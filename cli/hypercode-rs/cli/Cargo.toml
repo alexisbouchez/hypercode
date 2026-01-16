@@ -1,0 +1,64 @@
+[package]
+name = "hypercode-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "hypercode"
+path = "src/main.rs"
+
+[lib]
+name = "hypercode_cli"
+path = "src/lib.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+clap_complete = { workspace = true }
+hypercode-app-server = { workspace = true }
+hypercode-app-server-protocol = { workspace = true }
+hypercode-arg0 = { workspace = true }
+hypercode-chatgpt = { workspace = true }
+hypercode-cloud-tasks = { path = "../cloud-tasks" }
+hypercode-common = { workspace = true, features = ["cli"] }
+hypercode-core = { workspace = true }
+hypercode-exec = { workspace = true }
+hypercode-execpolicy = { workspace = true }
+hypercode-login = { workspace = true }
+hypercode-mcp-server = { workspace = true }
+hypercode-protocol = { workspace = true }
+hypercode-responses-api-proxy = { workspace = true }
+hypercode-rmcp-client = { workspace = true }
+hypercode-stdio-to-uds = { workspace = true }
+hypercode-tui = { workspace = true }
+hypercode-tui2 = { workspace = true }
+hypercode-utils-absolute-path = { workspace = true }
+libc = { workspace = true }
+owo-colors = { workspace = true }
+regex-lite = { workspace = true }
+serde_json = { workspace = true }
+supports-color = { workspace = true }
+tokio = { workspace = true, features = [
+    "io-std",
+    "macros",
+    "process",
+    "rt-multi-thread",
+    "signal",
+] }
+toml = { workspace = true }
+tracing = { workspace = true }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+hypercode_windows_sandbox = { package = "hypercode-windows-sandbox", path = "../windows-sandbox-rs" }
+
+[dev-dependencies]
+assert_cmd = { workspace = true }
+assert_matches = { workspace = true }
+hypercode-utils-cargo-bin = { workspace = true }
+predicates = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }

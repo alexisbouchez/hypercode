@@ -1,0 +1,15 @@
+---
+source: tui/src/bottom_pane/list_selection_view.rs
+assertion_line: 654
+expression: render_lines(&view)
+---
+                                                
+  Select Approval Mode                          
+  Switch between Hypercode approval presets     
+                                                
+› 1. Read Only (current)  Hypercode can read    
+                          files                 
+  2. Full Access          Hypercode can edit    
+                          files                 
+                                                
+  Press enter to confirm or esc to go back

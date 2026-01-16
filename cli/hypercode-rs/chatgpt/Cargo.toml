@@ -1,0 +1,22 @@
+[package]
+name = "hypercode-chatgpt"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+hypercode-common = { workspace = true, features = ["cli"] }
+hypercode-core = { workspace = true }
+hypercode-utils-cargo-bin = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["full"] }
+hypercode-git = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

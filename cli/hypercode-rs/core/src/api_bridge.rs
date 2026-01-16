@@ -1,0 +1,165 @@
+use chrono::DateTime;
+use chrono::Utc;
+use hypercode_api::AuthProvider as ApiAuthProvider;
+use hypercode_api::TransportError;
+use hypercode_api::error::ApiError;
+use hypercode_api::rate_limits::parse_rate_limit;
+use http::HeaderMap;
+use serde::Deserialize;
+
+use crate::auth::HypercodeAuth;
+use crate::error::HypercodeErr;
+use crate::error::RetryLimitReachedError;
+use crate::error::UnexpectedResponseError;
+use crate::error::UsageLimitReachedError;
+use crate::model_provider_info::ModelProviderInfo;
+use crate::token_data::PlanType;
+
+pub(crate) fn map_api_error(err: ApiError) -> HypercodeErr {
+    match err {
+        ApiError::ContextWindowExceeded => HypercodeErr::ContextWindowExceeded,
+        ApiError::QuotaExceeded => HypercodeErr::QuotaExceeded,
+        ApiError::UsageNotIncluded => HypercodeErr::UsageNotIncluded,
+        ApiError::Retryable { message, delay } => HypercodeErr::Stream(message, delay),
+        ApiError::Stream(msg) => HypercodeErr::Stream(msg, None),
+        ApiError::Api { status, message } => HypercodeErr::UnexpectedStatus(UnexpectedResponseError {
+            status,
+            body: message,
+            url: None,
+            request_id: None,
+        }),
+        ApiError::Transport(transport) => match transport {
+            TransportError::Http {
+                status,
+                url,
+                headers,
+                body,
+            } => {
+                let body_text = body.unwrap_or_default();
+
+                if status == http::StatusCode::BAD_REQUEST {
+                    if body_text
+                        .contains("The image data you provided does not represent a valid image")
+                    {
+                        HypercodeErr::InvalidImageRequest()
+                    } else {
+                        HypercodeErr::InvalidRequest(body_text)
+                    }
+                } else if status == http::StatusCode::INTERNAL_SERVER_ERROR {
+                    HypercodeErr::InternalServerError
+                } else if status == http::StatusCode::TOO_MANY_REQUESTS {
+                    if let Ok(err) = serde_json::from_str::<UsageErrorResponse>(&body_text) {
+                        if err.error.error_type.as_deref() == Some("usage_limit_reached") {
+                            let rate_limits = headers.as_ref().and_then(parse_rate_limit);
+                            let resets_at = err
+                                .error
+                                .resets_at
+                                .and_then(|seconds| DateTime::<Utc>::from_timestamp(seconds, 0));
+                            return HypercodeErr::UsageLimitReached(UsageLimitReachedError {
+                                plan_type: err.error.plan_type,
+                                resets_at,
+                                rate_limits,
+                            });
+                        } else if err.error.error_type.as_deref() == Some("usage_not_included") {
+                            return HypercodeErr::UsageNotIncluded;
+                        }
+                    }
+
+                    HypercodeErr::RetryLimit(RetryLimitReachedError {
+                        status,
+                        request_id: extract_request_id(headers.as_ref()),
+                    })
+                } else {
+                    HypercodeErr::UnexpectedStatus(UnexpectedResponseError {
+                        status,
+                        body: body_text,
+                        url,
+                        request_id: extract_request_id(headers.as_ref()),
+                    })
+                }
+            }
+            TransportError::RetryLimit => HypercodeErr::RetryLimit(RetryLimitReachedError {
+                status: http::StatusCode::INTERNAL_SERVER_ERROR,
+                request_id: None,
+            }),
+            TransportError::Timeout => HypercodeErr::Timeout,
+            TransportError::Network(msg) | TransportError::Build(msg) => {
+                HypercodeErr::Stream(msg, None)
+            }
+        },
+        ApiError::RateLimit(msg) => HypercodeErr::Stream(msg, None),
+    }
+}
+
+fn extract_request_id(headers: Option<&HeaderMap>) -> Option<String> {
+    headers.and_then(|map| {
+        ["cf-ray", "x-request-id", "x-oai-request-id"]
+            .iter()
+            .find_map(|name| {
+                map.get(*name)
+                    .and_then(|v| v.to_str().ok())
+                    .map(str::to_string)
+            })
+    })
+}
+
+pub(crate) fn auth_provider_from_auth(
+    auth: Option<HypercodeAuth>,
+    provider: &ModelProviderInfo,
+) -> crate::error::Result<CoreAuthProvider> {
+    if let Some(api_key) = provider.api_key()? {
+        return Ok(CoreAuthProvider {
+            token: Some(api_key),
+            account_id: None,
+        });
+    }
+
+    if let Some(token) = provider.experimental_bearer_token.clone() {
+        return Ok(CoreAuthProvider {
+            token: Some(token),
+            account_id: None,
+        });
+    }
+
+    if let Some(auth) = auth {
+        let token = auth.get_token()?;
+        Ok(CoreAuthProvider {
+            token: Some(token),
+            account_id: auth.get_account_id(),
+        })
+    } else {
+        Ok(CoreAuthProvider {
+            token: None,
+            account_id: None,
+        })
+    }
+}
+
+#[derive(Debug, Deserialize)]
+struct UsageErrorResponse {
+    error: UsageErrorBody,
+}
+
+#[derive(Debug, Deserialize)]
+struct UsageErrorBody {
+    #[serde(rename = "type")]
+    error_type: Option<String>,
+    plan_type: Option<PlanType>,
+    resets_at: Option<i64>,
+}
+
+#[derive(Clone, Default)]
+pub(crate) struct CoreAuthProvider {
+    token: Option<String>,
+    account_id: Option<String>,
+}
+
+impl ApiAuthProvider for CoreAuthProvider {
+    fn bearer_token(&self) -> Option<String> {
+        self.token.clone()
+    }
+
+    fn account_id(&self) -> Option<String> {
+        self.account_id.clone()
+    }
+}

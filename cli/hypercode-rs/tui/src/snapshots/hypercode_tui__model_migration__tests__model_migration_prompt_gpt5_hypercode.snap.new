@@ -1,0 +1,16 @@
+---
+source: tui/src/model_migration.rs
+assertion_line: 491
+expression: terminal.backend()
+---
+
+> Hypercode just got an upgrade. Introducing gpt-5.1-codex-m
+
+  We recommend switching from gpt-5-hypercode to
+  gpt-5.1-codex-max.
+
+  Hypercode-optimized flagship for deep and fast reasoning.
+  Learn more about gpt-5.1-codex-max at
+  https://www.hypercode.com/models/gpt-5.1-codex-max
+
+  Press enter to continue

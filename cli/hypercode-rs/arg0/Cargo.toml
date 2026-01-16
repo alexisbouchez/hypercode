@@ -1,0 +1,21 @@
+[package]
+name = "hypercode-arg0"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "hypercode_arg0"
+path = "src/lib.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+hypercode-apply-patch = { workspace = true }
+hypercode-core = { workspace = true }
+hypercode-linux-sandbox = { workspace = true }
+dotenvy = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["rt-multi-thread"] }

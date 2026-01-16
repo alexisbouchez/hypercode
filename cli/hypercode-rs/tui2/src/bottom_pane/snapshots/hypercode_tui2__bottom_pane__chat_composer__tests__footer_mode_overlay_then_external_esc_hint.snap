@@ -1,0 +1,13 @@
+---
+source: tui2/src/bottom_pane/chat_composer.rs
+expression: terminal.backend()
+---
+"                                                                                                    "
+"› Ask Hypercode to do anything                                                                          "
+"                                                                                                    "
+"                                                                                                    "
+"                                                                                                    "
+"                                                                                                    "
+"                                                                                                    "
+"                                                                                                    "
+"  esc again to edit previous message                                                                "

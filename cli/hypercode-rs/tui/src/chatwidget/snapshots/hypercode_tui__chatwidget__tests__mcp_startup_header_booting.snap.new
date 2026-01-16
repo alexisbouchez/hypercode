@@ -1,0 +1,12 @@
+---
+source: tui/src/chatwidget/tests.rs
+assertion_line: 2948
+expression: terminal.backend()
+---
+"                                                                                "
+"• Booting MCP server: alpha (0s • esc to interrupt)                             "
+"                                                                                "
+"                                                                                "
+"› Ask Hypercode to do anything                                                  "
+"                                                                                "
+"  100% context left · ? for shortcuts                                           "
