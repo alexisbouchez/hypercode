@@ -6,7 +6,7 @@ export const structs: Lesson = {
   chapterId: "structs-interfaces",
   content: `## Custom Types
 
-Structs are Go's way of grouping related data. If you are coming from an object-oriented language, structs are the closest thing to classes --- but without inheritance.
+Structs are Go's way of grouping related data. If you are coming from an object-oriented language, structs are the closest thing to classes, but without inheritance.
 
 ### Defining a Struct
 

@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://hypercode.alexisbouchez.com"),
   title: {
-    default: "Hypercode — Learn the Go Programming Language",
-    template: "%s — Hypercode",
+    default: "Hypercode - Learn the Go Programming Language",
+    template: "%s - Hypercode",
   },
   description:
     "An interactive platform to learn the Go programming language from scratch. No account needed.",
@@ -35,14 +35,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Hypercode",
-    title: "Hypercode — Learn the Go Programming Language",
+    title: "Hypercode - Learn the Go Programming Language",
     description:
       "An interactive platform to learn the Go programming language from scratch. No account needed.",
     url: "https://hypercode.alexisbouchez.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hypercode — Learn the Go Programming Language",
+    title: "Hypercode - Learn the Go Programming Language",
     description:
       "An interactive platform to learn the Go programming language from scratch. No account needed.",
   },

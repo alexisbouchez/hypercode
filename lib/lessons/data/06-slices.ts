@@ -6,7 +6,7 @@ export const slices: Lesson = {
   chapterId: "data-structures",
   content: `## Dynamic Arrays, Done Right
 
-Go has arrays, but you will rarely use them directly. Arrays have a fixed size baked into their type: \`[5]int\` and \`[10]int\` are different types entirely. Instead, Go gives you **slices** --- a flexible, dynamic view over an underlying array.
+Go has arrays, but you will rarely use them directly. Arrays have a fixed size baked into their type: \`[5]int\` and \`[10]int\` are different types entirely. Instead, Go gives you **slices**: a flexible, dynamic view over an underlying array.
 
 ### Creating Slices
 
@@ -41,7 +41,7 @@ s = append(s, 4, 5)
 // s is now [1, 2, 3, 4, 5]
 \`\`\`
 
-Always reassign the result of \`append\` back to the slice variable. This is not optional --- \`append\` may return a slice pointing to a completely new array.
+Always reassign the result of \`append\` back to the slice variable. This is not optional. \`append\` may return a slice pointing to a completely new array.
 
 ### Slicing
 

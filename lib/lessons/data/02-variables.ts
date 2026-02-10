@@ -18,7 +18,7 @@ var year int = 2009
 var ratio float64 = 3.14
 \`\`\`
 
-If you provide an initial value, the type can be omitted --- the compiler infers it:
+If you provide an initial value, the type can be omitted. The compiler infers it:
 
 \`\`\`go
 var name = "Go"     // inferred as string
@@ -39,7 +39,7 @@ The \`:=\` operator is only available inside functions. Package-level variables 
 
 ### Zero Values
 
-Every type in Go has a *zero value* --- the value a variable holds if you declare it without initializing it. This is a guarantee, not an accident. There are no uninitialized variables in Go.
+Every type in Go has a *zero value*: the value a variable holds if you declare it without initializing it. This is a guarantee, not an accident. There are no uninitialized variables in Go.
 
 | Type | Zero Value |
 |------|-----------|
@@ -56,7 +56,7 @@ var ready bool    // false
 
 ### Constants
 
-Values that never change are declared with \`const\`. Constants must be known at compile time --- you cannot assign the result of a function call to a constant.
+Values that never change are declared with \`const\`. Constants must be known at compile time. You cannot assign the result of a function call to a constant.
 
 \`\`\`go
 const pi = 3.14159

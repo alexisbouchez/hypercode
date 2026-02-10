@@ -6,7 +6,7 @@ export const interfaces: Lesson = {
   chapterId: "structs-interfaces",
   content: `## Implicit Contracts
 
-Interfaces in Go define behavior. An interface is a set of method signatures. Any type that implements all the methods of an interface automatically satisfies it --- no \`implements\` keyword needed.
+Interfaces in Go define behavior. An interface is a set of method signatures. Any type that implements all the methods of an interface automatically satisfies it. No \`implements\` keyword needed.
 
 \`\`\`go
 type Shape interface {
@@ -32,7 +32,7 @@ func printArea(s Shape) {
 }
 \`\`\`
 
-This function works with circles, rectangles, triangles --- anything that has an \`Area()\` method.
+This function works with circles, rectangles, triangles, or anything else that has an \`Area()\` method.
 
 ### The Stringer Interface
 

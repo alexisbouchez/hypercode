@@ -14,7 +14,7 @@ func greet(name string) string {
 }
 \`\`\`
 
-Parameter types come *after* the name, not before. This was a deliberate choice --- the Go team believes it reads more naturally, especially as declarations get complex.
+Parameter types come *after* the name, not before. This was a deliberate choice. The Go team believes it reads more naturally, especially as declarations get complex.
 
 When consecutive parameters share a type, you can group them:
 

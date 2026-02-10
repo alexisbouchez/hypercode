@@ -39,7 +39,7 @@ This pattern keeps variables tightly scoped. You will see it everywhere in Go, e
 
 ### Switch
 
-Go's \`switch\` is cleaner than most languages. Cases do not fall through by default --- no \`break\` statements needed:
+Go's \`switch\` is cleaner than most languages. Cases do not fall through by default, so no \`break\` statements are needed:
 
 \`\`\`go
 switch day {

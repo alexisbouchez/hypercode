@@ -58,7 +58,7 @@ This is called the "comma-ok" idiom. The second value is a boolean that indicate
 
 ### Iterating
 
-Use \`for range\` to iterate over a map. The iteration order is **not guaranteed** --- it is intentionally randomized by the runtime:
+Use \`for range\` to iterate over a map. The iteration order is **not guaranteed**. It is intentionally randomized by the runtime:
 
 \`\`\`go
 for key, value := range m {

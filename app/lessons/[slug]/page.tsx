@@ -19,8 +19,8 @@ export async function generateMetadata({
   if (!lesson) return {};
 
   const index = getLessonIndex(slug);
-  const title = `${lesson.title} — Hypercode`;
-  const description = `Lesson ${index + 1} of ${lessons.length}: ${lesson.title}. Learn Go interactively — no account needed.`;
+  const title = `${lesson.title} - Hypercode`;
+  const description = `Lesson ${index + 1} of ${lessons.length}: ${lesson.title}. Learn Go interactively - no account needed.`;
   const url = `https://hypercode.alexisbouchez.com/lessons/${slug}`;
 
   return {
