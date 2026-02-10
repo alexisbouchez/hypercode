@@ -58,7 +58,7 @@ export function AppSidebar({
                         <SidebarMenuButton
                           isActive={isCurrent}
                           onClick={() => onSelectLesson(lesson.id)}
-                          className="data-active:bg-primary/10 data-active:text-primary text-foreground/70"
+                          className="cursor-pointer data-active:bg-primary/10 data-active:text-primary text-foreground/70"
                         >
                           <span
                             className={cn(
