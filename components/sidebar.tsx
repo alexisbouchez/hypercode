@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { chapters, lessons } from "@/lib/lessons";
 import { cn } from "@/lib/utils";
 import {
@@ -18,13 +19,11 @@ import {
 interface SidebarProps {
   currentLessonId: string;
   completedLessons: string[];
-  onSelectLesson: (id: string) => void;
 }
 
 export function AppSidebar({
   currentLessonId,
   completedLessons,
-  onSelectLesson,
 }: SidebarProps) {
   return (
     <SidebarUI collapsible="icon">
@@ -56,8 +55,8 @@ export function AppSidebar({
                     return (
                       <SidebarMenuItem key={lesson.id}>
                         <SidebarMenuButton
+                          render={<Link href={`/lessons/${lesson.id}`} />}
                           isActive={isCurrent}
-                          onClick={() => onSelectLesson(lesson.id)}
                           className="cursor-pointer data-active:bg-primary/10 data-active:text-primary text-foreground/70"
                         >
                           <span

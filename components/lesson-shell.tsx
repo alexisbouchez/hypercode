@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { lessons } from "@/lib/lessons";
-import type { TestResult } from "@/lib/lessons/types";
+import Link from "next/link";
+import type { Lesson, Chapter, TestResult } from "@/lib/lessons/types";
 import { initGoRunner, runGo, runTests, isGoReady } from "@/lib/go-runner";
 import {
   loadProgress,
@@ -25,9 +25,19 @@ import {
 } from "./ui/resizable";
 import { ThemeToggle } from "./theme-toggle";
 
-export function LessonLayout() {
-  const [currentLessonId, setCurrentLessonId] = useState<string>(lessons[0].id);
-  const [code, setCode] = useState(lessons[0].starterCode);
+interface LessonShellProps {
+  lesson: Lesson;
+  lessons: Lesson[];
+  chapters: Chapter[];
+}
+
+export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
+  const currentLesson = lesson;
+  const currentIndex = lessons.findIndex((l) => l.id === currentLesson.id);
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < lessons.length - 1;
+
+  const [code, setCode] = useState(currentLesson.starterCode);
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
   const [testResults, setTestResults] = useState<TestResult[]>([]);
@@ -40,24 +50,25 @@ export function LessonLayout() {
     return localStorage.getItem("hypercode-read-mode") === "true";
   });
 
-  const currentLesson = lessons.find((l) => l.id === currentLessonId) ?? lessons[0];
-  const currentIndex = lessons.findIndex((l) => l.id === currentLessonId);
-  const hasPrev = currentIndex > 0;
-  const hasNext = currentIndex < lessons.length - 1;
-
-  // Load progress on mount
+  // Load progress on mount and restore saved code
   useEffect(() => {
     const progress = loadProgress();
     setCompletedLessons(progress.completedLessons);
-    if (progress.currentLessonId) {
-      const lesson = lessons.find((l) => l.id === progress.currentLessonId);
-      if (lesson) {
-        setCurrentLessonId(lesson.id);
-        const saved = getSavedCode(lesson.id);
-        setCode(saved ?? lesson.starterCode);
-      }
+    setCurrentLesson(currentLesson.id);
+
+    const saved = getSavedCode(currentLesson.id);
+    if (saved) {
+      setCode(saved);
+    } else {
+      setCode(currentLesson.starterCode);
     }
-  }, []);
+
+    // Reset editor state on lesson change
+    setOutput("");
+    setError("");
+    setTestResults([]);
+    setShowSolution(false);
+  }, [currentLesson.id, currentLesson.starterCode]);
 
   // Initialize Go runner (skip in read mode)
   useEffect(() => {
@@ -75,32 +86,11 @@ export function LessonLayout() {
     });
   }, []);
 
-  const navigateToLesson = useCallback(
-    (lessonId: string) => {
-      saveCode(currentLessonId, code);
-
-      const lesson = lessons.find((l) => l.id === lessonId);
-      if (!lesson) return;
-
-      setCurrentLessonId(lessonId);
-      setCurrentLesson(lessonId);
-
-      const saved = getSavedCode(lessonId);
-      setCode(saved ?? lesson.starterCode);
-
-      setOutput("");
-      setError("");
-      setTestResults([]);
-      setShowSolution(false);
-    },
-    [currentLessonId, code],
-  );
-
   const handleRun = useCallback(async () => {
     setIsRunning(true);
     setShowSolution(false);
 
-    saveCode(currentLessonId, code);
+    saveCode(currentLesson.id, code);
 
     const result = await runGo(code);
     setOutput(result.stdout);
@@ -111,14 +101,14 @@ export function LessonLayout() {
 
     const allPassed = results.every((t) => t.passed);
     if (allPassed) {
-      markCompleted(currentLessonId);
+      markCompleted(currentLesson.id);
       setCompletedLessons((prev) =>
-        prev.includes(currentLessonId) ? prev : [...prev, currentLessonId],
+        prev.includes(currentLesson.id) ? prev : [...prev, currentLesson.id],
       );
     }
 
     setIsRunning(false);
-  }, [code, currentLessonId, currentLesson.tests]);
+  }, [code, currentLesson.id, currentLesson.tests]);
 
   const handleViewSolution = useCallback(() => {
     setShowSolution((prev) => !prev);
@@ -131,6 +121,11 @@ export function LessonLayout() {
     setTestResults([]);
     setShowSolution(false);
   }, [currentLesson.starterCode]);
+
+  // Save code before navigating away
+  const handleBeforeNavigate = useCallback(() => {
+    saveCode(currentLesson.id, code);
+  }, [currentLesson.id, code]);
 
   const showDiff = showSolution;
 
@@ -158,22 +153,34 @@ export function LessonLayout() {
 
   const navigation = (
     <div className="px-6 py-3 border-t border-border flex items-center justify-between shrink-0">
-      <Button
-        variant="ghost"
-        size="sm"
-        disabled={!hasPrev}
-        onClick={() => hasPrev && navigateToLesson(lessons[currentIndex - 1].id)}
-      >
-        Previous
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        disabled={!hasNext}
-        onClick={() => hasNext && navigateToLesson(lessons[currentIndex + 1].id)}
-      >
-        Next
-      </Button>
+      {hasPrev ? (
+        <Button
+          variant="ghost"
+          size="sm"
+          render={<Link href={`/lessons/${lessons[currentIndex - 1].id}`} />}
+          onClick={handleBeforeNavigate}
+        >
+          Previous
+        </Button>
+      ) : (
+        <Button variant="ghost" size="sm" disabled>
+          Previous
+        </Button>
+      )}
+      {hasNext ? (
+        <Button
+          variant="ghost"
+          size="sm"
+          render={<Link href={`/lessons/${lessons[currentIndex + 1].id}`} />}
+          onClick={handleBeforeNavigate}
+        >
+          Next
+        </Button>
+      ) : (
+        <Button variant="ghost" size="sm" disabled>
+          Next
+        </Button>
+      )}
     </div>
   );
 
@@ -198,9 +205,8 @@ export function LessonLayout() {
     return (
       <SidebarProvider className="h-screen !min-h-0">
         <AppSidebar
-          currentLessonId={currentLessonId}
+          currentLessonId={currentLesson.id}
           completedLessons={completedLessons}
-          onSelectLesson={navigateToLesson}
         />
         <SidebarInset className="overflow-hidden h-full">
           {contentPanel}
@@ -212,9 +218,8 @@ export function LessonLayout() {
   return (
     <SidebarProvider className="h-screen !min-h-0">
       <AppSidebar
-        currentLessonId={currentLessonId}
+        currentLessonId={currentLesson.id}
         completedLessons={completedLessons}
-        onSelectLesson={navigateToLesson}
       />
       <SidebarInset className="overflow-hidden h-full">
         <ResizablePanelGroup orientation="horizontal">
