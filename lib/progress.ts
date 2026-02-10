@@ -38,6 +38,14 @@ export function markCompleted(lessonId: string) {
   save(progress);
 }
 
+export function unmarkCompleted(lessonId: string) {
+  const progress = loadProgress();
+  progress.completedLessons = progress.completedLessons.filter(
+    (id) => id !== lessonId,
+  );
+  save(progress);
+}
+
 export function isCompleted(lessonId: string): boolean {
   return loadProgress().completedLessons.includes(lessonId);
 }

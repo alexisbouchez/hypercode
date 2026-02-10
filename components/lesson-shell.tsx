@@ -10,6 +10,7 @@ import {
   saveCode,
   getSavedCode,
   markCompleted,
+  unmarkCompleted,
 } from "@/lib/progress";
 import { AppSidebar } from "./sidebar";
 import { LessonContent } from "./lesson-content";
@@ -129,6 +130,18 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
 
   const showDiff = showSolution;
 
+  const isCurrentCompleted = completedLessons.includes(currentLesson.id);
+
+  const handleToggleComplete = useCallback(() => {
+    if (isCurrentCompleted) {
+      unmarkCompleted(currentLesson.id);
+      setCompletedLessons((prev) => prev.filter((id) => id !== currentLesson.id));
+    } else {
+      markCompleted(currentLesson.id);
+      setCompletedLessons((prev) => [...prev, currentLesson.id]);
+    }
+  }, [currentLesson.id, isCurrentCompleted]);
+
   const topBar = (
     <div className="px-4 py-2 border-b border-border flex items-center gap-2 shrink-0">
       <SidebarTrigger />
@@ -136,6 +149,15 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
         Lesson {currentIndex + 1} of {lessons.length}
       </div>
       <div className="flex-1" />
+      {readMode && (
+        <Button
+          variant={isCurrentCompleted ? "ghost" : "outline"}
+          size="sm"
+          onClick={handleToggleComplete}
+        >
+          {isCurrentCompleted ? "Completed" : "Mark as complete"}
+        </Button>
+      )}
       {readMode && <ThemeToggle />}
       <label className="flex items-center gap-2 cursor-pointer select-none">
         <span className="text-xs text-muted-foreground">Interactive</span>
