@@ -40,6 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# wasm build artifacts
-public/yaegi.wasm
-public/wasm_exec.js
+# wasm build artifacts (committed to repo for deployment)
+# public/yaegi.wasm
+# public/wasm_exec.js
