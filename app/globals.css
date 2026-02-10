@@ -161,3 +161,12 @@
 .overflow-auto::-webkit-scrollbar-thumb:hover {
   background: oklch(0.5 0 0 / 35%);
 }
+
+/* Subtle background for code snippets */
+.shiki-block pre {
+  background-color: oklch(0.97 0 0) !important;
+}
+
+.dark .shiki-block pre {
+  background-color: oklch(0.18 0 0) !important;
+}
