@@ -3,7 +3,7 @@ import type { Lesson } from "../types";
 export const structs: Lesson = {
   id: "structs",
   title: "Structs and Methods",
-  chapterId: "structs-interfaces",
+  chapterId: "custom-types",
   content: `## Custom Types
 
 Structs are Go's way of grouping related data. If you are coming from an object-oriented language, structs are the closest thing to classes, but without inheritance.

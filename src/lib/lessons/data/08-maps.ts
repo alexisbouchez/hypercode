@@ -132,7 +132,6 @@ import (
 {{FUNC}}
 
 func main() {
-\t_ = strings.Fields
 \tresult := wordCount("the cat sat on the mat the cat")
 \tfmt.Println(result["the"])
 }`,
@@ -150,7 +149,6 @@ import (
 {{FUNC}}
 
 func main() {
-\t_ = strings.Fields
 \tresult := wordCount("the cat sat on the mat the cat")
 \tfmt.Println(result["cat"])
 }`,
@@ -168,7 +166,6 @@ import (
 {{FUNC}}
 
 func main() {
-\t_ = strings.Fields
 \tresult := wordCount("the cat sat on the mat the cat")
 \tfmt.Println(result["sat"])
 }`,
@@ -186,7 +183,6 @@ import (
 {{FUNC}}
 
 func main() {
-\t_ = strings.Fields
 \tresult := wordCount("")
 \tfmt.Println(len(result))
 }`,

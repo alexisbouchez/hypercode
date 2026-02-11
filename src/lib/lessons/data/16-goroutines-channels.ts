@@ -87,13 +87,43 @@ for val := range ch {
 
 The \`range\` loop receives values from the channel until it is closed. This is the cleanest way to consume all values from a channel.
 
-### WaitGroups
+### Buffered Channels
 
-When you need to wait for multiple goroutines to finish, use \`sync.WaitGroup\`:
+By default, channels are *unbuffered*: a send blocks until another goroutine receives. A **buffered channel** has a capacity, allowing sends to proceed without a receiver until the buffer is full:
 
 \`\`\`go
-var wg sync.WaitGroup
+ch := make(chan int, 3)  // buffer holds up to 3 values
 
+ch <- 1  // does not block
+ch <- 2  // does not block
+ch <- 3  // does not block
+// ch <- 4 would block here (buffer full)
+
+fmt.Println(<-ch) // 1
+\`\`\`
+
+Buffered channels are useful when the sender and receiver run at different speeds, or when you know the exact number of values that will be sent.
+
+### Synchronization with Channels
+
+When you need to wait for a goroutine to finish, you can use a channel as a signal:
+
+\`\`\`go
+done := make(chan bool)
+
+go func() {
+    fmt.Println("working...")
+    done <- true  // signal completion
+}()
+
+<-done  // wait for the goroutine to finish
+\`\`\`
+
+In production Go code, \`sync.WaitGroup\` is the standard tool for waiting on multiple goroutines. It is not available in this playground, but you will encounter it in virtually every real Go codebase:
+
+\`\`\`go
+// Real Go code (not available in this playground):
+var wg sync.WaitGroup
 for i := 0; i < 3; i++ {
     wg.Add(1)
     go func(n int) {
@@ -101,8 +131,7 @@ for i := 0; i < 3; i++ {
         fmt.Println(n)
     }(i)
 }
-
-wg.Wait() // blocks until all goroutines call Done
+wg.Wait()
 \`\`\`
 
 ### Your Task

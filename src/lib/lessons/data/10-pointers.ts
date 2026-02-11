@@ -3,7 +3,7 @@ import type { Lesson } from "../types";
 export const pointers: Lesson = {
   id: "pointers",
   title: "Pointers",
-  chapterId: "data-structures",
+  chapterId: "custom-types",
   content: `## Understanding Pointers
 
 A pointer holds the memory address of a value. Instead of passing data around by copying it, you can pass a pointer to the original data.

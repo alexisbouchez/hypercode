@@ -76,13 +76,11 @@ for _, name := range names {
 
 ### Your Task
 
-Write a function \`fizzBuzz\` that takes an integer \`n\` and returns a string:
-- For each number from 1 to n (inclusive):
-  - Print \`"FizzBuzz"\` if the number is divisible by both 3 and 5
-  - Print \`"Fizz"\` if the number is divisible by 3
-  - Print \`"Buzz"\` if the number is divisible by 5
-  - Print the number otherwise
-- Each value on its own line`,
+Write a function \`fizzBuzz\` that takes an integer \`n\` and prints the numbers from 1 to \`n\` (inclusive), one per line, with these substitutions:
+- Print \`"FizzBuzz"\` if the number is divisible by both 3 and 5
+- Print \`"Fizz"\` if the number is divisible by 3
+- Print \`"Buzz"\` if the number is divisible by 5
+- Print the number otherwise`,
 
   starterCode: `package main
 

@@ -3,7 +3,7 @@ import type { Lesson } from "../types";
 export const interfaces: Lesson = {
   id: "interfaces",
   title: "Interfaces",
-  chapterId: "structs-interfaces",
+  chapterId: "custom-types",
   content: `## Implicit Contracts
 
 Interfaces in Go define behavior. An interface is a set of method signatures. Any type that implements all the methods of an interface automatically satisfies it. No \`implements\` keyword needed.
@@ -61,12 +61,51 @@ fmt.Println(Point{1, 2}) // prints "(1, 2)"
 The type \`interface{}\` (or its alias \`any\` since Go 1.18) has no methods, so every type satisfies it. It is Go's version of "accept anything":
 
 \`\`\`go
-func describe(i any) {
+func printAny(i any) {
     fmt.Printf("(%v, %T)\\n", i, i)
 }
 \`\`\`
 
 Use it sparingly. Overusing \`any\` throws away the type safety that makes Go reliable.
+
+### Type Assertions
+
+When you have a value of type \`any\` (or any interface), you can extract the underlying concrete value using a **type assertion**:
+
+\`\`\`go
+var i any = "hello"
+
+s, ok := i.(string)  // s = "hello", ok = true
+n, ok := i.(int)     // n = 0, ok = false
+\`\`\`
+
+Always use the comma-ok form. Without it, a failed type assertion panics:
+
+\`\`\`go
+s := i.(string) // works
+n := i.(int)    // panic: interface conversion
+\`\`\`
+
+### Type Switches
+
+A **type switch** lets you branch based on the concrete type of an interface value:
+
+\`\`\`go
+func classify(i any) string {
+    switch v := i.(type) {
+    case string:
+        return "string: " + v
+    case int:
+        return fmt.Sprintf("int: %d", v)
+    case bool:
+        return fmt.Sprintf("bool: %v", v)
+    default:
+        return "unknown"
+    }
+}
+\`\`\`
+
+Inside each case, \`v\` is already the correct type — no further assertion needed. Type switches are cleaner than chains of type assertions when you need to handle multiple types.
 
 ### Your Task
 
@@ -78,7 +117,14 @@ Define two types:
 
 Implement \`Area()\` on both types. The area of a circle is \`math.Pi * r * r\`.
 
-Write a function \`totalArea\` that takes a \`[]Shape\` and returns the sum of all areas.`,
+Write a function \`totalArea\` that takes a \`[]Shape\` and returns the sum of all areas.
+
+Write a function \`describeShape\` that takes a \`Shape\` and returns a string using a type switch:
+- For a \`Circle\`, return \`"circle with radius X.XX"\`
+- For a \`Square\`, return \`"square with side X.XX"\`
+- For anything else, return \`"unknown shape"\`
+
+Use \`fmt.Sprintf("circle with radius %.2f", ...)\` for formatting.`,
 
   starterCode: `package main
 
@@ -95,13 +141,17 @@ import (
 
 // Write totalArea function
 
+// Write describeShape function using a type switch
+
 func main() {
 \tshapes := []Shape{
 \t\tCircle{Radius: 5},
 \t\tSquare{Side: 3},
-\t\tCircle{Radius: 2},
 \t}
 \tfmt.Printf("%.2f\\n", totalArea(shapes))
+\tfor _, s := range shapes {
+\t\tfmt.Println(describeShape(s))
+\t}
 }
 `,
 
@@ -140,13 +190,26 @@ func totalArea(shapes []Shape) float64 {
 \treturn total
 }
 
+func describeShape(s Shape) string {
+\tswitch v := s.(type) {
+\tcase Circle:
+\t\treturn fmt.Sprintf("circle with radius %.2f", v.Radius)
+\tcase Square:
+\t\treturn fmt.Sprintf("square with side %.2f", v.Side)
+\tdefault:
+\t\treturn "unknown shape"
+\t}
+}
+
 func main() {
 \tshapes := []Shape{
 \t\tCircle{Radius: 5},
 \t\tSquare{Side: 3},
-\t\tCircle{Radius: 2},
 \t}
 \tfmt.Printf("%.2f\\n", totalArea(shapes))
+\tfor _, s := range shapes {
+\t\tfmt.Println(describeShape(s))
+\t}
 }
 `,
 
@@ -205,6 +268,38 @@ func main() {
 \tfmt.Printf("%.2f\\n", totalArea(shapes))
 }`,
       expected: "100.11\n",
+    },
+    {
+      name: "describeShape Circle",
+      code: `package main
+
+import (
+\t"fmt"
+\t"math"
+)
+
+{{FUNC}}
+
+func main() {
+\tfmt.Println(describeShape(Circle{Radius: 5}))
+}`,
+      expected: "circle with radius 5.00\n",
+    },
+    {
+      name: "describeShape Square",
+      code: `package main
+
+import (
+\t"fmt"
+\t"math"
+)
+
+{{FUNC}}
+
+func main() {
+\tfmt.Println(describeShape(Square{Side: 3}))
+}`,
+      expected: "square with side 3.00\n",
     },
   ],
 };

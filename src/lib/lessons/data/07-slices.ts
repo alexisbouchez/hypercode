@@ -60,7 +60,7 @@ A sub-slice shares the same underlying array. Modifying one affects the other. I
 
 Write a function \`sum\` that takes a \`[]int\` and returns the sum of all elements.
 
-Write a function \`filter\` that takes a \`[]int\` and returns a new \`[]int\` containing only the even numbers, in order.`,
+Write a function \`filterEvens\` that takes a \`[]int\` and returns a new \`[]int\` containing only the even numbers, in order.`,
 
   starterCode: `package main
 
@@ -71,7 +71,7 @@ func sum(numbers []int) int {
 \treturn 0
 }
 
-func filter(numbers []int) []int {
+func filterEvens(numbers []int) []int {
 \t// Return only even numbers
 \treturn nil
 }
@@ -79,7 +79,7 @@ func filter(numbers []int) []int {
 func main() {
 \tnums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 \tfmt.Println(sum(nums))
-\tfmt.Println(filter(nums))
+\tfmt.Println(filterEvens(nums))
 }
 `,
 
@@ -95,7 +95,7 @@ func sum(numbers []int) int {
 \treturn total
 }
 
-func filter(numbers []int) []int {
+func filterEvens(numbers []int) []int {
 \tvar result []int
 \tfor _, n := range numbers {
 \t\tif n%2 == 0 {
@@ -108,7 +108,7 @@ func filter(numbers []int) []int {
 func main() {
 \tnums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 \tfmt.Println(sum(nums))
-\tfmt.Println(filter(nums))
+\tfmt.Println(filterEvens(nums))
 }
 `,
 
@@ -140,7 +140,7 @@ func main() {
       expected: "0\n",
     },
     {
-      name: "filter evens from 1..10",
+      name: "filterEvens from 1..10",
       code: `package main
 
 import "fmt"
@@ -148,12 +148,12 @@ import "fmt"
 {{FUNC}}
 
 func main() {
-\tfmt.Println(filter([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
+\tfmt.Println(filterEvens([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
 }`,
       expected: "[2 4 6 8 10]\n",
     },
     {
-      name: "filter with no evens",
+      name: "filterEvens with no evens",
       code: `package main
 
 import "fmt"
@@ -161,7 +161,7 @@ import "fmt"
 {{FUNC}}
 
 func main() {
-\tfmt.Println(filter([]int{1, 3, 5}))
+\tfmt.Println(filterEvens([]int{1, 3, 5}))
 }`,
       expected: "[]\n",
     },
