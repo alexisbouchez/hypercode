@@ -37,10 +37,6 @@ The repo ships prebuilt `public/yaegi.wasm` and `public/wasm_exec.js`. To rebuil
 
 This compiles the `wasm/` Go package (Yaegi + a small stdlib subset) to WebAssembly and copies `wasm_exec.js` from your Go installation. Optional: install [Binaryen](https://github.com/WebAssembly/binaryen) for `wasm-opt` to shrink the binary.
 
-## Tech
-
-- Next.js front end; in-browser Go execution via Yaegi (traefik/yaegi) compiled to WASM.
-
 ## License
 
 [LICENSE](./LICENSE)

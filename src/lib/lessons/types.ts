@@ -30,6 +30,8 @@ export interface GoResult {
   error: string;
 }
 
+export type RunResult = GoResult;
+
 export interface TestResult {
   name: string;
   passed: boolean;

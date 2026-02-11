@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import type { Chapter, Lesson } from "@/lib/lessons/types";
 import { loadProgress } from "@/lib/progress";
 import { AppSidebar } from "./sidebar";
 import { LessonContent } from "./lesson-content";
@@ -10,6 +11,10 @@ import { ThemeToggle } from "./theme-toggle";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "./ui/sidebar";
 
 interface ContentShellProps {
+  courseId: string;
+  chapters: Chapter[];
+  lessons: Lesson[];
+  pdfPath?: string;
   title: string;
   content: string;
   activePage: string;
@@ -18,6 +23,10 @@ interface ContentShellProps {
 }
 
 export function ContentShell({
+  courseId,
+  chapters,
+  lessons,
+  pdfPath,
   title,
   content,
   activePage,
@@ -27,13 +36,17 @@ export function ContentShell({
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
 
   useEffect(() => {
-    const progress = loadProgress();
+    const progress = loadProgress(courseId);
     setCompletedLessons(progress.completedLessons);
-  }, []);
+  }, [courseId]);
 
   return (
     <SidebarProvider className="h-screen !min-h-0">
       <AppSidebar
+        courseId={courseId}
+        chapters={chapters}
+        lessons={lessons}
+        pdfPath={pdfPath}
         currentLessonId={activePage}
         completedLessons={completedLessons}
       />

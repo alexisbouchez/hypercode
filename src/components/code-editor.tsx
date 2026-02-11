@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 interface CodeEditorProps {
   value: string;
   onChange: (value: string) => void;
+  language?: string;
   readOnly?: boolean;
   solution?: string;
   onRun?: () => void;
@@ -65,7 +66,7 @@ const editorOptions = {
   cursorSmoothCaretAnimation: "on" as const,
 };
 
-export function CodeEditor({ value, onChange, readOnly = false, solution, onRun }: CodeEditorProps) {
+export function CodeEditor({ value, onChange, language = "go", readOnly = false, solution, onRun }: CodeEditorProps) {
   const editorRef = useRef<Parameters<OnMount>[0] | null>(null);
   const onRunRef = useRef(onRun);
   onRunRef.current = onRun;
@@ -92,12 +93,12 @@ export function CodeEditor({ value, onChange, readOnly = false, solution, onRun 
           oldFile={{
             name: "Your Code",
             contents: value,
-            lang: "go",
+            lang: language as "go",
           }}
           newFile={{
             name: "Solution",
             contents: solution,
-            lang: "go",
+            lang: language as "go",
           }}
           options={{
             theme: {
@@ -118,7 +119,7 @@ export function CodeEditor({ value, onChange, readOnly = false, solution, onRun 
   return (
     <Editor
       height="100%"
-      language="go"
+      language={language}
       theme={theme}
       value={value}
       onChange={(v) => onChange(v ?? "")}

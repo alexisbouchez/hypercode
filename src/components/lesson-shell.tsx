@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import type { Lesson, Chapter, TestResult } from "@/lib/lessons/types";
-import { initGoRunner, runGo, runTests, isGoReady } from "@/lib/go-runner";
+import type { Lesson, Chapter, TestResult, RunResult, Test } from "@/lib/lessons/types";
 import {
   loadProgress,
   setCurrentLesson,
@@ -26,10 +25,18 @@ import {
 } from "./ui/resizable";
 import { ThemeToggle } from "./theme-toggle";
 
-interface LessonShellProps {
+export interface LessonShellProps {
+  courseId: string;
+  language: string;
+  runtimeLabel: string;
+  pdfPath?: string;
   lesson: Lesson;
   lessons: Lesson[];
   chapters: Chapter[];
+  initRunner: () => Promise<void>;
+  isRunnerReady: () => boolean;
+  runCode: (code: string) => Promise<RunResult>;
+  runTests: (code: string, tests: Test[]) => Promise<TestResult[]>;
 }
 
 function useIsMac() {
@@ -40,7 +47,19 @@ function useIsMac() {
   return isMac;
 }
 
-export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
+export function LessonShell({
+  courseId,
+  language,
+  runtimeLabel,
+  pdfPath,
+  lesson,
+  lessons,
+  chapters,
+  initRunner,
+  isRunnerReady,
+  runCode,
+  runTests,
+}: LessonShellProps) {
   const isMac = useIsMac();
   const mod = isMac ? "⌘" : "Ctrl+";
   const currentLesson = lesson;
@@ -55,7 +74,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
   const [isRunning, setIsRunning] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
-  const [goReady, setGoReady] = useState(false);
+  const [runtimeReady, setRuntimeReady] = useState(false);
   const [readMode, setReadMode] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("hypercode-read-mode") === "true";
@@ -63,11 +82,11 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
 
   // Load progress on mount and restore saved code
   useEffect(() => {
-    const progress = loadProgress();
+    const progress = loadProgress(courseId);
     setCompletedLessons(progress.completedLessons);
-    setCurrentLesson(currentLesson.id);
+    setCurrentLesson(courseId, currentLesson.id);
 
-    const saved = getSavedCode(currentLesson.id);
+    const saved = getSavedCode(courseId, currentLesson.id);
     if (saved) {
       setCode(saved);
     } else {
@@ -79,15 +98,15 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
     setError("");
     setTestResults([]);
     setShowSolution(false);
-  }, [currentLesson.id, currentLesson.starterCode]);
+  }, [courseId, currentLesson.id, currentLesson.starterCode]);
 
-  // Initialize Go runner (skip in read mode)
+  // Initialize runner (skip in read mode)
   useEffect(() => {
     if (readMode) return;
-    initGoRunner().then(() => {
-      setGoReady(isGoReady());
+    initRunner().then(() => {
+      setRuntimeReady(isRunnerReady());
     });
-  }, [readMode]);
+  }, [readMode, initRunner, isRunnerReady]);
 
   const toggleReadMode = useCallback(() => {
     setReadMode((prev) => {
@@ -101,9 +120,9 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
     setIsRunning(true);
     setShowSolution(false);
 
-    saveCode(currentLesson.id, code);
+    saveCode(courseId, currentLesson.id, code);
 
-    const result = await runGo(code);
+    const result = await runCode(code);
     setOutput(result.stdout);
     setError(result.error || result.stderr);
 
@@ -112,14 +131,14 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
 
     const allPassed = results.every((t) => t.passed);
     if (allPassed) {
-      markCompleted(currentLesson.id);
+      markCompleted(courseId, currentLesson.id);
       setCompletedLessons((prev) =>
         prev.includes(currentLesson.id) ? prev : [...prev, currentLesson.id],
       );
     }
 
     setIsRunning(false);
-  }, [code, currentLesson.id, currentLesson.tests]);
+  }, [courseId, code, currentLesson.id, currentLesson.tests, runCode, runTests]);
 
   const handleViewSolution = useCallback(() => {
     setShowSolution((prev) => !prev);
@@ -135,8 +154,8 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
 
   // Save code before navigating away
   const handleBeforeNavigate = useCallback(() => {
-    saveCode(currentLesson.id, code);
-  }, [currentLesson.id, code]);
+    saveCode(courseId, currentLesson.id, code);
+  }, [courseId, currentLesson.id, code]);
 
   const showDiff = showSolution;
 
@@ -144,13 +163,13 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
 
   const handleToggleComplete = useCallback(() => {
     if (isCurrentCompleted) {
-      unmarkCompleted(currentLesson.id);
+      unmarkCompleted(courseId, currentLesson.id);
       setCompletedLessons((prev) => prev.filter((id) => id !== currentLesson.id));
     } else {
-      markCompleted(currentLesson.id);
+      markCompleted(courseId, currentLesson.id);
       setCompletedLessons((prev) => [...prev, currentLesson.id]);
     }
-  }, [currentLesson.id, isCurrentCompleted]);
+  }, [courseId, currentLesson.id, isCurrentCompleted]);
 
   const topBar = (
     <div className="px-4 py-2 border-b border-border flex items-center gap-2 shrink-0">
@@ -190,7 +209,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
           variant="ghost"
           size="sm"
           nativeButton={false}
-          render={<Link href={`/lessons/${lessons[currentIndex - 1].id}`} />}
+          render={<Link href={`/${courseId}/lessons/${lessons[currentIndex - 1].id}`} />}
           onClick={handleBeforeNavigate}
         >
           &larr; Previous
@@ -200,7 +219,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
           variant="ghost"
           size="sm"
           nativeButton={false}
-          render={<Link href="/introduction" />}
+          render={<Link href={`/${courseId}/introduction`} />}
           onClick={handleBeforeNavigate}
         >
           &larr; Previous
@@ -211,17 +230,17 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
           variant="ghost"
           size="sm"
           nativeButton={false}
-          render={<Link href={`/lessons/${lessons[currentIndex + 1].id}`} />}
+          render={<Link href={`/${courseId}/lessons/${lessons[currentIndex + 1].id}`} />}
           onClick={handleBeforeNavigate}
         >
-          Next &rarr; 
+          Next &rarr;
         </Button>
       ) : (
         <Button
           variant="ghost"
           size="sm"
           nativeButton={false}
-          render={<Link href="/whats-next" />}
+          render={<Link href={`/${courseId}/whats-next`} />}
           onClick={handleBeforeNavigate}
         >
           Next &rarr;
@@ -251,6 +270,10 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
     return (
       <SidebarProvider className="h-screen !min-h-0">
         <AppSidebar
+          courseId={courseId}
+          chapters={chapters}
+          lessons={lessons}
+          pdfPath={pdfPath}
           currentLessonId={currentLesson.id}
           completedLessons={completedLessons}
         />
@@ -264,6 +287,10 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
   return (
     <SidebarProvider className="h-screen !min-h-0">
       <AppSidebar
+        courseId={courseId}
+        chapters={chapters}
+        lessons={lessons}
+        pdfPath={pdfPath}
         currentLessonId={currentLesson.id}
         completedLessons={completedLessons}
       />
@@ -300,14 +327,14 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
                   Reset
                 </Button>
                 <div className="flex-1" />
-                {!goReady && (
+                {!runtimeReady && (
                   <span className="text-xs text-muted-foreground">
-                    Go runtime loading...
+                    {runtimeLabel} loading...
                   </span>
                 )}
-                {goReady && (
+                {runtimeReady && (
                   <span className="text-xs text-primary">
-                    Go runtime ready
+                    {runtimeLabel} ready
                   </span>
                 )}
                 <ThemeToggle />
@@ -321,6 +348,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
                       <CodeEditor
                         value={code}
                         onChange={(v) => setCode(v)}
+                        language={language}
                         solution={showDiff ? currentLesson.solution : undefined}
                         onRun={handleRun}
                       />

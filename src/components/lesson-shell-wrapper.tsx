@@ -1,0 +1,63 @@
+"use client";
+
+import { useCallback } from "react";
+import type { Lesson, Chapter, RunResult, Test, TestResult } from "@/lib/lessons/types";
+import { initGoRunner, isGoReady, runGo, runTests as runGoTests } from "@/lib/go-runner";
+import { initZigRunner, isZigReady, runZig, runTests as runZigTests } from "@/lib/zig-runner";
+import { LessonShell } from "./lesson-shell";
+
+interface LessonShellWrapperProps {
+  courseId: string;
+  language: string;
+  runtimeLabel: string;
+  pdfPath?: string;
+  lesson: Lesson;
+  lessons: Lesson[];
+  chapters: Chapter[];
+}
+
+export function LessonShellWrapper({
+  courseId,
+  language,
+  runtimeLabel,
+  pdfPath,
+  lesson,
+  lessons,
+  chapters,
+}: LessonShellWrapperProps) {
+  const initRunner = useCallback((): Promise<void> => {
+    if (courseId === "zig") return initZigRunner();
+    return initGoRunner();
+  }, [courseId]);
+
+  const isRunnerReady = useCallback((): boolean => {
+    if (courseId === "zig") return isZigReady();
+    return isGoReady();
+  }, [courseId]);
+
+  const runCode = useCallback(async (code: string): Promise<RunResult> => {
+    if (courseId === "zig") return runZig(code);
+    return runGo(code);
+  }, [courseId]);
+
+  const runTestsFn = useCallback(async (code: string, tests: Test[]): Promise<TestResult[]> => {
+    if (courseId === "zig") return runZigTests(code, tests);
+    return runGoTests(code, tests);
+  }, [courseId]);
+
+  return (
+    <LessonShell
+      courseId={courseId}
+      language={language}
+      runtimeLabel={runtimeLabel}
+      pdfPath={pdfPath}
+      lesson={lesson}
+      lessons={lessons}
+      chapters={chapters}
+      initRunner={initRunner}
+      isRunnerReady={isRunnerReady}
+      runCode={runCode}
+      runTests={runTestsFn}
+    />
+  );
+}

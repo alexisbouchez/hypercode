@@ -1,5 +1,3 @@
-const STORAGE_KEY = "hypercode-progress";
-
 interface Progress {
   completedLessons: string[];
   currentLessonId: string | null;
@@ -14,10 +12,40 @@ function getDefaultProgress(): Progress {
   };
 }
 
-export function loadProgress(): Progress {
-  if (typeof window === "undefined") return getDefaultProgress();
+function storageKey(courseId: string): string {
+  return `hypercode-progress-${courseId}`;
+}
+
+/** Migrate legacy "hypercode-progress" to "hypercode-progress-go" once. */
+function migrateIfNeeded() {
+  if (typeof window === "undefined") return;
+  const OLD_KEY = "hypercode-progress";
+  const NEW_KEY = storageKey("go");
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const old = localStorage.getItem(OLD_KEY);
+    if (old && !localStorage.getItem(NEW_KEY)) {
+      localStorage.setItem(NEW_KEY, old);
+      localStorage.removeItem(OLD_KEY);
+    }
+  } catch {
+    // ignore
+  }
+}
+
+let migrated = false;
+
+function ensureMigrated() {
+  if (!migrated) {
+    migrateIfNeeded();
+    migrated = true;
+  }
+}
+
+export function loadProgress(courseId: string): Progress {
+  if (typeof window === "undefined") return getDefaultProgress();
+  ensureMigrated();
+  try {
+    const raw = localStorage.getItem(storageKey(courseId));
     if (!raw) return getDefaultProgress();
     return JSON.parse(raw) as Progress;
   } catch {
@@ -25,56 +53,56 @@ export function loadProgress(): Progress {
   }
 }
 
-function save(progress: Progress) {
+function save(courseId: string, progress: Progress) {
   if (typeof window === "undefined") return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  localStorage.setItem(storageKey(courseId), JSON.stringify(progress));
 }
 
-export function markCompleted(lessonId: string) {
-  const progress = loadProgress();
+export function markCompleted(courseId: string, lessonId: string) {
+  const progress = loadProgress(courseId);
   if (!progress.completedLessons.includes(lessonId)) {
     progress.completedLessons.push(lessonId);
   }
-  save(progress);
+  save(courseId, progress);
 }
 
-export function unmarkCompleted(lessonId: string) {
-  const progress = loadProgress();
+export function unmarkCompleted(courseId: string, lessonId: string) {
+  const progress = loadProgress(courseId);
   progress.completedLessons = progress.completedLessons.filter(
     (id) => id !== lessonId,
   );
-  save(progress);
+  save(courseId, progress);
 }
 
-export function isCompleted(lessonId: string): boolean {
-  return loadProgress().completedLessons.includes(lessonId);
+export function isCompleted(courseId: string, lessonId: string): boolean {
+  return loadProgress(courseId).completedLessons.includes(lessonId);
 }
 
-export function setCurrentLesson(lessonId: string) {
-  const progress = loadProgress();
+export function setCurrentLesson(courseId: string, lessonId: string) {
+  const progress = loadProgress(courseId);
   progress.currentLessonId = lessonId;
-  save(progress);
+  save(courseId, progress);
 }
 
-export function getCurrentLessonId(): string | null {
-  return loadProgress().currentLessonId;
+export function getCurrentLessonId(courseId: string): string | null {
+  return loadProgress(courseId).currentLessonId;
 }
 
-export function saveCode(lessonId: string, code: string) {
-  const progress = loadProgress();
+export function saveCode(courseId: string, lessonId: string, code: string) {
+  const progress = loadProgress(courseId);
   progress.savedCode[lessonId] = code;
-  save(progress);
+  save(courseId, progress);
 }
 
-export function getSavedCode(lessonId: string): string | null {
-  return loadProgress().savedCode[lessonId] ?? null;
+export function getSavedCode(courseId: string, lessonId: string): string | null {
+  return loadProgress(courseId).savedCode[lessonId] ?? null;
 }
 
-export function getCompletedCount(): number {
-  return loadProgress().completedLessons.length;
+export function getCompletedCount(courseId: string): number {
+  return loadProgress(courseId).completedLessons.length;
 }
 
-export function resetProgress() {
+export function resetProgress(courseId: string) {
   if (typeof window === "undefined") return;
-  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(storageKey(courseId));
 }

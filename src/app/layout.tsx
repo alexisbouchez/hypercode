@@ -22,16 +22,18 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://hypercode.alexisbouchez.com"),
   title: {
-    default: "Hypercode - Learn the Go Programming Language",
-    template: "%s - Hypercode",
+    default: "Hypercode - Learn Programming Interactively",
+    template: "%s",
   },
   description:
-    "An interactive platform to learn the Go programming language from scratch. No account needed.",
+    "An interactive platform to learn Go, Zig, and more programming languages from scratch. No account needed.",
   keywords: [
     "Go",
     "Golang",
+    "Zig",
     "learn Go",
-    "Go tutorial",
+    "learn Zig",
+    "programming tutorial",
     "interactive",
     "programming",
     "coding",
@@ -40,16 +42,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Hypercode",
-    title: "Hypercode - Learn the Go Programming Language",
+    title: "Hypercode - Learn Programming Interactively",
     description:
-      "An interactive platform to learn the Go programming language from scratch. No account needed.",
+      "An interactive platform to learn Go, Zig, and more programming languages from scratch. No account needed.",
     url: "https://hypercode.alexisbouchez.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hypercode - Learn the Go Programming Language",
+    title: "Hypercode - Learn Programming Interactively",
     description:
-      "An interactive platform to learn the Go programming language from scratch. No account needed.",
+      "An interactive platform to learn Go, Zig, and more programming languages from scratch. No account needed.",
   },
 };
 
@@ -70,7 +72,7 @@ export default function RootLayout({
               name: "Hypercode",
               url: "https://hypercode.alexisbouchez.com",
               description:
-                "An interactive platform to learn the Go programming language from scratch.",
+                "An interactive platform to learn Go, Zig, and more programming languages from scratch.",
             }),
           }}
         />
