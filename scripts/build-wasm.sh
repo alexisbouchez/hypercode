@@ -18,9 +18,22 @@ fi
 # Ensure dependencies are downloaded
 go mod tidy
 
-# Build WASM
+# Build WASM with size optimizations:
+#   -s: strip symbol table
+#   -w: strip DWARF debug info
 echo "Compiling to WebAssembly..."
-GOOS=js GOARCH=wasm go build -o "$PUBLIC_DIR/yaegi.wasm" .
+GOOS=js GOARCH=wasm go build -ldflags="-s -w" -trimpath -o "$PUBLIC_DIR/yaegi.wasm" .
+
+# Optimize WASM binary with wasm-opt (Binaryen) if available
+if command -v wasm-opt &> /dev/null; then
+    echo "Optimizing WASM with wasm-opt..."
+    wasm-opt -Oz --enable-bulk-memory -o "$PUBLIC_DIR/yaegi.wasm" "$PUBLIC_DIR/yaegi.wasm"
+elif npx wasm-opt --version &> /dev/null; then
+    echo "Optimizing WASM with wasm-opt (via npx)..."
+    npx wasm-opt -Oz --enable-bulk-memory -o "$PUBLIC_DIR/yaegi.wasm" "$PUBLIC_DIR/yaegi.wasm"
+else
+    echo "Note: Install binaryen (wasm-opt) for additional size reduction."
+fi
 
 # Copy wasm_exec.js from Go installation
 GOROOT=$(go env GOROOT)
