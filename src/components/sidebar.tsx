@@ -192,7 +192,7 @@ export function AppSidebar({
             GitHub
           </a>
           <a
-            href="https://discord.gg/ekrFAtS6Bj"
+            href="https://discord.gg/Fft3TE3UkY"
             target="_blank"
             rel="noopener noreferrer"
             className={cn(buttonVariants({ variant: "outline", size: "sm" }), "w-full")}

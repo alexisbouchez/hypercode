@@ -9,6 +9,7 @@ interface CodeEditorProps {
   onChange: (value: string) => void;
   readOnly?: boolean;
   solution?: string;
+  onRun?: () => void;
 }
 
 function useIsDark() {
@@ -64,14 +65,24 @@ const editorOptions = {
   cursorSmoothCaretAnimation: "on" as const,
 };
 
-export function CodeEditor({ value, onChange, readOnly = false, solution }: CodeEditorProps) {
+export function CodeEditor({ value, onChange, readOnly = false, solution, onRun }: CodeEditorProps) {
   const editorRef = useRef<Parameters<OnMount>[0] | null>(null);
+  const onRunRef = useRef(onRun);
+  onRunRef.current = onRun;
   const isDark = useIsDark();
   const theme = isDark ? "vs-dark" : "light";
 
-  const handleMount: OnMount = useCallback((editor) => {
+  const handleMount: OnMount = useCallback((editor, monaco) => {
     editorRef.current = editor;
     editor.focus();
+
+    editor.addAction({
+      id: "run-code",
+      label: "Run Code",
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
+      run: () => onRunRef.current?.(),
+    });
+
   }, []);
 
   if (solution !== undefined) {

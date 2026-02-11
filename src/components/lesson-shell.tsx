@@ -32,7 +32,17 @@ interface LessonShellProps {
   chapters: Chapter[];
 }
 
+function useIsMac() {
+  const [isMac, setIsMac] = useState(false);
+  useEffect(() => {
+    setIsMac(navigator.platform.startsWith("Mac"));
+  }, []);
+  return isMac;
+}
+
 export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
+  const isMac = useIsMac();
+  const mod = isMac ? "⌘" : "Ctrl+";
   const currentLesson = lesson;
   const currentIndex = lessons.findIndex((l) => l.id === currentLesson.id);
   const hasPrev = currentIndex > 0;
@@ -273,6 +283,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
               <div className="px-4 py-2 border-b border-border flex items-center gap-2 bg-card shrink-0">
                 <Button size="sm" onClick={handleRun} disabled={isRunning}>
                   {isRunning ? "Running..." : "Run"}
+                  <kbd className="ml-1.5 text-[10px] opacity-60 font-sans">{mod}↵</kbd>
                 </Button>
                 <Button
                   variant={showSolution ? "secondary" : "outline"}
@@ -311,6 +322,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
                         value={code}
                         onChange={(v) => setCode(v)}
                         solution={showDiff ? currentLesson.solution : undefined}
+                        onRun={handleRun}
                       />
                     </div>
                   </ResizablePanel>
