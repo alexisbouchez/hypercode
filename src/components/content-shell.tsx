@@ -62,11 +62,11 @@ export function ContentShell({
                 nativeButton={false}
                 render={<Link href={prevHref} />}
               >
-                Previous
+                &larr; Previous
               </Button>
             ) : (
               <Button variant="ghost" size="sm" disabled>
-                Previous
+                &larr; Previous
               </Button>
             )}
             {nextHref ? (
@@ -76,11 +76,11 @@ export function ContentShell({
                 nativeButton={false}
                 render={<Link href={nextHref} />}
               >
-                Next
+                Next &rarr;
               </Button>
             ) : (
               <Button variant="ghost" size="sm" disabled>
-                Next
+                Next &rarr;
               </Button>
             )}
           </div>

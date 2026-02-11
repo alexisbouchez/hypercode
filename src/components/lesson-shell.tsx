@@ -183,7 +183,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
           render={<Link href={`/lessons/${lessons[currentIndex - 1].id}`} />}
           onClick={handleBeforeNavigate}
         >
-          Previous
+          &larr; Previous
         </Button>
       ) : (
         <Button
@@ -193,7 +193,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
           render={<Link href="/introduction" />}
           onClick={handleBeforeNavigate}
         >
-          Previous
+          &larr; Previous
         </Button>
       )}
       {hasNext ? (
@@ -204,7 +204,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
           render={<Link href={`/lessons/${lessons[currentIndex + 1].id}`} />}
           onClick={handleBeforeNavigate}
         >
-          Next
+          Next &rarr; 
         </Button>
       ) : (
         <Button
@@ -214,7 +214,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
           render={<Link href="/whats-next" />}
           onClick={handleBeforeNavigate}
         >
-          Next
+          Next &rarr;
         </Button>
       )}
     </div>

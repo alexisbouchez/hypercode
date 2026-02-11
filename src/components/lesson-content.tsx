@@ -54,7 +54,7 @@ export function LessonContent({ content }: LessonContentProps) {
         components={{
           h2: ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => (
             <h2
-              className="text-2xl font-bold text-foreground mt-8 mb-4 first:mt-0 tracking-tight"
+              className="text-xl font-bold text-foreground mt-8 mb-4 first:mt-0 tracking-tight"
               {...props}
             >
               {children}
@@ -62,7 +62,7 @@ export function LessonContent({ content }: LessonContentProps) {
           ),
           h3: ({ children, ...props }: ComponentPropsWithoutRef<"h3">) => (
             <h3
-              className="text-lg font-semibold text-foreground mt-6 mb-3 tracking-tight"
+              className="text-base font-semibold text-foreground mt-6 mb-3 tracking-tight"
               {...props}
             >
               {children}
