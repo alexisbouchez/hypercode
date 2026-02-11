@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:book": "pdflatex -output-directory=public -jobname=go-book -interaction=nonstopmode go-book.tex && pdflatex -output-directory=public -jobname=go-book -interaction=nonstopmode go-book.tex"
+    "build:book": "tectonic -o public go-book.tex"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",
