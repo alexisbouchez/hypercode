@@ -179,13 +179,20 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
         <Button
           variant="ghost"
           size="sm"
+          nativeButton={false}
           render={<Link href={`/lessons/${lessons[currentIndex - 1].id}`} />}
           onClick={handleBeforeNavigate}
         >
           Previous
         </Button>
       ) : (
-        <Button variant="ghost" size="sm" disabled>
+        <Button
+          variant="ghost"
+          size="sm"
+          nativeButton={false}
+          render={<Link href="/introduction" />}
+          onClick={handleBeforeNavigate}
+        >
           Previous
         </Button>
       )}
@@ -193,13 +200,20 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
         <Button
           variant="ghost"
           size="sm"
+          nativeButton={false}
           render={<Link href={`/lessons/${lessons[currentIndex + 1].id}`} />}
           onClick={handleBeforeNavigate}
         >
           Next
         </Button>
       ) : (
-        <Button variant="ghost" size="sm" disabled>
+        <Button
+          variant="ghost"
+          size="sm"
+          nativeButton={false}
+          render={<Link href="/whats-next" />}
+          onClick={handleBeforeNavigate}
+        >
           Next
         </Button>
       )}
@@ -212,7 +226,7 @@ export function LessonShell({ lesson, lessons, chapters }: LessonShellProps) {
       <div className="flex-1 overflow-y-auto px-6 py-6">
         <div className={readMode ? "max-w-3xl mx-auto w-full" : undefined}>
           <div className="mb-6">
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground font-display">
               {currentLesson.title}
             </h1>
           </div>

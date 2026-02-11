@@ -167,6 +167,16 @@ export function LessonContent({ content }: LessonContentProps) {
           hr: (props: ComponentPropsWithoutRef<"hr">) => (
             <hr className="my-6 border-border" {...props} />
           ),
+          a: ({ children, ...props }: ComponentPropsWithoutRef<"a">) => (
+            <a
+              className="text-primary underline underline-offset-2 hover:text-primary/80"
+              target="_blank"
+              rel="noopener noreferrer"
+              {...props}
+            >
+              {children}
+            </a>
+          ),
           blockquote: ({ children, ...props }: ComponentPropsWithoutRef<"blockquote">) => (
             <blockquote
               className="border-l-2 border-primary/50 pl-4 my-4 text-foreground/75 italic"

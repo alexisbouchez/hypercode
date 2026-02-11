@@ -10,11 +10,11 @@ export default function Page() {
 
   useEffect(() => {
     const lastLesson = getCurrentLessonId();
-    const target =
-      lastLesson && lessons.some((l) => l.id === lastLesson)
-        ? lastLesson
-        : lessons[0].id;
-    router.replace(`/lessons/${target}`);
+    if (lastLesson && lessons.some((l) => l.id === lastLesson)) {
+      router.replace(`/lessons/${lastLesson}`);
+    } else {
+      router.replace("/introduction");
+    }
   }, [router]);
 
   return null;

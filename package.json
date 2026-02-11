@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:book": "pdflatex -output-directory=public -jobname=go-book -interaction=nonstopmode go-book.tex && pdflatex -output-directory=public -jobname=go-book -interaction=nonstopmode go-book.tex"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",

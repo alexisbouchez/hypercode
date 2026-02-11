@@ -9,6 +9,8 @@ import { maps } from "./data/07-maps";
 import { structs } from "./data/08-structs";
 import { interfaces } from "./data/09-interfaces";
 import { errors } from "./data/10-errors";
+import { genericFunctions } from "./data/11-generic-functions";
+import { genericTypes } from "./data/12-generic-types";
 
 export const chapters: Chapter[] = [
   { id: "foundations", title: "Foundations" },
@@ -17,6 +19,7 @@ export const chapters: Chapter[] = [
   { id: "data-structures", title: "Data Structures" },
   { id: "structs-interfaces", title: "Structs and Interfaces" },
   { id: "error-handling", title: "Error Handling" },
+  { id: "generics", title: "Generics" },
 ];
 
 export const lessons: Lesson[] = [
@@ -30,6 +33,8 @@ export const lessons: Lesson[] = [
   structs,
   interfaces,
   errors,
+  genericFunctions,
+  genericTypes,
 ];
 
 export function getLessonById(id: string): Lesson | undefined {
