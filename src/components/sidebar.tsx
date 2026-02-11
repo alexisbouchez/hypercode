@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { chapters, lessons } from "@/lib/lessons";
+import type { Chapter, Lesson } from "@/lib/lessons/types";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import {
@@ -20,25 +20,35 @@ import {
 import logo from "../logo.png"
 
 interface SidebarProps {
+  courseId: string;
+  chapters: Chapter[];
+  lessons: Lesson[];
+  pdfPath?: string;
   currentLessonId: string;
   completedLessons: string[];
 }
 
 export function AppSidebar({
+  courseId,
+  chapters,
+  lessons,
+  pdfPath,
   currentLessonId,
   completedLessons,
 }: SidebarProps) {
   return (
     <SidebarUI collapsible="icon">
       <SidebarHeader className="px-4 pt-3 pb-2 group-data-[collapsible=icon]:p-1">
-        <Image
-          src={logo}
-          alt="Hypercode"
-          width={163}
-          height={36}
-          className="group-data-[collapsible=icon]:hidden"
-          priority
-        />
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="Hypercode"
+            width={163}
+            height={36}
+            className="group-data-[collapsible=icon]:hidden"
+            priority
+          />
+        </Link>
 
         <div className="flex items-center gap-3 group-data-[collapsible=icon]:hidden">
           <span className="text-xs text-muted-foreground shrink-0">Progress:</span>
@@ -61,7 +71,7 @@ export function AppSidebar({
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  render={<Link href="/introduction" />}
+                  render={<Link href={`/${courseId}/introduction`} />}
                   isActive={currentLessonId === "introduction"}
                   className="cursor-pointer data-active:bg-primary/10 data-active:text-primary text-foreground/70"
                 >
@@ -103,7 +113,7 @@ export function AppSidebar({
                     return (
                       <SidebarMenuItem key={lesson.id}>
                         <SidebarMenuButton
-                          render={<Link href={`/lessons/${lesson.id}`} />}
+                          render={<Link href={`/${courseId}/lessons/${lesson.id}`} />}
                           isActive={isCurrent}
                           className="cursor-pointer data-active:bg-primary/10 data-active:text-primary text-foreground/70"
                         >
@@ -148,7 +158,7 @@ export function AppSidebar({
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  render={<Link href="/whats-next" />}
+                  render={<Link href={`/${courseId}/whats-next`} />}
                   isActive={currentLessonId === "whats-next"}
                   className="cursor-pointer data-active:bg-primary/10 data-active:text-primary text-foreground/70"
                 >
@@ -174,14 +184,16 @@ export function AppSidebar({
       </SidebarContent>
       <SidebarFooter className="p-4 group-data-[collapsible=icon]:p-1">
         <div className="grid grid-cols-2 gap-2 group-data-[collapsible=icon]:hidden">
-          <a
-            href="/go-book.pdf"
-            download
-            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "col-span-2 w-full")}
-          >
-            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-4! fill-current"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
-            Download PDF
-          </a>
+          {pdfPath && (
+            <a
+              href={pdfPath}
+              download
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "col-span-2 w-full")}
+            >
+              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-4! fill-current"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
+              Download PDF
+            </a>
+          )}
           <a
             href="https://github.com/alexisbouchez/hypercode"
             target="_blank"

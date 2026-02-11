@@ -4,7 +4,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 WASM_DIR="$PROJECT_DIR/wasm"
-PUBLIC_DIR="$PROJECT_DIR/public"
+PUBLIC_DIR="$(dirname "$PROJECT_DIR")/public"
 
 echo "Building Yaegi WASM module..."
 

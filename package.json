@@ -7,10 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:book": "tectonic -o public go-book.tex"
+    "build:book": "tectonic -o public src/go-book.tex"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",
+    "@electric-sql/pglite": "^0.3.15",
     "@hugeicons/core-free-icons": "^3.1.1",
     "@hugeicons/react": "^1.1.5",
     "@monaco-editor/react": "^4.7.0",

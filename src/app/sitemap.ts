@@ -1,24 +1,38 @@
 import type { MetadataRoute } from "next";
-import { lessons } from "@/lib/lessons";
+import { courses } from "@/lib/courses";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://hypercode.alexisbouchez.com";
 
-  return [
+  const entries: MetadataRoute.Sitemap = [
     {
-      url: `${base}/introduction`,
+      url: base,
       changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    ...lessons.map((lesson) => ({
-      url: `${base}/lessons/${lesson.id}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    })),
-    {
-      url: `${base}/whats-next`,
-      changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 1.0,
     },
   ];
+
+  for (const course of courses) {
+    entries.push({
+      url: `${base}/${course.id}/introduction`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    });
+
+    for (const lesson of course.lessons) {
+      entries.push({
+        url: `${base}/${course.id}/lessons/${lesson.id}`,
+        changeFrequency: "monthly",
+        priority: 0.8,
+      });
+    }
+
+    entries.push({
+      url: `${base}/${course.id}/whats-next`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    });
+  }
+
+  return entries;
 }
