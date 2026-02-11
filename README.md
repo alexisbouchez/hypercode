@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hypercode
 
-## Getting Started
+Interactive Go lessons in the browser. You edit Go code in the editor and run it; execution is handled by [Yaegi](https://github.com/traefik/yaegi) (the Go interpreter) compiled to WebAssembly.
 
-First, run the development server:
+## Clone and run
+
+```bash
+git clone https://github.com/alexisbouchez/hypercode.git
+cd hypercode
+```
+
+Install dependencies (npm or bun):
+
+```bash
+npm install
+# or
+bun install
+```
+
+Start the dev server:
 
 ```bash
 npm run dev
 # or
-yarn dev
-# or
-pnpm dev
-# or
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Building the WASM module
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The repo ships prebuilt `public/yaegi.wasm` and `public/wasm_exec.js`. To rebuild them you need Go and the project’s script:
 
-## Learn More
+```bash
+./scripts/build-wasm.sh
+```
 
-To learn more about Next.js, take a look at the following resources:
+This compiles the `wasm/` Go package (Yaegi + a small stdlib subset) to WebAssembly and copies `wasm_exec.js` from your Go installation. Optional: install [Binaryen](https://github.com/WebAssembly/binaryen) for `wasm-opt` to shrink the binary.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js front end; in-browser Go execution via Yaegi (traefik/yaegi) compiled to WASM.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[LICENSE](./LICENSE)
