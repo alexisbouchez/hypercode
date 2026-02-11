@@ -271,7 +271,7 @@ Learn Go from Scratch}
 % Description
 {\color{gray}\fontsize{12}{19}\selectfont
 From ``Hello, World!'' to concurrency ---\\[8pt]
-fourteen lessons covering the fundamentals of Go.
+seventeen lessons covering the fundamentals of Go.
 }
 
 \vspace{2cm}
@@ -344,17 +344,17 @@ Major companies use Go extensively: Google, Uber, Dropbox, Twitch, Cloudflare, a
 
 \subsection*{About This Book}
 
-This book contains fourteen lessons organized into eight chapters. Each lesson explains a concept, demonstrates it with code examples, and ends with an exercise for you to practice. Solutions are provided at the end of each lesson. The lessons are designed to be worked through in order, as each builds on the concepts introduced before it.
+This book contains seventeen lessons organized into eight chapters. Each lesson explains a concept, demonstrates it with code examples, and ends with an exercise for you to practice. Solutions are provided at the end of each lesson. The lessons are designed to be worked through in order, as each builds on the concepts introduced before it.
 
 \begin{itemize}[leftmargin=1.5em]
   \item \textbf{Foundations} --- How Go programs are structured: packages, imports, and the \code{main} function. Variables, types, and constants.
   \item \textbf{Control Flow} --- Conditionals with \code{if}/\code{else} and \code{switch}. Loops with \code{for}.
-  \item \textbf{Functions} --- Declaring functions, multiple return values, and named returns.
-  \item \textbf{Data Structures} --- Slices (dynamic arrays), maps (hash tables), and pointers.
-  \item \textbf{Structs and Interfaces} --- Custom types with methods. Interfaces and structural typing.
+  \item \textbf{Functions} --- Declaring functions, multiple return values, named returns, and \code{defer}.
+  \item \textbf{Data Structures} --- Slices (dynamic arrays), maps (hash tables), and strings in depth.
+  \item \textbf{Custom Types} --- Pointers, structs with methods, interfaces, type assertions, and structural typing.
   \item \textbf{Error Handling} --- Go's explicit approach to errors using values instead of exceptions.
   \item \textbf{Generics} --- Type parameters for functions and data structures.
-  \item \textbf{Concurrency} --- Goroutines and channels for concurrent programming.
+  \item \textbf{Concurrency} --- Goroutines, channels, and the \code{select} statement.
 \end{itemize}
 
 \cleardoublepage
@@ -762,16 +762,12 @@ for _, name := range names {
 \end{lstlisting}
 
 \begin{taskbox}
-Write a function \code{fizzBuzz} that takes an integer \code{n} and prints:
+Write a function \code{fizzBuzz} that takes an integer \code{n} and prints the numbers from 1 to \code{n} (inclusive), one per line, with these substitutions:
 \begin{itemize}[leftmargin=1.5em]
-  \item For each number from 1 to $n$ (inclusive):
-  \begin{itemize}
-    \item \code{"FizzBuzz"} if the number is divisible by both 3 and 5
-    \item \code{"Fizz"} if the number is divisible by 3
-    \item \code{"Buzz"} if the number is divisible by 5
-    \item The number otherwise
-  \end{itemize}
-  \item Each value on its own line
+  \item \code{"FizzBuzz"} if the number is divisible by both 3 and 5
+  \item \code{"Fizz"} if the number is divisible by 3
+  \item \code{"Buzz"} if the number is divisible by 5
+  \item The number otherwise
 \end{itemize}
 
 \textbf{Starter code:}
@@ -938,6 +934,126 @@ func main() {
 \end{lstlisting}
 \end{solutionbox}
 
+\newpage
+
+% ─── Lesson 6: Defer ────────────────────────────────────────────
+\section{Defer}
+
+\subsection*{Cleaning Up After Yourself}
+
+The \code{defer} keyword schedules a function call to run when the surrounding function returns. It is Go's way of ensuring cleanup happens no matter how the function exits.
+
+\begin{lstlisting}
+func main() {
+    fmt.Println("start")
+    defer fmt.Println("deferred")
+    fmt.Println("end")
+}
+// Output:
+// start
+// end
+// deferred
+\end{lstlisting}
+
+The deferred call runs \emph{after} the function body completes but \emph{before} it returns to the caller.
+
+\subsubsection*{LIFO Order}
+
+When you defer multiple calls, they execute in \textbf{last-in, first-out} order --- like a stack:
+
+\begin{lstlisting}
+func main() {
+    defer fmt.Println("first")
+    defer fmt.Println("second")
+    defer fmt.Println("third")
+}
+// Output:
+// third
+// second
+// first
+\end{lstlisting}
+
+\subsubsection*{Common Pattern: Open Then Defer Close}
+
+The most common use of \code{defer} is pairing resource acquisition with cleanup on the very next line:
+
+\begin{lstlisting}
+f, err := os.Open("data.txt")
+if err != nil {
+    return err
+}
+defer f.Close()
+// work with f...
+\end{lstlisting}
+
+This makes it impossible to forget to close the file, regardless of how many return paths the function has.
+
+\subsubsection*{Arguments Are Evaluated Immediately}
+
+The arguments to a deferred call are evaluated when the \code{defer} statement executes, not when the deferred function runs:
+
+\begin{lstlisting}
+x := 10
+defer fmt.Println(x) // captures 10
+x = 20
+// prints 10, not 20
+\end{lstlisting}
+
+\subsubsection*{Defer in Loops}
+
+Be careful with \code{defer} inside loops. Deferred calls accumulate and only run when the function returns, not when the loop iteration ends:
+
+\begin{lstlisting}
+for _, name := range files {
+    f, _ := os.Open(name)
+    defer f.Close() // these all pile up!
+}
+\end{lstlisting}
+
+If you need per-iteration cleanup, extract the body into a separate function so each deferred call runs promptly.
+
+\begin{taskbox}
+Write a function \code{countdown(n int)} that uses \code{defer} inside a loop to print numbers in reverse order, followed by \code{"Go!"}.
+
+For example, \code{countdown(3)} should print \code{3}, \code{2}, \code{1}, \code{Go!} (each on its own line).
+
+Hint: defer each number inside the loop. Since deferred calls execute in LIFO order, deferring 1, 2, 3 will print 3, 2, 1. Print \code{"Go!"} using a defer \emph{before} the loop.
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func countdown(n int) {
+    // Your code here
+}
+
+func main() {
+    countdown(3)
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func countdown(n int) {
+    defer fmt.Println("Go!")
+    for i := 1; i <= n; i++ {
+        defer fmt.Println(i)
+    }
+}
+
+func main() {
+    countdown(3)
+}
+\end{lstlisting}
+\end{solutionbox}
+
 \cleardoublepage
 
 % ═══════════════════════════════════════════════════════════════════
@@ -1004,7 +1120,7 @@ A sub-slice shares the same underlying array. Modifying one affects the other. I
 Write two functions:
 \begin{itemize}[leftmargin=1.5em]
   \item \code{sum} --- takes a \code{[]int} and returns the sum of all elements.
-  \item \code{filter} --- takes a \code{[]int} and returns a new \code{[]int} containing only the even numbers, in order.
+  \item \code{filterEvens} --- takes a \code{[]int} and returns a new \code{[]int} containing only the even numbers, in order.
 \end{itemize}
 
 \textbf{Starter code:}
@@ -1018,7 +1134,7 @@ func sum(numbers []int) int {
     return 0
 }
 
-func filter(numbers []int) []int {
+func filterEvens(numbers []int) []int {
     // Return only even numbers
     return nil
 }
@@ -1026,7 +1142,7 @@ func filter(numbers []int) []int {
 func main() {
     nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
     fmt.Println(sum(nums))
-    fmt.Println(filter(nums))
+    fmt.Println(filterEvens(nums))
 }
 \end{lstlisting}
 \end{taskbox}
@@ -1045,7 +1161,7 @@ func sum(numbers []int) int {
     return total
 }
 
-func filter(numbers []int) []int {
+func filterEvens(numbers []int) []int {
     var result []int
     for _, n := range numbers {
         if n%2 == 0 {
@@ -1058,7 +1174,7 @@ func filter(numbers []int) []int {
 func main() {
     nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
     fmt.Println(sum(nums))
-    fmt.Println(filter(nums))
+    fmt.Println(filterEvens(nums))
 }
 \end{lstlisting}
 \end{solutionbox}
@@ -1190,7 +1306,156 @@ func main() {
 
 \newpage
 
-% ─── Lesson 8: Pointers ─────────────────────────────────────────
+% ─── Lesson 9: Strings ──────────────────────────────────────────
+\section{Strings}
+
+\subsection*{More Than Meets the Eye}
+
+Go strings are immutable sequences of bytes. This seems simple until you encounter non-ASCII text and discover the difference between bytes and characters.
+
+\subsubsection*{Bytes vs Runes}
+
+A \code{string} in Go is a read-only slice of bytes. The \code{len} function returns the number of \textbf{bytes}, not the number of characters:
+
+\begin{lstlisting}
+fmt.Println(len("hello"))  // 5
+fmt.Println(len("héllo"))  // 6 (é is 2 bytes in UTF-8)
+\end{lstlisting}
+
+Go uses the term \textbf{rune} for what most languages call a character. A rune is an alias for \code{int32} and represents a single Unicode code point.
+
+To get the actual character count, use \code{utf8.RuneCountInString}:
+
+\begin{lstlisting}
+import "unicode/utf8"
+
+fmt.Println(utf8.RuneCountInString("héllo")) // 5
+\end{lstlisting}
+
+\subsubsection*{Iterating Over Strings}
+
+A \code{for range} loop over a string yields runes, not bytes:
+
+\begin{lstlisting}
+for i, r := range "héllo" {
+    fmt.Printf("%d: %c\n", i, r)
+}
+// 0: h
+// 1: é    (byte index 1, but é is 2 bytes wide)
+// 3: l    (byte index jumps to 3)
+// 4: l
+// 5: o
+\end{lstlisting}
+
+The index is the byte position, but \code{r} is a full rune. This is the safe way to process strings character by character.
+
+\subsubsection*{The strings Package}
+
+The \code{strings} package provides essential string operations:
+
+\begin{lstlisting}
+import "strings"
+
+strings.Contains("seafood", "foo")     // true
+strings.HasPrefix("seafood", "sea")    // true
+strings.HasSuffix("seafood", "food")   // true
+
+strings.ToUpper("hello")               // "HELLO"
+strings.ToLower("HELLO")               // "hello"
+
+strings.Split("a,b,c", ",")            // ["a", "b", "c"]
+strings.Join([]string{"a", "b"}, "-")  // "a-b"
+
+strings.Fields("  foo  bar  baz  ")    // ["foo", "bar", "baz"]
+\end{lstlisting}
+
+\code{strings.Fields} splits on any whitespace and ignores leading/trailing spaces. It is often more useful than \code{strings.Split}.
+
+\subsubsection*{Conversions}
+
+You can convert between strings, byte slices, and rune slices:
+
+\begin{lstlisting}
+s := "hello"
+b := []byte(s)   // string to bytes
+r := []rune(s)   // string to runes
+s2 := string(b)  // bytes back to string
+s3 := string(r)  // runes back to string
+\end{lstlisting}
+
+For number conversions, use the \code{strconv} package:
+
+\begin{lstlisting}
+import "strconv"
+
+s := strconv.Itoa(42)        // int to string: "42"
+n, err := strconv.Atoi("42") // string to int: 42, nil
+\end{lstlisting}
+
+\begin{taskbox}
+Write a function \code{acronym(s string) string} that takes a phrase and returns its acronym. Take the first letter of each word and uppercase it.
+
+For example, \code{"Portable Network Graphics"} becomes \code{"PNG"}.
+
+Use \code{strings.Fields} to split into words, and \code{strings.ToUpper} to uppercase.
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+func acronym(s string) string {
+    // Your code here
+    return ""
+}
+
+func main() {
+    fmt.Println(acronym("Portable Network Graphics"))
+    fmt.Println(acronym("as soon as possible"))
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+func acronym(s string) string {
+    words := strings.Fields(s)
+    result := ""
+    for _, w := range words {
+        for _, r := range w {
+            result += strings.ToUpper(string(r))
+            break
+        }
+    }
+    return result
+}
+
+func main() {
+    fmt.Println(acronym("Portable Network Graphics"))
+    fmt.Println(acronym("as soon as possible"))
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 5: CUSTOM TYPES
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Custom Types}
+
+% ─── Lesson 10: Pointers ────────────────────────────────────────
 \section{Pointers}
 
 \subsection*{Understanding Pointers}
@@ -1309,14 +1574,9 @@ func main() {
 \end{lstlisting}
 \end{solutionbox}
 
-\cleardoublepage
+\newpage
 
-% ═══════════════════════════════════════════════════════════════════
-% CHAPTER 5: STRUCTS AND INTERFACES
-% ═══════════════════════════════════════════════════════════════════
-\chapter{Structs and Interfaces}
-
-% ─── Lesson 8: Structs and Methods ───────────────────────────────
+% ─── Lesson 11: Structs and Methods ──────────────────────────────
 \section{Structs and Methods}
 
 \subsection*{Custom Types}
@@ -1440,7 +1700,7 @@ func main() {
 
 \newpage
 
-% ─── Lesson 9: Interfaces ────────────────────────────────────────
+% ─── Lesson 12: Interfaces ───────────────────────────────────────
 \section{Interfaces}
 
 \subsection*{Implicit Contracts}
@@ -1500,12 +1760,51 @@ fmt.Println(Point{1, 2}) // prints "(1, 2)"
 The type \code{interface\{\}} (or its alias \code{any} since Go 1.18) has no methods, so every type satisfies it. It is Go's version of ``accept anything'':
 
 \begin{lstlisting}
-func describe(i any) {
+func printAny(i any) {
     fmt.Printf("(%v, %T)\n", i, i)
 }
 \end{lstlisting}
 
 Use it sparingly. Overusing \code{any} throws away the type safety that makes Go reliable.
+
+\subsubsection*{Type Assertions}
+
+When you have a value of type \code{any} (or any interface), you can extract the underlying concrete value using a \textbf{type assertion}:
+
+\begin{lstlisting}
+var i any = "hello"
+
+s, ok := i.(string)  // s = "hello", ok = true
+n, ok := i.(int)     // n = 0, ok = false
+\end{lstlisting}
+
+Always use the comma-ok form. Without it, a failed type assertion panics:
+
+\begin{lstlisting}
+s := i.(string) // works
+n := i.(int)    // panic: interface conversion
+\end{lstlisting}
+
+\subsubsection*{Type Switches}
+
+A \textbf{type switch} lets you branch based on the concrete type of an interface value:
+
+\begin{lstlisting}
+func classify(i any) string {
+    switch v := i.(type) {
+    case string:
+        return "string: " + v
+    case int:
+        return fmt.Sprintf("int: %d", v)
+    case bool:
+        return fmt.Sprintf("bool: %v", v)
+    default:
+        return "unknown"
+    }
+}
+\end{lstlisting}
+
+Inside each case, \code{v} is already the correct type --- no further assertion needed. Type switches are cleaner than chains of type assertions when you need to handle multiple types.
 
 \begin{taskbox}
 Define a \code{Shape} interface with a single method: \code{Area() float64}.
@@ -1519,6 +1818,13 @@ Define two types:
 Implement \code{Area()} on both types. The area of a circle is \code{math.Pi * r * r}.
 
 Write a function \code{totalArea} that takes a \code{[]Shape} and returns the sum of all areas.
+
+Write a function \code{describeShape} that takes a \code{Shape} and returns a string using a type switch:
+\begin{itemize}[leftmargin=1.5em]
+  \item For a \code{Circle}, return \code{"circle with radius X.XX"}
+  \item For a \code{Square}, return \code{"square with side X.XX"}
+  \item For anything else, return \code{"unknown shape"}
+\end{itemize}
 
 \textbf{Starter code:}
 \begin{lstlisting}
@@ -1537,13 +1843,17 @@ import (
 
 // Write totalArea function
 
+// Write describeShape function using a type switch
+
 func main() {
     shapes := []Shape{
         Circle{Radius: 5},
         Square{Side: 3},
-        Circle{Radius: 2},
     }
     fmt.Printf("%.2f\n", totalArea(shapes))
+    for _, s := range shapes {
+        fmt.Println(describeShape(s))
+    }
 }
 \end{lstlisting}
 \end{taskbox}
@@ -1585,13 +1895,26 @@ func totalArea(shapes []Shape) float64 {
     return total
 }
 
+func describeShape(s Shape) string {
+    switch v := s.(type) {
+    case Circle:
+        return fmt.Sprintf("circle with radius %.2f", v.Radius)
+    case Square:
+        return fmt.Sprintf("square with side %.2f", v.Side)
+    default:
+        return "unknown shape"
+    }
+}
+
 func main() {
     shapes := []Shape{
         Circle{Radius: 5},
         Square{Side: 3},
-        Circle{Radius: 2},
     }
     fmt.Printf("%.2f\n", totalArea(shapes))
+    for _, s := range shapes {
+        fmt.Println(describeShape(s))
+    }
 }
 \end{lstlisting}
 \end{solutionbox}
@@ -2086,7 +2409,7 @@ func main() {
 % ═══════════════════════════════════════════════════════════════════
 \chapter{Concurrency}
 
-% ─── Lesson 14: Goroutines and Channels ──────────────────────────
+% ─── Lesson 16: Goroutines and Channels ──────────────────────────
 \section{Goroutines and Channels}
 
 \subsection*{Concurrency in Go}
@@ -2172,13 +2495,42 @@ for val := range ch {
 
 The \code{range} loop receives values from the channel until it is closed. This is the cleanest way to consume all values from a channel.
 
-\subsubsection*{WaitGroups}
+\subsubsection*{Buffered Channels}
 
-When you need to wait for multiple goroutines to finish, use \code{sync.WaitGroup}:
+By default, channels are \textit{unbuffered}: a send blocks until another goroutine receives. A \textbf{buffered channel} has a capacity, allowing sends to proceed without a receiver until the buffer is full:
+
+\begin{lstlisting}
+ch := make(chan int, 3)  // buffer holds up to 3 values
+
+ch <- 1  // does not block
+ch <- 2  // does not block
+ch <- 3  // does not block
+// ch <- 4 would block here (buffer full)
+
+fmt.Println(<-ch) // 1
+\end{lstlisting}
+
+Buffered channels are useful when the sender and receiver run at different speeds, or when you know the exact number of values that will be sent.
+
+\subsubsection*{Synchronization with Channels}
+
+When you need to wait for a goroutine to finish, you can use a channel as a signal:
+
+\begin{lstlisting}
+done := make(chan bool)
+
+go func() {
+    fmt.Println("working...")
+    done <- true  // signal completion
+}()
+
+<-done  // wait for the goroutine to finish
+\end{lstlisting}
+
+For waiting on multiple goroutines, use \code{sync.WaitGroup}. Call \code{Add} before launching, \code{Done} when each goroutine finishes, and \code{Wait} to block until all are done:
 
 \begin{lstlisting}
 var wg sync.WaitGroup
-
 for i := 0; i < 3; i++ {
     wg.Add(1)
     go func(n int) {
@@ -2186,7 +2538,6 @@ for i := 0; i < 3; i++ {
         fmt.Println(n)
     }(i)
 }
-
 wg.Wait() // blocks until all goroutines call Done
 \end{lstlisting}
 
@@ -2237,6 +2588,176 @@ func main() {
 \end{lstlisting}
 \end{solutionbox}
 
+\newpage
+
+% ─── Lesson 17: Select ──────────────────────────────────────────
+\section{Select}
+
+\subsection*{Multiplexing Channels}
+
+The \code{select} statement lets a goroutine wait on multiple channel operations simultaneously. It is like a \code{switch} statement, but each case is a channel send or receive.
+
+\begin{lstlisting}
+select {
+case msg := <-ch1:
+    fmt.Println("from ch1:", msg)
+case msg := <-ch2:
+    fmt.Println("from ch2:", msg)
+}
+\end{lstlisting}
+
+If multiple channels are ready, \code{select} picks one at random. If none are ready, it blocks until one becomes ready.
+
+\subsubsection*{Non-Blocking Operations}
+
+Add a \code{default} case to make channel operations non-blocking:
+
+\begin{lstlisting}
+select {
+case msg := <-ch:
+    fmt.Println("received:", msg)
+default:
+    fmt.Println("no message available")
+}
+\end{lstlisting}
+
+Without \code{default}, the \code{select} blocks. With \code{default}, it executes the default case immediately if no channel is ready.
+
+\subsubsection*{Pattern: Merging Channels}
+
+A common use of \code{select} is merging multiple channels into one. This lets a consumer read from a single channel regardless of how many producers exist:
+
+\begin{lstlisting}
+func merge(ch1, ch2 <-chan string) <-chan string {
+    out := make(chan string)
+    go func() {
+        defer close(out)
+        for ch1 != nil || ch2 != nil {
+            select {
+            case v, ok := <-ch1:
+                if !ok { ch1 = nil; continue }
+                out <- v
+            case v, ok := <-ch2:
+                if !ok { ch2 = nil; continue }
+                out <- v
+            }
+        }
+    }()
+    return out
+}
+\end{lstlisting}
+
+Setting a channel to \code{nil} after it closes prevents \code{select} from receiving zero values from it, because receives on a nil channel block forever.
+
+\begin{taskbox}
+Write a function \code{merge(ch1, ch2 <-chan int) <-chan int} that merges two integer channels into one. The output channel should receive all values from both input channels and close when both inputs are exhausted.
+
+Key steps:
+\begin{enumerate}[leftmargin=1.5em]
+  \item Create an output channel and launch a goroutine
+  \item Loop while at least one input channel is still open
+  \item Use \code{select} to receive from whichever channel is ready
+  \item When a channel is closed (\code{ok} is false), set it to \code{nil} so \code{select} ignores it
+  \item Close the output channel when both inputs are exhausted
+\end{enumerate}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func merge(ch1, ch2 <-chan int) <-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        // Loop while ch1 or ch2 is still open.
+        // Use select to receive from whichever is ready.
+        // When ok is false, set the channel to nil and continue.
+    }()
+    return out
+}
+
+func main() {
+    a := make(chan int)
+    b := make(chan int)
+
+    go func() {
+        for _, v := range []int{1, 3, 5} {
+            a <- v
+        }
+        close(a)
+    }()
+
+    go func() {
+        for _, v := range []int{2, 4, 6} {
+            b <- v
+        }
+        close(b)
+    }()
+
+    for v := range merge(a, b) {
+        fmt.Println(v)
+    }
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func merge(ch1, ch2 <-chan int) <-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        for ch1 != nil || ch2 != nil {
+            select {
+            case v, ok := <-ch1:
+                if !ok {
+                    ch1 = nil
+                    continue
+                }
+                out <- v
+            case v, ok := <-ch2:
+                if !ok {
+                    ch2 = nil
+                    continue
+                }
+                out <- v
+            }
+        }
+    }()
+    return out
+}
+
+func main() {
+    a := make(chan int)
+    b := make(chan int)
+
+    go func() {
+        for _, v := range []int{1, 3, 5} {
+            a <- v
+        }
+        close(a)
+    }()
+
+    go func() {
+        for _, v := range []int{2, 4, 6} {
+            b <- v
+        }
+        close(b)
+    }()
+
+    for v := range merge(a, b) {
+        fmt.Println(v)
+    }
+}
+\end{lstlisting}
+\end{solutionbox}
+
 \cleardoublepage
 
 % ═══════════════════════════════════════════════════════════════════
@@ -2246,7 +2767,7 @@ func main() {
 \addcontentsline{toc}{chapter}{What's Next?}
 \markboth{What's Next?}{What's Next?}
 
-Congratulations on completing all fourteen lessons! You now have a solid foundation in Go's core language features. Here are some directions to explore next:
+Congratulations on completing all seventeen lessons! You now have a solid foundation in Go's core language features. Here are some directions to explore next:
 
 \subsection*{The Standard Library}
 Go ships with a comprehensive standard library. Key packages to explore:

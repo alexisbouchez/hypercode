@@ -119,10 +119,9 @@ go func() {
 <-done  // wait for the goroutine to finish
 \`\`\`
 
-In production Go code, \`sync.WaitGroup\` is the standard tool for waiting on multiple goroutines. It is not available in this playground, but you will encounter it in virtually every real Go codebase:
+For waiting on multiple goroutines, use \`sync.WaitGroup\`. Call \`Add\` before launching, \`Done\` when each goroutine finishes, and \`Wait\` to block until all are done:
 
 \`\`\`go
-// Real Go code (not available in this playground):
 var wg sync.WaitGroup
 for i := 0; i < 3; i++ {
     wg.Add(1)
@@ -131,7 +130,7 @@ for i := 0; i < 3; i++ {
         fmt.Println(n)
     }(i)
 }
-wg.Wait()
+wg.Wait() // blocks until all goroutines call Done
 \`\`\`
 
 ### Your Task

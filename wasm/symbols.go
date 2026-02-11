@@ -11,6 +11,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
+	"unicode/utf8"
 
 	"go/constant"
 	"go/token"
@@ -235,6 +237,42 @@ func init() {
 		"ErrSyntax":              reflect.ValueOf(&strconv.ErrSyntax).Elem(),
 		"NumError":               reflect.ValueOf((*strconv.NumError)(nil)),
 	}
+
+	// sync
+	Symbols["sync/sync"] = map[string]reflect.Value{
+		"Cond":       reflect.ValueOf((*sync.Cond)(nil)),
+		"Locker":     reflect.ValueOf((*sync.Locker)(nil)),
+		"Map":        reflect.ValueOf((*sync.Map)(nil)),
+		"Mutex":      reflect.ValueOf((*sync.Mutex)(nil)),
+		"Once":       reflect.ValueOf((*sync.Once)(nil)),
+		"Pool":       reflect.ValueOf((*sync.Pool)(nil)),
+		"RWMutex":    reflect.ValueOf((*sync.RWMutex)(nil)),
+		"WaitGroup":  reflect.ValueOf((*sync.WaitGroup)(nil)),
+		"NewCond":    reflect.ValueOf(sync.NewCond),
+		"OnceFunc":   reflect.ValueOf(sync.OnceFunc),
+		"_Locker":    reflect.ValueOf((*_sync_Locker)(nil)),
+	}
+
+	// unicode/utf8
+	Symbols["unicode/utf8/utf8"] = map[string]reflect.Value{
+		"DecodeLastRune":         reflect.ValueOf(utf8.DecodeLastRune),
+		"DecodeLastRuneInString": reflect.ValueOf(utf8.DecodeLastRuneInString),
+		"DecodeRune":             reflect.ValueOf(utf8.DecodeRune),
+		"DecodeRuneInString":     reflect.ValueOf(utf8.DecodeRuneInString),
+		"EncodeRune":             reflect.ValueOf(utf8.EncodeRune),
+		"FullRune":               reflect.ValueOf(utf8.FullRune),
+		"FullRuneInString":       reflect.ValueOf(utf8.FullRuneInString),
+		"MaxRune":                reflect.ValueOf(utf8.MaxRune),
+		"RuneCount":              reflect.ValueOf(utf8.RuneCount),
+		"RuneCountInString":      reflect.ValueOf(utf8.RuneCountInString),
+		"RuneError":              reflect.ValueOf(utf8.RuneError),
+		"RuneLen":                reflect.ValueOf(utf8.RuneLen),
+		"RuneSelf":               reflect.ValueOf(utf8.RuneSelf),
+		"UTFMax":                 reflect.ValueOf(utf8.UTFMax),
+		"Valid":                  reflect.ValueOf(utf8.Valid),
+		"ValidRune":              reflect.ValueOf(utf8.ValidRune),
+		"ValidString":            reflect.ValueOf(utf8.ValidString),
+	}
 }
 
 // Interface wrappers for fmt package (required by yaegi)
@@ -300,3 +338,13 @@ func (W _fmt_Stringer) String() string {
 	}
 	return W.WString()
 }
+
+// Interface wrappers for sync package (required by yaegi)
+type _sync_Locker struct {
+	IValue  interface{}
+	WLock   func()
+	WUnlock func()
+}
+
+func (W _sync_Locker) Lock()   { W.WLock() }
+func (W _sync_Locker) Unlock() { W.WUnlock() }
