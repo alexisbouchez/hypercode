@@ -1,6 +1,7 @@
 import type { Course } from "./types";
 import { chapters as goChapters, lessons as goLessons } from "@/lib/lessons";
 import { zigChapters, zigLessons } from "@/lib/lessons/zig";
+import { sqlChapters, sqlLessons } from "@/lib/lessons/sql";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -171,6 +172,88 @@ The best way to learn is to build. Some project ideas:
 - [Zig GitHub](https://github.com/ziglang/zig) -- the source code and issue tracker.
 `;
 
+const sqlIntroductionContent = `
+## Why PostgreSQL?
+
+PostgreSQL is the world's most advanced open-source relational database. It is reliable, feature-rich, and standards-compliant. Here is what makes it stand out:
+
+- **Battle-tested** -- Used by Apple, Instagram, Spotify, and thousands of other companies in production.
+- **Feature-rich** -- JSON, full-text search, arrays, window functions, CTEs, and more -- all built in.
+- **Standards-compliant** -- Follows the SQL standard closely, so what you learn here applies broadly.
+- **Free and open source** -- No licensing fees, backed by a strong community since 1996.
+- **Extensible** -- Custom types, operators, index methods, and procedural languages.
+
+## The Story
+
+PostgreSQL traces its origins to the POSTGRES project at UC Berkeley, started by Professor Michael Stonebraker in 1986. The project was a research successor to the Ingres database. In 1996, the project was renamed PostgreSQL to reflect its SQL support, and the open-source community took over development.
+
+Today, PostgreSQL is developed by a global community of contributors. Major releases come out annually, each adding significant features while maintaining backward compatibility.
+
+## Who Uses PostgreSQL
+
+PostgreSQL powers some of the world's largest applications:
+
+- **Instagram** -- stores hundreds of millions of user records.
+- **Spotify** -- manages music catalog and user data.
+- **Apple** -- uses PostgreSQL for various internal services.
+- **Reddit, Twitch, The Guardian** -- all rely on PostgreSQL in production.
+
+It is the default choice for startups and enterprises alike, and the most popular database on platforms like Supabase, Neon, and Railway.
+
+## What You Will Learn
+
+This course contains **22 lessons** organized into **8 chapters**:
+
+1. **SQL Basics** -- SELECT queries, filtering with WHERE, sorting, and pagination.
+2. **Tables** -- Data types, CREATE TABLE, constraints, keys, and ALTER TABLE.
+3. **CRUD Operations** -- INSERT, UPDATE, DELETE, upsert, and bulk operations.
+4. **Joins** -- INNER JOIN, LEFT/RIGHT/FULL OUTER JOIN, self joins, and cross joins.
+5. **Aggregations** -- COUNT, SUM, AVG, GROUP BY, HAVING, ROLLUP, and CUBE.
+6. **Subqueries & CTEs** -- Nested queries, correlated subqueries, and Common Table Expressions.
+7. **Advanced SQL** -- Window functions, JSON operations, arrays, and full-text search.
+8. **Performance** -- Indexes, EXPLAIN ANALYZE, query optimization, and database design.
+
+Each lesson explains a concept, demonstrates it with SQL examples, and gives you an exercise to practice against a live PostgreSQL database running in your browser.
+
+Let's get started.
+`;
+
+const sqlWhatsNextContent = `
+## Congratulations
+
+You have completed all 22 lessons. You now have a solid foundation in SQL and PostgreSQL: querying, filtering, joining, aggregating, subqueries, CTEs, window functions, JSON, indexes, and database design.
+
+That is a real accomplishment. You can read and write SQL confidently, design database schemas, and optimize queries.
+
+## What to Explore Next
+
+Here are topics to dive deeper into:
+
+- **Transactions** -- ACID properties, BEGIN/COMMIT/ROLLBACK, isolation levels, and deadlocks.
+- **Stored Procedures and Functions** -- PL/pgSQL for server-side logic.
+- **Triggers** -- Automatically execute functions when data changes.
+- **Views and Materialized Views** -- Save complex queries as virtual or cached tables.
+- **Partitioning** -- Split large tables for better performance.
+- **Replication** -- Set up read replicas and high availability.
+
+## Build Something
+
+The best way to learn is to build. Some project ideas:
+
+- **A REST API with a database backend** -- CRUD endpoints backed by PostgreSQL.
+- **A data dashboard** -- aggregate and visualize data from multiple tables.
+- **A multi-tenant application** -- row-level security and schema isolation.
+- **A search engine** -- full-text search with ranking and highlighting.
+
+## References
+
+- [PostgreSQL Official Documentation](https://www.postgresql.org/docs/current/) -- comprehensive and well-written.
+- [PostgreSQL Tutorial](https://www.postgresqltutorial.com/) -- practical examples for common tasks.
+- [Use The Index, Luke](https://use-the-index-luke.com/) -- deep dive into SQL indexing and performance.
+- [pgexercises.com](https://pgexercises.com/) -- interactive SQL exercises.
+- *Designing Data-Intensive Applications* by Martin Kleppmann (O'Reilly, 2017) -- the best book on database internals and distributed systems.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -194,6 +277,17 @@ export const courses: Course[] = [
     runtimeLabel: "Zig runtime",
     introductionContent: zigIntroductionContent,
     whatsNextContent: zigWhatsNextContent,
+  },
+  {
+    id: "postgresql",
+    title: "PostgreSQL",
+    description: "Learn SQL and PostgreSQL from scratch. Master queries, joins, aggregations, window functions, and database design with a live database in your browser.",
+    language: "sql",
+    chapters: sqlChapters,
+    lessons: sqlLessons,
+    runtimeLabel: "SQL runtime",
+    introductionContent: sqlIntroductionContent,
+    whatsNextContent: sqlWhatsNextContent,
   },
 ];
 

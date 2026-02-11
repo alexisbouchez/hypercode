@@ -77,6 +77,98 @@ export function CodeEditor({ value, onChange, language = "go", readOnly = false,
     editorRef.current = editor;
     editor.focus();
 
+    // Register Zig language if not already registered
+    if (!monaco.languages.getLanguages().some((l: { id: string }) => l.id === "zig")) {
+      monaco.languages.register({ id: "zig" });
+      monaco.languages.setMonarchTokensProvider("zig", {
+        keywords: [
+          "addrspace", "align", "allowzero", "and", "anyframe", "anytype",
+          "asm", "async", "await", "break", "callconv", "catch", "comptime",
+          "const", "continue", "defer", "else", "enum", "errdefer", "error",
+          "export", "extern", "fn", "for", "if", "inline", "linksection",
+          "noalias", "nosuspend", "noinline", "opaque", "or", "orelse",
+          "packed", "pub", "resume", "return", "struct", "suspend",
+          "switch", "test", "threadlocal", "try", "union", "unreachable",
+          "undefined", "var", "volatile", "while",
+        ],
+        builtinTypes: [
+          "i8", "u8", "i16", "u16", "i32", "u32", "i64", "u64", "i128", "u128",
+          "isize", "usize", "f16", "f32", "f64", "f80", "f128",
+          "bool", "void", "noreturn", "type", "anyerror", "comptime_int",
+          "comptime_float",
+        ],
+        builtinFunctions: [
+          "@abs", "@addWithOverflow", "@alignCast", "@alignOf", "@as",
+          "@atomicLoad", "@atomicRmw", "@atomicStore", "@bitCast",
+          "@bitOffsetOf", "@bitSizeOf", "@boolToInt", "@bitReverse",
+          "@breakpoint", "@byteSwap", "@call", "@cDefine", "@cImport",
+          "@cInclude", "@clz", "@cmpxchgStrong", "@cmpxchgWeak",
+          "@compileError", "@compileLog", "@ctz", "@cUndef", "@divExact",
+          "@divFloor", "@divTrunc", "@embedFile", "@enumToInt",
+          "@errorName", "@errorReturnTrace", "@errorToInt", "@errSetCast",
+          "@export", "@extern", "@fence", "@field", "@fieldParentPtr",
+          "@floatCast", "@floatToInt", "@frameAddress", "@hasDecl",
+          "@hasField", "@import", "@intCast", "@intToEnum", "@intToFloat",
+          "@intToPtr", "@max", "@memcpy", "@memset", "@min", "@mod",
+          "@mulAdd", "@mulWithOverflow", "@offsetOf", "@panic",
+          "@popCount", "@prefetch", "@ptrCast", "@ptrToInt", "@reduce",
+          "@rem", "@returnAddress", "@select", "@setAlignStack",
+          "@setCold", "@setEvalBranchQuota", "@setFloatMode",
+          "@setRuntimeSafety", "@shlExact", "@shlWithOverflow",
+          "@shrExact", "@shuffle", "@sizeOf", "@splat", "@src",
+          "@sqrt", "@subWithOverflow", "@tagName", "@This", "@trap",
+          "@truncate", "@typeInfo", "@typeName", "@TypeOf",
+          "@unionInit", "@Vector", "@wasmMemorySize",
+          "@wasmMemoryGrow",
+        ],
+        operators: [
+          "=", ">", "<", "!", "~", "?", ":", "==", "<=", ">=", "!=",
+          "&&", "||", "++", "--", "+", "-", "*", "/", "&", "|", "^",
+          "%", "<<", ">>", "+=", "-=", "*=", "/=", "&=", "|=", "^=",
+          "%=", "<<=", ">>=", "=>",
+        ],
+        symbols: /[=><!~?:&|+\-*/^%]+/,
+        tokenizer: {
+          root: [
+            [/@[a-zA-Z_]\w*/, "keyword"],
+            [/[a-z_$][\w$]*/, {
+              cases: {
+                "@keywords": "keyword",
+                "@builtinTypes": "type",
+                "@default": "identifier",
+              },
+            }],
+            [/[A-Z][\w$]*/, "type.identifier"],
+            { include: "@whitespace" },
+            [/[{}()[\]]/, "@brackets"],
+            [/@symbols/, {
+              cases: {
+                "@operators": "operator",
+                "@default": "",
+              },
+            }],
+            [/0[xX][0-9a-fA-F_]+/, "number.hex"],
+            [/0[oO][0-7_]+/, "number.octal"],
+            [/0[bB][01_]+/, "number.binary"],
+            [/[0-9][0-9_]*(\.[0-9_]*)?([eE][+-]?[0-9_]+)?/, "number"],
+            [/"([^"\\]|\\.)*$/, "string.invalid"],
+            [/"/, { token: "string.quote", bracket: "@open", next: "@string" }],
+            [/'[^\\']'/, "string"],
+            [/'/, "string.invalid"],
+          ],
+          string: [
+            [/[^\\"]+/, "string"],
+            [/\\./, "string.escape"],
+            [/"/, { token: "string.quote", bracket: "@close", next: "@pop" }],
+          ],
+          whitespace: [
+            [/[ \t\r\n]+/, "white"],
+            [/\/\/.*$/, "comment"],
+          ],
+        },
+      });
+    }
+
     editor.addAction({
       id: "run-code",
       label: "Run Code",

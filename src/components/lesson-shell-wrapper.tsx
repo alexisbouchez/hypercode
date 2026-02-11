@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import type { Lesson, Chapter, RunResult, Test, TestResult } from "@/lib/lessons/types";
 import { initGoRunner, isGoReady, runGo, runTests as runGoTests } from "@/lib/go-runner";
 import { initZigRunner, isZigReady, runZig, runTests as runZigTests } from "@/lib/zig-runner";
+import { initSqlRunner, isSqlReady, runSql, runTests as runSqlTests } from "@/lib/sql-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -26,21 +27,25 @@ export function LessonShellWrapper({
   chapters,
 }: LessonShellWrapperProps) {
   const initRunner = useCallback((): Promise<void> => {
+    if (courseId === "postgresql") return initSqlRunner();
     if (courseId === "zig") return initZigRunner();
     return initGoRunner();
   }, [courseId]);
 
   const isRunnerReady = useCallback((): boolean => {
+    if (courseId === "postgresql") return isSqlReady();
     if (courseId === "zig") return isZigReady();
     return isGoReady();
   }, [courseId]);
 
   const runCode = useCallback(async (code: string): Promise<RunResult> => {
+    if (courseId === "postgresql") return runSql(code);
     if (courseId === "zig") return runZig(code);
     return runGo(code);
   }, [courseId]);
 
   const runTestsFn = useCallback(async (code: string, tests: Test[]): Promise<TestResult[]> => {
+    if (courseId === "postgresql") return runSqlTests(code, tests);
     if (courseId === "zig") return runZigTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);

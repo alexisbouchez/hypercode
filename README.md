@@ -1,5 +1,7 @@
 # Hypercode
 
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/Fft3TE3UkY)
+
 Interactive Go lessons in the browser. You edit Go code in the editor and run it; execution is handled by [Yaegi](https://github.com/traefik/yaegi) (the Go interpreter) compiled to WebAssembly.
 
 ## Clone and run
