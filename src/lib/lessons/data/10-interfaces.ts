@@ -76,13 +76,16 @@ Define two types:
 - \`Circle\` with a \`Radius float64\` field
 - \`Square\` with a \`Side float64\` field
 
-Implement \`Area()\` on both types. The area of a circle is \`3.14159 * r * r\`.
+Implement \`Area()\` on both types. The area of a circle is \`math.Pi * r * r\`.
 
 Write a function \`totalArea\` that takes a \`[]Shape\` and returns the sum of all areas.`,
 
   starterCode: `package main
 
-import "fmt"
+import (
+\t"fmt"
+\t"math"
+)
 
 // Define Shape interface
 
@@ -104,7 +107,10 @@ func main() {
 
   solution: `package main
 
-import "fmt"
+import (
+\t"fmt"
+\t"math"
+)
 
 type Shape interface {
 \tArea() float64
@@ -115,7 +121,7 @@ type Circle struct {
 }
 
 func (c Circle) Area() float64 {
-\treturn 3.14159 * c.Radius * c.Radius
+\treturn math.Pi * c.Radius * c.Radius
 }
 
 type Square struct {
@@ -149,7 +155,10 @@ func main() {
       name: "Circle area (r=5)",
       code: `package main
 
-import "fmt"
+import (
+\t"fmt"
+\t"math"
+)
 
 {{FUNC}}
 
@@ -163,7 +172,10 @@ func main() {
       name: "Square area (side=3)",
       code: `package main
 
-import "fmt"
+import (
+\t"fmt"
+\t"math"
+)
 
 {{FUNC}}
 
@@ -177,7 +189,10 @@ func main() {
       name: "totalArea with mixed shapes",
       code: `package main
 
-import "fmt"
+import (
+\t"fmt"
+\t"math"
+)
 
 {{FUNC}}
 

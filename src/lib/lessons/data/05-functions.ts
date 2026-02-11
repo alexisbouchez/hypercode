@@ -72,26 +72,20 @@ fmt.Println(double(5)) // 10
 
 ### Your Task
 
-Write a function \`safeDivide\` that takes two \`float64\` parameters and returns two values: a \`float64\` result and a \`string\` error message.
-
-- If the second argument is 0, return \`0\` and \`"division by zero"\`
-- Otherwise, return the result of the division and an empty string \`""\``,
+Write a function \`minMax\` that takes a \`[]int\` and returns two \`int\` values: the minimum and the maximum values from the slice.`,
 
   starterCode: `package main
 
 import "fmt"
 
-func safeDivide(a, b float64) (float64, string) {
+func minMax(numbers []int) (int, int) {
 \t// Your code here
-\treturn 0, ""
+\treturn 0, 0
 }
 
 func main() {
-\tresult, err := safeDivide(10, 3)
-\tfmt.Printf("%.2f, %s\\n", result, err)
-
-\tresult, err = safeDivide(10, 0)
-\tfmt.Printf("%.2f, %s\\n", result, err)
+\tmin, max := minMax([]int{3, 1, 4, 1, 5, 9, 2, 6})
+\tfmt.Printf("min: %d, max: %d\\n", min, max)
 }
 `,
 
@@ -99,25 +93,28 @@ func main() {
 
 import "fmt"
 
-func safeDivide(a, b float64) (float64, string) {
-\tif b == 0 {
-\t\treturn 0, "division by zero"
+func minMax(numbers []int) (int, int) {
+\tmin, max := numbers[0], numbers[0]
+\tfor _, n := range numbers {
+\t\tif n < min {
+\t\t\tmin = n
+\t\t}
+\t\tif n > max {
+\t\t\tmax = n
+\t\t}
 \t}
-\treturn a / b, ""
+\treturn min, max
 }
 
 func main() {
-\tresult, err := safeDivide(10, 3)
-\tfmt.Printf("%.2f, %s\\n", result, err)
-
-\tresult, err = safeDivide(10, 0)
-\tfmt.Printf("%.2f, %s\\n", result, err)
+\tmin, max := minMax([]int{3, 1, 4, 1, 5, 9, 2, 6})
+\tfmt.Printf("min: %d, max: %d\\n", min, max)
 }
 `,
 
   tests: [
     {
-      name: "10 / 3 returns correct result",
+      name: "minMax with mixed values",
       code: `package main
 
 import "fmt"
@@ -125,13 +122,13 @@ import "fmt"
 {{FUNC}}
 
 func main() {
-\tresult, errMsg := safeDivide(10, 3)
-\tfmt.Printf("%.2f, %s\\n", result, errMsg)
+\tmin, max := minMax([]int{3, 1, 4, 1, 5, 9, 2, 6})
+\tfmt.Printf("min: %d, max: %d\\n", min, max)
 }`,
-      expected: "3.33, \n",
+      expected: "min: 1, max: 9\n",
     },
     {
-      name: "division by zero returns error",
+      name: "minMax with single element",
       code: `package main
 
 import "fmt"
@@ -139,13 +136,13 @@ import "fmt"
 {{FUNC}}
 
 func main() {
-\tresult, errMsg := safeDivide(10, 0)
-\tfmt.Printf("%.2f, %s\\n", result, errMsg)
+\tmin, max := minMax([]int{42})
+\tfmt.Printf("min: %d, max: %d\\n", min, max)
 }`,
-      expected: "0.00, division by zero\n",
+      expected: "min: 42, max: 42\n",
     },
     {
-      name: "20 / 4 returns 5.00",
+      name: "minMax with negative values",
       code: `package main
 
 import "fmt"
@@ -153,10 +150,24 @@ import "fmt"
 {{FUNC}}
 
 func main() {
-\tresult, errMsg := safeDivide(20, 4)
-\tfmt.Printf("%.2f, %s\\n", result, errMsg)
+\tmin, max := minMax([]int{-3, -1, -4})
+\tfmt.Printf("min: %d, max: %d\\n", min, max)
 }`,
-      expected: "5.00, \n",
+      expected: "min: -4, max: -1\n",
+    },
+    {
+      name: "minMax with identical values",
+      code: `package main
+
+import "fmt"
+
+{{FUNC}}
+
+func main() {
+\tmin, max := minMax([]int{5, 5, 5})
+\tfmt.Printf("min: %d, max: %d\\n", min, max)
+}`,
+      expected: "min: 5, max: 5\n",
     },
   ],
 };

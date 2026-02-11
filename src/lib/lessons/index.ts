@@ -6,11 +6,13 @@ import { loops } from "./data/04-loops";
 import { functions } from "./data/05-functions";
 import { slices } from "./data/06-slices";
 import { maps } from "./data/07-maps";
-import { structs } from "./data/08-structs";
-import { interfaces } from "./data/09-interfaces";
-import { errors } from "./data/10-errors";
-import { genericFunctions } from "./data/11-generic-functions";
-import { genericTypes } from "./data/12-generic-types";
+import { pointers } from "./data/08-pointers";
+import { structs } from "./data/09-structs";
+import { interfaces } from "./data/10-interfaces";
+import { errors } from "./data/11-errors";
+import { genericFunctions } from "./data/12-generic-functions";
+import { genericTypes } from "./data/13-generic-types";
+import { concurrency } from "./data/14-concurrency";
 
 export const chapters: Chapter[] = [
   { id: "foundations", title: "Foundations" },
@@ -20,6 +22,7 @@ export const chapters: Chapter[] = [
   { id: "structs-interfaces", title: "Structs and Interfaces" },
   { id: "error-handling", title: "Error Handling" },
   { id: "generics", title: "Generics" },
+  { id: "concurrency", title: "Concurrency" },
 ];
 
 export const lessons: Lesson[] = [
@@ -30,11 +33,13 @@ export const lessons: Lesson[] = [
   functions,
   slices,
   maps,
+  pointers,
   structs,
   interfaces,
   errors,
   genericFunctions,
   genericTypes,
+  concurrency,
 ];
 
 export function getLessonById(id: string): Lesson | undefined {

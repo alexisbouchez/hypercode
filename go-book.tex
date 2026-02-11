@@ -270,8 +270,8 @@ Learn Go from Scratch}
 
 % Description
 {\color{gray}\fontsize{12}{19}\selectfont
-From ``Hello, World!'' to generics ---\\[8pt]
-twelve lessons covering the fundamentals of Go.
+From ``Hello, World!'' to concurrency ---\\[8pt]
+fourteen lessons covering the fundamentals of Go.
 }
 
 \vspace{2cm}
@@ -344,16 +344,17 @@ Major companies use Go extensively: Google, Uber, Dropbox, Twitch, Cloudflare, a
 
 \subsection*{About This Book}
 
-This book contains twelve lessons organized into seven chapters. Each lesson explains a concept, demonstrates it with code examples, and ends with an exercise for you to practice. Solutions are provided at the end of each lesson. The lessons are designed to be worked through in order, as each builds on the concepts introduced before it.
+This book contains fourteen lessons organized into eight chapters. Each lesson explains a concept, demonstrates it with code examples, and ends with an exercise for you to practice. Solutions are provided at the end of each lesson. The lessons are designed to be worked through in order, as each builds on the concepts introduced before it.
 
 \begin{itemize}[leftmargin=1.5em]
   \item \textbf{Foundations} --- How Go programs are structured: packages, imports, and the \code{main} function. Variables, types, and constants.
   \item \textbf{Control Flow} --- Conditionals with \code{if}/\code{else} and \code{switch}. Loops with \code{for}.
   \item \textbf{Functions} --- Declaring functions, multiple return values, and named returns.
-  \item \textbf{Data Structures} --- Slices (dynamic arrays) and maps (hash tables).
+  \item \textbf{Data Structures} --- Slices (dynamic arrays), maps (hash tables), and pointers.
   \item \textbf{Structs and Interfaces} --- Custom types with methods. Interfaces and structural typing.
   \item \textbf{Error Handling} --- Go's explicit approach to errors using values instead of exceptions.
   \item \textbf{Generics} --- Type parameters for functions and data structures.
+  \item \textbf{Concurrency} --- Goroutines and channels for concurrent programming.
 \end{itemize}
 
 \cleardoublepage
@@ -891,12 +892,7 @@ fmt.Println(double(5)) // 10
 \end{lstlisting}
 
 \begin{taskbox}
-Write a function \code{safeDivide} that takes two \code{float64} parameters and returns two values: a \code{float64} result and a \code{string} error message.
-
-\begin{itemize}[leftmargin=1.5em]
-  \item If the second argument is 0, return \code{0} and \code{"division by zero"}
-  \item Otherwise, return the result of the division and an empty string \code{""}
-\end{itemize}
+Write a function \code{minMax} that takes a \code{[]int} and returns two \code{int} values: the minimum and the maximum values from the slice.
 
 \textbf{Starter code:}
 \begin{lstlisting}
@@ -904,17 +900,14 @@ package main
 
 import "fmt"
 
-func safeDivide(a, b float64) (float64, string) {
+func minMax(numbers []int) (int, int) {
     // Your code here
-    return 0, ""
+    return 0, 0
 }
 
 func main() {
-    result, err := safeDivide(10, 3)
-    fmt.Printf("%.2f, %s\n", result, err)
-
-    result, err = safeDivide(10, 0)
-    fmt.Printf("%.2f, %s\n", result, err)
+    min, max := minMax([]int{3, 1, 4, 1, 5, 9, 2, 6})
+    fmt.Printf("min: %d, max: %d\n", min, max)
 }
 \end{lstlisting}
 \end{taskbox}
@@ -925,19 +918,22 @@ package main
 
 import "fmt"
 
-func safeDivide(a, b float64) (float64, string) {
-    if b == 0 {
-        return 0, "division by zero"
+func minMax(numbers []int) (int, int) {
+    min, max := numbers[0], numbers[0]
+    for _, n := range numbers {
+        if n < min {
+            min = n
+        }
+        if n > max {
+            max = n
+        }
     }
-    return a / b, ""
+    return min, max
 }
 
 func main() {
-    result, err := safeDivide(10, 3)
-    fmt.Printf("%.2f, %s\n", result, err)
-
-    result, err = safeDivide(10, 0)
-    fmt.Printf("%.2f, %s\n", result, err)
+    min, max := minMax([]int{3, 1, 4, 1, 5, 9, 2, 6})
+    fmt.Printf("min: %d, max: %d\n", min, max)
 }
 \end{lstlisting}
 \end{solutionbox}
@@ -1192,6 +1188,127 @@ func main() {
 \end{lstlisting}
 \end{solutionbox}
 
+\newpage
+
+% ─── Lesson 8: Pointers ─────────────────────────────────────────
+\section{Pointers}
+
+\subsection*{Understanding Pointers}
+
+A pointer holds the memory address of a value. Instead of passing data around by copying it, you can pass a pointer to the original data.
+
+\subsubsection*{Pointer Types and Operators}
+
+The type \code{*T} is a pointer to a value of type \code{T}. The \code{\&} operator takes the address of a variable. The \code{*} operator dereferences a pointer, giving you the value it points to:
+
+\begin{lstlisting}
+x := 42
+p := &x         // p is *int, points to x
+fmt.Println(*p)  // 42 (read through the pointer)
+*p = 100         // modify x through the pointer
+fmt.Println(x)   // 100
+\end{lstlisting}
+
+\subsubsection*{Zero Value}
+
+The zero value of a pointer is \code{nil}. A nil pointer does not point to anything. Dereferencing a nil pointer causes a runtime panic:
+
+\begin{lstlisting}
+var p *int       // p is nil
+fmt.Println(p)   // <nil>
+\end{lstlisting}
+
+\subsubsection*{Passing by Value vs Pointer}
+
+Go is pass-by-value. When you pass a variable to a function, the function gets a copy. To let a function modify the original, pass a pointer:
+
+\begin{lstlisting}
+func increment(x *int) {
+    *x++
+}
+
+n := 5
+increment(&n)
+fmt.Println(n) // 6
+\end{lstlisting}
+
+Without the pointer, \code{increment} would modify a copy and \code{n} would stay 5.
+
+\subsubsection*{When to Use Pointers}
+
+Use pointers when you need to:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Modify the caller's data} --- the most common reason
+  \item \textbf{Avoid copying large structs} --- passing a pointer is cheaper than copying a large value
+  \item \textbf{Signal absence} --- a nil pointer can mean ``no value''
+\end{itemize}
+
+The \code{new} function allocates memory and returns a pointer to the zero value:
+
+\begin{lstlisting}
+p := new(int)    // *int pointing to 0
+*p = 42
+\end{lstlisting}
+
+\begin{taskbox}
+Write two functions:
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{swap(a, b *int)} --- swaps the values that \code{a} and \code{b} point to
+  \item \code{double(x *int)} --- doubles the value that \code{x} points to
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func swap(a, b *int) {
+    // Your code here
+}
+
+func double(x *int) {
+    // Your code here
+}
+
+func main() {
+    a, b := 3, 5
+    swap(&a, &b)
+    fmt.Println(a, b)
+
+    x := 7
+    double(&x)
+    fmt.Println(x)
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func swap(a, b *int) {
+    *a, *b = *b, *a
+}
+
+func double(x *int) {
+    *x *= 2
+}
+
+func main() {
+    a, b := 3, 5
+    swap(&a, &b)
+    fmt.Println(a, b)
+
+    x := 7
+    double(&x)
+    fmt.Println(x)
+}
+\end{lstlisting}
+\end{solutionbox}
+
 \cleardoublepage
 
 % ═══════════════════════════════════════════════════════════════════
@@ -1399,7 +1516,7 @@ Define two types:
   \item \code{Square} with a \code{Side float64} field
 \end{itemize}
 
-Implement \code{Area()} on both types. The area of a circle is $3.14159 \times r^2$.
+Implement \code{Area()} on both types. The area of a circle is \code{math.Pi * r * r}.
 
 Write a function \code{totalArea} that takes a \code{[]Shape} and returns the sum of all areas.
 
@@ -1407,7 +1524,10 @@ Write a function \code{totalArea} that takes a \code{[]Shape} and returns the su
 \begin{lstlisting}
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "math"
+)
 
 // Define Shape interface
 
@@ -1432,7 +1552,10 @@ func main() {
 \begin{lstlisting}
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "math"
+)
 
 type Shape interface {
     Area() float64
@@ -1443,7 +1566,7 @@ type Circle struct {
 }
 
 func (c Circle) Area() float64 {
-    return 3.14159 * c.Radius * c.Radius
+    return math.Pi * c.Radius * c.Radius
 }
 
 type Square struct {
@@ -1959,16 +2082,171 @@ func main() {
 \cleardoublepage
 
 % ═══════════════════════════════════════════════════════════════════
+% CHAPTER 8: CONCURRENCY
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Concurrency}
+
+% ─── Lesson 14: Goroutines and Channels ──────────────────────────
+\section{Goroutines and Channels}
+
+\subsection*{Concurrency in Go}
+
+Concurrency is one of Go's defining features. Go makes it easy to run functions concurrently and communicate between them safely.
+
+\subsubsection*{Goroutines}
+
+A goroutine is a lightweight thread managed by the Go runtime. You start one by putting the \code{go} keyword before a function call:
+
+\begin{lstlisting}
+go doSomething()
+\end{lstlisting}
+
+That is it. The function runs concurrently with the rest of your program. Goroutines are extremely cheap: you can launch thousands without concern.
+
+\begin{lstlisting}
+func printNumbers() {
+    for i := 1; i <= 5; i++ {
+        fmt.Println(i)
+    }
+}
+
+func main() {
+    go printNumbers() // runs concurrently
+    fmt.Println("started")
+    time.Sleep(time.Second) // wait for goroutine
+}
+\end{lstlisting}
+
+\subsubsection*{Channels}
+
+Channels are Go's way of communicating between goroutines. A channel is a typed conduit through which you send and receive values:
+
+\begin{lstlisting}
+ch := make(chan int)  // create a channel of ints
+
+go func() {
+    ch <- 42  // send a value into the channel
+}()
+
+val := <-ch  // receive a value from the channel
+fmt.Println(val) // 42
+\end{lstlisting}
+
+The \code{<-} operator is used for both sending and receiving. Sends and receives block until the other side is ready, which naturally synchronizes goroutines.
+
+\subsubsection*{Channel Direction}
+
+Function signatures can restrict a channel to send-only or receive-only:
+
+\begin{lstlisting}
+func producer(ch chan<- int) {  // can only send to ch
+    ch <- 42
+}
+
+func consumer(ch <-chan int) {  // can only receive from ch
+    val := <-ch
+    fmt.Println(val)
+}
+\end{lstlisting}
+
+This makes your intent clear and catches mistakes at compile time.
+
+\subsubsection*{Closing Channels and Range}
+
+A sender can close a channel to signal that no more values will be sent. The receiver can detect this:
+
+\begin{lstlisting}
+ch := make(chan int)
+
+go func() {
+    for i := 0; i < 5; i++ {
+        ch <- i
+    }
+    close(ch)
+}()
+
+for val := range ch {
+    fmt.Println(val)
+}
+\end{lstlisting}
+
+The \code{range} loop receives values from the channel until it is closed. This is the cleanest way to consume all values from a channel.
+
+\subsubsection*{WaitGroups}
+
+When you need to wait for multiple goroutines to finish, use \code{sync.WaitGroup}:
+
+\begin{lstlisting}
+var wg sync.WaitGroup
+
+for i := 0; i < 3; i++ {
+    wg.Add(1)
+    go func(n int) {
+        defer wg.Done()
+        fmt.Println(n)
+    }(i)
+}
+
+wg.Wait() // blocks until all goroutines call Done
+\end{lstlisting}
+
+\begin{taskbox}
+Write a function \code{squares(n int) <-chan int} that returns a receive-only channel. It should start a goroutine that sends the squares of 1 through \code{n} into the channel, then closes it.
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func squares(n int) <-chan int {
+    // Your code here
+    return nil
+}
+
+func main() {
+    for val := range squares(5) {
+        fmt.Println(val)
+    }
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func squares(n int) <-chan int {
+    ch := make(chan int)
+    go func() {
+        for i := 1; i <= n; i++ {
+            ch <- i * i
+        }
+        close(ch)
+    }()
+    return ch
+}
+
+func main() {
+    for val := range squares(5) {
+        fmt.Println(val)
+    }
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
 % CLOSING
 % ═══════════════════════════════════════════════════════════════════
 \chapter*{What's Next?}
 \addcontentsline{toc}{chapter}{What's Next?}
 \markboth{What's Next?}{What's Next?}
 
-Congratulations on completing all twelve lessons! You now have a solid foundation in Go's core language features. Here are some directions to explore next:
-
-\subsection*{Concurrency}
-Go's goroutines and channels are one of its most powerful features. Learn how to run functions concurrently with \code{go} and communicate between them with channels.
+Congratulations on completing all fourteen lessons! You now have a solid foundation in Go's core language features. Here are some directions to explore next:
 
 \subsection*{The Standard Library}
 Go ships with a comprehensive standard library. Key packages to explore:
