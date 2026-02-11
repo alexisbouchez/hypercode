@@ -7,7 +7,6 @@ import (
 	"syscall/js"
 
 	"github.com/traefik/yaegi/interp"
-	"github.com/traefik/yaegi/stdlib"
 )
 
 func runGo(_ js.Value, args []js.Value) any {
@@ -27,7 +26,7 @@ func runGo(_ js.Value, args []js.Value) any {
 		Stdout: &stdout,
 		Stderr: &stderr,
 	})
-	i.Use(stdlib.Symbols)
+	i.Use(Symbols)
 
 	_, err := i.Eval(code)
 

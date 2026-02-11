@@ -1,0 +1,2017 @@
+\documentclass[11pt,a4paper]{book}
+
+% ─── Encoding & Fonts ─────────────────────────────────────────────
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{amssymb}
+
+\setmainfont{Geist}[
+  Path=fonts/,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic,
+]
+\setsansfont{Geist}[
+  Path=fonts/,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic,
+]
+\setmonofont{GeistMono}[
+  Path=fonts/,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  Scale=0.9,
+]
+\newfontfamily\displayfont{SpaceGrotesk}[
+  Path=fonts/,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+]
+
+% ─── Page Layout ──────────────────────────────────────────────────
+\usepackage[
+  top=2.5cm,
+  bottom=2.5cm,
+  left=2.5cm,
+  right=2.5cm,
+  headheight=14pt
+]{geometry}
+
+% ─── Colors ───────────────────────────────────────────────────────
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+
+\definecolor{rose}{HTML}{F43F5E}
+\definecolor{roseDark}{HTML}{E11D48}
+\definecolor{roseMedium}{HTML}{FB7185}
+\definecolor{roseLight}{HTML}{FDA4AF}
+\definecolor{rosePale}{HTML}{FFF1F2}
+\definecolor{bgCode}{HTML}{F9F9F9}
+\definecolor{bgTask}{HTML}{FFF1F2}
+\definecolor{bgSolution}{HTML}{FFF1F2}
+\definecolor{frameCode}{HTML}{E5E5E5}
+\definecolor{accentDark}{HTML}{1A1A1A}
+\definecolor{chapterBg}{HTML}{F43F5E}
+
+% ─── Syntax Highlighting ─────────────────────────────────────────
+\usepackage{listings}
+
+% Syntax colors
+\definecolor{codeKeyword}{HTML}{D6336C}
+\definecolor{codeBuiltin}{HTML}{C2255C}
+\definecolor{codeType}{HTML}{9C36B5}
+\definecolor{codeComment}{HTML}{868E96}
+\definecolor{codeString}{HTML}{2F9E44}
+\definecolor{codeNumber}{HTML}{E8590C}
+\definecolor{codeBase}{HTML}{212529}
+
+\lstdefinelanguage{Go}{
+  keywords=[1]{break,default,func,interface,select,case,defer,go,map,struct,chan,else,goto,package,switch,const,fallthrough,if,range,type,continue,for,import,return,var},
+  keywords=[2]{append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover,true,false,nil,iota},
+  keywords=[3]{bool,byte,complex64,complex128,float32,float64,int,int8,int16,int32,int64,rune,string,uint,uint8,uint16,uint32,uint64,uintptr,error,any},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]`,
+}
+
+\lstdefinestyle{gostyle}{
+  language=Go,
+  basicstyle=\small\ttfamily\color{codeBase},
+  keywordstyle=[1]\color{codeKeyword}\bfseries,
+  keywordstyle=[2]\color{codeBuiltin},
+  keywordstyle=[3]\color{codeType},
+  commentstyle=\color{codeComment}\itshape,
+  stringstyle=\color{codeString},
+  numberstyle=\tiny\color{codeComment},
+  backgroundcolor=\color{bgCode},
+  frame=l,
+  framesep=8pt,
+  framerule=2pt,
+  rulecolor=\color{rose},
+  breaklines=true,
+  breakatwhitespace=false,
+  tabsize=4,
+  showstringspaces=false,
+  showspaces=false,
+  xleftmargin=14pt,
+  aboveskip=8pt,
+  belowskip=8pt,
+  literate=
+    *{0}{{{\color{codeNumber}0}}}1
+     {1}{{{\color{codeNumber}1}}}1
+     {2}{{{\color{codeNumber}2}}}1
+     {3}{{{\color{codeNumber}3}}}1
+     {4}{{{\color{codeNumber}4}}}1
+     {5}{{{\color{codeNumber}5}}}1
+     {6}{{{\color{codeNumber}6}}}1
+     {7}{{{\color{codeNumber}7}}}1
+     {8}{{{\color{codeNumber}8}}}1
+     {9}{{{\color{codeNumber}9}}}1,
+}
+
+\lstset{style=gostyle}
+
+% ─── Boxes ────────────────────────────────────────────────────────
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{listings,skins,breakable}
+
+% Code block box
+\newtcolorbox{codebox}[1][]{
+  enhanced,
+  breakable,
+  colback=bgCode,
+  colframe=frameCode,
+  boxrule=0.5pt,
+  arc=3pt,
+  left=4pt,
+  right=4pt,
+  top=4pt,
+  bottom=4pt,
+  #1
+}
+
+% Task box
+\newtcolorbox{taskbox}{
+  enhanced,
+  breakable,
+  colback=rosePale,
+  colframe=roseMedium,
+  boxrule=0.8pt,
+  arc=4pt,
+  left=10pt,
+  right=10pt,
+  top=8pt,
+  bottom=8pt,
+  fonttitle=\bfseries\large,
+  title={\raisebox{-1pt}{\large$\triangleright$}~~Your Task},
+  coltitle=roseDark,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=rosePale,
+    colframe=rosePale,
+    boxrule=0pt,
+  }
+}
+
+% Solution box
+\newtcolorbox{solutionbox}{
+  enhanced,
+  breakable,
+  colback=rosePale,
+  colframe=roseLight,
+  boxrule=0.8pt,
+  arc=4pt,
+  left=10pt,
+  right=10pt,
+  top=8pt,
+  bottom=8pt,
+  fonttitle=\bfseries\large,
+  title={\raisebox{-1pt}{\checkmark}~~Solution},
+  coltitle=roseDark,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=rosePale,
+    colframe=rosePale,
+    boxrule=0pt,
+  }
+}
+
+% ─── Tables ───────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+
+% ─── Headers & Footers ───────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{gray}{\leftmark}}
+\fancyhead[RO]{\small\textcolor{gray}{\rightmark}}
+\fancyfoot[C]{\small\textcolor{gray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rose}\leaders\hrule height \headrulewidth\hfill}}
+
+% ─── Chapter & Section Styling ────────────────────────────────────
+\usepackage{titlesec}
+\usepackage{titletoc}
+
+\titleformat{\chapter}[display]
+  {\displayfont\Huge\bfseries}
+  {\colorbox{rose}{\parbox[c][1.2cm][c]{1.5cm}{\centering\color{white}\fontsize{28}{32}\selectfont\thechapter}}}
+  {20pt}
+  {\color{accentDark}\fontsize{28}{34}\selectfont}
+
+\titleformat{\section}
+  {\displayfont\LARGE\bfseries\color{roseDark}}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\displayfont\Large\bfseries\color{roseDark!80!black}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\displayfont\large\bfseries\color{roseDark!60!black}}
+  {\thesubsubsection}{1em}{}
+
+% ─── Hyperlinks ───────────────────────────────────────────────────
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=roseDark,
+  urlcolor=rose,
+  citecolor=roseDark,
+  pdftitle={Hypercode: Learn Go from Scratch},
+  pdfauthor={Alexis Bouchez},
+  pdfsubject={Go Programming Language Tutorial},
+}
+
+% ─── Misc ─────────────────────────────────────────────────────────
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{epigraph}
+\usepackage{emptypage}
+\usepackage{tikz}
+
+% Inline code command
+\newcommand{\code}[1]{\colorbox{bgCode}{\texttt{\small #1}}}
+
+% ─── Document ─────────────────────────────────────────────────────
+\begin{document}
+
+% ═══════════════════════════════════════════════════════════════════
+% TITLE PAGE
+% ═══════════════════════════════════════════════════════════════════
+\begin{titlepage}
+\newgeometry{top=0pt,bottom=0pt,left=0pt,right=0pt}
+
+\begin{center}
+
+\vspace*{4cm}
+
+% Logo
+\includegraphics[width=0.70\textwidth]{public/nabla-hypercode.png}
+
+\vspace{1.2cm}
+
+% Subtitle
+{\displayfont\fontsize{24}{30}\selectfont\color{accentDark}%
+Learn Go from Scratch}
+
+\vspace{2.5cm}
+
+% Description
+{\color{gray}\fontsize{12}{19}\selectfont
+From ``Hello, World!'' to generics ---\\[8pt]
+twelve lessons covering the fundamentals of Go.
+}
+
+\vspace{2cm}
+
+{\color{gray}\fontsize{11}{16}\selectfont
+This is the PDF version of Hypercode.\\[4pt]
+For the interactive experience with a built-in code editor, visit:\\[6pt]
+\href{https://hypercode.alexisbouchez.com}{\color{rose}\fontsize{12}{16}\selectfont hypercode.alexisbouchez.com}
+}
+
+\vfill
+
+% Author
+{\color{accentDark}\displayfont\fontsize{15}{20}\selectfont Alexis Bouchez}
+
+\vspace{2.5cm}
+
+\end{center}
+\restoregeometry
+\end{titlepage}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ═══════════════════════════════════════════════════════════════════
+\tableofcontents
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% INTRODUCTION
+% ═══════════════════════════════════════════════════════════════════
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+\markboth{Introduction}{Introduction}
+
+Welcome to \textbf{Hypercode}, an interactive course for learning the Go programming language from the ground up.
+
+\subsection*{Why Go?}
+
+Go is a statically typed, compiled language designed for simplicity and efficiency. It compiles fast, runs fast, and is easy to read. Here is what makes it stand out:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Fast compilation} --- Go compiles entire projects in seconds, even large codebases.
+  \item \textbf{Simple syntax} --- The language has only 25 keywords. If you know any C-style language, you can read Go code immediately.
+  \item \textbf{Built-in concurrency} --- Goroutines and channels make concurrent programming straightforward.
+  \item \textbf{Rich standard library} --- HTTP servers, JSON encoding, cryptography, testing --- all built in, no third-party dependencies required.
+  \item \textbf{Single binary deployment} --- Go compiles to a single static binary. No runtime, no VM, no dependencies to install on the target machine.
+\end{itemize}
+
+\subsection*{The Story}
+
+Go was created at Google in 2007 by Robert Griesemer, Rob Pike, and Ken Thompson. The three designers were frustrated with the complexity of existing systems languages, particularly C++: slow builds, complicated dependency management, and a language specification that had grown unwieldy over decades.
+
+Their goal was a language that combined the performance and safety of a compiled language with the ease of use of a dynamic one. Go was open-sourced in November 2009 and reached its first stable release, Go 1.0, in March 2012 with a strong backward-compatibility promise.
+
+Rob Pike had co-created the Plan 9 operating system and the UTF-8 encoding. Ken Thompson had co-created Unix and the C programming language. Robert Griesemer had worked on the V8 JavaScript engine and the Java HotSpot VM.
+
+\subsection*{Who Uses Go}
+
+Go has become the backbone of modern cloud infrastructure. Some of the most influential open-source projects are written in Go:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Docker} --- the containerization platform that changed how software is deployed.
+  \item \textbf{Kubernetes} --- the container orchestration system that powers cloud-native applications.
+  \item \textbf{Terraform} --- the infrastructure-as-code tool used to manage cloud resources.
+\end{itemize}
+
+Major companies use Go extensively: Google, Uber, Dropbox, Twitch, Cloudflare, and many others. It is especially popular for building microservices, CLI tools, DevOps tooling, and network services.
+
+\subsection*{About This Book}
+
+This book contains twelve lessons organized into seven chapters. Each lesson explains a concept, demonstrates it with code examples, and ends with an exercise for you to practice. Solutions are provided at the end of each lesson. The lessons are designed to be worked through in order, as each builds on the concepts introduced before it.
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Foundations} --- How Go programs are structured: packages, imports, and the \code{main} function. Variables, types, and constants.
+  \item \textbf{Control Flow} --- Conditionals with \code{if}/\code{else} and \code{switch}. Loops with \code{for}.
+  \item \textbf{Functions} --- Declaring functions, multiple return values, and named returns.
+  \item \textbf{Data Structures} --- Slices (dynamic arrays) and maps (hash tables).
+  \item \textbf{Structs and Interfaces} --- Custom types with methods. Interfaces and structural typing.
+  \item \textbf{Error Handling} --- Go's explicit approach to errors using values instead of exceptions.
+  \item \textbf{Generics} --- Type parameters for functions and data structures.
+\end{itemize}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 1: FOUNDATIONS
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Foundations}
+
+% ─── Lesson 1: Hello, World! ─────────────────────────────────────
+\section{Hello, World!}
+
+\subsection*{The Anatomy of a Go Program}
+
+Every Go source file starts with a package declaration. A package is how Go organizes code: it serves as a namespace, a unit of compilation, and a mechanism for controlling visibility.
+
+The \code{main} package is special. It tells the Go compiler that this is an executable program, not a library. Without it, you have a package that other code can import, but nothing you can actually run.
+
+\begin{lstlisting}
+package main
+\end{lstlisting}
+
+\subsection*{Imports}
+
+The \code{import} keyword brings other packages into scope. The \code{fmt} package (short for ``format'') handles formatted I/O: printing to the terminal, formatting strings, reading input.
+
+\begin{lstlisting}
+import "fmt"
+\end{lstlisting}
+
+When you need multiple packages, Go uses a grouped syntax:
+
+\begin{lstlisting}
+import (
+    "fmt"
+    "math"
+    "strings"
+)
+\end{lstlisting}
+
+\subsection*{The Entry Point}
+
+Every executable needs a starting point. In Go, that is \code{func main()}, with no parameters and no return value. When you run a Go program, execution begins here and here only.
+
+\begin{lstlisting}
+func main() {
+    fmt.Println("Hello, World!")
+}
+\end{lstlisting}
+
+\code{fmt.Println} writes its arguments to standard output, followed by a newline character.
+
+\subsection*{Exported Names}
+
+Notice the capital \code{P} in \code{Println}. In Go, any name that starts with an uppercase letter is \emph{exported}, visible outside its package. A lowercase name is \emph{unexported}, private to the package.
+
+No \code{public} or \code{private} keywords. The casing \textbf{is} the access control. This is a deliberate design choice that makes visibility immediately obvious when reading code.
+
+\begin{taskbox}
+Write a program that prints exactly \code{Hello, World!} to standard output.
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func main() {
+    // Write your first Go program here
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\newpage
+
+% ─── Lesson 2: Variables ─────────────────────────────────────────
+\section{Variables}
+
+\subsection*{Declaring Variables}
+
+Go is statically typed, but it does not force you to spell out every type. You have two primary ways to declare variables.
+
+\subsection*{The \code{var} Keyword}
+
+The explicit form. You state the name, the type, and optionally an initial value:
+
+\begin{lstlisting}
+var name string = "Go"
+var year int = 2009
+var ratio float64 = 3.14
+\end{lstlisting}
+
+If you provide an initial value, the type can be omitted. The compiler infers it:
+
+\begin{lstlisting}
+var name = "Go"     // inferred as string
+var year = 2009     // inferred as int
+\end{lstlisting}
+
+\subsection*{Short Declaration}
+
+Inside functions, the \code{:=} operator declares and initializes in one step. This is the form you will use most often:
+
+\begin{lstlisting}
+name := "Go"
+year := 2009
+awesome := true
+\end{lstlisting}
+
+The \code{:=} operator is only available inside functions. Package-level variables must use \code{var}.
+
+\subsection*{Zero Values}
+
+Every type in Go has a \emph{zero value}: the value a variable holds if you declare it without initializing it. This is a guarantee, not an accident. There are no uninitialized variables in Go.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Type} & \textbf{Zero Value} \\
+\midrule
+\code{int}, \code{float64} & \code{0} \\
+\code{string} & \code{""} (empty string) \\
+\code{bool} & \code{false} \\
+pointers, slices, maps & \code{nil} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{lstlisting}
+var count int     // 0
+var label string  // ""
+var ready bool    // false
+\end{lstlisting}
+
+\subsection*{Constants}
+
+Values that never change are declared with \code{const}. Constants must be known at compile time. You cannot assign the result of a function call to a constant.
+
+\begin{lstlisting}
+const pi = 3.14159
+const maxRetries = 3
+\end{lstlisting}
+
+\begin{taskbox}
+Declare three variables using the short declaration operator:
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{name} with value \code{"Go"}
+  \item \code{year} with value \code{2009}
+  \item \code{awesome} with value \code{true}
+\end{itemize}
+
+Then print them using the format string provided in the starter code.
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func main() {
+    // Declare your variables here using :=
+
+    fmt.Printf("name: %s, year: %d, awesome: %t\n",
+        name, year, awesome)
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func main() {
+    name := "Go"
+    year := 2009
+    awesome := true
+
+    fmt.Printf("name: %s, year: %d, awesome: %t\n",
+        name, year, awesome)
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 2: CONTROL FLOW
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Control Flow}
+
+% ─── Lesson 3: Conditionals ──────────────────────────────────────
+\section{Conditionals}
+
+\subsection*{Making Decisions}
+
+\subsubsection*{If / Else}
+
+Go's \code{if} statement looks like most languages, minus the parentheses around the condition:
+
+\begin{lstlisting}
+if x > 10 {
+    fmt.Println("big")
+} else if x > 5 {
+    fmt.Println("medium")
+} else {
+    fmt.Println("small")
+}
+\end{lstlisting}
+
+The braces are mandatory, even for single-line bodies. This eliminates an entire class of bugs that other languages suffer from.
+
+\subsubsection*{If with Init Statement}
+
+Go has a unique feature: you can run a short statement before the condition. The variable you declare is scoped to the \code{if} block:
+
+\begin{lstlisting}
+if length := len(name); length > 10 {
+    fmt.Println("long name")
+} else {
+    fmt.Println("short name")
+}
+// length is not accessible here
+\end{lstlisting}
+
+This pattern keeps variables tightly scoped. You will see it everywhere in Go, especially with error handling.
+
+\subsubsection*{Switch}
+
+Go's \code{switch} is cleaner than most languages. Cases do not fall through by default, so no \code{break} statements are needed:
+
+\begin{lstlisting}
+switch day {
+case "Monday":
+    fmt.Println("start of the week")
+case "Friday":
+    fmt.Println("almost weekend")
+default:
+    fmt.Println("regular day")
+}
+\end{lstlisting}
+
+\subsubsection*{Switch Without a Condition}
+
+A \code{switch} with no value acts as a clean alternative to long \code{if-else} chains:
+
+\begin{lstlisting}
+switch {
+case temp <= 0:
+    fmt.Println("freezing")
+case temp <= 15:
+    fmt.Println("cold")
+case temp <= 30:
+    fmt.Println("warm")
+default:
+    fmt.Println("hot")
+}
+\end{lstlisting}
+
+This reads naturally and scales better than nested \code{if-else} blocks.
+
+\begin{taskbox}
+Write a function \code{classifyTemp} that takes an integer temperature in Celsius and returns a string:
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{"freezing"} if temp $\leq$ 0
+  \item \code{"cold"} if temp $\leq$ 15
+  \item \code{"warm"} if temp $\leq$ 30
+  \item \code{"hot"} if temp $>$ 30
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func classifyTemp(temp int) string {
+    // Your code here
+    return ""
+}
+
+func main() {
+    fmt.Println(classifyTemp(-5))
+    fmt.Println(classifyTemp(10))
+    fmt.Println(classifyTemp(25))
+    fmt.Println(classifyTemp(35))
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func classifyTemp(temp int) string {
+    switch {
+    case temp <= 0:
+        return "freezing"
+    case temp <= 15:
+        return "cold"
+    case temp <= 30:
+        return "warm"
+    default:
+        return "hot"
+    }
+}
+
+func main() {
+    fmt.Println(classifyTemp(-5))
+    fmt.Println(classifyTemp(10))
+    fmt.Println(classifyTemp(25))
+    fmt.Println(classifyTemp(35))
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\newpage
+
+% ─── Lesson 4: Loops ─────────────────────────────────────────────
+\section{Loops}
+
+\subsection*{The Only Loop You Need}
+
+Go has exactly one loop keyword: \code{for}. It does the work of \code{for}, \code{while}, and \code{do-while} from other languages.
+
+\subsubsection*{Classic For Loop}
+
+The three-component form, similar to C or Java:
+
+\begin{lstlisting}
+for i := 0; i < 5; i++ {
+    fmt.Println(i)
+}
+\end{lstlisting}
+
+\subsubsection*{While-Style Loop}
+
+Drop the init and post statements. You get a while loop:
+
+\begin{lstlisting}
+n := 1
+for n < 100 {
+    n *= 2
+}
+\end{lstlisting}
+
+\subsubsection*{Infinite Loop}
+
+Drop everything. Use \code{break} to exit:
+
+\begin{lstlisting}
+for {
+    line := readInput()
+    if line == "quit" {
+        break
+    }
+}
+\end{lstlisting}
+
+\subsubsection*{Continue}
+
+\code{continue} skips to the next iteration:
+
+\begin{lstlisting}
+for i := 0; i < 10; i++ {
+    if i%2 == 0 {
+        continue
+    }
+    fmt.Println(i) // only odd numbers
+}
+\end{lstlisting}
+
+\subsubsection*{For Range}
+
+The \code{range} keyword iterates over slices, arrays, strings, maps, and channels. It gives you both the index and the value:
+
+\begin{lstlisting}
+names := []string{"Alice", "Bob", "Charlie"}
+for i, name := range names {
+    fmt.Printf("%d: %s\n", i, name)
+}
+\end{lstlisting}
+
+Use \code{\_} to discard the index when you do not need it:
+
+\begin{lstlisting}
+for _, name := range names {
+    fmt.Println(name)
+}
+\end{lstlisting}
+
+\begin{taskbox}
+Write a function \code{fizzBuzz} that takes an integer \code{n} and prints:
+\begin{itemize}[leftmargin=1.5em]
+  \item For each number from 1 to $n$ (inclusive):
+  \begin{itemize}
+    \item \code{"FizzBuzz"} if the number is divisible by both 3 and 5
+    \item \code{"Fizz"} if the number is divisible by 3
+    \item \code{"Buzz"} if the number is divisible by 5
+    \item The number otherwise
+  \end{itemize}
+  \item Each value on its own line
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func fizzBuzz(n int) {
+    // Your code here
+}
+
+func main() {
+    fizzBuzz(15)
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func fizzBuzz(n int) {
+    for i := 1; i <= n; i++ {
+        switch {
+        case i%15 == 0:
+            fmt.Println("FizzBuzz")
+        case i%3 == 0:
+            fmt.Println("Fizz")
+        case i%5 == 0:
+            fmt.Println("Buzz")
+        default:
+            fmt.Println(i)
+        }
+    }
+}
+
+func main() {
+    fizzBuzz(15)
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 3: FUNCTIONS
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Functions}
+
+% ─── Lesson 5: Functions ─────────────────────────────────────────
+\section{Functions in Go}
+
+Functions are declared with \code{func}, followed by the name, parameters, and return type:
+
+\begin{lstlisting}
+func greet(name string) string {
+    return "Hello, " + name
+}
+\end{lstlisting}
+
+Parameter types come \emph{after} the name, not before. This was a deliberate choice. The Go team believes it reads more naturally, especially as declarations get complex.
+
+When consecutive parameters share a type, you can group them:
+
+\begin{lstlisting}
+func add(a, b int) int {
+    return a + b
+}
+\end{lstlisting}
+
+\subsection*{Multiple Return Values}
+
+This is one of Go's most distinctive features. A function can return more than one value:
+
+\begin{lstlisting}
+func divide(a, b float64) (float64, error) {
+    if b == 0 {
+        return 0, fmt.Errorf("division by zero")
+    }
+    return a / b, nil
+}
+\end{lstlisting}
+
+The caller unpacks the results:
+
+\begin{lstlisting}
+result, err := divide(10, 3)
+\end{lstlisting}
+
+This pattern is the foundation of Go's error handling. Instead of exceptions, functions return errors as values.
+
+\subsection*{Named Return Values}
+
+You can name your return values, which documents what the function returns and allows ``naked'' returns:
+
+\begin{lstlisting}
+func swap(a, b string) (first, second string) {
+    first = b
+    second = a
+    return // returns first and second
+}
+\end{lstlisting}
+
+Use named returns sparingly. They are most useful for documenting return values in short functions. In longer functions, explicit returns are clearer.
+
+\subsection*{Functions as Values}
+
+Functions are first-class values. You can assign them to variables, pass them as arguments, and return them from other functions:
+
+\begin{lstlisting}
+double := func(x int) int {
+    return x * 2
+}
+fmt.Println(double(5)) // 10
+\end{lstlisting}
+
+\begin{taskbox}
+Write a function \code{safeDivide} that takes two \code{float64} parameters and returns two values: a \code{float64} result and a \code{string} error message.
+
+\begin{itemize}[leftmargin=1.5em]
+  \item If the second argument is 0, return \code{0} and \code{"division by zero"}
+  \item Otherwise, return the result of the division and an empty string \code{""}
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func safeDivide(a, b float64) (float64, string) {
+    // Your code here
+    return 0, ""
+}
+
+func main() {
+    result, err := safeDivide(10, 3)
+    fmt.Printf("%.2f, %s\n", result, err)
+
+    result, err = safeDivide(10, 0)
+    fmt.Printf("%.2f, %s\n", result, err)
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func safeDivide(a, b float64) (float64, string) {
+    if b == 0 {
+        return 0, "division by zero"
+    }
+    return a / b, ""
+}
+
+func main() {
+    result, err := safeDivide(10, 3)
+    fmt.Printf("%.2f, %s\n", result, err)
+
+    result, err = safeDivide(10, 0)
+    fmt.Printf("%.2f, %s\n", result, err)
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 4: DATA STRUCTURES
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Data Structures}
+
+% ─── Lesson 6: Slices ────────────────────────────────────────────
+\section{Slices}
+
+\subsection*{Dynamic Arrays, Done Right}
+
+Go has arrays, but you will rarely use them directly. Arrays have a fixed size baked into their type: \code{[5]int} and \code{[10]int} are different types entirely. Instead, Go gives you \textbf{slices}: a flexible, dynamic view over an underlying array.
+
+\subsubsection*{Creating Slices}
+
+\begin{lstlisting}
+// Slice literal
+numbers := []int{1, 2, 3, 4, 5}
+
+// Make a slice with initial length and capacity
+data := make([]int, 5)       // len=5, cap=5, filled with zeros
+buffer := make([]int, 0, 10) // len=0, cap=10
+\end{lstlisting}
+
+The difference between \code{[5]int} (array) and \code{[]int} (slice) is that single missing number. Slices are what you want almost every time.
+
+\subsubsection*{Length and Capacity}
+
+Every slice has two properties: \textbf{length} (how many elements it contains) and \textbf{capacity} (how many elements the underlying array can hold before reallocation).
+
+\begin{lstlisting}
+s := make([]int, 3, 10)
+fmt.Println(len(s)) // 3
+fmt.Println(cap(s)) // 10
+\end{lstlisting}
+
+\subsubsection*{Append}
+
+\code{append} adds elements to a slice and returns a new slice. If the underlying array is full, Go allocates a bigger one and copies the data:
+
+\begin{lstlisting}
+s := []int{1, 2, 3}
+s = append(s, 4, 5)
+// s is now [1, 2, 3, 4, 5]
+\end{lstlisting}
+
+Always reassign the result of \code{append} back to the slice variable. This is not optional. \code{append} may return a slice pointing to a completely new array.
+
+\subsubsection*{Slicing}
+
+You can create a new slice from an existing one using the slice operator:
+
+\begin{lstlisting}
+s := []int{0, 1, 2, 3, 4}
+a := s[1:3]  // [1, 2]     (from index 1, up to but not including 3)
+b := s[:3]   // [0, 1, 2]  (from the start)
+c := s[2:]   // [2, 3, 4]  (to the end)
+\end{lstlisting}
+
+A sub-slice shares the same underlying array. Modifying one affects the other. If you need an independent copy, use \code{copy} or \code{append} to a new slice.
+
+\begin{taskbox}
+Write two functions:
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{sum} --- takes a \code{[]int} and returns the sum of all elements.
+  \item \code{filter} --- takes a \code{[]int} and returns a new \code{[]int} containing only the even numbers, in order.
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func sum(numbers []int) int {
+    // Your code here
+    return 0
+}
+
+func filter(numbers []int) []int {
+    // Return only even numbers
+    return nil
+}
+
+func main() {
+    nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    fmt.Println(sum(nums))
+    fmt.Println(filter(nums))
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func sum(numbers []int) int {
+    total := 0
+    for _, n := range numbers {
+        total += n
+    }
+    return total
+}
+
+func filter(numbers []int) []int {
+    var result []int
+    for _, n := range numbers {
+        if n%2 == 0 {
+            result = append(result, n)
+        }
+    }
+    return result
+}
+
+func main() {
+    nums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    fmt.Println(sum(nums))
+    fmt.Println(filter(nums))
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\newpage
+
+% ─── Lesson 7: Maps ──────────────────────────────────────────────
+\section{Maps}
+
+\subsection*{Key-Value Storage}
+
+Maps are Go's built-in hash table. They store key-value pairs and provide constant-time lookups.
+
+\subsubsection*{Creating Maps}
+
+\begin{lstlisting}
+// Map literal
+ages := map[string]int{
+    "Alice": 30,
+    "Bob":   25,
+}
+
+// Make an empty map
+scores := make(map[string]int)
+\end{lstlisting}
+
+The type \code{map[string]int} reads as ``a map from strings to ints.'' Keys can be any comparable type (strings, ints, booleans, structs without slice/map fields). Values can be anything.
+
+\subsubsection*{Operations}
+
+\begin{lstlisting}
+m := make(map[string]int)
+
+// Insert or update
+m["alice"] = 95
+
+// Lookup
+score := m["alice"] // 95
+
+// Delete
+delete(m, "alice")
+
+// Length
+fmt.Println(len(m))
+\end{lstlisting}
+
+\subsubsection*{The Comma-Ok Idiom}
+
+When you look up a key that does not exist, Go returns the zero value for the value type. To distinguish between ``key not found'' and ``key exists with zero value'', use the two-value form:
+
+\begin{lstlisting}
+value, ok := m["key"]
+if ok {
+    fmt.Println("found:", value)
+} else {
+    fmt.Println("not found")
+}
+\end{lstlisting}
+
+This is called the ``comma-ok'' idiom. The second value is a boolean that indicates whether the key was present.
+
+\subsubsection*{Iterating}
+
+Use \code{for range} to iterate over a map. The iteration order is \textbf{not guaranteed}. It is intentionally randomized by the runtime:
+
+\begin{lstlisting}
+for key, value := range m {
+    fmt.Printf("%s: %d\n", key, value)
+}
+\end{lstlisting}
+
+\begin{taskbox}
+Write a function \code{wordCount} that takes a string and returns a \code{map[string]int} where each key is a word and each value is how many times that word appears.
+
+Use \code{strings.Fields} to split the string into words (it splits on whitespace).
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+func wordCount(s string) map[string]int {
+    // Your code here
+    return nil
+}
+
+func main() {
+    result := wordCount("the cat sat on the mat the cat")
+    fmt.Println(result["the"])
+    fmt.Println(result["cat"])
+    fmt.Println(result["sat"])
+    fmt.Println(result["on"])
+    fmt.Println(result["mat"])
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import (
+    "fmt"
+    "strings"
+)
+
+func wordCount(s string) map[string]int {
+    counts := make(map[string]int)
+    for _, word := range strings.Fields(s) {
+        counts[word]++
+    }
+    return counts
+}
+
+func main() {
+    result := wordCount("the cat sat on the mat the cat")
+    fmt.Println(result["the"])
+    fmt.Println(result["cat"])
+    fmt.Println(result["sat"])
+    fmt.Println(result["on"])
+    fmt.Println(result["mat"])
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 5: STRUCTS AND INTERFACES
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Structs and Interfaces}
+
+% ─── Lesson 8: Structs and Methods ───────────────────────────────
+\section{Structs and Methods}
+
+\subsection*{Custom Types}
+
+Structs are Go's way of grouping related data. If you are coming from an object-oriented language, structs are the closest thing to classes, but without inheritance.
+
+\subsubsection*{Defining a Struct}
+
+\begin{lstlisting}
+type Point struct {
+    X float64
+    Y float64
+}
+\end{lstlisting}
+
+\subsubsection*{Creating Instances}
+
+\begin{lstlisting}
+// Named fields (preferred for clarity)
+p1 := Point{X: 1.0, Y: 2.0}
+
+// Positional (fragile, avoid unless struct is tiny)
+p2 := Point{1.0, 2.0}
+
+// Zero value (all fields are zero-valued)
+var p3 Point // {0, 0}
+\end{lstlisting}
+
+\subsubsection*{Methods}
+
+Methods are functions attached to a type. They are declared with a \emph{receiver} between the \code{func} keyword and the method name:
+
+\begin{lstlisting}
+func (p Point) Distance() float64 {
+    return math.Sqrt(p.X*p.X + p.Y*p.Y)
+}
+\end{lstlisting}
+
+Call methods with dot notation:
+
+\begin{lstlisting}
+p := Point{X: 3, Y: 4}
+fmt.Println(p.Distance()) // 5
+\end{lstlisting}
+
+\subsubsection*{Pointer Receivers}
+
+A value receiver gets a copy of the struct. A pointer receiver gets a reference and can modify the original:
+
+\begin{lstlisting}
+func (p *Point) Scale(factor float64) {
+    p.X *= factor
+    p.Y *= factor
+}
+\end{lstlisting}
+
+Use a pointer receiver when:
+\begin{itemize}[leftmargin=1.5em]
+  \item The method needs to modify the struct
+  \item The struct is large and copying would be expensive
+  \item You want consistency (if any method uses a pointer receiver, all should)
+\end{itemize}
+
+Go automatically handles the conversion: you can call a pointer-receiver method on a value, and vice versa.
+
+\begin{taskbox}
+Define a \code{Rect} struct with fields \code{Width} and \code{Height} (both \code{float64}).
+
+Add two methods:
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{Area()} returns the area (\code{Width * Height})
+  \item \code{Perimeter()} returns the perimeter (\code{2 * (Width + Height)})
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+// Define your Rect struct here
+
+// Add Area() method
+
+// Add Perimeter() method
+
+func main() {
+    r := Rect{Width: 5, Height: 3}
+    fmt.Printf("%.1f\n", r.Area())
+    fmt.Printf("%.1f\n", r.Perimeter())
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+type Rect struct {
+    Width  float64
+    Height float64
+}
+
+func (r Rect) Area() float64 {
+    return r.Width * r.Height
+}
+
+func (r Rect) Perimeter() float64 {
+    return 2 * (r.Width + r.Height)
+}
+
+func main() {
+    r := Rect{Width: 5, Height: 3}
+    fmt.Printf("%.1f\n", r.Area())
+    fmt.Printf("%.1f\n", r.Perimeter())
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\newpage
+
+% ─── Lesson 9: Interfaces ────────────────────────────────────────
+\section{Interfaces}
+
+\subsection*{Implicit Contracts}
+
+Interfaces in Go define behavior. An interface is a set of method signatures. Any type that implements all the methods of an interface automatically satisfies it. No \code{implements} keyword needed.
+
+\begin{lstlisting}
+type Shape interface {
+    Area() float64
+}
+\end{lstlisting}
+
+Any type with an \code{Area() float64} method satisfies \code{Shape}. The type does not even need to know the interface exists.
+
+\subsubsection*{Why This Matters}
+
+This design means you can define interfaces \emph{after} the concrete types are written. You can define an interface in your package that is satisfied by types from a third-party library, without modifying that library.
+
+This is fundamentally different from Java or C\# where implementing an interface is an explicit declaration. Go's approach is called \emph{structural typing}.
+
+\subsubsection*{Using Interfaces}
+
+Interfaces let you write functions that accept any type with the right behavior:
+
+\begin{lstlisting}
+func printArea(s Shape) {
+    fmt.Printf("Area: %.2f\n", s.Area())
+}
+\end{lstlisting}
+
+This function works with circles, rectangles, triangles, or anything else that has an \code{Area()} method.
+
+\subsubsection*{The Stringer Interface}
+
+The \code{fmt} package defines a commonly used interface:
+
+\begin{lstlisting}
+type Stringer interface {
+    String() string
+}
+\end{lstlisting}
+
+If your type implements \code{String()}, the \code{fmt} functions will use it automatically:
+
+\begin{lstlisting}
+type Point struct { X, Y int }
+
+func (p Point) String() string {
+    return fmt.Sprintf("(%d, %d)", p.X, p.Y)
+}
+
+fmt.Println(Point{1, 2}) // prints "(1, 2)"
+\end{lstlisting}
+
+\subsubsection*{The Empty Interface}
+
+The type \code{interface\{\}} (or its alias \code{any} since Go 1.18) has no methods, so every type satisfies it. It is Go's version of ``accept anything'':
+
+\begin{lstlisting}
+func describe(i any) {
+    fmt.Printf("(%v, %T)\n", i, i)
+}
+\end{lstlisting}
+
+Use it sparingly. Overusing \code{any} throws away the type safety that makes Go reliable.
+
+\begin{taskbox}
+Define a \code{Shape} interface with a single method: \code{Area() float64}.
+
+Define two types:
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{Circle} with a \code{Radius float64} field
+  \item \code{Square} with a \code{Side float64} field
+\end{itemize}
+
+Implement \code{Area()} on both types. The area of a circle is $3.14159 \times r^2$.
+
+Write a function \code{totalArea} that takes a \code{[]Shape} and returns the sum of all areas.
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+// Define Shape interface
+
+// Define Circle struct and Area method
+
+// Define Square struct and Area method
+
+// Write totalArea function
+
+func main() {
+    shapes := []Shape{
+        Circle{Radius: 5},
+        Square{Side: 3},
+        Circle{Radius: 2},
+    }
+    fmt.Printf("%.2f\n", totalArea(shapes))
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+type Shape interface {
+    Area() float64
+}
+
+type Circle struct {
+    Radius float64
+}
+
+func (c Circle) Area() float64 {
+    return 3.14159 * c.Radius * c.Radius
+}
+
+type Square struct {
+    Side float64
+}
+
+func (s Square) Area() float64 {
+    return s.Side * s.Side
+}
+
+func totalArea(shapes []Shape) float64 {
+    total := 0.0
+    for _, s := range shapes {
+        total += s.Area()
+    }
+    return total
+}
+
+func main() {
+    shapes := []Shape{
+        Circle{Radius: 5},
+        Square{Side: 3},
+        Circle{Radius: 2},
+    }
+    fmt.Printf("%.2f\n", totalArea(shapes))
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 6: ERROR HANDLING
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Error Handling}
+
+% ─── Lesson 10: Errors ───────────────────────────────────────────
+\section{Errors as Values}
+
+Go does not have exceptions. Instead, functions that can fail return an error value alongside their result. This is arguably Go's most important design decision.
+
+\subsection*{The error Interface}
+
+The built-in \code{error} type is an interface with a single method:
+
+\begin{lstlisting}
+type error interface {
+    Error() string
+}
+\end{lstlisting}
+
+Any type that has an \code{Error() string} method is an error. This is the simplest possible contract.
+
+\subsection*{Creating Errors}
+
+The standard library provides two ways to create simple errors:
+
+\begin{lstlisting}
+import "errors"
+
+err := errors.New("something went wrong")
+\end{lstlisting}
+
+\begin{lstlisting}
+import "fmt"
+
+err := fmt.Errorf("user %s not found", username)
+\end{lstlisting}
+
+\code{fmt.Errorf} works like \code{fmt.Sprintf} but returns an error. Use it when you need formatted messages.
+
+\subsection*{The Error-Checking Pattern}
+
+The canonical Go pattern: call a function, check the error immediately, handle it or return it:
+
+\begin{lstlisting}
+result, err := doSomething()
+if err != nil {
+    return fmt.Errorf("doSomething failed: %w", err)
+}
+// use result
+\end{lstlisting}
+
+The \code{\%w} verb wraps the original error, preserving the chain for debugging. This pattern appears hundreds of times in any real Go codebase.
+
+\subsection*{Custom Error Types}
+
+For richer error information, define your own error type:
+
+\begin{lstlisting}
+type ValidationError struct {
+    Field   string
+    Message string
+}
+
+func (e *ValidationError) Error() string {
+    return fmt.Sprintf("%s: %s", e.Field, e.Message)
+}
+\end{lstlisting}
+
+\subsection*{When to Return Errors}
+
+A function should return an error when:
+\begin{itemize}[leftmargin=1.5em]
+  \item An operation can fail (file I/O, network, parsing)
+  \item The failure is recoverable (the caller can do something about it)
+  \item The failure is expected in normal operation
+\end{itemize}
+
+Do not return errors for programming mistakes (like passing a nil pointer where one is never expected). Use panics for those.
+
+\begin{taskbox}
+Write a function \code{validateAge} that takes an \code{int} and returns an \code{error}:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item If age is negative, return an error with the message \code{"age cannot be negative"}
+  \item If age is greater than 150, return an error with the message \code{"age is unrealistic"}
+  \item Otherwise, return \code{nil} (no error)
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import (
+    "errors"
+    "fmt"
+)
+
+func validateAge(age int) error {
+    // Your code here
+    return nil
+}
+
+func main() {
+    for _, age := range []int{25, -1, 200} {
+        if err := validateAge(age); err != nil {
+            fmt.Println(err)
+        } else {
+            fmt.Println("valid")
+        }
+    }
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import (
+    "errors"
+    "fmt"
+)
+
+func validateAge(age int) error {
+    if age < 0 {
+        return errors.New("age cannot be negative")
+    }
+    if age > 150 {
+        return errors.New("age is unrealistic")
+    }
+    return nil
+}
+
+func main() {
+    for _, age := range []int{25, -1, 200} {
+        if err := validateAge(age); err != nil {
+            fmt.Println(err)
+        } else {
+            fmt.Println("valid")
+        }
+    }
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPTER 7: GENERICS
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Generics}
+
+% ─── Lesson 11: Generic Functions ────────────────────────────────
+\section{Generic Functions}
+
+\subsection*{Type Parameters}
+
+Go 1.18 introduced generics, allowing you to write functions and types that work with any type. Before generics, you had to write separate functions for each type or use \code{interface\{\}} and lose type safety.
+
+\subsubsection*{Syntax}
+
+A generic function declares one or more \emph{type parameters} in square brackets before the regular parameters:
+
+\begin{lstlisting}
+func Print[T any](val T) {
+    fmt.Println(val)
+}
+\end{lstlisting}
+
+\code{T} is a type parameter. \code{any} is a \emph{constraint} that means ``any type at all''. The function can be called with any type:
+
+\begin{lstlisting}
+Print[int](42)
+Print[string]("hello")
+\end{lstlisting}
+
+\subsubsection*{Type Inference}
+
+In most cases the compiler can figure out the type argument from the regular arguments, so you can omit it:
+
+\begin{lstlisting}
+Print(42)       // T inferred as int
+Print("hello")  // T inferred as string
+\end{lstlisting}
+
+\subsubsection*{Constraints}
+
+Constraints restrict which types a type parameter can accept. The \code{any} constraint allows everything. The \code{comparable} constraint allows types that support \code{==} and \code{!=}:
+
+\begin{lstlisting}
+func Contains[T comparable](slice []T, target T) bool {
+    for _, v := range slice {
+        if v == target {
+            return true
+        }
+    }
+    return false
+}
+\end{lstlisting}
+
+You can also define your own constraint interfaces:
+
+\begin{lstlisting}
+type Number interface {
+    int | float64
+}
+
+func Sum[T Number](nums []T) T {
+    var total T
+    for _, n := range nums {
+        total += n
+    }
+    return total
+}
+\end{lstlisting}
+
+\subsubsection*{Multiple Type Parameters}
+
+A function can have more than one type parameter:
+
+\begin{lstlisting}
+func Map[T any, U any](slice []T, f func(T) U) []U {
+    result := make([]U, len(slice))
+    for i, v := range slice {
+        result[i] = f(v)
+    }
+    return result
+}
+\end{lstlisting}
+
+\begin{taskbox}
+Write a generic function \code{Filter[T any]} that takes a \code{[]T} and a \code{func(T) bool} predicate. It should return a new \code{[]T} containing only the elements for which the predicate returns \code{true}.
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func Filter[T any](slice []T, predicate func(T) bool) []T {
+    // Your code here
+    return nil
+}
+
+func main() {
+    nums := []int{1, 2, 3, 4, 5, 6}
+    evens := Filter(nums, func(n int) bool {
+        return n%2 == 0
+    })
+    fmt.Println(evens)
+
+    words := []string{"hi", "hello", "hey", "greetings"}
+    short := Filter(words, func(s string) bool {
+        return len(s) <= 3
+    })
+    fmt.Println(short)
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+func Filter[T any](slice []T, predicate func(T) bool) []T {
+    var result []T
+    for _, v := range slice {
+        if predicate(v) {
+            result = append(result, v)
+        }
+    }
+    return result
+}
+
+func main() {
+    nums := []int{1, 2, 3, 4, 5, 6}
+    evens := Filter(nums, func(n int) bool {
+        return n%2 == 0
+    })
+    fmt.Println(evens)
+
+    words := []string{"hi", "hello", "hey", "greetings"}
+    short := Filter(words, func(s string) bool {
+        return len(s) <= 3
+    })
+    fmt.Println(short)
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\newpage
+
+% ─── Lesson 12: Generic Types ───────────────────────────────────
+\section{Generic Types}
+
+\subsection*{Generic Structs}
+
+Just like functions, struct types can have type parameters. This lets you build reusable data structures that work with any type.
+
+\begin{lstlisting}
+type Pair[T any, U any] struct {
+    First  T
+    Second U
+}
+\end{lstlisting}
+
+You create instances by specifying the type arguments:
+
+\begin{lstlisting}
+p := Pair[string, int]{First: "age", Second: 30}
+\end{lstlisting}
+
+\subsubsection*{Methods on Generic Types}
+
+Methods on a generic type must redeclare the type parameters in the receiver, but they cannot introduce new ones:
+
+\begin{lstlisting}
+func (p Pair[T, U]) Swap() Pair[U, T] {
+    return Pair[U, T]{First: p.Second, Second: p.First}
+}
+\end{lstlisting}
+
+\subsubsection*{A Generic Container}
+
+Here is a practical example: a simple linked list:
+
+\begin{lstlisting}
+type Node[T any] struct {
+    Value T
+    Next  *Node[T]
+}
+
+func (n *Node[T]) Append(val T) {
+    current := n
+    for current.Next != nil {
+        current = current.Next
+    }
+    current.Next = &Node[T]{Value: val}
+}
+\end{lstlisting}
+
+\subsubsection*{Type Constraint Interfaces}
+
+You can define interfaces that constrain type parameters to types supporting specific operations:
+
+\begin{lstlisting}
+type Number interface {
+    int | int8 | int16 | int32 | int64 | float32 | float64
+}
+
+type Stats[T Number] struct {
+    Values []T
+}
+
+func (s Stats[T]) Sum() T {
+    var total T
+    for _, v := range s.Values {
+        total += v
+    }
+    return total
+}
+\end{lstlisting}
+
+\begin{taskbox}
+Implement a generic \code{Stack[T any]} struct backed by a slice. It should have three methods:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{Push(val T)} --- adds a value to the top of the stack
+  \item \code{Pop() (T, bool)} --- removes and returns the top value; returns the zero value of \code{T} and \code{false} if the stack is empty
+  \item \code{Peek() (T, bool)} --- returns the top value without removing it; returns the zero value of \code{T} and \code{false} if the stack is empty
+\end{itemize}
+
+\textbf{Starter code:}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+type Stack[T any] struct {
+    items []T
+}
+
+func (s *Stack[T]) Push(val T) {
+    // Your code here
+}
+
+func (s *Stack[T]) Pop() (T, bool) {
+    // Your code here
+    var zero T
+    return zero, false
+}
+
+func (s *Stack[T]) Peek() (T, bool) {
+    // Your code here
+    var zero T
+    return zero, false
+}
+
+func main() {
+    s := &Stack[int]{}
+    s.Push(10)
+    s.Push(20)
+    s.Push(30)
+
+    val, ok := s.Peek()
+    fmt.Printf("Peek: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+}
+\end{lstlisting}
+\end{taskbox}
+
+\begin{solutionbox}
+\begin{lstlisting}
+package main
+
+import "fmt"
+
+type Stack[T any] struct {
+    items []T
+}
+
+func (s *Stack[T]) Push(val T) {
+    s.items = append(s.items, val)
+}
+
+func (s *Stack[T]) Pop() (T, bool) {
+    if len(s.items) == 0 {
+        var zero T
+        return zero, false
+    }
+    val := s.items[len(s.items)-1]
+    s.items = s.items[:len(s.items)-1]
+    return val, true
+}
+
+func (s *Stack[T]) Peek() (T, bool) {
+    if len(s.items) == 0 {
+        var zero T
+        return zero, false
+    }
+    return s.items[len(s.items)-1], true
+}
+
+func main() {
+    s := &Stack[int]{}
+    s.Push(10)
+    s.Push(20)
+    s.Push(30)
+
+    val, ok := s.Peek()
+    fmt.Printf("Peek: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+
+    val, ok = s.Pop()
+    fmt.Printf("Pop: %d (%v)\n", val, ok)
+}
+\end{lstlisting}
+\end{solutionbox}
+
+\cleardoublepage
+
+% ═══════════════════════════════════════════════════════════════════
+% CLOSING
+% ═══════════════════════════════════════════════════════════════════
+\chapter*{What's Next?}
+\addcontentsline{toc}{chapter}{What's Next?}
+\markboth{What's Next?}{What's Next?}
+
+Congratulations on completing all twelve lessons! You now have a solid foundation in Go's core language features. Here are some directions to explore next:
+
+\subsection*{Concurrency}
+Go's goroutines and channels are one of its most powerful features. Learn how to run functions concurrently with \code{go} and communicate between them with channels.
+
+\subsection*{The Standard Library}
+Go ships with a comprehensive standard library. Key packages to explore:
+\begin{itemize}[leftmargin=1.5em]
+  \item \code{net/http} --- build web servers and HTTP clients
+  \item \code{encoding/json} --- encode and decode JSON
+  \item \code{os} and \code{io} --- file system and I/O operations
+  \item \code{testing} --- write and run tests
+  \item \code{context} --- manage cancellation and timeouts
+\end{itemize}
+
+\subsection*{Build Something}
+The best way to learn is to build. Some project ideas:
+\begin{itemize}[leftmargin=1.5em]
+  \item A command-line tool (file organizer, task tracker, URL shortener)
+  \item A REST API with \code{net/http}
+  \item A concurrent web scraper
+  \item A chat server using WebSockets
+\end{itemize}
+
+\subsection*{References}
+Here are the best resources for continuing your Go journey:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{The Go Programming Language Specification} --- \url{https://go.dev/ref/spec}
+  \item \textbf{Effective Go} --- \url{https://go.dev/doc/effective_go}
+  \item \textbf{Go by Example} --- \url{https://gobyexample.com}
+  \item \textbf{The Go Blog} --- \url{https://go.dev/blog}
+  \item \textbf{The Go Playground} --- \url{https://go.dev/play}
+  \item \textbf{\textit{The Go Programming Language}} by Alan Donovan and Brian Kernighan (Addison-Wesley, 2015)
+  \item \textbf{Go Standard Library Documentation} --- \url{https://pkg.go.dev/std}
+\end{itemize}
+
+\vfill
+
+\begin{center}
+{\large\color{rose}\rule{0.4\textwidth}{1pt}}
+
+\vspace{0.5cm}
+
+{\color{gray}
+Built with Hypercode\\
+\url{https://hypercode.alexisbouchez.com}
+}
+\end{center}
+
+\end{document}
