@@ -11,7 +11,6 @@ import {
   markCompleted,
   unmarkCompleted,
 } from "@/lib/progress";
-import { EXERCISE_SCHEMA_SUMMARY } from "@/lib/sql-shared";
 import { AppSidebar } from "./sidebar";
 import { LessonContent } from "./lesson-content";
 import { CodeEditor } from "./code-editor";
@@ -390,27 +389,6 @@ export function LessonShell({
                         error={error}
                         testResults={testResults}
                         isRunning={isRunning}
-                        schemaReference={
-                          courseId === "postgresql" ? (
-                            <div className="text-xs">
-                              <div className="text-muted-foreground font-semibold mb-2">
-                                Available tables
-                              </div>
-                              <div className="space-y-1.5 text-foreground/90">
-                                {EXERCISE_SCHEMA_SUMMARY.map(({ table, columns }) => (
-                                  <div key={table}>
-                                    <span className="font-semibold text-foreground">
-                                      {table}
-                                    </span>
-                                    <span className="text-muted-foreground">
-                                      {" "}({columns.join(", ")})
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          ) : undefined
-                        }
                       />
                     </div>
                   </ResizablePanel>

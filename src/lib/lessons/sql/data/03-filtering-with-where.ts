@@ -125,8 +125,8 @@ WHERE category = 'Electronics'
 
   tests: [
     {
-      name: "returns matching products",
-      expected: '{"type":"custom"}',
+      name: "returns exactly 2 products (Electronics between 50 and 1000)",
+      expected: '{"type":"rowCount","value":2}',
     },
   ],
 };

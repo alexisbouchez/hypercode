@@ -157,8 +157,12 @@ WHERE price > avg_price.value;`,
 
   tests: [
     {
-      name: "returns products above average price using a CTE",
-      expected: '{"type":"custom"}',
+      name: "returns name and price columns",
+      expected: '{"type":"contains","columns":["name","price"]}',
+    },
+    {
+      name: "returns exactly one product above average (Laptop)",
+      expected: '{"type":"rowCount","value":1}',
     },
   ],
 };

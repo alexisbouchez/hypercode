@@ -141,8 +141,12 @@ HAVING COUNT(*) > 2;`,
 
   tests: [
     {
-      name: "returns categories with more than 2 products",
-      expected: '{"type":"custom"}',
+      name: "returns exactly one category (Office has 3 products)",
+      expected: '{"type":"rowCount","value":1}',
+    },
+    {
+      name: "result includes Office",
+      expected: '{"type":"contains","value":"Office"}',
     },
   ],
 };

@@ -168,5 +168,9 @@ FROM products;`,
       name: "returns name, price, and price_rank columns",
       expected: '{"type":"contains","columns":["name","price","price_rank"]}',
     },
+    {
+      name: "returns all 8 products",
+      expected: '{"type":"rowCount","value":8}',
+    },
   ],
 };

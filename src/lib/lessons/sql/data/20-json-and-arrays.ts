@@ -184,8 +184,8 @@ FROM products p;`,
 
   tests: [
     {
-      name: "returns products as JSON",
-      expected: '{"type":"custom"}',
+      name: "returns all 8 products as JSON",
+      expected: '{"type":"rowCount","value":8}',
     },
   ],
 };

@@ -195,8 +195,12 @@ JOIN products p ON o.product_id = p.id;`,
 
   tests: [
     {
-      name: "returns joined data with name and total columns",
+      name: "returns name and total columns",
       expected: '{"type":"contains","columns":["name","total"]}',
+    },
+    {
+      name: "returns all 3 orders",
+      expected: '{"type":"rowCount","value":3}',
     },
   ],
 };

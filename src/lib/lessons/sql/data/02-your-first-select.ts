@@ -86,5 +86,9 @@ SELECT`,
       name: "returns name and price columns",
       expected: '{"type":"contains","columns":["name","price"]}',
     },
+    {
+      name: "returns all 8 products",
+      expected: '{"type":"rowCount","value":8}',
+    },
   ],
 };

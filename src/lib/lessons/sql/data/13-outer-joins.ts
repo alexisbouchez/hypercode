@@ -108,7 +108,11 @@ LEFT JOIN orders o ON c.id = o.customer_id;`,
 
   tests: [
     {
-      name: "returns all customers with their order totals",
+      name: "returns name and total columns",
+      expected: '{"type":"contains","columns":["name","total"]}',
+    },
+    {
+      name: "returns 4 rows (all customers including Charlie with NULL)",
       expected: '{"type":"rowCount","value":4}',
     },
   ],

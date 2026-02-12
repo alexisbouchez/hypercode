@@ -122,8 +122,8 @@ WHERE table_name = 'products';`,
 
   tests: [
     {
-      name: "returns column information",
-      expected: '{"type":"custom"}',
+      name: "returns column information for products (4 columns)",
+      expected: '{"type":"rowCount","value":4}',
     },
   ],
 };

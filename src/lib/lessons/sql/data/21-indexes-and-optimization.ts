@@ -158,7 +158,7 @@ CREATE INDEX`,
   tests: [
     {
       name: "creates an index on the category column",
-      expected: '{"type":"custom"}',
+      expected: '{"type":"rowCount","value":1}',
       code: `{{USER_SQL}}\n---VALIDATE---\nSELECT indexname FROM pg_indexes WHERE tablename = 'products' AND indexdef LIKE '%category%';`,
     },
   ],

@@ -140,8 +140,12 @@ WHERE price > (SELECT AVG(price) FROM products);`,
 
   tests: [
     {
-      name: "returns products above average price",
-      expected: '{"type":"custom"}',
+      name: "returns name and price columns",
+      expected: '{"type":"contains","columns":["name","price"]}',
+    },
+    {
+      name: "returns exactly one product above average (Laptop)",
+      expected: '{"type":"rowCount","value":1}',
     },
   ],
 };

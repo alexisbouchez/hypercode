@@ -7,8 +7,6 @@ interface OutputPanelProps {
   error: string;
   testResults: TestResult[];
   isRunning: boolean;
-  /** Optional reference (e.g. available tables for SQL) shown at top when provided */
-  schemaReference?: React.ReactNode;
 }
 
 export function OutputPanel({
@@ -16,7 +14,6 @@ export function OutputPanel({
   error,
   testResults,
   isRunning,
-  schemaReference,
 }: OutputPanelProps) {
   if (isRunning) {
     return (
@@ -29,7 +26,7 @@ export function OutputPanel({
   const hasOutput = output || error;
   const hasTests = testResults.length > 0;
 
-  if (!hasOutput && !hasTests && !schemaReference) {
+  if (!hasOutput && !hasTests) {
     return (
       <div className="font-mono text-sm p-4 text-muted-foreground">
         Click &quot;Run&quot; to execute your code.
@@ -41,11 +38,6 @@ export function OutputPanel({
 
   return (
     <div className="font-mono text-sm p-4 space-y-3 overflow-auto">
-      {schemaReference && (
-        <div className="mb-3 pb-3 border-b border-border">
-          {schemaReference}
-        </div>
-      )}
       {error && (
         <div className="text-destructive whitespace-pre-wrap">{error}</div>
       )}

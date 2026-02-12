@@ -109,5 +109,13 @@ SELECT`,
       name: "returns exactly 3 rows",
       expected: '{"type":"rowCount","value":3}',
     },
+    {
+      name: "returns the 3 cheapest (includes 4.99 and 19.99)",
+      expected: '{"type":"contains","value":"4.99"}',
+    },
+    {
+      name: "result includes third-cheapest price 19.99",
+      expected: '{"type":"contains","value":"19.99"}',
+    },
   ],
 };

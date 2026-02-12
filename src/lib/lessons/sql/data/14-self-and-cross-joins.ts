@@ -114,8 +114,12 @@ INNER JOIN products b ON a.category = b.category AND a.id < b.id;`,
 
   tests: [
     {
-      name: "returns product pairs in the same category",
-      expected: '{"type":"custom"}',
+      name: "returns product pairs with shared category (5 pairs)",
+      expected: '{"type":"rowCount","value":5}',
+    },
+    {
+      name: "returns product_a, product_b, and category columns",
+      expected: '{"type":"contains","columns":["category"]}',
     },
   ],
 };

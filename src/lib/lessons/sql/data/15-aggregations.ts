@@ -140,5 +140,9 @@ GROUP BY category;`,
       name: "returns results grouped by category",
       expected: '{"type":"contains","columns":["category"]}',
     },
+    {
+      name: "returns all 4 categories",
+      expected: '{"type":"rowCount","value":4}',
+    },
   ],
 };
