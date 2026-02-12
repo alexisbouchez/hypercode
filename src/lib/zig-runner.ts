@@ -3,8 +3,10 @@ import type { RunResult, Test, TestResult } from "@/lib/lessons/types";
 let zigReady = false;
 let zigLoading = false;
 let zigLoadPromise: Promise<void> | null = null;
-let compilerWorker: Worker | null = null;
-let runnerWorker: Worker | null = null;
+
+let zigWasmModule: WebAssembly.Module | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let libContents: Map<string, any> | null = null;
 
 export function isZigReady(): boolean {
   return zigReady;
@@ -17,35 +19,71 @@ export function initZigRunner(): Promise<void> {
   zigLoadPromise = (async () => {
     zigLoading = true;
     try {
-      compilerWorker = new Worker(
-        new URL("./zig-compiler.worker.ts", import.meta.url),
-        { type: "module" },
-      );
-      runnerWorker = new Worker(
-        new URL("./zig-runner.worker.ts", import.meta.url),
-        { type: "module" },
-      );
+      const { Directory, File: WasiFile } = await import("@bjorn3/browser_wasi_shim");
+      const { untar } = await import("@andrewbranch/untar.js");
 
-      // Wait for compiler worker to be ready (it loads zig.wasm + std lib)
-      await new Promise<void>((resolve, reject) => {
-        if (!compilerWorker) return reject(new Error("No compiler worker"));
-        const handler = (e: MessageEvent) => {
-          if (e.data.type === "ready") {
-            compilerWorker!.removeEventListener("message", handler);
-            resolve();
-          } else if (e.data.type === "error") {
-            compilerWorker!.removeEventListener("message", handler);
-            reject(new Error(e.data.error));
-          }
-        };
-        compilerWorker.addEventListener("message", handler);
-        compilerWorker.postMessage({ type: "init" });
-      });
+      // Load zig.wasm and stdlib in parallel
+      const [wasmResponse, tarResponse] = await Promise.all([
+        fetch("/zig/zig.wasm"),
+        fetch("/zig/zig-stdlib.tar.gz"),
+      ]);
+
+      if (!wasmResponse.ok) {
+        throw new Error(`Failed to load zig.wasm: ${wasmResponse.status}`);
+      }
+      if (!tarResponse.ok) {
+        throw new Error(`Failed to load zig-stdlib.tar.gz: ${tarResponse.status}`);
+      }
+
+      zigWasmModule = await WebAssembly.compileStreaming(wasmResponse);
+
+      // Parse stdlib tarball
+      let arrayBuffer = await tarResponse.arrayBuffer();
+      const magic = new Uint8Array(arrayBuffer).slice(0, 2);
+      if (magic[0] === 0x1f && magic[1] === 0x8b) {
+        const ds = new DecompressionStream("gzip");
+        const decompressed = new Response(
+          new Response(arrayBuffer).body!.pipeThrough(ds),
+        );
+        arrayBuffer = await decompressed.arrayBuffer();
+      }
+
+      const entries = untar(arrayBuffer);
+
+      type TreeNode = Map<string, TreeNode | Uint8Array>;
+      const root: TreeNode = new Map();
+
+      for (const entry of entries) {
+        if (!entry.filename.startsWith("lib/")) continue;
+        const path = entry.filename.slice("lib/".length);
+        const segments = path.split("/");
+
+        let current = root;
+        for (const seg of segments.slice(0, -1)) {
+          if (!current.has(seg)) current.set(seg, new Map());
+          current = current.get(seg) as TreeNode;
+        }
+        current.set(segments[segments.length - 1], entry.fileData);
+      }
+
+      function convertTree(node: TreeNode): InstanceType<typeof Directory> {
+        return new Directory(
+          [...node.entries()].map(([key, value]) => {
+            if (value instanceof Uint8Array) {
+              return [key, new WasiFile(value)];
+            }
+            return [key, convertTree(value)];
+          }),
+        );
+      }
+
+      const lib = convertTree(root);
+      libContents = lib.contents;
 
       zigReady = true;
     } catch (err) {
       zigReady = false;
-      zigLoadPromise = null; // allow retry
+      zigLoadPromise = null;
       throw err;
     } finally {
       zigLoading = false;
@@ -60,37 +98,106 @@ export function isZigLoading(): boolean {
 }
 
 async function compileZig(code: string): Promise<Uint8Array> {
-  if (!compilerWorker) throw new Error("Zig compiler not initialized");
+  if (!zigWasmModule || !libContents) throw new Error("Zig compiler not initialized");
 
-  return new Promise((resolve, reject) => {
-    const handler = (e: MessageEvent) => {
-      compilerWorker!.removeEventListener("message", handler);
-      if (e.data.type === "compiled") {
-        resolve(new Uint8Array(e.data.wasm));
-      } else if (e.data.type === "error") {
-        reject(new Error(e.data.error));
-      }
-    };
-    compilerWorker!.addEventListener("message", handler);
-    compilerWorker!.postMessage({ type: "compile", code });
+  const { WASI, PreopenDirectory, OpenFile, File: WasiFile } = await import("@bjorn3/browser_wasi_shim");
+
+  const cwd = new PreopenDirectory(
+    ".",
+    new Map([["main.zig", new WasiFile(new TextEncoder().encode(code))]]),
+  );
+
+  let stderrText = "";
+  const decoder = new TextDecoder("utf-8", { fatal: false });
+
+  const fds = [
+    new OpenFile(new WasiFile([])),  // stdin
+    new OpenFile(new WasiFile([])),  // stdout
+    new OpenFile(new WasiFile([])),  // stderr
+    cwd,
+    new PreopenDirectory("/lib", libContents),
+    new PreopenDirectory("/cache", new Map()),
+  ];
+
+  // Intercept stderr writes
+  const origStdout = fds[1].fd_write;
+  fds[1].fd_write = function (data: Uint8Array) {
+    stderrText += decoder.decode(data, { stream: true });
+    return origStdout.call(this, data);
+  };
+  const origStderr = fds[2].fd_write;
+  fds[2].fd_write = function (data: Uint8Array) {
+    stderrText += decoder.decode(data, { stream: true });
+    return origStderr.call(this, data);
+  };
+
+  const wasi = new WASI(
+    ["zig.wasm", "build-exe", "main.zig", "-fno-llvm", "-fno-lld", "-fno-ubsan-rt", "-fno-entry"],
+    [],
+    fds,
+    { debug: false },
+  );
+
+  const instance = await WebAssembly.instantiate(zigWasmModule, {
+    wasi_snapshot_preview1: wasi.wasiImport,
   });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const exitCode = (wasi as any).start(instance);
+
+  if (exitCode !== 0) {
+    throw new Error(stderrText || `Compilation failed with exit code ${exitCode}`);
+  }
+
+  const mainWasm = cwd.dir.contents.get("main.wasm") as { data: Uint8Array } | undefined;
+  if (!mainWasm) throw new Error(stderrText || "Compilation produced no output");
+
+  return mainWasm.data;
 }
 
-async function executeWasm(wasm: Uint8Array): Promise<{ stdout: string; stderr: string }> {
-  if (!runnerWorker) throw new Error("Zig runner not initialized");
+async function executeWasm(wasmBytes: Uint8Array): Promise<{ stdout: string; stderr: string }> {
+  const { WASI, PreopenDirectory, OpenFile, File: WasiFile } = await import("@bjorn3/browser_wasi_shim");
 
-  return new Promise((resolve, reject) => {
-    const handler = (e: MessageEvent) => {
-      runnerWorker!.removeEventListener("message", handler);
-      if (e.data.type === "result") {
-        resolve({ stdout: e.data.stdout, stderr: e.data.stderr });
-      } else if (e.data.type === "error") {
-        reject(new Error(e.data.error));
-      }
-    };
-    runnerWorker!.addEventListener("message", handler);
-    runnerWorker!.postMessage({ type: "run", wasm: wasm.buffer }, [wasm.buffer]);
+  let stdout = "";
+  let stderr = "";
+  const decoder = new TextDecoder("utf-8", { fatal: false });
+
+  const stdoutFd = new OpenFile(new WasiFile([]));
+  const stderrFd = new OpenFile(new WasiFile([]));
+
+  const origStdout = stdoutFd.fd_write;
+  stdoutFd.fd_write = function (data: Uint8Array) {
+    stdout += decoder.decode(data, { stream: true });
+    return origStdout.call(this, data);
+  };
+  const origStderr = stderrFd.fd_write;
+  stderrFd.fd_write = function (data: Uint8Array) {
+    stderr += decoder.decode(data, { stream: true });
+    return origStderr.call(this, data);
+  };
+
+  const fds = [
+    new OpenFile(new WasiFile([])),
+    stdoutFd,
+    stderrFd,
+    new PreopenDirectory(".", new Map()),
+  ];
+
+  const wasi = new WASI(["main.wasm"], [], fds, { debug: false });
+
+  const module = await WebAssembly.compile(wasmBytes as BufferSource);
+  const instance = await WebAssembly.instantiate(module, {
+    wasi_snapshot_preview1: wasi.wasiImport,
   });
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (wasi as any).start(instance);
+  } catch {
+    // proc_exit(0) throws but that's normal termination
+  }
+
+  return { stdout, stderr };
 }
 
 export async function runZig(code: string): Promise<RunResult> {
