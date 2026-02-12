@@ -1,0 +1,20 @@
+name: Test Lessons
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - uses: mlugg/setup-zig@v2
+        with:
+          version: "0.14.0"
+      - run: bun install --frozen-lockfile
+      - run: bun src/scripts/test-lessons.ts

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:book": "tectonic -o public src/go-book.tex"
+    "build:book": "tectonic -o public src/go-book.tex",
+    "test": "bun src/scripts/test-lessons.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",

@@ -97,7 +97,7 @@ SELECT * FROM customers c LEFT JOIN orders o ON c.id = o.customer_id;
 
 ### Your Task
 
-List all customers and their order totals. Include customers who have never placed an order. Your result should have 3 rows (one for each customer, with Charlie showing a \`NULL\` total).`,
+List all customers and their order totals. Include customers who have never placed an order. Your result should have 4 rows (Alice appears twice because she has two orders, and Charlie shows a \`NULL\` total).`,
 
   starterCode: `-- List all customers with their order totals (include those with no orders)
 SELECT`,
@@ -108,8 +108,8 @@ LEFT JOIN orders o ON c.id = o.customer_id;`,
 
   tests: [
     {
-      name: "returns all 3 customers including those without orders",
-      expected: '{"type":"rowCount","value":3}',
+      name: "returns all customers with their order totals",
+      expected: '{"type":"rowCount","value":4}',
     },
   ],
 };

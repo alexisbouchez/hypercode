@@ -43,8 +43,10 @@ export function initZigRunner(): Promise<void> {
       });
 
       zigReady = true;
-    } catch {
+    } catch (err) {
       zigReady = false;
+      zigLoadPromise = null; // allow retry
+      throw err;
     } finally {
       zigLoading = false;
     }
