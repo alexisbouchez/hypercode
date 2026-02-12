@@ -11,6 +11,7 @@ import {
   markCompleted,
   unmarkCompleted,
 } from "@/lib/progress";
+import { EXERCISE_SCHEMA_SUMMARY } from "@/lib/sql-shared";
 import { AppSidebar } from "./sidebar";
 import { LessonContent } from "./lesson-content";
 import { CodeEditor } from "./code-editor";
@@ -24,6 +25,7 @@ import {
   ResizableHandle,
 } from "./ui/resizable";
 import { ThemeToggle } from "./theme-toggle";
+import { SchemaDrawer } from "./schema-drawer";
 
 export interface LessonShellProps {
   courseId: string;
@@ -75,6 +77,8 @@ export function LessonShell({
   const [showSolution, setShowSolution] = useState(false);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [runtimeReady, setRuntimeReady] = useState(false);
+  const [runtimeError, setRuntimeError] = useState<string | null>(null);
+  const [showSchema, setShowSchema] = useState(false);
   const [readMode, setReadMode] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("hypercode-read-mode") === "true";
@@ -103,9 +107,16 @@ export function LessonShell({
   // Initialize runner (skip in read mode)
   useEffect(() => {
     if (readMode) return;
-    initRunner().then(() => {
-      setRuntimeReady(isRunnerReady());
-    });
+    setRuntimeError(null);
+    initRunner()
+      .then(() => {
+        setRuntimeReady(isRunnerReady());
+        setRuntimeError(null);
+      })
+      .catch((err) => {
+        setRuntimeReady(false);
+        setRuntimeError(err instanceof Error ? err.message : String(err));
+      });
   }, [readMode, initRunner, isRunnerReady]);
 
   const toggleReadMode = useCallback(() => {
@@ -319,6 +330,15 @@ export function LessonShell({
                 >
                   {showSolution ? "Hide Diff" : "Compare Solution"}
                 </Button>
+                {courseId === "postgresql" && (
+                  <Button
+                    variant={showSchema ? "secondary" : "outline"}
+                    size="sm"
+                    onClick={() => setShowSchema((v) => !v)}
+                  >
+                    {showSchema ? "Hide Tables" : "Show Tables"}
+                  </Button>
+                )}
                 <Button
                   variant="ghost"
                   size="sm"
@@ -327,9 +347,14 @@ export function LessonShell({
                   Reset
                 </Button>
                 <div className="flex-1" />
-                {!runtimeReady && (
+                {!runtimeReady && !runtimeError && (
                   <span className="text-xs text-muted-foreground">
                     {runtimeLabel} loading...
+                  </span>
+                )}
+                {runtimeError && (
+                  <span className="text-xs text-destructive" title={runtimeError}>
+                    {runtimeLabel} failed to load
                   </span>
                 )}
                 {runtimeReady && (
@@ -341,7 +366,8 @@ export function LessonShell({
               </div>
 
               {/* Editor + Output: vertical resizable split */}
-              <div className="flex-1 min-h-0">
+              <div className="flex-1 min-h-0 relative">
+                <SchemaDrawer open={showSchema} onClose={() => setShowSchema(false)} />
                 <ResizablePanelGroup orientation="vertical">
                   <ResizablePanel defaultSize="70" minSize="20">
                     <div className="h-full overflow-hidden">
@@ -364,6 +390,27 @@ export function LessonShell({
                         error={error}
                         testResults={testResults}
                         isRunning={isRunning}
+                        schemaReference={
+                          courseId === "postgresql" ? (
+                            <div className="text-xs">
+                              <div className="text-muted-foreground font-semibold mb-2">
+                                Available tables
+                              </div>
+                              <div className="space-y-1.5 text-foreground/90">
+                                {EXERCISE_SCHEMA_SUMMARY.map(({ table, columns }) => (
+                                  <div key={table}>
+                                    <span className="font-semibold text-foreground">
+                                      {table}
+                                    </span>
+                                    <span className="text-muted-foreground">
+                                      {" "}({columns.join(", ")})
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ) : undefined
+                        }
                       />
                     </div>
                   </ResizablePanel>
