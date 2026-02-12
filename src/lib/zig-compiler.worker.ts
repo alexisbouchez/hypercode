@@ -1,24 +1,29 @@
 /* eslint-disable no-restricted-globals */
 
-let zigCompiler: WebAssembly.Instance | null = null;
-let stdTar: ArrayBuffer | null = null;
+import { WASI, PreopenDirectory, OpenFile, File, type Fd, type Inode, Directory } from "@bjorn3/browser_wasi_shim";
+import { untar } from "@andrewbranch/untar.js";
 
-interface ZigExports {
-  memory: WebAssembly.Memory;
-  compile: (srcPtr: number, srcLen: number) => number;
-  getOutputPtr: () => number;
-  getOutputLen: () => number;
-  getErrorPtr: () => number;
-  getErrorLen: () => number;
-  alloc: (len: number) => number;
+type TreeNode = Map<string, TreeNode | Uint8Array>;
+
+function convertTree(node: TreeNode): Directory {
+  return new Directory(
+    [...node.entries()].map(([key, value]) => {
+      if (value instanceof Uint8Array) {
+        return [key, new File(value)] as [string, Inode];
+      }
+      return [key, convertTree(value)] as [string, Inode];
+    }),
+  );
 }
+
+let zigWasmModule: WebAssembly.Module | null = null;
+let libDirectory: Directory | null = null;
 
 self.addEventListener("message", async (e: MessageEvent) => {
   const { type } = e.data;
 
   if (type === "init") {
     try {
-      // Load zig.wasm compiler and std library archive in parallel
       const [wasmResponse, tarResponse] = await Promise.all([
         fetch("/zig/zig.wasm"),
         fetch("/zig/zig-stdlib.tar.gz"),
@@ -31,13 +36,39 @@ self.addEventListener("message", async (e: MessageEvent) => {
         throw new Error(`Failed to load zig-stdlib.tar.gz: ${tarResponse.status}`);
       }
 
-      const wasmModule = await WebAssembly.instantiateStreaming(wasmResponse, {
-        env: {
-          // Minimal imports the Zig WASM compiler expects
-        },
-      });
-      zigCompiler = wasmModule.instance;
-      stdTar = await tarResponse.arrayBuffer();
+      // Compile WASM module (can be instantiated multiple times)
+      zigWasmModule = await WebAssembly.compileStreaming(wasmResponse);
+
+      // Parse the standard library tarball into a virtual directory tree
+      let arrayBuffer = await tarResponse.arrayBuffer();
+      const magicNumber = new Uint8Array(arrayBuffer).slice(0, 2);
+      if (magicNumber[0] === 0x1f && magicNumber[1] === 0x8b) {
+        const ds = new DecompressionStream("gzip");
+        const decompressed = new Response(
+          new Response(arrayBuffer).body!.pipeThrough(ds),
+        );
+        arrayBuffer = await decompressed.arrayBuffer();
+      }
+
+      const entries = untar(arrayBuffer);
+      const root: TreeNode = new Map();
+
+      for (const entry of entries) {
+        if (!entry.filename.startsWith("lib/")) continue;
+        const path = entry.filename.slice("lib/".length);
+        const segments = path.split("/");
+
+        let current = root;
+        for (const seg of segments.slice(0, -1)) {
+          if (!current.has(seg)) {
+            current.set(seg, new Map());
+          }
+          current = current.get(seg) as TreeNode;
+        }
+        current.set(segments[segments.length - 1], entry.fileData);
+      }
+
+      libDirectory = convertTree(root);
 
       self.postMessage({ type: "ready" });
     } catch (err) {
@@ -48,41 +79,81 @@ self.addEventListener("message", async (e: MessageEvent) => {
     }
   } else if (type === "compile") {
     try {
-      if (!zigCompiler) throw new Error("Compiler not initialized");
-
-      const { code } = e.data;
-      const encoder = new TextEncoder();
-      const decoder = new TextDecoder();
-      const src = encoder.encode(code);
-
-      const exports = zigCompiler.exports as unknown as ZigExports;
-
-      // Allocate memory for source and copy it in
-      const srcPtr = exports.alloc(src.length);
-      const mem = new Uint8Array(exports.memory.buffer);
-      mem.set(src, srcPtr);
-
-      // Compile
-      const result = exports.compile(srcPtr, src.length);
-
-      if (result !== 0) {
-        // Error
-        const errPtr = exports.getErrorPtr();
-        const errLen = exports.getErrorLen();
-        const errBytes = new Uint8Array(exports.memory.buffer, errPtr, errLen);
-        const errMsg = decoder.decode(errBytes);
-        throw new Error(errMsg);
+      if (!zigWasmModule || !libDirectory) {
+        throw new Error("Compiler not initialized");
       }
 
-      // Get output WASM binary
-      const outPtr = exports.getOutputPtr();
-      const outLen = exports.getOutputLen();
-      const wasmBinary = new Uint8Array(exports.memory.buffer, outPtr, outLen).slice();
+      const { code } = e.data;
+      let compileErrors = "";
 
-      self.postMessage(
-        { type: "compiled", wasm: wasmBinary.buffer },
-        { transfer: [wasmBinary.buffer] },
+      const cwd = new PreopenDirectory(
+        ".",
+        new Map<string, Inode>([
+          ["main.zig", new File(new TextEncoder().encode(code))],
+        ]),
       );
+
+      const stderrFd = new OpenFile(new File([]));
+
+      const fds: Fd[] = [
+        new OpenFile(new File([])), // stdin
+        stderrFd,                   // stdout (zig writes errors here too)
+        stderrFd,                   // stderr
+        cwd,                        // preopened "."
+        new PreopenDirectory("/lib", libDirectory.contents), // std lib
+        new PreopenDirectory("/cache", new Map()),           // cache dir
+      ];
+
+      const args = [
+        "zig.wasm",
+        "build-exe",
+        "main.zig",
+        "-fno-llvm",
+        "-fno-lld",
+        "-fno-ubsan-rt",
+        "-fno-entry",
+      ];
+
+      const wasi = new WASI(args, [], fds, { debug: false });
+
+      const instance = await WebAssembly.instantiate(zigWasmModule, {
+        wasi_snapshot_preview1: wasi.wasiImport,
+      });
+
+      // Capture stderr before running (for error reporting)
+      const stderrCollector = { text: "" };
+      const origWrite = stderrFd.fd_write;
+      stderrFd.fd_write = function (data: Uint8Array) {
+        stderrCollector.text += new TextDecoder().decode(data);
+        return origWrite.call(this, data);
+      };
+
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const exitCode = (wasi as any).start(instance);
+
+        if (exitCode === 0) {
+          const mainWasm = cwd.dir.contents.get("main.wasm") as File | undefined;
+          if (mainWasm) {
+            const wasmBinary = mainWasm.data.slice();
+            self.postMessage(
+              { type: "compiled", wasm: wasmBinary.buffer },
+              { transfer: [wasmBinary.buffer] },
+            );
+          } else {
+            throw new Error("Compilation produced no output");
+          }
+        } else {
+          compileErrors = stderrCollector.text || `Compilation failed with exit code ${exitCode}`;
+          throw new Error(compileErrors);
+        }
+      } catch (err) {
+        if (err instanceof Error && err.message === compileErrors && compileErrors) {
+          throw err;
+        }
+        const errMsg = stderrCollector.text || (err instanceof Error ? err.message : String(err));
+        throw new Error(errMsg);
+      }
     } catch (err) {
       self.postMessage({
         type: "error",

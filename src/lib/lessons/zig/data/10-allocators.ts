@@ -36,18 +36,19 @@ The \`try\` keyword handles the possibility that allocation fails (out of memory
 
 ### ArrayList
 
-\`std.ArrayList\` is Zig's dynamic array, similar to \`std::vector\` in C++ or \`Vec\` in Rust. It takes an allocator and manages a growable buffer:
+\`std.ArrayList\` is Zig's dynamic array, similar to \`std::vector\` in C++ or \`Vec\` in Rust. In Zig, the allocator is passed explicitly to every operation that might allocate:
 
 \`\`\`zig
 const std = @import("std");
 
 pub fn main() !void {
-    var list = std.ArrayList(i32).init(std.heap.page_allocator);
-    defer list.deinit();
+    const allocator = std.heap.page_allocator;
+    var list: std.ArrayList(i32) = .empty;
+    defer list.deinit(allocator);
 
-    try list.append(10);
-    try list.append(20);
-    try list.append(30);
+    try list.append(allocator, 10);
+    try list.append(allocator, 20);
+    try list.append(allocator, 30);
 
     for (list.items) |item| {
         std.debug.print("{}\\n", .{item});
@@ -56,23 +57,25 @@ pub fn main() !void {
 \`\`\`
 
 Key ArrayList operations:
-- \`init(allocator)\` --- create an empty list
-- \`deinit()\` --- free all memory (always pair with \`defer\`)
-- \`append(value)\` --- add an element (may allocate, hence \`try\`)
+- \`.empty\` --- create an empty list (no allocator stored)
+- \`deinit(allocator)\` --- free all memory (always pair with \`defer\`)
+- \`append(allocator, value)\` --- add an element (may allocate, hence \`try\`)
 - \`items\` --- access the underlying slice
 - \`items.len\` --- get the current number of elements
+
+Notice that the allocator is passed to \`append\` and \`deinit\` rather than being stored in the list. This makes allocation points explicit in your code and keeps the struct smaller.
 
 ### The defer Pattern
 
 \`defer\` is essential for resource management in Zig. It guarantees cleanup code runs when the scope exits:
 
 \`\`\`zig
-var list = std.ArrayList(u8).init(allocator);
-defer list.deinit();  // Runs when function returns
+var list: std.ArrayList(u8) = .empty;
+defer list.deinit(allocator);  // Runs when function returns
 
 // Even if an error occurs below, deinit() still runs
-try list.append(42);
-try list.append(99);
+try list.append(allocator, 42);
+try list.append(allocator, 99);
 \`\`\`
 
 Multiple \`defer\` statements execute in reverse order (last defer runs first), which naturally handles nested resource acquisition.
@@ -97,7 +100,7 @@ Also write a function \`sumList(list: std.ArrayList(i32)) i32\` that returns the
   starterCode: `const std = @import("std");
 
 fn buildRange(allocator: std.mem.Allocator, start: i32, end: i32) !std.ArrayList(i32) {
-\tvar list = std.ArrayList(i32).init(allocator);
+\tvar list: std.ArrayList(i32) = .empty;
 \t// Your code here: append integers from start to end (exclusive)
 \treturn list;
 }
@@ -110,7 +113,7 @@ fn sumList(list: std.ArrayList(i32)) i32 {
 pub fn main() !void {
 \tconst allocator = std.heap.page_allocator;
 \tvar list = try buildRange(allocator, 1, 6);
-\tdefer list.deinit();
+\tdefer list.deinit(allocator);
 
 \tstd.debug.print("{}\\n", .{sumList(list)});
 }
@@ -119,10 +122,10 @@ pub fn main() !void {
   solution: `const std = @import("std");
 
 fn buildRange(allocator: std.mem.Allocator, start: i32, end: i32) !std.ArrayList(i32) {
-\tvar list = std.ArrayList(i32).init(allocator);
+\tvar list: std.ArrayList(i32) = .empty;
 \tvar i = start;
 \twhile (i < end) : (i += 1) {
-\t\ttry list.append(i);
+\t\ttry list.append(allocator, i);
 \t}
 \treturn list;
 }
@@ -138,7 +141,7 @@ fn sumList(list: std.ArrayList(i32)) i32 {
 pub fn main() !void {
 \tconst allocator = std.heap.page_allocator;
 \tvar list = try buildRange(allocator, 1, 6);
-\tdefer list.deinit();
+\tdefer list.deinit(allocator);
 
 \tstd.debug.print("{}\\n", .{sumList(list)});
 }
@@ -154,7 +157,7 @@ pub fn main() !void {
 pub fn main() !void {
 \tconst allocator = std.heap.page_allocator;
 \tvar list = try buildRange(allocator, 1, 6);
-\tdefer list.deinit();
+\tdefer list.deinit(allocator);
 \tstd.debug.print("{}\\n", .{sumList(list)});
 }
 `,
@@ -169,7 +172,7 @@ pub fn main() !void {
 pub fn main() !void {
 \tconst allocator = std.heap.page_allocator;
 \tvar list = try buildRange(allocator, 0, 1);
-\tdefer list.deinit();
+\tdefer list.deinit(allocator);
 \tstd.debug.print("{}\\n", .{sumList(list)});
 }
 `,
@@ -184,7 +187,7 @@ pub fn main() !void {
 pub fn main() !void {
 \tconst allocator = std.heap.page_allocator;
 \tvar list = try buildRange(allocator, 1, 1);
-\tdefer list.deinit();
+\tdefer list.deinit(allocator);
 \tstd.debug.print("{}\\n", .{sumList(list)});
 }
 `,
@@ -199,7 +202,7 @@ pub fn main() !void {
 pub fn main() !void {
 \tconst allocator = std.heap.page_allocator;
 \tvar list = try buildRange(allocator, 1, 11);
-\tdefer list.deinit();
+\tdefer list.deinit(allocator);
 \tstd.debug.print("{}\\n", .{list.items.len});
 }
 `,

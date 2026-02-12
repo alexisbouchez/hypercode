@@ -15,6 +15,6 @@ jobs:
           go-version: stable
       - uses: mlugg/setup-zig@v2
         with:
-          version: "0.14.0"
+          version: "0.15.1"
       - run: bun install --frozen-lockfile
       - run: bun src/scripts/test-lessons.ts
