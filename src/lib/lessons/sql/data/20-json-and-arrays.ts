@@ -15,6 +15,8 @@ PostgreSQL has first-class support for JSON data through two types:
 
 In almost all cases, prefer \`JSONB\` over \`JSON\`. It is more efficient for reads and supports a richer set of operators.
 
+> Holodeck programs are complex nested data structures --- simulated realities within realities. JSON in PostgreSQL works the same way: objects within objects, arrays within arrays.
+
 ### Creating JSON Data
 
 You can store JSON directly in a column:

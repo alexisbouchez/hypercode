@@ -19,6 +19,8 @@ ARM64 uses condition flags to make decisions. These four flags, stored in the NZ
 
 > **Important**: Regular \`ADD\` and \`SUB\` do **not** set flags. Only flag-setting instructions (\`CMP\`, \`ADDS\`, \`SUBS\`) modify NZCV. This means you can safely do arithmetic without accidentally changing flags set by a previous comparison.
 
+> Condition flags are the sensor readings of the CPU -- after every comparison, they report the status of your last operation, just like the Enterprise's sensors report conditions ahead.
+
 ### CMP -- Compare
 
 \`CMP\` is the primary comparison instruction. It subtracts its second operand from its first, sets the flags, and **discards** the subtraction result:

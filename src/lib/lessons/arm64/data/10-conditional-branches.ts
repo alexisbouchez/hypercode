@@ -25,6 +25,8 @@ The syntax is \`B.\` followed by a condition code:
 
 > **Tip**: Use the signed variants (\`GT\`, \`GE\`, \`LT\`, \`LE\`) for most comparisons. Use unsigned variants (\`HI\`, \`LO\`) when comparing addresses or values that cannot be negative.
 
+> As Spock once said, "There are always possibilities." Conditional branches are how the CPU explores them -- choosing a different code path based on the outcome of each comparison.
+
 ### Implementing if/else
 
 The pattern is: compare, branch over the "else" code, then skip over the "then" code:

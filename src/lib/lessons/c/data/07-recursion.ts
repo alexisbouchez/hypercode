@@ -28,6 +28,8 @@ factorial(4) = 4 * factorial(3)
              = 24
 \`\`\`
 
+> Q snapping his fingers and sending you into a nested reality within a reality within a reality. That's recursion -- just make sure you have a base case to escape.
+
 ### Fibonacci
 
 Another classic recursive function:

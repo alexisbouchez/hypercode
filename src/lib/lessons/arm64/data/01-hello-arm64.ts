@@ -10,6 +10,8 @@ ARM64 (also called AArch64) is the 64-bit instruction set used by billions of de
 
 ### Why Learn Assembly?
 
+> "Space: the final frontier" -- and assembly is the final frontier of programming. Welcome aboard.
+
 Every program you write -- whether in Python, JavaScript, or Rust -- eventually becomes machine instructions. Assembly is the human-readable form of those instructions. Understanding it lets you:
 - Debug performance-critical code at the lowest level
 - Understand what compilers actually generate

@@ -20,6 +20,8 @@ WHERE price > (SELECT AVG(price) FROM products);
 
 The inner query \`(SELECT AVG(price) FROM products)\` returns a single value. The outer query then uses that value to filter rows. This is called a **scalar subquery** because it returns exactly one row and one column.
 
+> A query within a query --- like the Enterprise separating its saucer section. Each part operates independently, but they combine to accomplish the mission.
+
 ### IN with a Subquery
 
 When a subquery returns multiple rows, use \`IN\` to check membership:

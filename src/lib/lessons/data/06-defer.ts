@@ -22,6 +22,8 @@ func main() {
 
 The deferred call runs *after* the function body completes but *before* it returns to the caller.
 
+> On the bridge of the Enterprise, the captain might say: "Engage! But first, make sure someone closes the shuttlebay doors." That is \`defer\` in a nutshell.
+
 ### LIFO Order
 
 When you defer multiple calls, they execute in **last-in, first-out** order --- like a stack:

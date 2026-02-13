@@ -18,6 +18,8 @@ long b = a;      // int -> long (safe, no data loss)
 int c = 3.14;    // double -> int (truncates to 3)
 \`\`\`
 
+> Like a Changeling shapeshifting: the same underlying matter, reinterpreted as a different form.
+
 ### Explicit Casts
 
 Use the cast operator \`(type)\` to convert explicitly:

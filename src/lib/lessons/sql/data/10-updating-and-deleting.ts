@@ -22,6 +22,8 @@ This sets the \`price\` column to \`5.99\` for every row where \`name\` equals \
 
 > **Warning:** An \`UPDATE\` without a \`WHERE\` clause modifies **every row** in the table. This is almost never what you want. Always double-check that your \`WHERE\` clause is present and correct before running an \`UPDATE\` in production.
 
+> Remember the Temporal Prime Directive: be very careful when you \`UPDATE\` the timeline. Always use a \`WHERE\` clause, or you will rewrite every row in the table.
+
 ### Updating Multiple Columns
 
 You can set several columns in a single statement by separating them with commas:

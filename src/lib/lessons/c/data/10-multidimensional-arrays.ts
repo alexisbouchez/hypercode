@@ -19,6 +19,8 @@ int matrix[2][3] = {
 
 This creates a 2-row, 3-column matrix. In memory, the rows are stored contiguously.
 
+> Holodeck grids: a 2D array of emitters creating a 3D world. Every \`matrix[row][col]\` is one photon emitter in the grid.
+
 ### Accessing Elements
 
 \`\`\`c

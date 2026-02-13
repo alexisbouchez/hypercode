@@ -20,6 +20,8 @@ CREATE TABLE employees (
 
 Each column definition follows the pattern: \`column_name DATA_TYPE [constraints]\`.
 
+> You would not build a starship without blueprints. Similarly, \`CREATE TABLE\` is your schema blueprint --- you need to define the structure before you can fill it with data.
+
 ### Column Definitions
 
 A column definition consists of:

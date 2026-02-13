@@ -19,6 +19,8 @@ BR X9                 // Jump to that address
 
 Unlike \`BL\`, \`BR\` does **not** save a return address in LR. It is a plain jump, like a \`goto\`. This makes it ideal for implementing jump tables and dispatch patterns.
 
+> Function pointers are the Changelings of assembly -- like the Founders from Deep Space Nine, they can take any form. A single register can point to any function, and you only discover which one at runtime.
+
 ### Why Indirect Branching Matters
 
 At the hardware level, indirect branching is how the CPU implements:

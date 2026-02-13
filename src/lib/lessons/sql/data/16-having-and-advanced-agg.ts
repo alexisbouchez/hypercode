@@ -24,6 +24,8 @@ HAVING COUNT(*) > 2;
 
 The first query excludes cheap products, then counts per category. The second query counts all products per category, then keeps only categories with more than two products.
 
+> Bridge crew status report: "Only show me departments with more than 5 crew members." That is \`HAVING\` in a nutshell --- filtering groups after the data has been aggregated.
+
 > **Tip:** A common mistake is using \`WHERE\` with aggregate functions. \`WHERE COUNT(*) > 2\` is invalid because \`WHERE\` runs before aggregation. Always use \`HAVING\` when your condition involves an aggregate function.
 
 ### Combining WHERE and HAVING

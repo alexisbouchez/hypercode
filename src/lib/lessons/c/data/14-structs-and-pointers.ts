@@ -20,6 +20,8 @@ struct Point p = {10, 20};
 struct Point *pp = &p;
 \`\`\`
 
+> Engineering schematics passed by reference: Geordi doesn't carry the whole warp core to show you -- he hands you a pointer to the diagram.
+
 ### The Arrow Operator
 
 Use \`->\` to access members through a pointer (equivalent to \`(*pp).x\`):

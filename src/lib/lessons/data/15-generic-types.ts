@@ -21,6 +21,8 @@ You create instances by specifying the type arguments:
 p := Pair[string, int]{First: "age", Second: 30}
 \`\`\`
 
+> Like Odo from Deep Space Nine shifting into whatever form the situation demands, a generic type adapts its shape to hold \`int\`, \`string\`, or anything you need.
+
 ### Methods on Generic Types
 
 Methods on a generic type must redeclare the type parameters in the receiver, but they cannot introduce new ones:

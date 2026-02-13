@@ -8,6 +8,8 @@ export const helloC: Lesson = {
 
 C is one of the most influential programming languages ever created. Developed by Dennis Ritchie at Bell Labs in 1972, it remains the foundation of operating systems, embedded systems, and high-performance software.
 
+> C (1972) is ancient technology -- like discovering Vulcan ruins that still power modern civilization.
+
 ### Program Structure
 
 Every C program needs a \`main\` function -- this is where execution begins:

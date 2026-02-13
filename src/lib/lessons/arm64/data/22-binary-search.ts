@@ -70,6 +70,8 @@ B search_loop
 
 ### Time Complexity
 
+> "Scanning for life forms" -- like Data methodically scanning a planet, binary search eliminates half the possibilities with each comparison. Fascinatingly efficient.
+
 Binary search runs in **O(log n)** time. For an array of 1 million elements, it needs at most 20 comparisons. Linear search would need up to 1 million. This is the power of halving the search space.
 
 ### Your Task

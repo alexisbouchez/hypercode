@@ -31,6 +31,8 @@ for n < 100 {
 
 ### Infinite Loop
 
+> In the TNG episode "Cause and Effect," the Enterprise gets stuck in a time loop, repeating the same disaster over and over. At least they did not have to debug an off-by-one error.
+
 Drop everything. Use \`break\` to exit:
 
 \`\`\`go

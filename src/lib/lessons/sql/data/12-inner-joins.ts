@@ -20,6 +20,8 @@ INNER JOIN customers ON orders.customer_id = customers.id;
 
 This query pairs each order with its customer. Only orders that have a valid \`customer_id\` matching a \`customers.id\` appear in the result. Customers with no orders and orders with no matching customer are both excluded.
 
+> Docking two starships requires both vessels to match up on the same docking port. An \`INNER JOIN\` works the same way --- only rows with a matching key in both tables make the connection.
+
 ### How It Works
 
 Think of an inner join as a two-step process:

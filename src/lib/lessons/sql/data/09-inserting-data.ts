@@ -21,6 +21,8 @@ The number of values must match the number of columns listed, and the types must
 
 > **Tip:** Always list column names explicitly. Writing \`INSERT INTO products VALUES (...)\` without column names works, but it is fragile. If someone adds or reorders columns in the table, your insert will break or, worse, silently put data in the wrong columns.
 
+> "Captain's log, supplemental." Each \`INSERT\` is a new entry in the ship's log --- recording what happened, one row at a time.
+
 ### Inserting Multiple Rows
 
 You can insert several rows in a single statement by separating each set of values with a comma:

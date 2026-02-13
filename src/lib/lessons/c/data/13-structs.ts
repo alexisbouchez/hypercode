@@ -17,6 +17,8 @@ struct Point {
 };
 \`\`\`
 
+> Starship specifications: hull type, warp capability, crew complement -- all bundled into one struct.
+
 ### Declaration and Initialization
 
 \`\`\`c

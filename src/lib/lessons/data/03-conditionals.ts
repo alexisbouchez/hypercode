@@ -37,6 +37,8 @@ if length := len(name); length > 10 {
 
 This pattern keeps variables tightly scoped. You will see it everywhere in Go, especially with error handling.
 
+> Spock would approve of Go's conditionals. Clean, logical, and no room for human error. "Fascinating."
+
 ### Switch
 
 Go's \`switch\` is cleaner than most languages. Cases do not fall through by default, so no \`break\` statements are needed:

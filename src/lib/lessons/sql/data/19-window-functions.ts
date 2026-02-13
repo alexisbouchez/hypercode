@@ -10,6 +10,8 @@ Window functions perform calculations across a set of rows that are related to t
 
 This makes them ideal for running totals, rankings, moving averages, and comparisons within groups.
 
+> Window functions are like the Enterprise viewscreen: you can see the bigger picture --- the whole star field --- while still tracking each individual ship. Every row stays visible, but now it carries context from the group around it.
+
 ### Window Function Syntax
 
 Every window function uses the \`OVER()\` clause:

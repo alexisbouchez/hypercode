@@ -21,6 +21,8 @@ PostgreSQL provides several built-in aggregate functions:
 | \`MIN(column)\` | Smallest value | \`SELECT MIN(price) FROM products;\` |
 | \`MAX(column)\` | Largest value | \`SELECT MAX(price) FROM products;\` |
 
+> Ship's census time: \`COUNT\` the crew, \`SUM\` the photon torpedoes, and \`AVG\` the crew's age. Aggregate functions are your chief science officer's best friend.
+
 A simple aggregate query without \`GROUP BY\` collapses the entire table into a single row:
 
 \`\`\`sql

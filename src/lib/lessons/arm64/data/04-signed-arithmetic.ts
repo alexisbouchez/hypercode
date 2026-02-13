@@ -23,6 +23,8 @@ To negate a value, you invert all bits and add 1. For example, in 8-bit:
 
 The beauty of two's complement is that \`ADD\` and \`SUB\` work the same way for signed and unsigned values -- the hardware does not need separate circuits.
 
+> Negative numbers are like the Mirror Universe in Star Trek -- every positive value has an evil twin on the other side of zero, and two's complement is the portal between them.
+
 ### NEG -- Negate
 
 \`NEG\` computes the two's complement negation of a register:

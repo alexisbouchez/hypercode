@@ -19,6 +19,8 @@ struct Node {
 
 Each node holds a value and a pointer to the next node. The last node points to \`NULL\`.
 
+> The chain of command: each officer points to the next in line, from Captain down to Ensign. The last one points to \`NULL\` -- no one left to delegate to.
+
 ### Creating Nodes
 
 \`\`\`c

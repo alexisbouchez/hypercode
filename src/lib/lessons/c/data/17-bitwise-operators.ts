@@ -19,6 +19,8 @@ Bitwise operators work on individual bits of integer values. They are essential 
 | \`<<\` | Left shift | \`1 << 3\` = 8 |
 | \`>>\` | Right shift | \`8 >> 2\` = 2 |
 
+> The Borg think in binary. "You will be assimilated" -- one bit at a time.
+
 ### How It Works
 
 Think in binary:

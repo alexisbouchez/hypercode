@@ -32,6 +32,8 @@ func main() {
 }
 \`\`\`
 
+> "Hailing frequencies open, Captain." The Enterprise communicates with multiple ships at once, each on its own channel. Go's goroutines and channels work the same way --- parallel conversations, perfectly coordinated.
+
 ### Channels
 
 Channels are Go's way of communicating between goroutines. A channel is a typed conduit through which you send and receive values:

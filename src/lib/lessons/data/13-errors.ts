@@ -52,6 +52,8 @@ if err != nil {
 
 The \`%w\` verb wraps the original error, preserving the chain for debugging. This pattern appears hundreds of times in any real Go codebase.
 
+> "He's dead, Jim." Dr. McCoy never threw an exception --- he returned a clear error status. Go handles errors the same way: no drama, just values.
+
 ### Custom Error Types
 
 For richer error information, define your own error type:

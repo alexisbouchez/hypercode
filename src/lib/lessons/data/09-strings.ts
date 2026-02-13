@@ -19,6 +19,8 @@ fmt.Println(len("héllo"))  // 6 (é is 2 bytes in UTF-8)
 
 Go uses the term **rune** for what most languages call a character. A rune is an alias for \`int32\` and represents a single Unicode code point.
 
+> The Universal Translator handles Klingon, Vulcan, and Romulan. Go's rune type handles UTF-8 --- arguably the harder problem.
+
 To get the actual character count, use \`utf8.RuneCountInString\`:
 
 \`\`\`go

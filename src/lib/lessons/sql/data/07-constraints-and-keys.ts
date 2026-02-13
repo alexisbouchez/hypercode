@@ -10,6 +10,8 @@ Constraints are rules enforced by the database to ensure data integrity. They pr
 
 Constraints are your first line of defense against bad data. They are enforced at the database level, regardless of which application or tool is writing the data.
 
+> Starfleet security protocols do not let unauthorized personnel through the force fields. Constraints work the same way --- they ensure no invalid data breaches your tables.
+
 ### PRIMARY KEY
 
 A primary key uniquely identifies each row in a table. Every table should have one. A primary key implies two things: the column is \`UNIQUE\` and it is \`NOT NULL\`.

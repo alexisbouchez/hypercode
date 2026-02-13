@@ -8,6 +8,8 @@ export const databaseDesign: Lesson = {
 
 Normalization is the process of organizing a database to reduce redundancy and improve data integrity. It involves splitting data across multiple related tables so that each fact is stored in exactly one place.
 
+> Designing a starship requires careful planning of how all systems --- life support, propulsion, weapons --- connect and depend on each other. Good database design demands the same discipline.
+
 ### First Normal Form (1NF)
 
 A table is in 1NF when:

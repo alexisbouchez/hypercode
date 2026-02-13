@@ -20,6 +20,8 @@ INNER JOIN products b ON a.category = b.category AND a.id < b.id;
 
 This finds all pairs of products in the same category. The condition \`a.id < b.id\` ensures each pair appears only once (not both "Laptop, Headphones" and "Headphones, Laptop") and excludes a product being paired with itself.
 
+> A self join is like visiting the Mirror Universe --- you meet your own table's evil counterpart, and the results can be surprising.
+
 ### Finding Duplicates
 
 Self joins are useful for finding duplicate or near-duplicate data:

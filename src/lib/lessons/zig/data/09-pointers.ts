@@ -26,6 +26,8 @@ ptr.* = 100;
 
 Note the \`.*\` syntax for dereferencing. This is different from C's \`*ptr\`. Zig uses a postfix operator to keep the syntax consistent and unambiguous.
 
+> "Set coordinates, Mr. Sulu." Pointers navigate to exact memory locations just like warp coordinates --- you need the right address, or you end up somewhere you really did not want to be.
+
 ### Const Pointers
 
 A \`*const T\` pointer allows reading but not writing. You get a const pointer when you take the address of a \`const\` variable:

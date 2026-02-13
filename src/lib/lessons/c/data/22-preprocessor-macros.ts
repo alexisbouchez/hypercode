@@ -19,6 +19,8 @@ The C preprocessor runs before compilation, performing text substitution. Lines 
 int arr[MAX_SIZE];
 \`\`\`
 
+> Standing orders: defined before the mission begins, automatically applied everywhere they're referenced. That's a \`#define\`.
+
 ### Macros with Parameters
 
 Macros can take arguments, acting like inline functions:

@@ -8,6 +8,8 @@ export const loops: Lesson = {
 
 ARM64 has no dedicated loop instruction. Loops are built from the same branches and comparisons you already know -- but combined in specific patterns.
 
+> "All hands, brace for impact!" -- as the crew of the Enterprise-D learned in "Cause and Effect," getting caught in a temporal causality loop means repeating the same sequence until you find the exit condition. Loops in assembly work the same way.
+
 ### While Loop Pattern
 
 The standard while loop tests the condition first, then executes the body:

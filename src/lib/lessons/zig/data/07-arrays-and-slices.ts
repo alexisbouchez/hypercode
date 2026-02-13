@@ -36,6 +36,8 @@ const length = arr.len;      // 5
 
 Zig performs bounds checking at runtime in safe build modes. Accessing \`arr[5]\` on a 5-element array would trigger a panic, not silent undefined behavior.
 
+> Think of arrays like the Enterprise's photon torpedo banks --- each slot is indexed, loaded, and ready to fire. Try to access a tube that does not exist and the tactical officer will let you know.
+
 ### Slices
 
 A slice is a pointer-and-length pair that refers to a portion of an array (or any contiguous memory). The type \`[]const u8\` means "a slice of constant bytes." Slices do not own their memory; they borrow it.

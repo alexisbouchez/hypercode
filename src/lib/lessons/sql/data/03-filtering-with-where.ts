@@ -16,6 +16,8 @@ This returns only the products whose \`category\` column equals \`'Electronics'\
 
 > **Warning:** SQL uses single quotes for string literals. Double quotes are reserved for identifiers (like column or table names). Writing \`WHERE category = "Electronics"\` will cause an error in PostgreSQL because it looks for a column named \`Electronics\`.
 
+> Think of \`WHERE\` like tuning the Enterprise's sensors to filter out the noise: you are scanning for specific life signs in a sea of data.
+
 ### Comparison Operators
 
 SQL provides the standard set of comparison operators:

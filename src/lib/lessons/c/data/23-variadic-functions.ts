@@ -35,6 +35,8 @@ void bubble_sort(int *arr, int n) {
 }
 \`\`\`
 
+> The universal translator processes languages one pair at a time, comparing and rearranging until everything is in order. Bubble sort works the same way.
+
 ### Swapping Elements
 
 The swap pattern is essential in many algorithms:

@@ -8,6 +8,8 @@ export const variablesAndTypes: Lesson = {
 
 C is a statically typed language. Every variable must be declared with a type before use.
 
+> The Enterprise's main computer stores data in specific types too -- just like C requires explicit type declarations. No ambiguity allowed on the bridge.
+
 ### Basic Types
 
 | Type | Size | Description |

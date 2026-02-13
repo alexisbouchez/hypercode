@@ -8,6 +8,8 @@ export const callingConvention: Lesson = {
 
 The calling convention is a contract between functions: it specifies which registers hold arguments, where return values go, and who is responsible for saving each register. Following it is essential when your code interacts with other functions.
 
+> Like Starfleet protocol, the calling convention is a standardized set of procedures so that every function -- like every crew member -- knows the rules of engagement.
+
 ### Register Roles
 
 | Registers | Role | Saved by |

@@ -16,6 +16,8 @@ The allocator pattern gives you:
 - **Flexibility** --- different parts of your program can use different allocation strategies
 - **No hidden behavior** --- there is no global allocator lurking behind the scenes
 
+> "Tea, Earl Grey, hot." Even Picard's replicator must allocate energy before materializing that cup. In Zig, every allocation is just as deliberate --- nothing appears out of thin air.
+
 ### The Page Allocator
 
 The simplest allocator is \`std.heap.page_allocator\`. It requests memory directly from the operating system:

@@ -18,6 +18,8 @@ for (int i = 0; i < 5; i++) {
 }
 \`\`\`
 
+> "Captain, we appear to be caught in a temporal causality loop." -- The Enterprise keeps reliving the same moment (TNG S5E18). At least they had a \`break\` condition.
+
 ### while Loop
 
 Repeats while a condition is true:

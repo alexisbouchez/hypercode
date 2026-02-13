@@ -21,6 +21,8 @@ printf("%d\\n", *p);  // 42
 free(p);              // always free when done
 \`\`\`
 
+> The replicator: \`malloc\` materializes memory from thin air, and \`free\` recycles it back into energy.
+
 ### sizeof
 
 Use \`sizeof\` to get the size of a type in bytes:

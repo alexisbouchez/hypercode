@@ -19,6 +19,8 @@ SELECT * FROM expensive_products ORDER BY price DESC;
 
 The CTE \`expensive_products\` is defined first, then the main query selects from it.
 
+> Think of CTEs like a Starfleet mission briefing: you outline each step of the plan clearly before the away team beams down. No one goes in blind.
+
 ### Benefits of CTEs
 
 CTEs offer several advantages over nested subqueries:

@@ -28,6 +28,8 @@ switch (day) {
 }
 \`\`\`
 
+> Bridge stations: each crew member mans a different console. Helm, navigation, tactical -- switch to the right station for the job.
+
 ### The break Statement
 
 Each \`case\` must end with \`break\`, otherwise execution **falls through** to the next case:

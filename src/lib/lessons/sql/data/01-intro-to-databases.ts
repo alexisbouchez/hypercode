@@ -45,6 +45,8 @@ Each row represents one product. Each column represents an attribute of that pro
 
 ### SQL: The Language of Databases
 
+> **Fun fact:** On the USS Enterprise, the crew queries the ship's computer with natural language: "Computer, display all crew members sorted by rank." That is essentially a SELECT query with an ORDER BY clause. We are not quite there yet, but SQL gets the job done.
+
 SQL (Structured Query Language) is the standard language for interacting with relational databases. You use SQL to:
 
 - **Query** data with \`SELECT\`

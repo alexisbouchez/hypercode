@@ -37,6 +37,8 @@ const arr = repeat(5, 42); // [42, 42, 42, 42, 42]
 
 Notice that the return type uses \`n\` --- a comptime parameter can appear in types. This is how Zig achieves generics without a separate generics syntax.
 
+> Comptime is the Q of Zig --- omnipotent and knowing everything before runtime even begins. Unlike Q, though, it is actually on your side.
+
 ### Type as a First-Class Value
 
 In Zig, types are values of type \`type\`, and they can be manipulated at compile time:

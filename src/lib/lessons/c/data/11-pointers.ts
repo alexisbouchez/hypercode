@@ -21,6 +21,8 @@ printf("%d\\n", *p); // 42 -- dereference p to read x's value
 printf("%d\\n", x);  // 99 -- x was modified through p
 \`\`\`
 
+> Tractor beams: a pointer locks onto the exact memory address, just like a tractor beam locks onto a ship's coordinates.
+
 ### Pointer Types
 
 A pointer's type determines what type it points to:

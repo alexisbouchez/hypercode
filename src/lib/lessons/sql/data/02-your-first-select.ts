@@ -20,6 +20,8 @@ This returns every column and every row from the \`products\` table. It is usefu
 
 > **Tip:** Avoid \`SELECT *\` in application code. It fetches more data than necessary, makes your queries fragile when columns are added or reordered, and can hurt performance on large tables.
 
+> Captain Picard would probably say: "Computer, show me everything about this planet." That is his version of \`SELECT *\` --- convenient on the bridge, but in production code, you want to be more specific.
+
 ### Selecting Specific Columns
 
 List the columns you want, separated by commas:

@@ -33,6 +33,8 @@ while (i < 5) : (i += 1) {
 
 This is the idiomatic way to write a counting loop in Zig. The continue expression \`(i += 1)\` runs after each iteration, including when \`continue\` is used.
 
+> Loops gone wrong can feel like the TNG episode "Cause and Effect" --- the Enterprise stuck repeating the same disaster over and over. Always make sure your loop condition will eventually end!
+
 ### For Loops
 
 Zig's \`for\` loop iterates over slices and arrays. It does not count. If you want to count, use \`while\`:

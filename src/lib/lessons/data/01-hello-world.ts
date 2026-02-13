@@ -36,6 +36,8 @@ import (
 
 Every executable needs a starting point. In Go, that is \`func main()\`, with no parameters and no return value. When you run a Go program, execution begins here and here only.
 
+> As Captain Picard would say: "Make it so." And with \`func main()\`, Go does exactly that.
+
 \`\`\`go
 func main() {
     fmt.Println("Hello, World!")

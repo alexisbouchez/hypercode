@@ -23,6 +23,8 @@ scores := make(map[string]int)
 
 The type \`map[string]int\` reads as "a map from strings to ints." Keys can be any comparable type (strings, ints, booleans, structs without slice/map fields). Values can be anything.
 
+> Like the star charts on the Enterprise, a Go map lets you look up any destination in constant time. No need to scan the entire quadrant.
+
 ### Operations
 
 \`\`\`go

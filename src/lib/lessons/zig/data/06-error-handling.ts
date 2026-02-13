@@ -56,6 +56,8 @@ fn doWork() !void {
 
 \`try x\` is shorthand for \`x catch |err| return err\`. It propagates errors up the call stack without boilerplate.
 
+> Red alert! Error propagation in Zig works much like the Enterprise's alert system --- the problem is detected at the source and escalated up the chain of command until someone handles it.
+
 ### catch
 
 The \`catch\` keyword handles errors inline. You can provide a default value or run a block:

@@ -41,6 +41,8 @@ The \`:=\` operator is only available inside functions. Package-level variables 
 
 Every type in Go has a *zero value*: the value a variable holds if you declare it without initializing it. This is a guarantee, not an accident. There are no uninitialized variables in Go.
 
+> Commander Data would appreciate Go's zero values. Even an android knows that uninitialized memory is the path to chaos.
+
 | Type | Zero Value |
 |------|-----------|
 | \`int\`, \`float64\` | \`0\` |

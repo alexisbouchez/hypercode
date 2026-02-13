@@ -15,6 +15,8 @@ int nums[5] = {10, 20, 30, 40, 50};
 int zeros[100] = {0};  // all elements initialized to 0
 \`\`\`
 
+> Photon torpedo banks: indexed, loaded, and ready to launch in order. Torpedo \`tubes[0]\` through \`tubes[n-1]\`.
+
 ### Accessing Elements
 
 Array indices start at 0:

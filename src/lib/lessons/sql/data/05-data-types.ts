@@ -10,6 +10,8 @@ Every column in a PostgreSQL table has a data type. The type determines what kin
 
 Choosing the right data type is important for correctness, performance, and storage efficiency.
 
+> The Federation is full of diverse species, and data types are no different: Vulcans are purely logical (INTEGER), Betazoids sense true or false (BOOLEAN), and humans are endlessly versatile (TEXT).
+
 ### Numeric Types
 
 PostgreSQL provides several numeric types:

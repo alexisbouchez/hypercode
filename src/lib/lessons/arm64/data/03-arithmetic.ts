@@ -75,6 +75,8 @@ ADD X3, X3, #48     // '8'
 
 > **Tip**: This divide-multiply-subtract pattern for computing remainders is one of the most common patterns in assembly. You will use it in nearly every lesson that prints numbers.
 
+> As Spock would say: "Captain, the odds of survival are 2,467 to 1." Good thing ARM64 has the arithmetic instructions to verify that calculation.
+
 ### Your Task
 
 Compute \`7 * 8 + 2\`, convert the result (58) to a two-digit ASCII string, and print it followed by a newline.

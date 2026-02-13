@@ -31,6 +31,8 @@ int add(int a, int b) {  // definition
 }
 \`\`\`
 
+> Like Scotty's engineering subroutines: "I've given her all she's got, Captain!" A well-defined function does one job and does it right.
+
 ### void Functions
 
 Functions that return nothing use \`void\`:

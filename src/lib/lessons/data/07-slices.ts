@@ -31,6 +31,8 @@ fmt.Println(len(s)) // 3
 fmt.Println(cap(s)) // 10
 \`\`\`
 
+> "Tea, Earl Grey, hot." The replicator does not give you the whole cargo bay --- just the slice you asked for. Go slices work the same way: a precise view into a larger array.
+
 ### Append
 
 \`append\` adds elements to a slice and returns a new slice. If the underlying array is full, Go allocates a bigger one and copies the data:

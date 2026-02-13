@@ -31,6 +31,8 @@ MOV X1, X0         // X1 = 10 (copied from X0)
 
 > **Important**: \`MOV\` copies the value -- it does not move it. After \`MOV X1, X0\`, both X0 and X1 contain the same value.
 
+> Think of \`MOV\` as the transporter beam of ARM64 -- it beams a copy of a value from one register to another, and the original stays right where it was.
+
 ### X Registers vs W Registers
 
 Each 64-bit \`X\` register has a 32-bit alias called \`W\`:

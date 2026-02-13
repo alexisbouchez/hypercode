@@ -16,6 +16,8 @@ const char *greeting = "Hello";
 
 This creates a string \`{'H', 'e', 'l', 'l', 'o', '\\0'}\` in memory and stores its address in \`greeting\`.
 
+> Subspace messages: character arrays transmitted across the quadrant, always null-terminated so you know where the message ends.
+
 ### Character Arrays
 
 You can also store strings in character arrays:

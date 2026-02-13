@@ -19,6 +19,8 @@ case msg := <-ch2:
 
 If multiple channels are ready, \`select\` picks one at random. If none are ready, it blocks until one becomes ready.
 
+> "On screen!" The bridge crew monitors tactical, science, and communications all at once --- just like \`select\` listens on multiple channels simultaneously, ready to act on whichever one has news first.
+
 ### Non-Blocking Operations
 
 Add a \`default\` case to make channel operations non-blocking:

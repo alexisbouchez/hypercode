@@ -20,6 +20,8 @@ enum Color {
 
 By default, the first constant is 0, and each subsequent one increments by 1.
 
+> Starfleet ranks: ENSIGN, LIEUTENANT, COMMANDER, CAPTAIN -- each with a well-defined numeric value.
+
 ### Using Enums
 
 \`\`\`c

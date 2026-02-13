@@ -8,6 +8,8 @@ export const bitwiseOperations: Lesson = {
 
 Bitwise operations work on individual bits of a value. They are fundamental to low-level programming -- used for hardware registers, network protocols, file permissions, graphics, cryptography, and countless other domains.
 
+> "You will be assimilated. Resistance is futile." -- The Borg see everything as ones and zeros, and so do bitwise operations. Welcome to their world.
+
 ### Quick Reference
 
 | Instruction | Operation | C equivalent |

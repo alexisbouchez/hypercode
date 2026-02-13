@@ -20,6 +20,8 @@ fmt.Println(*p)  // 42 (read through the pointer)
 fmt.Println(x)   // 100
 \`\`\`
 
+> Think of pointers like the Enterprise's targeting sensors: they do not hold the enemy ship, they lock onto its coordinates. The \`&\` operator gets the coordinates; \`*\` fires on them.
+
 ### Zero Value
 
 The zero value of a pointer is \`nil\`. A nil pointer does not point to anything. Dereferencing a nil pointer causes a runtime panic:

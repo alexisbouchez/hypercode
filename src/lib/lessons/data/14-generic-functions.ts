@@ -34,6 +34,8 @@ Print(42)       // T inferred as int
 Print("hello")  // T inferred as string
 \`\`\`
 
+> "We are the Borg. We will adapt to handle your type." Generics let your functions assimilate \`int\`, \`string\`, or any type --- resistance is futile.
+
 ### Constraints
 
 Constraints restrict which types a type parameter can accept. The \`any\` constraint allows everything. The \`comparable\` constraint allows types that support \`==\` and \`!=\`:

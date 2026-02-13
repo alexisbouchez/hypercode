@@ -26,6 +26,8 @@ SELECT * FROM products ORDER BY price ASC;
 SELECT * FROM products ORDER BY price DESC;
 \`\`\`
 
+> Starfleet's crew manifest is basically \`ORDER BY rank DESC LIMIT 7\` --- that is how you get the senior bridge staff.
+
 ### Sorting by Multiple Columns
 
 You can sort by more than one column. Rows are sorted by the first column, and ties are broken by the second column, and so on:

@@ -8,6 +8,8 @@ export const conditionalSelection: Lesson = {
 
 Branches (B.EQ, B.GT, etc.) work well, but they can be expensive on modern processors because they disrupt the instruction pipeline. ARM64 provides **conditional selection** instructions that choose between two values without branching.
 
+> Much like the Kobayashi Maru, sometimes you pick one outcome, sometimes another -- but with CSEL, the CPU always has a choice and never needs to cheat the no-win scenario.
+
 ### CSEL -- Conditional Select
 
 \`CSEL\` picks one of two registers based on a condition:

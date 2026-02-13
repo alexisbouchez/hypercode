@@ -10,6 +10,8 @@ An index is a data structure that speeds up data retrieval at the cost of additi
 
 Think of an index like the index at the back of a book. Instead of reading every page to find a topic, you look it up in the index and go straight to the right page.
 
+> Geordi La Forge does not just build the warp engine --- he tunes it for maximum performance. Indexes are your warp coils: they make queries fly at warp speed instead of crawling at impulse.
+
 ### Index Types in PostgreSQL
 
 PostgreSQL supports several index types, each optimized for different query patterns:

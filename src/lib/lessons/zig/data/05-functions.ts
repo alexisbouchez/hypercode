@@ -54,6 +54,8 @@ const result = multiply(i32, 5, 3); // 15
 
 This is Zig's approach to generics. Instead of a separate generics syntax, you pass types as compile-time parameters. The compiler generates specialized code for each type.
 
+> Like Scotty's engineering protocols on the Enterprise, every function should have a clear mission, well-defined inputs, and a predictable output. "She cannae take any more, Captain!" --- unless the function signature says she can.
+
 ### Function Pointers
 
 Functions are first-class values. You can store them in variables and pass them as arguments:

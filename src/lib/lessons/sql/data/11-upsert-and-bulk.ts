@@ -54,6 +54,8 @@ SET price = GREATEST(products.price, EXCLUDED.price);
 
 This only updates the price if the new value is higher than the existing one.
 
+> Why beam down the away team one at a time when the transporter can handle the whole group at once? Bulk operations follow the same logic.
+
 ### Bulk INSERT
 
 Inserting multiple rows in a single statement is significantly faster than individual inserts:

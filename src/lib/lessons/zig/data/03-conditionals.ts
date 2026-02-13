@@ -74,6 +74,8 @@ The \`...\` syntax defines an inclusive range. This is unique to Zig and makes r
 
 ### Switch vs If-Else Chains
 
+> "The needs of the many outweigh the needs of the few." --- Spock's logic applies to conditionals too: \`switch\` serves the many cases elegantly, while \`if-else\` handles the few complex ones.
+
 Use \`switch\` when you have multiple discrete values or ranges to match against. Use \`if-else\` chains when conditions are complex expressions that do not map cleanly to a single value.
 
 ### Your Task

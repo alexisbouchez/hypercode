@@ -8,6 +8,8 @@ export const theStack: Lesson = {
 
 The stack is a region of memory used for temporary storage. It grows **downward** -- pushing data decreases the stack pointer, and popping increases it. The stack is essential for function calls, local variables, and saving registers.
 
+> The stack works like a turbolift on the Enterprise: it is strictly LIFO -- the last crew member in is the first one out.
+
 ### The SP Register
 
 \`SP\` (Stack Pointer) holds the address of the top of the stack.

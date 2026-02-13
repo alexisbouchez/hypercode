@@ -8,6 +8,8 @@ export const stringOperations: Lesson = {
 
 Strings in assembly are just sequences of bytes in memory. There is no \`String\` type, no \`.length\` property, no built-in functions -- you process them one byte at a time using \`LDRB\` and \`STRB\`. This lesson brings together loops, memory operations, comparisons, and bitwise ops.
 
+> Processing strings byte by byte is like the universal translator on the Enterprise -- decoding alien languages one character at a time until the message becomes clear.
+
 ### Null-Terminated Strings
 
 In C and assembly, strings end with a **null terminator** -- a byte with value 0. The \`.asciz\` directive adds this automatically:

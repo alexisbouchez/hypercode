@@ -17,10 +17,16 @@ import { functionPointers } from "./data/15-function-pointers";
 import { recursiveFunctions } from "./data/16-recursive-functions";
 import { bitwiseOperations } from "./data/17-bitwise-operations";
 import { bitManipulation } from "./data/18-bit-manipulation";
+import { xorCipher } from "./data/23-xor-cipher";
 import { stringOperations } from "./data/19-string-operations";
 import { multiplyAccumulate } from "./data/20-multiply-accumulate";
 import { sorting } from "./data/21-sorting";
 import { binarySearch } from "./data/22-binary-search";
+import { fibonacci } from "./data/24-fibonacci";
+import { gcdAlgorithm } from "./data/25-gcd";
+import { stringReversal } from "./data/26-string-reversal";
+import { stringComparison } from "./data/27-string-comparison";
+import { numberPrinting } from "./data/28-number-printing";
 
 export const arm64Chapters: Chapter[] = [
   { id: "foundations", title: "Foundations" },
@@ -29,6 +35,7 @@ export const arm64Chapters: Chapter[] = [
   { id: "functions", title: "Functions" },
   { id: "bitwise", title: "Bitwise Operations" },
   { id: "putting-it-together", title: "Putting It Together" },
+  { id: "challenges", title: "Challenges" },
 ];
 
 export const arm64Lessons: Lesson[] = [
@@ -50,8 +57,14 @@ export const arm64Lessons: Lesson[] = [
   recursiveFunctions,
   bitwiseOperations,
   bitManipulation,
+  xorCipher,
   stringOperations,
   multiplyAccumulate,
   sorting,
   binarySearch,
+  fibonacci,
+  gcdAlgorithm,
+  stringReversal,
+  stringComparison,
+  numberPrinting,
 ];

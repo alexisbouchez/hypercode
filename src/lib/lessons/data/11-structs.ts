@@ -17,6 +17,8 @@ type Point struct {
 }
 \`\`\`
 
+> Every starship in the fleet has a spec sheet: name, class, warp factor, crew complement. A Go struct is essentially the same thing --- a blueprint that groups all the critical data in one place.
+
 ### Creating Instances
 
 \`\`\`go

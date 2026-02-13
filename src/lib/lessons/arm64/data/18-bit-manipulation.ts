@@ -8,6 +8,8 @@ export const bitManipulation: Lesson = {
 
 These patterns appear constantly in systems programming -- from device drivers and OS kernels to compression algorithms and game engines. Mastering them makes you a more effective low-level programmer.
 
+> Like Data's positronic brain, bit manipulation is about tweaking individual neural pathways one bit at a time -- precise, methodical, and deeply satisfying.
+
 ### Set, Clear, and Toggle Bits
 
 These three operations are the building blocks of bit manipulation:

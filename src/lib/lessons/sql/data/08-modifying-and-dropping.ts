@@ -86,6 +86,8 @@ ALTER TABLE products RENAME TO inventory;
 
 ## DROP TABLE
 
+> "Computer, initiate auto-destruct sequence." \`DROP TABLE\` is the self-destruct of SQL --- once it is done, there is no coming back.
+
 \`DROP TABLE\` permanently removes a table and all of its data:
 
 \`\`\`sql

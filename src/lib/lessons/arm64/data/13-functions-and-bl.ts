@@ -14,6 +14,8 @@ Functions (also called subroutines or procedures) let you organize code into reu
 1. Saves the address of the *next* instruction into \`X30\` (the Link Register, also called \`LR\`)
 2. Jumps to the target label
 
+> Think of \`BL\` as sending an away team on a mission: it saves the ship's coordinates (the return address) in the Link Register so the team can beam back when the mission is complete.
+
 \`\`\`asm
 BL my_function       // X30 = address of next instruction, then jump
 // execution continues here when my_function returns

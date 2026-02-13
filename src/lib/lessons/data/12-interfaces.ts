@@ -16,6 +16,8 @@ type Shape interface {
 
 Any type with an \`Area() float64\` method satisfies \`Shape\`. The type does not even need to know the interface exists.
 
+> "All stations, report!" When the captain calls for status, every department responds the same way --- even though Engineering and Medical do very different things. That is what an interface does: one contract, many implementations.
+
 ### Why This Matters
 
 This design means you can define interfaces *after* the concrete types are written. You can define an interface in your package that is satisfied by types from a third-party library, without modifying that library.

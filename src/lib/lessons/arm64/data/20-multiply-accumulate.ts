@@ -8,6 +8,8 @@ export const multiplyAccumulate: Lesson = {
 
 Many real-world computations follow the pattern \`a + (b * c)\` or \`a - (b * c)\`. ARM64 provides dedicated instructions for these patterns that execute in a single cycle.
 
+> "Warp 9.975, Mr. La Forge!" -- computing warp factors requires some serious multiply-accumulate math. Fortunately, MADD does it in a single instruction.
+
 ### MADD -- Multiply-Add
 
 \`MADD\` computes \`Xd = Xa + (Xn * Xm)\`:

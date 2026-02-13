@@ -26,6 +26,8 @@ func add(a, b int) int {
 
 ### Multiple Return Values
 
+> "She canna take much more of this, Captain!" Scotty always had a function for every crisis --- and in Go, functions can even return multiple values at once.
+
 This is one of Go's most distinctive features. A function can return more than one value:
 
 \`\`\`go

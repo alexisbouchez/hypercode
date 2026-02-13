@@ -50,6 +50,8 @@ Zig has a rich set of primitive types. Unlike C, the sizes are explicit in the t
 
 The naming convention is clear: \`i\` for signed, \`u\` for unsigned, followed by the bit width. No ambiguity about sizes, ever.
 
+> As Spock would say: "Fascinating." Zig's type precision is entirely logical --- no room for ambiguity when the bit width is right there in the name.
+
 ### Integer Literals
 
 Zig supports several literal formats:

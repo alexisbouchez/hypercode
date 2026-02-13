@@ -22,6 +22,8 @@ printf("%d\\n", p[2]);     // 30
 printf("%d\\n", *(p + 2)); // 30 (same thing)
 \`\`\`
 
+> Tractor beam arrays: multiple beams working in concert, each pointing to a different target. That's pointer arithmetic in action.
+
 ### Arrays as Function Parameters
 
 When you pass an array to a function, it decays to a pointer. The function receives a pointer, not a copy:

@@ -21,6 +21,8 @@ for i = n-1 down to 1:      // outer loop: shrink unsorted region
 
 ### Why Bubble Sort?
 
+> Sorting is like organizing Starfleet officers by rank -- from Ensign to Admiral, everyone has their place, and bubble sort makes sure they get there by swapping neighbors until order is restored.
+
 While not efficient for large datasets (O(n^2) comparisons), bubble sort is ideal for learning assembly because:
 - It only needs adjacent element comparisons and swaps
 - The memory access pattern is simple (sequential)

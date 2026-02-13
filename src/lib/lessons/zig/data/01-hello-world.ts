@@ -14,6 +14,8 @@ const std = @import("std");
 
 This single line gives you access to the entire standard library through the \`std\` namespace. The \`const\` keyword means \`std\` cannot be reassigned. In Zig, everything is explicit and there are no hidden allocations or control flow.
 
+> Think of this as your "first contact" with Zig --- much like the Federation encountering a new species, the key is following the protocol exactly.
+
 ### The Entry Point
 
 The entry point of a Zig program is the \`pub fn main\` function. The \`pub\` keyword makes it public, meaning the runtime can find and call it:

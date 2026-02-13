@@ -6,7 +6,7 @@ export const dataSizes: Lesson = {
   chapterId: "memory",
   content: `## Working with Different Data Sizes
 
-Real-world data comes in different sizes. ARM64 provides load and store instructions for each size:
+Real-world data comes in different sizes. ARM64 provides load and store instructions for each size, just like Starfleet has different vessel classes for different missions -- from 8-bit shuttlecraft to 64-bit Galaxy-class starships.
 
 | Size | Bits | Load | Store | Directive |
 |------|------|------|-------|-----------|

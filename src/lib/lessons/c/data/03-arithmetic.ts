@@ -16,6 +16,8 @@ C supports the standard arithmetic operators:
 | \`/\` | Division |
 | \`%\` | Modulus (remainder) |
 
+> Spock calculating warp field equations: precise arithmetic is critical when lives are at stake.
+
 ### Integer Arithmetic
 
 When both operands are integers, the result is an integer. Division truncates toward zero:

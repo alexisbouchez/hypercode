@@ -8,6 +8,8 @@ export const recursiveFunctions: Lesson = {
 
 Recursive functions call themselves. Understanding recursion in assembly reveals exactly what the CPU does when high-level languages handle it automatically -- each recursive call creates a new stack frame, and the call stack unwinds as results are returned.
 
+> Like Q sending Picard into nested timelines within timelines, each recursive call drops you one level deeper -- and you must unwind every layer to get back to where you started.
+
 ### The Core Problem
 
 When a function calls itself with \`BL\`, the return address in \`X30\` is overwritten. Without saving it, the function has no way to return to its original caller. Similarly, argument registers (X0-X7) are overwritten by the recursive call's arguments.

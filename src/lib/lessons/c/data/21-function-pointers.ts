@@ -20,6 +20,8 @@ int (*op)(int, int) = add;
 printf("%d\\n", op(3, 4));  // 7
 \`\`\`
 
+> "Number One, you have the conn." The captain doesn't do the task -- he points to whoever should. That's a function pointer.
+
 ### Why Function Pointers?
 
 They let you write **generic code**. For example, an apply function that works with any operation:

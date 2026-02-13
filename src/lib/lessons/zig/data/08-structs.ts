@@ -27,6 +27,8 @@ const p = Point{ .x = 3.0, .y = 4.0 };
 
 Fields are always initialized with the \`.\` prefix syntax. There is no positional initialization: you must name every field. This is a deliberate design choice that keeps code readable as structs evolve.
 
+> Every starship needs a well-defined blueprint before it leaves the shipyard. A Zig struct is no different --- every field must be accounted for, or the compiler refuses to let it launch.
+
 ### Default Values
 
 Fields can have default values. Any field with a default can be omitted when constructing the struct:

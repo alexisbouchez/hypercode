@@ -8,6 +8,8 @@ export const memoryLdrStr: Lesson = {
 
 ARM64 is a **load/store architecture**: you cannot operate directly on memory. Unlike x86 where you can write \`ADD [address], 1\`, ARM64 requires you to first load data into registers, operate on it, then store it back. This design is simpler for the hardware and enables higher clock speeds.
 
+> Think of it like cargo bay operations on the Enterprise: you beam items (LDR) up to the ship (registers) to work on them, then beam them back down (STR) to storage when you are done.
+
 ### LDR -- Load Register
 
 \`LDR\` reads a value from memory into a register:

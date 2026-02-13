@@ -45,6 +45,8 @@ if (maybe) |val| {
 
 The variable \`val\` only exists inside the \`if\` block and contains the unwrapped value. This pattern guarantees you never accidentally use \`null\`.
 
+> Like Schrodinger's tribble, an optional value both exists and does not exist until you unwrap it. At least in Zig, the compiler makes sure you check before petting it.
+
 ### Optional Pointers
 
 Optional pointers \`?*T\` are particularly useful. Unlike C, where any pointer might be null, Zig's \`*T\` is guaranteed non-null. When you need a nullable pointer, you opt in explicitly with \`?*T\`:

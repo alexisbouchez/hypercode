@@ -8,6 +8,8 @@ export const addressingModes: Lesson = {
 
 ARM64 supports several ways to compute memory addresses. Understanding these modes is key to writing efficient code -- the right addressing mode can save instructions when working with arrays and data structures.
 
+> Like the navigational deflector on the Enterprise, addressing modes give you different ways to plot a course to your data -- each optimized for a different flight plan.
+
 ### Summary of Modes
 
 | Mode | Syntax | Effect |

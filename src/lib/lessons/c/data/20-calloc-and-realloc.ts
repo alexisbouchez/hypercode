@@ -26,6 +26,8 @@ Compare with \`malloc\`, which leaves memory uninitialized:
 | \`malloc\` | \`malloc(size)\` | No |
 | \`calloc\` | \`calloc(count, size)\` | Yes |
 
+> Expanding the Enterprise: \`realloc\` is like adding a new deck to the ship while everyone's still aboard.
+
 ### realloc
 
 \`realloc(ptr, new_size)\` resizes a previously allocated block. It may move the data to a new location:

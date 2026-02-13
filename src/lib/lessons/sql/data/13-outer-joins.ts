@@ -29,6 +29,8 @@ Result with the sandbox data:
 
 Charlie has no orders, but still appears in the result. The \`total\` column is \`NULL\` because there is no matching row in the \`orders\` table.
 
+> First Contact protocol: a \`LEFT JOIN\` includes everyone from your ship, even if they have no match on the alien vessel. No crew member gets left behind.
+
 > **Tip:** The "left" table is the one that appears first --- before the \`LEFT JOIN\` keywords. The "right" table is the one that appears after. The naming refers to their position in the query, not any inherent property of the tables.
 
 ### RIGHT JOIN

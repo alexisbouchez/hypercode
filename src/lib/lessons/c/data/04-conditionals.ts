@@ -21,6 +21,8 @@ if (x > 0) {
 }
 \`\`\`
 
+> Red alert conditions: "Shields up!" only triggers when sensors detect a threat. That's an \`if\` statement protecting the ship.
+
 ### Comparison Operators
 
 | Operator | Meaning |
