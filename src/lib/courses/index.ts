@@ -2,6 +2,7 @@ import type { Course } from "./types";
 import { chapters as goChapters, lessons as goLessons } from "@/lib/lessons";
 import { zigChapters, zigLessons } from "@/lib/lessons/zig";
 import { sqlChapters, sqlLessons } from "@/lib/lessons/sql";
+import { arm64Chapters, arm64Lessons } from "@/lib/lessons/arm64";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -254,6 +255,73 @@ The best way to learn is to build. Some project ideas:
 - *Designing Data-Intensive Applications* by Martin Kleppmann (O'Reilly, 2017) -- the best book on database internals and distributed systems.
 `;
 
+const arm64IntroductionContent = `
+## Why ARM64 Assembly?
+
+ARM64 (AArch64) is the dominant processor architecture of the modern era. It powers every iPhone, every Android phone, Apple's M-series Macs, AWS Graviton servers, and billions of embedded devices. Understanding ARM64 assembly gives you direct insight into how these processors execute code.
+
+- **The architecture of the future** -- ARM's power efficiency is moving it from mobile into servers, desktops, and supercomputers.
+- **Clean, modern design** -- ARM64 is a modern RISC architecture with a regular, orthogonal instruction set that is easier to learn than x86.
+- **Fixed-width instructions** -- Every instruction is exactly 32 bits. No variable-length decoding complexity.
+- **31 general-purpose registers** -- Generous register file means less memory traffic.
+- **Real-world relevance** -- Knowing ARM64 assembly helps you understand compiler output, debug low-level issues, and write performance-critical code.
+
+## The Story
+
+ARM started in 1983 at Acorn Computers in Cambridge, England. Sophie Wilson and Steve Furber designed the original ARM1 processor. The name originally stood for "Acorn RISC Machine," later "Advanced RISC Machine."
+
+ARM's big insight was that a simpler processor could be faster and more power-efficient. This bet paid off spectacularly: ARM processors now ship in over 250 billion chips, more than any other processor family in history.
+
+ARM64 (AArch64) was introduced in 2011 with the ARMv8-A architecture, bringing 64-bit computing to the ARM world. It was a clean break from the 32-bit ARM instruction set, designed from scratch with modern computing needs in mind.
+
+## What You Will Learn
+
+This course contains **16 lessons** organized into **6 chapters**:
+
+1. **Foundations** -- Registers, MOV, arithmetic, and your first program using Linux syscalls.
+2. **Memory** -- Load/store architecture, addressing modes, and the stack.
+3. **Control Flow** -- Condition flags, CMP, conditional branches, and loops.
+4. **Functions** -- BL/RET, the calling convention, and recursive functions.
+5. **Bitwise Operations** -- AND, OR, XOR, shifts, and bit manipulation patterns.
+6. **Putting It Together** -- String operations and sorting algorithms.
+
+Each lesson explains a concept, demonstrates it with code, and gives you an exercise. Your code runs directly in the browser using a custom ARM64 interpreter -- no native toolchain needed.
+
+Let's get started.
+`;
+
+const arm64WhatsNextContent = `
+## Congratulations
+
+You have completed all 16 lessons. You now understand ARM64's register model, memory operations, control flow, functions, bitwise operations, and have implemented real algorithms in assembly.
+
+That is a real accomplishment. ARM64 assembly is not easy, and you have built a solid foundation.
+
+## What to Explore Next
+
+- **System calls** -- Linux has hundreds of syscalls beyond write and exit: open, read, mmap, socket, and more.
+- **SIMD/NEON** -- ARM64's vector instructions for parallel data processing.
+- **Floating point** -- ARM64 has 32 dedicated 128-bit vector/FP registers (V0-V31).
+- **Atomic operations** -- LDXR/STXR for lock-free concurrent programming.
+- **Exception handling** -- How ARM64 handles interrupts, page faults, and system calls at the hardware level.
+- **Performance optimization** -- Instruction scheduling, cache effects, and branch prediction.
+
+## Build Something
+
+- **A simple shell** -- Read commands, fork processes, execute programs.
+- **A bootloader** -- Write bare-metal ARM64 code that runs without an OS.
+- **An emulator** -- Build an emulator for a simpler architecture (like CHIP-8) in ARM64.
+- **Optimize a hot loop** -- Take a C function, look at the compiler output, and hand-optimize it.
+
+## References
+
+- [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/) -- the definitive reference for ARM64.
+- [ARM64 Instruction Set Quick Reference](https://developer.arm.com/documentation/100076/0100/) -- concise instruction reference.
+- [Azeria Labs ARM Assembly Basics](https://azeria-labs.com/writing-arm-assembly-language/) -- excellent tutorials on ARM assembly.
+- [ARM Assembly Internals and Reverse Engineering](https://www.wiley.com/en-us/ARM+Assembly+Internals+and+Reverse+Engineering-p-9781119745303) by Maria Markstedter -- comprehensive book.
+- [Computer Organization and Design: ARM Edition](https://www.elsevier.com/books/computer-organization-and-design-arm-edition/patterson/978-0-12-801733-3) by Patterson and Hennessy.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -288,6 +356,17 @@ export const courses: Course[] = [
     runtimeLabel: "SQL runtime",
     introductionContent: sqlIntroductionContent,
     whatsNextContent: sqlWhatsNextContent,
+  },
+  {
+    id: "arm64",
+    title: "ARM64 Assembly",
+    description: "Learn ARM64 assembly language from scratch. Understand how processors execute code with registers, memory, branches, and syscalls.",
+    language: "arm64",
+    chapters: arm64Chapters,
+    lessons: arm64Lessons,
+    runtimeLabel: "ARM64 runtime",
+    introductionContent: arm64IntroductionContent,
+    whatsNextContent: arm64WhatsNextContent,
   },
 ];
 
