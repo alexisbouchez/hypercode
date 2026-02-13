@@ -101,5 +101,45 @@ int main() {
 			name: "reverses array",
 			expected: "5 4 3 2 1\n",
 		},
+		{
+			name: "reverse single element",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint arr[] = {42};
+\treverse(arr, 1);
+\tprintf("%d\\n", arr[0]);
+\treturn 0;
+}`,
+			expected: "42\n",
+		},
+		{
+			name: "reverse two elements",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint arr[] = {1, 2};
+\treverse(arr, 2);
+\tprintf("%d %d\\n", arr[0], arr[1]);
+\treturn 0;
+}`,
+			expected: "2 1\n",
+		},
+		{
+			name: "reverse even-length array",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint arr[] = {10, 20, 30, 40};
+\treverse(arr, 4);
+\tfor (int i = 0; i < 4; i++) {
+\t\tif (i > 0) printf(" ");
+\t\tprintf("%d", arr[i]);
+\t}
+\tprintf("\\n");
+\treturn 0;
+}`,
+			expected: "40 30 20 10\n",
+		},
 	],
 };

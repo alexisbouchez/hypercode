@@ -119,5 +119,46 @@ int main() {
 			name: "counter reaches 13",
 			expected: "13\n",
 		},
+		{
+			name: "increment once",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tstruct Counter c;
+\tc.value = 0;
+\tincrement(&c);
+\tprintf("%d\\n", c.value);
+\treturn 0;
+}`,
+			expected: "1\n",
+		},
+		{
+			name: "add 50",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tstruct Counter c;
+\tc.value = 0;
+\tadd(&c, 50);
+\tprintf("%d\\n", c.value);
+\treturn 0;
+}`,
+			expected: "50\n",
+		},
+		{
+			name: "increment and add combined",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tstruct Counter c;
+\tc.value = 5;
+\tincrement(&c);
+\tadd(&c, 10);
+\tincrement(&c);
+\tprintf("%d\\n", c.value);
+\treturn 0;
+}`,
+			expected: "17\n",
+		},
 	],
 };

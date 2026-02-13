@@ -92,5 +92,41 @@ int main() {
 			name: "swaps values",
 			expected: "20 10\n",
 		},
+		{
+			name: "swap(1, 2)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint a = 1, b = 2;
+\tswap(&a, &b);
+\tprintf("%d %d\\n", a, b);
+\treturn 0;
+}`,
+			expected: "2 1\n",
+		},
+		{
+			name: "swap(0, 0)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint a = 0, b = 0;
+\tswap(&a, &b);
+\tprintf("%d %d\\n", a, b);
+\treturn 0;
+}`,
+			expected: "0 0\n",
+		},
+		{
+			name: "swap(42, 7)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint a = 42, b = 7;
+\tswap(&a, &b);
+\tprintf("%d %d\\n", a, b);
+\treturn 0;
+}`,
+			expected: "7 42\n",
+		},
 	],
 };

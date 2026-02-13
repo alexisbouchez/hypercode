@@ -347,14 +347,15 @@ This gives you a window into how your high-level C code translates to low-level 
 
 ## What You Will Learn
 
-This course contains **14 lessons** organized into **6 chapters**:
+This course contains **18 lessons** organized into **7 chapters**:
 
-1. **C Basics** -- Your first C program, variables, types, and arithmetic.
-2. **Control Flow** -- Conditionals with \`if\`/\`else\` and loops with \`for\`/\`while\`.
-3. **Functions** -- Declaring functions, parameters, return values, and recursion.
-4. **Arrays and Strings** -- Arrays, C-style strings, and multi-dimensional arrays.
-5. **Pointers** -- Address-of, dereference, pointer arithmetic, and arrays as pointers.
-6. **Structs** -- Defining structs, member access, and struct pointers with the arrow operator.
+1. **C Basics** -- Your first C program, variables, types, arithmetic, and type casting.
+2. **Control Flow** -- Conditionals with \`if\`/\`else\`, loops with \`for\`/\`while\`, and \`switch\` statements.
+3. **Enums and Bitwise** -- Enum declarations, named constants, and bitwise operators for flags and bit manipulation.
+4. **Functions** -- Declaring functions, parameters, return values, and recursion.
+5. **Arrays and Strings** -- Arrays, C-style strings, and multi-dimensional arrays.
+6. **Pointers** -- Address-of, dereference, pointer arithmetic, and arrays as pointers.
+7. **Structs** -- Defining structs, member access, and struct pointers with the arrow operator.
 
 Each lesson explains a concept, demonstrates it with code examples, and gives you an exercise to practice. Your code is compiled to ARM64 by TCC running in your browser, then executed by our ARM64 interpreter.
 
@@ -364,7 +365,7 @@ Let's get started.
 const cWhatsNextContent = `
 ## Congratulations
 
-You have completed all 14 lessons. You now have a solid foundation in C: variables, types, control flow, functions, arrays, strings, pointers, and structs.
+You have completed all 18 lessons. You now have a solid foundation in C: variables, types, control flow, switch statements, enums, bitwise operators, functions, arrays, strings, pointers, and structs.
 
 That is a real accomplishment. C is not easy, and understanding it gives you a deep appreciation for how software works at the system level.
 

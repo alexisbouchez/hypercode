@@ -49,34 +49,76 @@ C does **not** check array bounds. Accessing \`nums[10]\` when the array has 5 e
 
 ### Your Task
 
-Create an array with the values \`{2, 4, 6, 8, 10}\`. Compute and print the sum of all elements.`,
+Write a function \`int sum_array(int *arr, int len)\` that returns the sum of all elements in the array. Use it to print the sum of \`{2, 4, 6, 8, 10}\`.`,
 
 	starterCode: `#include <stdio.h>
 
+int sum_array(int *arr, int len) {
+\t// Sum all elements
+\treturn 0;
+}
+
 int main() {
-\tint nums[5] = {2, 4, 6, 8, 10};
-\t// Compute the sum and print it
+\tint nums[] = {2, 4, 6, 8, 10};
+\tprintf("%d\\n", sum_array(nums, 5));
 \treturn 0;
 }
 `,
 
 	solution: `#include <stdio.h>
 
-int main() {
-\tint nums[5] = {2, 4, 6, 8, 10};
+int sum_array(int *arr, int len) {
 \tint sum = 0;
-\tfor (int i = 0; i < 5; i++) {
-\t\tsum = sum + nums[i];
+\tfor (int i = 0; i < len; i++) {
+\t\tsum = sum + arr[i];
 \t}
-\tprintf("%d\\n", sum);
+\treturn sum;
+}
+
+int main() {
+\tint nums[] = {2, 4, 6, 8, 10};
+\tprintf("%d\\n", sum_array(nums, 5));
 \treturn 0;
 }
 `,
 
 	tests: [
 		{
-			name: "prints sum of array",
+			name: "sum of {2,4,6,8,10} = 30",
 			expected: "30\n",
+		},
+		{
+			name: "sum of {1} = 1",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint arr[] = {1};
+\tprintf("%d\\n", sum_array(arr, 1));
+\treturn 0;
+}`,
+			expected: "1\n",
+		},
+		{
+			name: "sum of {10,20,30} = 60",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint arr[] = {10, 20, 30};
+\tprintf("%d\\n", sum_array(arr, 3));
+\treturn 0;
+}`,
+			expected: "60\n",
+		},
+		{
+			name: "sum of {-1,1} = 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint arr[] = {-1, 1};
+\tprintf("%d\\n", sum_array(arr, 2));
+\treturn 0;
+}`,
+			expected: "0\n",
 		},
 	],
 };

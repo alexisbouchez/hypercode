@@ -210,12 +210,52 @@ export async function runC(code: string): Promise<RunResult> {
 	}
 }
 
+export function extractCFunctions(code: string): string {
+	let result = code;
+
+	// Remove #include lines
+	result = result.replace(/^\s*#include\s+[<"][^>"]+[>"]\s*\n/gm, "");
+
+	// Remove int main() { ... } via brace-counting
+	const mainRegex = /int\s+main\s*\([^)]*\)\s*\{/;
+	const match = mainRegex.exec(result);
+	if (match) {
+		const startIndex = match.index;
+		let braceCount = 0;
+		let endIndex = startIndex;
+		let foundOpen = false;
+
+		for (let i = startIndex; i < result.length; i++) {
+			if (result[i] === "{") {
+				braceCount++;
+				foundOpen = true;
+			} else if (result[i] === "}") {
+				braceCount--;
+				if (foundOpen && braceCount === 0) {
+					endIndex = i + 1;
+					break;
+				}
+			}
+		}
+
+		result = result.slice(0, startIndex) + result.slice(endIndex);
+	}
+
+	return result.trim();
+}
+
 export async function runTests(code: string, tests: Test[]): Promise<TestResult[]> {
 	const results: TestResult[] = [];
 
 	for (const test of tests) {
 		try {
-			const codeToRun = test.code ? test.code.replace("{{FUNC}}", code) : code;
+			let codeToRun: string;
+			if (test.code) {
+				const funcs = extractCFunctions(code);
+				codeToRun = test.code.replace("{{FUNC}}", funcs);
+			} else {
+				codeToRun = code;
+			}
 			const elfBytes = compileCToElf(codeToRun);
 			const assembly = elfToAssembly(elfBytes);
 			const result = runAssembly(assembly);

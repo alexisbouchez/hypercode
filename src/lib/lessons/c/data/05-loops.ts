@@ -57,30 +57,71 @@ for (int i = 0; i < 10; i++) {
 
 ### Your Task
 
-Write a program that prints the numbers 1 through 10, each on a separate line.`,
+Write a function \`int sum_range(int a, int b)\` that returns the sum of all integers from \`a\` to \`b\` (inclusive). For example, \`sum_range(1, 5)\` returns 15. Print the result of \`sum_range(1, 10)\`.`,
 
 	starterCode: `#include <stdio.h>
 
+int sum_range(int a, int b) {
+\t// Sum all integers from a to b inclusive
+\treturn 0;
+}
+
 int main() {
-\t// Print numbers 1 through 10, each on its own line
+\tprintf("%d\\n", sum_range(1, 10));
 \treturn 0;
 }
 `,
 
 	solution: `#include <stdio.h>
 
-int main() {
-\tfor (int i = 1; i <= 10; i++) {
-\t\tprintf("%d\\n", i);
+int sum_range(int a, int b) {
+\tint sum = 0;
+\tfor (int i = a; i <= b; i++) {
+\t\tsum = sum + i;
 \t}
+\treturn sum;
+}
+
+int main() {
+\tprintf("%d\\n", sum_range(1, 10));
 \treturn 0;
 }
 `,
 
 	tests: [
 		{
-			name: "prints 1 to 10",
-			expected: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n",
+			name: "sum_range(1, 10) = 55",
+			expected: "55\n",
+		},
+		{
+			name: "sum_range(1, 5) = 15",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", sum_range(1, 5));
+\treturn 0;
+}`,
+			expected: "15\n",
+		},
+		{
+			name: "sum_range(3, 3) = 3",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", sum_range(3, 3));
+\treturn 0;
+}`,
+			expected: "3\n",
+		},
+		{
+			name: "sum_range(0, 0) = 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", sum_range(0, 0));
+\treturn 0;
+}`,
+			expected: "0\n",
 		},
 	],
 };

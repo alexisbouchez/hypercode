@@ -92,5 +92,45 @@ int main() {
 			name: "classifies numbers",
 			expected: "positive\nnegative\nzero\n",
 		},
+		{
+			name: "positive (100)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tclassify(100);
+\treturn 0;
+}`,
+			expected: "positive\n",
+		},
+		{
+			name: "negative (-1)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tclassify(-1);
+\treturn 0;
+}`,
+			expected: "negative\n",
+		},
+		{
+			name: "zero (0)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tclassify(0);
+\treturn 0;
+}`,
+			expected: "zero\n",
+		},
+		{
+			name: "positive (1)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tclassify(1);
+\treturn 0;
+}`,
+			expected: "positive\n",
+		},
 	],
 };

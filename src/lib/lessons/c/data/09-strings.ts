@@ -91,5 +91,45 @@ int main() {
 			name: "counts character occurrences",
 			expected: "3\n",
 		},
+		{
+			name: "count_char('aaa', 'a') = 3",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", count_char("aaa", 'a'));
+\treturn 0;
+}`,
+			expected: "3\n",
+		},
+		{
+			name: "count_char('hello', 'z') = 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", count_char("hello", 'z'));
+\treturn 0;
+}`,
+			expected: "0\n",
+		},
+		{
+			name: "count_char('banana', 'a') = 3",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", count_char("banana", 'a'));
+\treturn 0;
+}`,
+			expected: "3\n",
+		},
+		{
+			name: "count_char('', 'x') = 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", count_char("", 'x'));
+\treturn 0;
+}`,
+			expected: "0\n",
+		},
 	],
 };

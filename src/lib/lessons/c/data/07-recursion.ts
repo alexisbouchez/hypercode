@@ -85,5 +85,45 @@ int main() {
 			name: "computes factorials",
 			expected: "1\n1\n120\n3628800\n",
 		},
+		{
+			name: "factorial(0) = 1",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", factorial(0));
+\treturn 0;
+}`,
+			expected: "1\n",
+		},
+		{
+			name: "factorial(1) = 1",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", factorial(1));
+\treturn 0;
+}`,
+			expected: "1\n",
+		},
+		{
+			name: "factorial(6) = 720",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", factorial(6));
+\treturn 0;
+}`,
+			expected: "720\n",
+		},
+		{
+			name: "factorial(8) = 40320",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", factorial(8));
+\treturn 0;
+}`,
+			expected: "40320\n",
+		},
 	],
 };

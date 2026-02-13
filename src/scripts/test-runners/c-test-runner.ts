@@ -6,6 +6,7 @@ import { C_RUNTIME } from "@/lib/c/runtime";
 import { HEADERS } from "@/lib/c/headers";
 import { assemble } from "@/lib/arm64/assembler";
 import { execute } from "@/lib/arm64/interpreter";
+import { extractCFunctions } from "@/lib/c-runner";
 import type { LessonTestResult } from "./types";
 
 // We need to load TCC as a Node.js module
@@ -169,7 +170,7 @@ export async function runCTests(): Promise<LessonTestResult[]> {
 		for (const test of lesson.tests) {
 			try {
 				const codeToRun = test.code
-					? test.code.replace("{{FUNC}}", lesson.solution)
+					? test.code.replace("{{FUNC}}", extractCFunctions(lesson.solution))
 					: lesson.solution;
 
 				const elfBytes = compileCToElf(codeToRun);

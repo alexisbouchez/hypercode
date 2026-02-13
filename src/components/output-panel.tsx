@@ -1,7 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
+import { codeToHtml } from "shiki";
 import type { TestResult } from "@/lib/lessons/types";
+
+function AssemblyView({ code }: { code: string }) {
+  const [html, setHtml] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    let cancelled = false;
+    const theme = resolvedTheme === "light" ? "github-light-default" : "github-dark-default";
+    codeToHtml(code, { lang: "asm", theme }).then((result) => {
+      if (!cancelled) setHtml(result);
+    });
+    return () => { cancelled = true; };
+  }, [code, resolvedTheme]);
+
+  if (!html) {
+    return (
+      <pre className="text-foreground whitespace-pre-wrap text-xs leading-relaxed">
+        {code}
+      </pre>
+    );
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className="overflow-x-auto text-xs leading-relaxed [&_pre]:!bg-transparent [&_code]:font-mono"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
 
 interface OutputPanelProps {
   output: string;
@@ -89,7 +122,7 @@ export function OutputPanel({
   const assemblyContent = generatedCode ? (
     <div>
       <div className="text-muted-foreground text-xs mb-1">Generated ARM64 Assembly</div>
-      <pre className="text-foreground whitespace-pre-wrap text-xs leading-relaxed">{generatedCode}</pre>
+      <AssemblyView code={generatedCode} />
     </div>
   ) : null;
 

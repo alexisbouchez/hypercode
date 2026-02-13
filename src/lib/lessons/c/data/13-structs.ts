@@ -113,5 +113,44 @@ int main() {
 			name: "computes rectangle area",
 			expected: "15\n",
 		},
+		{
+			name: "area(1, 1) = 1",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tstruct Rectangle r;
+\tr.width = 1;
+\tr.height = 1;
+\tprintf("%d\\n", area(r));
+\treturn 0;
+}`,
+			expected: "1\n",
+		},
+		{
+			name: "area(10, 20) = 200",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tstruct Rectangle r;
+\tr.width = 10;
+\tr.height = 20;
+\tprintf("%d\\n", area(r));
+\treturn 0;
+}`,
+			expected: "200\n",
+		},
+		{
+			name: "area(7, 0) = 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tstruct Rectangle r;
+\tr.width = 7;
+\tr.height = 0;
+\tprintf("%d\\n", area(r));
+\treturn 0;
+}`,
+			expected: "0\n",
+		},
 	],
 };

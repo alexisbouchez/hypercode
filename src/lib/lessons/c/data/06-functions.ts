@@ -93,5 +93,45 @@ int main() {
 			name: "max returns larger value",
 			expected: "7\n10\n5\n",
 		},
+		{
+			name: "max(0, 0) = 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", max(0, 0));
+\treturn 0;
+}`,
+			expected: "0\n",
+		},
+		{
+			name: "max(7, 42) = 42",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", max(7, 42));
+\treturn 0;
+}`,
+			expected: "42\n",
+		},
+		{
+			name: "max(100, 1) = 100",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", max(100, 1));
+\treturn 0;
+}`,
+			expected: "100\n",
+		},
+		{
+			name: "max(-5, 5) = 5",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tprintf("%d\\n", max(-5, 5));
+\treturn 0;
+}`,
+			expected: "5\n",
+		},
 	],
 };
