@@ -166,6 +166,7 @@
 /* Subtle background for code snippets */
 .shiki-block pre {
   background-color: oklch(0.97 0 0) !important;
+  min-width: fit-content;
 }
 
 .dark .shiki-block pre {

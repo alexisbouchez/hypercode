@@ -27,7 +27,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 
   if (!html) {
     return (
-      <pre className="bg-[oklch(0.97_0_0)] dark:bg-[oklch(0.18_0_0)] text-foreground p-4 mb-4 overflow-x-auto text-sm font-mono leading-relaxed border-l-2 border-primary">
+      <pre className="bg-[oklch(0.97_0_0)] dark:bg-[oklch(0.18_0_0)] text-foreground p-4 mb-4 overflow-x-auto text-sm font-mono leading-relaxed border-l-2 border-primary min-w-fit">
         <code>{code}</code>
       </pre>
     );
@@ -36,7 +36,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   return (
     <div
       ref={containerRef}
-      className="shiki-block mb-4 overflow-x-auto text-sm leading-relaxed border-l-2 border-primary [&_pre]:p-4 [&_code]:font-mono"
+      className="shiki-block mb-4 overflow-x-auto text-sm leading-relaxed border-l-2 border-primary [&_pre]:p-4 [&_pre]:min-w-fit [&_code]:font-mono"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
