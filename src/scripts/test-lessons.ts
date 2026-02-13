@@ -2,6 +2,7 @@ import { runGoTests } from "./test-runners/go-test-runner";
 import { runZigTests } from "./test-runners/zig-test-runner";
 import { runSqlTests } from "./test-runners/sql-test-runner";
 import { runArm64Tests } from "./test-runners/arm64-test-runner";
+import { runCTests } from "./test-runners/c-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -22,6 +23,10 @@ async function main() {
   console.log("Running ARM64 tests...");
   const arm64Results = runArm64Tests();
   allResults.push(...arm64Results);
+
+  console.log("Running C tests...");
+  const cResults = await runCTests();
+  allResults.push(...cResults);
 
   console.log("\n--- Results ---\n");
 

@@ -15,6 +15,24 @@ function getReg(op: Operand): number {
   throw new Error(`Expected register operand, got ${op.kind}`);
 }
 
+function isSP(op: Operand): boolean {
+  return op.kind === "reg64" && op.sp === true;
+}
+
+function readReg(op: Operand, regs: RegisterFile): bigint {
+  const reg = getReg(op);
+  if (isSP(op)) return regs.getSP();
+  if (op.kind === "reg32") return BigInt(regs.getW(reg));
+  return regs.getX(reg);
+}
+
+function writeReg(op: Operand, regs: RegisterFile, value: bigint) {
+  const reg = getReg(op);
+  if (isSP(op)) { regs.setSP(value); return; }
+  if (op.kind === "reg32") { regs.setW(reg, Number(BigInt.asUintN(32, value))); return; }
+  regs.setX(reg, value);
+}
+
 function getImm(op: Operand): bigint {
   if (op.kind === "imm") return op.value;
   throw new Error(`Expected immediate operand, got ${op.kind}`);
@@ -83,21 +101,12 @@ export function execute(program: AssembledProgram): ExecutionResult {
     try {
       switch (instr.op) {
         case "mov": {
-          const dst = getReg(ops[0]);
           if (ops[1].kind === "imm") {
             const val = ops[1].value;
-            if (ops[0].kind === "reg32") {
-              regs.setW(dst, Number(BigInt.asUintN(32, val)));
-            } else {
-              regs.setX(dst, val);
-            }
+            writeReg(ops[0], regs, ops[0].kind === "reg32" ? BigInt.asUintN(32, val) : val);
           } else {
-            const src = getReg(ops[1]);
-            if (ops[0].kind === "reg32") {
-              regs.setW(dst, regs.getW(src));
-            } else {
-              regs.setX(dst, regs.getX(src));
-            }
+            const val = readReg(ops[1], regs);
+            writeReg(ops[0], regs, ops[0].kind === "reg32" ? BigInt.asUintN(32, val) : val);
           }
           break;
         }
@@ -112,6 +121,21 @@ export function execute(program: AssembledProgram): ExecutionResult {
             regs.setW(dst, Number(BigInt.asUintN(32, val)));
           } else {
             regs.setX(dst, BigInt.asUintN(64, val));
+          }
+          break;
+        }
+
+        case "movn": {
+          const dst = getReg(ops[0]);
+          let val = getImm(ops[1]);
+          if (ops[2]?.kind === "shift" && ops[2].type === "lsl") {
+            val = val << BigInt(ops[2].amount);
+          }
+          const inverted = BigInt.asUintN(64, ~val);
+          if (ops[0].kind === "reg32") {
+            regs.setW(dst, Number(BigInt.asUintN(32, inverted)));
+          } else {
+            regs.setX(dst, inverted);
           }
           break;
         }
@@ -132,16 +156,14 @@ export function execute(program: AssembledProgram): ExecutionResult {
         }
 
         case "add": {
-          const dst = getReg(ops[0]);
-          const rn = getReg(ops[1]);
-          const a = regs.getX(rn);
+          const a = readReg(ops[1], regs);
           let b: bigint;
           if (ops[2].kind === "imm") {
             b = ops[2].value;
           } else {
-            b = regs.getX(getReg(ops[2]));
+            b = readReg(ops[2], regs);
           }
-          regs.setX(dst, BigInt.asUintN(64, a + b));
+          writeReg(ops[0], regs, BigInt.asUintN(64, a + b));
           break;
         }
 
@@ -162,21 +184,14 @@ export function execute(program: AssembledProgram): ExecutionResult {
         }
 
         case "sub": {
-          const dst = getReg(ops[0]);
-          const rn = getReg(ops[1]);
-          const a = regs.getX(rn);
+          const a = readReg(ops[1], regs);
           let b: bigint;
           if (ops[2].kind === "imm") {
             b = ops[2].value;
           } else {
-            b = regs.getX(getReg(ops[2]));
+            b = readReg(ops[2], regs);
           }
-          // Handle SP as destination or source
-          if (dst === 31 && ops[0].kind === "reg64") {
-            // Writing to XZR = discard
-          } else {
-            regs.setX(dst, BigInt.asUintN(64, a - b));
-          }
+          writeReg(ops[0], regs, BigInt.asUintN(64, a - b));
           break;
         }
 
@@ -421,6 +436,111 @@ export function execute(program: AssembledProgram): ExecutionResult {
           if (preWrite) preWrite();
           mem.writeByte(addr, Number(BigInt.asUintN(8, regs.getX(rt))));
           if (postWrite) postWrite();
+          break;
+        }
+
+        case "ldrh": {
+          const rt = getReg(ops[0]);
+          const { addr, preWrite, postWrite } = resolveAddr(ops[1], regs);
+          if (preWrite) preWrite();
+          regs.setX(rt, BigInt(mem.readU16(addr)));
+          if (postWrite) postWrite();
+          break;
+        }
+
+        case "ldrh_label": {
+          const rt = getReg(ops[0]);
+          const labelName = (ops[1] as { kind: "label"; name: string }).name;
+          const addr = program.labels.get(labelName);
+          if (addr === undefined) throw new Error(`Line ${instr.line}: Undefined label: ${labelName}`);
+          regs.setX(rt, BigInt(addr));
+          break;
+        }
+
+        case "strh": {
+          const rt = getReg(ops[0]);
+          const { addr, preWrite, postWrite } = resolveAddr(ops[1], regs);
+          if (preWrite) preWrite();
+          mem.writeU16(addr, Number(BigInt.asUintN(16, regs.getX(rt))));
+          if (postWrite) postWrite();
+          break;
+        }
+
+        case "ldrsw": {
+          const rt = getReg(ops[0]);
+          const { addr, preWrite, postWrite } = resolveAddr(ops[1], regs);
+          if (preWrite) preWrite();
+          const val = mem.read32(addr); // sign-extended 32-bit read
+          regs.setX(rt, BigInt(val)); // BigInt preserves sign
+          if (postWrite) postWrite();
+          break;
+        }
+
+        case "ldrsw_label": {
+          const rt = getReg(ops[0]);
+          const labelName = (ops[1] as { kind: "label"; name: string }).name;
+          const addr = program.labels.get(labelName);
+          if (addr === undefined) throw new Error(`Line ${instr.line}: Undefined label: ${labelName}`);
+          regs.setX(rt, BigInt(addr));
+          break;
+        }
+
+        case "sxtw": {
+          const dst = getReg(ops[0]);
+          const src = getReg(ops[1]);
+          // Sign-extend 32-bit value to 64-bit
+          const val32 = regs.getW(src);
+          const signed = (val32 << 0) >> 0; // sign-extend via 32-bit shift
+          regs.setX(dst, BigInt(signed));
+          break;
+        }
+
+        case "uxtb": {
+          const dst = getReg(ops[0]);
+          const src = getReg(ops[1]);
+          const val = regs.getW(src) & 0xff;
+          regs.setW(dst, val);
+          break;
+        }
+
+        case "uxth": {
+          const dst = getReg(ops[0]);
+          const src = getReg(ops[1]);
+          const val = regs.getW(src) & 0xffff;
+          regs.setW(dst, val);
+          break;
+        }
+
+        case "tst": {
+          const a = regs.getX(getReg(ops[0]));
+          let b: bigint;
+          if (ops[1].kind === "imm") {
+            b = BigInt.asUintN(64, ops[1].value);
+          } else {
+            b = regs.getX(getReg(ops[1]));
+          }
+          const result = BigInt.asUintN(64, a & b);
+          regs.setFlags64(result);
+          break;
+        }
+
+        case "madd": {
+          // MADD Xd, Xn, Xm, Xa — Xd = Xa + (Xn * Xm)
+          const dst = getReg(ops[0]);
+          const n = BigInt.asIntN(64, regs.getX(getReg(ops[1])));
+          const m = BigInt.asIntN(64, regs.getX(getReg(ops[2])));
+          const a = BigInt.asIntN(64, regs.getX(getReg(ops[3])));
+          regs.setX(dst, BigInt.asUintN(64, a + n * m));
+          break;
+        }
+
+        case "msub": {
+          // MSUB Xd, Xn, Xm, Xa — Xd = Xa - (Xn * Xm)
+          const dst = getReg(ops[0]);
+          const n = BigInt.asIntN(64, regs.getX(getReg(ops[1])));
+          const m = BigInt.asIntN(64, regs.getX(getReg(ops[2])));
+          const a = BigInt.asIntN(64, regs.getX(getReg(ops[3])));
+          regs.setX(dst, BigInt.asUintN(64, a - n * m));
           break;
         }
 

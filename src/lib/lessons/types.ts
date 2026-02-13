@@ -30,7 +30,7 @@ export interface GoResult {
   error: string;
 }
 
-export type RunResult = GoResult;
+export type RunResult = GoResult & { generatedCode?: string };
 
 export interface TestResult {
   name: string;

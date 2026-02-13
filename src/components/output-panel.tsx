@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { TestResult } from "@/lib/lessons/types";
 
 interface OutputPanelProps {
@@ -7,6 +8,7 @@ interface OutputPanelProps {
   error: string;
   testResults: TestResult[];
   isRunning: boolean;
+  generatedCode?: string;
 }
 
 export function OutputPanel({
@@ -14,7 +16,10 @@ export function OutputPanel({
   error,
   testResults,
   isRunning,
+  generatedCode,
 }: OutputPanelProps) {
+  const [activeTab, setActiveTab] = useState<"output" | "assembly">("output");
+
   if (isRunning) {
     return (
       <div className="font-mono text-sm p-4 text-muted-foreground">
@@ -25,8 +30,9 @@ export function OutputPanel({
 
   const hasOutput = output || error;
   const hasTests = testResults.length > 0;
+  const hasTabs = !!generatedCode;
 
-  if (!hasOutput && !hasTests) {
+  if (!hasOutput && !hasTests && !generatedCode) {
     return (
       <div className="font-mono text-sm p-4 text-muted-foreground">
         Click &quot;Run&quot; to execute your code.
@@ -36,8 +42,8 @@ export function OutputPanel({
 
   const allPassed = hasTests && testResults.every((t) => t.passed);
 
-  return (
-    <div className="font-mono text-sm p-4 space-y-3 overflow-auto">
+  const outputContent = (
+    <div className="space-y-3">
       {error && (
         <div className="text-destructive whitespace-pre-wrap">{error}</div>
       )}
@@ -77,6 +83,51 @@ export function OutputPanel({
           )}
         </div>
       )}
+    </div>
+  );
+
+  const assemblyContent = generatedCode ? (
+    <div>
+      <div className="text-muted-foreground text-xs mb-1">Generated ARM64 Assembly</div>
+      <pre className="text-foreground whitespace-pre-wrap text-xs leading-relaxed">{generatedCode}</pre>
+    </div>
+  ) : null;
+
+  if (!hasTabs) {
+    return (
+      <div className="font-mono text-sm p-4 overflow-auto">
+        {outputContent}
+      </div>
+    );
+  }
+
+  return (
+    <div className="font-mono text-sm overflow-auto">
+      <div className="flex border-b border-border sticky top-0 bg-muted z-10">
+        <button
+          onClick={() => setActiveTab("output")}
+          className={`px-3 py-1.5 text-xs transition-colors ${
+            activeTab === "output"
+              ? "text-foreground border-b-2 border-primary"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Output
+        </button>
+        <button
+          onClick={() => setActiveTab("assembly")}
+          className={`px-3 py-1.5 text-xs transition-colors ${
+            activeTab === "assembly"
+              ? "text-foreground border-b-2 border-primary"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Assembly
+        </button>
+      </div>
+      <div className="p-4">
+        {activeTab === "output" ? outputContent : assemblyContent}
+      </div>
     </div>
   );
 }

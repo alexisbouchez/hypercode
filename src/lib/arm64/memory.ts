@@ -45,6 +45,14 @@ export class Memory {
     this.view.setBigInt64(this.offset(addr), value, true);
   }
 
+  readU16(addr: number): number {
+    return this.view.getUint16(this.offset(addr), true);
+  }
+
+  writeU16(addr: number, value: number) {
+    this.view.setUint16(this.offset(addr), value & 0xffff, true);
+  }
+
   readU32(addr: number): number {
     return this.view.getUint32(this.offset(addr), true);
   }

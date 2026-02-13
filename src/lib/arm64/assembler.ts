@@ -3,7 +3,7 @@ import { REG_NAMES_64, REG_NAMES_32, COND_CODES, CODE_BASE, DATA_BASE } from "./
 // ---------- Instruction IR ----------
 
 export type Operand =
-  | { kind: "reg64"; reg: number }
+  | { kind: "reg64"; reg: number; sp?: boolean }
   | { kind: "reg32"; reg: number }
   | { kind: "imm"; value: bigint }
   | { kind: "mem"; base: number; offset: number; preIndex: boolean; postIndex: boolean; useSP: boolean }
@@ -47,8 +47,7 @@ function parseRegister(token: string): Operand | null {
   if (lower in REG_NAMES_64) {
     const isSP = lower === "sp";
     const reg = REG_NAMES_64[lower];
-    // sp is treated specially in load/store (useSP flag handled at instruction level)
-    if (isSP) return { kind: "reg64", reg };
+    if (isSP) return { kind: "reg64", reg, sp: true };
     return { kind: "reg64", reg };
   }
   if (lower in REG_NAMES_32) {
@@ -474,7 +473,8 @@ function parseInstruction(mnemonic: string, operandsRaw: string, lineNum: number
   switch (mn) {
     case "mov":
     case "movz":
-    case "movk": {
+    case "movk":
+    case "movn": {
       const dst = parseRegister(tokens[0]);
       if (!dst) throw new Error(`Line ${lineNum}: Invalid register: ${tokens[0]}`);
       operands.push(dst);
@@ -575,10 +575,63 @@ function parseInstruction(mnemonic: string, operandsRaw: string, lineNum: number
       return { op: mn, operands, line: lineNum };
     }
 
+    case "sxtw": {
+      // SXTW Xd, Wn — sign-extend 32-bit to 64-bit
+      const dst = parseRegister(tokens[0]);
+      if (!dst) throw new Error(`Line ${lineNum}: Invalid register: ${tokens[0]}`);
+      operands.push(dst);
+      const src = parseRegister(tokens[1]);
+      if (!src) throw new Error(`Line ${lineNum}: Invalid register: ${tokens[1]}`);
+      operands.push(src);
+      return { op: mn, operands, line: lineNum };
+    }
+
+    case "uxtb":
+    case "uxth": {
+      const dst = parseRegister(tokens[0]);
+      if (!dst) throw new Error(`Line ${lineNum}: Invalid register: ${tokens[0]}`);
+      operands.push(dst);
+      const src = parseRegister(tokens[1]);
+      if (!src) throw new Error(`Line ${lineNum}: Invalid register: ${tokens[1]}`);
+      operands.push(src);
+      return { op: mn, operands, line: lineNum };
+    }
+
+    case "tst": {
+      // TST Xn, Xm/#imm (ANDS XZR, Xn, Xm/#imm)
+      const rn = parseRegister(tokens[0]);
+      if (!rn) throw new Error(`Line ${lineNum}: Expected register: ${tokens[0]}`);
+      operands.push(rn);
+
+      const rm = parseRegister(tokens[1]);
+      if (rm) {
+        operands.push(rm);
+      } else {
+        const imm = parseImmediate(tokens[1]);
+        if (imm === null) throw new Error(`Line ${lineNum}: Invalid operand: ${tokens[1]}`);
+        operands.push({ kind: "imm", value: imm });
+      }
+      return { op: mn, operands, line: lineNum };
+    }
+
+    case "madd":
+    case "msub": {
+      // MADD/MSUB Xd, Xn, Xm, Xa
+      for (const t of tokens) {
+        const reg = parseRegister(t);
+        if (!reg) throw new Error(`Line ${lineNum}: Expected register: ${t}`);
+        operands.push(reg);
+      }
+      return { op: mn, operands, line: lineNum };
+    }
+
     case "ldr":
     case "ldrb":
+    case "ldrh":
+    case "ldrsw":
     case "str":
-    case "strb": {
+    case "strb":
+    case "strh": {
       // Rt, [Xn, #offset] or =label for LDR
       const rt = parseRegister(tokens[0]);
       if (!rt) throw new Error(`Line ${lineNum}: Expected register: ${tokens[0]}`);
