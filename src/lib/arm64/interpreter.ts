@@ -640,6 +640,13 @@ export function execute(program: AssembledProgram): ExecutionResult {
           break;
         }
 
+        case "blr": {
+          const target = Number(regs.getX(getReg(ops[0])));
+          regs.setX(30, BigInt(regs.pc + 1)); // LR = next instruction
+          nextPC = target;
+          break;
+        }
+
         case "ret": {
           const reg = ops.length > 0 ? getReg(ops[0]) : 30;
           const target = Number(regs.getX(reg));

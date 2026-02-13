@@ -90,6 +90,12 @@ function decodeInstruction(instr: number, pc: number): string {
 		return `BR ${REG64(rn)}`;
 	}
 
+	// BLR Xn
+	if (((instr & 0xfffffc1f) >>> 0) === 0xd63f0000) {
+		const rn = bits(instr, 9, 5);
+		return `BLR ${REG64(rn)}`;
+	}
+
 	// BL
 	if ((instr >>> 26) === 0x25) {
 		const imm26 = signExtend(bits(instr, 25, 0), 26);

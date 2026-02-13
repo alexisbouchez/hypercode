@@ -716,7 +716,8 @@ function parseInstruction(mnemonic: string, operandsRaw: string, lineNum: number
       return { op: mn, operands, line: lineNum };
     }
 
-    case "br": {
+    case "br":
+    case "blr": {
       const reg = parseRegister(tokens[0]);
       if (!reg) throw new Error(`Line ${lineNum}: Expected register: ${tokens[0]}`);
       operands.push(reg);

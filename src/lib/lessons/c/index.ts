@@ -17,6 +17,12 @@ import { pointers } from "./data/11-pointers";
 import { pointersAndArrays } from "./data/12-pointers-and-arrays";
 import { structs } from "./data/13-structs";
 import { structsAndPointers } from "./data/14-structs-and-pointers";
+import { dynamicMemory } from "./data/19-dynamic-memory";
+import { callocAndRealloc } from "./data/20-calloc-and-realloc";
+import { linkedLists } from "./data/24-linked-lists";
+import { functionPointers } from "./data/21-function-pointers";
+import { preprocessorMacros } from "./data/22-preprocessor-macros";
+import { sorting } from "./data/23-variadic-functions";
 
 export const cChapters: Chapter[] = [
 	{ id: "basics", title: "C Basics" },
@@ -26,6 +32,8 @@ export const cChapters: Chapter[] = [
 	{ id: "arrays-and-strings", title: "Arrays and Strings" },
 	{ id: "pointers", title: "Pointers" },
 	{ id: "structs", title: "Structs" },
+	{ id: "dynamic-memory", title: "Dynamic Memory" },
+	{ id: "advanced", title: "Advanced Concepts" },
 ];
 
 export const cLessons: Lesson[] = [
@@ -47,4 +55,10 @@ export const cLessons: Lesson[] = [
 	pointersAndArrays,
 	structs,
 	structsAndPointers,
+	dynamicMemory,
+	callocAndRealloc,
+	linkedLists,
+	functionPointers,
+	preprocessorMacros,
+	sorting,
 ];

@@ -8,6 +8,8 @@ __printf_buf:
 \t.skip 1024
 __printf_numbuf:
 \t.skip 32
+__heap_ptr:
+\t.quad 0x550000
 
 .text
 .global _start
@@ -126,6 +128,68 @@ memset_loop:
 \tSUB X2, X2, #1
 \tCBNZ X2, memset_loop
 memset_done:
+\tRET
+
+// malloc(size_t size)
+// X0 = size
+// Returns: pointer in X0
+malloc:
+\tLDR X1, =__heap_ptr
+\tLDR X2, [X1]
+\tADD X0, X0, #7
+\tLSR X0, X0, #3
+\tLSL X0, X0, #3
+\tADD X3, X2, X0
+\tSTR X3, [X1]
+\tMOV X0, X2
+\tRET
+
+// free(void *ptr) - no-op bump allocator
+free:
+\tRET
+
+// calloc(size_t nmemb, size_t size)
+// X0 = nmemb, X1 = size
+// Returns: pointer in X0 (zeroed)
+calloc:
+\tSTP X29, X30, [SP, #-32]!
+\tMOV X29, SP
+\tSTR X19, [SP, #16]
+\tMUL X0, X0, X1
+\tMOV X19, X0
+\tBL malloc
+\tMOV X2, X19
+\tMOV X1, #0
+\tBL memset
+\tLDR X19, [SP, #16]
+\tLDP X29, X30, [SP], #32
+\tRET
+
+// realloc(void *ptr, size_t new_size)
+// X0 = ptr, X1 = new_size
+// Returns: pointer in X0
+realloc:
+\tSTP X29, X30, [SP, #-48]!
+\tMOV X29, SP
+\tSTR X19, [SP, #16]
+\tSTR X20, [SP, #24]
+\tSTR X21, [SP, #32]
+\tMOV X19, X0
+\tMOV X20, X1
+\tMOV X0, X1
+\tBL malloc
+\tMOV X21, X0
+\tCBZ X19, realloc_done
+\tMOV X0, X21
+\tMOV X1, X19
+\tMOV X2, X20
+\tBL memcpy
+realloc_done:
+\tMOV X0, X21
+\tLDR X19, [SP, #16]
+\tLDR X20, [SP, #24]
+\tLDR X21, [SP, #32]
+\tLDP X29, X30, [SP], #48
 \tRET
 
 // printf(const char *fmt, ...)

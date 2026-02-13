@@ -34,6 +34,7 @@ const RUNTIME_FUNCTIONS = new Set([
 	"printf", "puts", "putchar", "exit",
 	"strlen", "strcmp", "memcpy", "memset",
 	"snprintf", "sprintf",
+	"malloc", "free", "calloc", "realloc",
 ]);
 
 export function link(
