@@ -99,6 +99,30 @@ export class RegisterFile {
     this.v = (sa >= 0n && sb < 0n && sr < 0n) || (sa < 0n && sb >= 0n && sr >= 0n);
   }
 
+  setFlagsAddition32(a: bigint, b: bigint) {
+    const result = BigInt.asUintN(32, a) + BigInt.asUintN(32, b);
+    const u32 = BigInt.asUintN(32, result);
+    this.n = (u32 >> 31n) === 1n;
+    this.z = u32 === 0n;
+    this.c = result > 0xFFFFFFFFn;
+    const sa = BigInt.asIntN(32, a);
+    const sb = BigInt.asIntN(32, b);
+    const sr = BigInt.asIntN(32, u32);
+    this.v = (sa >= 0n && sb >= 0n && sr < 0n) || (sa < 0n && sb < 0n && sr >= 0n);
+  }
+
+  setFlagsSubtraction32(a: bigint, b: bigint) {
+    const result = BigInt.asUintN(32, a) - BigInt.asUintN(32, b);
+    const u32 = BigInt.asUintN(32, result);
+    this.n = (u32 >> 31n) === 1n;
+    this.z = u32 === 0n;
+    this.c = BigInt.asUintN(32, a) >= BigInt.asUintN(32, b);
+    const sa = BigInt.asIntN(32, a);
+    const sb = BigInt.asIntN(32, b);
+    const sr = BigInt.asIntN(32, u32);
+    this.v = (sa >= 0n && sb < 0n && sr < 0n) || (sa < 0n && sb >= 0n && sr >= 0n);
+  }
+
   checkCondition(cond: number): boolean {
     switch (cond) {
       case 0: return this.z;                     // EQ
