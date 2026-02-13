@@ -6,7 +6,16 @@ export const addressingModes: Lesson = {
   chapterId: "memory",
   content: `## Addressing Modes
 
-ARM64 supports several ways to compute memory addresses. The three main addressing modes are offset, pre-index, and post-index.
+ARM64 supports several ways to compute memory addresses. Understanding these modes is key to writing efficient code -- the right addressing mode can save instructions when working with arrays and data structures.
+
+### Summary of Modes
+
+| Mode | Syntax | Effect |
+|------|--------|--------|
+| Offset | \`[X1, #8]\` | Access X1+8, X1 unchanged |
+| Pre-index | \`[X1, #8]!\` | X1 += 8, then access X1 |
+| Post-index | \`[X1], #8\` | Access X1, then X1 += 8 |
+| Register offset | \`[X1, X2]\` | Access X1+X2, both unchanged |
 
 ### Offset Addressing
 
@@ -17,6 +26,8 @@ LDR X0, [X1, #16]   // Load from X1+16, X1 unchanged
 STR X0, [X1, #8]    // Store to X1+8, X1 unchanged
 \`\`\`
 
+This is the most common mode -- ideal for accessing struct fields or array elements at known offsets.
+
 ### Pre-Index Addressing
 
 The offset is added to the base register **before** the memory access, and the base register is updated:
@@ -26,33 +37,41 @@ LDR X0, [X1, #8]!   // X1 = X1+8, then load from X1
 STR X0, [X1, #-16]! // X1 = X1-16, then store to X1
 \`\`\`
 
-The \`!\` suffix means "write back" -- the base register is updated with the computed address.
+The \`!\` suffix means "write back" -- the base register is permanently updated. This is commonly used for stack operations (allocating stack space before storing).
 
 ### Post-Index Addressing
 
-The memory access uses the base register as-is, then the offset is added to the base register:
+The memory access uses the base register as-is, **then** the offset is added:
 
 \`\`\`asm
 LDR X0, [X1], #8    // Load from X1, then X1 = X1+8
 STR X0, [X1], #16   // Store to X1, then X1 = X1+16
 \`\`\`
 
-### LDRB and STRB
+This is perfect for walking through arrays: load the current element and advance the pointer in one instruction.
 
-\`LDRB\` and \`STRB\` load and store single bytes:
+### Register Offset Addressing
+
+You can use a register as the offset, which is useful for indexing arrays with a variable:
 
 \`\`\`asm
-LDRB W0, [X1]       // Load 1 byte into W0 (zero-extended)
-STRB W0, [X1]       // Store low byte of W0
+LDRB W0, [X1, X2]   // Load byte from X1 + X2
 \`\`\`
 
 ### Walking Through an Array
 
-Pre-index and post-index modes are useful for iterating through arrays. Post-index is especially natural for sequential access:
+Post-index is especially natural for sequential access. Compare these two approaches:
 
 \`\`\`asm
-LDR X0, [X1], #8    // Load value, advance pointer by 8
+// Without post-index (2 instructions per element):
+LDRB W0, [X1]       // Load byte
+ADD X1, X1, #1      // Advance pointer
+
+// With post-index (1 instruction per element):
+LDRB W0, [X1], #1   // Load byte AND advance pointer
 \`\`\`
+
+> **Tip**: Use post-index for forward iteration and pre-index for stack operations. Offset addressing is best when you know the exact position at compile time.
 
 ### Your Task
 

@@ -6,25 +6,35 @@ export const functionsAndBl: Lesson = {
   chapterId: "functions",
   content: `## Functions in ARM64
 
-ARM64 implements function calls using two key concepts: the \`BL\` instruction and the link register (\`LR\`/\`X30\`).
+Functions (also called subroutines or procedures) let you organize code into reusable blocks. ARM64 implements function calls using two key concepts: the \`BL\` instruction and the link register.
 
 ### BL -- Branch with Link
 
-\`BL\` branches to a label and saves the return address in \`X30\` (the Link Register):
+\`BL\` does two things in one instruction:
+1. Saves the address of the *next* instruction into \`X30\` (the Link Register, also called \`LR\`)
+2. Jumps to the target label
 
 \`\`\`asm
-BL my_function       // Jump to my_function, save return address in X30
+BL my_function       // X30 = address of next instruction, then jump
+// execution continues here when my_function returns
 \`\`\`
 
 ### RET -- Return
 
-\`RET\` branches to the address in \`X30\`, returning from the function:
+\`RET\` branches to the address in \`X30\`, returning to the caller:
 
 \`\`\`asm
 my_function:
     // ... function body ...
-    RET              // Return to caller (jump to address in X30)
+    RET              // Jump to address in X30 (back to caller)
 \`\`\`
+
+### BL vs B
+
+| Instruction | Saves return address? | Use for |
+|-------------|----------------------|---------|
+| \`B label\` | No | One-way jump (loops, goto) |
+| \`BL label\` | Yes (in X30) | Function calls (expects RET) |
 
 ### A Simple Function
 
@@ -40,7 +50,7 @@ _start:
     BL double         // Call double, X0 = 42 on return
 \`\`\`
 
-### Function Arguments
+### Function Arguments and Return Values
 
 By convention, function arguments are passed in \`X0\` through \`X7\`, and the return value is in \`X0\`:
 
@@ -54,6 +64,23 @@ _start:
     MOV X0, #3       // first argument
     MOV X1, #4       // second argument
     BL add            // X0 = 7 on return
+\`\`\`
+
+> **Important**: After \`BL\`, the function can freely modify X0-X15 (caller-saved registers). If you need a value to survive a function call, save it first. The return value always comes back in X0.
+
+### Function Placement
+
+Functions must be placed **before** \`_start\` (or jumped over). If you put a function after \`_start\` without a branch around it, the CPU will fall through into the function code unexpectedly:
+
+\`\`\`asm
+// Good: function before _start
+square:
+    MUL X0, X0, X0
+    RET
+
+_start:
+    MOV X0, #7
+    BL square        // Calls square, returns here
 \`\`\`
 
 ### Your Task

@@ -6,7 +6,7 @@ export const callingConvention: Lesson = {
   chapterId: "functions",
   content: `## The AArch64 Calling Convention
 
-When writing functions, you need to follow rules about which registers to use and who is responsible for saving them.
+The calling convention is a contract between functions: it specifies which registers hold arguments, where return values go, and who is responsible for saving each register. Following it is essential when your code interacts with other functions.
 
 ### Register Roles
 
@@ -15,43 +15,49 @@ When writing functions, you need to follow rules about which registers to use an
 | \`X0\`-\`X7\` | Arguments and return values | Caller |
 | \`X8\` | Indirect result / syscall number | Caller |
 | \`X9\`-\`X15\` | Temporary (scratch) | Caller |
-| \`X16\`-\`X17\` | Intra-procedure-call scratch | Caller |
 | \`X19\`-\`X28\` | Callee-saved | Callee |
 | \`X29\` (\`FP\`) | Frame pointer | Callee |
 | \`X30\` (\`LR\`) | Link register | Callee |
 
 ### Caller-Saved vs Callee-Saved
 
-- **Caller-saved** (X0-X15): The called function may freely modify these. If you need their values after a call, save them yourself before calling.
-- **Callee-saved** (X19-X28, FP, LR): The called function must restore these before returning. If a function uses them, it must save and restore them.
+This distinction is the most important concept:
 
-### Saving LR
+- **Caller-saved** (X0-X15): The called function may destroy these freely. If you need a value in X0-X15 to survive a \`BL\`, you must save it yourself before the call.
+- **Callee-saved** (X19-X28, FP, LR): The called function **promises** to restore these before returning. If a function wants to use X19-X28, it must push them to the stack first and restore them at the end.
 
-If a function calls another function, it must save \`LR\` (X30) because \`BL\` will overwrite it:
+Think of it this way: caller-saved registers are "your problem", callee-saved registers are "their problem."
+
+### Saving LR When Calling Functions
+
+If a function calls another function, it must save \`LR\` (X30) because the inner \`BL\` will overwrite it:
 
 \`\`\`asm
 outer:
     STP X29, X30, [SP, #-16]!  // Save FP and LR
     MOV X0, #5
-    BL inner                     // This overwrites X30
+    BL inner                     // This overwrites X30!
+    // X30 now points to inner's return, not outer's return
     LDP X29, X30, [SP], #16    // Restore FP and LR
-    RET                          // Return to our caller
+    RET                          // Now RET correctly returns to outer's caller
 
 inner:
     ADD X0, X0, #1
     RET
 \`\`\`
 
-### Multiple Arguments
+> **Rule of thumb**: Any function that uses \`BL\` must save/restore X30. Leaf functions (functions that do not call other functions) can skip this since their X30 is never overwritten.
 
-Arguments go in X0-X7 in order:
+### Argument Passing
+
+Arguments go in X0-X7 in order. Return values come back in X0:
 
 \`\`\`asm
 // max(a, b) -- returns the larger value
 max:
     CMP X0, X1
     B.GE max_done
-    MOV X0, X1
+    MOV X0, X1        // Return larger value in X0
 max_done:
     RET
 \`\`\`

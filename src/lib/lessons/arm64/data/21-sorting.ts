@@ -6,35 +6,57 @@ export const sorting: Lesson = {
   chapterId: "putting-it-together",
   content: `## Bubble Sort in ARM64
 
-Sorting is the ultimate test of assembly skills: it combines memory access, loops, comparisons, and conditional logic. We will implement bubble sort.
+Sorting is the ultimate test of assembly skills: it combines memory access, nested loops, comparisons, and conditional logic. We will implement bubble sort -- a simple O(n^2) algorithm that is easy to implement correctly.
 
 ### The Algorithm
 
-Bubble sort repeatedly walks through the array, comparing adjacent elements and swapping them if they are out of order. After each pass, the largest unsorted element "bubbles" to its correct position.
+Bubble sort repeatedly walks through the array, comparing adjacent elements and swapping them if they are out of order. After each pass, the largest unsorted element "bubbles up" to its correct position:
 
 \`\`\`
-for i = n-1 down to 1:
-    for j = 0 to i-1:
+for i = n-1 down to 1:      // outer loop: shrink unsorted region
+    for j = 0 to i-1:       // inner loop: walk through unsorted part
         if arr[j] > arr[j+1]:
             swap arr[j] and arr[j+1]
 \`\`\`
 
-### Swapping with Registers
+### Why Bubble Sort?
 
-To swap two values in memory:
-1. Load both into registers
-2. Compare them
-3. If out of order, store them back in swapped positions
+While not efficient for large datasets (O(n^2) comparisons), bubble sort is ideal for learning assembly because:
+- It only needs adjacent element comparisons and swaps
+- The memory access pattern is simple (sequential)
+- The nested loop structure maps cleanly to assembly
+- It sorts in-place (no extra memory needed)
+
+### Swapping in Assembly
+
+To swap two adjacent values in memory, load both, compare, and store them back in reversed positions:
 
 \`\`\`asm
 LDRB W2, [X0]        // a = arr[j]
 LDRB W3, [X0, #1]    // b = arr[j+1]
 CMP W2, W3
-B.LE no_swap
+B.LE no_swap          // Already in order, skip
 STRB W3, [X0]        // arr[j] = b
 STRB W2, [X0, #1]    // arr[j+1] = a
 no_swap:
+ADD X0, X0, #1       // Advance to next pair
 \`\`\`
+
+### Nested Loop Structure
+
+The outer loop controls how many passes we make. The inner loop does the actual comparing and swapping. The outer counter starts at n-1 and counts down:
+
+\`\`\`asm
+MOV X9, #4           // i = n-1 = 4 (for 5 elements)
+outer:
+    CBZ X9, done      // If i == 0, sorting is complete
+    // ... inner loop (j = 0 to i-1) ...
+    SUB X9, X9, #1   // i--
+    B outer
+done:
+\`\`\`
+
+> **Tip**: In the inner loop, reset the array pointer to the beginning on each outer iteration. Use the outer counter to limit how far the inner loop runs.
 
 ### Your Task
 

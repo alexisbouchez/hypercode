@@ -304,6 +304,13 @@ export function assemble(source: string): AssembledProgram {
           dataOffset += vals.length;
           break;
         }
+        case "hword":
+        case "short":
+        case "2byte": {
+          const vals = p.directive.args.split(",").map((s) => s.trim());
+          dataOffset += vals.length * 2;
+          break;
+        }
         case "word":
         case "4byte": {
           const vals = p.directive.args.split(",").map((s) => s.trim());
@@ -362,6 +369,16 @@ export function assemble(source: string): AssembledProgram {
           const vals = p.directive.args.split(",").map((s) => s.trim());
           for (const v of vals) {
             dataBytes.push(parseInt(v) & 0xff);
+          }
+          break;
+        }
+        case "hword":
+        case "short":
+        case "2byte": {
+          const vals = p.directive.args.split(",").map((s) => s.trim());
+          for (const v of vals) {
+            const n = parseInt(v);
+            dataBytes.push(n & 0xff, (n >> 8) & 0xff);
           }
           break;
         }

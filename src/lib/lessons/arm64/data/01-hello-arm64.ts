@@ -8,6 +8,14 @@ export const helloArm64: Lesson = {
 
 ARM64 (also called AArch64) is the 64-bit instruction set used by billions of devices worldwide -- from smartphones to Apple's M-series chips to cloud servers. Learning ARM64 assembly gives you a direct understanding of how processors actually execute code.
 
+### Why Learn Assembly?
+
+Every program you write -- whether in Python, JavaScript, or Rust -- eventually becomes machine instructions. Assembly is the human-readable form of those instructions. Understanding it lets you:
+- Debug performance-critical code at the lowest level
+- Understand what compilers actually generate
+- Write operating system and embedded code
+- Reverse-engineer binaries and analyze security vulnerabilities
+
 ### Registers
 
 ARM64 has 31 general-purpose 64-bit registers named \`X0\` through \`X30\`, plus a few special ones:
@@ -23,6 +31,17 @@ ARM64 has 31 general-purpose 64-bit registers named \`X0\` through \`X30\`, plus
 | \`X30\` (\`LR\`) | Link register (return address) |
 | \`SP\` | Stack pointer |
 | \`XZR\` | Zero register (always reads as 0) |
+
+> **Tip**: You do not need to memorize this table right now. We will cover each register group in detail in later lessons. For now, just know that \`X0\`-\`X7\` hold arguments and \`X8\` holds the syscall number.
+
+### Program Structure
+
+Every ARM64 program has two sections:
+
+- **\`.data\`** -- holds your data (strings, numbers, buffers)
+- **\`.text\`** -- holds your code (instructions)
+
+The \`_start\` label marks where execution begins. The \`.global _start\` directive makes it visible to the system.
 
 ### Writing to the Screen
 
@@ -44,7 +63,7 @@ String data lives in the \`.data\` section. You define a label and use \`.asciz\
 \`\`\`asm
 .data
 msg:
-    .asciz "Hello, ARM64!\\n"
+    .ascii "Hello, ARM64!\\n"
 \`\`\`
 
 ### Loading Addresses
@@ -75,6 +94,12 @@ _start:
     MOV X8, #93        // syscall = exit
     SVC #0
 \`\`\`
+
+### Exiting Cleanly
+
+Every program must end with the \`exit\` syscall (number 93). Without it, the CPU would continue executing whatever bytes happen to follow your code in memory, causing a crash. The value in \`X0\` becomes the exit code (0 = success).
+
+> **Common mistake**: Forgetting to exit. If your program prints nothing or crashes, check that you have the exit syscall at the end.
 
 ### Your Task
 

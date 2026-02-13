@@ -6,7 +6,7 @@ export const memoryLdrStr: Lesson = {
   chapterId: "memory",
   content: `## Loading and Storing Data
 
-ARM64 is a load/store architecture: you cannot operate directly on memory. All computation happens in registers, and you use \`LDR\` (load) and \`STR\` (store) to move data between registers and memory.
+ARM64 is a **load/store architecture**: you cannot operate directly on memory. Unlike x86 where you can write \`ADD [address], 1\`, ARM64 requires you to first load data into registers, operate on it, then store it back. This design is simpler for the hardware and enables higher clock speeds.
 
 ### LDR -- Load Register
 
@@ -18,6 +18,8 @@ LDR X0, [X1, #8]    // Load from address X1+8
 LDR W0, [X1]        // Load 4 bytes (W registers = 32-bit)
 \`\`\`
 
+The square brackets \`[X1]\` mean "the memory at the address stored in X1". Think of X1 as a pointer.
+
 ### STR -- Store Register
 
 \`STR\` writes a register value to memory:
@@ -26,6 +28,17 @@ LDR W0, [X1]        // Load 4 bytes (W registers = 32-bit)
 STR X0, [X1]        // Store X0 at address in X1
 STR X0, [X1, #16]   // Store at address X1+16
 \`\`\`
+
+### LDRB and STRB -- Byte Access
+
+\`LDRB\` and \`STRB\` load and store single bytes:
+
+\`\`\`asm
+LDRB W0, [X1]       // Load 1 byte into W0 (zero-extended to 32 bits)
+STRB W0, [X1]       // Store the low byte of W0
+\`\`\`
+
+> **Note**: Byte operations use \`W\` (32-bit) registers, not \`X\`. The loaded byte is zero-extended to fill the register.
 
 ### The .data Section
 
@@ -37,6 +50,7 @@ myByte:   .byte 42         // 1 byte
 myWord:   .word 100000     // 4 bytes
 myQuad:   .quad 123456789  // 8 bytes
 myStr:    .ascii "hello"   // string (no null terminator)
+buf:      .skip 16         // 16 zero-filled bytes (a buffer)
 \`\`\`
 
 ### Loading Addresses with LDR =
@@ -47,6 +61,20 @@ To get the address of a data label, use the \`LDR Xn, =label\` pseudo-instructio
 LDR X0, =myQuad     // X0 = address of myQuad
 LDR X1, [X0]        // X1 = value at myQuad (123456789)
 \`\`\`
+
+This is a two-step process: first get the address, then load the value:
+
+\`\`\`asm
+// Read a value from memory
+LDR X0, =val_a      // X0 = &val_a (address)
+LDR X0, [X0]        // X0 = *val_a (the value itself)
+
+// Write a value to memory
+LDR X1, =result     // X1 = &result
+STR X0, [X1]        // *result = X0
+\`\`\`
+
+> **Common mistake**: Writing \`LDR X0, =val_a\` and thinking X0 now holds the value 25. It holds the *address*. You need a second \`LDR X0, [X0]\` to load the actual value.
 
 ### Your Task
 
