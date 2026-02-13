@@ -353,26 +353,36 @@ export function execute(program: AssembledProgram): ExecutionResult {
         }
 
         case "cmp": {
-          const a = regs.getX(getReg(ops[0]));
+          const is32 = ops[0].kind === "reg32";
+          const a = is32 ? BigInt(regs.getW(getReg(ops[0]))) : regs.getX(getReg(ops[0]));
           let b: bigint;
           if (ops[1].kind === "imm") {
-            b = ops[1].value;
+            b = is32 ? BigInt.asUintN(32, ops[1].value) : ops[1].value;
           } else {
-            b = regs.getX(getReg(ops[1]));
+            b = is32 ? BigInt(regs.getW(getReg(ops[1]))) : regs.getX(getReg(ops[1]));
           }
-          regs.setFlagsSubtraction(a, b);
+          if (is32) {
+            regs.setFlagsSubtraction32(a, b);
+          } else {
+            regs.setFlagsSubtraction(a, b);
+          }
           break;
         }
 
         case "cmn": {
-          const a = regs.getX(getReg(ops[0]));
+          const is32 = ops[0].kind === "reg32";
+          const a = is32 ? BigInt(regs.getW(getReg(ops[0]))) : regs.getX(getReg(ops[0]));
           let b: bigint;
           if (ops[1].kind === "imm") {
-            b = ops[1].value;
+            b = is32 ? BigInt.asUintN(32, ops[1].value) : ops[1].value;
           } else {
-            b = regs.getX(getReg(ops[1]));
+            b = is32 ? BigInt(regs.getW(getReg(ops[1]))) : regs.getX(getReg(ops[1]));
           }
-          regs.setFlagsAddition(a, b);
+          if (is32) {
+            regs.setFlagsAddition32(a, b);
+          } else {
+            regs.setFlagsAddition(a, b);
+          }
           break;
         }
 
@@ -541,6 +551,46 @@ export function execute(program: AssembledProgram): ExecutionResult {
           const m = BigInt.asIntN(64, regs.getX(getReg(ops[2])));
           const a = BigInt.asIntN(64, regs.getX(getReg(ops[3])));
           regs.setX(dst, BigInt.asUintN(64, a - n * m));
+          break;
+        }
+
+        case "cset": {
+          // CSET Rd, cond — set Rd to 1 if cond is true, 0 otherwise
+          const cond = (ops[1] as { kind: "cond"; code: number }).code;
+          const val = regs.checkCondition(cond) ? 1n : 0n;
+          writeReg(ops[0], regs, val);
+          break;
+        }
+
+        case "csel": {
+          // CSEL Rd, Rn, Rm, cond — Rd = cond ? Rn : Rm
+          const cond = (ops[3] as { kind: "cond"; code: number }).code;
+          const val = regs.checkCondition(cond) ? readReg(ops[1], regs) : readReg(ops[2], regs);
+          writeReg(ops[0], regs, val);
+          break;
+        }
+
+        case "csinc": {
+          // CSINC Rd, Rn, Rm, cond — Rd = cond ? Rn : Rm + 1
+          const cond = (ops[3] as { kind: "cond"; code: number }).code;
+          const val = regs.checkCondition(cond) ? readReg(ops[1], regs) : readReg(ops[2], regs) + 1n;
+          writeReg(ops[0], regs, BigInt.asUintN(64, val));
+          break;
+        }
+
+        case "csinv": {
+          // CSINV Rd, Rn, Rm, cond — Rd = cond ? Rn : ~Rm
+          const cond = (ops[3] as { kind: "cond"; code: number }).code;
+          const val = regs.checkCondition(cond) ? readReg(ops[1], regs) : BigInt.asUintN(64, ~readReg(ops[2], regs));
+          writeReg(ops[0], regs, val);
+          break;
+        }
+
+        case "csneg": {
+          // CSNEG Rd, Rn, Rm, cond — Rd = cond ? Rn : -Rm
+          const cond = (ops[3] as { kind: "cond"; code: number }).code;
+          const val = regs.checkCondition(cond) ? readReg(ops[1], regs) : BigInt.asUintN(64, -readReg(ops[2], regs));
+          writeReg(ops[0], regs, val);
           break;
         }
 

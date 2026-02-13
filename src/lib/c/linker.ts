@@ -13,12 +13,20 @@ import {
 	R_AARCH64_MOVW_UABS_G1_NC,
 	R_AARCH64_MOVW_UABS_G2_NC,
 	R_AARCH64_MOVW_UABS_G3,
+	R_AARCH64_ADR_GOT_PAGE,
+	R_AARCH64_LD64_GOT_LO12_NC,
 } from "./elf-parser";
 
 // Map from instruction offset to replacement assembly line
 export interface LinkedLine {
 	text: string;
 	isLabel?: boolean;
+	originalOffset?: number; // Original byte offset in .text section
+}
+
+// Sanitize TCC symbol names (e.g. "L.1") to valid assembler labels (e.g. "L_1")
+function sanitizeLabel(name: string): string {
+	return name.replace(/[^a-zA-Z0-9_]/g, "_");
 }
 
 // Known C runtime functions we provide
@@ -46,7 +54,7 @@ export function link(
 
 	// First pass: identify ADRP relocations and their targets
 	for (const r of relocations) {
-		if (r.type === R_AARCH64_ADR_PREL_PG_HI21) {
+		if (r.type === R_AARCH64_ADR_PREL_PG_HI21 || r.type === R_AARCH64_ADR_GOT_PAGE) {
 			const sym = symbols[r.symbolIndex];
 			if (sym) {
 				adrpTargets.set(r.offset, { symbolName: sym.name, offset: r.offset });
@@ -90,7 +98,9 @@ export function link(
 		const line = disasmLines[i];
 
 		if (line.isLabel) {
-			result.push({ text: line.text, isLabel: true });
+			// Sanitize label names for our assembler (e.g. "L.1:" → "L_1:")
+			const labelText = line.text.replace(/^([^:]+):/, (_, name) => `${sanitizeLabel(name)}:`);
+			result.push({ text: labelText, isLabel: true, originalOffset: line.offset });
 			continue;
 		}
 
@@ -101,7 +111,7 @@ export function link(
 			if (reloc.type === R_AARCH64_CALL26) {
 				const sym = symbols[reloc.symbolIndex];
 				if (sym) {
-					result.push({ text: `\tBL ${sym.name}` });
+					result.push({ text: `\tBL ${sanitizeLabel(sym.name)}`, originalOffset: line.offset });
 					continue;
 				}
 			}
@@ -123,9 +133,26 @@ export function link(
 						const adrpMatch = line.text.match(/ADRP\s+(X\d+)/i);
 						if (adrpMatch && sym) {
 							const reg = adrpMatch[1];
-							const symName = sym.name;
 							// Replace ADRP+ADD pair with LDR Xd, =label
-							result.push({ text: `\tLDR ${reg}, =${symName}` });
+							result.push({ text: `\tLDR ${reg}, =${sanitizeLabel(sym.name)}`, originalOffset: line.offset });
+							skipNext = true;
+							continue;
+						}
+					}
+				}
+			}
+
+			// Handle ADRP+LDR GOT pair → LDR Xd, =label
+			if (reloc.type === R_AARCH64_ADR_GOT_PAGE) {
+				const sym = symbols[reloc.symbolIndex];
+				const nextLine = disasmLines[i + 1];
+				if (nextLine && !nextLine.isLabel) {
+					const nextReloc = relocMap.get(nextLine.offset);
+					if (nextReloc && nextReloc.type === R_AARCH64_LD64_GOT_LO12_NC) {
+						const adrpMatch = line.text.match(/ADRP\s+(X\d+)/i);
+						if (adrpMatch && sym) {
+							const reg = adrpMatch[1];
+							result.push({ text: `\tLDR ${reg}, =${sanitizeLabel(sym.name)}`, originalOffset: line.offset });
 							skipNext = true;
 							continue;
 						}
@@ -157,7 +184,7 @@ export function link(
 							}
 						}
 						const xReg = reg.startsWith("W") ? `X${reg.slice(1)}` : reg;
-						result.push({ text: `\tLDR ${xReg}, =${sym.name}` });
+						result.push({ text: `\tLDR ${xReg}, =${sanitizeLabel(sym.name)}`, originalOffset: line.offset });
 						// Skip the MOVK instructions we consumed
 						const toSkip = j - i - 1;
 						for (let k = 0; k < toSkip; k++) {
@@ -170,7 +197,7 @@ export function link(
 		}
 
 		// Pass through as-is
-		result.push({ text: line.text, isLabel: line.isLabel });
+		result.push({ text: line.text, isLabel: line.isLabel, originalOffset: line.offset });
 	}
 
 	return result;
@@ -180,83 +207,66 @@ export function link(
 export function resolveBranchTargets(
 	lines: LinkedLine[],
 ): string {
-	// Build offset→label map from label lines
-	const labelAtOffset = new Map<number, string>();
-	let instrOffset = 0;
-
-	// First pass: map labels to instruction indices
-	const instrLines: { text: string; instrIndex: number }[] = [];
-	let instrIdx = 0;
-	for (const line of lines) {
-		if (line.isLabel) {
-			labelAtOffset.set(instrIdx, line.text.replace(/:$/, ""));
-		} else {
-			instrLines.push({ text: line.text, instrIndex: instrIdx });
-			instrIdx++;
-		}
-	}
-
-	// Build byte offset to label map
-	const byteToLabel = new Map<number, string>();
-	instrIdx = 0;
-	for (const line of lines) {
-		if (line.isLabel) {
-			byteToLabel.set(instrIdx * 4, line.text.replace(/:$/, ""));
-		} else {
-			instrIdx++;
-		}
-	}
-
-	// Build instruction-index-to-byte-offset reverse mapping
-	// Actually, we need to figure out mapping from disasm byte offsets to labels
-	// The disassembler uses byte offsets in #target notation
-
-	// Reconstruct: for each instruction line, figure out what its byte offset was
-	const result: string[] = [];
-	let currentInstrByteOff = 0;
-	const instrByteOffsets: number[] = [];
-
-	for (const line of lines) {
-		if (line.isLabel) {
-			// label doesn't take bytes
-			continue;
-		}
-		instrByteOffsets.push(currentInstrByteOff);
-		currentInstrByteOff += 4;
-	}
-
-	// Rebuild: label byte offsets
+	// Map original byte offset → label name for existing labels
 	const labelByteMap = new Map<number, string>();
-	currentInstrByteOff = 0;
+	// Track which labels already exist (to avoid duplicating them as synthetic)
+	const existingLabels = new Set<string>();
 	for (const line of lines) {
-		if (line.isLabel) {
-			labelByteMap.set(currentInstrByteOff, line.text.replace(/:$/, ""));
-		} else {
-			currentInstrByteOff += 4;
+		if (line.isLabel && line.originalOffset !== undefined) {
+			const name = line.text.replace(/:$/, "");
+			labelByteMap.set(line.originalOffset, name);
+			existingLabels.add(name);
 		}
 	}
 
-	// Output
+	// Collect all branch target byte offsets from instruction text
+	const branchTargets = new Set<number>();
+	const branchPattern = /\b(?:B|BL|B\.\w+)\s+#(-?\d+)/i;
+	const cbPattern = /\b(?:CBZ|CBNZ)\s+(?:X|W)\d+,\s*#(-?\d+)/i;
+	for (const line of lines) {
+		if (line.isLabel) continue;
+		let m = branchPattern.exec(line.text);
+		if (m) branchTargets.add(parseInt(m[1]));
+		m = cbPattern.exec(line.text);
+		if (m) branchTargets.add(parseInt(m[1]));
+	}
+
+	// Create synthetic labels for branch targets that don't have labels
+	let syntheticId = 0;
+	for (const off of branchTargets) {
+		if (!labelByteMap.has(off)) {
+			labelByteMap.set(off, `__L${syntheticId++}`);
+		}
+	}
+
+	// Build output, inserting synthetic labels at the right original byte offsets
+	const result: string[] = [];
 	for (const line of lines) {
 		if (line.isLabel) {
 			result.push(line.text);
 			continue;
 		}
 
+		// Insert synthetic label before this instruction if its originalOffset matches a branch target
+		const origOff = line.originalOffset;
+		if (origOff !== undefined) {
+			const label = labelByteMap.get(origOff);
+			if (label && !existingLabels.has(label)) {
+				result.push(`${label}:`);
+			}
+		}
+
 		let text = line.text;
 
-		// Replace #<byte_offset> branch targets with labels
-		// B #offset, BL #offset, B.cond #offset, CBZ/CBNZ reg, #offset
+		// Replace branch targets with label names
 		text = text.replace(/\b(B|BL|B\.\w+)\s+#(-?\d+)/i, (match, mnemonic, offStr) => {
-			const targetOff = parseInt(offStr);
-			const label = labelByteMap.get(targetOff);
+			const label = labelByteMap.get(parseInt(offStr));
 			if (label) return `${mnemonic} ${label}`;
 			return match;
 		});
 
 		text = text.replace(/\b(CBZ|CBNZ)\s+(X\d+|W\d+),\s*#(-?\d+)/i, (match, mnemonic, reg, offStr) => {
-			const targetOff = parseInt(offStr);
-			const label = labelByteMap.get(targetOff);
+			const label = labelByteMap.get(parseInt(offStr));
 			if (label) return `${mnemonic} ${reg}, ${label}`;
 			return match;
 		});

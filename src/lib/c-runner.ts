@@ -98,7 +98,7 @@ function elfToAssembly(elfBytes: Uint8Array): string {
 	for (const sym of elf.symbols) {
 		if (sym.name) {
 			const sec = elf.sections[sym.sectionIndex];
-			if (sec && (sec.name === ".data" || sec.name === ".rodata")) {
+			if (sec && (sec.name === ".data" || sec.name === ".rodata" || sec.name === ".data.ro")) {
 				dataLabels.set(sym.name, sym.value);
 			}
 		}
@@ -127,7 +127,7 @@ function elfToAssembly(elfBytes: Uint8Array): string {
 			const nextOff = si + 1 < sectionSyms.length ? sectionSyms[si + 1].value : section.data.length;
 			const bytes = section.data.slice(sym.value, nextOff);
 
-			result += `${sym.name}:\n`;
+			result += `${sym.name.replace(/[^a-zA-Z0-9_]/g, "_")}:\n`;
 
 			// Try to detect string data (null-terminated)
 			if (bytes.length > 0 && bytes[bytes.length - 1] === 0) {

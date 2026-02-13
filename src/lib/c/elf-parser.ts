@@ -161,7 +161,7 @@ export function parseElf(data: Uint8Array): ElfParseResult {
 	// Find key sections
 	const textSection = sections.find((s) => s.name === ".text") ?? null;
 	const dataSection = sections.find((s) => s.name === ".data") ?? null;
-	const rodataSection = sections.find((s) => s.name === ".rodata") ?? null;
+	const rodataSection = sections.find((s) => s.name === ".rodata" || s.name === ".data.ro") ?? null;
 	const bssSection = sections.find((s) => s.name === ".bss");
 	const bssSize = bssSection?.size ?? 0;
 

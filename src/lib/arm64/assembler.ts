@@ -625,6 +625,33 @@ function parseInstruction(mnemonic: string, operandsRaw: string, lineNum: number
       return { op: mn, operands, line: lineNum };
     }
 
+    case "cset": {
+      // CSET Rd, cond
+      const rd = parseRegister(tokens[0]);
+      if (!rd) throw new Error(`Line ${lineNum}: Expected register: ${tokens[0]}`);
+      operands.push(rd);
+      const condCode = COND_CODES[tokens[1].toLowerCase()];
+      if (condCode === undefined) throw new Error(`Line ${lineNum}: Unknown condition: ${tokens[1]}`);
+      operands.push({ kind: "cond", code: condCode });
+      return { op: mn, operands, line: lineNum };
+    }
+
+    case "csel":
+    case "csinc":
+    case "csinv":
+    case "csneg": {
+      // CSEL/CSINC Rd, Rn, Rm, cond
+      for (let ti = 0; ti < 3; ti++) {
+        const reg = parseRegister(tokens[ti]);
+        if (!reg) throw new Error(`Line ${lineNum}: Expected register: ${tokens[ti]}`);
+        operands.push(reg);
+      }
+      const condCode = COND_CODES[tokens[3].toLowerCase()];
+      if (condCode === undefined) throw new Error(`Line ${lineNum}: Unknown condition: ${tokens[3]}`);
+      operands.push({ kind: "cond", code: condCode });
+      return { op: mn, operands, line: lineNum };
+    }
+
     case "ldr":
     case "ldrb":
     case "ldrh":

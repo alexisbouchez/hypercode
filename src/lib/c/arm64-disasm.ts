@@ -377,6 +377,49 @@ function decodeInstruction(instr: number, pc: number): string {
 		}
 	}
 
+	// CSEL / CSINC / CSET / CSINV / CSNEG
+	if ((instr & 0x1fe00000) === 0x1a800000) {
+		const sf = bit(instr, 31);
+		const op = bit(instr, 30);
+		const S = bit(instr, 29);
+		const rm = bits(instr, 20, 16);
+		const cond = bits(instr, 15, 12);
+		const op2 = bit(instr, 10);
+		const rn = bits(instr, 9, 5);
+		const rd = bits(instr, 4, 0);
+
+		if (S === 0) {
+			const regD = sf ? REG64(rd) : REG32(rd);
+			const regN = sf ? REG64(rn) : REG32(rn);
+			const regM = sf ? REG64(rm) : REG32(rm);
+
+			if (op === 0 && op2 === 0) {
+				// CSEL
+				return `CSEL ${regD}, ${regN}, ${regM}, ${COND_NAMES[cond]}`;
+			}
+			if (op === 0 && op2 === 1) {
+				// CSINC - CSET is CSINC Rd, XZR, XZR, invert(cond)
+				if (rn === 31 && rm === 31) {
+					const invertedCond = cond ^ 1;
+					return `CSET ${regD}, ${COND_NAMES[invertedCond]}`;
+				}
+				return `CSINC ${regD}, ${regN}, ${regM}, ${COND_NAMES[cond]}`;
+			}
+			if (op === 1 && op2 === 0) {
+				// CSINV - CSETM is CSINV Rd, XZR, XZR, invert(cond)
+				if (rn === 31 && rm === 31) {
+					const invertedCond = cond ^ 1;
+					return `CSETM ${regD}, ${COND_NAMES[invertedCond]}`;
+				}
+				return `CSINV ${regD}, ${regN}, ${regM}, ${COND_NAMES[cond]}`;
+			}
+			if (op === 1 && op2 === 1) {
+				// CSNEG
+				return `CSNEG ${regD}, ${regN}, ${regM}, ${COND_NAMES[cond]}`;
+			}
+		}
+	}
+
 	// Shift (immediate) - encoded as UBFM/SBFM
 	if ((instr & 0x7f800000) === 0x53000000 || ((instr & 0x7f800000) >>> 0) === 0xd3400000) {
 		const sf = bit(instr, 31);
@@ -504,9 +547,8 @@ function decodeInstruction(instr: number, pc: number): string {
 		const rn = bits(instr, 9, 5);
 		const rt = bits(instr, 4, 0);
 
-		if (V === 0 && (type === 1 || type === 3)) {
+		if (V === 0 && (type === 0 || type === 1 || type === 3)) {
 			const regN = REG64_SP(rn);
-			const isPre = type === 3;
 
 			const getMnemonic = () => {
 				if (size === 3 && opc === 1) return { mn: "LDR", reg: REG64(rt) };
@@ -523,8 +565,11 @@ function decodeInstruction(instr: number, pc: number): string {
 
 			const r = getMnemonic();
 			if (r) {
-				if (isPre) return `${r.mn} ${r.reg}, [${regN}, #${imm9}]!`;
-				return `${r.mn} ${r.reg}, [${regN}], #${imm9}`;
+				if (type === 3) return `${r.mn} ${r.reg}, [${regN}, #${imm9}]!`;
+				if (type === 1) return `${r.mn} ${r.reg}, [${regN}], #${imm9}`;
+				// type === 0: unscaled immediate (same syntax as offset)
+				if (imm9 === 0) return `${r.mn} ${r.reg}, [${regN}]`;
+				return `${r.mn} ${r.reg}, [${regN}, #${imm9}]`;
 			}
 		}
 	}
