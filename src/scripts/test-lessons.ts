@@ -3,6 +3,7 @@ import { runZigTests } from "./test-runners/zig-test-runner";
 import { runSqlTests } from "./test-runners/sql-test-runner";
 import { runArm64Tests } from "./test-runners/arm64-test-runner";
 import { runCTests } from "./test-runners/c-test-runner";
+import { runGleamTests } from "./test-runners/gleam-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -27,6 +28,10 @@ async function main() {
   console.log("Running C tests...");
   const cResults = await runCTests();
   allResults.push(...cResults);
+
+  console.log("Running Gleam tests...");
+  const gleamResults = runGleamTests();
+  allResults.push(...gleamResults);
 
   console.log("\n--- Results ---\n");
 

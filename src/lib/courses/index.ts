@@ -4,6 +4,7 @@ import { zigChapters, zigLessons } from "@/lib/lessons/zig";
 import { sqlChapters, sqlLessons } from "@/lib/lessons/sql";
 import { arm64Chapters, arm64Lessons } from "@/lib/lessons/arm64";
 import { cChapters, cLessons } from "@/lib/lessons/c";
+import { gleamChapters, gleamLessons } from "@/lib/lessons/gleam";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -398,6 +399,86 @@ The best way to learn is to build. Some project ideas:
 - [CS:APP](https://csapp.cs.cmu.edu/) -- *Computer Systems: A Programmer's Perspective* covers how C maps to machine code.
 `;
 
+const gleamIntroductionContent = `
+## Why Gleam?
+
+Gleam is a friendly functional programming language with a powerful type system that catches mistakes before your code runs. It compiles to both Erlang and JavaScript, letting you build reliable software for any platform.
+
+- **Type safe** -- Gleam's type system catches errors at compile time. No null pointer exceptions, no undefined is not a function. If it compiles, it works.
+- **Functional** -- Immutable data, pattern matching, and the pipe operator make code easy to read and reason about.
+- **Erlang VM** -- Gleam runs on the BEAM, the battle-tested virtual machine behind WhatsApp, Discord, and other systems serving millions of users.
+- **JavaScript target** -- Gleam also compiles to JavaScript, so you can share code between server and client.
+- **Friendly** -- Clear error messages, simple syntax, and a welcoming community. Gleam is designed to be a joy to use.
+
+## The Story
+
+Gleam was created by Louis Pilfold, who started working on it in 2018. Louis wanted a language that combined the reliability of the Erlang ecosystem with the developer experience of modern typed languages.
+
+The Erlang VM is legendary for building fault-tolerant, concurrent systems -- it powers phone networks, messaging apps, and databases that need to stay up 24/7. But Erlang's dynamic typing and unusual syntax can be barriers for newcomers. Gleam bridges this gap with a familiar syntax and a strong type system, while giving you full access to the BEAM ecosystem.
+
+Gleam reached version 1.0 in March 2024, marking its stability commitment.
+
+## Who Uses Gleam
+
+Gleam is a young but rapidly growing language:
+
+- **Gleam itself** -- the Gleam compiler is written in Rust, and its standard library and package manager are written in Gleam.
+- **Web applications** -- frameworks like Lustre (frontend) and Wisp (backend) let you build full-stack Gleam apps.
+- **The BEAM ecosystem** -- Gleam interoperates seamlessly with Erlang and Elixir libraries.
+
+## What You Will Learn
+
+This course contains **16 lessons** organized into **7 chapters**:
+
+1. **Foundations** -- How Gleam programs are structured: imports, functions, and printing output.
+2. **Data Types** -- Strings, numbers, and the operations you can perform on them.
+3. **Control Flow** -- Case expressions and pattern matching.
+4. **Collections** -- Lists and tuples for grouping data.
+5. **Custom Types** -- Sum types, records, and generics.
+6. **Error Handling** -- The Result type and the use expression.
+7. **Functional Patterns** -- The pipe operator and higher-order functions.
+
+Each lesson explains a concept, demonstrates it with code examples, and gives you an exercise to practice.
+
+Let's get started.
+`;
+
+const gleamWhatsNextContent = `
+## Congratulations
+
+You have completed all 16 lessons. You now have a solid foundation in Gleam: functions, types, pattern matching, custom types, error handling, pipes, and higher-order functions.
+
+That is a real accomplishment. You understand the key ideas that make Gleam a powerful and enjoyable language.
+
+## What to Explore Next
+
+Here are topics to dive deeper into:
+
+- **The BEAM** -- Learn about processes, message passing, and OTP for building fault-tolerant concurrent systems.
+- **Lustre** -- A frontend framework for building interactive web apps in Gleam.
+- **Wisp** -- A web framework for building backend services in Gleam.
+- **Gleam OTP** -- Typed wrappers around Erlang's OTP behaviors.
+- **JavaScript interop** -- Call JavaScript libraries from Gleam code.
+
+## Build Something
+
+The best way to learn is to build. Some project ideas:
+
+- **A command-line tool** -- parse arguments, read files, and produce output
+- **A web API** with Wisp -- routes, JSON responses, and database queries
+- **A frontend app** with Lustre -- components, state management, and effects
+- **A Discord bot** -- using Gleam on the BEAM for real-time message handling
+
+## References
+
+- [Gleam Language Tour](https://tour.gleam.run/) -- interactive guide to every Gleam feature.
+- [Gleam Documentation](https://gleam.run/documentation/) -- official language documentation.
+- [Gleam Standard Library](https://hexdocs.pm/gleam_stdlib/) -- API docs for the standard library.
+- [Gleam Packages](https://packages.gleam.run/) -- the Gleam package index.
+- [Awesome Gleam](https://github.com/gleam-lang/awesome-gleam) -- community-curated list of Gleam resources.
+- [Gleam Discord](https://discord.gg/Fm8Pwmy) -- the official community chat.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -454,6 +535,17 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: cIntroductionContent,
     whatsNextContent: cWhatsNextContent,
+  },
+  {
+    id: "gleam",
+    title: "Gleam",
+    description: "Learn the Gleam programming language from scratch. Build type-safe, functional programs with pattern matching, the pipe operator, and the Result type.",
+    language: "gleam",
+    chapters: gleamChapters,
+    lessons: gleamLessons,
+    runtimeLabel: "Gleam runtime",
+    introductionContent: gleamIntroductionContent,
+    whatsNextContent: gleamWhatsNextContent,
   },
 ];
 

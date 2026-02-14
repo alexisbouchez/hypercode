@@ -228,6 +228,74 @@ export function CodeEditor({ value, onChange, language = "go", readOnly = false,
       });
     }
 
+    // Register Gleam language if not already registered
+    if (!monaco.languages.getLanguages().some((l: { id: string }) => l.id === "gleam")) {
+      monaco.languages.register({ id: "gleam" });
+      monaco.languages.setMonarchTokensProvider("gleam", {
+        keywords: [
+          "as", "assert", "auto", "case", "const", "echo", "else", "fn",
+          "if", "import", "let", "macro", "opaque", "panic", "pub", "test",
+          "todo", "type", "use",
+        ],
+        typeKeywords: [
+          "Int", "Float", "String", "Bool", "Result", "List", "Option",
+          "Nil", "True", "False", "Ok", "Error", "Some", "None",
+          "BitArray", "Dict", "Set", "Iterator", "Regex", "StringBuilder",
+          "Dynamic", "DecodeError",
+        ],
+        operators: [
+          "=", ">", "<", "!", "==", "!=", "<=", ">=",
+          "+", "-", "*", "/", "%", "+.", "-.", "*.", "/.",
+          "<>", "|>", "..", "->", "<-",
+        ],
+        symbols: /[=><!~?:&|+\-*/^%]+/,
+        tokenizer: {
+          root: [
+            [/[a-z_]\w*/, {
+              cases: {
+                "@keywords": "keyword",
+                "@default": "identifier",
+              },
+            }],
+            [/[A-Z]\w*/, {
+              cases: {
+                "@typeKeywords": "type",
+                "@default": "type.identifier",
+              },
+            }],
+            { include: "@whitespace" },
+            [/[{}()[\]]/, "@brackets"],
+            [/\|>/, "operator"],
+            [/<>/, "operator"],
+            [/->/, "operator"],
+            [/\.\./, "operator"],
+            [/<-/, "operator"],
+            [/@symbols/, {
+              cases: {
+                "@operators": "operator",
+                "@default": "",
+              },
+            }],
+            [/#\(/, "@brackets"],
+            [/0[xX][0-9a-fA-F_]+/, "number.hex"],
+            [/0[oO][0-7_]+/, "number.octal"],
+            [/0[bB][01_]+/, "number.binary"],
+            [/[0-9][0-9_]*(\.[0-9_]+)?([eE][+-]?[0-9_]+)?/, "number"],
+            [/"/, { token: "string.quote", bracket: "@open", next: "@string" }],
+          ],
+          string: [
+            [/[^\\"]+/, "string"],
+            [/\\./, "string.escape"],
+            [/"/, { token: "string.quote", bracket: "@close", next: "@pop" }],
+          ],
+          whitespace: [
+            [/[ \t\r\n]+/, "white"],
+            [/\/\/.*$/, "comment"],
+          ],
+        },
+      });
+    }
+
     editor.addAction({
       id: "run-code",
       label: "Run Code",

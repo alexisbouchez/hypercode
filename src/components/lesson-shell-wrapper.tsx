@@ -7,6 +7,7 @@ import { initZigRunner, isZigReady, runZig, runTests as runZigTests } from "@/li
 import { initSqlRunner, isSqlReady, runSql, runTests as runSqlTests } from "@/lib/sql-runner";
 import { initArm64Runner, isArm64Ready, runArm64, runTests as runArm64Tests } from "@/lib/arm64-runner";
 import { initCRunner, isCReady, runC, runTests as runCTests } from "@/lib/c-runner";
+import { initGleamRunner, isGleamReady, runGleam, runTests as runGleamTests } from "@/lib/gleam-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -33,6 +34,7 @@ export function LessonShellWrapper({
     if (courseId === "zig") return initZigRunner();
     if (courseId === "arm64") return initArm64Runner();
     if (courseId === "c") return initCRunner();
+    if (courseId === "gleam") return initGleamRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -41,6 +43,7 @@ export function LessonShellWrapper({
     if (courseId === "zig") return isZigReady();
     if (courseId === "arm64") return isArm64Ready();
     if (courseId === "c") return isCReady();
+    if (courseId === "gleam") return isGleamReady();
     return isGoReady();
   }, [courseId]);
 
@@ -49,6 +52,7 @@ export function LessonShellWrapper({
     if (courseId === "zig") return runZig(code);
     if (courseId === "arm64") return runArm64(code);
     if (courseId === "c") return runC(code);
+    if (courseId === "gleam") return runGleam(code);
     return runGo(code);
   }, [courseId]);
 
@@ -57,6 +61,7 @@ export function LessonShellWrapper({
     if (courseId === "zig") return runZigTests(code, tests);
     if (courseId === "arm64") return runArm64Tests(code, tests);
     if (courseId === "c") return runCTests(code, tests);
+    if (courseId === "gleam") return runGleamTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 
