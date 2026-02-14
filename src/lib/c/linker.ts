@@ -131,7 +131,7 @@ export function link(
 						nextReloc.type === R_AARCH64_LDST8_ABS_LO12_NC
 					)) {
 						// Extract destination register from ADRP line
-						const adrpMatch = line.text.match(/ADRP\s+(X\d+)/i);
+						const adrpMatch = line.text.match(/ADRP\s+(X\d+|LR|FP)/i);
 						if (adrpMatch && sym) {
 							const reg = adrpMatch[1];
 							// Replace ADRP+ADD pair with LDR Xd, =label
@@ -150,7 +150,7 @@ export function link(
 				if (nextLine && !nextLine.isLabel) {
 					const nextReloc = relocMap.get(nextLine.offset);
 					if (nextReloc && nextReloc.type === R_AARCH64_LD64_GOT_LO12_NC) {
-						const adrpMatch = line.text.match(/ADRP\s+(X\d+)/i);
+						const adrpMatch = line.text.match(/ADRP\s+(X\d+|LR|FP)/i);
 						if (adrpMatch && sym) {
 							const reg = adrpMatch[1];
 							result.push({ text: `\tLDR ${reg}, =${sanitizeLabel(sym.name)}`, originalOffset: line.offset });

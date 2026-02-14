@@ -10,6 +10,7 @@ import { enums } from "./data/16-enums";
 import { bitwiseOperators } from "./data/17-bitwise-operators";
 import { functions } from "./data/06-functions";
 import { recursion } from "./data/07-recursion";
+import { staticVariables } from "./data/25-static";
 import { arrays } from "./data/08-arrays";
 import { strings } from "./data/09-strings";
 import { multidimensionalArrays } from "./data/10-multidimensional-arrays";
@@ -48,6 +49,7 @@ export const cLessons: Lesson[] = [
 	bitwiseOperators,
 	functions,
 	recursion,
+	staticVariables,
 	arrays,
 	strings,
 	multidimensionalArrays,
