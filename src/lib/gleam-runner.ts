@@ -132,19 +132,31 @@ async function executeJs(js: string): Promise<{ stdout: string }> {
 
   // Parse import statements and dynamically import dependencies from same-origin
   // URLs. We can't use blob URLs because COEP require-corp blocks their sub-imports.
-  const importRegex = /import\s*\{([^}]+)\}\s*from\s*"([^"]+)";?/g;
+  // Gleam compiler emits two patterns:
+  //   import * as $io from "./gleam/io.mjs"
+  //   import { Ok, toList, CustomType as $CustomType } from "./gleam.mjs"
   const paramNames: string[] = [];
   const paramValues: unknown[] = [];
 
+  // Handle star imports: import * as $name from "path"
+  const starRegex = /import\s+\*\s+as\s+(\S+)\s+from\s+"([^"]+)";?/g;
   let match;
-  while ((match = importRegex.exec(js)) !== null) {
-    const bindings = match[1].split(",").map((s) => s.trim()).filter(Boolean);
-    const rawPath = match[2];
-    const resolvedPath = rawPath.replace(/^\.\//, "/gleam/precompiled/");
-
+  while ((match = starRegex.exec(js)) !== null) {
+    const localName = match[1];
+    const resolvedPath = match[2].replace(/^\.\//, "/gleam/precompiled/");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mod: any = await import(/* webpackIgnore: true */ resolvedPath);
+    paramNames.push(localName);
+    paramValues.push(mod);
+  }
 
+  // Handle named imports: import { a, b as c } from "path"
+  const namedRegex = /import\s*\{([^}]+)\}\s*from\s*"([^"]+)";?/g;
+  while ((match = namedRegex.exec(js)) !== null) {
+    const bindings = match[1].split(",").map((s) => s.trim()).filter(Boolean);
+    const resolvedPath = match[2].replace(/^\.\//, "/gleam/precompiled/");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mod: any = await import(/* webpackIgnore: true */ resolvedPath);
     for (const binding of bindings) {
       const parts = binding.split(/\s+as\s+/);
       const exportName = parts[0].trim();
@@ -154,8 +166,9 @@ async function executeJs(js: string): Promise<{ stdout: string }> {
     }
   }
 
-  // Strip import/export statements from the compiled code
-  let code = js.replace(/import\s*\{[^}]+\}\s*from\s*"[^"]+";?\s*/g, "");
+  // Strip all import and export statements from the compiled code
+  let code = js.replace(/import\s+\*\s+as\s+\S+\s+from\s+"[^"]+";?\s*/g, "");
+  code = code.replace(/import\s*\{[^}]+\}\s*from\s*"[^"]+";?\s*/g, "");
   code = code.replace(/\bexport\s+/g, "");
 
   // Intercept console.log
