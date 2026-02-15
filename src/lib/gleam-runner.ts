@@ -97,15 +97,8 @@ export async function runGleam(code: string): Promise<RunResult> {
       return { stdout: "", stderr: "", error: "Compilation produced no output" };
     }
 
-    // Rewrite imports to full URLs (blob: URLs can't resolve absolute paths)
-    const origin = window.location.origin;
-    const rewrittenJs = js.replaceAll(
-      /from\s+"\.\/(.+)"/g,
-      `from "${origin}/gleam/precompiled/$1"`,
-    );
-
-    // Execute via blob URL with console.log interception
-    const result = await executeJs(rewrittenJs);
+    // Execute compiled JS with console.log interception
+    const result = await executeJs(js);
 
     return {
       stdout: result.stdout,
@@ -137,9 +130,33 @@ function cleanError(error: string): string {
 async function executeJs(js: string): Promise<{ stdout: string }> {
   let stdout = "";
 
-  // Create a blob URL for the compiled JS module
-  const blob = new Blob([js], { type: "text/javascript" });
-  const url = URL.createObjectURL(blob);
+  // Parse import statements and dynamically import dependencies from same-origin
+  // URLs. We can't use blob URLs because COEP require-corp blocks their sub-imports.
+  const importRegex = /import\s*\{([^}]+)\}\s*from\s*"([^"]+)";?/g;
+  const paramNames: string[] = [];
+  const paramValues: unknown[] = [];
+
+  let match;
+  while ((match = importRegex.exec(js)) !== null) {
+    const bindings = match[1].split(",").map((s) => s.trim()).filter(Boolean);
+    const rawPath = match[2];
+    const resolvedPath = rawPath.replace(/^\.\//, "/gleam/precompiled/");
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mod: any = await import(/* webpackIgnore: true */ resolvedPath);
+
+    for (const binding of bindings) {
+      const parts = binding.split(/\s+as\s+/);
+      const exportName = parts[0].trim();
+      const localName = parts.length > 1 ? parts[1].trim() : exportName;
+      paramNames.push(localName);
+      paramValues.push(mod[exportName]);
+    }
+  }
+
+  // Strip import/export statements from the compiled code
+  let code = js.replace(/import\s*\{[^}]+\}\s*from\s*"[^"]+";?\s*/g, "");
+  code = code.replace(/\bexport\s+/g, "");
 
   // Intercept console.log
   const origLog = console.log;
@@ -157,15 +174,12 @@ async function executeJs(js: string): Promise<{ stdout: string }> {
   };
 
   try {
-    const mod = await import(/* webpackIgnore: true */ url);
-    if (typeof mod.main === "function") {
-      mod.main();
-    }
+    const fn = new Function(...paramNames, code + "\nif (typeof main === 'function') main();");
+    fn(...paramValues);
   } finally {
     console.log = origLog;
     console.error = origError;
     console.warn = origWarn;
-    URL.revokeObjectURL(url);
   }
 
   return { stdout };

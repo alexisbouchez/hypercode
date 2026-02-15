@@ -43,7 +43,7 @@ const courseLogos: Record<string, React.ReactNode> = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background overflow-y-auto">
+    <div className="h-screen bg-background overflow-y-auto">
       <header className="bg-background sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-6 flex items-center justify-between">
           <Image src={logo} alt="Hypercode" width={200} height={44} priority />
