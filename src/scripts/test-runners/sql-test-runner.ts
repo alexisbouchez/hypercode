@@ -10,13 +10,22 @@ import type { LessonTestResult } from "./types";
 
 export async function runSqlTests(): Promise<LessonTestResult[]> {
   const results: LessonTestResult[] = [];
+  const db = new PGlite();
+  await db.waitReady;
 
   for (const lesson of sqlLessons) {
     for (const test of lesson.tests) {
-      const db = new PGlite();
-      await db.waitReady;
-
       try {
+        // Reset to clean state: drop all tables and recreate schema
+        await db.exec(`
+          DO $$ DECLARE r RECORD;
+          BEGIN
+            FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+              EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE';
+            END LOOP;
+          END $$;
+        `);
+        await db.exec("DROP SEQUENCE IF EXISTS products_id_seq, users_id_seq, customers_id_seq, orders_id_seq CASCADE;");
         await db.exec(EXERCISE_SCHEMA);
         await db.exec(EXERCISE_DATA);
 
@@ -76,11 +85,10 @@ export async function runSqlTests(): Promise<LessonTestResult[]> {
           actual: message,
           expected: test.expected,
         });
-      } finally {
-        await db.close();
       }
     }
   }
 
+  await db.close();
   return results;
 }
