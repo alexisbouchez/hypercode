@@ -97,10 +97,11 @@ export async function runGleam(code: string): Promise<RunResult> {
       return { stdout: "", stderr: "", error: "Compilation produced no output" };
     }
 
-    // Rewrite imports to point to our precompiled files
+    // Rewrite imports to full URLs (blob: URLs can't resolve absolute paths)
+    const origin = window.location.origin;
     const rewrittenJs = js.replaceAll(
       /from\s+"\.\/(.+)"/g,
-      'from "/gleam/precompiled/$1"',
+      `from "${origin}/gleam/precompiled/$1"`,
     );
 
     // Execute via blob URL with console.log interception
