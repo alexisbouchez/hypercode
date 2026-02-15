@@ -75,13 +75,16 @@ echo "    Bundled $(node -e "console.log(Object.keys(JSON.parse(require('fs').re
 echo "==> Copying precompiled JS files..."
 COMPILED_DIR="$TMP_PROJECT/stdlib_builder/build/dev/javascript"
 
-# Copy prelude
-cp "$COMPILED_DIR/prelude.mjs" "$PRECOMPILED_DIR/gleam.mjs"
-
 # Copy gleam_stdlib FFI and root-level compiled modules (dict.mjs, etc.)
+# NOTE: this must run BEFORE the prelude copy because gleam_stdlib/gleam.mjs
+# is a re-export stub that would overwrite the real prelude content.
 for f in "$COMPILED_DIR/gleam_stdlib/"*.mjs; do
   [ -f "$f" ] && cp "$f" "$PRECOMPILED_DIR/"
 done
+
+# Copy prelude — gleam_stdlib/gleam.mjs re-exports from ../prelude.mjs,
+# so we need prelude.mjs at the parent level (public/gleam/) as well.
+cp "$COMPILED_DIR/prelude.mjs" "$OUTPUT_DIR/prelude.mjs"
 
 # Copy compiled stdlib modules
 mkdir -p "$PRECOMPILED_DIR/gleam"

@@ -110,7 +110,7 @@ export function OutputPanel({
             ))}
           </div>
           {allPassed && (
-            <div className="mt-3 text-emerald-500 font-semibold">
+            <div className="mt-3 text-emerald-500 font-semibold" data-testid="all-passed">
               All tests passed!
             </div>
           )}

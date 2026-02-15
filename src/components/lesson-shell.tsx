@@ -69,6 +69,12 @@ export function LessonShell({
   const hasNext = currentIndex < lessons.length - 1;
 
   const [code, setCode] = useState(currentLesson.starterCode);
+
+  // Expose setCode for E2E tests
+  useEffect(() => {
+    (window as any).__e2eSetCode = setCode;
+    return () => { delete (window as any).__e2eSetCode; };
+  }, []);
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
   const [testResults, setTestResults] = useState<TestResult[]>([]);
@@ -320,7 +326,7 @@ export function LessonShell({
             <div className="h-full flex flex-col overflow-hidden">
               {/* Toolbar */}
               <div className="px-4 py-2 border-b border-border flex items-center gap-2 bg-card shrink-0">
-                <Button size="sm" onClick={handleRun} disabled={isRunning}>
+                <Button size="sm" onClick={handleRun} disabled={isRunning} data-testid="run-button">
                   {isRunning ? "Running..." : "Run"}
                   <kbd className="ml-1.5 text-[10px] opacity-60 font-sans">{mod}↵</kbd>
                 </Button>
@@ -349,17 +355,17 @@ export function LessonShell({
                 </Button>
                 <div className="flex-1" />
                 {!runtimeReady && !runtimeError && (
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-muted-foreground" data-testid="runtime-status">
                     {runtimeLabel} loading...
                   </span>
                 )}
                 {runtimeError && (
-                  <span className="text-xs text-destructive" title={runtimeError}>
+                  <span className="text-xs text-destructive" data-testid="runtime-status" title={runtimeError}>
                     {runtimeLabel} failed to load
                   </span>
                 )}
                 {runtimeReady && (
-                  <span className="text-xs text-primary">
+                  <span className="text-xs text-primary" data-testid="runtime-status">
                     {runtimeLabel} ready
                   </span>
                 )}

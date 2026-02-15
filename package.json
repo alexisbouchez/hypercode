@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "build:book": "tectonic -o public src/go-book.tex",
-    "test": "bun src/scripts/test-lessons.ts"
+    "test": "bun src/scripts/test-lessons.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@andrewbranch/untar.js": "^1.0.3",
@@ -35,6 +36,7 @@
     "webr": "^0.5.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
