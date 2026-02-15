@@ -6,8 +6,23 @@ import { extractGleamFunctions } from "@/lib/gleam-runner";
 import { gleamLessons } from "@/lib/lessons/gleam/index";
 import type { LessonTestResult } from "./types";
 
+function hasGleam(): boolean {
+  try {
+    execSync("gleam --version", { stdio: "pipe" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function runGleamTests(): LessonTestResult[] {
   const results: LessonTestResult[] = [];
+
+  if (!hasGleam()) {
+    console.log("  (skipped: gleam CLI not found)");
+    return results;
+  }
+
   const tmp = join(tmpdir(), `hypercode-gleam-${Date.now()}`);
   mkdirSync(tmp, { recursive: true });
 

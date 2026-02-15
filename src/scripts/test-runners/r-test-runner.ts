@@ -6,8 +6,23 @@ import { extractRFunctions } from "@/lib/r-runner";
 import { rLessons } from "@/lib/lessons/r/index";
 import type { LessonTestResult } from "./types";
 
+function hasRscript(): boolean {
+  try {
+    execSync("Rscript --version", { stdio: "pipe" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function runRTests(): LessonTestResult[] {
   const results: LessonTestResult[] = [];
+
+  if (!hasRscript()) {
+    console.log("  (skipped: Rscript not found)");
+    return results;
+  }
+
   const tmp = join(tmpdir(), `hypercode-r-${Date.now()}`);
   mkdirSync(tmp, { recursive: true });
 
