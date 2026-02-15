@@ -78,10 +78,10 @@ COMPILED_DIR="$TMP_PROJECT/stdlib_builder/build/dev/javascript"
 # Copy prelude
 cp "$COMPILED_DIR/prelude.mjs" "$PRECOMPILED_DIR/gleam.mjs"
 
-# Copy gleam_stdlib FFI
-if [ -f "$COMPILED_DIR/gleam_stdlib/gleam_stdlib.mjs" ]; then
-  cp "$COMPILED_DIR/gleam_stdlib/gleam_stdlib.mjs" "$PRECOMPILED_DIR/gleam_stdlib.mjs"
-fi
+# Copy gleam_stdlib FFI and root-level compiled modules (dict.mjs, etc.)
+for f in "$COMPILED_DIR/gleam_stdlib/"*.mjs; do
+  [ -f "$f" ] && cp "$f" "$PRECOMPILED_DIR/"
+done
 
 # Copy compiled stdlib modules
 mkdir -p "$PRECOMPILED_DIR/gleam"
