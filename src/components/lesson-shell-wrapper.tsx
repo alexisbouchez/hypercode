@@ -8,6 +8,7 @@ import { initSqlRunner, isSqlReady, runSql, runTests as runSqlTests } from "@/li
 import { initArm64Runner, isArm64Ready, runArm64, runTests as runArm64Tests } from "@/lib/arm64-runner";
 import { initCRunner, isCReady, runC, runTests as runCTests } from "@/lib/c-runner";
 import { initGleamRunner, isGleamReady, runGleam, runTests as runGleamTests } from "@/lib/gleam-runner";
+import { initRRunner, isRReady, runR, runTests as runRTests } from "@/lib/r-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -35,6 +36,7 @@ export function LessonShellWrapper({
     if (courseId === "arm64") return initArm64Runner();
     if (courseId === "c") return initCRunner();
     if (courseId === "gleam") return initGleamRunner();
+    if (courseId === "r") return initRRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -44,6 +46,7 @@ export function LessonShellWrapper({
     if (courseId === "arm64") return isArm64Ready();
     if (courseId === "c") return isCReady();
     if (courseId === "gleam") return isGleamReady();
+    if (courseId === "r") return isRReady();
     return isGoReady();
   }, [courseId]);
 
@@ -53,6 +56,7 @@ export function LessonShellWrapper({
     if (courseId === "arm64") return runArm64(code);
     if (courseId === "c") return runC(code);
     if (courseId === "gleam") return runGleam(code);
+    if (courseId === "r") return runR(code);
     return runGo(code);
   }, [courseId]);
 
@@ -62,6 +66,7 @@ export function LessonShellWrapper({
     if (courseId === "arm64") return runArm64Tests(code, tests);
     if (courseId === "c") return runCTests(code, tests);
     if (courseId === "gleam") return runGleamTests(code, tests);
+    if (courseId === "r") return runRTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

@@ -5,6 +5,7 @@ import { sqlChapters, sqlLessons } from "@/lib/lessons/sql";
 import { arm64Chapters, arm64Lessons } from "@/lib/lessons/arm64";
 import { cChapters, cLessons } from "@/lib/lessons/c";
 import { gleamChapters, gleamLessons } from "@/lib/lessons/gleam";
+import { rChapters, rLessons } from "@/lib/lessons/r";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -479,6 +480,90 @@ The best way to learn is to build. Some project ideas:
 - [Gleam Discord](https://discord.gg/Fm8Pwmy) -- the official community chat.
 `;
 
+const rIntroductionContent = `
+## Why R?
+
+R is the language of statistics and data science. It was designed from the ground up for data analysis, visualization, and statistical computing. Here is what makes it stand out:
+
+- **Built for data** -- Vectors, data frames, and matrices are first-class citizens. Data manipulation is natural and expressive.
+- **Unmatched statistics** -- From t-tests to Bayesian inference, R has every statistical method built in or available through packages.
+- **Visualization** -- R's plotting capabilities, especially ggplot2, produce publication-quality graphics with minimal code.
+- **CRAN** -- The Comprehensive R Archive Network hosts over 20,000 packages covering every domain of data analysis.
+- **Interactive analysis** -- R excels at exploratory data analysis with its REPL and notebook-style workflows.
+
+## The Story
+
+R was created by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand, in 1993. The name "R" is a play on the creators' first names and a nod to S, the language that inspired it.
+
+S was developed at Bell Labs by John Chambers in the 1970s as a language for statistical computing. R reimplemented S as free, open-source software and quickly surpassed it. The first stable release, R 1.0.0, came in February 2000.
+
+Today, R is maintained by the R Core Team and has one of the most active open-source communities in data science.
+
+## Who Uses R
+
+R is the standard tool in many fields:
+
+- **Academia** -- the dominant language for statistical research and publications.
+- **Pharmaceutical industry** -- used for clinical trial analysis and FDA submissions.
+- **Finance** -- risk modeling, time series analysis, and quantitative trading.
+- **Tech companies** -- Google, Facebook, Microsoft, and Twitter use R for data analysis.
+
+The tidyverse ecosystem, created by Hadley Wickham, has made R accessible to a much broader audience with packages like dplyr, ggplot2, and tidyr.
+
+## What You Will Learn
+
+This course contains **16 lessons** organized into **7 chapters**:
+
+1. **Foundations** -- Printing output, variables, types, and arithmetic.
+2. **Vectors** -- Creating vectors, vectorized operations, indexing, and filtering.
+3. **Control Flow** -- Conditionals and loops.
+4. **Functions** -- Defining functions, default arguments, closures, and higher-order functions.
+5. **Data Structures** -- Lists, matrices, and data frames.
+6. **Data Manipulation** -- Apply functions and data frame operations.
+7. **Strings** -- String manipulation with paste, gsub, and sprintf.
+
+Each lesson explains a concept, demonstrates it with code examples, and gives you an exercise to practice.
+
+Let's get started.
+`;
+
+const rWhatsNextContent = `
+## Congratulations
+
+You have completed all 16 lessons. You now have a solid foundation in R: variables, vectors, control flow, functions, lists, matrices, data frames, apply functions, and string operations.
+
+That is a real accomplishment. You understand the core building blocks that make R powerful for data analysis.
+
+## What to Explore Next
+
+Here are topics to dive deeper into:
+
+- **ggplot2** -- The most popular R visualization package. Learn the grammar of graphics.
+- **dplyr** -- Data manipulation with filter, select, mutate, summarize, and group_by.
+- **tidyr** -- Reshape data with pivot_longer and pivot_wider.
+- **R Markdown** -- Create reproducible reports combining code, output, and narrative.
+- **Shiny** -- Build interactive web applications entirely in R.
+- **Statistical modeling** -- Linear models, GLMs, and machine learning with caret or tidymodels.
+
+## Build Something
+
+The best way to learn is to build. Some project ideas:
+
+- **An exploratory data analysis** -- download a dataset from Kaggle and analyze it with dplyr and ggplot2.
+- **A statistical report** -- run hypothesis tests and build regression models in R Markdown.
+- **A Shiny dashboard** -- create an interactive visualization app.
+- **A data pipeline** -- clean, transform, and analyze a messy real-world dataset.
+
+## References
+
+- [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham -- the best introduction to modern R.
+- [Advanced R](https://adv-r.hadley.nz/) by Hadley Wickham -- deep dive into R's internals and programming patterns.
+- [The R Manuals](https://cran.r-project.org/manuals.html) -- official documentation from the R Core Team.
+- [CRAN Task Views](https://cran.r-project.org/web/views/) -- curated lists of packages by topic.
+- [RStudio Cheatsheets](https://posit.co/resources/cheatsheets/) -- quick reference cards for popular packages.
+- [R-bloggers](https://www.r-bloggers.com/) -- community blog aggregator for R content.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -546,6 +631,17 @@ export const courses: Course[] = [
     runtimeLabel: "Gleam runtime",
     introductionContent: gleamIntroductionContent,
     whatsNextContent: gleamWhatsNextContent,
+  },
+  {
+    id: "r",
+    title: "R",
+    description: "Learn the R programming language from scratch. Master vectors, data frames, functions, and data manipulation with R's powerful built-in tools.",
+    language: "r",
+    chapters: rChapters,
+    lessons: rLessons,
+    runtimeLabel: "R runtime",
+    introductionContent: rIntroductionContent,
+    whatsNextContent: rWhatsNextContent,
   },
 ];
 
