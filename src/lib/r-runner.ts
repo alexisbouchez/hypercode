@@ -49,7 +49,7 @@ export async function runR(code: string): Promise<RunResult> {
   }
 
   try {
-    const shelter = await webR.shelter();
+    const shelter = await new webR.Shelter();
     try {
       const result = await shelter.captureR(code, {
         withAutoprint: true,
