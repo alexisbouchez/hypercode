@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/:path*.mjs",
+        headers: [
+          { key: "Content-Type", value: "text/javascript" },
+        ],
+      },
+      {
         source: "/(.*)",
         headers: [
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
