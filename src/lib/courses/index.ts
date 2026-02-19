@@ -6,6 +6,7 @@ import { arm64Chapters, arm64Lessons } from "@/lib/lessons/arm64";
 import { cChapters, cLessons } from "@/lib/lessons/c";
 import { gleamChapters, gleamLessons } from "@/lib/lessons/gleam";
 import { rChapters, rLessons } from "@/lib/lessons/r";
+import { holycChapters, holycLessons } from "@/lib/lessons/holyc";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -564,6 +565,78 @@ The best way to learn is to build. Some project ideas:
 - [R-bloggers](https://www.r-bloggers.com/) -- community blog aggregator for R content.
 `;
 
+const holycIntroductionContent = `
+## Why HolyC?
+
+HolyC is the programming language Terry A. Davis created for TempleOS — a complete operating system he built alone over more than a decade. It is a C dialect with unique features designed for simplicity, directness, and a close relationship between programmer and machine.
+
+- **No preprocessor** -- HolyC has no \`#define\`. Metaprogramming is done with \`#exe\` blocks that run real code at compile time.
+- **No \`continue\`** -- Intentionally omitted to encourage explicit control flow with \`goto\`.
+- **Capital built-ins** -- \`Print\`, \`TRUE\`, \`FALSE\` and other built-ins are capitalized to distinguish them from user code.
+- **Default arguments** -- Functions can have default parameter values at any position, unlike C.
+- **Range switch cases** -- \`case 1...5:\` matches a range of values in a single case.
+- **JIT model** -- HolyC compiles and runs immediately. There is no separate compile step and no \`main\` function required.
+- **Classes** -- \`class\` replaces C's \`typedef struct\`, with cleaner syntax.
+
+## The Story
+
+Terry Davis began working on TempleOS around 2003 after a series of hospitalizations. He believed God had given him a specification for a "Third Temple" — a personal, direct interface between humans and the divine — implemented as an operating system.
+
+TempleOS is 100,000 lines of HolyC, written entirely by one person. It includes its own compiler, filesystem (\`RedSea\`), 2D/3D graphics, music, and a Bible-verse-generating oracle. The entire system runs in ring 0 — there is no user/kernel separation, no memory protection, no networking. Every part of the system is equally accessible to every program.
+
+Terry Davis died in 2018. TempleOS remains a singular achievement: a complete, working operating system, programming language, and development environment created by one human being.
+
+## The Aiwnios Runtime
+
+This course runs HolyC in your browser using **Aiwnios**, a reimplementation of the TempleOS HolyC compiler that runs on Linux (and, via WebAssembly, in browsers). Aiwnios supports HolyC's core syntax and built-ins, making it possible to learn the language without running TempleOS itself.
+
+## What You Will Learn
+
+This course contains **16 lessons** organized into **6 chapters**:
+
+1. **The Temple** -- Your first HolyC program, printing output, and comments.
+2. **Types & Variables** -- Integer types, floating point, booleans, and \`auto\`.
+3. **Control Flow** -- \`if\`/\`else\`, switch with ranges, and loops without \`continue\`.
+4. **Functions** -- Declaring functions, default arguments, and output parameters.
+5. **Classes & Structures** -- Defining classes, member access, and inheritance patterns.
+6. **Advanced HolyC** -- Arrays, pointers, and compile-time expressions with \`#exe\`.
+
+Each lesson explains a concept, demonstrates it with code, and gives you an exercise to practice.
+
+Let's get started.
+`;
+
+const holycWhatsNextContent = `
+## Congratulations
+
+You have completed all 16 lessons. You now understand HolyC's types, control flow, functions, classes, pointers, and compile-time metaprogramming.
+
+That is a real accomplishment. HolyC is an unusual language with a singular history, and you have learned its core ideas.
+
+## What to Explore Next
+
+- **TempleOS itself** -- Download and run TempleOS in a virtual machine. Experience HolyC in its native environment: no mouse, no networking, 640×480 16-color display.
+- **Aiwnios** -- Explore the Aiwnios source code on GitHub. It is a complete HolyC compiler and runtime written in C.
+- **The TempleOS source** -- Read Terry's original HolyC code. It is available in the TempleOS distribution and on GitHub mirrors.
+- **\`#exe\` metaprogramming** -- Explore how \`#exe\` blocks can generate data structures, precompute tables, and embed constants at compile time.
+- **TempleOS graphics** -- The original TempleOS has a sprite editor, 3D flight simulator, and other programs written in HolyC.
+
+## Build Something
+
+- **A calculator** -- parse and evaluate arithmetic expressions in HolyC
+- **A sorting visualizer** -- implement bubble sort or quicksort and print each step
+- **A number theory program** -- primes, factorization, or the Collatz sequence
+- **A text adventure** -- simple game logic using HolyC's \`switch\` and functions
+
+## References
+
+- [TempleOS on GitHub](https://github.com/cia-foundation/TempleOS) -- a mirror of the TempleOS source code.
+- [Aiwnios on GitHub](https://github.com/Aiwnios/Aiwnios) -- the HolyC compiler used in this course.
+- [TempleOS Wikipedia](https://en.wikipedia.org/wiki/TempleOS) -- background on the OS and its creator.
+- [The TempleOS Online Documentation](https://templeos.org) -- Terry's original documentation, preserved online.
+- [HolyC Overview](https://en.wikipedia.org/wiki/HolyC) -- a concise summary of the language's features.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -642,6 +715,17 @@ export const courses: Course[] = [
     runtimeLabel: "R runtime",
     introductionContent: rIntroductionContent,
     whatsNextContent: rWhatsNextContent,
+  },
+  {
+    id: "holyc",
+    title: "HolyC",
+    description: "Learn HolyC, the programming language Terry Davis created for TempleOS. Explore range switches, default arguments, compile-time #exe blocks, and a direct relationship with the machine.",
+    language: "holyc",
+    chapters: holycChapters,
+    lessons: holycLessons,
+    runtimeLabel: "Aiwnios HolyC",
+    introductionContent: holycIntroductionContent,
+    whatsNextContent: holycWhatsNextContent,
   },
 ];
 
