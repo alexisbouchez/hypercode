@@ -296,6 +296,68 @@ export function CodeEditor({ value, onChange, language = "go", readOnly = false,
       });
     }
 
+    // Register HolyC language (C-like syntax from TempleOS)
+    if (!monaco.languages.getLanguages().some((l: { id: string }) => l.id === "holyc")) {
+      monaco.languages.register({ id: "holyc" });
+      monaco.languages.setMonarchTokensProvider("holyc", {
+        keywords: [
+          "if", "else", "for", "while", "do", "switch", "case", "default",
+          "break", "continue", "return", "class", "union", "extern", "static",
+          "volatile", "reg", "noreg", "public", "define", "include",
+        ],
+        typeKeywords: [
+          "U0", "U8", "U16", "U32", "U64", "I8", "I16", "I32", "I64", "F64", "Bool",
+        ],
+        operators: [
+          "=", ">", "<", "!", "~", "?", ":", "==", "<=", ">=", "!=",
+          "&&", "||", "++", "--", "+", "-", "*", "/", "&", "|", "^",
+          "%", "<<", ">>", "+=", "-=", "*=", "/=", "&=", "|=", "^=",
+          "%=", "<<=", ">>=",
+        ],
+        symbols: /[=><!~?:&|+\-*/^%]+/,
+        tokenizer: {
+          root: [
+            [/#[a-zA-Z_]\w*/, "keyword.directive"],
+            [/[a-zA-Z_]\w*/, {
+              cases: {
+                "@keywords": "keyword",
+                "@typeKeywords": "type",
+                "@default": "identifier",
+              },
+            }],
+            { include: "@whitespace" },
+            [/[{}()[\]]/, "@brackets"],
+            [/@symbols/, {
+              cases: {
+                "@operators": "operator",
+                "@default": "",
+              },
+            }],
+            [/0[xX][0-9a-fA-F]+/, "number.hex"],
+            [/\d+/, "number"],
+            [/"([^"\\]|\\.)*$/, "string.invalid"],
+            [/"/, { token: "string.quote", bracket: "@open", next: "@string" }],
+            [/'[^\\']'/, "string"],
+          ],
+          string: [
+            [/[^\\"]+/, "string"],
+            [/\\./, "string.escape"],
+            [/"/, { token: "string.quote", bracket: "@close", next: "@pop" }],
+          ],
+          whitespace: [
+            [/[ \t\r\n]+/, "white"],
+            [/\/\/.*$/, "comment"],
+            [/\/\*/, { token: "comment.quote", bracket: "@open", next: "@comment" }],
+          ],
+          comment: [
+            [/[^/*]+/, "comment"],
+            [/\*\//, { token: "comment.quote", bracket: "@close", next: "@pop" }],
+            [/[/*]/, "comment"],
+          ],
+        },
+      });
+    }
+
     editor.addAction({
       id: "run-code",
       label: "Run Code",

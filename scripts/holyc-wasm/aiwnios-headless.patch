@@ -1,0 +1,218 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 028b2dd..dcd65c9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -46,13 +46,24 @@ if (NOT DEFINED EMSCRIPTEN)
+   add_subdirectory(asm)
+ endif()
+ 
+-set_target_properties(aiwnios
+-  PROPERTIES
+-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+-    C_VISIBILITY_PRESET hidden
+-    C_STANDARD 11
+-    C_STANDARD_REQUIRED YES
+-    C_EXTENSIONS YES)
++if (DEFINED EMSCRIPTEN)
++  set_target_properties(aiwnios
++    PROPERTIES
++      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
++      C_VISIBILITY_PRESET hidden
++      C_STANDARD 11
++      C_STANDARD_REQUIRED YES
++      C_EXTENSIONS YES
++      SUFFIX ".js")
++else()
++  set_target_properties(aiwnios
++    PROPERTIES
++      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
++      C_VISIBILITY_PRESET hidden
++      C_STANDARD 11
++      C_STANDARD_REQUIRED YES
++      C_EXTENSIONS YES)
++endif()
+ 
+ target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+ 
+@@ -79,15 +90,21 @@ elseif (ARCH STREQUAL x86_64)
+   endif ()
+ endif ()
+ else()
+-target_link_options(aiwnios PRIVATE 
++target_link_options(aiwnios PRIVATE
+         "-sUSE_SDL=2"
+         "-sWASM=1"
+         "-sALLOW_MEMORY_GROWTH=1"
+         "-sMEMORY_GROWTH_GEOMETRIC_STEP=1"
+         "-sSINGLE_FILE=1"
++        "-sMODULARIZE=1"
++        "-sEXPORT_NAME=AiwniosFactory"
++        "-sEXPORT_ES6=1"
++        "-sINVOKE_RUN=0"
++        "-sEXPORTED_RUNTIME_METHODS=[\"FS\",\"callMain\",\"stringToNewUTF8\"]"
++        "-sEXPORTED_FUNCTIONS=[\"_main\",\"_holyc_is_done\",\"_holyc_step\",\"_holyc_set_file\"]"
+         "-lidbfs.js"
+-		-Wl,--export-all		
+-        --embed-file ${CMAKE_CURRENT_SOURCE_DIR}/wasmStage@/
++		-Wl,--export-all
++        --embed-file ${CMAKE_CURRENT_SOURCE_DIR}/wasmStage-minimal@/
+ )
+ endif()
+ 
+diff --git a/c/main.c b/c/main.c
+index f7f74b6..6b58f6a 100644
+--- a/c/main.c
++++ b/c/main.c
+@@ -1462,7 +1462,16 @@ static int64_t STK_VFsDir(int64_t *) {
+   return ret;
+ }
+ 
++#if defined(__EMSCRIPTEN__)
++// Headless mode globals: non-static so windows.c can access via extern
++char *headless_file = NULL;
++int is_headless = 0;
++#endif
++
+ int64_t IsCmdLineMode() {
++#if defined(__EMSCRIPTEN__)
++  if (is_headless) return 1;
++#endif
+   return arg_bootstrap_bin->count != 0 || arg_cmd_line->count != 0;
+ }
+ int64_t IsCmdLineMode2() {
+@@ -1494,12 +1503,14 @@ static int64_t CmdLineGetStr(int64_t *stk) {
+ 
+ int64_t CmdLineBootFiles(int64_t *) {
+ #ifdef __EMSCRIPTEN__
+-  return NULL;
++  if (is_headless && headless_file) return (int64_t)&headless_file;
++  return (int64_t)NULL;
+ #endif
+-  return arg_boot_files->filename;
++  return (int64_t)arg_boot_files->filename;
+ }
+ int64_t CmdLineBootFileCnt(int64_t *) {
+ #if defined(__EMSCRIPTEN__)
++  if (is_headless && headless_file) return 1;
+   return 0;
+ #endif
+   return arg_boot_files->count;
+@@ -1898,6 +1909,13 @@ typedef struct CAiwniosPack {
+   char save_directory[144];
+ } CAiwniosPack;
+ static char *loaded_hcrt, *loaded_hcrt_ptr = NULL;
++#if defined(__EMSCRIPTEN__)
++void EMSCRIPTEN_KEEPALIVE holyc_set_file(const char *filename) {
++  free(headless_file);
++  headless_file = filename ? strdup(filename) : NULL;
++  is_headless = (filename != NULL);
++}
++#endif
+ static int64_t Boot(int64_t *) {
+   int64_t len, size, hcrt_size;
+   char *fbuf, *hcrt;
+@@ -2021,11 +2039,15 @@ static int64_t ExitAiwnios(int64_t *stk) {
+     AiwniosBye();
+     exit(stk[0]);
+   } else {
++#if defined(__EMSCRIPTEN__)
++    if (is_headless) return 0; // headless: quit flag already set, no SDL needed
++#endif
+     SDL_QuitEvent qev;
+     qev.type = SDL_QUIT;
+     qev.timestamp = SDL_GetTicks();
+     SDL_PushEvent(&qev);
+   }
++  return 0;
+ }
+ static int64_t IsAiwniosPackApp() {
+ #if !defined(__EMSCRIPTEN__)
+@@ -2053,6 +2075,19 @@ static void EMMainLoop() {
+     emscripten_cancel_main_loop();
+   }
+ }
++
++// Exported helpers for JavaScript headless execution
++int EMSCRIPTEN_KEEPALIVE holyc_is_done() {
++  return (int)quit;
++}
++
++void EMSCRIPTEN_KEEPALIVE holyc_step() {
++  if (quit) return;
++  if (loaded_hcrt) {
++    loaded_hcrt_ptr = LoadMainsWasm(loaded_hcrt_ptr, loaded_hcrt);
++  }
++  EMInputLoopRun(&quit);
++}
+ #endif
+ int main(int argc, char **argv) {
+   SDL_SetMainReady();
+@@ -2229,7 +2264,11 @@ int main(int argc, char **argv) {
+   }
+   if (arg_new_boot_dir->count)
+     exit(EXIT_SUCCESS);
+-  if (!(arg_cmd_line->count || arg_bootstrap_bin->count)) {
++  if (!(arg_cmd_line->count || arg_bootstrap_bin->count)
++#if defined(__EMSCRIPTEN__)
++      && !is_headless
++#endif
++      ) {
+     InitSound();
+     if (0 > SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS)) {
+       char *p = SDL_GetError();
+@@ -2247,7 +2286,7 @@ int main(int argc, char **argv) {
+     }
+     user_ev_num = SDL_RegisterEvents(1);
+ #if defined(__EMSCRIPTEN__)
+-    DrawWindowNew();
++    if (!is_headless) DrawWindowNew();
+     Boot(NULL);
+     emscripten_set_main_loop(EMMainLoop, 0, 1);
+     return 0;
+@@ -2263,6 +2302,14 @@ int main(int argc, char **argv) {
+   } else {
+     if (arg_s->count)
+       InitSound();
++#if defined(__EMSCRIPTEN__)
++    // In EMSCRIPTEN headless mode: use main loop (not direct exit)
++    if (is_headless) {
++      Boot(NULL);
++      emscripten_set_main_loop(EMMainLoop, 0, 1);
++      return 0;
++    }
++#endif
+     Boot(argv[0]);
+   }
+   AiwniosBye(); // My RISCV(and presumably others) dont like atexit with
+diff --git a/c/w_bytecode.c b/c/w_bytecode.c
+index 8c62224..2343f23 100644
+--- a/c/w_bytecode.c
++++ b/c/w_bytecode.c
+@@ -244,13 +244,8 @@ again:;
+   int64_t (*fun_ptr)(int64_t *stk);
+   int64_t dft;
+   int64_t *table;
+-  printf("IP:%p(%s),FP:%p,SP:%p\n", bc, WhichFun(bc), state->fp, state->_sp);
+-  //   printf("BTTM:%p,	%p,PR:(%p)\n", abcf->istk[abcf->sp - 1],
+-  //        abcf->istk[abcf->sp], abcf->sp);
+-  printf("%d,%d,%d\n", (*bc >> 8) & 0xff, *bc & 0xff, *bc);
+   switch (*bc++ & 0xffff) {
+   default:
+-    printf("FUCK:%d\n", bc[-1] & 0xff);
+     break;
+     // Pray that your optimizer is good
+ #define CASE_BALLER(cs, code)                                                  \
+diff --git a/c/windows.c b/c/windows.c
+index 814cda0..ac8a6be 100644
+--- a/c/windows.c
++++ b/c/windows.c
+@@ -673,7 +673,9 @@ void InputLoop(void *ul) {
+   }
+ }
+ #if defined(__EMSCRIPTEN__)
++extern int is_headless;
+ void EMInputLoopRun(void *ul) {
++  if (is_headless) return; // headless mode: no SDL event handling
+   SDL_Event e;
+   if (IsCmdLineMode2()) {
+     TUIInputLoop(ul);

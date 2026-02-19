@@ -14,8 +14,10 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   useEffect(() => {
     let cancelled = false;
     const theme = resolvedTheme === "light" ? "github-light-default" : "github-dark-default";
+    // Map languages not supported by Shiki to a close equivalent
+    const shikiLang = language === "holyc" ? "c" : (language || "text");
     codeToHtml(code, {
-      lang: language || "text",
+      lang: shikiLang,
       theme,
     }).then((result) => {
       if (!cancelled) setHtml(result);
