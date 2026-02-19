@@ -21,38 +21,33 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hypercode.alexisbouchez.com"),
+  metadataBase: new URL("https://www.hypercode.run"),
   title: {
     default: "Hypercode - Learn Programming Interactively",
-    template: "%s",
+    template: "%s | Hypercode",
   },
   description:
-    "An interactive platform to learn Go, Zig, and more programming languages from scratch. No account needed.",
+    "Learn Go, Zig, C, ARM64, PostgreSQL, Gleam, R, and HolyC interactively in your browser. No account needed.",
   keywords: [
-    "Go",
-    "Golang",
-    "Zig",
-    "learn Go",
-    "learn Zig",
-    "programming tutorial",
-    "interactive",
-    "programming",
-    "coding",
-    "Hypercode",
+    "Go", "Golang", "Zig", "C", "ARM64", "assembly", "PostgreSQL", "SQL",
+    "Gleam", "R", "HolyC", "TempleOS", "learn programming", "programming tutorial",
+    "interactive coding", "Hypercode",
   ],
   openGraph: {
     type: "website",
     siteName: "Hypercode",
     title: "Hypercode - Learn Programming Interactively",
     description:
-      "An interactive platform to learn Go, Zig, and more programming languages from scratch. No account needed.",
-    url: "https://hypercode.alexisbouchez.com",
+      "Learn Go, Zig, C, ARM64, PostgreSQL, Gleam, R, and HolyC interactively in your browser. No account needed.",
+    url: "https://www.hypercode.run",
+    images: [{ url: "/nabla-hypercode.png", width: 1200, height: 630, alt: "Hypercode" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hypercode - Learn Programming Interactively",
     description:
-      "An interactive platform to learn Go, Zig, and more programming languages from scratch. No account needed.",
+      "Learn Go, Zig, C, ARM64, PostgreSQL, Gleam, R, and HolyC interactively in your browser. No account needed.",
+    images: ["/nabla-hypercode.png"],
   },
 };
 
@@ -71,9 +66,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Hypercode",
-              url: "https://hypercode.alexisbouchez.com",
+              url: "https://www.hypercode.run",
               description:
-                "An interactive platform to learn Go, Zig, and more programming languages from scratch.",
+                "Learn Go, Zig, C, ARM64, PostgreSQL, Gleam, R, and HolyC interactively in your browser.",
             }),
           }}
         />
