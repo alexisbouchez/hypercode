@@ -20,7 +20,7 @@ function filterOutput(raw: string): string {
   // the ;; operator prints the return value of #include (always "1" = success)
   // before user code runs. Strip it unconditionally since it is always first.
   if (lines[0] === "1") lines.shift();
-  return lines.join("\n");
+  return lines.length > 0 ? lines.join("\n") + "\n" : "";
 }
 
 function loadModuleFactory() {
