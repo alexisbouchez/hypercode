@@ -21,7 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.hypercode.run"),
+  metadataBase: new URL("https://hypercode.alexisbouchez.com"),
   title: {
     default: "Hypercode - Learn Programming Interactively",
     template: "%s | Hypercode",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Hypercode - Learn Programming Interactively",
     description:
       "Learn Go, Zig, C, ARM64, PostgreSQL, Gleam, R, and HolyC interactively in your browser. No account needed.",
-    url: "https://www.hypercode.run",
+    url: "https://hypercode.alexisbouchez.com",
     images: [{ url: "/nabla-hypercode.png", width: 1200, height: 630, alt: "Hypercode" }],
   },
   twitter: {
@@ -66,7 +66,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Hypercode",
-              url: "https://www.hypercode.run",
+              url: "https://hypercode.alexisbouchez.com",
               description:
                 "Learn Go, Zig, C, ARM64, PostgreSQL, Gleam, R, and HolyC interactively in your browser.",
             }),

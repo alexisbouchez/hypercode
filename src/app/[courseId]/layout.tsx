@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   const title = `Learn ${course.title}`;
   const description = course.description;
-  const url = `https://www.hypercode.run/${courseId}`;
+  const url = `https://hypercode.alexisbouchez.com/${courseId}`;
 
   return {
     title,
