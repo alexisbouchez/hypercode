@@ -42,6 +42,7 @@ interface OutputPanelProps {
   testResults: TestResult[];
   isRunning: boolean;
   generatedCode?: string;
+  previewHtml?: string;
 }
 
 export function OutputPanel({
@@ -50,8 +51,14 @@ export function OutputPanel({
   testResults,
   isRunning,
   generatedCode,
+  previewHtml,
 }: OutputPanelProps) {
-  const [activeTab, setActiveTab] = useState<"output" | "assembly">("output");
+  const [activeTab, setActiveTab] = useState<"output" | "assembly" | "preview">("output");
+
+  // Auto-switch to preview tab when previewHtml first arrives
+  useEffect(() => {
+    if (previewHtml) setActiveTab("preview");
+  }, [previewHtml]);
 
   if (isRunning) {
     return (
@@ -63,9 +70,9 @@ export function OutputPanel({
 
   const hasOutput = output || error;
   const hasTests = testResults.length > 0;
-  const hasTabs = !!generatedCode;
+  const hasTabs = !!generatedCode || !!previewHtml;
 
-  if (!hasOutput && !hasTests && !generatedCode) {
+  if (!hasOutput && !hasTests && !generatedCode && !previewHtml) {
     return (
       <div className="font-mono text-sm p-4 text-muted-foreground">
         Click &quot;Run&quot; to execute your code.
@@ -126,6 +133,15 @@ export function OutputPanel({
     </div>
   ) : null;
 
+  const previewContent = previewHtml ? (
+    <iframe
+      srcDoc={previewHtml}
+      className="w-full h-full border-0 rounded"
+      title="Three.js Preview"
+      allow="accelerometer; autoplay"
+    />
+  ) : null;
+
   if (!hasTabs) {
     return (
       <div className="font-mono text-sm p-4 overflow-auto">
@@ -135,8 +151,8 @@ export function OutputPanel({
   }
 
   return (
-    <div className="font-mono text-sm overflow-auto">
-      <div className="flex border-b border-border sticky top-0 bg-muted z-10">
+    <div className="font-mono text-sm flex flex-col h-full">
+      <div className="flex border-b border-border sticky top-0 bg-muted z-10 shrink-0">
         <button
           onClick={() => setActiveTab("output")}
           className={`px-3 py-1.5 text-xs transition-colors ${
@@ -147,20 +163,40 @@ export function OutputPanel({
         >
           Output
         </button>
-        <button
-          onClick={() => setActiveTab("assembly")}
-          className={`px-3 py-1.5 text-xs transition-colors ${
-            activeTab === "assembly"
-              ? "text-foreground border-b-2 border-primary"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          Assembly
-        </button>
+        {generatedCode && (
+          <button
+            onClick={() => setActiveTab("assembly")}
+            className={`px-3 py-1.5 text-xs transition-colors ${
+              activeTab === "assembly"
+                ? "text-foreground border-b-2 border-primary"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Assembly
+          </button>
+        )}
+        {previewHtml && (
+          <button
+            onClick={() => setActiveTab("preview")}
+            className={`px-3 py-1.5 text-xs transition-colors ${
+              activeTab === "preview"
+                ? "text-foreground border-b-2 border-primary"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Preview
+          </button>
+        )}
       </div>
-      <div className="p-4">
-        {activeTab === "output" ? outputContent : assemblyContent}
-      </div>
+      {activeTab === "preview" ? (
+        <div className="flex-1 min-h-0">
+          {previewContent}
+        </div>
+      ) : (
+        <div className="p-4 overflow-auto">
+          {activeTab === "output" ? outputContent : assemblyContent}
+        </div>
+      )}
     </div>
   );
 }

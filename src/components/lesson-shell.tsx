@@ -79,6 +79,7 @@ export function LessonShell({
   const [error, setError] = useState("");
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [generatedCode, setGeneratedCode] = useState<string | undefined>(undefined);
+  const [previewHtml, setPreviewHtml] = useState<string | undefined>(undefined);
   const [isRunning, setIsRunning] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
@@ -143,6 +144,7 @@ export function LessonShell({
     setOutput(result.stdout);
     setError(result.error || result.stderr);
     setGeneratedCode(result.generatedCode);
+    setPreviewHtml(result.previewHtml);
 
     const results = await runTests(code, currentLesson.tests);
     setTestResults(results);
@@ -398,6 +400,7 @@ export function LessonShell({
                         testResults={testResults}
                         isRunning={isRunning}
                         generatedCode={generatedCode}
+                        previewHtml={previewHtml}
                       />
                     </div>
                   </ResizablePanel>
