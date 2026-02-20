@@ -40,6 +40,7 @@ export function LessonShellWrapper({
     if (courseId === "gleam") return initGleamRunner();
     if (courseId === "r") return initRRunner();
     if (courseId === "holyc") return initHolycRunner();
+    if (courseId === "coreutils") return initCRunner();
     if (courseId === "linux") return initLinuxRunner();
     return initGoRunner();
   }, [courseId]);
@@ -52,6 +53,7 @@ export function LessonShellWrapper({
     if (courseId === "gleam") return isGleamReady();
     if (courseId === "r") return isRReady();
     if (courseId === "holyc") return isHolycReady();
+    if (courseId === "coreutils") return isCReady();
     if (courseId === "linux") return isLinuxReady();
     return isGoReady();
   }, [courseId]);
@@ -64,6 +66,7 @@ export function LessonShellWrapper({
     if (courseId === "gleam") return runGleam(code);
     if (courseId === "r") return runR(code);
     if (courseId === "holyc") return runHolyC(code);
+    if (courseId === "coreutils") return runC(code);
     if (courseId === "linux") return runLinux(code);
     return runGo(code);
   }, [courseId]);
@@ -76,6 +79,7 @@ export function LessonShellWrapper({
     if (courseId === "gleam") return runGleamTests(code, tests);
     if (courseId === "r") return runRTests(code, tests);
     if (courseId === "holyc") return runHolycTests(code, tests);
+    if (courseId === "coreutils") return runCTests(code, tests);
     if (courseId === "linux") return runLinuxTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);

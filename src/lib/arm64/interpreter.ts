@@ -50,7 +50,7 @@ function isMemReg(op: Operand): op is { kind: "mem_reg"; base: number; offsetReg
 function resolveAddr(op: Operand, regs: RegisterFile): { addr: number; preWrite: (() => void) | null; postWrite: (() => void) | null } {
   if (op.kind === "mem_reg") {
     const baseVal = Number(BigInt.asUintN(64, op.useSP ? regs.getSP() : regs.getXOrSP(op.base)));
-    const offVal = Number(BigInt.asUintN(64, regs.getX(op.offsetReg)));
+    const offVal = Number(BigInt.asIntN(64, regs.getX(op.offsetReg)));
     return { addr: baseVal + offVal, preWrite: null, postWrite: null };
   }
   const m = getMem(op);

@@ -8,6 +8,7 @@ import { gleamChapters, gleamLessons } from "@/lib/lessons/gleam";
 import { rChapters, rLessons } from "@/lib/lessons/r";
 import { holycChapters, holycLessons } from "@/lib/lessons/holyc";
 import { linuxChapters, linuxLessons } from "@/lib/lessons/linux";
+import { coreutilsChapters, coreutilsLessons } from "@/lib/lessons/coreutils";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -638,6 +639,108 @@ That is a real accomplishment. HolyC is an unusual language with a singular hist
 - [HolyC Overview](https://en.wikipedia.org/wiki/HolyC) -- a concise summary of the language's features.
 `;
 
+const coreutilsIntroductionContent = `
+## Build the Tools You Use Every Day
+
+Every command you ran in the Linux course — \`cat\`, \`grep\`, \`wc\`, \`head\`, \`tail\`, \`tr\`, \`uniq\` — is a C program. These programs are part of the **GNU coreutils** package, and they have been powering Unix systems for decades.
+
+This course asks one question: **can you build them yourself?**
+
+Each lesson gives you a coreutils command and asks you to implement its core logic as a C function. Not the full command with every flag and edge case — just the essential algorithm.
+
+- \`cat\` → print a string character by character
+- \`wc -l\` → count newlines
+- \`grep\` → find lines containing a substring
+- \`tail\` → print the last N lines
+- \`tac\` → print lines in reverse order
+
+Simple descriptions. Interesting implementations.
+
+## Why This Matters
+
+Writing these tools from scratch forces you to think about problems that are usually hidden:
+
+- **How does \`wc -w\` know where one word ends and another begins?** A state machine.
+- **How does \`tail\` know where the last N lines start without reading the file twice?** Scanning backwards.
+- **How does \`grep\` check every position in a line?** A nested loop over all starting positions.
+
+These are real algorithms running on millions of machines every day. You will understand them after implementing them.
+
+## The Connection
+
+This course is designed to follow the **Linux** and **C** courses on this platform:
+
+- The Linux course taught you to *use* these commands from the shell.
+- The C course taught you the language they are written in.
+- This course connects both: rewrite the commands in C.
+
+## What You Will Learn
+
+This course contains **13 lessons** organized into **4 chapters**:
+
+1. **Output** -- \`echo\`, \`cat\`, \`rev\`. Print strings, character by character, and reversed.
+2. **Counting** -- \`wc -c\`, \`wc -l\`, \`wc -w\`. Count characters, lines, and words using pointer arithmetic and state machines.
+3. **Filtering** -- \`head\`, \`tail\`, \`grep\`. Select lines from the start, end, or by pattern.
+4. **Transformation** -- \`toupper\`, \`tr\`, \`uniq\`, \`tac\`. Modify and reorder text.
+
+Each lesson explains the command, walks through the algorithm, and gives you a C function to implement and test.
+
+Let's build coreutils.
+`;
+
+const coreutilsWhatsNextContent = `
+## Congratulations
+
+You have reimplemented 13 coreutils in C: \`echo\`, \`cat\`, \`rev\`, \`wc -c/l/w\`, \`head\`, \`tail\`, \`grep\`, \`toupper\`, \`tr\`, \`uniq\`, and \`tac\`.
+
+That is real systems programming. These are the same algorithms that run on every Linux server in the world.
+
+## What to Explore Next
+
+You have built the core. Here are ways to go deeper:
+
+- **Add the missing flags** -- \`head -n N\` with \`atoi\` to parse the argument; \`grep -i\` for case-insensitive matching; \`uniq -c\` to count occurrences.
+- **Read from stdin** -- Real coreutils read from \`stdin\` (or files given as arguments). Add \`fgets\` or \`getchar\` loops to handle real input.
+- **Handle multiple files** -- \`cat file1 file2\` opens and concatenates multiple files using \`fopen\`, \`fread\`, \`fclose\`.
+- **Add error handling** -- What happens when a file does not exist? \`fprintf(stderr, ...)\` and non-zero exit codes.
+- **Implement sort** -- Sorting lines requires either dynamic memory (\`malloc\`) or a fixed buffer. A classic exercise.
+
+## Build Something Real
+
+The ultimate exercise: **write a complete coreutil that works on your system**.
+
+\`\`\`c
+// mycat.c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        // read from stdin
+        int c;
+        while ((c = getchar()) != EOF) putchar(c);
+        return 0;
+    }
+    for (int i = 1; i < argc; i++) {
+        FILE *f = fopen(argv[i], "r");
+        if (!f) { fprintf(stderr, "mycat: %s: No such file\\n", argv[i]); return 1; }
+        int c;
+        while ((c = fgetc(f)) != EOF) putchar(c);
+        fclose(f);
+    }
+    return 0;
+}
+\`\`\`
+
+Compile with \`gcc mycat.c -o mycat\` and test it on real files. This is software you actually built, running on real hardware.
+
+## References
+
+- [GNU coreutils source code](https://github.com/coreutils/coreutils) -- Read the real implementations. \`src/cat.c\` is ~700 lines. \`src/wc.c\` handles UTF-8. See how far your implementations got.
+- [The C Programming Language](https://www.cs.princeton.edu/~bwk/cbook.html) by Kernighan & Ritchie -- The original book. Chapter 7 on I/O is directly relevant.
+- [Beej's Guide to C](https://beej.us/guide/bgc/) -- Free, comprehensive, practical.
+- \`man 1 coreutils\` -- On any Linux system, \`man cat\`, \`man grep\`, etc. document every flag.
+`;
+
 const linuxIntroductionContent = `
 ## Why Linux?
 
@@ -802,6 +905,17 @@ export const courses: Course[] = [
     runtimeLabel: "Aiwnios HolyC",
     introductionContent: holycIntroductionContent,
     whatsNextContent: holycWhatsNextContent,
+  },
+  {
+    id: "coreutils",
+    title: "Coreutils in C",
+    description: "Reimplement the classic Unix command-line tools in C. Build echo, cat, grep, wc, head, tail, tr, uniq, and more from scratch — and understand how they work.",
+    language: "c",
+    chapters: coreutilsChapters,
+    lessons: coreutilsLessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: coreutilsIntroductionContent,
+    whatsNextContent: coreutilsWhatsNextContent,
   },
   {
     id: "linux",
