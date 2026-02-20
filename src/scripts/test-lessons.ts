@@ -16,6 +16,7 @@ import { runKernelTests } from "./test-runners/kernel-test-runner";
 import { runLinkedListsTests } from "./test-runners/linked-lists-test-runner";
 import { runHaskellTests } from "./test-runners/haskell-test-runner";
 import { runLinearAlgebraTests } from "./test-runners/linear-algebra-test-runner";
+import { runStatisticsTests } from "./test-runners/statistics-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -92,6 +93,10 @@ async function main() {
   console.log("Running Linear Algebra tests...");
   const linearAlgebraResults = runLinearAlgebraTests();
   allResults.push(...linearAlgebraResults);
+
+  console.log("Running Statistics tests...");
+  const statisticsResults = runStatisticsTests();
+  allResults.push(...statisticsResults);
 
   console.log("\n--- Results ---\n");
 

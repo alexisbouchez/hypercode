@@ -23,6 +23,7 @@ import { haskellChapters, haskellLessons } from "@/lib/lessons/haskell";
 import { graphsChapters, graphsLessons } from "@/lib/lessons/graphs";
 import { linearAlgebraChapters, linearAlgebraLessons } from "@/lib/lessons/linear-algebra";
 import { diffeqChapters, diffeqLessons } from "@/lib/lessons/diffeq";
+import { statisticsChapters, statisticsLessons } from "@/lib/lessons/statistics";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -1616,6 +1617,67 @@ This is the mathematical foundation for machine learning, graphics, and scientif
 - [SymPy documentation](https://docs.sympy.org/latest/tutorials/intro-tutorial/index.html) — SymPy tutorial and full API.
 `;
 
+const statisticsIntroductionContent = `
+## Why Statistics?
+
+Statistics is the science of learning from data. It gives you the tools to summarize data, quantify uncertainty, test hypotheses, and make predictions. Every field that works with data — from medicine to machine learning — depends on statistical reasoning.
+
+- **Data science & ML** — train/test splits, evaluation metrics, A/B testing, overfitting detection. Statistics is the foundation beneath every model.
+- **Scientific research** — clinical trials, psychology experiments, and physics measurements all rely on hypothesis testing and confidence intervals.
+- **Business** — conversion rate optimization, product analytics, forecasting, and pricing all use statistical methods daily.
+- **Engineering** — quality control, signal processing, reliability analysis.
+
+## The Python Statistics Stack
+
+This course uses three complementary libraries:
+
+- **\`statistics\`** — Python's built-in module for basic descriptive stats (mean, median, mode, stdev). No dependencies needed.
+- **NumPy** — fast array operations, percentiles, random sampling, and correlation. The backbone of scientific Python.
+- **SciPy** — probability distributions, hypothesis tests (t-test, chi-square), standard error, and linear regression via \`scipy.stats\`.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Descriptive Statistics** — Summarize datasets with mean, median, mode, variance, standard deviation, percentiles, and z-scores.
+2. **Distributions** — Model random phenomena with the normal and binomial distributions. Understand sampling, the Central Limit Theorem, and standard error.
+3. **Inference** — Draw conclusions from samples: one-sample and two-sample t-tests, confidence intervals, and chi-square goodness-of-fit.
+4. **Regression** — Measure relationships: Pearson correlation, linear regression, and bootstrap resampling for distribution-free inference.
+
+## In-Browser Runtime
+
+All code runs live in your browser via **Pyodide** — CPython compiled to WebAssembly. NumPy and SciPy load automatically from your import statements.
+`;
+
+const statisticsWhatsNextContent = `
+## Continue Your Statistics Journey
+
+### Deeper Statistics
+
+- **ANOVA** — compare means across three or more groups simultaneously.
+- **Multiple regression** — model y as a linear combination of multiple predictors using \`statsmodels\`.
+- **Bayesian inference** — quantify beliefs with prior distributions and update with data using PyMC or Stan.
+- **Non-parametric tests** — Mann-Whitney U, Wilcoxon signed-rank for when normality can't be assumed.
+
+### Visualization
+
+- **Matplotlib** — histograms, box plots, scatter plots with regression lines, QQ-plots for normality.
+- **Seaborn** — statistical visualization with built-in distribution plots, pair plots, and heatmaps.
+
+## Build Something
+
+- **A/B test simulator** — generate two conversion rate datasets, run a two-sample t-test, and estimate the sample size needed for statistical power.
+- **Distribution explorer** — interactive sliders for μ and σ, showing how the normal distribution PDF and CDF change.
+- **Bootstrap vs. t-test comparison** — verify that bootstrap CIs and t-test CIs agree for normally distributed data.
+
+## References
+
+- *Statistics* by Freedman, Pisani & Purves — the most intuitive introduction to statistical reasoning.
+- [Think Stats](https://greenteapress.com/thinkstats2/) by Allen Downey — statistics with Python, free online.
+- [SciPy stats documentation](https://docs.scipy.org/doc/scipy/reference/stats.html) — full reference for all distributions and tests.
+- [StatQuest with Josh Starmer](https://www.youtube.com/@statquest) — YouTube channel with clear visual explanations of every concept in this course.
+`;
+
 const graphsIntroductionContent = `
 ## Why Graph Algorithms?
 
@@ -2034,6 +2096,17 @@ export const courses: Course[] = [
     runtimeLabel: "Pyodide",
     introductionContent: diffeqIntroductionContent,
     whatsNextContent: diffeqWhatsNextContent,
+  },
+  {
+    id: "statistics",
+    title: "Statistics in Python",
+    description: "Master statistics with Python. Compute descriptive stats, model distributions, run t-tests and chi-square tests, build confidence intervals, fit regression lines, and estimate uncertainty with bootstrap resampling.",
+    language: "python",
+    chapters: statisticsChapters,
+    lessons: statisticsLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: statisticsIntroductionContent,
+    whatsNextContent: statisticsWhatsNextContent,
   },
 ];
 
