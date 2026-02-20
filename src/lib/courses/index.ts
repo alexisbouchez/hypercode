@@ -33,9 +33,10 @@ import { redisChapters, redisLessons } from "@/lib/lessons/redis";
 import { cppChapters, cppLessons } from "@/lib/lessons/cpp";
 import { musicChapters, musicLessons } from "@/lib/lessons/music";
 import { classicalMechanicsChapters, classicalMechanicsLessons } from "@/lib/lessons/classical-mechanics";
+import { wavesChapters, wavesLessons } from "@/lib/lessons/waves";
 import { quantumChapters, quantumLessons } from "@/lib/lessons/quantum";
 import { genomicsChapters, genomicsLessons } from "@/lib/lessons/genomics";
-
+import { microgptChapters, microgptLessons } from "@/lib/lessons/microgpt";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2283,6 +2284,43 @@ You have completed all 15 lessons. You can now solve differential equations nume
 - [SciPy ODE documentation](https://docs.scipy.org/doc/scipy/reference/integrate.html) -- production-grade solvers
 `;
 
+const wavesIntroductionContent = `
+## Why Waves & Acoustics in JavaScript?
+
+Waves are everywhere — sound, light, seismic activity, quantum probability amplitudes. Acoustics in particular is tangible: you can *hear* the results of your computations. JavaScript's Web Audio API lets you play tones, demonstrate beats, and sweep Doppler shifts directly in the browser.
+
+- **Wave Fundamentals** — Period, speed, wavelength, and temperature-dependent sound speed
+- **Intensity & Perception** — The inverse-square law, decibel scale, acoustic beats, and the Doppler effect
+- **Standing Waves & Resonance** — String harmonics, open and closed pipe modes, and wave superposition
+- **Room Acoustics** — Sabine's reverberation formula, sound power levels, and acoustic reflection coefficients
+
+## Physics You Can Hear
+
+Each lesson includes working Web Audio code so you can *hear* what you are computing — beats pulsing at the frequency you calculate, Doppler sweeps, the hollow timbre of odd harmonics, constructive and destructive interference. Physics becomes tangible when it makes sound.
+
+## Prerequisites
+
+Basic JavaScript (functions, \`Math\`, \`console.log\`). No prior acoustics knowledge required — every concept is introduced from first principles.
+`;
+
+const wavesWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons of Waves & Acoustics in JavaScript. You can now compute wave periods and speeds, sound wavelengths, temperature-dependent sound speed, inverse-square intensity, decibel levels, beat frequencies, Doppler-shifted frequencies, string and pipe resonances, superposed amplitudes, reverberation times, sound power levels, and acoustic reflection coefficients — all in JavaScript.
+
+## What's Next
+
+- **Classical Mechanics in C** — The companion physics course: velocity, free fall, Newton's laws, energy, oscillations, and gravitation
+- **Music Programming** — Apply Web Audio directly: synthesise tones, build chord and scale generators, sequence melodies, and design LFO effects
+- **Electromagnetism** — Coulomb's law, electric fields, Biot-Savart, Maxwell's equations — the physics of waves extended to light
+
+## References
+
+- [Kinsler & Frey — Fundamentals of Acoustics](https://www.wiley.com/en-us/Fundamentals+of+Acoustics%2C+4th+Edition-p-9780471847892) — comprehensive textbook
+- [Web Audio API specification](https://webaudio.github.io/web-audio-api/) — the browser sound engine
+- [Wolframalpha](https://www.wolframalpha.com/) — verify acoustic formulas interactively
+`;
+
 const classicalMechanicsIntroductionContent = `
 ## Why Classical Mechanics in C?
 
@@ -2524,6 +2562,65 @@ You have completed the Genomics course. You now understand the molecular biology
 - **Molecular Biology of the Gene** by Watson et al. -- The canonical textbook.
 - **Bioinformatics Algorithms** by Compeau & Pevzner -- Algorithmic approach to genomics.
 - [AlphaGenome paper on Nature](https://www.nature.com/articles/s41586-025-10014-0) -- The original publication.
+`;
+
+const microgptIntroductionContent = `
+## Why Build a GPT From Scratch?
+
+Large language models like GPT-4 feel like magic — until you build one yourself. Then they feel like math.
+
+This course takes you through the complete pipeline for building a miniature GPT in **pure Python**, with no ML frameworks. You will implement every component from scratch: the automatic differentiation engine, the tokenizer, the linear layer, softmax, RMS normalization, cross-entropy loss, scaled dot-product attention, multi-head attention, the training loop, and the Adam optimizer.
+
+The result is a small model that learns to generate names character by character. It is the same architecture as GPT-2, just smaller.
+
+## What is Autograd?
+
+Most ML code hides the calculus. You call \`loss.backward()\` and gradients appear. This course shows you exactly how that works.
+
+You will build a \`Value\` class that tracks every arithmetic operation in a computation graph. When you call \`backward()\`, it walks the graph in reverse topological order and applies the chain rule at each node — the same algorithm used by PyTorch and JAX under the hood.
+
+## How This Course Works
+
+Each lesson introduces one concept, provides a short explanation, and asks you to implement a single function. The starter code includes all the infrastructure you need — you only implement the function described.
+
+By the final lesson, you will have implemented every component needed to train a transformer language model.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Autograd Engine** -- Value class, arithmetic operations, backpropagation.
+2. **Data & Tokens** -- Tokenizer, character-level vocabulary, training pairs.
+3. **Neural Net Primitives** -- Linear layer, softmax, RMS normalization, cross-entropy loss.
+4. **The Transformer** -- Single-head attention, multi-head attention.
+5. **Training** -- SGD training loop, Adam optimizer.
+
+Let's start.
+`;
+
+const microgptWhatsNextContent = `
+## Congratulations
+
+You have built a GPT from scratch. You now understand every component of a transformer language model: the autograd engine, tokenizer, linear layers, attention, and the Adam optimizer.
+
+## What to Explore Next
+
+- **Andrej Karpathy's micrograd** -- The autograd engine in this course is inspired by [micrograd](https://github.com/karpathy/micrograd). The original ~100-line implementation is worth reading.
+- **Andrej Karpathy's makemore** -- A character-level language model built step by step, leading up to a full GPT. [The YouTube series](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) is excellent.
+- **nanoGPT** -- A clean, minimal GPT-2 implementation in PyTorch by Karpathy. Around 300 lines of model code.
+- **Attention Is All You Need** -- The 2017 paper that introduced the transformer architecture. Short and readable.
+- **The Illustrated Transformer** -- Jay Alammar's visual walkthrough of the transformer. The best introduction for visual learners.
+
+## Tools and Libraries
+
+- [PyTorch](https://pytorch.org/) -- The standard deep learning framework. Now that you understand what \`autograd\` does, PyTorch will feel familiar.
+- [Hugging Face Transformers](https://huggingface.co/docs/transformers/) -- Pre-trained models including GPT-2.
+- [tiktoken](https://github.com/openai/tiktoken) -- OpenAI's fast BPE tokenizer (what GPT-4 uses).
+
+## Further Reading
+
+- **Deep Learning** by Goodfellow, Bengio & Courville -- The standard textbook.
+- **The Little Book of Deep Learning** by François Fleuret -- A concise, free introduction.
 `;
 
 export const courses: Course[] = [
@@ -2892,6 +2989,17 @@ export const courses: Course[] = [
     whatsNextContent: musicWhatsNextContent,
   },
   {
+    id: "waves",
+    title: "Waves & Acoustics",
+    description: "Learn wave physics and acoustics in JavaScript. Compute wave periods, Doppler shifts, standing wave harmonics, reverberation times, and acoustic reflection — and hear your results through the Web Audio API.",
+    language: "javascript",
+    chapters: wavesChapters,
+    lessons: wavesLessons,
+    runtimeLabel: "Web Audio API",
+    introductionContent: wavesIntroductionContent,
+    whatsNextContent: wavesWhatsNextContent,
+  },
+  {
     id: "classical-mechanics",
     title: "Classical Mechanics in C",
     description: "Learn classical mechanics by implementing the algorithms in C. Compute velocity, free fall, projectile range, Newton's laws, friction, energy, momentum, oscillations, and gravitational force from scratch.",
@@ -2923,6 +3031,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: genomicsIntroductionContent,
     whatsNextContent: genomicsWhatsNextContent,
+  },
+  {
+    id: "microgpt",
+    title: "MicroGPT",
+    description: "Build a GPT from scratch in pure Python. Implement autograd, tokenization, attention, and train a transformer language model — no ML frameworks required.",
+    language: "python",
+    chapters: microgptChapters,
+    lessons: microgptLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: microgptIntroductionContent,
+    whatsNextContent: microgptWhatsNextContent,
   },
 ];
 

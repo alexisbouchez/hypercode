@@ -73,11 +73,13 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return initPythonRunner();
     if (courseId === "quantum") return initPythonRunner();
     if (courseId === "genomics") return initPythonRunner();
+    if (courseId === "microgpt") return initPythonRunner();
     if (courseId === "haskell") return initHaskellRunner();
     if (courseId === "sqlite") return initSqliteRunner();
     if (courseId === "redis") return initRedisRunner();
     if (courseId === "cpp") return initCppRunner();
     if (courseId === "music") return initMusicRunner();
+    if (courseId === "waves") return initMusicRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -112,11 +114,13 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return isPythonReady();
     if (courseId === "quantum") return isPythonReady();
     if (courseId === "genomics") return isPythonReady();
+    if (courseId === "microgpt") return isPythonReady();
     if (courseId === "haskell") return isHaskellReady();
     if (courseId === "sqlite") return isSqliteReady();
     if (courseId === "redis") return isRedisReady();
     if (courseId === "cpp") return isCppReady();
     if (courseId === "music") return isMusicReady();
+    if (courseId === "waves") return isMusicReady();
     return isGoReady();
   }, [courseId]);
 
@@ -151,11 +155,13 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return runPython(code);
     if (courseId === "quantum") return runPython(code);
     if (courseId === "genomics") return runPython(code);
+    if (courseId === "microgpt") return runPython(code);
     if (courseId === "haskell") return runHaskell(code);
     if (courseId === "sqlite") return runSqlite(code);
     if (courseId === "redis") return runRedis(code);
     if (courseId === "cpp") return runCpp(code);
     if (courseId === "music") return runMusic(code);
+    if (courseId === "waves") return runMusic(code);
     return runGo(code);
   }, [courseId]);
 
@@ -190,11 +196,13 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return runPythonTests(code, tests);
     if (courseId === "quantum") return runPythonTests(code, tests);
     if (courseId === "genomics") return runPythonTests(code, tests);
+    if (courseId === "microgpt") return runPythonTests(code, tests);
     if (courseId === "haskell") return runHaskellTests(code, tests);
     if (courseId === "sqlite") return runSqliteTests(code, tests);
     if (courseId === "redis") return runRedisTests(code, tests);
     if (courseId === "cpp") return runCppTests(code, tests);
     if (courseId === "music") return runMusicTests(code, tests);
+    if (courseId === "waves") return runMusicTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

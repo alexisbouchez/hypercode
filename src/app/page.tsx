@@ -113,8 +113,8 @@ const tracks: { title: string; ids: string[] }[] = [
     ids: ["go", "zig", "gleam", "ruby", "haskell", "holyc"],
   },
   {
-    title: "Physics & Electronics in C",
-    ids: ["classical-mechanics", "circuits"],
+    title: "Physics & Acoustics",
+    ids: ["classical-mechanics", "waves", "circuits"],
   },
   {
     title: "Systems & Low-Level",
