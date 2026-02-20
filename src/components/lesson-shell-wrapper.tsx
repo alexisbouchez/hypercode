@@ -15,6 +15,7 @@ import { initJsRunner, isJsReady, runJs, runTests as runJsTests } from "@/lib/js
 import { initTsRunner, isTsReady, runTs, runTests as runTsTests } from "@/lib/ts-runner";
 import { initRubyRunner, isRubyReady, runRuby, runTests as runRubyTests } from "@/lib/ruby-runner";
 import { initThreeJsRunner, isThreeJsReady, runThreeJs, runTests as runThreeJsTests } from "@/lib/threejs-runner";
+import { initPythonRunner, isPythonReady, runPython, runTests as runPythonTests } from "@/lib/python-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -55,6 +56,7 @@ export function LessonShellWrapper({
     if (courseId === "algorithms") return initJsRunner();
     if (courseId === "distributed-systems") return initJsRunner();
     if (courseId === "threejs") return initThreeJsRunner();
+    if (courseId === "python") return initPythonRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -77,6 +79,7 @@ export function LessonShellWrapper({
     if (courseId === "algorithms") return isJsReady();
     if (courseId === "distributed-systems") return isJsReady();
     if (courseId === "threejs") return isThreeJsReady();
+    if (courseId === "python") return isPythonReady();
     return isGoReady();
   }, [courseId]);
 
@@ -99,6 +102,7 @@ export function LessonShellWrapper({
     if (courseId === "algorithms") return runJs(code);
     if (courseId === "distributed-systems") return runJs(code);
     if (courseId === "threejs") return runThreeJs(code);
+    if (courseId === "python") return runPython(code);
     return runGo(code);
   }, [courseId]);
 
@@ -121,6 +125,7 @@ export function LessonShellWrapper({
     if (courseId === "algorithms") return runJsTests(code, tests);
     if (courseId === "distributed-systems") return runJsTests(code, tests);
     if (courseId === "threejs") return runThreeJsTests(code, tests);
+    if (courseId === "python") return runPythonTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

@@ -18,6 +18,7 @@ import { rubyChapters, rubyLessons } from "@/lib/lessons/ruby";
 import { treesChapters, treesLessons } from "@/lib/lessons/trees";
 import { threejsChapters, threejsLessons } from "@/lib/lessons/threejs";
 import { linkedListsChapters, linkedListsLessons } from "@/lib/lessons/linked-lists";
+import { pythonChapters, pythonLessons } from "@/lib/lessons/python";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -1476,6 +1477,69 @@ const threejsWhatsNextContent = `
 - [Discover Three.js](https://discoverthreejs.com/) — free online book covering fundamentals.
 `;
 
+const pythonIntroductionContent = `
+## Why Python?
+
+Python is the most popular programming language in the world. It powers artificial intelligence, data science, web development, automation, and scientific computing. Its philosophy — "there should be one obvious way to do it" — makes it readable and maintainable at scale.
+
+- **Readable syntax** -- Python reads almost like English. No semicolons, no braces, indentation defines structure.
+- **Dynamically typed** -- No type declarations. Faster to write, easier to prototype.
+- **Batteries included** -- A massive standard library covers HTTP, JSON, CSV, regular expressions, testing, and much more.
+- **Huge ecosystem** -- PyPI hosts over 500,000 packages: NumPy, Pandas, Django, Flask, FastAPI, TensorFlow, PyTorch.
+- **Interactive** -- Python's REPL and Jupyter notebooks make exploration fast and visual.
+
+## The Story
+
+Python was created by Guido van Rossum, who started working on it in December 1989 as a hobby project during the Christmas holidays. He wanted a language that bridged the gap between C and shell scripting — powerful yet easy to use. Python 1.0 was released in 1994.
+
+Python 2 and Python 3 coexisted for years, but Python 2 reached end-of-life in 2020. All modern Python is Python 3. The language is governed by the Python Software Foundation and maintained by a global community of contributors.
+
+Python's name comes not from the snake, but from Monty Python's Flying Circus. The language has always had a sense of humor — the canonical package installer is called \`pip\`, and the Zen of Python (\`import this\`) includes aphorisms like "Readability counts."
+
+## What You Will Learn
+
+In this course you will master:
+
+- **Foundations**: variables, strings, numbers, lists, and dictionaries
+- **Control flow**: if/elif/else, for loops, while loops, break/continue
+- **Functions**: arguments, defaults, \`*args\`, \`**kwargs\`, higher-order functions, lambdas
+- **Comprehensions**: list, dict, and set comprehensions
+- **Object-oriented programming**: classes, inheritance, dunder methods
+- **Error handling**: try/except/finally, raising exceptions
+- **Generators**: lazy evaluation, infinite sequences, \`yield\`
+- **Standard library**: \`collections\`, \`itertools\`, \`functools\`
+- **Recursion**: base cases, recursive cases, memoization
+`;
+
+const pythonWhatsNextContent = `
+## What to Explore Next
+
+### Web Development
+- **FastAPI** -- Modern, fast Python web framework. Automatic API docs, type hints, async support. The fastest-growing Python web framework. [fastapi.tiangolo.com](https://fastapi.tiangolo.com/)
+- **Django** -- The batteries-included framework. ORM, admin panel, auth, templates. Great for full-stack apps. [djangoproject.com](https://www.djangoproject.com/)
+- **Flask** -- Lightweight WSGI framework. Start small, add only what you need.
+
+### Data Science & AI
+- **NumPy** -- Fast multi-dimensional arrays and linear algebra. The foundation of the scientific Python stack.
+- **Pandas** -- DataFrames for data manipulation and analysis. Read CSV, SQL, Excel; filter, group, aggregate.
+- **Matplotlib / Seaborn** -- Data visualization.
+- **scikit-learn** -- Machine learning: classification, regression, clustering, pipelines.
+- **PyTorch / TensorFlow** -- Deep learning frameworks for building neural networks.
+
+### Advanced Python
+- **async/await** -- Asyncio for concurrent I/O without threads. Powerful for web servers and network clients.
+- **Type hints + mypy** -- Static type checking in Python. Catches bugs at development time.
+- **Decorators and metaclasses** -- Advanced metaprogramming patterns.
+- **Dataclasses** -- \`@dataclass\` reduces boilerplate for data-holding classes.
+
+### Resources
+- [The Python Tutorial](https://docs.python.org/3/tutorial/) — Official Python docs, comprehensive and well-written.
+- [Real Python](https://realpython.com/) — Practical tutorials on all aspects of Python.
+- [Python Cookbook](https://www.oreilly.com/library/view/python-cookbook-3rd/9781449357337/) by David Beazley — Advanced recipes and idioms.
+- [Fluent Python](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/) by Luciano Ramalho — Deep dive into Python's data model.
+- [PyPI](https://pypi.org/) — The Python Package Index. Find packages for any task.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -1686,6 +1750,17 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: linkedListsIntroductionContent,
     whatsNextContent: linkedListsWhatsNextContent,
+  },
+  {
+    id: "python",
+    title: "Python",
+    description: "Learn Python from the ground up. Master strings, lists, dictionaries, OOP, generators, and the standard library — the language powering AI, data science, and web development.",
+    language: "python",
+    chapters: pythonChapters,
+    lessons: pythonLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: pythonIntroductionContent,
+    whatsNextContent: pythonWhatsNextContent,
   },
 ];
 
