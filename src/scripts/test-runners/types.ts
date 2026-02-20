@@ -1,5 +1,5 @@
 export interface LessonTestResult {
-  course: "go" | "zig" | "sql" | "sqlite" | "redis" | "arm64" | "c" | "gleam" | "r" | "holyc" | "linux" | "coreutils" | "javascript" | "typescript" | "ruby" | "trees" | "kernel" | "linked-lists" | "haskell" | "linear-algebra" | "statistics" | "calculus" | "calculus2" | "calculus3" | "circuits" | "music" | "cpp" | "quantum" | "classical-mechanics" | "genomics" | "microgpt" | "waves";
+  course: "go" | "zig" | "sql" | "sqlite" | "redis" | "arm64" | "c" | "gleam" | "r" | "holyc" | "linux" | "coreutils" | "javascript" | "typescript" | "ruby" | "trees" | "kernel" | "linked-lists" | "haskell" | "linear-algebra" | "statistics" | "calculus" | "calculus2" | "calculus3" | "circuits" | "music" | "cpp" | "quantum" | "classical-mechanics" | "genomics" | "microgpt" | "waves" | "electromagnetism";
   lessonId: string;
   lessonTitle: string;
   testName: string;

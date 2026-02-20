@@ -34,6 +34,7 @@ import { cppChapters, cppLessons } from "@/lib/lessons/cpp";
 import { musicChapters, musicLessons } from "@/lib/lessons/music";
 import { classicalMechanicsChapters, classicalMechanicsLessons } from "@/lib/lessons/classical-mechanics";
 import { wavesChapters, wavesLessons } from "@/lib/lessons/waves";
+import { electromagnetismChapters, electromagnetismLessons } from "@/lib/lessons/electromagnetism";
 import { quantumChapters, quantumLessons } from "@/lib/lessons/quantum";
 import { genomicsChapters, genomicsLessons } from "@/lib/lessons/genomics";
 import { microgptChapters, microgptLessons } from "@/lib/lessons/microgpt";
@@ -2284,6 +2285,43 @@ You have completed all 15 lessons. You can now solve differential equations nume
 - [SciPy ODE documentation](https://docs.scipy.org/doc/scipy/reference/integrate.html) -- production-grade solvers
 `;
 
+const electromagnetismIntroductionContent = `
+## Why Electromagnetism in Python?
+
+Electromagnetism governs everything from the force between charges to the operation of motors, radio waves, and computer chips. Python's clean syntax and \`math\` module make it ideal for computing field strengths, circuit values, and wave phenomena without getting bogged down in pointer arithmetic.
+
+- **Electric Fields & Forces** — Coulomb's law, electric field strength, electric potential — the inverse-square-law structure of electrostatics
+- **DC Circuits** — Ohm's law, series and parallel resistance, electrical power — the foundation of every circuit
+- **Magnetism** — Magnetic field of a wire, Lorentz force, magnetic flux, solenoid inductance — current creates fields
+- **Electromagnetic Induction** — Faraday's law, RC time constants, LC resonance, and skin depth — changing fields create currents
+
+## Physics Meets Engineering
+
+Every lesson implements a formula used in real engineering: circuit simulators, antenna design, motor control, and signal-integrity analysis all rest on these same equations. By writing them yourself you build both intuition and numerical literacy.
+
+## Prerequisites
+
+Basic Python (functions, \`math\`, \`print\`). The Python course on this platform is good preparation. No prior physics knowledge required — every concept is introduced from first principles.
+`;
+
+const electromagnetismWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons of Electromagnetism in Python. You can now compute Coulomb forces, electric field strengths, electric potentials, Ohm's-law currents, series and parallel resistances, electrical power, the magnetic field of a wire, Lorentz forces, magnetic flux, solenoid inductance, Faraday induction EMFs, RC time constants, LC resonant frequencies, and skin depths — all in Python.
+
+## What's Next
+
+- **Classical Mechanics in C** — The companion physics course: kinematics, Newton's laws, energy, oscillations, and gravitation
+- **Waves & Acoustics** — Standing waves, Doppler effect, Sabine reverberation — acoustic physics you can hear
+- **Differential Equations in Python** — Model RC charging curves, LC oscillations, and driven harmonic oscillators with Euler's method and RK4
+
+## References
+
+- [Griffiths — Introduction to Electrodynamics](https://www.cambridge.org/highereducation/books/introduction-to-electrodynamics/3AB220820CDA8E33B8F8E7E76E3C0E9F) — the standard undergraduate text
+- [Hayt & Buck — Engineering Electromagnetics](https://www.mheducation.com/highered/product/engineering-electromagnetics-hayt-buck/M9780078028151.html) — engineering-focused coverage
+- [Falstad circuit simulator](https://www.falstad.com/circuit/) — visualise circuits and fields interactively
+`;
+
 const wavesIntroductionContent = `
 ## Why Waves & Acoustics in JavaScript?
 
@@ -2998,6 +3036,17 @@ export const courses: Course[] = [
     runtimeLabel: "Web Audio API",
     introductionContent: wavesIntroductionContent,
     whatsNextContent: wavesWhatsNextContent,
+  },
+  {
+    id: "electromagnetism",
+    title: "Electromagnetism in Python",
+    description: "Learn electromagnetism by implementing the equations in Python. Compute Coulomb forces, electric fields, circuit resistance, magnetic fields, Lorentz forces, Faraday induction, RC time constants, LC resonance, and skin depth from scratch.",
+    language: "python",
+    chapters: electromagnetismChapters,
+    lessons: electromagnetismLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: electromagnetismIntroductionContent,
+    whatsNextContent: electromagnetismWhatsNextContent,
   },
   {
     id: "classical-mechanics",

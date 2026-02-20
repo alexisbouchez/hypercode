@@ -80,6 +80,7 @@ export function LessonShellWrapper({
     if (courseId === "cpp") return initCppRunner();
     if (courseId === "music") return initMusicRunner();
     if (courseId === "waves") return initMusicRunner();
+    if (courseId === "electromagnetism") return initPythonRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -121,6 +122,7 @@ export function LessonShellWrapper({
     if (courseId === "cpp") return isCppReady();
     if (courseId === "music") return isMusicReady();
     if (courseId === "waves") return isMusicReady();
+    if (courseId === "electromagnetism") return isPythonReady();
     return isGoReady();
   }, [courseId]);
 
@@ -162,6 +164,7 @@ export function LessonShellWrapper({
     if (courseId === "cpp") return runCpp(code);
     if (courseId === "music") return runMusic(code);
     if (courseId === "waves") return runMusic(code);
+    if (courseId === "electromagnetism") return runPython(code);
     return runGo(code);
   }, [courseId]);
 
@@ -203,6 +206,7 @@ export function LessonShellWrapper({
     if (courseId === "cpp") return runCppTests(code, tests);
     if (courseId === "music") return runMusicTests(code, tests);
     if (courseId === "waves") return runMusicTests(code, tests);
+    if (courseId === "electromagnetism") return runPythonTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

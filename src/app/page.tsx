@@ -114,7 +114,7 @@ const tracks: { title: string; ids: string[] }[] = [
   },
   {
     title: "Physics & Acoustics",
-    ids: ["classical-mechanics", "waves", "circuits"],
+    ids: ["classical-mechanics", "waves", "electromagnetism", "circuits"],
   },
   {
     title: "Systems & Low-Level",
