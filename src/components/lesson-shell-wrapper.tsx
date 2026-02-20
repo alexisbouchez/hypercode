@@ -12,6 +12,8 @@ import { initRRunner, isRReady, runR, runTests as runRTests } from "@/lib/r-runn
 import { initHolycRunner, isHolycReady, runHolyC, runTests as runHolycTests } from "@/lib/holyc-runner";
 import { initLinuxRunner, isLinuxReady, runLinux, runTests as runLinuxTests } from "@/lib/linux-runner";
 import { initJsRunner, isJsReady, runJs, runTests as runJsTests } from "@/lib/js-runner";
+import { initTsRunner, isTsReady, runTs, runTests as runTsTests } from "@/lib/ts-runner";
+import { initRubyRunner, isRubyReady, runRuby, runTests as runRubyTests } from "@/lib/ruby-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -44,6 +46,10 @@ export function LessonShellWrapper({
     if (courseId === "coreutils") return initCRunner();
     if (courseId === "linux") return initLinuxRunner();
     if (courseId === "javascript") return initJsRunner();
+    if (courseId === "typescript") return initTsRunner();
+    if (courseId === "ruby") return initRubyRunner();
+    if (courseId === "algorithms") return initJsRunner();
+    if (courseId === "distributed-systems") return initJsRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -58,6 +64,10 @@ export function LessonShellWrapper({
     if (courseId === "coreutils") return isCReady();
     if (courseId === "linux") return isLinuxReady();
     if (courseId === "javascript") return isJsReady();
+    if (courseId === "typescript") return isTsReady();
+    if (courseId === "ruby") return isRubyReady();
+    if (courseId === "algorithms") return isJsReady();
+    if (courseId === "distributed-systems") return isJsReady();
     return isGoReady();
   }, [courseId]);
 
@@ -72,6 +82,10 @@ export function LessonShellWrapper({
     if (courseId === "coreutils") return runC(code);
     if (courseId === "linux") return runLinux(code);
     if (courseId === "javascript") return runJs(code);
+    if (courseId === "typescript") return runTs(code);
+    if (courseId === "ruby") return runRuby(code);
+    if (courseId === "algorithms") return runJs(code);
+    if (courseId === "distributed-systems") return runJs(code);
     return runGo(code);
   }, [courseId]);
 
@@ -86,6 +100,10 @@ export function LessonShellWrapper({
     if (courseId === "coreutils") return runCTests(code, tests);
     if (courseId === "linux") return runLinuxTests(code, tests);
     if (courseId === "javascript") return runJsTests(code, tests);
+    if (courseId === "typescript") return runTsTests(code, tests);
+    if (courseId === "ruby") return runRubyTests(code, tests);
+    if (courseId === "algorithms") return runJsTests(code, tests);
+    if (courseId === "distributed-systems") return runJsTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

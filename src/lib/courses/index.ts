@@ -10,6 +10,9 @@ import { holycChapters, holycLessons } from "@/lib/lessons/holyc";
 import { linuxChapters, linuxLessons } from "@/lib/lessons/linux";
 import { coreutilsChapters, coreutilsLessons } from "@/lib/lessons/coreutils";
 import { jsChapters, jsLessons } from "@/lib/lessons/javascript";
+import { tsChapters, tsLessons } from "@/lib/lessons/typescript";
+import { algorithmsChapters, algorithmsLessons } from "@/lib/lessons/algorithms";
+import { distributedSystemsChapters, distributedSystemsLessons } from "@/lib/lessons/distributed-systems";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -896,6 +899,240 @@ The best way to learn is to build. Some project ideas:
 - [The Modern JavaScript Tutorial](https://javascript.info/) -- practical, modern, and thorough.
 `;
 
+const tsIntroductionContent = `
+## Why TypeScript?
+
+TypeScript is JavaScript with static types. It is a superset of JavaScript — any valid JavaScript is valid TypeScript. The type system catches errors at compile time, before your code ever runs.
+
+- **Catch bugs early** -- Type errors are caught when you write code, not when users hit them. A mistyped property name, a wrong argument type, or a missing return value are all caught before deployment.
+- **Better tooling** -- TypeScript enables powerful autocomplete, inline documentation, and safe refactoring in any editor. The type system knows what properties an object has.
+- **Scales with your codebase** -- As projects grow, types make code easier to understand and modify safely. Large teams rely on TypeScript to work on shared codebases without stepping on each other.
+- **Gradual adoption** -- You can add TypeScript to an existing JavaScript project one file at a time. The \`strict: false\` option lets you start loose and tighten up incrementally.
+- **The industry standard** -- React, Angular, Vue, Node.js, and virtually every major JavaScript framework are written in or have first-class TypeScript support.
+
+## The Story
+
+TypeScript was created at Microsoft by Anders Hejlsberg — the original designer of C# and Delphi. It was announced in October 2012 after being developed internally for two years.
+
+Microsoft's motivation was practical: they were building large applications in JavaScript and finding it increasingly hard to maintain at scale. TypeScript was their answer — a typed layer that compiles away entirely, leaving standard JavaScript.
+
+The project went open source from day one on GitHub. It gained widespread adoption in the JavaScript ecosystem, especially after Angular 2 (2016) made TypeScript its primary language. Today, TypeScript is consistently one of the most loved and most used programming languages.
+
+## Who Uses TypeScript
+
+The JavaScript ecosystem has largely adopted TypeScript:
+
+- **Microsoft** -- VS Code, Teams, and Office Online are built with TypeScript.
+- **Google** -- Angular is TypeScript-first.
+- **Airbnb** -- migrated their entire frontend to TypeScript.
+- **Slack, Asana, Figma, Stripe** -- all use TypeScript in production.
+
+The DefinitelyTyped repository hosts type definitions for over 8,000 JavaScript libraries, making TypeScript work with the entire npm ecosystem.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **6 chapters**:
+
+1. **Basics** -- Type annotations for variables, arrays, and function parameters and return types.
+2. **Interfaces** -- Defining object shapes with interfaces, type aliases, and optional properties.
+3. **Type System** -- Union types, type narrowing with \`typeof\`, and literal types.
+4. **Generics** -- Generic functions and generic constraints with \`extends\` and \`keyof\`.
+5. **Classes** -- TypeScript classes with access modifiers, and enums.
+6. **Advanced** -- Readonly properties and type guard functions.
+
+Each lesson explains a concept, demonstrates it with code examples, and gives you an exercise to practice.
+
+Let's get started.
+`;
+
+const tsWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now have a solid foundation in TypeScript: type annotations, interfaces, union types, type narrowing, generics, classes, enums, readonly, and type guards.
+
+That is a real accomplishment. You understand the core type system features that make TypeScript valuable at scale.
+
+## What to Explore Next
+
+Here are topics to dive deeper into:
+
+- **Utility Types** -- \`Partial<T>\`, \`Required<T>\`, \`Pick<T, K>\`, \`Omit<T, K>\`, \`Record<K, V>\`, \`ReturnType<F>\` — TypeScript's built-in type transformations.
+- **Mapped Types** -- Transform every property of a type: \`{ [K in keyof T]: ... }\`.
+- **Conditional Types** -- \`T extends U ? X : Y\` for type-level branching.
+- **Template Literal Types** -- String manipulation at the type level: \`\\\`get\${Capitalize<string>}\\\`\`.
+- **Declaration Files** -- Write \`.d.ts\` files to add types to JavaScript libraries.
+- **Strict Mode** -- Enable \`strict: true\` for stricter null checking and better safety.
+- **Decorators** -- Metadata annotations used heavily in Angular and NestJS.
+
+## Build Something
+
+The best way to learn is to build. Some project ideas:
+
+- **A typed REST API client** -- define types for requests and responses, with generics for different endpoints
+- **A state machine** -- use discriminated unions to model application states safely
+- **A type-safe event emitter** -- generics and mapped types to enforce correct event handler signatures
+- **Migrate a JavaScript project** -- take an existing JS project and add TypeScript types incrementally
+
+## References
+
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) -- the official guide, comprehensive and well-written.
+- [TypeScript Playground](https://www.typescriptlang.org/play) -- write and run TypeScript in the browser, see the compiled JavaScript.
+- [Type Challenges](https://github.com/type-challenges/type-challenges) -- a collection of type system puzzles to sharpen your skills.
+- [Total TypeScript](https://www.totaltypescript.com/) by Matt Pocock -- advanced TypeScript patterns explained clearly.
+- [Effective TypeScript](https://effectivetypescript.com/) by Dan Vanderkam -- 62 specific ways to improve your TypeScript.
+- *Programming TypeScript* by Boris Cherny (O'Reilly, 2019) -- a comprehensive book on TypeScript for JavaScript developers.
+`;
+
+const algorithmsIntroductionContent = `
+## Why Study Algorithms?
+
+Algorithms are the foundation of all software. Every program you write — whether it sorts a list, searches a database, or finds a route on a map — relies on well-understood algorithms. Learning them makes you a better programmer at every level.
+
+- **Speed matters** -- A naive O(n²) sort on 1 million elements takes seconds. An O(n log n) sort takes milliseconds. The algorithm is the difference.
+- **Interview ready** -- Algorithms are the core of technical interviews at every top tech company.
+- **Problem solving** -- Algorithm design teaches systematic thinking: how to decompose problems, identify patterns, and reason about correctness.
+- **Universal knowledge** -- These algorithms run on every language, every platform, every architecture.
+
+## The Canon
+
+The algorithms in this course are not academic curiosities. They are the ones that power real software:
+
+- **Merge sort** is used in Python's \`sorted()\` and Java's \`Arrays.sort()\`.
+- **Quick sort** underlies C's \`qsort\` and C++'s \`std::sort\`.
+- **BFS** finds shortest paths in Google Maps and social network friend suggestions.
+- **Dijkstra's algorithm** powers GPS navigation and network routing protocols.
+- **Dynamic programming** is used in sequence alignment (bioinformatics), spell correction, and compiler optimization.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Sorting** -- Bubble sort, selection sort, insertion sort, merge sort, and quick sort. Understand the trade-offs between O(n²) and O(n log n) algorithms.
+2. **Searching** -- Linear search for unsorted data, binary search for sorted data. The power of O(log n).
+3. **Data Structures** -- Stack (LIFO), Queue (FIFO), and Linked List. The building blocks for more complex algorithms.
+4. **Graphs** -- Breadth-first search (BFS), depth-first search (DFS), and Dijkstra's shortest path algorithm.
+5. **Dynamic Programming** -- Memoization, the Fibonacci sequence, and the Longest Common Subsequence problem.
+
+Each lesson explains the algorithm, shows the code, and gives you an exercise to implement it.
+
+Let's get started.
+`;
+
+const algorithmsWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now understand sorting algorithms, binary search, stacks, queues, linked lists, graph traversal, and dynamic programming.
+
+That is a real accomplishment. These algorithms appear in virtually every technical interview and underlie most software systems.
+
+## What to Explore Next
+
+You have covered the fundamentals. Here is where to go deeper:
+
+- **Heaps and Priority Queues** -- Efficient O(log n) min/max operations. The foundation for Dijkstra with a priority queue and heap sort.
+- **Hash Tables** -- O(1) average lookup, insertion, and deletion. The most used data structure in practice.
+- **Binary Search Trees** -- O(log n) search, insert, delete for dynamic sorted data.
+- **Balanced BSTs (AVL, Red-Black)** -- Guaranteed O(log n) even with adversarial inputs.
+- **Tries** -- Efficient prefix searches for autocomplete and spell checking.
+- **Union-Find** -- Efficient connected components and Kruskal's minimum spanning tree.
+- **Topological Sort** -- Ordering dependencies in build systems and package managers.
+- **Bellman-Ford** -- Shortest paths with negative weights.
+
+## Practice
+
+Theory is not enough — you need to practice on real problems:
+
+- [LeetCode](https://leetcode.com/) -- the most popular competitive programming platform. Start with "Easy" problems.
+- [NeetCode](https://neetcode.io/) -- curated problem lists with video explanations, organized by pattern.
+- [AlgoExpert](https://www.algoexpert.io/) -- 160 handpicked questions with video solutions.
+- [Project Euler](https://projecteuler.net/) -- mathematical and computational problems that reward algorithmic thinking.
+
+## References
+
+- *Introduction to Algorithms* (CLRS) by Cormen, Leiserson, Rivest, and Stein -- the definitive textbook. Dense but comprehensive.
+- *The Algorithm Design Manual* by Steven Skiena -- practical and readable. Excellent war stories from real-world algorithm use.
+- *Grokking Algorithms* by Aditya Bhargava -- illustrated introduction, great for visual learners.
+- [Visualgo](https://visualgo.net/) -- visual animations of sorting, graph, and DP algorithms.
+- [Big-O Cheat Sheet](https://www.bigocheatsheet.com/) -- quick reference for time and space complexity.
+`;
+
+const distributedSystemsIntroductionContent = `
+## Why Distributed Systems?
+
+When a single machine is not enough — too slow, too small, or too unreliable — you distribute the workload across multiple machines. This is how every major internet service operates: Google, Amazon, Netflix, and WhatsApp all run on distributed systems.
+
+- **Scale** -- distribute load across hundreds or thousands of machines. No single machine can serve a billion users.
+- **Fault tolerance** -- when one machine fails (and it will), the system keeps running. Replication and consensus protocols keep data safe.
+- **Latency** -- serve users from servers close to them. Data replicated globally means fast reads everywhere.
+
+But distribution introduces hard problems: machines fail, networks partition, clocks drift, and messages are lost or delayed. Every distributed system must make trade-offs between consistency, availability, and partition tolerance — the famous **CAP theorem**.
+
+## What You Will Build
+
+In this course, you will implement the core algorithms and data structures that power real distributed systems — in JavaScript:
+
+- **Lamport clocks and vector clocks** — how to order events when there is no global clock.
+- **Consistent hashing** — how DynamoDB and Cassandra distribute data across nodes without reshuffling everything when a node is added or removed.
+- **Leader election** — how Kafka and Kubernetes elect a coordinator.
+- **Quorum-based replication** — how to guarantee strong consistency with N replicas.
+- **CRDTs** — conflict-free data structures that merge automatically in eventually consistent systems.
+- **Bloom filters** — probabilistic membership tests used in Cassandra, Chrome, and Bitcoin.
+- **Rate limiting** — the token bucket algorithm used by every production API.
+- **Circuit breakers** — the pattern that prevents cascading failures in microservices.
+- **LRU caches** — the eviction policy behind CPU caches, Redis, and database buffer pools.
+- **Gossip protocols** — how Cassandra and DynamoDB propagate cluster membership.
+- **Two-phase commit** — the atomic protocol for distributed transactions.
+
+## What You Will Learn
+
+This course contains **12 lessons** organized into **6 chapters**:
+
+1. **Clocks & Ordering** -- Lamport clocks and vector clocks for logical time.
+2. **Data Distribution** -- Consistent hashing for distributing data across nodes.
+3. **Consensus** -- Leader election and two-phase commit for coordination.
+4. **Replication** -- Quorum-based operations, G-Counter CRDTs, and gossip protocols.
+5. **Probabilistic Structures** -- Bloom filters for space-efficient membership testing.
+6. **Fault Tolerance** -- Rate limiting, circuit breakers, and LRU caching.
+
+Each lesson explains the concept, shows the algorithm, and gives you an exercise to implement it in JavaScript.
+
+Let's get started.
+`;
+
+const distributedSystemsWhatsNextContent = `
+## Congratulations
+
+You have completed all 12 lessons. You now understand Lamport clocks, vector clocks, consistent hashing, leader election, two-phase commit, quorums, CRDTs, gossip protocols, Bloom filters, rate limiting, circuit breakers, and LRU caches.
+
+These are the algorithms and patterns that power Amazon, Google, Netflix, and every other major distributed system.
+
+## What to Explore Next
+
+You have covered the foundational algorithms. Here is where to go deeper:
+
+- **Raft consensus** -- The readable alternative to Paxos. A leader is elected per term; all writes go through the leader. Implemented by etcd (Kubernetes), CockroachDB, and TiKV.
+- **Paxos** -- The original consensus protocol by Lamport. Notoriously difficult to understand but foundational to Google Chubby and Spanner.
+- **MVCC (Multi-Version Concurrency Control)** -- How databases like PostgreSQL and CockroachDB implement snapshot isolation without locking.
+- **Saga pattern** -- Managing long-running distributed transactions without 2PC.
+- **Consistent Hashing with Virtual Nodes** -- How Cassandra and DynamoDB use virtual nodes for better load balancing.
+- **Replication logs** -- WAL shipping, statement-based replication, and row-based replication.
+
+## Build Something
+
+- **A key-value store** -- implement a simple distributed key-value store with consistent hashing and replication.
+- **A rate-limited API server** -- build a Node.js server with per-client rate limiting backed by Redis.
+- **A Raft implementation** -- implement the Raft leader election protocol across multiple processes.
+
+## References
+
+- *Designing Data-Intensive Applications* by Martin Kleppmann (O'Reilly, 2017) -- the best book on distributed systems for practitioners. Covers replication, partitioning, transactions, consistency, and consensus with clarity and depth.
+- [The Raft Paper](https://raft.github.io/raft.pdf) -- "In Search of an Understandable Consensus Algorithm" by Ongaro and Ousterhout. Readable and complete.
+- [Amazon DynamoDB Paper](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf) -- the original Dynamo paper. Consistent hashing, quorums, and vector clocks in production.
+- [Google Bigtable Paper](https://research.google/pubs/bigtable-a-distributed-storage-system-for-structured-data/) -- how Google stores petabytes of structured data.
+- [Jepsen](https://jepsen.io/) -- Kyle Kingsbury's analyses of consistency and failure modes in distributed databases.
+- [Martin Kleppmann's Blog](https://martin.kleppmann.com/) -- deep dives into distributed systems research.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -1009,6 +1246,17 @@ export const courses: Course[] = [
     whatsNextContent: jsWhatsNextContent,
   },
   {
+    id: "typescript",
+    title: "TypeScript",
+    description: "Learn TypeScript from scratch. Master type annotations, interfaces, generics, and the type system that makes large-scale JavaScript development reliable.",
+    language: "typescript",
+    chapters: tsChapters,
+    lessons: tsLessons,
+    runtimeLabel: "TypeScript",
+    introductionContent: tsIntroductionContent,
+    whatsNextContent: tsWhatsNextContent,
+  },
+  {
     id: "linux",
     title: "Linux",
     description: "Learn Linux and the Bash shell from scratch. Master the command line: navigate the filesystem, manage files, process text with pipes, and write shell scripts.",
@@ -1018,6 +1266,28 @@ export const courses: Course[] = [
     runtimeLabel: "Linux shell",
     introductionContent: linuxIntroductionContent,
     whatsNextContent: linuxWhatsNextContent,
+  },
+  {
+    id: "algorithms",
+    title: "Algorithms",
+    description: "Learn essential algorithms from scratch. Master sorting, searching, graph traversal, and dynamic programming — the foundations of every technical interview and production system.",
+    language: "javascript",
+    chapters: algorithmsChapters,
+    lessons: algorithmsLessons,
+    runtimeLabel: "JavaScript",
+    introductionContent: algorithmsIntroductionContent,
+    whatsNextContent: algorithmsWhatsNextContent,
+  },
+  {
+    id: "distributed-systems",
+    title: "Distributed Systems",
+    description: "Learn distributed systems by implementing them. Build Lamport clocks, consistent hashing, quorum replication, CRDTs, Bloom filters, circuit breakers, and more — in JavaScript.",
+    language: "javascript",
+    chapters: distributedSystemsChapters,
+    lessons: distributedSystemsLessons,
+    runtimeLabel: "JavaScript",
+    introductionContent: distributedSystemsIntroductionContent,
+    whatsNextContent: distributedSystemsWhatsNextContent,
   },
 ];
 
