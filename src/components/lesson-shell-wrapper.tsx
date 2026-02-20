@@ -58,6 +58,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus2") return initCRunner();
     if (courseId === "calculus3") return initCRunner();
     if (courseId === "circuits") return initCRunner();
+    if (courseId === "classical-mechanics") return initCRunner();
     if (courseId === "linux") return initLinuxRunner();
     if (courseId === "javascript") return initJsRunner();
     if (courseId === "typescript") return initTsRunner();
@@ -96,6 +97,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus2") return isCReady();
     if (courseId === "calculus3") return isCReady();
     if (courseId === "circuits") return isCReady();
+    if (courseId === "classical-mechanics") return isCReady();
     if (courseId === "linux") return isLinuxReady();
     if (courseId === "javascript") return isJsReady();
     if (courseId === "typescript") return isTsReady();
@@ -134,6 +136,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus2") return runC(code);
     if (courseId === "calculus3") return runC(code);
     if (courseId === "circuits") return runC(code);
+    if (courseId === "classical-mechanics") return runC(code);
     if (courseId === "linux") return runLinux(code);
     if (courseId === "javascript") return runJs(code);
     if (courseId === "typescript") return runTs(code);
@@ -172,6 +175,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus2") return runCTests(code, tests);
     if (courseId === "calculus3") return runCTests(code, tests);
     if (courseId === "circuits") return runCTests(code, tests);
+    if (courseId === "classical-mechanics") return runCTests(code, tests);
     if (courseId === "linux") return runLinuxTests(code, tests);
     if (courseId === "javascript") return runJsTests(code, tests);
     if (courseId === "typescript") return runTsTests(code, tests);

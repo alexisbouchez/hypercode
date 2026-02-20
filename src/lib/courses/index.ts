@@ -2892,6 +2892,17 @@ export const courses: Course[] = [
     whatsNextContent: musicWhatsNextContent,
   },
   {
+    id: "classical-mechanics",
+    title: "Classical Mechanics in C",
+    description: "Learn classical mechanics by implementing the algorithms in C. Compute velocity, free fall, projectile range, Newton's laws, friction, energy, momentum, oscillations, and gravitational force from scratch.",
+    language: "c",
+    chapters: classicalMechanicsChapters,
+    lessons: classicalMechanicsLessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: classicalMechanicsIntroductionContent,
+    whatsNextContent: classicalMechanicsWhatsNextContent,
+  },
+  {
     id: "quantum",
     title: "Quantum Computing",
     description: "Learn quantum computing from first principles. Simulate qubits, apply quantum gates, create entangled Bell states, and implement Grover's search, the Deutsch algorithm, and the BB84 quantum key distribution protocol — all in Python.",
