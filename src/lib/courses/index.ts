@@ -25,6 +25,7 @@ import { linearAlgebraChapters, linearAlgebraLessons } from "@/lib/lessons/linea
 import { diffeqChapters, diffeqLessons } from "@/lib/lessons/diffeq";
 import { calculusChapters, calculusLessons } from "@/lib/lessons/calculus";
 import { statisticsChapters, statisticsLessons } from "@/lib/lessons/statistics";
+import { calculus2Chapters, calculus2Lessons } from "@/lib/lessons/calculus2";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -1847,6 +1848,63 @@ You have completed all 15 lessons. You can now implement the core algorithms of 
 - [Numerical Recipes in C](http://numerical.recipes/) -- the practitioner's guide to numerical algorithms
 `;
 
+const calculus2IntroductionContent = `
+## Why Calculus 2?
+
+Calculus 2 takes the foundations of Calculus 1 and extends them in three major directions: more powerful integration techniques, the theory of infinite series, and new coordinate systems for curves that can't be described with simple \`y = f(x)\` equations.
+
+- **Integration Applications** -- Arc length, surface area, work done by variable forces, and improper integrals that span infinite intervals
+- **Sequences and Series** -- Rigorous theory of convergence: geometric series, p-series, alternating series, and the ratio test
+- **Taylor Series** -- Approximate any smooth function as a polynomial, with quantified error bounds — the computational backbone of numerical computing
+- **Parametric and Polar** -- Curves defined by parameter or angle: circles, spirals, rose curves, and their arc lengths and areas
+
+## The Computational Angle
+
+This course implements every concept in C using **numerical algorithms** — no symbolic algebra. You will:
+
+- Compute arc lengths and surface areas with numerical integration + numerical derivatives
+- Approximate improper integrals by integrating to large finite bounds
+- Implement partial sums to observe series convergence empirically
+- Build a Taylor polynomial engine using recursive central differences
+- Compute curvature using the second-derivative formula
+
+Each function you write is a small numerical experiment. When your output matches the analytic formula, you know both the theory and the implementation are correct.
+
+## Prerequisites
+
+Calculus 1 (limits, derivatives, integrals) and basic C programming (pointers, loops, structs). The Calculus 1 in C course on this platform is ideal preparation.
+`;
+
+const calculus2WhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons of Calculus 2. You can now implement arc length, surface area, improper integrals, partial sums, Taylor polynomials, parametric arc length, polar area, and curvature — all from scratch in C.
+
+## What to Explore Next
+
+- **Multivariable Calculus** -- Partial derivatives, gradient descent, Lagrange multipliers, double and triple integrals, line integrals, Stokes' theorem
+- **Differential Equations** -- Apply integration and series directly to ODEs: separation of variables, series solutions, Laplace transforms
+- **Numerical Analysis** -- Adaptive step-size quadrature, Gaussian quadrature, Chebyshev approximation — the professional tools built on these ideas
+- **Complex Analysis** -- Taylor and Laurent series in the complex plane, residue theorem, conformal mappings
+
+## Key Formulas
+
+| Concept | Formula |
+|---------|---------|
+| Arc length | \`∫_a^b √(1 + f'²) dx\` |
+| Surface area | \`2π ∫_a^b f(x)√(1+f'²) dx\` |
+| Geometric series | \`a/(1-r)\` for \`|r|<1\` |
+| Taylor polynomial | \`Σ f^(k)(a)/k! · (x-a)^k\` |
+| Polar area | \`½ ∫_a^b r(θ)² dθ\` |
+| Curvature | \`|f''| / (1+f'²)^{3/2}\` |
+
+## References
+
+- [Calculus](https://www.stewartcalculus.com/) by James Stewart — the standard university textbook (Chapters 8–12)
+- [Numerical Recipes in C](http://numerical.recipes/) — the practitioner's guide to numerical algorithms
+- [3Blue1Brown: Essence of Calculus](https://www.3blue1brown.com/topics/calculus) — visual intuition for the concepts
+`;
+
 const diffeqIntroductionContent = `
 ## Why Differential Equations?
 
@@ -2185,6 +2243,17 @@ export const courses: Course[] = [
     runtimeLabel: "Pyodide",
     introductionContent: statisticsIntroductionContent,
     whatsNextContent: statisticsWhatsNextContent,
+  },
+  {
+    id: "calculus2",
+    title: "Calculus 2 in C",
+    description: "Learn Calculus 2 by implementing the algorithms in C. Compute arc lengths, surface areas, improper integrals, partial sums, geometric series, Taylor polynomials, parametric arc length, polar area, and curvature.",
+    language: "c",
+    chapters: calculus2Chapters,
+    lessons: calculus2Lessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: calculus2IntroductionContent,
+    whatsNextContent: calculus2WhatsNextContent,
   },
 ];
 
