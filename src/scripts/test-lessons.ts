@@ -14,6 +14,8 @@ import { runRubyTests } from "./test-runners/ruby-test-runner";
 import { runTreesTests } from "./test-runners/trees-test-runner";
 import { runKernelTests } from "./test-runners/kernel-test-runner";
 import { runLinkedListsTests } from "./test-runners/linked-lists-test-runner";
+import { runHaskellTests } from "./test-runners/haskell-test-runner";
+import { runLinearAlgebraTests } from "./test-runners/linear-algebra-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -82,6 +84,14 @@ async function main() {
   console.log("Running Linked Lists tests...");
   const linkedListsResults = await runLinkedListsTests();
   allResults.push(...linkedListsResults);
+
+  console.log("Running Haskell tests...");
+  const haskellResults = runHaskellTests();
+  allResults.push(...haskellResults);
+
+  console.log("Running Linear Algebra tests...");
+  const linearAlgebraResults = runLinearAlgebraTests();
+  allResults.push(...linearAlgebraResults);
 
   console.log("\n--- Results ---\n");
 

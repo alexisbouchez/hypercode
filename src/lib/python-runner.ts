@@ -96,6 +96,10 @@ export async function runPython(code: string): Promise<RunResult> {
   }
 
   try {
+    await pyodide.loadPackagesFromImports(code);
+  } catch {}
+
+  try {
     pyodide.runPython(code);
   } catch (e: any) {
     error = (e.message || String(e)).replace(/^PythonError:\s*/, "").trim();

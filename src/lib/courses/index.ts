@@ -19,6 +19,9 @@ import { treesChapters, treesLessons } from "@/lib/lessons/trees";
 import { threejsChapters, threejsLessons } from "@/lib/lessons/threejs";
 import { linkedListsChapters, linkedListsLessons } from "@/lib/lessons/linked-lists";
 import { pythonChapters, pythonLessons } from "@/lib/lessons/python";
+import { haskellChapters, haskellLessons } from "@/lib/lessons/haskell";
+import { graphsChapters, graphsLessons } from "@/lib/lessons/graphs";
+import { linearAlgebraChapters, linearAlgebraLessons } from "@/lib/lessons/linear-algebra";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -1540,6 +1543,180 @@ const pythonWhatsNextContent = `
 - [PyPI](https://pypi.org/) — The Python Package Index. Find packages for any task.
 `;
 
+const linearAlgebraIntroductionContent = `
+## Why Linear Algebra?
+
+Linear algebra is the mathematics of vectors and matrices — the language of machine learning, computer graphics, scientific computing, and data analysis. Every neural network, every 3D game, every recommendation system is built on it.
+
+- **Machine Learning** — gradient descent, PCA, SVD, attention in transformers
+- **Computer Graphics** — transformations, projections, shading
+- **Data Science** — dimensionality reduction, regression, covariance
+- **Physics Simulations** — systems of differential equations
+- **Cryptography** — lattice-based cryptography is pure linear algebra
+
+## Why NumPy and SymPy?
+
+**NumPy** gives you fast numerical linear algebra:
+- Vectors and matrices as \`np.array\`
+- \`np.dot\`, \`np.linalg.solve\`, \`np.linalg.eig\` — all backed by LAPACK and BLAS
+- Runs at C speed on arrays of millions of values
+
+**SymPy** gives you exact symbolic algebra with beautiful rendering:
+- Symbols, expressions, equations — no floating point error
+- \`sympy.pprint()\` renders equations as Unicode art in your terminal:
+
+\`\`\`
+ ⎡1  2⎤           2
+ ⎢    ⎥   (x + 1)
+ ⎣3  4⎦
+\`\`\`
+
+Together, they cover both the computational and symbolic sides of linear algebra.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Vectors** — Create NumPy vectors, perform element-wise operations, compute dot products, and normalize with the L2 norm.
+2. **Matrices** — Build 2D matrices, apply transpose, multiply with the \`@\` operator, and compute determinants.
+3. **Linear Systems** — Test invertibility, solve \`Ax = b\` with \`np.linalg.solve\`, find eigenvalues, and fit lines with least squares.
+4. **Symbolic Math** — Use SymPy to factor polynomials, solve equations exactly, and render expressions as beautiful Unicode math.
+
+Let's compute.
+`;
+
+const linearAlgebraWhatsNextContent = `
+## Congratulations
+
+You have implemented 15 linear algebra concepts in Python: vectors, element-wise operations, dot products, norms, matrices, transpose, multiplication, determinants, invertibility, solving systems, eigenvalues, least squares, symbolic factoring, symbolic solving, and symbolic matrix algebra.
+
+This is the mathematical foundation for machine learning, graphics, and scientific computing.
+
+## What to Explore Next
+
+- **Singular Value Decomposition (SVD)** — \`np.linalg.svd\`. Every matrix has an SVD. It powers image compression (JPEG), recommendation systems (Netflix), and dimensionality reduction.
+- **Principal Component Analysis (PCA)** — compute eigenvectors of the covariance matrix to find the directions of maximum variance. The foundation of dimensionality reduction.
+- **NumPy Broadcasting** — operations between arrays of different shapes. Eliminates explicit loops for most tensor operations.
+- **SciPy** — builds on NumPy with sparse matrices, FFT, optimization, and statistics.
+- **Matplotlib** — visualize vectors, transformations, eigenspaces, and regression lines.
+
+## Build Something
+
+- **Image compression** — load a grayscale image as a matrix, compute its SVD, reconstruct with k singular values, and compare quality vs. size.
+- **Linear regression** — implement gradient descent from scratch using matrix operations on the Boston housing dataset.
+- **2D transformation visualizer** — apply rotation/scaling/shear matrices to a set of points and plot before/after.
+- **PageRank** — model the web as an adjacency matrix and find the dominant eigenvector.
+
+## References
+
+- *Linear Algebra and Its Applications* by Gilbert Strang — the most readable linear algebra textbook, used at MIT.
+- [3Blue1Brown: Essence of Linear Algebra](https://www.3blue1brown.com/topics/linear-algebra) — 16 videos with stunning visualizations of every concept from this course.
+- [NumPy documentation](https://numpy.org/doc/stable/reference/routines.linalg.html) — complete reference for \`np.linalg\`.
+- [SymPy documentation](https://docs.sympy.org/latest/tutorials/intro-tutorial/index.html) — SymPy tutorial and full API.
+`;
+
+const graphsIntroductionContent = `
+## Why Graph Algorithms?
+
+Graphs are one of the most powerful abstractions in computer science. They model relationships between things — web pages and links, cities and roads, users and friendships, tasks and dependencies. Nearly every complex problem at scale can be framed as a graph problem.
+
+- **Social networks** — Facebook, LinkedIn, Twitter are graphs. Shortest path gives degrees of separation. PageRank ranks influence.
+- **Maps & Navigation** — Google Maps uses Dijkstra and A* to find shortest routes.
+- **Compilers** — Topological sort orders declarations. Cycle detection finds circular imports.
+- **Networking** — Routing protocols (OSPF) use shortest-path algorithms.
+- **Machine Learning** — Knowledge graphs, graph neural networks, dependency parsing.
+
+## What You Will Learn
+
+This course implements the core graph algorithms from scratch in Python:
+
+- **Representations**: adjacency lists — the foundation of all graph algorithms
+- **Traversals**: BFS (level-by-level) and DFS (deep-first) — the building blocks
+- **Connectivity**: has_path, connected components, bipartite check
+- **Cycle detection**: undirected (parent tracking) and directed (3-color DFS)
+- **Topological sort**: Kahn's algorithm for ordering DAGs
+- **Shortest paths**: Dijkstra (non-negative weights) and Bellman-Ford (negative weights)
+- **Union-Find**: path compression and union by rank — nearly O(1) per operation
+- **Minimum Spanning Tree**: Kruskal's algorithm using Union-Find
+- **PageRank**: the algorithm behind Google Search
+
+Every function is tested against concrete examples with known correct outputs.
+`;
+
+const graphsWhatsNextContent = `
+## What to Explore Next
+
+### More Graph Algorithms
+- **A* Search** — Dijkstra with a heuristic. Used for pathfinding in games and maps. Requires an admissible heuristic.
+- **Floyd-Warshall** — All-pairs shortest paths in O(V³). Great for dense graphs or when you need distances between all pairs.
+- **Tarjan's SCC** — Strongly Connected Components in a single DFS pass. More efficient than Kosaraju's.
+- **Network Flow** — Edmonds-Karp (BFS-based Ford-Fulkerson) for max flow / min cut problems.
+- **Articulation Points & Bridges** — Find critical infrastructure nodes/edges in a network.
+
+### Applications
+- **Word Ladder** — BFS on a graph where words are nodes and edges connect words differing by one letter.
+- **Course Schedule** — LeetCode 207/210: topological sort with cycle detection.
+- **Number of Islands** — DFS/BFS on a 2D grid graph.
+- **Alien Dictionary** — Topological sort from character ordering constraints.
+
+### Tools & Libraries
+- **NetworkX** — The Python graph library. Implements hundreds of algorithms, visualizes graphs, handles massive networks.
+- **igraph** — Fast graph analysis for Python and R.
+- **Gephi** — Graph visualization and exploration tool.
+- **Neo4j** — Graph database for storing and querying graph-structured data with Cypher query language.
+
+### Further Reading
+- *Introduction to Algorithms* (CLRS) — Chapters 22-25 cover all graph algorithms in depth.
+- *Algorithm Design Manual* by Steven Skiena — Practical graph algorithms with real-world applications.
+- [CP-algorithms.com](https://cp-algorithms.com/) — Detailed explanations with implementations for competitive programming.
+- [LeetCode Graph Problems](https://leetcode.com/tag/graph/) — 200+ practice problems from easy to hard.
+`;
+
+const haskellIntroductionContent = `
+## Why Haskell?
+
+Haskell is a purely functional, statically typed programming language with lazy evaluation. Learning Haskell changes how you think about programming — even if you never write it professionally.
+
+- **Pure functions** -- No hidden state, no side effects. Every function takes inputs and returns outputs. The same input always produces the same output.
+- **Strong type system** -- Haskell's types catch entire classes of bugs at compile time. The famous saying: "If it compiles, it often works."
+- **Pattern matching** -- Destructure data with elegance. Define functions by cases, matching on shape and value simultaneously.
+- **Lazy evaluation** -- Haskell only computes values when needed. You can define infinite lists and only use the parts you want.
+- **Conciseness** -- Haskell programs are often a fraction of the length of equivalent imperative code.
+
+## The Story
+
+Haskell was born in 1987 when a committee of researchers decided that the proliferation of lazy functional languages needed a single, open standard. Named after the logician Haskell Curry, version 1.0 was released in 1990. GHC (Glasgow Haskell Compiler) is the de-facto standard implementation.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Basics** -- Printing output, variables and bindings, arithmetic, and strings.
+2. **Functions** -- Defining functions, if expressions, guards, and pattern matching.
+3. **Lists** -- Creating lists, ranges, map, filter, take, drop, zip, and list comprehensions.
+4. **Functional Patterns** -- Lambdas, folds, where/let bindings, and the Maybe type.
+
+Let's get started.
+`;
+
+const haskellWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now understand Haskell's core ideas: pure functions, pattern matching, list comprehensions, higher-order functions, folds, and the Maybe type.
+
+## What to Explore Next
+
+- **Type classes** -- \`Eq\`, \`Ord\`, \`Show\`, \`Functor\`, \`Monad\` — Haskell's polymorphism mechanism.
+- **Monads** -- The abstraction behind \`IO\`, \`Maybe\`, \`Either\`, and \`List\`.
+- **Algebraic data types** -- \`data Tree a = Leaf | Node a (Tree a) (Tree a)\` — how Haskell models the world.
+
+## References
+
+- [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/) — The classic free online introduction.
+- [Real World Haskell](http://book.realworldhaskell.org/) — Practical Haskell for production use.
+- [Haskell Wiki](https://wiki.haskell.org/) — Community-maintained documentation.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -1761,6 +1938,39 @@ export const courses: Course[] = [
     runtimeLabel: "Pyodide",
     introductionContent: pythonIntroductionContent,
     whatsNextContent: pythonWhatsNextContent,
+  },
+  {
+    id: "haskell",
+    title: "Haskell",
+    description: "Learn Haskell from the ground up. Master pure functions, pattern matching, list comprehensions, folds, lambdas, and the Maybe type — the language that makes functional programming beautiful.",
+    language: "haskell",
+    chapters: haskellChapters,
+    lessons: haskellLessons,
+    runtimeLabel: "Haskell",
+    introductionContent: haskellIntroductionContent,
+    whatsNextContent: haskellWhatsNextContent,
+  },
+  {
+    id: "graphs",
+    title: "Graphs in Python",
+    description: "Master graph algorithms in Python. Implement BFS, DFS, Dijkstra, Bellman-Ford, topological sort, Union-Find, Kruskal's MST, and PageRank from scratch.",
+    language: "python",
+    chapters: graphsChapters,
+    lessons: graphsLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: graphsIntroductionContent,
+    whatsNextContent: graphsWhatsNextContent,
+  },
+  {
+    id: "linear-algebra",
+    title: "Linear Algebra in Python",
+    description: "Master linear algebra with NumPy and SymPy. Build vectors and matrices, solve linear systems, compute eigenvalues, fit lines with least squares, and render beautiful equations with SymPy's pprint.",
+    language: "python",
+    chapters: linearAlgebraChapters,
+    lessons: linearAlgebraLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: linearAlgebraIntroductionContent,
+    whatsNextContent: linearAlgebraWhatsNextContent,
   },
 ];
 
