@@ -14,12 +14,20 @@ det([[a, b], [c, d]]) = a·d - b·c
 \`\`\`
 
 \`\`\`python
-import numpy as np
+def det(A):
+    if len(A) == 1:
+        return A[0][0]
+    if len(A) == 2:
+        return A[0][0]*A[1][1] - A[0][1]*A[1][0]
+    # Cofactor expansion along first row
+    return sum(
+        ((-1)**j) * A[0][j] * det([[A[i][k] for k in range(len(A)) if k != j]
+                                    for i in range(1, len(A))])
+        for j in range(len(A))
+    )
 
-A = np.array([[3, 0],
-              [0, 2]])
-
-print(np.linalg.det(A))  # 6.0  — scales area by 6
+A = [[3, 0], [0, 2]]
+print(int(round(det(A))))  # 6  — scales area by 6
 \`\`\`
 
 ### What the Determinant Tells You
@@ -36,39 +44,39 @@ print(np.linalg.det(A))  # 6.0  — scales area by 6
 If rows are linearly dependent (one row is a multiple of another), the determinant is 0:
 
 \`\`\`python
-S = np.array([[1, 2],
-              [2, 4]])  # row 2 = 2 × row 1
-
-print(int(round(np.linalg.det(S))))  # 0
+S = [[1, 2], [2, 4]]  # row 2 = 2 × row 1
+print(int(round(det(S))))  # 0
 \`\`\`
-
-### Floating Point Note
-
-\`np.linalg.det\` returns a float. Always round to an integer when you expect an exact integer result.
 
 ### Your Task
 
 Implement \`det(A)\` that returns the determinant as an integer (rounded).`,
 
-	starterCode: `import numpy as np
-
-def det(A):
+	starterCode: `def det(A):
     # Return the determinant as a rounded integer
+    # Hint: for 2x2 use a*d - b*c; for larger use cofactor expansion
     pass
 
-print(det(np.array([[3, 0], [0, 2]])))
-print(det(np.array([[1, 2], [3, 4]])))
-print(det(np.array([[1, 2], [2, 4]])))
+print(det([[3, 0], [0, 2]]))
+print(det([[1, 2], [3, 4]]))
+print(det([[1, 2], [2, 4]]))
 `,
 
-	solution: `import numpy as np
+	solution: `def det(A):
+    n = len(A)
+    if n == 1:
+        return A[0][0]
+    if n == 2:
+        return int(round(A[0][0]*A[1][1] - A[0][1]*A[1][0]))
+    return int(round(sum(
+        ((-1)**j) * A[0][j] * det([[A[i][k] for k in range(n) if k != j]
+                                    for i in range(1, n)])
+        for j in range(n)
+    )))
 
-def det(A):
-    return int(round(np.linalg.det(A)))
-
-print(det(np.array([[3, 0], [0, 2]])))
-print(det(np.array([[1, 2], [3, 4]])))
-print(det(np.array([[1, 2], [2, 4]])))
+print(det([[3, 0], [0, 2]]))
+print(det([[1, 2], [3, 4]]))
+print(det([[1, 2], [2, 4]]))
 `,
 
 	tests: [
@@ -79,24 +87,25 @@ print(det(np.array([[1, 2], [2, 4]])))
 		{
 			name: "identity has det 1",
 			code: `{{FUNC}}
-print(det(np.eye(3, dtype=int)))`,
+I = [[1 if i==j else 0 for j in range(3)] for i in range(3)]
+print(det(I))`,
 			expected: "1\n",
 		},
 		{
 			name: "swap rows negates determinant",
 			code: `{{FUNC}}
-A = np.array([[1, 2], [3, 4]])
-B = np.array([[3, 4], [1, 2]])
+A = [[1, 2], [3, 4]]
+B = [[3, 4], [1, 2]]
 print(det(A))
 print(det(B))`,
 			expected: "-2\n2\n",
 		},
 		{
-			name: "det of 3x3",
+			name: "det of 3x3 diagonal",
 			code: `{{FUNC}}
-A = np.array([[2, 0, 0],
-              [0, 3, 0],
-              [0, 0, 4]])
+A = [[2, 0, 0],
+     [0, 3, 0],
+     [0, 0, 4]]
 print(det(A))`,
 			expected: "24\n",
 		},

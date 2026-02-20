@@ -13,14 +13,14 @@ The **one-sample t-test** checks whether the mean of your data is significantly 
 - H₁ (alternative): μ ≠ μ₀
 
 \`\`\`python
-from scipy import stats
+import math, statistics
 
 data = [2.1, 2.5, 2.3, 2.8, 2.4]
 mu_0 = 2.0   # hypothesized mean
+n = len(data)
 
-t_stat, p_value = stats.ttest_1samp(data, mu_0)
+t_stat = (statistics.fmean(data) - mu_0) / (statistics.stdev(data) / math.sqrt(n))
 print(round(t_stat, 4))   # 4.0
-print(p_value < 0.05)     # True — reject H₀
 \`\`\`
 
 ### The t-Statistic
@@ -40,19 +40,13 @@ The p-value is the probability of observing a t-statistic this extreme (or more)
 
 ### Special Case: Testing Against the Sample Mean
 
-When μ₀ equals the sample mean exactly, t = 0 and p = 1.0:
-
-\`\`\`python
-t, p = stats.ttest_1samp([1, 2, 3, 4, 5], popmean=3)
-print(t)   # 0.0
-print(p)   # 1.0
-\`\`\`
+When μ₀ equals the sample mean exactly, t = 0 and p = 1.0.
 
 ### Your Task
 
 Implement \`ttest_one_sample(data, mu)\` that prints the t-statistic (rounded to 4 decimal places) and whether the result is significant (\`p < 0.05\`).`,
 
-	starterCode: `from scipy import stats
+	starterCode: `import math, statistics
 
 def ttest_one_sample(data, mu):
     # Print t_stat (round 4) and whether p < 0.05 (True/False)
@@ -61,11 +55,43 @@ def ttest_one_sample(data, mu):
 ttest_one_sample([1, 2, 3, 4, 5], 3)
 `,
 
-	solution: `from scipy import stats
+	solution: `import math, statistics
+
+def _betacf(a, b, x):
+    MAXIT, EPS = 100, 3e-7
+    qab, qap, qam = a+b, a+1, a-1
+    c, d = 1.0, max(1-qab*x/qap, 1e-30)
+    d, h = 1.0/d, 1.0/d
+    for m in range(1, MAXIT+1):
+        m2 = 2*m
+        aa = m*(b-m)*x/((qam+m2)*(a+m2))
+        d = max(1+aa*d, 1e-30); c = max(1+aa/c, 1e-30)
+        d = 1.0/d; h *= d*c
+        aa = -(a+m)*(qab+m)*x/((a+m2)*(qap+m2))
+        d = max(1+aa*d, 1e-30); c = max(1+aa/c, 1e-30)
+        d = 1.0/d; delta = d*c; h *= delta
+        if abs(delta-1.0) < EPS: break
+    return h
+
+def _betainc(a, b, x):
+    if x <= 0: return 0.0
+    if x >= 1: return 1.0
+    lbeta = math.lgamma(a)+math.lgamma(b)-math.lgamma(a+b)
+    front = math.exp(math.log(x)*a + math.log(1-x)*b - lbeta)
+    if x < (a+1)/(a+b+2): return front*_betacf(a,b,x)/a
+    return 1 - front*_betacf(b,a,1-x)/b
+
+def _t_pvalue(t, df):
+    x = df / (df + t*t)
+    return _betainc(df/2, 0.5, x)
 
 def ttest_one_sample(data, mu):
-    t_stat, p_value = stats.ttest_1samp(data, mu)
-    print(round(float(t_stat), 4))
+    n = len(data)
+    mean = statistics.fmean(data)
+    s = statistics.stdev(data)
+    t_stat = (mean - mu) / (s / math.sqrt(n))
+    p_value = _t_pvalue(t_stat, n - 1)
+    print(round(t_stat, 4))
     print(p_value < 0.05)
 
 ttest_one_sample([1, 2, 3, 4, 5], 3)

@@ -6,18 +6,15 @@ export const vectorOps: Lesson = {
 	chapterId: "vectors",
 	content: `## Vector Operations
 
-NumPy applies arithmetic operators **element-wise** across vectors of the same length.
+We can add vectors, subtract them, and scale them — all element-wise.
 
 \`\`\`python
-import numpy as np
+a = [1, 2, 3]
+b = [4, 5, 6]
 
-a = np.array([1, 2, 3])
-b = np.array([4, 5, 6])
-
-print(a + b)   # [5 7 9]
-print(b - a)   # [3 3 3]
-print(2 * a)   # [2 4 6]
-print(a * b)   # [ 4 10 18]  element-wise product
+add = [a[i] + b[i] for i in range(len(a))]   # [5, 7, 9]
+sub = [b[i] - a[i] for i in range(len(a))]   # [3, 3, 3]
+scale = [2 * x for x in a]                   # [2, 4, 6]
 \`\`\`
 
 ### Linear Combination
@@ -32,7 +29,7 @@ Every vector in the **span** of \`a\` and \`b\` can be expressed this way.
 
 \`\`\`python
 alpha, beta = 2, 3
-c = alpha * a + beta * b
+c = [alpha * a[i] + beta * b[i] for i in range(len(a))]
 # 2·[1,2,3] + 3·[4,5,6] = [2,4,6] + [12,15,18] = [14,19,24]
 \`\`\`
 
@@ -42,57 +39,53 @@ Multiplying a vector by a scalar scales every component. It stretches or shrinks
 
 ### Your Task
 
-Implement \`linear_combination(a, b, alpha, beta)\` that returns \`alpha * a + beta * b\`.`,
+Implement \`linear_combination(a, b, alpha, beta)\` that returns \`alpha * a + beta * b\` as a list.`,
 
-	starterCode: `import numpy as np
-
-def linear_combination(a, b, alpha, beta):
-    # Return alpha * a + beta * b
+	starterCode: `def linear_combination(a, b, alpha, beta):
+    # Return alpha * a + beta * b as a list
     pass
 
-a = np.array([1, 2, 3])
-b = np.array([1, 0, -1])
+a = [1, 2, 3]
+b = [1, 0, -1]
 print(linear_combination(a, b, 2, 3))
 `,
 
-	solution: `import numpy as np
+	solution: `def linear_combination(a, b, alpha, beta):
+    return [alpha * a[i] + beta * b[i] for i in range(len(a))]
 
-def linear_combination(a, b, alpha, beta):
-    return alpha * a + beta * b
-
-a = np.array([1, 2, 3])
-b = np.array([1, 0, -1])
+a = [1, 2, 3]
+b = [1, 0, -1]
 print(linear_combination(a, b, 2, 3))
 `,
 
 	tests: [
 		{
-			name: "2·[1,2,3] + 3·[1,0,-1] = [5,4,3]",
-			expected: "[5 4 3]\n",
+			name: "2·[1,2,3] + 3·[1,0,-1] = [5, 4, 3]",
+			expected: "[5, 4, 3]\n",
 		},
 		{
 			name: "1·a + 0·b = a",
 			code: `{{FUNC}}
-a = np.array([7, 8, 9])
-b = np.array([1, 2, 3])
+a = [7, 8, 9]
+b = [1, 2, 3]
 print(linear_combination(a, b, 1, 0))`,
-			expected: "[7 8 9]\n",
+			expected: "[7, 8, 9]\n",
 		},
 		{
 			name: "0·a + 1·b = b",
 			code: `{{FUNC}}
-a = np.array([0, 0, 0])
-b = np.array([4, 5, 6])
+a = [0, 0, 0]
+b = [4, 5, 6]
 print(linear_combination(a, b, 0, 1))`,
-			expected: "[4 5 6]\n",
+			expected: "[4, 5, 6]\n",
 		},
 		{
 			name: "negative scale flips sign",
 			code: `{{FUNC}}
-a = np.array([1, 2, 3])
-b = np.array([0, 0, 0])
+a = [1, 2, 3]
+b = [0, 0, 0]
 print(linear_combination(a, b, -1, 0))`,
-			expected: "[-1 -2 -3]\n",
+			expected: "[-1, -2, -3]\n",
 		},
 	],
 };

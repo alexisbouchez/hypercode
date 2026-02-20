@@ -13,14 +13,13 @@ The three most important measures of central tendency:
 - **Mode** — the most frequently occurring value
 
 \`\`\`python
-import numpy as np
 import statistics
 
 data = [2, 4, 4, 4, 5, 5, 7, 9]
 
-print(round(np.mean(data), 1))        # 5.0
-print(round(np.median(data), 1))      # 4.5
-print(statistics.mode(data))          # 4
+print(round(statistics.fmean(data), 1))   # 5.0
+print(round(statistics.median(data), 1))  # 4.5
+print(statistics.mode(data))              # 4
 \`\`\`
 
 ### When to Use Each
@@ -35,8 +34,7 @@ print(statistics.mode(data))          # 4
 
 Implement \`central_tendency(data)\` that prints the mean (rounded to 1 decimal), median (rounded to 1 decimal), and mode of the input list.`,
 
-	starterCode: `import numpy as np
-import statistics
+	starterCode: `import statistics
 
 def central_tendency(data):
     # Print mean (round 1 decimal), median (round 1 decimal), mode
@@ -45,12 +43,11 @@ def central_tendency(data):
 central_tendency([2, 4, 4, 4, 5, 5, 7, 9])
 `,
 
-	solution: `import numpy as np
-import statistics
+	solution: `import statistics
 
 def central_tendency(data):
-    print(round(float(np.mean(data)), 1))
-    print(round(float(np.median(data)), 1))
+    print(round(statistics.fmean(data), 1))
+    print(round(float(statistics.median(data)), 1))
     print(statistics.mode(data))
 
 central_tendency([2, 4, 4, 4, 5, 5, 7, 9])

@@ -13,13 +13,14 @@ z = (x - μ) / σ
 \`\`\`
 
 \`\`\`python
-from scipy import stats
-import numpy as np
+import statistics
 
 data = [1, 2, 3, 4, 5]
-z = stats.zscore(data)  # uses population std (ddof=0)
-print(np.round(z, 4))
-# [-1.4142 -0.7071  0.      0.7071  1.4142]
+mean = statistics.fmean(data)
+pstdev = statistics.pstdev(data)  # population std (ddof=0)
+z = [(x - mean) / pstdev for x in data]
+print([round(v, 4) for v in z])
+# [-1.4142, -0.7071, 0.0, 0.7071, 1.4142]
 \`\`\`
 
 ### Properties
@@ -45,29 +46,29 @@ A standardized dataset always has:
 
 ### Your Task
 
-Implement \`z_scores(data)\` that returns the z-scores of the data using \`scipy.stats.zscore\`.`,
+Implement \`z_scores(data)\` that returns the z-scores of the data as a list (using population standard deviation).`,
 
-	starterCode: `from scipy import stats
-import numpy as np
+	starterCode: `import statistics
 
 def z_scores(data):
-    # Return scipy.stats.zscore of data
+    # Return list of z-scores using population std
     pass
 
 z = z_scores([1, 2, 3, 4, 5])
-print(round(float(z[0]), 4))
-print(round(float(z[-1]), 4))
+print(round(z[0], 4))
+print(round(z[-1], 4))
 `,
 
-	solution: `from scipy import stats
-import numpy as np
+	solution: `import statistics
 
 def z_scores(data):
-    return stats.zscore(data)
+    mean = statistics.fmean(data)
+    pstdev = statistics.pstdev(data)
+    return [(x - mean) / pstdev for x in data]
 
 z = z_scores([1, 2, 3, 4, 5])
-print(round(float(z[0]), 4))
-print(round(float(z[-1]), 4))
+print(round(z[0], 4))
+print(round(z[-1], 4))
 `,
 
 	tests: [
@@ -79,21 +80,22 @@ print(round(float(z[-1]), 4))
 			name: "mean of z-scores is ~0",
 			code: `{{FUNC}}
 z = z_scores([2, 4, 4, 4, 5, 5, 7, 9])
-print(abs(round(float(z.mean()), 4)) == 0)`,
+print(abs(round(sum(z)/len(z), 4)) == 0)`,
 			expected: "True\n",
 		},
 		{
 			name: "std of z-scores is 1.0",
 			code: `{{FUNC}}
+import statistics
 z = z_scores([2, 4, 4, 4, 5, 5, 7, 9])
-print(round(float(z.std()), 4) == 1.0)`,
+print(round(statistics.pstdev(z), 4) == 1.0)`,
 			expected: "True\n",
 		},
 		{
 			name: "z-score of value at mean is 0.0",
 			code: `{{FUNC}}
 z = z_scores([1, 2, 3, 4, 5])
-print(round(float(z[2]), 4))`,
+print(round(z[2], 4))`,
 			expected: "0.0\n",
 		},
 	],

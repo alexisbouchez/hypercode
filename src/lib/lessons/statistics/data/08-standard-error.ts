@@ -9,14 +9,14 @@ export const standardError: Lesson = {
 The **standard error (SE)** measures the variability of a sample mean. It tells you how much sample means vary from the true population mean:
 
 \`\`\`
-SE = σ / √n
+SE = s / √n
 \`\`\`
 
 \`\`\`python
-from scipy import stats
+import math, statistics
 
 data = [1, 2, 3, 4, 5]
-se = stats.sem(data)
+se = statistics.stdev(data) / math.sqrt(len(data))
 print(round(se, 4))   # 0.7071
 \`\`\`
 
@@ -33,11 +33,12 @@ This means:
 A larger sample size → smaller SE → more precise estimates.
 
 \`\`\`python
-import numpy as np
+import math
 
 # SE decreases as sample grows
+sigma = 10
 for n in [10, 100, 1000]:
-    se = 10 / np.sqrt(n)   # σ=10
+    se = sigma / math.sqrt(n)
     print(f"n={n}: SE={round(se, 2)}")
 # n=10: SE=3.16
 # n=100: SE=1.0
@@ -46,9 +47,9 @@ for n in [10, 100, 1000]:
 
 ### Your Task
 
-Implement \`std_error(data)\` that computes the **standard error of the mean** using \`scipy.stats.sem\`, returned as a float rounded to 4 decimal places.`,
+Implement \`std_error(data)\` that computes the **standard error of the mean** (sample std divided by √n), returned as a float rounded to 4 decimal places.`,
 
-	starterCode: `from scipy import stats
+	starterCode: `import math, statistics
 
 def std_error(data):
     # Return the standard error of the mean, rounded to 4 decimal places
@@ -57,10 +58,10 @@ def std_error(data):
 print(std_error([1, 2, 3, 4, 5]))
 `,
 
-	solution: `from scipy import stats
+	solution: `import math, statistics
 
 def std_error(data):
-    return round(float(stats.sem(data)), 4)
+    return round(statistics.stdev(data) / math.sqrt(len(data)), 4)
 
 print(std_error([1, 2, 3, 4, 5]))
 `,

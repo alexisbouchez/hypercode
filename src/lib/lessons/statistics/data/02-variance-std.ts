@@ -9,12 +9,12 @@ export const varianceStd: Lesson = {
 **Variance** and **standard deviation** measure how spread out data is around the mean.
 
 \`\`\`python
-import numpy as np
+import statistics
 
 data = [1, 2, 3, 4, 5]
 
-var = np.var(data, ddof=1)   # sample variance (ddof=1)
-std = np.std(data, ddof=1)   # sample std deviation
+var = statistics.variance(data)   # sample variance (ddof=1)
+std = statistics.stdev(data)      # sample std deviation
 
 print(round(var, 2))   # 2.5
 print(round(std, 2))   # 1.58
@@ -22,8 +22,8 @@ print(round(std, 2))   # 1.58
 
 ### Population vs Sample
 
-Use \`ddof=0\` (default) for the **population** — when you have all the data.
-Use \`ddof=1\` for a **sample** — when your data is a subset of a larger population. This gives an unbiased estimate.
+Use \`statistics.pvariance\` / \`statistics.pstdev\` for the **population** — when you have all the data.
+Use \`statistics.variance\` / \`statistics.stdev\` for a **sample** — when your data is a subset of a larger population. This gives an unbiased estimate (ddof=1).
 
 ### Standard Deviation
 
@@ -36,22 +36,22 @@ For normally distributed data, approximately:
 
 ### Your Task
 
-Implement \`spread(data)\` that prints the **sample variance** (ddof=1, rounded to 2 decimal places) and **sample standard deviation** (ddof=1, rounded to 2 decimal places).`,
+Implement \`spread(data)\` that prints the **sample variance** (rounded to 2 decimal places) and **sample standard deviation** (rounded to 2 decimal places).`,
 
-	starterCode: `import numpy as np
+	starterCode: `import statistics
 
 def spread(data):
-    # Print sample variance (ddof=1, round 2) and sample std (ddof=1, round 2)
+    # Print sample variance (round 2) and sample std (round 2)
     pass
 
 spread([1, 2, 3, 4, 5])
 `,
 
-	solution: `import numpy as np
+	solution: `import statistics
 
 def spread(data):
-    print(round(float(np.var(data, ddof=1)), 2))
-    print(round(float(np.std(data, ddof=1)), 2))
+    print(round(float(statistics.variance(data)), 2))
+    print(round(float(statistics.stdev(data)), 2))
 
 spread([1, 2, 3, 4, 5])
 `,

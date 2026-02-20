@@ -9,16 +9,17 @@ export const normalDistribution: Lesson = {
 The **normal distribution** is the most important distribution in statistics. It is symmetric around the mean and fully described by two parameters: mean (μ) and standard deviation (σ).
 
 \`\`\`python
-from scipy import stats
+import math
+
+def normal_cdf(x, mu=0, sigma=1):
+    return 0.5 * (1 + math.erf((x - mu) / (sigma * math.sqrt(2))))
+
+def normal_pdf(x, mu=0, sigma=1):
+    return (1 / (sigma * math.sqrt(2 * math.pi))) * math.exp(-0.5 * ((x - mu) / sigma) ** 2)
 
 # Standard normal: μ=0, σ=1
-dist = stats.norm(loc=0, scale=1)
-
-# Probability that X ≤ 0 (CDF)
-print(dist.cdf(0))    # 0.5
-
-# Probability density at x=0 (PDF)
-print(round(dist.pdf(0), 4))  # 0.3989
+print(normal_cdf(0))          # 0.5
+print(round(normal_pdf(0), 4))  # 0.3989
 \`\`\`
 
 ### CDF vs PDF
@@ -39,7 +40,7 @@ Implement \`normal_stats(mu, sigma, x)\` that prints:
 1. \`CDF(x)\` — the probability that X ≤ x (rounded to 4 decimal places)
 2. \`PDF(x)\` — the density at x (rounded to 4 decimal places)`,
 
-	starterCode: `from scipy import stats
+	starterCode: `import math
 
 def normal_stats(mu, sigma, x):
     # Print CDF(x) and PDF(x) of N(mu, sigma), each rounded to 4 decimal places
@@ -48,12 +49,13 @@ def normal_stats(mu, sigma, x):
 normal_stats(0, 1, 0)
 `,
 
-	solution: `from scipy import stats
+	solution: `import math
 
 def normal_stats(mu, sigma, x):
-    dist = stats.norm(loc=mu, scale=sigma)
-    print(round(float(dist.cdf(x)), 4))
-    print(round(float(dist.pdf(x)), 4))
+    cdf = 0.5 * (1 + math.erf((x - mu) / (sigma * math.sqrt(2))))
+    pdf = (1 / (sigma * math.sqrt(2 * math.pi))) * math.exp(-0.5 * ((x - mu) / sigma) ** 2)
+    print(round(cdf, 4))
+    print(round(pdf, 4))
 
 normal_stats(0, 1, 0)
 `,

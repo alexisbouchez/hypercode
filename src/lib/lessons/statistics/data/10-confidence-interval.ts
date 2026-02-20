@@ -9,18 +9,18 @@ export const confidenceInterval: Lesson = {
 A **confidence interval (CI)** gives a range of plausible values for the population mean, based on a sample.
 
 \`\`\`python
-from scipy import stats
-import numpy as np
+import math, statistics
 
 data = [1, 2, 3, 4, 5]
-ci = stats.t.interval(
-    confidence=0.95,
-    df=len(data) - 1,
-    loc=np.mean(data),
-    scale=stats.sem(data)
-)
-print(round(ci[0], 2))   # 1.04
-print(round(ci[1], 2))   # 4.96
+n = len(data)
+mean = statistics.fmean(data)
+sem = statistics.stdev(data) / math.sqrt(n)
+
+# 95% CI: mean ± t_critical * sem
+# t_critical for df=4, 95% ≈ 2.7764
+t_crit = 2.7764
+print(round(mean - t_crit * sem, 2))   # 1.04
+print(round(mean + t_crit * sem, 2))   # 4.96
 \`\`\`
 
 ### Interpretation
@@ -44,8 +44,12 @@ We use the **t-distribution** (not normal) because we estimate σ from the sampl
 
 Implement \`confidence_interval(data, confidence)\` that prints the **lower bound** and **upper bound** of the confidence interval, each rounded to 2 decimal places.`,
 
-	starterCode: `from scipy import stats
-import numpy as np
+	starterCode: `import math, statistics
+
+def _t_ppf(p, df):
+    # Inverse CDF of t-distribution via binary search
+    # (uses _betainc and _t_pvalue — see solution for full helpers)
+    pass
 
 def confidence_interval(data, confidence):
     # Print lower and upper bounds of the CI, each rounded to 2 decimal places
@@ -54,18 +58,55 @@ def confidence_interval(data, confidence):
 confidence_interval([1, 2, 3, 4, 5], 0.95)
 `,
 
-	solution: `from scipy import stats
-import numpy as np
+	solution: `import math, statistics
+
+def _betacf(a, b, x):
+    MAXIT, EPS = 100, 3e-7
+    qab, qap, qam = a+b, a+1, a-1
+    c, d = 1.0, max(1-qab*x/qap, 1e-30)
+    d, h = 1.0/d, 1.0/d
+    for m in range(1, MAXIT+1):
+        m2 = 2*m
+        aa = m*(b-m)*x/((qam+m2)*(a+m2))
+        d = max(1+aa*d, 1e-30); c = max(1+aa/c, 1e-30)
+        d = 1.0/d; h *= d*c
+        aa = -(a+m)*(qab+m)*x/((a+m2)*(qap+m2))
+        d = max(1+aa*d, 1e-30); c = max(1+aa/c, 1e-30)
+        d = 1.0/d; delta = d*c; h *= delta
+        if abs(delta-1.0) < EPS: break
+    return h
+
+def _betainc(a, b, x):
+    if x <= 0: return 0.0
+    if x >= 1: return 1.0
+    lbeta = math.lgamma(a)+math.lgamma(b)-math.lgamma(a+b)
+    front = math.exp(math.log(x)*a + math.log(1-x)*b - lbeta)
+    if x < (a+1)/(a+b+2): return front*_betacf(a,b,x)/a
+    return 1 - front*_betacf(b,a,1-x)/b
+
+def _t_pvalue(t, df):
+    x = df / (df + t*t)
+    return _betainc(df/2, 0.5, x)
+
+def _t_ppf(p, df):
+    # Binary search for positive t where two-tailed p-value = 2*(1-p)
+    lo, hi = 0.0, 100.0
+    target = 2*(1-p)
+    for _ in range(200):
+        mid = (lo+hi)/2
+        if _t_pvalue(mid, df) > target: lo = mid
+        else: hi = mid
+    return (lo+hi)/2
 
 def confidence_interval(data, confidence):
-    ci = stats.t.interval(
-        confidence=confidence,
-        df=len(data) - 1,
-        loc=np.mean(data),
-        scale=stats.sem(data)
-    )
-    print(round(float(ci[0]), 2))
-    print(round(float(ci[1]), 2))
+    n = len(data)
+    mean = statistics.fmean(data)
+    sem = statistics.stdev(data) / math.sqrt(n)
+    t_crit = _t_ppf((1 + confidence) / 2, n - 1)
+    lo = mean - t_crit * sem
+    hi = mean + t_crit * sem
+    print(round(lo, 2))
+    print(round(hi, 2))
 
 confidence_interval([1, 2, 3, 4, 5], 0.95)
 `,
@@ -84,23 +125,25 @@ confidence_interval([10, 20, 30, 40, 50], 0.95)`,
 		{
 			name: "CI lower < mean < CI upper",
 			code: `{{FUNC}}
-import numpy as np
 data = [1, 2, 3, 4, 5]
-from scipy import stats
-ci = stats.t.interval(0.95, df=4, loc=3.0, scale=stats.sem(data))
-print(ci[0] < np.mean(data) < ci[1])`,
+mean = statistics.fmean(data)
+n = len(data)
+sem = statistics.stdev(data) / math.sqrt(n)
+t_crit = _t_ppf(0.975, n - 1)
+lo = mean - t_crit * sem
+hi = mean + t_crit * sem
+print(lo < mean < hi)`,
 			expected: "True\n",
 		},
 		{
 			name: "90% CI is narrower than 95% CI",
 			code: `{{FUNC}}
-from scipy import stats
-import numpy as np
 data = [1, 2, 3, 4, 5]
-ci90 = stats.t.interval(0.90, df=4, loc=3.0, scale=stats.sem(data))
-ci95 = stats.t.interval(0.95, df=4, loc=3.0, scale=stats.sem(data))
-w90 = ci90[1] - ci90[0]
-w95 = ci95[1] - ci95[0]
+n = len(data)
+sem = statistics.stdev(data) / math.sqrt(n)
+mean = statistics.fmean(data)
+w90 = 2 * _t_ppf(0.95, n-1) * sem
+w95 = 2 * _t_ppf(0.975, n-1) * sem
 print(w90 < w95)`,
 			expected: "True\n",
 		},

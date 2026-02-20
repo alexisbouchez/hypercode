@@ -13,20 +13,27 @@ y = slope · x + intercept
 \`\`\`
 
 \`\`\`python
-from scipy import stats
+def linear_regression(x, y):
+    n = len(x)
+    sx, sy = sum(x), sum(y)
+    sxy = sum(xi*yi for xi, yi in zip(x, y))
+    sxx = sum(xi**2 for xi in x)
+
+    slope = (n*sxy - sx*sy) / (n*sxx - sx**2)
+    intercept = (sy - slope*sx) / n
+    return slope, intercept
 
 x = [0, 1, 2, 3, 4]
 y = [1, 3, 5, 7, 9]  # y = 2x + 1
 
-result = stats.linregress(x, y)
-print(round(result.slope, 4))      # 2.0
-print(round(result.intercept, 4))  # 1.0
-print(round(result.rvalue ** 2, 4))  # 1.0 — R² (perfect fit)
+slope, intercept = linear_regression(x, y)
+print(round(slope, 4))      # 2.0
+print(round(intercept, 4))  # 1.0
 \`\`\`
 
 ### Least Squares
 
-scipy finds the line that **minimizes the sum of squared residuals** — the vertical distances between data points and the line.
+The formula minimizes the **sum of squared residuals** — the vertical distances between data points and the line.
 
 ### R² (Coefficient of Determination)
 
@@ -36,17 +43,11 @@ R² measures how much variance in y is explained by x:
 - **R² = 0.8** — the line explains 80% of the variance
 
 \`\`\`python
-print(result.rvalue ** 2)   # R² = rvalue squared
-\`\`\`
-
-### Prediction
-
-Once you have the slope and intercept, you can predict:
-\`\`\`python
-def predict(x_new):
-    return result.slope * x_new + result.intercept
-
-print(predict(10))   # 21.0 for our example
+mean_y = sy / n
+yhat = [slope*xi + intercept for xi in x]
+ss_res = sum((yi - yhi)**2 for yi, yhi in zip(y, yhat))
+ss_tot = sum((yi - mean_y)**2 for yi in y)
+r_sq = 1 - ss_res / ss_tot
 \`\`\`
 
 ### Assumptions
@@ -61,22 +62,28 @@ Linear regression assumes:
 
 Implement \`linear_regression(x, y)\` that prints the **slope**, **intercept**, and **R²** (coefficient of determination), each rounded to 4 decimal places.`,
 
-	starterCode: `from scipy import stats
-
-def linear_regression(x, y):
-    # Print slope, intercept, and R² (rvalue**2), each rounded to 4 decimal places
+	starterCode: `def linear_regression(x, y):
+    # Print slope, intercept, and R², each rounded to 4 decimal places
     pass
 
 linear_regression([0, 1, 2, 3, 4], [1, 3, 5, 7, 9])
 `,
 
-	solution: `from scipy import stats
-
-def linear_regression(x, y):
-    result = stats.linregress(x, y)
-    print(round(float(result.slope), 4))
-    print(round(float(result.intercept), 4))
-    print(round(float(result.rvalue ** 2), 4))
+	solution: `def linear_regression(x, y):
+    n = len(x)
+    sx, sy = sum(x), sum(y)
+    sxy = sum(xi*yi for xi, yi in zip(x, y))
+    sxx = sum(xi**2 for xi in x)
+    slope = (n*sxy - sx*sy) / (n*sxx - sx**2)
+    intercept = (sy - slope*sx) / n
+    mean_y = sy / n
+    yhat = [slope*xi + intercept for xi in x]
+    ss_res = sum((yi - yhi)**2 for yi, yhi in zip(y, yhat))
+    ss_tot = sum((yi - mean_y)**2 for yi in y)
+    r_sq = 1 - ss_res / ss_tot if ss_tot != 0 else 1.0
+    print(round(slope, 4))
+    print(round(intercept, 4))
+    print(round(r_sq, 4))
 
 linear_regression([0, 1, 2, 3, 4], [1, 3, 5, 7, 9])
 `,
@@ -95,17 +102,30 @@ linear_regression([1, 2, 3, 4, 5], [2, 4, 6, 8, 10])`,
 		{
 			name: "slope is negative for decreasing data",
 			code: `{{FUNC}}
-from scipy import stats
-result = stats.linregress([1,2,3,4,5], [10,8,6,4,2])
-print(result.slope < 0)`,
+x, y = [1,2,3,4,5], [10,8,6,4,2]
+n = len(x)
+sx, sy = sum(x), sum(y)
+sxy = sum(xi*yi for xi,yi in zip(x,y))
+sxx = sum(xi**2 for xi in x)
+slope = (n*sxy - sx*sy) / (n*sxx - sx**2)
+print(slope < 0)`,
 			expected: "True\n",
 		},
 		{
 			name: "R² is between 0 and 1",
 			code: `{{FUNC}}
-from scipy import stats
-result = stats.linregress([1,2,3,4,5], [2,3,5,4,6])
-r_sq = result.rvalue ** 2
+x, y = [1,2,3,4,5], [2,3,5,4,6]
+n = len(x)
+sx, sy = sum(x), sum(y)
+sxy = sum(xi*yi for xi,yi in zip(x,y))
+sxx = sum(xi**2 for xi in x)
+slope = (n*sxy - sx*sy) / (n*sxx - sx**2)
+intercept = (sy - slope*sx) / n
+mean_y = sy / n
+yhat = [slope*xi + intercept for xi in x]
+ss_res = sum((yi-yhi)**2 for yi,yhi in zip(y,yhat))
+ss_tot = sum((yi-mean_y)**2 for yi in y)
+r_sq = 1 - ss_res/ss_tot
 print(0 <= r_sq <= 1)`,
 			expected: "True\n",
 		},

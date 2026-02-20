@@ -9,13 +9,16 @@ export const chiSquare: Lesson = {
 The **chi-square goodness-of-fit test** checks whether observed frequencies match expected frequencies for a categorical variable.
 
 \`\`\`python
-from scipy import stats
+import math
 
 # Roll a die 100 times. Is it fair?
 observed = [20, 15, 18, 22, 17, 8]  # 6 categories
-chi2, p = stats.chisquare(observed)  # default: equal expected frequencies
+n = len(observed)
+total = sum(observed)
+expected = total / n  # uniform: each category equally likely
+
+chi2 = sum((o - expected)**2 / expected for o in observed)
 print(round(chi2, 4))   # chi-square statistic
-print(p < 0.05)         # is the die unfair?
 \`\`\`
 
 ### How It Works
@@ -33,33 +36,44 @@ For k categories: df = k − 1. More categories → larger chi2 needed for signi
 
 ### Custom Expected Frequencies
 
-\`\`\`python
-# Non-uniform expected: 50%, 30%, 20%
-observed = [48, 32, 20]
-expected = [50, 30, 20]
-chi2, p = stats.chisquare(observed, f_exp=expected)
-\`\`\`
+You can also test against non-uniform expectations by providing your own expected counts.
 
 ### Your Task
 
 Implement \`chi_square_test(observed)\` that tests whether the observed frequencies are **uniformly distributed** (equal expected frequency for each category). Print the chi-square statistic (rounded to 4 decimal places) and the p-value (rounded to 4 decimal places).`,
 
-	starterCode: `from scipy import stats
+	starterCode: `import math
 
 def chi_square_test(observed):
-    # Use stats.chisquare with uniform expected frequencies
+    # Compute chi2 with uniform expected frequencies
     # Print chi2 (round 4) and p_value (round 4)
     pass
 
 chi_square_test([25, 25, 25, 25])
 `,
 
-	solution: `from scipy import stats
+	solution: `import math
+
+def _chi2_cdf(x, df):
+    if x <= 0: return 0.0
+    a, t = df/2.0, x/2.0
+    if t > a + 100: return 1.0  # x far into the tail: CDF ≈ 1
+    term = math.exp(-t + a*math.log(t) - math.lgamma(a+1))
+    s = term
+    for n in range(1, 300):
+        term *= t/(a+n); s += term
+        if term < 1e-12: break
+    return min(s, 1.0)
 
 def chi_square_test(observed):
-    chi2, p = stats.chisquare(observed)
-    print(round(float(chi2), 4))
-    print(round(float(p), 4))
+    n = len(observed)
+    total = sum(observed)
+    expected = total / n
+    chi2 = sum((o - expected)**2 / expected for o in observed)
+    df = n - 1
+    p = round(1 - _chi2_cdf(chi2, df), 4)
+    print(round(chi2, 4))
+    print(p)
 
 chi_square_test([25, 25, 25, 25])
 `,
@@ -78,16 +92,23 @@ chi_square_test([20, 30, 25, 25])`,
 		{
 			name: "highly skewed → p < 0.05",
 			code: `{{FUNC}}
-from scipy import stats
-chi2, p = stats.chisquare([95, 1, 1, 3])
+obs = [95, 1, 1, 3]
+n = len(obs)
+total = sum(obs)
+expected = total / n
+chi2 = sum((o - expected)**2 / expected for o in obs)
+p = 1 - _chi2_cdf(chi2, n - 1)
 print(p < 0.05)`,
 			expected: "True\n",
 		},
 		{
 			name: "chi2 is always non-negative",
 			code: `{{FUNC}}
-from scipy import stats
-chi2, _ = stats.chisquare([10, 20, 30])
+obs = [10, 20, 30]
+n = len(obs)
+total = sum(obs)
+expected = total / n
+chi2 = sum((o - expected)**2 / expected for o in obs)
 print(chi2 >= 0)`,
 			expected: "True\n",
 		},

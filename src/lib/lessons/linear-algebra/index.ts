@@ -11,15 +11,15 @@ import { inverse } from "./data/09-inverse";
 import { solve } from "./data/10-solve";
 import { eigenvalues } from "./data/11-eigenvalues";
 import { leastSquares } from "./data/12-least-squares";
-import { sympyIntro } from "./data/13-sympy-intro";
-import { sympySolve } from "./data/14-sympy-solve";
-import { sympyMatrices } from "./data/15-sympy-matrices";
+import { polynomialRoots } from "./data/13-polynomial-roots";
+import { newtonRaphson } from "./data/14-newton-raphson";
+import { powerIteration } from "./data/15-power-iteration";
 
 export const linearAlgebraChapters: Chapter[] = [
 	{ id: "vectors", title: "Vectors" },
 	{ id: "matrices", title: "Matrices" },
 	{ id: "systems", title: "Linear Systems" },
-	{ id: "symbolic", title: "Symbolic Math" },
+	{ id: "numerical", title: "Numerical Methods" },
 ];
 
 export const linearAlgebraLessons: Lesson[] = [
@@ -35,7 +35,7 @@ export const linearAlgebraLessons: Lesson[] = [
 	solve,
 	eigenvalues,
 	leastSquares,
-	sympyIntro,
-	sympySolve,
-	sympyMatrices,
+	polynomialRoots,
+	newtonRaphson,
+	powerIteration,
 ];

@@ -13,10 +13,11 @@ The **norm** (or magnitude) of a vector is its length:
 \`\`\`
 
 \`\`\`python
-import numpy as np
+import math
 
-v = np.array([3, 4])
-print(np.linalg.norm(v))  # √(9 + 16) = √25 = 5.0
+v = [3, 4]
+norm = math.sqrt(sum(x**2 for x in v))
+print(norm)  # √(9 + 16) = √25 = 5.0
 \`\`\`
 
 ### Unit Vectors
@@ -24,11 +25,13 @@ print(np.linalg.norm(v))  # √(9 + 16) = √25 = 5.0
 A **unit vector** has norm 1. To **normalize** a vector — convert it to a unit vector — divide by its norm:
 
 \`\`\`python
-v = np.array([3, 4])
-norm = np.linalg.norm(v)   # 5.0
-unit = v / norm            # [0.6, 0.8]
+import math
 
-print(np.linalg.norm(unit))  # 1.0
+v = [3, 4]
+norm = math.sqrt(sum(x**2 for x in v))   # 5.0
+unit = [round(x / norm, 2) for x in v]   # [0.6, 0.8]
+
+print(math.sqrt(sum(x**2 for x in unit)))  # ≈ 1.0
 \`\`\`
 
 Unit vectors preserve direction but discard magnitude. They answer: *which way?* rather than *how far?*
@@ -39,59 +42,56 @@ Unit vectors preserve direction but discard magnitude. They answer: *which way?*
 - The dot product formula \`a · b = ‖a‖‖b‖cos(θ)\` uses norms to extract the angle
 - **L2 regularization** in neural networks penalizes the norm of the weight vector
 
-### Higher-Order Norms
-
-\`np.linalg.norm(v, ord=1)\` gives the **L1 norm** (Manhattan distance): sum of absolute values.
-\`np.linalg.norm(v, ord=np.inf)\` gives the **L∞ norm**: the maximum absolute value.
-
 ### Your Task
 
-Implement \`normalize(v)\` that returns the unit vector in the direction of \`v\`, rounded to 2 decimal places.`,
+Implement \`normalize(v)\` that returns the unit vector in the direction of \`v\`, with each component rounded to 2 decimal places.`,
 
-	starterCode: `import numpy as np
+	starterCode: `import math
 
 def normalize(v):
-    # Return the unit vector in the direction of v, rounded to 2 decimal places
+    # Return unit vector as a list, each component rounded to 2 decimal places
     pass
 
-v = np.array([3, 4])
-print(normalize(v))
-print(np.linalg.norm(normalize(v)))
+v = [3, 4]
+u = normalize(v)
+print(u)
+print(round(math.sqrt(sum(x**2 for x in u)), 1))
 `,
 
-	solution: `import numpy as np
+	solution: `import math
 
 def normalize(v):
-    norm = np.linalg.norm(v)
-    return np.round(v / norm, 2)
+    norm = math.sqrt(sum(x**2 for x in v))
+    return [round(x / norm, 2) for x in v]
 
-v = np.array([3, 4])
-print(normalize(v))
-print(np.linalg.norm(normalize(v)))
+v = [3, 4]
+u = normalize(v)
+print(u)
+print(round(math.sqrt(sum(x**2 for x in u)), 1))
 `,
 
 	tests: [
 		{
-			name: "normalize [3,4] → [0.6, 0.8]",
-			expected: "[0.6 0.8]\n1.0\n",
+			name: "normalize [3,4] → [0.6, 0.8], norm ≈ 1.0",
+			expected: "[0.6, 0.8]\n1.0\n",
 		},
 		{
 			name: "normalize [1,0] → [1.0, 0.0]",
 			code: `{{FUNC}}
-print(normalize(np.array([1, 0])))`,
-			expected: "[1. 0.]\n",
+print(normalize([1, 0]))`,
+			expected: "[1.0, 0.0]\n",
 		},
 		{
 			name: "normalize [5,0,0] → [1.0, 0.0, 0.0]",
 			code: `{{FUNC}}
-print(normalize(np.array([5, 0, 0])))`,
-			expected: "[1. 0. 0.]\n",
+print(normalize([5, 0, 0]))`,
+			expected: "[1.0, 0.0, 0.0]\n",
 		},
 		{
 			name: "normalize [0,0,4] → [0.0, 0.0, 1.0]",
 			code: `{{FUNC}}
-print(normalize(np.array([0, 0, 4])))`,
-			expected: "[0. 0. 1.]\n",
+print(normalize([0, 0, 4]))`,
+			expected: "[0.0, 0.0, 1.0]\n",
 		},
 	],
 };

@@ -9,14 +9,18 @@ export const binomialDistribution: Lesson = {
 The **binomial distribution** models the number of successes in \`n\` independent trials, each with success probability \`p\`.
 
 \`\`\`python
-from scipy import stats
+import math
+
+def binom_pmf(k, n, p):
+    return math.comb(n, k) * p**k * (1 - p)**(n - k)
+
+def binom_cdf(k, n, p):
+    return sum(binom_pmf(i, n, p) for i in range(k + 1))
 
 # Flip a fair coin 5 times. What is P(exactly 2 heads)?
 n, p = 5, 0.5
-dist = stats.binom(n=n, p=p)
-
-print(round(dist.pmf(2), 4))   # 0.3125 — P(X = 2)
-print(round(dist.cdf(2), 4))   # 0.5    — P(X ≤ 2)
+print(round(binom_pmf(2, n, p), 4))   # 0.3125 — P(X = 2)
+print(round(binom_cdf(2, n, p), 4))   # 0.5    — P(X ≤ 2)
 \`\`\`
 
 ### PMF vs CDF
@@ -35,7 +39,7 @@ print(round(dist.cdf(2), 4))   # 0.5    — P(X ≤ 2)
 In a factory, 10% of items are defective. If you inspect 20 items, what is the probability of finding exactly 2 defective ones?
 
 \`\`\`python
-print(round(stats.binom.pmf(2, n=20, p=0.1), 4))  # 0.2852
+print(round(binom_pmf(2, n=20, p=0.1), 4))  # 0.2852
 \`\`\`
 
 ### Your Task
@@ -44,7 +48,7 @@ Implement \`binomial_stats(n, p, k)\` that prints:
 1. P(X = k) — the PMF (rounded to 4 decimal places)
 2. P(X ≤ k) — the CDF (rounded to 4 decimal places)`,
 
-	starterCode: `from scipy import stats
+	starterCode: `import math
 
 def binomial_stats(n, p, k):
     # Print PMF(k) and CDF(k) of Binomial(n, p), each rounded to 4 decimal places
@@ -53,12 +57,13 @@ def binomial_stats(n, p, k):
 binomial_stats(5, 0.5, 2)
 `,
 
-	solution: `from scipy import stats
+	solution: `import math
 
 def binomial_stats(n, p, k):
-    dist = stats.binom(n=n, p=p)
-    print(round(float(dist.pmf(k)), 4))
-    print(round(float(dist.cdf(k)), 4))
+    pmf = math.comb(n, k) * p**k * (1 - p)**(n - k)
+    cdf = sum(math.comb(n, i) * p**i * (1 - p)**(n - i) for i in range(k + 1))
+    print(round(pmf, 4))
+    print(round(cdf, 4))
 
 binomial_stats(5, 0.5, 2)
 `,

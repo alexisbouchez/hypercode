@@ -4,67 +4,56 @@ export const vectors: Lesson = {
 	id: "vectors",
 	title: "Vectors",
 	chapterId: "vectors",
-	content: `## Vectors in NumPy
+	content: `## Vectors in Python
 
-A **vector** is an ordered list of numbers. In NumPy, vectors are 1-dimensional arrays.
+A **vector** is an ordered list of numbers. In Python, we represent vectors as plain lists.
 
 \`\`\`python
-import numpy as np
-
-v = np.array([3, 1, 4, 1, 5])
-print(v)        # [3 1 4 1 5]
-print(v.shape)  # (5,)  — 5 elements
-print(v[0])     # 3     — zero-indexed
-print(len(v))   # 5
+v = [3, 1, 4, 1, 5]
+print(v)        # [3, 1, 4, 1, 5]
+print(len(v))   # 5  — number of elements
+print(v[0])     # 3  — zero-indexed
 \`\`\`
 
-### Why NumPy?
+### Why Lists?
 
-Python lists can hold vectors, but NumPy arrays are:
-
-- **Faster** — stored as contiguous memory, processed with SIMD instructions
-- **Concise** — \`a + b\` adds element-wise (no loop needed)
-- **Integrated** — all linear algebra functions expect NumPy arrays
-
-### Shape
-
-\`v.shape\` returns a tuple. For a 1D array with \`n\` elements, it is \`(n,)\`. The trailing comma distinguishes it from a scalar.
+Python lists are flexible and sufficient for learning linear algebra concepts. For high-performance numerical work, libraries like NumPy provide array types with vectorized operations.
 
 ### Indexing
 
-NumPy uses 0-based indexing. \`v[0]\` is the first element, \`v[-1]\` is the last.
+Python uses 0-based indexing. \`v[0]\` is the first element, \`v[-1]\` is the last.
+
+### Length
+
+\`len(v)\` returns the number of elements. For a vector in **ℝⁿ**, this is \`n\`.
 
 ### Your Task
 
-Implement \`make_vector(values)\` that takes a Python list and returns a NumPy array.`,
+Implement \`make_vector(values)\` that takes a Python list and returns it as a vector (list).`,
 
-	starterCode: `import numpy as np
-
-def make_vector(values):
-    # Return a NumPy array from the list of values
+	starterCode: `def make_vector(values):
+    # Return a list from the values
     pass
 
 v = make_vector([3, 1, 4, 1, 5])
 print(v)
-print(v.shape)
+print(len(v))
 print(v[0])
 `,
 
-	solution: `import numpy as np
-
-def make_vector(values):
-    return np.array(values)
+	solution: `def make_vector(values):
+    return list(values)
 
 v = make_vector([3, 1, 4, 1, 5])
 print(v)
-print(v.shape)
+print(len(v))
 print(v[0])
 `,
 
 	tests: [
 		{
-			name: "make_vector returns [3 1 4 1 5], shape (5,), index 0 = 3",
-			expected: "[3 1 4 1 5]\n(5,)\n3\n",
+			name: "make_vector returns [3, 1, 4, 1, 5], length 5, index 0 = 3",
+			expected: "[3, 1, 4, 1, 5]\n5\n3\n",
 		},
 		{
 			name: "indexing into vector",
@@ -81,10 +70,10 @@ print(len(make_vector([1, 2, 3, 4])))`,
 			expected: "4\n",
 		},
 		{
-			name: "vector shape",
+			name: "vector length of 3-element vector",
 			code: `{{FUNC}}
-print(make_vector([7, 8, 9]).shape)`,
-			expected: "(3,)\n",
+print(len(make_vector([7, 8, 9])))`,
+			expected: "3\n",
 		},
 	],
 };

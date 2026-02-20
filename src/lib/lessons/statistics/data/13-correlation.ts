@@ -9,14 +9,19 @@ export const correlation: Lesson = {
 **Pearson's r** measures the strength and direction of a linear relationship between two variables. It ranges from −1 to +1.
 
 \`\`\`python
-from scipy import stats
+def pearson_r(x, y):
+    n = len(x)
+    mx = sum(x) / n
+    my = sum(y) / n
+    num = sum((xi - mx) * (yi - my) for xi, yi in zip(x, y))
+    den = (sum((xi - mx)**2 for xi in x) * sum((yi - my)**2 for yi in y)) ** 0.5
+    return num / den
 
 x = [1, 2, 3, 4, 5]
 y = [2, 4, 6, 8, 10]   # perfect positive relationship
 
-r, p = stats.pearsonr(x, y)
+r = pearson_r(x, y)
 print(round(r, 4))   # 1.0
-print(p < 0.001)     # True
 \`\`\`
 
 ### Interpreting r
@@ -34,23 +39,15 @@ print(p < 0.001)     # True
 
 A high correlation between X and Y does not mean X causes Y. There may be a confounding variable, or the relationship may be coincidental.
 
-### Correlation Requires Linearity
+### Significance
 
-Pearson's r only measures **linear** relationships. Two variables can have a strong non-linear relationship (e.g., quadratic) while r ≈ 0.
-
-\`\`\`python
-import numpy as np
-x = np.linspace(-3, 3, 100)
-y = x ** 2   # perfect quadratic relationship
-r, _ = stats.pearsonr(x, y)
-print(round(r, 4))   # ≈ 0.0 — no linear correlation!
-\`\`\`
+The t-statistic \`t = r √((n-2)/(1-r²))\` follows a t-distribution with df = n−2, allowing us to test if r is significantly different from 0.
 
 ### Your Task
 
 Implement \`pearson_r(x, y)\` that prints the correlation coefficient \`r\` (rounded to 4 decimal places) and whether the relationship is statistically significant (\`p < 0.001\`).`,
 
-	starterCode: `from scipy import stats
+	starterCode: `import math
 
 def pearson_r(x, y):
     # Print r (round 4) and whether p < 0.001 (True/False)
@@ -59,11 +56,46 @@ def pearson_r(x, y):
 pearson_r([1, 2, 3, 4, 5], [2, 4, 6, 8, 10])
 `,
 
-	solution: `from scipy import stats
+	solution: `import math
+
+def _betacf(a, b, x):
+    MAXIT, EPS = 100, 3e-7
+    qab, qap, qam = a+b, a+1, a-1
+    c, d = 1.0, max(1-qab*x/qap, 1e-30)
+    d, h = 1.0/d, 1.0/d
+    for m in range(1, MAXIT+1):
+        m2 = 2*m
+        aa = m*(b-m)*x/((qam+m2)*(a+m2))
+        d = max(1+aa*d, 1e-30); c = max(1+aa/c, 1e-30)
+        d = 1.0/d; h *= d*c
+        aa = -(a+m)*(qab+m)*x/((a+m2)*(qap+m2))
+        d = max(1+aa*d, 1e-30); c = max(1+aa/c, 1e-30)
+        d = 1.0/d; delta = d*c; h *= delta
+        if abs(delta-1.0) < EPS: break
+    return h
+
+def _betainc(a, b, x):
+    if x <= 0: return 0.0
+    if x >= 1: return 1.0
+    lbeta = math.lgamma(a)+math.lgamma(b)-math.lgamma(a+b)
+    front = math.exp(math.log(x)*a + math.log(1-x)*b - lbeta)
+    if x < (a+1)/(a+b+2): return front*_betacf(a,b,x)/a
+    return 1 - front*_betacf(b,a,1-x)/b
+
+def _t_pvalue(t, df):
+    x = df / (df + t*t)
+    return _betainc(df/2, 0.5, x)
 
 def pearson_r(x, y):
-    r, p = stats.pearsonr(x, y)
-    print(round(float(r), 4))
+    n = len(x)
+    mx = sum(x) / n
+    my = sum(y) / n
+    num = sum((xi - mx) * (yi - my) for xi, yi in zip(x, y))
+    den = (sum((xi - mx)**2 for xi in x) * sum((yi - my)**2 for yi in y)) ** 0.5
+    r = num / den
+    t_stat = r * math.sqrt((n - 2) / (1 - r**2)) if abs(r) < 1 else float('inf')
+    p = _t_pvalue(t_stat, n - 2)
+    print(round(r, 4))
     print(p < 0.001)
 
 pearson_r([1, 2, 3, 4, 5], [2, 4, 6, 8, 10])
@@ -83,8 +115,14 @@ pearson_r([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])`,
 		{
 			name: "no correlation → |r| small, not significant",
 			code: `{{FUNC}}
-from scipy import stats
-r, p = stats.pearsonr([1, 2, 3, 4, 5], [3, 1, 4, 1, 5])
+x, y = [1, 2, 3, 4, 5], [3, 1, 4, 1, 5]
+n = len(x)
+mx, my = sum(x)/n, sum(y)/n
+num = sum((xi-mx)*(yi-my) for xi,yi in zip(x,y))
+den = (sum((xi-mx)**2 for xi in x) * sum((yi-my)**2 for yi in y)) ** 0.5
+r = num / den
+t_stat = r * math.sqrt((n-2)/(1-r**2)) if abs(r) < 1 else float('inf')
+p = _t_pvalue(t_stat, n-2)
 print(abs(r) < 0.5)
 print(p > 0.05)`,
 			expected: "True\nTrue\n",
@@ -92,8 +130,12 @@ print(p > 0.05)`,
 		{
 			name: "r is between -1 and 1",
 			code: `{{FUNC}}
-from scipy import stats
-r, _ = stats.pearsonr([1, 3, 2, 5, 4], [2, 5, 3, 8, 6])
+x, y = [1, 3, 2, 5, 4], [2, 5, 3, 8, 6]
+n = len(x)
+mx, my = sum(x)/n, sum(y)/n
+num = sum((xi-mx)*(yi-my) for xi,yi in zip(x,y))
+den = (sum((xi-mx)**2 for xi in x) * sum((yi-my)**2 for yi in y)) ** 0.5
+r = num / den
 print(-1.0 <= r <= 1.0)`,
 			expected: "True\n",
 		},

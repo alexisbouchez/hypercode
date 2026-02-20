@@ -16,88 +16,110 @@ A **system of linear equations** like:
 can be written in matrix form as \`Ax = b\`:
 
 \`\`\`python
-import numpy as np
-
-A = np.array([[2, 1],
-              [1, 1]])
-b = np.array([5, 3])
-
-x = np.linalg.solve(A, b)
-print(x)  # [2. 1.]  →  x=2, y=1
+A = [[2, 1],
+     [1, 1]]
+b = [5, 3]
 \`\`\`
 
-### Why not \`A⁻¹b\`?
+### Gaussian Elimination
 
-Mathematically, \`x = A⁻¹b\`. But **never compute the inverse just to solve a system**:
+We solve this by **row reduction** — transforming A into upper triangular form, then back-substituting:
 
-- \`np.linalg.solve\` uses LU decomposition — faster and more numerically stable
-- Computing \`inv(A) @ b\` accumulates more floating point error
+\`\`\`python
+def solve(A, b):
+    n = len(b)
+    # Augment [A|b]
+    M = [A[i][:] + [b[i]] for i in range(n)]
+    # Forward elimination
+    for col in range(n):
+        for row in range(col+1, n):
+            factor = M[row][col] / M[col][col]
+            M[row] = [M[row][k] - factor*M[col][k] for k in range(n+1)]
+    # Back substitution
+    x = [0.0] * n
+    for i in range(n-1, -1, -1):
+        x[i] = (M[i][n] - sum(M[i][j]*x[j] for j in range(i+1, n))) / M[i][i]
+    return [round(xi, 1) for xi in x]
+
+x = solve([[2,1],[1,1]], [5,3])
+print(x)  # [2.0, 1.0]  →  x=2, y=1
+\`\`\`
+
+### Why Gaussian Elimination?
+
+- More numerically stable than computing the inverse
+- Works directly on the augmented matrix \`[A|b]\`
+- Basis for LU decomposition
 
 ### Verifying the Solution
 
-Always check: \`A @ x\` should equal \`b\` (up to floating point):
+Check: \`A @ x\` should equal \`b\`:
 
 \`\`\`python
-print(np.allclose(A @ x, b))  # True
+Ax = [sum(A[i][j]*x[j] for j in range(len(x))) for i in range(len(A))]
+print(all(abs(Ax[i] - b[i]) < 1e-9 for i in range(len(b))))  # True
 \`\`\`
-
-### When There's No Solution
-
-If \`A\` is singular (det = 0), \`np.linalg.solve\` raises a \`LinAlgError\`. The system either has no solution or infinitely many — use \`np.linalg.lstsq\` instead.
 
 ### Your Task
 
 Implement \`solve(A, b)\` that returns the solution vector \`x\` to \`Ax = b\`, rounded to 1 decimal place.`,
 
-	starterCode: `import numpy as np
-
-def solve(A, b):
+	starterCode: `def solve(A, b):
     # Return the solution x to Ax = b, rounded to 1 decimal place
+    # Use Gaussian elimination
     pass
 
-A = np.array([[2.0, 1.0], [1.0, 1.0]])
-b = np.array([5.0, 3.0])
+A = [[2.0, 1.0], [1.0, 1.0]]
+b = [5.0, 3.0]
 print(solve(A, b))
 `,
 
-	solution: `import numpy as np
+	solution: `def solve(A, b):
+    n = len(b)
+    M = [A[i][:] + [b[i]] for i in range(n)]
+    for col in range(n):
+        for row in range(col + 1, n):
+            factor = M[row][col] / M[col][col]
+            M[row] = [M[row][k] - factor * M[col][k] for k in range(n + 1)]
+    x = [0.0] * n
+    for i in range(n - 1, -1, -1):
+        x[i] = (M[i][n] - sum(M[i][j] * x[j] for j in range(i + 1, n))) / M[i][i]
+    return [round(xi, 1) for xi in x]
 
-def solve(A, b):
-    return np.round(np.linalg.solve(A, b), 1)
-
-A = np.array([[2.0, 1.0], [1.0, 1.0]])
-b = np.array([5.0, 3.0])
+A = [[2.0, 1.0], [1.0, 1.0]]
+b = [5.0, 3.0]
 print(solve(A, b))
 `,
 
 	tests: [
 		{
 			name: "2x+y=5, x+y=3 → x=2, y=1",
-			expected: "[2. 1.]\n",
+			expected: "[2.0, 1.0]\n",
 		},
 		{
 			name: "diagonal system",
 			code: `{{FUNC}}
-A = np.array([[2.0, 0.0], [0.0, 3.0]])
-b = np.array([6.0, 9.0])
+A = [[2.0, 0.0], [0.0, 3.0]]
+b = [6.0, 9.0]
 print(solve(A, b))`,
-			expected: "[3. 3.]\n",
+			expected: "[3.0, 3.0]\n",
 		},
 		{
 			name: "identity system: x = b",
 			code: `{{FUNC}}
-A = np.eye(3)
-b = np.array([1.0, 2.0, 3.0])
+A = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+b = [1.0, 2.0, 3.0]
 print(solve(A, b))`,
-			expected: "[1. 2. 3.]\n",
+			expected: "[1.0, 2.0, 3.0]\n",
 		},
 		{
 			name: "solution satisfies Ax = b",
 			code: `{{FUNC}}
-A = np.array([[3.0, 1.0], [1.0, 2.0]])
-b = np.array([9.0, 8.0])
+A = [[3.0, 1.0], [1.0, 2.0]]
+b = [9.0, 8.0]
 x = solve(A, b)
-print(np.allclose(A @ x, b))`,
+Ax = [sum(A[i][j]*x[j] for j in range(len(x))) for i in range(len(A))]
+print(all(abs(Ax[i] - b[i]) < 1e-6 for i in range(len(b))))`,
 			expected: "True\n",
 		},
 	],

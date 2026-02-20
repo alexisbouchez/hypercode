@@ -11,21 +11,26 @@ export const bootstrap: Lesson = {
 The idea: repeatedly sample your data **with replacement**, compute your statistic each time, and look at the distribution of results.
 
 \`\`\`python
-import numpy as np
+import random
 
-data = np.array([1, 2, 3, 4, 5])
-rng = np.random.default_rng(seed=42)
+data = [1, 2, 3, 4, 5]
+rng = random.Random(42)
 
 # Draw 1000 bootstrap samples and compute means
 boot_means = [
-    np.mean(rng.choice(data, size=len(data), replace=True))
+    sum(rng.choices(data, k=len(data))) / len(data)
     for _ in range(1000)
 ]
+boot_means.sort()
 
-# 95% bootstrap confidence interval
-lower = np.percentile(boot_means, 2.5)
-upper = np.percentile(boot_means, 97.5)
-print(round(lower, 1), round(upper, 1))
+# 95% bootstrap confidence interval (percentile method)
+def pct(p):
+    i = (p / 100) * (len(boot_means) - 1)
+    lo = int(i)
+    hi = min(lo + 1, len(boot_means) - 1)
+    return boot_means[lo] + (i - lo) * (boot_means[hi] - boot_means[lo])
+
+print(round(pct(2.5), 1), round(pct(97.5), 1))
 \`\`\`
 
 ### Why Bootstrap?
@@ -48,7 +53,7 @@ The **percentile method** extracts the CI directly from the bootstrap distributi
 
 Implement \`bootstrap_ci(data, n_samples, seed)\` that returns a tuple \`(lower, upper)\` representing the **95% bootstrap confidence interval** of the mean, rounded to 2 decimal places.`,
 
-	starterCode: `import numpy as np
+	starterCode: `import random
 
 def bootstrap_ci(data, n_samples, seed):
     # Resample with replacement n_samples times, compute means
@@ -59,17 +64,22 @@ lower, upper = bootstrap_ci([1, 2, 3, 4, 5], 1000, 42)
 print(lower < 3.0 < upper)   # True: CI should contain the mean
 `,
 
-	solution: `import numpy as np
+	solution: `import random
 
 def bootstrap_ci(data, n_samples, seed):
-    data = np.array(data)
-    rng = np.random.default_rng(seed)
-    boot_means = [
-        np.mean(rng.choice(data, size=len(data), replace=True))
+    rng = random.Random(seed)
+    n = len(data)
+    boot_means = sorted(
+        sum(rng.choices(data, k=n)) / n
         for _ in range(n_samples)
-    ]
-    lower = round(float(np.percentile(boot_means, 2.5)), 2)
-    upper = round(float(np.percentile(boot_means, 97.5)), 2)
+    )
+    def pct(p):
+        i = (p / 100) * (n_samples - 1)
+        lo = int(i)
+        hi = min(lo + 1, n_samples - 1)
+        return boot_means[lo] + (i - lo) * (boot_means[hi] - boot_means[lo])
+    lower = round(pct(2.5), 2)
+    upper = round(pct(97.5), 2)
     return lower, upper
 
 lower, upper = bootstrap_ci([1, 2, 3, 4, 5], 1000, 42)
