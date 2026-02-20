@@ -55,9 +55,83 @@ const courseLogos: Record<string, React.ReactNode> = {
       <path d="M1042.09 1126.57C1037.19 1128.46 1032.71 1131.3 1028.9 1134.92C1025.1 1138.54 1022.04 1142.88 1019.92 1147.68C1017.79 1152.49 1016.63 1157.66 1016.5 1162.91C1016.37 1168.16 1017.28 1173.39 1019.17 1178.29C1024.11 1191.06 1031.51 1202.74 1040.96 1212.66L1040.96 1212.66C1050.41 1222.58 1061.72 1230.53 1074.25 1236.07L1074.26 1236.08C1086.77 1241.62 1100.25 1244.64 1113.94 1244.97L1113.95 1244.97L1113.97 1244.97C1127.65 1245.29 1141.26 1242.92 1154.03 1237.99L1154.04 1237.99C1166.81 1233.06 1178.49 1225.66 1188.4 1216.21L1188.41 1216.21L1188.41 1216.2C1198.32 1206.76 1206.27 1195.45 1211.81 1182.94C1217.37 1170.41 1220.39 1156.9 1220.71 1143.2C1220.96 1132.6 1216.99 1122.33 1209.67 1114.65C1202.34 1106.98 1192.27 1102.53 1181.66 1102.28C1176.41 1102.15 1171.19 1103.07 1166.29 1104.96C1161.39 1106.86 1156.91 1109.7 1153.11 1113.33C1149.31 1116.95 1146.26 1121.29 1144.14 1126.1C1142.02 1130.9 1140.86 1136.08 1140.74 1141.33C1140.66 1144.5 1139.96 1147.63 1138.67 1150.53L1138.67 1150.54L1138.66 1150.56C1137.37 1153.47 1135.52 1156.1 1133.22 1158.3C1130.91 1160.5 1128.2 1162.22 1125.23 1163.36L1125.21 1163.37C1122.23 1164.52 1119.06 1165.07 1115.87 1165C1112.69 1164.92 1109.55 1164.21 1106.64 1162.92L1106.62 1162.92L1106.61 1162.91C1103.7 1161.62 1101.08 1159.78 1098.88 1157.48L1098.88 1157.47L1098.88 1157.47C1096.68 1155.16 1094.96 1152.45 1093.81 1149.47C1091.92 1144.57 1089.08 1140.09 1085.46 1136.29C1081.83 1132.49 1077.5 1129.43 1072.69 1127.31C1067.89 1125.18 1062.71 1124.02 1057.46 1123.89C1052.21 1123.76 1046.99 1124.67 1042.09 1126.57Z" fill="#151515"/>
     </svg>
   ),
+  calculus: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="2" y="26" fontSize="28" fontFamily="Georgia, serif" fill="#A8B9CC">∫</text>
+    </svg>
+  ),
+  calculus2: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="1" y="24" fontSize="22" fontFamily="Georgia, serif" fill="#A8B9CC">Σ</text>
+    </svg>
+  ),
+  "linear-algebra": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <rect x="4" y="4" width="10" height="10" rx="1" stroke="#A8B9CC" strokeWidth="1.5" fill="none"/>
+      <rect x="18" y="4" width="10" height="10" rx="1" stroke="#A8B9CC" strokeWidth="1.5" fill="none"/>
+      <rect x="4" y="18" width="10" height="10" rx="1" stroke="#A8B9CC" strokeWidth="1.5" fill="none"/>
+      <rect x="18" y="18" width="10" height="10" rx="1" stroke="#A8B9CC" strokeWidth="1.5" fill="none"/>
+    </svg>
+  ),
+  diffeq: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="1" y="22" fontSize="14" fontFamily="Georgia, serif" fill="#A8B9CC">dy/dx</text>
+    </svg>
+  ),
+  statistics: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <rect x="4" y="20" width="5" height="8" rx="1" fill="#A8B9CC"/>
+      <rect x="13" y="12" width="5" height="16" rx="1" fill="#A8B9CC"/>
+      <rect x="22" y="6" width="5" height="22" rx="1" fill="#A8B9CC"/>
+    </svg>
+  ),
+  python: (
+    <svg viewBox="0 0 24 24" className="w-8 h-8">
+      <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.031v-2.867s-.109-3.402 3.35-3.402h5.762s3.24.052 3.24-3.13V3.19S18.28 0 11.914 0zm-3.2 1.848a1.047 1.047 0 1 1 0 2.094 1.046 1.046 0 0 1 0-2.094z" fill="#387EB8"/>
+      <path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121S24 18.211 24 12.031c0-6.18-3.403-5.96-3.403-5.96h-2.031v2.867s.109 3.402-3.35 3.402H9.454s-3.24-.052-3.24 3.13V17.81S5.72 24 12.086 24zm3.2-1.848a1.047 1.047 0 1 1 0-2.094 1.046 1.046 0 0 1 0 2.094z" fill="#FFE052"/>
+    </svg>
+  ),
 };
 
+const mathInCCurriculum = [
+  { id: "calculus", label: "1" },
+  { id: "calculus2", label: "2" },
+];
+
+const tracks: { title: string; ids: string[] }[] = [
+  {
+    title: "Mathematics in C",
+    ids: ["calculus", "calculus2"],
+  },
+  {
+    title: "Mathematics in Python",
+    ids: ["linear-algebra", "statistics", "diffeq"],
+  },
+  {
+    title: "Languages",
+    ids: ["go", "zig", "gleam", "ruby", "haskell", "holyc"],
+  },
+  {
+    title: "Systems & Low-Level",
+    ids: ["arm64", "c", "linux", "kernel", "coreutils"],
+  },
+  {
+    title: "Web & Frontend",
+    ids: ["javascript", "typescript", "threejs"],
+  },
+  {
+    title: "Data & Databases",
+    ids: ["postgresql", "r", "python"],
+  },
+  {
+    title: "Algorithms & Computer Science",
+    ids: ["algorithms", "graphs", "trees", "linked-lists", "distributed-systems"],
+  },
+];
+
 export default function HomePage() {
+  const courseMap = Object.fromEntries(courses.map((c) => [c.id, c]));
+
   return (
     <div className="h-screen bg-background overflow-y-auto">
       <header className="bg-background sticky top-0 z-10">
@@ -77,44 +151,111 @@ export default function HomePage() {
           Write code, get instant feedback.
         </p>
 
-        <div className="flex flex-col -space-y-px">
-          {courses.map((course) => (
-            <Link
-              key={course.id}
-              href={`/${course.id}`}
-              className="group flex items-center gap-5 border border-border px-6 py-5 transition-colors hover:bg-accent/50"
-            >
-              <div className="shrink-0">
-                {courseLogos[course.id]}
-              </div>
+        {/* Mathematics in C — featured curriculum */}
+        <section className="mb-14">
+          <div className="mb-4 flex items-center gap-3">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Mathematics in C — Curriculum
+            </h2>
+            <div className="flex-1 h-px bg-border" />
+          </div>
 
-              <div className="min-w-0 flex-1">
-                <h2 className="text-lg font-semibold text-foreground font-display mb-1">
-                  {course.title}
+          <p className="text-sm text-muted-foreground mb-5 max-w-xl">
+            Implement the core algorithms of university mathematics in C — from limits and integrals
+            to Taylor series, parametric curves, and curvature. Each concept runs live in your browser
+            via TCC.
+          </p>
+
+          {/* Learning path */}
+          <div className="flex items-stretch gap-0 mb-2">
+            {mathInCCurriculum.map(({ id, label }, i) => {
+              const course = courseMap[id];
+              if (!course) return null;
+              return (
+                <div key={id} className="flex items-center gap-0 flex-1">
+                  <Link
+                    href={`/${id}`}
+                    className="group flex-1 flex items-center gap-4 border border-border px-5 py-4 transition-colors hover:bg-accent/50"
+                  >
+                    <div className="shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground font-mono">
+                      {label}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm font-semibold text-foreground font-display">{course.title}</div>
+                      <div className="text-xs text-muted-foreground mt-0.5">{course.runtimeLabel}</div>
+                    </div>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 text-muted-foreground/40 transition-all group-hover:text-foreground group-hover:translate-x-0.5">
+                      <path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                  {i < mathInCCurriculum.length - 1 && (
+                    <div className="shrink-0 px-2 text-muted-foreground/40 text-xs font-mono">→</div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <p className="text-xs text-muted-foreground/60 mt-2">
+            Start with Calculus 1, then continue to Calculus 2. Each course builds on the previous.
+          </p>
+        </section>
+
+        {/* All other tracks */}
+        {tracks.slice(1).map((track) => {
+          const trackCourses = track.ids.map((id) => courseMap[id]).filter(Boolean);
+          if (trackCourses.length === 0) return null;
+          return (
+            <section key={track.title} className="mb-10">
+              <div className="mb-3 flex items-center gap-3">
+                <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  {track.title}
                 </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-1">
-                  {course.description}
-                </p>
+                <div className="flex-1 h-px bg-border" />
               </div>
-
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                className="shrink-0 text-muted-foreground/40 transition-all group-hover:text-foreground group-hover:translate-x-0.5"
-              >
-                <path
-                  d="M6 3.5L10.5 8L6 12.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          ))}
-        </div>
+              <div className="flex flex-col -space-y-px">
+                {trackCourses.map((course) => (
+                  <Link
+                    key={course.id}
+                    href={`/${course.id}`}
+                    className="group flex items-center gap-5 border border-border px-6 py-4 transition-colors hover:bg-accent/50"
+                  >
+                    <div className="shrink-0">
+                      {courseLogos[course.id] ?? (
+                        <div className="w-8 h-8 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-mono font-bold">
+                          {course.language.slice(0, 2).toUpperCase()}
+                        </div>
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base font-semibold text-foreground font-display mb-0.5">
+                        {course.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-1">
+                        {course.description}
+                      </p>
+                    </div>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      className="shrink-0 text-muted-foreground/40 transition-all group-hover:text-foreground group-hover:translate-x-0.5"
+                    >
+                      <path
+                        d="M6 3.5L10.5 8L6 12.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        })}
       </main>
     </div>
   );
