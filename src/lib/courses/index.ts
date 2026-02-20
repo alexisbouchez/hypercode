@@ -9,10 +9,13 @@ import { rChapters, rLessons } from "@/lib/lessons/r";
 import { holycChapters, holycLessons } from "@/lib/lessons/holyc";
 import { linuxChapters, linuxLessons } from "@/lib/lessons/linux";
 import { coreutilsChapters, coreutilsLessons } from "@/lib/lessons/coreutils";
+import { kernelChapters, kernelLessons } from "@/lib/lessons/kernel";
 import { jsChapters, jsLessons } from "@/lib/lessons/javascript";
 import { tsChapters, tsLessons } from "@/lib/lessons/typescript";
 import { algorithmsChapters, algorithmsLessons } from "@/lib/lessons/algorithms";
 import { distributedSystemsChapters, distributedSystemsLessons } from "@/lib/lessons/distributed-systems";
+import { rubyChapters, rubyLessons } from "@/lib/lessons/ruby";
+import { treesChapters, treesLessons } from "@/lib/lessons/trees";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -745,6 +748,69 @@ Compile with \`gcc mycat.c -o mycat\` and test it on real files. This is softwar
 - \`man 1 coreutils\` -- On any Linux system, \`man cat\`, \`man grep\`, etc. document every flag.
 `;
 
+const kernelIntroductionContent = `
+## How Linux Works Under the Hood
+
+You have used Linux commands. You have written C programs. Now go one level deeper: **how does the Linux kernel itself work?**
+
+This course teaches Linux internals through C simulations. Every lesson implements a real kernel data structure or algorithm — not toy code, but the actual patterns from \`kernel/sched.c\`, \`mm/slab.c\`, \`fs/inode.c\`, and \`kernel/signal.c\`.
+
+Since we run in the browser, we simulate rather than invoke real syscalls. But the data structures, algorithms, and logic are faithful to the real kernel.
+
+## What the Kernel Does
+
+The Linux kernel is the software layer between your programs and the hardware. Its four main jobs:
+
+- **Process management** — create, schedule, and terminate processes
+- **Memory management** — map virtual addresses to physical RAM, handle page faults
+- **File system** — abstract disks into files and directories
+- **IPC and signals** — let processes communicate and coordinate
+
+Each chapter of this course covers one of these subsystems.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Processes** — The Process Control Block (\`task_struct\`), state transitions, \`fork()\`, and round-robin scheduling.
+2. **Memory** — Virtual address layout, page table walks, and the slab allocator.
+3. **File System** — Inodes, file descriptor tables, and the File Allocation Table (FAT).
+4. **IPC** — Ring buffers (the kernel pipe implementation), semaphores, and signal dispatch.
+5. **System Calls** — The syscall dispatch table and \`sys_write\`.
+
+Each lesson explains the concept, shows where it lives in the real kernel source, and gives you a C function to implement and test.
+
+Let's read the kernel.
+\`;
+
+const kernelWhatsNextContent = \`
+## Congratulations
+
+You have implemented the core data structures of a real operating system:
+
+- **Processes**: PCB, state machine, fork, round-robin scheduler
+- **Memory**: virtual address parsing, page tables, slab allocator
+- **File System**: inodes, file descriptor tables, FAT chains
+- **IPC**: ring buffers, semaphores, signal dispatch tables
+- **Syscalls**: syscall table, sys_write
+
+These are not abstractions — they are the actual patterns used in \`linux/sched.h\`, \`mm/slab.c\`, \`fs/inode.h\`, and \`kernel/signal.c\`.
+
+## Go Deeper
+
+- **Read the kernel source** — [elixir.bootlin.com](https://elixir.bootlin.com/linux/latest/source) lets you browse the Linux source online with cross-references. Start with \`include/linux/sched.h\` (task_struct) and \`mm/slab.c\`.
+- **Write a kernel module** — A kernel module is a C file you compile and load into a running kernel. The classic first module: a character device that returns "hello" when read.
+- **Explore xv6** — MIT's teaching operating system, written in C for RISC-V. It implements everything you learned here in ~8,000 lines: [github.com/mit-pdos/xv6-riscv](https://github.com/mit-pdos/xv6-riscv).
+- **Read Operating Systems: Three Easy Pieces** — Free online OS textbook covering virtualization, concurrency, and persistence in depth: [ostep.org](https://ostep.org).
+- **Try the Linux kernel labs** — [linux-kernel-labs.github.io](https://linux-kernel-labs.github.io) has hands-on exercises for kernel development.
+
+## References
+
+- *Linux Kernel Development* by Robert Love — The best single-volume guide to the kernel internals.
+- *Understanding the Linux Kernel* by Bovet & Cesati — Deep dive into kernel mechanisms.
+- [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/) — Official docs, including subsystem-specific guides.
+`;
+
 const linuxIntroductionContent = `
 ## Why Linux?
 
@@ -1133,6 +1199,160 @@ You have covered the foundational algorithms. Here is where to go deeper:
 - [Martin Kleppmann's Blog](https://martin.kleppmann.com/) -- deep dives into distributed systems research.
 `;
 
+const rubyIntroductionContent = `
+## Why Ruby?
+
+Ruby is a language designed for programmer happiness. Matz (Yukihiro Matsumoto) created it in 1995 with a single guiding principle: make programming enjoyable. The result is a language that reads almost like English, rewards elegance, and gets out of your way.
+
+- **Expressive** -- Ruby code is concise and readable. A task that takes 10 lines in Java often takes 2 in Ruby.
+- **Everything is an object** -- In Ruby, even integers and booleans are objects with methods. \`5.times\`, \`"hello".upcase\`, \`[1,2,3].map\`.
+- **Flexible** -- Ruby embraces the idea that there is more than one way to do things. Blocks, procs, lambdas, open classes — the language bends to you.
+- **Rails** -- Ruby on Rails, the web framework created by DHH, revolutionized web development. GitHub, Shopify, Basecamp, and Airbnb were all built on Rails.
+- **Great for beginners** -- Ruby's syntax is forgiving and the error messages are helpful. It is one of the best first languages.
+
+## The Story
+
+Yukihiro "Matz" Matsumoto began designing Ruby in 1993 and released the first version in 1995. He was inspired by Perl, Smalltalk, Eiffel, Ada, and Lisp — taking what he loved from each.
+
+Ruby remained relatively obscure outside Japan until 2004, when David Heinemeier Hansson (DHH) released Ruby on Rails. Rails showed what Ruby was capable of: a web application framework that made building CRUD apps dramatically faster. The Rails community exploded, and Ruby exploded with it.
+
+Today, Ruby is mature, stable, and widely used in web development, scripting, and DevOps tooling. The MRI (Matz's Ruby Interpreter) is the reference implementation, but JRuby and TruffleRuby bring Ruby to the JVM and GraalVM.
+
+## Who Uses Ruby
+
+Ruby powers some of the world's most recognizable products:
+
+- **GitHub** -- the largest code hosting platform in the world, built on Rails.
+- **Shopify** -- e-commerce platform serving over a million merchants, running on a massive Rails monolith.
+- **Basecamp** -- the original Rails app, still running on Ruby.
+- **Airbnb** -- started on Rails and still uses Ruby extensively.
+- **Stripe** -- uses Ruby for parts of its payment infrastructure.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Basics** -- \`puts\`, variables, strings with interpolation, and string methods.
+2. **Numbers** -- Integer and Float arithmetic, comparison operators, and boolean logic.
+3. **Collections** -- Arrays, Hashes, and Ranges — Ruby's three core collection types.
+4. **Control Flow** -- Conditionals with \`if\`/\`unless\`, loops with \`while\`/\`until\`, and iterators: \`each\`, \`map\`, \`select\`, \`reduce\`.
+5. **Methods & OOP** -- Defining methods with default parameters, blocks and \`yield\`, classes with instance variables, and modules as mixins.
+
+Each lesson explains a concept, shows examples, and gives you an exercise to write and run in your browser.
+
+Let's get started.
+`;
+
+const rubyWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now know Ruby's core: variables, strings, numbers, arrays, hashes, ranges, control flow, iterators, methods, blocks, classes, and modules.
+
+That is a real foundation. You can read Ruby code, write Ruby programs, and start exploring the vast Ruby ecosystem.
+
+## What to Explore Next
+
+Here are the natural next steps:
+
+- **Ruby on Rails** -- The most popular Ruby framework. Build web applications with models, views, controllers, and a database in hours. Start with the [Rails Guides](https://guides.rubyonrails.org/).
+- **RubyGems** -- Ruby's package manager. Over 100,000 gems available. \`gem install\` and \`require\` to add any library.
+- **Symbols and frozen strings** -- Ruby's performance optimization for immutable string-like values.
+- **Procs and Lambdas** -- First-class functions in Ruby. Understand the difference between \`Proc.new\`, \`proc {}\`, and \`lambda {}\`.
+- **Comparable and Enumerable** -- Two of Ruby's most useful modules. Include them in your classes to get dozens of free methods.
+- **File I/O** -- \`File.read\`, \`File.write\`, and processing files line by line.
+- **Regular expressions** -- Ruby has native regex support: \`"hello" =~ /e(l+)o/\`.
+- **Testing** -- RSpec and Minitest, the two dominant testing frameworks. TDD is a core Ruby community value.
+
+## Build Something
+
+The best way to learn is to build:
+
+- **A command-line tool** -- process CSV files, generate reports, or automate a repetitive task.
+- **A web scraper** -- use the Nokogiri gem to parse HTML and extract data from websites.
+- **A REST API** -- use Sinatra (a lightweight framework) to build a simple HTTP API.
+- **A Rails app** -- follow the official Rails tutorial and build a blog or to-do app with a real database.
+
+## References
+
+- [The Ruby Programming Language](https://www.oreilly.com/library/view/the-ruby-programming/9780596516178/) by Matz and David Flanagan (O'Reilly) -- the definitive Ruby book.
+- [Programming Ruby (the Pickaxe)](https://pragprog.com/titles/ruby5/programming-ruby-3-3-5th-edition/) by Dave Thomas -- the classic Ruby reference.
+- [Ruby Documentation](https://ruby-doc.org/) -- official API docs for the standard library.
+- [RubyGems](https://rubygems.org/) -- the Ruby package repository.
+- [Ruby on Rails Guides](https://guides.rubyonrails.org/) -- comprehensive guides for the most popular Ruby framework.
+- [The Odin Project](https://www.theodinproject.com/paths/full-stack-ruby-on-rails) -- free, comprehensive full-stack curriculum using Ruby and Rails.
+`;
+
+const treesIntroductionContent = `
+## Why Trees?
+
+Trees are the most important data structure beyond arrays and linked lists. They appear everywhere in software:
+
+- **File systems** — directories are trees. Every \`ls\` you run traverses one.
+- **The DOM** — every webpage is a tree of HTML elements.
+- **Compilers** — source code is parsed into an Abstract Syntax Tree (AST) before execution.
+- **Databases** — B-trees power the indexes that make SQL queries fast.
+- **Git** — the commit graph is a tree (actually a DAG). Every \`git log\` traverses it.
+- **DNS** — the domain name system is a tree. \`com\` → \`example\` → \`www\`.
+
+Understanding trees is the gateway to understanding how real systems work at depth.
+
+## Why C?
+
+Implementing trees in C forces you to understand them at the lowest level:
+
+- There is no garbage collector. You call \`malloc\` to create a node, and you own that memory.
+- There is no tree library. You write the struct, the insert, the traversal — everything.
+- The pointer manipulation is explicit. \`root->left = new_node(val)\` is not hidden behind an object system.
+
+When you implement a BST in C, you understand what Python's \`dict\` and Java's \`TreeMap\` are doing under the hood.
+
+## What You Will Learn
+
+This course contains **12 lessons** organized into **4 chapters**:
+
+1. **Binary Trees** — Define the Node struct, create nodes with malloc, and implement all three classic traversals: inorder, preorder, and postorder.
+2. **Tree Properties** — Recursive algorithms to count nodes, measure height, and count leaves.
+3. **Binary Search Tree** — Insert values, search for values, and find min/max using the BST property.
+4. **BST Operations** — Validate that a tree is a correct BST using the min-max technique.
+
+Each lesson explains the concept, walks through the algorithm, and gives you a function to implement and test.
+
+Let's build trees.
+`;
+
+const treesWhatsNextContent = `
+## Congratulations
+
+You have implemented 12 tree algorithms in C: node creation, all three traversals, node count, height, leaf count, sum, BST insert, BST search, min/max, and BST validation.
+
+That is real data structures knowledge — the kind that comes up in every technical interview and underpins every database and compiler ever written.
+
+## What to Explore Next
+
+You have covered the fundamentals. Here is where to go deeper:
+
+- **BST Delete** — The hardest BST operation. When deleting a node with two children, replace it with its inorder successor (the smallest node in its right subtree).
+- **Balanced BSTs (AVL Trees)** — A BST stays O(log n) only if it's balanced. AVL trees self-balance on insert and delete using rotations.
+- **Red-Black Trees** — The self-balancing BST used by Linux's process scheduler, Java's \`TreeMap\`, and C++'s \`std::map\`.
+- **B-Trees** — N-ary trees optimized for disk access. The structure behind every database index.
+- **Tries** — Trees for string prefixes. Used in autocomplete, spell checkers, and IP routing tables.
+- **Heaps** — A tree with a different invariant (parent ≤ children). The structure behind priority queues.
+
+## Build Something
+
+- **A sorted set** — use a BST to build a dynamic sorted container with insert, search, delete, and iteration.
+- **An expression evaluator** — parse arithmetic expressions into a tree and evaluate them recursively.
+- **A file system simulator** — implement a tree of directories and files with path traversal.
+- **A spell checker** — build a trie from a dictionary and check words character by character.
+
+## References
+
+- *Introduction to Algorithms* (CLRS) by Cormen, Leiserson, Rivest, and Stein — Chapter 12 covers BSTs; Chapters 13-14 cover Red-Black Trees and augmented data structures.
+- *The Algorithm Design Manual* by Steven Skiena — practical discussion of tree variants and when to use each.
+- [Visualgo - BST](https://visualgo.net/en/bst) — animated visualization of BST insert, delete, and search.
+- [CS50x Data Structures](https://cs50.harvard.edu/x/) — Harvard's free course covers trees with excellent C examples.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -1288,6 +1508,39 @@ export const courses: Course[] = [
     runtimeLabel: "JavaScript",
     introductionContent: distributedSystemsIntroductionContent,
     whatsNextContent: distributedSystemsWhatsNextContent,
+  },
+  {
+    id: "ruby",
+    title: "Ruby",
+    description: "Learn Ruby from scratch. Master variables, strings, arrays, hashes, iterators, classes, and modules — the expressive language behind Rails, GitHub, and Shopify.",
+    language: "ruby",
+    chapters: rubyChapters,
+    lessons: rubyLessons,
+    runtimeLabel: "ruby.wasm",
+    introductionContent: rubyIntroductionContent,
+    whatsNextContent: rubyWhatsNextContent,
+  },
+  {
+    id: "trees",
+    title: "Trees in C",
+    description: "Learn tree data structures by implementing them in C. Build binary trees, master inorder/preorder/postorder traversals, and implement a Binary Search Tree from scratch.",
+    language: "c",
+    chapters: treesChapters,
+    lessons: treesLessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: treesIntroductionContent,
+    whatsNextContent: treesWhatsNextContent,
+  },
+  {
+    id: "kernel",
+    title: "Linux Internals",
+    description: "Understand how the Linux kernel works by implementing its core data structures in C. Build a process scheduler, page table, slab allocator, ring buffer, semaphore, signal table, and syscall dispatcher.",
+    language: "c",
+    chapters: kernelChapters,
+    lessons: kernelLessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: kernelIntroductionContent,
+    whatsNextContent: kernelWhatsNextContent,
   },
 ];
 

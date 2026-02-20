@@ -11,6 +11,7 @@ import { runCoreutilsTests } from "./test-runners/coreutils-test-runner";
 import { runJsTests } from "./test-runners/js-test-runner";
 import { runTsTests } from "./test-runners/ts-test-runner";
 import { runRubyTests } from "./test-runners/ruby-test-runner";
+import { runTreesTests } from "./test-runners/trees-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -67,6 +68,10 @@ async function main() {
   console.log("Running Ruby tests...");
   const rubyResults = runRubyTests();
   allResults.push(...rubyResults);
+
+  console.log("Running Trees tests...");
+  const treesResults = await runTreesTests();
+  allResults.push(...treesResults);
 
   console.log("\n--- Results ---\n");
 
