@@ -1,5 +1,5 @@
 export interface LessonTestResult {
-  course: "go" | "zig" | "sql" | "arm64" | "c" | "gleam" | "r" | "holyc";
+  course: "go" | "zig" | "sql" | "arm64" | "c" | "gleam" | "r" | "holyc" | "linux";
   lessonId: string;
   lessonTitle: string;
   testName: string;

@@ -7,6 +7,7 @@ import { cChapters, cLessons } from "@/lib/lessons/c";
 import { gleamChapters, gleamLessons } from "@/lib/lessons/gleam";
 import { rChapters, rLessons } from "@/lib/lessons/r";
 import { holycChapters, holycLessons } from "@/lib/lessons/holyc";
+import { linuxChapters, linuxLessons } from "@/lib/lessons/linux";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -637,6 +638,81 @@ That is a real accomplishment. HolyC is an unusual language with a singular hist
 - [HolyC Overview](https://en.wikipedia.org/wiki/HolyC) -- a concise summary of the language's features.
 `;
 
+const linuxIntroductionContent = `
+## Why Linux?
+
+Linux is the operating system that runs the world. It powers web servers, cloud infrastructure, Android phones, supercomputers, and embedded systems. If you write software professionally, you will work with Linux every day.
+
+- **Free and open source** -- The kernel source code is public, auditable, and modifiable. You own your system.
+- **Dominant in servers** -- Over 96% of the world's web servers run Linux. AWS, Google Cloud, and Azure are built on Linux.
+- **The developer's OS** -- Package managers, shell scripting, SSH, containers, and deployment pipelines all assume Linux fluency.
+- **Stable and secure** -- Linux powers critical infrastructure because it is reliable, configurable, and has a strong security model.
+
+## The Story
+
+Linus Torvalds was a 21-year-old Finnish student in 1991 when he announced on a Usenet newsgroup: "I'm doing a (free) operating system (just a hobby, won't be big and professional like GNU)." That project became the Linux kernel — today one of the largest collaborative software projects in history, with contributions from thousands of developers and companies including Google, Intel, Red Hat, and Microsoft.
+
+The GNU Project, started by Richard Stallman in 1983, had already created most of the user-space tools (shell, compiler, coreutils). Combined with Torvalds' kernel, the result was a complete free operating system: GNU/Linux.
+
+## The Shell
+
+At the heart of Linux is the **shell** — a text interface where you type commands. The default shell on most systems is **Bash** (Bourne Again SHell). The shell is not just a way to run programs; it is a full scripting language for automating tasks.
+
+This course runs your shell commands in an in-browser Linux simulator. You get a real shell experience — a virtual filesystem, common commands, pipes, variables, and scripting — without needing to install anything.
+
+## What You Will Learn
+
+This course contains **17 lessons** organized into **4 chapters**:
+
+1. **The Shell** -- \`echo\`, \`pwd\`, \`ls\`, \`cd\`, and \`cat\`. The fundamental commands for navigating and reading files.
+2. **Working with Files** -- \`mkdir\`, \`touch\`, \`cp\`, \`mv\`, and \`rm\`. Creating, copying, moving, and deleting files and directories.
+3. **Text Processing** -- \`head\`, \`grep\`, pipes, and \`wc\`. Reading parts of files, searching, and combining commands with the pipe operator.
+4. **Shell Scripting** -- Variables, \`for\` loops, and \`if\`/\`else\` conditionals. Writing scripts that automate work.
+
+Each lesson explains a concept, demonstrates it with examples, and gives you an exercise to practice in the browser.
+
+Let's get started.
+`;
+
+const linuxWhatsNextContent = `
+## Congratulations
+
+You have completed all 17 lessons. You now know how to navigate the filesystem, manage files, process text, and write shell scripts with variables, loops, and conditionals.
+
+That is a real foundation. Linux fluency opens up a world of capabilities: automating repetitive tasks, managing servers, building deployment pipelines, and understanding how software systems work.
+
+## What to Explore Next
+
+Here are topics to dive deeper into:
+
+- **Redirections** -- \`>\` and \`>>\` write stdout to files; \`<\` reads stdin from files; \`2>\` redirects stderr.
+- **File permissions** -- \`chmod\`, \`chown\`, and understanding \`rwxr-xr-x\` in detail.
+- **Processes** -- \`ps\`, \`top\`, \`kill\`, background jobs with \`&\`, and \`fg\`/\`bg\`.
+- **Regular expressions** -- \`grep -E\`, \`sed\`, and \`awk\` for powerful text transformation.
+- **SSH** -- Connecting to remote machines securely.
+- **cron** -- Scheduling scripts to run at specific times.
+- **Package management** -- \`apt\`, \`yum\`, or \`pacman\` depending on your distribution.
+- **Environment variables** -- \`export\`, \`.bashrc\`, and \`.profile\`.
+
+## Build Something
+
+The best way to solidify Linux skills is to use them:
+
+- **A backup script** -- automatically copy important files to a backup directory with timestamps
+- **A log analyzer** -- parse a log file with \`grep\`, \`awk\`, and \`sort\` to find the most common errors
+- **A project scaffolder** -- a script that creates a standard directory structure for new projects
+- **A system monitor** -- display disk usage, memory, and CPU load in a readable format
+
+## References
+
+- [The Linux Command Line](https://linuxcommand.org/tlcl.php) by William Shotts -- free online book, comprehensive and well-written.
+- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html) -- the official Bash documentation.
+- [TLDR Pages](https://tldr.sh/) -- community-maintained simplified man pages with practical examples.
+- [Explain Shell](https://explainshell.com/) -- paste any shell command and get a visual breakdown of what each part does.
+- [The Art of Command Line](https://github.com/jlevy/the-art-of-command-line) -- a curated guide of command-line tips and tricks.
+- [Linux Journey](https://linuxjourney.com/) -- interactive Linux learning with exercises.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -726,6 +802,17 @@ export const courses: Course[] = [
     runtimeLabel: "Aiwnios HolyC",
     introductionContent: holycIntroductionContent,
     whatsNextContent: holycWhatsNextContent,
+  },
+  {
+    id: "linux",
+    title: "Linux",
+    description: "Learn Linux and the Bash shell from scratch. Master the command line: navigate the filesystem, manage files, process text with pipes, and write shell scripts.",
+    language: "bash",
+    chapters: linuxChapters,
+    lessons: linuxLessons,
+    runtimeLabel: "Linux shell",
+    introductionContent: linuxIntroductionContent,
+    whatsNextContent: linuxWhatsNextContent,
   },
 ];
 
