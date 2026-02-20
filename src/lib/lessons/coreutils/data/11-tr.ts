@@ -6,84 +6,86 @@ export const tr: Lesson = {
 	chapterId: "transformation",
 	content: `## The \`tr\` Command
 
-\`tr\` (**translate**) replaces every occurrence of one character with another:
+\`tr\` (**translate**) maps every character in \`from\` to the corresponding character in \`to\`:
 
 \`\`\`bash
-$ echo "hello world" | tr 'o' '0'
-hell0 w0rld
+$ echo "hello" | tr 'aeiou' 'AEIOU'
+hEllO
+$ echo "hello world" | tr 'a-z' 'A-Z'
+HELLO WORLD
 \`\`\`
 
-It is a character-level find-and-replace. Every character in the input is either passed through or replaced.
+Each character in \`from[i]\` is replaced by \`to[i]\`. Characters not in \`from\` pass through unchanged.
 
 ### Your Implementation
 
-Write \`void my_tr(const char *s, char from, char to)\` that replaces every occurrence of \`from\` with \`to\`, and prints all other characters unchanged.
+Write \`void my_tr(const char *s, const char *from, const char *to)\` that translates characters.
+
+For each character in \`s\`, search for it in \`from\`. If found at position \`i\`, print \`to[i]\`. Otherwise print the character as-is.
 
 \`\`\`c
-void my_tr(const char *s, char from, char to) {
+void my_tr(const char *s, const char *from, const char *to) {
     while (*s) {
-        putchar(*s == from ? to : *s);
+        char c = *s;
+        for (int i = 0; from[i] && to[i]; i++) {
+            if (c == from[i]) { c = to[i]; break; }
+        }
+        putchar(c);
         s++;
     }
 }
 \`\`\`
 
-The ternary operator \`*s == from ? to : *s\` picks between the replacement and the original in a single expression.
+### Why a Loop Instead of a Ternary?
 
-### Real tr is More Powerful
-
-The real \`tr\` command takes ranges and sets:
-
-\`\`\`bash
-tr 'a-z' 'A-Z'     # uppercase all lowercase letters
-tr -d ' '           # delete all spaces (-d = delete)
-tr -s ' '           # squeeze repeated spaces into one (-s = squeeze)
-\`\`\`
-
-Your simplified version handles the single-character case, which is the core idea.
+The single-char version used \`*s == from ? to : *s\`. With a string mapping you need to search the full \`from\` table for a match. The inner \`for\` loop does this — it walks both \`from\` and \`to\` together, stopping when it finds a match or reaches the end.
 
 ### Your Task
 
-Implement \`my_tr\` that replaces every \`from\` character with \`to\`.`,
+Implement \`my_tr\` that translates every character in \`s\` according to the \`from\` → \`to\` mapping.`,
 
 	starterCode: `#include <stdio.h>
 
-void my_tr(const char *s, char from, char to) {
-\t// Replace every occurrence of 'from' with 'to'
+void my_tr(const char *s, const char *from, const char *to) {
+\t// Replace each character found in from with the corresponding char in to
 }
 
 int main() {
-\tmy_tr("hello world\\n", 'o', '0');
+\tmy_tr("hello world\\n", "aeiou", "AEIOU");
 \treturn 0;
 }
 `,
 
 	solution: `#include <stdio.h>
 
-void my_tr(const char *s, char from, char to) {
+void my_tr(const char *s, const char *from, const char *to) {
 \twhile (*s) {
-\t\tputchar(*s == from ? to : *s);
+\t\tchar c = *s;
+\t\tfor (int i = 0; from[i] && to[i]; i++) {
+\t\t\tif (c == from[i]) { c = to[i]; break; }
+\t\t}
+\t\tputchar(c);
 \t\ts++;
 \t}
 }
 
 int main() {
-\tmy_tr("hello world\\n", 'o', '0');
+\tmy_tr("hello world\\n", "aeiou", "AEIOU");
 \treturn 0;
 }
 `,
 
 	tests: [
 		{
-			name: "replaces o with 0",
-			expected: "hell0 w0rld\n",
+			name: "replaces vowels with uppercase",
+			expected: "hEllO wOrld\n",
 		},
 		{
 			name: "replaces spaces with underscores",
 			code: `#include <stdio.h>
 {{FUNC}}
 int main() {
-\tmy_tr("hello world\\n", ' ', '_');
+\tmy_tr("hello world\\n", " ", "_");
 \treturn 0;
 }`,
 			expected: "hello_world\n",
@@ -93,20 +95,20 @@ int main() {
 			code: `#include <stdio.h>
 {{FUNC}}
 int main() {
-\tmy_tr("abcdef\\n", 'z', 'Z');
+\tmy_tr("abcdef\\n", "xyz", "XYZ");
 \treturn 0;
 }`,
 			expected: "abcdef\n",
 		},
 		{
-			name: "replaces a with @",
+			name: "maps multiple characters",
 			code: `#include <stdio.h>
 {{FUNC}}
 int main() {
-\tmy_tr("banana\\n", 'a', '@');
+\tmy_tr("banana\\n", "abc", "ABC");
 \treturn 0;
 }`,
-			expected: "b@n@n@\n",
+			expected: "BAnAnA\n",
 		},
 	],
 };

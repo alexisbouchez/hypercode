@@ -18,6 +18,10 @@ import { cut } from "./data/16-cut";
 import { seq } from "./data/17-seq";
 import { basename } from "./data/18-basename";
 import { dirname } from "./data/19-dirname";
+import { ls } from "./data/20-ls";
+import { paste } from "./data/21-paste";
+import { fold } from "./data/22-fold";
+import { tree } from "./data/23-tree";
 
 export const coreutilsChapters: Chapter[] = [
 	{ id: "output", title: "Output" },
@@ -46,4 +50,8 @@ export const coreutilsLessons: Lesson[] = [
 	nl,
 	basename,
 	dirname,
+	ls,
+	paste,
+	fold,
+	tree,
 ];
