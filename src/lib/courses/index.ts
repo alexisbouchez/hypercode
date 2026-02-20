@@ -23,6 +23,7 @@ import { haskellChapters, haskellLessons } from "@/lib/lessons/haskell";
 import { graphsChapters, graphsLessons } from "@/lib/lessons/graphs";
 import { linearAlgebraChapters, linearAlgebraLessons } from "@/lib/lessons/linear-algebra";
 import { diffeqChapters, diffeqLessons } from "@/lib/lessons/diffeq";
+import { calculusChapters, calculusLessons } from "@/lib/lessons/calculus";
 import { statisticsChapters, statisticsLessons } from "@/lib/lessons/statistics";
 
 const goIntroductionContent = `
@@ -1780,6 +1781,72 @@ You have completed all 15 lessons. You now understand Haskell's core ideas: pure
 - [Haskell Wiki](https://wiki.haskell.org/) — Community-maintained documentation.
 `;
 
+const calculusIntroductionContent = `
+## Why Calculus?
+
+Calculus is the mathematics of change. It was invented independently by Newton and Leibniz in the 17th century to solve problems that algebra couldn't — the slope of a curve at a single point, the area under an arbitrary shape, the motion of planets.
+
+Today, calculus underpins:
+
+- **Physics** -- every differential equation in mechanics, electromagnetism, and quantum theory
+- **Engineering** -- control systems, signal processing, structural analysis
+- **Machine learning** -- gradient descent is pure applied calculus: minimize a loss function by following the negative gradient
+- **Finance** -- Black-Scholes option pricing, continuous compounding
+- **Computer graphics** -- curves, surfaces, and physically-based rendering
+
+## Why Implement It in C?
+
+Most calculus courses focus on analytic techniques: the power rule, integration by parts, u-substitution. This course takes a different angle — you implement the **numerical algorithms** that compute what pen-and-paper calculus describes.
+
+This approach:
+
+- Reveals the limit definition of the derivative as actual code
+- Shows why some methods converge faster than others
+- Prepares you for scientific computing, simulation, and numerical analysis
+- Builds deep intuition: you can't implement something you don't understand
+
+## What You Will Learn
+
+This course covers the core of **Calculus 1** through C implementations:
+
+1. **Limits & Derivatives** -- Numerical limits, central difference formula, second derivative, tangent line linearization
+2. **Derivative Applications** -- Newton's method for root finding, finding critical points, the Mean Value Theorem
+3. **Integration** -- Left/right Riemann sums, midpoint rule, trapezoidal rule, Simpson's rule
+4. **Integral Applications** -- Average value, area between curves, volume of revolution (disk method)
+
+Every function uses **function pointers** — C's way of passing functions as arguments. This is the gateway to understanding higher-order functions and functional programming.
+`;
+
+const calculusWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You can now implement the core algorithms of Calculus 1 in C — from numerical limits and derivatives through Riemann sums, Simpson's rule, and volumes of revolution.
+
+## What to Explore Next
+
+- **Calculus 2** -- Integration techniques (by parts, trig substitution, partial fractions), sequences and series, Taylor series, polar coordinates
+- **Multivariable Calculus** -- Partial derivatives, gradient, divergence, curl, multiple integrals, Stokes' theorem
+- **Numerical Analysis** -- Adaptive step-size methods, Gaussian quadrature, spline interpolation — the professional tools built on these foundations
+- **Differential Equations** -- Everything here feeds directly into ODEs and PDEs
+
+## Key Formulas to Remember
+
+| Concept | Formula |
+|---------|---------|
+| Central difference | \`f'(x) ≈ (f(x+h) - f(x-h)) / (2h)\` |
+| Second derivative | \`f''(x) ≈ (f(x+h) - 2f(x) + f(x-h)) / h²\` |
+| Newton's method | \`xₙ₊₁ = xₙ - f(xₙ)/f'(xₙ)\` |
+| Trapezoidal rule | \`h/2·[f(x₀) + 2f(x₁) + ... + 2f(xₙ₋₁) + f(xₙ)]\` |
+| Simpson's rule | \`h/3·[f(x₀) + 4f(x₁) + 2f(x₂) + ... + 4f(xₙ₋₁) + f(xₙ)]\` |
+| Volume of revolution | \`π ∫_a^b f(x)² dx\` |
+
+## References
+
+- [Calculus](https://www.stewartcalculus.com/) by James Stewart -- the standard university textbook
+- [Calculus Made Easy](https://calculusmadeeasy.org/) by Silvanus P. Thompson -- free, clear, and written in 1910
+- [Numerical Recipes in C](http://numerical.recipes/) -- the practitioner's guide to numerical algorithms
+`;
+
 const diffeqIntroductionContent = `
 ## Why Differential Equations?
 
@@ -2085,6 +2152,17 @@ export const courses: Course[] = [
     runtimeLabel: "Pyodide",
     introductionContent: linearAlgebraIntroductionContent,
     whatsNextContent: linearAlgebraWhatsNextContent,
+  },
+  {
+    id: "calculus",
+    title: "Calculus 1 in C",
+    description: "Learn Calculus 1 by implementing the algorithms in C. Compute limits, derivatives, and integrals numerically — Euler's method, Newton's method, Riemann sums, Simpson's rule, and volumes of revolution.",
+    language: "c",
+    chapters: calculusChapters,
+    lessons: calculusLessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: calculusIntroductionContent,
+    whatsNextContent: calculusWhatsNextContent,
   },
   {
     id: "diffeq",
