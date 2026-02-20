@@ -155,7 +155,8 @@ int main() {
 int main() {
 \tFDEntry table[16] = {};
 \tfor (int i = 0; i < 16; i++) table[i].open = 1;
-\tprintf("%d\\n", my_open(table, "x"));
+\tint r = my_open(table, "x");
+\tprintf("%d\\n", r);
 \treturn 0;
 }`,
 			expected: "-1\n",

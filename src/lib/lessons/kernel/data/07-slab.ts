@@ -111,7 +111,8 @@ int main() {
 int main() {
 \tint bm = 0;
 \tfor (int i = 0; i < 4; i++) slab_alloc(&bm, 4);
-\tprintf("%d\\n", slab_alloc(&bm, 4));
+\tint r = slab_alloc(&bm, 4);
+\tprintf("%d\\n", r);
 \treturn 0;
 }`,
 			expected: "-1\n",

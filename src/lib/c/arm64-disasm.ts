@@ -659,7 +659,7 @@ function decodeInstruction(instr: number, pc: number): string {
 }
 
 // Decode ARM64 bitmask immediate
-function decodeBitmaskImm(N: number, imms: number, immr: number, regSize: number): number | null {
+function decodeBitmaskImm(N: number, imms: number, immr: number, regSize: number): bigint | null {
 	const len = highestSetBit((N << 6) | (~imms & 0x3f));
 	if (len < 1) return null;
 
@@ -668,15 +668,19 @@ function decodeBitmaskImm(N: number, imms: number, immr: number, regSize: number
 	const S = imms & levels;
 	const R = immr & levels;
 
-	const welem = ((1 << (S + 1)) - 1) >>> 0;
-	const rotated = ((welem >>> R) | (welem << (size - R))) & ((1 << size) - 1);
+	const sizeN = BigInt(size);
+	const welem = (1n << BigInt(S + 1)) - 1n;
+	const mask = (1n << sizeN) - 1n;
+	const rotated = R === 0
+		? welem
+		: ((welem >> BigInt(R)) | (welem << (sizeN - BigInt(R)))) & mask;
 
-	let result = 0;
+	let result = 0n;
 	for (let i = 0; i < regSize; i += size) {
-		result = (result | (rotated << i)) >>> 0;
+		result = result | (rotated << BigInt(i));
 	}
 
-	return result >>> 0;
+	return result;
 }
 
 function highestSetBit(value: number): number {

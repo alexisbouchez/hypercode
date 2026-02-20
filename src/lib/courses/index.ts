@@ -16,6 +16,8 @@ import { algorithmsChapters, algorithmsLessons } from "@/lib/lessons/algorithms"
 import { distributedSystemsChapters, distributedSystemsLessons } from "@/lib/lessons/distributed-systems";
 import { rubyChapters, rubyLessons } from "@/lib/lessons/ruby";
 import { treesChapters, treesLessons } from "@/lib/lessons/trees";
+import { threejsChapters, threejsLessons } from "@/lib/lessons/threejs";
+import { linkedListsChapters, linkedListsLessons } from "@/lib/lessons/linked-lists";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -781,9 +783,9 @@ This course contains **15 lessons** organized into **5 chapters**:
 Each lesson explains the concept, shows where it lives in the real kernel source, and gives you a C function to implement and test.
 
 Let's read the kernel.
-\`;
+`;
 
-const kernelWhatsNextContent = \`
+const kernelWhatsNextContent = `
 ## Congratulations
 
 You have implemented the core data structures of a real operating system:
@@ -1353,6 +1355,127 @@ You have covered the fundamentals. Here is where to go deeper:
 - [CS50x Data Structures](https://cs50.harvard.edu/x/) — Harvard's free course covers trees with excellent C examples.
 `;
 
+const linkedListsIntroductionContent = `
+## Why Linked Lists?
+
+Linked lists are the foundational heap-allocated data structure. Before you can understand trees, graphs, hash tables, or memory allocators, you need to understand the linked list — because they all share the same core idea: nodes connected by pointers.
+
+They appear everywhere in systems programming:
+
+- **Operating systems** — the Linux kernel uses doubly-linked lists extensively (process lists, wait queues, LRU caches).
+- **Memory allocators** — free blocks are tracked as a linked list.
+- **Compilers** — symbol tables and intermediate representations use linked structures.
+- **Undo/redo** — editor history is a linked list of states.
+
+## Why C?
+
+Linked lists without manual memory management are just exercises. In C, you call \`malloc\` to allocate each node, you own the pointer, and you call \`free\` when you are done. That is the full picture — no garbage collector hiding the cost.
+
+Implementing a linked list in C teaches you:
+
+- How heap allocation works at the function-call level.
+- Why pointer manipulation requires care (NULL checks, prev/cur tracking).
+- What languages like Python and Java are doing behind their list objects.
+
+## What You Will Learn
+
+This course contains **12 lessons** organized into **4 chapters**:
+
+1. **The Node** — Define the \`Node\` struct, allocate nodes with \`malloc\`, traverse and print a list, and measure its length.
+2. **Insertions & Deletions** — Insert at the front (O(1)), insert at the back (O(n)), and remove the front node.
+3. **Search & Access** — Linear search, O(n) index access, and delete-by-value with the prev/cur two-pointer pattern.
+4. **Classic Problems** — Three interview staples: nth-from-end (fast/slow pointers), in-place reversal, and merging two sorted lists.
+
+Each lesson explains the algorithm, walks through a worked example, and gives you a function to implement.
+
+Let's build lists.
+`;
+
+const linkedListsWhatsNextContent = `
+## Congratulations
+
+You have implemented 12 linked list algorithms in C: node creation, traversal, length, push front/back, pop front, search, nth node, delete by value, nth from end, reverse, and merge sorted.
+
+These are exactly the problems that come up in systems programming interviews and in real kernel/allocator code. You know them at the pointer level now — not just abstractly.
+
+## What to Explore Next
+
+- **Doubly-Linked Lists** — Add a \`prev\` pointer to each node. O(1) deletion anywhere (given the node pointer). The Linux kernel's list implementation uses this.
+- **Circular Lists** — The tail's \`next\` points back to the head. Useful for round-robin schedulers.
+- **Skip Lists** — Probabilistic multi-level linked lists that achieve O(log n) search. Used in Redis and LevelDB.
+- **XOR Lists** — Store \`prev XOR next\` in a single pointer field, halving memory use. A classic bit-manipulation trick.
+- **Memory Allocators** — Implement a free list allocator: \`malloc\` returns from the front of the free list; \`free\` inserts back in order.
+
+## Build Something
+
+- **A stack** — use push_front/pop_front to implement LIFO semantics with O(1) push and pop.
+- **A queue** — maintain head and tail pointers; O(1) enqueue at tail, O(1) dequeue at head.
+- **A sorted insert** — insert values in sorted order into a linked list (the basis of insertion sort).
+- **Cycle detection** — implement Floyd's tortoise-and-hare algorithm to detect if a list has a cycle.
+
+## References
+
+- *The C Programming Language* by Kernighan and Ritchie — Chapter 6 covers structs and the basics of pointer-linked data structures.
+- *Introduction to Algorithms* (CLRS) — Chapter 10 covers linked lists, stacks, and queues at depth.
+- [Linux kernel list.h](https://github.com/torvalds/linux/blob/master/include/linux/list.h) — the actual doubly-linked list implementation used throughout the Linux kernel. Read it after this course.
+`;
+
+const threejsIntroductionContent = `
+## Why Three.js?
+
+Three.js is the most popular JavaScript library for 3D graphics on the web. It wraps WebGL — the raw GPU API — into a clean, high-level scene graph that lets you create stunning 3D experiences without writing a single line of GLSL shader code.
+
+- **WebGL made easy** -- WebGL requires hundreds of lines of boilerplate for a spinning cube. Three.js reduces it to 10.
+- **Runs everywhere** -- Any modern browser supports it. No plugins, no installs, no native builds.
+- **Huge ecosystem** -- Thousands of examples, plugins, and a massive community.
+- **Real-time rendering** -- 60fps animations, particle systems, physics-ready geometry, and post-processing effects.
+- **3D + DOM** -- Combine Three.js with React, Vue, or plain HTML. React Three Fiber makes it declarative.
+
+## The Story
+
+Three.js was created by Ricardo Cabello (known online as Mr.doob) and first released in 2010. It started as a port of a ActionScript 3D engine to JavaScript, but quickly became its own thing.
+
+The library has grown from a weekend project to the de-facto standard for WebGL — used by Google, NASA, Apple, and thousands of creative developers worldwide. It is entirely open-source (MIT license) and has over 1,000 contributors on GitHub.
+
+## What You Will Build
+
+In this course you will:
+
+- Understand the **scene graph**: scenes, cameras, renderers, meshes
+- Work with **geometries** (Box, Sphere, Torus, Cylinder) and **materials** (Basic, Standard, Phong)
+- Add **lights** (Ambient, Directional, Point, Spot) for realistic shading
+- **Transform** objects with position, rotation, and scale
+- Build **animation loops** with delta time for frame-rate independence
+- Organize objects into **groups** and hierarchies
+- Control the **camera** and field of view
+- Add atmospheric **fog**
+- Detect mouse interaction with **raycasting**
+- Create **particle systems** with BufferGeometry
+- Combine everything into a final **Solar System** scene
+
+Every lesson renders a live 3D preview directly in your browser.
+`;
+
+const threejsWhatsNextContent = `
+## What to Explore Next
+
+### Three.js Ecosystem
+- **React Three Fiber** -- Declarative Three.js for React. Compose 3D scenes with components and hooks. See [docs.pmnd.rs](https://docs.pmnd.rs/react-three-fiber).
+- **Drei** -- Useful helpers and abstractions for R3F: OrbitControls, Environment, Text3D, and more.
+- **Cannon.js / Rapier** -- Physics engines for realistic simulations (gravity, collisions, joints).
+- **Postprocessing** -- Bloom, depth of field, chromatic aberration, and other full-screen effects.
+
+### Shaders
+- **GLSL** -- The shading language behind WebGL. Write custom vertex and fragment shaders with \`ShaderMaterial\`.
+- **The Book of Shaders** -- [thebookofshaders.com](https://thebookofshaders.com/) — the best free resource for learning GLSL.
+
+### Resources
+- [Three.js Documentation](https://threejs.org/docs/) — comprehensive API reference with live examples.
+- [Three.js Journey](https://threejs-journey.com/) — the most popular paid Three.js course by Bruno Simon.
+- [Three.js Examples](https://threejs.org/examples/) — hundreds of official demos and experiments.
+- [Discover Three.js](https://discoverthreejs.com/) — free online book covering fundamentals.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -1541,6 +1664,28 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: kernelIntroductionContent,
     whatsNextContent: kernelWhatsNextContent,
+  },
+  {
+    id: "threejs",
+    title: "Three.js",
+    description: "Learn 3D graphics in the browser with Three.js. Build scenes, add lights, animate objects, and render a full solar system — all running live in your browser.",
+    language: "javascript",
+    chapters: threejsChapters,
+    lessons: threejsLessons,
+    runtimeLabel: "Three.js",
+    introductionContent: threejsIntroductionContent,
+    whatsNextContent: threejsWhatsNextContent,
+  },
+  {
+    id: "linked-lists",
+    title: "Linked Lists in C",
+    description: "Master linked lists by implementing them from scratch in C. Build nodes with malloc, traverse and mutate lists, and solve classic interview problems: reversal, nth-from-end, and merging sorted lists.",
+    language: "c",
+    chapters: linkedListsChapters,
+    lessons: linkedListsLessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: linkedListsIntroductionContent,
+    whatsNextContent: linkedListsWhatsNextContent,
   },
 ];
 

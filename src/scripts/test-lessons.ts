@@ -12,6 +12,8 @@ import { runJsTests } from "./test-runners/js-test-runner";
 import { runTsTests } from "./test-runners/ts-test-runner";
 import { runRubyTests } from "./test-runners/ruby-test-runner";
 import { runTreesTests } from "./test-runners/trees-test-runner";
+import { runKernelTests } from "./test-runners/kernel-test-runner";
+import { runLinkedListsTests } from "./test-runners/linked-lists-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -72,6 +74,14 @@ async function main() {
   console.log("Running Trees tests...");
   const treesResults = await runTreesTests();
   allResults.push(...treesResults);
+
+  console.log("Running Kernel tests...");
+  const kernelResults = await runKernelTests();
+  allResults.push(...kernelResults);
+
+  console.log("Running Linked Lists tests...");
+  const linkedListsResults = await runLinkedListsTests();
+  allResults.push(...linkedListsResults);
 
   console.log("\n--- Results ---\n");
 

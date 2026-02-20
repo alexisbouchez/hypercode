@@ -264,6 +264,8 @@ printf_int:
 \tLDR X0, [X1]
 \tADD X21, X21, #8
 \tADD X19, X19, #1
+\t// Sign-extend 32-bit int to 64-bit (TCC zero-extends W regs on stack)
+\tSXTW X0, W0
 \t// Convert signed int to decimal string
 \t// Check if negative
 \tCMP X0, #0

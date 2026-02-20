@@ -72,7 +72,8 @@ int sys_write(int fd, const char *buf, int len) {
 int main() {
 \tint n = sys_write(STDOUT, "hello\\n", 6);
 \tprintf("%d\\n", n);
-\tprintf("%d\\n", sys_write(0, "x", 1));
+\tint m = sys_write(0, "x", 1);
+\tprintf("%d\\n", m);
 \treturn 0;
 }
 `,
@@ -97,7 +98,8 @@ int main() {
 			code: `#include <stdio.h>
 {{FUNC}}
 int main() {
-\tprintf("%d\\n", sys_write(0, "x", 1));
+\tint r = sys_write(0, "x", 1);
+\tprintf("%d\\n", r);
 \treturn 0;
 }`,
 			expected: "-1\n",
@@ -107,7 +109,8 @@ int main() {
 			code: `#include <stdio.h>
 {{FUNC}}
 int main() {
-\tprintf("%d\\n", sys_write(5, "data", 4));
+\tint r = sys_write(5, "data", 4);
+\tprintf("%d\\n", r);
 \treturn 0;
 }`,
 			expected: "-1\n",
