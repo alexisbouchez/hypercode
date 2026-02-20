@@ -38,6 +38,7 @@ import { electromagnetismChapters, electromagnetismLessons } from "@/lib/lessons
 import { quantumChapters, quantumLessons } from "@/lib/lessons/quantum";
 import { genomicsChapters, genomicsLessons } from "@/lib/lessons/genomics";
 import { microgptChapters, microgptLessons } from "@/lib/lessons/microgpt";
+import { advancedLinearAlgebraChapters, advancedLinearAlgebraLessons } from "@/lib/lessons/advanced-linear-algebra";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2602,6 +2603,39 @@ You have completed the Genomics course. You now understand the molecular biology
 - [AlphaGenome paper on Nature](https://www.nature.com/articles/s41586-025-10014-0) -- The original publication.
 `;
 
+const advancedLinearAlgebraIntroductionContent = `
+## Advanced Linear Algebra in Python
+
+Linear algebra is the backbone of machine learning, scientific computing, and engineering. This course takes you beyond the basics — from orthogonal projections to eigenvalue algorithms — implementing each idea in pure Python from scratch.
+
+You will build:
+- **QR decomposition** via Gram-Schmidt — the numerically stable way to factor any matrix
+- **LU and Cholesky decompositions** — the workhorses of direct linear solvers
+- **Power iteration and deflation** — extracting eigenvalues one by one
+- **The pseudoinverse** — solving underdetermined and overdetermined systems
+- **PCA** — finding the directions of maximum variance in data
+- **The matrix exponential** — bridging linear algebra and differential equations
+- **Conjugate Gradient** — the iterative solver behind large-scale machine learning
+
+All implementations use only Python's standard \`math\` module — no NumPy, no shortcuts. When you finish, you will understand exactly what those library functions do under the hood.
+`;
+
+const advancedLinearAlgebraWhatsNextContent = `
+## What's Next
+
+You have built linear algebra from the ground up. Here are natural next steps:
+
+- **MicroGPT** — Apply what you learned: attention is matrix multiplication, training is least-squares, and the model is a function of eigenvalues of the Hessian
+- **Statistics in Python** — Regression, PCA in practice, and hypothesis testing built on these foundations
+- **Quantum Computing** — Quantum states are unit vectors; quantum gates are unitary matrices; measurement is eigenvalue decomposition
+
+### Further Reading
+
+- [Introduction to Linear Algebra — Strang](https://math.mit.edu/~gs/linearalgebra/) — The classic MIT textbook, free lectures online
+- [Numerical Linear Algebra — Trefethen & Bau](https://people.maths.ox.ac.uk/trefethen/text.html) — Algorithms with numerical stability analysis
+- [Matrix Computations — Golub & Van Loan](https://jhupbooks.press.jhu.edu/title/matrix-computations) — The definitive reference for numerical algorithms
+`;
+
 const microgptIntroductionContent = `
 ## Why Build a GPT From Scratch?
 
@@ -3091,6 +3125,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: microgptIntroductionContent,
     whatsNextContent: microgptWhatsNextContent,
+  },
+  {
+    id: "advanced-linear-algebra",
+    title: "Advanced Linear Algebra in Python",
+    description: "Go beyond the basics of linear algebra by implementing QR decomposition, LU factorisation, Cholesky, power iteration, PCA, matrix exponentials, and the conjugate gradient method in pure Python from scratch.",
+    language: "python",
+    chapters: advancedLinearAlgebraChapters,
+    lessons: advancedLinearAlgebraLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: advancedLinearAlgebraIntroductionContent,
+    whatsNextContent: advancedLinearAlgebraWhatsNextContent,
   },
 ];
 

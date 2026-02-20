@@ -81,6 +81,7 @@ export function LessonShellWrapper({
     if (courseId === "music") return initMusicRunner();
     if (courseId === "waves") return initMusicRunner();
     if (courseId === "electromagnetism") return initPythonRunner();
+    if (courseId === "advanced-linear-algebra") return initPythonRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -123,6 +124,7 @@ export function LessonShellWrapper({
     if (courseId === "music") return isMusicReady();
     if (courseId === "waves") return isMusicReady();
     if (courseId === "electromagnetism") return isPythonReady();
+    if (courseId === "advanced-linear-algebra") return isPythonReady();
     return isGoReady();
   }, [courseId]);
 
@@ -165,6 +167,7 @@ export function LessonShellWrapper({
     if (courseId === "music") return runMusic(code);
     if (courseId === "waves") return runMusic(code);
     if (courseId === "electromagnetism") return runPython(code);
+    if (courseId === "advanced-linear-algebra") return runPython(code);
     return runGo(code);
   }, [courseId]);
 
@@ -207,6 +210,7 @@ export function LessonShellWrapper({
     if (courseId === "music") return runMusicTests(code, tests);
     if (courseId === "waves") return runMusicTests(code, tests);
     if (courseId === "electromagnetism") return runPythonTests(code, tests);
+    if (courseId === "advanced-linear-algebra") return runPythonTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

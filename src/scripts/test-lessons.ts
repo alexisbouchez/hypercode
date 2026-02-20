@@ -21,8 +21,12 @@ import { runSqliteTests } from "./test-runners/sqlite-test-runner";
 import { runRedisTests } from "./test-runners/redis-test-runner";
 import { runCppTests } from "./test-runners/cpp-test-runner";
 import { runQuantumTests } from "./test-runners/quantum-test-runner";
+import { runCalculusTests } from "./test-runners/calculus-test-runner";
+import { runCalculus2Tests } from "./test-runners/calculus2-test-runner";
 import { runCalculus3Tests } from "./test-runners/calculus3-test-runner";
 import { runGenomicsTests } from "./test-runners/genomics-test-runner";
+import { runMicrogptTests } from "./test-runners/microgpt-test-runner";
+import { runAdvancedLinearAlgebraTests } from "./test-runners/advanced-linear-algebra-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -120,6 +124,14 @@ async function main() {
   const quantumResults = runQuantumTests();
   allResults.push(...quantumResults);
 
+  console.log("Running Calculus 1 tests...");
+  const calculus1Results = await runCalculusTests();
+  allResults.push(...calculus1Results);
+
+  console.log("Running Calculus 2 tests...");
+  const calculus2Results = await runCalculus2Tests();
+  allResults.push(...calculus2Results);
+
   console.log("Running Calculus 3 tests...");
   const calculus3Results = await runCalculus3Tests();
   allResults.push(...calculus3Results);
@@ -127,6 +139,14 @@ async function main() {
   console.log("Running Genomics tests...");
   const genomicsResults = runGenomicsTests();
   allResults.push(...genomicsResults);
+
+  console.log("Running MicroGPT tests...");
+  const microgptResults = runMicrogptTests();
+  allResults.push(...microgptResults);
+
+  console.log("Running Advanced Linear Algebra tests...");
+  const advancedLinearAlgebraResults = runAdvancedLinearAlgebraTests();
+  allResults.push(...advancedLinearAlgebraResults);
 
   console.log("\n--- Results ---\n");
 
