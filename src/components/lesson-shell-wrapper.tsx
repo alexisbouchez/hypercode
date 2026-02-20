@@ -17,6 +17,7 @@ import { initRubyRunner, isRubyReady, runRuby, runTests as runRubyTests } from "
 import { initThreeJsRunner, isThreeJsReady, runThreeJs, runTests as runThreeJsTests } from "@/lib/threejs-runner";
 import { initPythonRunner, isPythonReady, runPython, runTests as runPythonTests } from "@/lib/python-runner";
 import { initHaskellRunner, isHaskellReady, runHaskell, runTests as runHaskellTests } from "@/lib/haskell-runner";
+import { initSqliteRunner, isSqliteReady, runSqlite, runTests as runSqliteTests } from "@/lib/sqlite-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -53,6 +54,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus") return initCRunner();
     if (courseId === "calculus2") return initCRunner();
     if (courseId === "calculus3") return initCRunner();
+    if (courseId === "circuits") return initCRunner();
     if (courseId === "linux") return initLinuxRunner();
     if (courseId === "javascript") return initJsRunner();
     if (courseId === "typescript") return initTsRunner();
@@ -66,6 +68,7 @@ export function LessonShellWrapper({
     if (courseId === "statistics") return initPythonRunner();
     if (courseId === "diffeq") return initPythonRunner();
     if (courseId === "haskell") return initHaskellRunner();
+    if (courseId === "sqlite") return initSqliteRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -84,6 +87,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus") return isCReady();
     if (courseId === "calculus2") return isCReady();
     if (courseId === "calculus3") return isCReady();
+    if (courseId === "circuits") return isCReady();
     if (courseId === "linux") return isLinuxReady();
     if (courseId === "javascript") return isJsReady();
     if (courseId === "typescript") return isTsReady();
@@ -97,6 +101,7 @@ export function LessonShellWrapper({
     if (courseId === "statistics") return isPythonReady();
     if (courseId === "diffeq") return isPythonReady();
     if (courseId === "haskell") return isHaskellReady();
+    if (courseId === "sqlite") return isSqliteReady();
     return isGoReady();
   }, [courseId]);
 
@@ -115,6 +120,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus") return runC(code);
     if (courseId === "calculus2") return runC(code);
     if (courseId === "calculus3") return runC(code);
+    if (courseId === "circuits") return runC(code);
     if (courseId === "linux") return runLinux(code);
     if (courseId === "javascript") return runJs(code);
     if (courseId === "typescript") return runTs(code);
@@ -128,6 +134,7 @@ export function LessonShellWrapper({
     if (courseId === "statistics") return runPython(code);
     if (courseId === "diffeq") return runPython(code);
     if (courseId === "haskell") return runHaskell(code);
+    if (courseId === "sqlite") return runSqlite(code);
     return runGo(code);
   }, [courseId]);
 
@@ -146,6 +153,7 @@ export function LessonShellWrapper({
     if (courseId === "calculus") return runCTests(code, tests);
     if (courseId === "calculus2") return runCTests(code, tests);
     if (courseId === "calculus3") return runCTests(code, tests);
+    if (courseId === "circuits") return runCTests(code, tests);
     if (courseId === "linux") return runLinuxTests(code, tests);
     if (courseId === "javascript") return runJsTests(code, tests);
     if (courseId === "typescript") return runTsTests(code, tests);
@@ -159,6 +167,7 @@ export function LessonShellWrapper({
     if (courseId === "statistics") return runPythonTests(code, tests);
     if (courseId === "diffeq") return runPythonTests(code, tests);
     if (courseId === "haskell") return runHaskellTests(code, tests);
+    if (courseId === "sqlite") return runSqliteTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

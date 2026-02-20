@@ -27,6 +27,9 @@ import { calculusChapters, calculusLessons } from "@/lib/lessons/calculus";
 import { statisticsChapters, statisticsLessons } from "@/lib/lessons/statistics";
 import { calculus2Chapters, calculus2Lessons } from "@/lib/lessons/calculus2";
 import { calculus3Chapters, calculus3Lessons } from "@/lib/lessons/calculus3";
+import { circuitsChapters, circuitsLessons } from "@/lib/lessons/circuits";
+import { sqliteChapters, sqliteLessons } from "@/lib/lessons/sqlite";
+import { cppChapters, cppLessons } from "@/lib/lessons/cpp";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -195,6 +198,65 @@ The best way to learn is to build. Some project ideas:
 - [Ziglings](https://codeberg.org/ziglings/exercises/) -- small exercises to learn Zig.
 - [Zig News](https://zig.news/) -- community articles and tutorials.
 - [Zig GitHub](https://github.com/ziglang/zig) -- the source code and issue tracker.
+`;
+
+const sqliteIntroductionContent = `
+## Why SQLite?
+
+SQLite is the most widely deployed database engine in the world. Unlike PostgreSQL or MySQL, SQLite is a library embedded directly in your application — no server, no configuration, no installation.
+
+- **Everywhere** -- iOS, Android, Firefox, Python stdlib, Bun, every major browser. An estimated one trillion SQLite databases are in active use.
+- **Zero setup** -- A single \`.db\` file. Open it, query it, done.
+- **Standard SQL** -- Most SQL you learn here — SELECT, JOIN, GROUP BY, window functions, CTEs — works identically in PostgreSQL and MySQL.
+- **Serverless** -- Perfect for local apps, mobile, embedded devices, testing, and prototyping.
+- **Fast** -- For read-heavy workloads on a single machine, SQLite often outperforms client-server databases.
+
+## The Story
+
+SQLite was created by D. Richard Hipp in 2000, originally for the US Navy to manage guided missile destroyer software. Hipp designed it to work without a server — the entire database is a single file that the application reads and writes directly.
+
+In 2000, a database without a server was an unusual idea. Today it is a design pattern that powers billions of applications. SQLite is public domain — no license, no restrictions.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Getting Started** -- SELECT, WHERE, ORDER BY, LIMIT, and SQLite's flexible type system.
+2. **Schema** -- CREATE TABLE, INTEGER PRIMARY KEY, constraints, and ALTER TABLE.
+3. **CRUD Operations** -- INSERT, UPDATE, DELETE, and conflict resolution.
+4. **Querying** -- JOINs, aggregations, GROUP BY, and Common Table Expressions.
+5. **SQLite Features** -- Window functions and JSON functions built into SQLite.
+
+Each lesson explains a concept with examples and gives you an exercise to practice against a live SQLite database in your browser.
+
+Let's get started.
+`;
+
+const sqliteWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now understand SQLite's fundamentals: querying, filtering, sorting, schema management, CRUD operations, joins, aggregations, CTEs, window functions, and JSON.
+
+## What to Explore Next
+
+- **Full-text search** -- SQLite's FTS5 extension for fast text search.
+- **Virtual tables** -- Custom table implementations (CSV files, R-tree spatial indexes).
+- **WAL mode** -- Write-Ahead Logging for better concurrent read performance.
+- **Transactions** -- BEGIN/COMMIT/ROLLBACK and SAVEPOINT for atomicity.
+- **Indexes** -- CREATE INDEX, covering indexes, and EXPLAIN QUERY PLAN.
+
+## Use SQLite in Your Projects
+
+- **Bun** -- \`import { Database } from "bun:sqlite"\` — the fastest SQLite API in any runtime.
+- **Python** -- \`import sqlite3\` — in the standard library, zero install.
+- **Node.js** -- \`better-sqlite3\` or \`@libsql/client\` for async remote SQLite (Turso).
+- **Go** -- \`github.com/mattn/go-sqlite3\` or the pure-Go \`modernc.org/sqlite\`.
+
+## References
+
+- [SQLite Official Documentation](https://www.sqlite.org/docs.html) — thorough and well-organized.
+- [SQLite Tutorial](https://www.sqlitetutorial.net/) — practical examples.
+- [Bun SQLite docs](https://bun.sh/docs/api/sqlite) — fastest SQLite API in JS/TS.
 `;
 
 const sqlIntroductionContent = `
@@ -1906,6 +1968,59 @@ You have completed all 15 lessons of Calculus 2. You can now implement arc lengt
 - [3Blue1Brown: Essence of Calculus](https://www.3blue1brown.com/topics/calculus) — visual intuition for the concepts
 `;
 
+const circuitsIntroductionContent = `
+## Why Circuits in C?
+
+Electronics is the foundation of every computing device — but circuit analysis is usually taught with hand calculations, not code. This course bridges that gap: every fundamental relationship is implemented as a C function and tested numerically.
+
+- **DC Fundamentals** -- Ohm's law, series and parallel resistance, voltage and current dividers — the building blocks of every circuit
+- **Circuit Analysis** -- Power dissipation, KCL node analysis, and the Wheatstone bridge — tools for solving arbitrary resistor networks
+- **Transient Response** -- RC and RL exponential transients, RLC oscillations via RK4 — how circuits behave in time, not just at steady state
+- **AC & Filters** -- Low-pass and high-pass filter gain, LC resonant frequency — the frequency domain and why it matters
+
+## The Computational Angle
+
+Each lesson asks you to implement a formula or numerical method in C. The verification is immediate: run your code and compare to the exact analytic result. When they match, you understand both the theory and the numbers.
+
+No oscilloscope required. No breadboard. Just C and the equations.
+
+## Prerequisites
+
+Basic C programming (loops, arrays, pointers, function pointers). The ARM64 in C course on this platform is good preparation. No prior electronics knowledge needed — every concept is introduced from first principles.
+`;
+
+const circuitsWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons of Circuits in C. You can now implement Ohm's law, series/parallel resistance, voltage and current dividers, power calculations, KCL node analysis, Wheatstone bridge, RC and RL transients, RLC oscillators (RK4), capacitor/inductor energy, and RC filter frequency response — all from scratch in C.
+
+## What to Explore Next
+
+- **SPICE** — Simulate arbitrary circuits using ngspice netlist format. The Circuits in C course is the perfect foundation for understanding what SPICE is computing.
+- **Signal Processing in Python** — Take filter design to the next level with scipy.signal: Butterworth filters, Bode plots, FFT analysis
+- **Differential Equations** — The RLC circuit is just one second-order ODE. The diffeq course generalizes RK4 to any system
+- **Embedded Systems** — Apply circuit knowledge to real hardware: ADC, PWM, I2C, SPI on microcontrollers
+
+## Key Formulas
+
+| Concept | Formula |
+|---------|---------|
+| Ohm's Law | \`V = I·R\` |
+| Series resistance | \`R = R₁ + R₂ + ...\` |
+| Parallel resistance | \`1/R = 1/R₁ + 1/R₂ + ...\` |
+| Voltage divider | \`Vout = Vin·R₂/(R₁+R₂)\` |
+| RC time constant | \`τ = R·C\` |
+| RC charging | \`V(t) = Vs·(1 − e^{−t/τ})\` |
+| RC low-pass gain | \`|H| = 1/√(1+(ωRC)²)\` |
+| LC resonance | \`f₀ = 1/(2π√(LC))\` |
+
+## References
+
+- [The Art of Electronics](https://artofelectronics.net/) by Horowitz & Hill — the definitive practical guide
+- [All About Circuits](https://www.allaboutcircuits.com/) — free online textbook series
+- [Falstad Circuit Simulator](https://www.falstad.com/circuit/) — interactive visual circuit simulation
+`;
+
 const calculus3IntroductionContent = `
 ## Why Calculus 3?
 
@@ -2047,6 +2162,17 @@ export const courses: Course[] = [
     runtimeLabel: "SQL runtime",
     introductionContent: sqlIntroductionContent,
     whatsNextContent: sqlWhatsNextContent,
+  },
+  {
+    id: "sqlite",
+    title: "SQLite",
+    description: "Learn SQLite from scratch. Master queries, schema design, CRUD operations, window functions, and JSON functions in the world's most deployed database.",
+    language: "sqlite",
+    chapters: sqliteChapters,
+    lessons: sqliteLessons,
+    runtimeLabel: "SQLite runtime",
+    introductionContent: sqliteIntroductionContent,
+    whatsNextContent: sqliteWhatsNextContent,
   },
   {
     id: "arm64",
@@ -2311,6 +2437,17 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: calculus2IntroductionContent,
     whatsNextContent: calculus2WhatsNextContent,
+  },
+  {
+    id: "circuits",
+    title: "Circuits in C",
+    description: "Learn analog circuit analysis by implementing the algorithms in C. From Ohm's law to Wheatstone bridges, RC transients, RLC oscillators, and frequency-domain filter design.",
+    language: "c",
+    chapters: circuitsChapters,
+    lessons: circuitsLessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: circuitsIntroductionContent,
+    whatsNextContent: circuitsWhatsNextContent,
   },
   {
     id: "calculus3",
