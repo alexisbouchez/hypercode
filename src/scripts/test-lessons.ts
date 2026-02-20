@@ -8,6 +8,7 @@ import { runRTests } from "./test-runners/r-test-runner";
 import { runHolycTests } from "./test-runners/holyc-test-runner";
 import { runLinuxTests } from "./test-runners/linux-test-runner";
 import { runCoreutilsTests } from "./test-runners/coreutils-test-runner";
+import { runJsTests } from "./test-runners/js-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -52,6 +53,10 @@ async function main() {
   console.log("Running Coreutils tests...");
   const coreutilsResults = await runCoreutilsTests();
   allResults.push(...coreutilsResults);
+
+  console.log("Running JavaScript tests...");
+  const jsResults = runJsTests();
+  allResults.push(...jsResults);
 
   console.log("\n--- Results ---\n");
 

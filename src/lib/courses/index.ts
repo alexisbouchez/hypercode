@@ -9,6 +9,7 @@ import { rChapters, rLessons } from "@/lib/lessons/r";
 import { holycChapters, holycLessons } from "@/lib/lessons/holyc";
 import { linuxChapters, linuxLessons } from "@/lib/lessons/linux";
 import { coreutilsChapters, coreutilsLessons } from "@/lib/lessons/coreutils";
+import { jsChapters, jsLessons } from "@/lib/lessons/javascript";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -816,6 +817,85 @@ The best way to solidify Linux skills is to use them:
 - [Linux Journey](https://linuxjourney.com/) -- interactive Linux learning with exercises.
 `;
 
+const jsIntroductionContent = `
+## Why JavaScript?
+
+JavaScript is the language of the web. It runs in every browser, powers millions of websites and apps, and is consistently one of the most popular programming languages in the world.
+
+- **Everywhere** -- Every browser runs JavaScript natively. No install, no compile step, no runtime to set up. Open the console and start coding.
+- **Full-stack** -- With Node.js, JavaScript runs on servers too. One language for frontend, backend, scripting, and tooling.
+- **Huge ecosystem** -- npm hosts over 2 million packages. Whatever you need to build, there is probably a library for it.
+- **Fast enough** -- Modern JavaScript engines (V8, SpiderMonkey) use JIT compilation. JavaScript is fast enough for games, real-time apps, and data processing.
+- **Expressive** -- First-class functions, closures, destructuring, and the rest of the modern ES6+ syntax make JavaScript surprisingly elegant.
+
+## The Story
+
+JavaScript was created by Brendan Eich in just 10 days in May 1995 while working at Netscape. Originally called Mocha, then LiveScript, it was renamed JavaScript as a marketing move to capitalize on Java's popularity — despite having almost nothing to do with Java.
+
+The language was standardized in 1997 as ECMAScript (ES1). For years, browser incompatibilities made JavaScript painful to write. The release of ES6 (ES2015) transformed the language: \`let\`, \`const\`, arrow functions, classes, modules, Promises, and much more arrived all at once.
+
+Today, JavaScript evolves yearly, with new features added through TC39, the standards committee. Engines like Google's V8 (used in Chrome and Node.js) make it one of the fastest dynamic languages in existence.
+
+## Who Uses JavaScript
+
+Practically everyone in web development:
+
+- **React, Vue, Angular** -- the dominant frontend frameworks are all JavaScript.
+- **Node.js** -- JavaScript on the server, powering Netflix, LinkedIn, and Uber.
+- **Electron** -- VS Code, Slack, and Figma are built with JavaScript.
+- **React Native** -- mobile apps from a single JavaScript codebase.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Basics** -- \`console.log\`, variables with \`let\` and \`const\`, and string operations.
+2. **Control Flow** -- Conditionals with \`if\`/\`else\`, \`for\` loops, and \`while\` loops.
+3. **Functions** -- Declaring functions, arrow functions, and closures.
+4. **Arrays** -- Creating and modifying arrays, then \`map\`, \`filter\`, and \`reduce\`.
+5. **Objects** -- Key-value pairs, property access, and destructuring.
+
+Each lesson explains a concept, shows examples, and gives you an exercise to write and run in your browser.
+
+Let's get started.
+`;
+
+const jsWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now know JavaScript's core language: variables, types, control flow, functions, closures, arrays, higher-order functions, objects, and destructuring.
+
+That is a real foundation. You can read and write JavaScript, understand most code you encounter, and start building your own projects.
+
+## What to Explore Next
+
+Here are the natural next steps:
+
+- **The DOM** -- \`document.querySelector\`, event listeners, and updating the page dynamically. This is how JavaScript makes web pages interactive.
+- **Fetch API** -- Make HTTP requests with \`fetch()\` to load data from APIs. Return JSON and display it on a page.
+- **Promises and async/await** -- Handle asynchronous operations cleanly. Essential for working with APIs and databases.
+- **ES6+ Features** -- Spread (\`...\`), rest parameters, optional chaining (\`?.\`), nullish coalescing (\`??\`), and template literals.
+- **Modules** -- \`import\` and \`export\` to organize code across files.
+- **TypeScript** -- Add static types to JavaScript for better tooling and fewer bugs at scale.
+
+## Build Something
+
+The best way to learn is to build. Some project ideas:
+
+- **A todo app** -- add, complete, and delete tasks. Store them in localStorage.
+- **A weather app** -- fetch data from a public weather API and display it.
+- **A quiz game** -- questions and answers, score tracking, and a timer.
+- **A markdown previewer** -- type markdown on the left, see HTML on the right.
+
+## References
+
+- [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript) -- the definitive JavaScript reference. Every built-in function, every API, with examples.
+- [javascript.info](https://javascript.info/) -- the best free JavaScript tutorial. Comprehensive, modern, well-explained.
+- [Eloquent JavaScript](https://eloquentjavascript.net/) by Marijn Haverbeke -- a free book that goes deep into the language.
+- [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) by Kyle Simpson -- six books explaining JavaScript's quirks and internals in depth.
+- [The Modern JavaScript Tutorial](https://javascript.info/) -- practical, modern, and thorough.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -916,6 +996,17 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: coreutilsIntroductionContent,
     whatsNextContent: coreutilsWhatsNextContent,
+  },
+  {
+    id: "javascript",
+    title: "JavaScript",
+    description: "Learn JavaScript from scratch. Master variables, functions, closures, arrays, and objects — the foundation of the web's most popular language.",
+    language: "javascript",
+    chapters: jsChapters,
+    lessons: jsLessons,
+    runtimeLabel: "JavaScript",
+    introductionContent: jsIntroductionContent,
+    whatsNextContent: jsWhatsNextContent,
   },
   {
     id: "linux",
