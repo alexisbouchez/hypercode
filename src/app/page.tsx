@@ -96,12 +96,13 @@ const courseLogos: Record<string, React.ReactNode> = {
 const mathInCCurriculum = [
   { id: "calculus", label: "1" },
   { id: "calculus2", label: "2" },
+  { id: "calculus3", label: "3" },
 ];
 
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Mathematics in C",
-    ids: ["calculus", "calculus2"],
+    ids: ["calculus", "calculus2", "calculus3"],
   },
   {
     title: "Mathematics in Python",

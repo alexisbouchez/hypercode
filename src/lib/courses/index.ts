@@ -26,6 +26,7 @@ import { diffeqChapters, diffeqLessons } from "@/lib/lessons/diffeq";
 import { calculusChapters, calculusLessons } from "@/lib/lessons/calculus";
 import { statisticsChapters, statisticsLessons } from "@/lib/lessons/statistics";
 import { calculus2Chapters, calculus2Lessons } from "@/lib/lessons/calculus2";
+import { calculus3Chapters, calculus3Lessons } from "@/lib/lessons/calculus3";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -1905,6 +1906,62 @@ You have completed all 15 lessons of Calculus 2. You can now implement arc lengt
 - [3Blue1Brown: Essence of Calculus](https://www.3blue1brown.com/topics/calculus) — visual intuition for the concepts
 `;
 
+const calculus3IntroductionContent = `
+## Why Calculus 3?
+
+Calculus 3 extends single-variable calculus into **multiple dimensions**. Instead of curves, we study surfaces. Instead of slopes, we study gradients. Instead of integrals over intervals, we integrate over areas and volumes.
+
+- **Vectors in 3D** -- Dot products, cross products, magnitudes, and projections — the language of 3D geometry
+- **Partial Derivatives** -- How a multivariable function changes as each variable moves independently
+- **Optimization** -- Finding maxima and minima of surfaces using the gradient and the second derivative test
+- **Multiple Integrals** -- Integrating over 2D regions and 3D volumes, in Cartesian and polar coordinates
+
+## The Computational Angle
+
+Every concept is implemented in C as a numerical algorithm. You will:
+
+- Compute dot and cross products from scratch
+- Approximate partial derivatives using central differences
+- Find and classify critical points with the discriminant
+- Evaluate double and triple integrals using the midpoint rule in 2D and 3D
+- Integrate over polar coordinates using the Jacobian factor r
+
+## Prerequisites
+
+Calculus 1 and 2 (limits, derivatives, integrals, series) and basic C programming (pointers, function pointers, loops). Calculus 1 in C and Calculus 2 in C on this platform are ideal preparation.
+`;
+
+const calculus3WhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons of Calculus 3. You can now implement dot and cross products, partial derivatives, gradients, tangent planes, the Laplacian, the second derivative test, and double, polar, and triple integrals — all from scratch in C.
+
+## What to Explore Next
+
+- **Vector Calculus** -- Line integrals, surface integrals, Green's theorem, Stokes' theorem, the divergence theorem
+- **Differential Equations** -- Apply partial derivatives directly to PDEs: the heat equation, wave equation, and Laplace's equation
+- **Numerical Analysis** -- Adaptive quadrature in multiple dimensions, Monte Carlo integration, finite element methods
+- **Linear Algebra** -- The algebra behind gradients and Jacobians: eigenvalues, diagonalization, matrix calculus
+
+## Key Formulas
+
+| Concept | Formula |
+|---------|---------|
+| Dot product | \`a·b = ax·bx + ay·by + az·bz\` |
+| Cross product | \`a×b = (ay·bz-az·by, az·bx-ax·bz, ax·by-ay·bx)\` |
+| Gradient | \`∇f = (∂f/∂x, ∂f/∂y)\` |
+| Directional derivative | \`D_u f = ∇f · û\` |
+| Laplacian | \`∇²f = ∂²f/∂x² + ∂²f/∂y²\` |
+| Discriminant | \`D = fxx·fyy - fxy²\` |
+| Polar area element | \`dA = r dr dθ\` |
+
+## References
+
+- [Calculus](https://www.stewartcalculus.com/) by James Stewart — Chapters 12–16 cover multivariable calculus
+- [3Blue1Brown: Multivariable Calculus](https://www.3blue1brown.com/) — visual intuition for gradients and partial derivatives
+- [Numerical Recipes in C](http://numerical.recipes/) — multidimensional integration and optimization
+`;
+
 const diffeqIntroductionContent = `
 ## Why Differential Equations?
 
@@ -2254,6 +2311,17 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: calculus2IntroductionContent,
     whatsNextContent: calculus2WhatsNextContent,
+  },
+  {
+    id: "calculus3",
+    title: "Calculus 3 in C",
+    description: "Learn Multivariable Calculus by implementing the algorithms in C. Compute dot and cross products, partial derivatives, gradients, tangent planes, the Laplacian, double integrals, polar integrals, and triple integrals.",
+    language: "c",
+    chapters: calculus3Chapters,
+    lessons: calculus3Lessons,
+    runtimeLabel: "TCC compiler",
+    introductionContent: calculus3IntroductionContent,
+    whatsNextContent: calculus3WhatsNextContent,
   },
 ];
 
