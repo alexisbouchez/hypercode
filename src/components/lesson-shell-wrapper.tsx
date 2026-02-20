@@ -18,6 +18,7 @@ import { initThreeJsRunner, isThreeJsReady, runThreeJs, runTests as runThreeJsTe
 import { initPythonRunner, isPythonReady, runPython, runTests as runPythonTests } from "@/lib/python-runner";
 import { initHaskellRunner, isHaskellReady, runHaskell, runTests as runHaskellTests } from "@/lib/haskell-runner";
 import { initSqliteRunner, isSqliteReady, runSqlite, runTests as runSqliteTests } from "@/lib/sqlite-runner";
+import { initRedisRunner, isRedisReady, runRedis, runTests as runRedisTests } from "@/lib/redis-runner";
 import { initCppRunner, isCppReady, runCpp, runTests as runCppTests } from "@/lib/cpp-runner";
 import { initMusicRunner, isMusicReady, runMusic, runTests as runMusicTests } from "@/lib/music-runner";
 import { LessonShell } from "./lesson-shell";
@@ -69,8 +70,11 @@ export function LessonShellWrapper({
     if (courseId === "linear-algebra") return initPythonRunner();
     if (courseId === "statistics") return initPythonRunner();
     if (courseId === "diffeq") return initPythonRunner();
+    if (courseId === "quantum") return initPythonRunner();
+    if (courseId === "genomics") return initPythonRunner();
     if (courseId === "haskell") return initHaskellRunner();
     if (courseId === "sqlite") return initSqliteRunner();
+    if (courseId === "redis") return initRedisRunner();
     if (courseId === "cpp") return initCppRunner();
     if (courseId === "music") return initMusicRunner();
     return initGoRunner();
@@ -104,8 +108,11 @@ export function LessonShellWrapper({
     if (courseId === "linear-algebra") return isPythonReady();
     if (courseId === "statistics") return isPythonReady();
     if (courseId === "diffeq") return isPythonReady();
+    if (courseId === "quantum") return isPythonReady();
+    if (courseId === "genomics") return isPythonReady();
     if (courseId === "haskell") return isHaskellReady();
     if (courseId === "sqlite") return isSqliteReady();
+    if (courseId === "redis") return isRedisReady();
     if (courseId === "cpp") return isCppReady();
     if (courseId === "music") return isMusicReady();
     return isGoReady();
@@ -139,8 +146,11 @@ export function LessonShellWrapper({
     if (courseId === "linear-algebra") return runPython(code);
     if (courseId === "statistics") return runPython(code);
     if (courseId === "diffeq") return runPython(code);
+    if (courseId === "quantum") return runPython(code);
+    if (courseId === "genomics") return runPython(code);
     if (courseId === "haskell") return runHaskell(code);
     if (courseId === "sqlite") return runSqlite(code);
+    if (courseId === "redis") return runRedis(code);
     if (courseId === "cpp") return runCpp(code);
     if (courseId === "music") return runMusic(code);
     return runGo(code);
@@ -174,8 +184,11 @@ export function LessonShellWrapper({
     if (courseId === "linear-algebra") return runPythonTests(code, tests);
     if (courseId === "statistics") return runPythonTests(code, tests);
     if (courseId === "diffeq") return runPythonTests(code, tests);
+    if (courseId === "quantum") return runPythonTests(code, tests);
+    if (courseId === "genomics") return runPythonTests(code, tests);
     if (courseId === "haskell") return runHaskellTests(code, tests);
     if (courseId === "sqlite") return runSqliteTests(code, tests);
+    if (courseId === "redis") return runRedisTests(code, tests);
     if (courseId === "cpp") return runCppTests(code, tests);
     if (courseId === "music") return runMusicTests(code, tests);
     return runGoTests(code, tests);

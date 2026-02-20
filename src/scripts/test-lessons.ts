@@ -17,6 +17,12 @@ import { runLinkedListsTests } from "./test-runners/linked-lists-test-runner";
 import { runHaskellTests } from "./test-runners/haskell-test-runner";
 import { runLinearAlgebraTests } from "./test-runners/linear-algebra-test-runner";
 import { runStatisticsTests } from "./test-runners/statistics-test-runner";
+import { runSqliteTests } from "./test-runners/sqlite-test-runner";
+import { runRedisTests } from "./test-runners/redis-test-runner";
+import { runCppTests } from "./test-runners/cpp-test-runner";
+import { runQuantumTests } from "./test-runners/quantum-test-runner";
+import { runCalculus3Tests } from "./test-runners/calculus3-test-runner";
+import { runGenomicsTests } from "./test-runners/genomics-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -97,6 +103,30 @@ async function main() {
   console.log("Running Statistics tests...");
   const statisticsResults = runStatisticsTests();
   allResults.push(...statisticsResults);
+
+  console.log("Running SQLite tests...");
+  const sqliteResults = runSqliteTests();
+  allResults.push(...sqliteResults);
+
+  console.log("Running Redis tests...");
+  const redisResults = runRedisTests();
+  allResults.push(...redisResults);
+
+  console.log("Running C++ tests...");
+  const cppResults = runCppTests();
+  allResults.push(...cppResults);
+
+  console.log("Running Quantum Computing tests...");
+  const quantumResults = runQuantumTests();
+  allResults.push(...quantumResults);
+
+  console.log("Running Calculus 3 tests...");
+  const calculus3Results = await runCalculus3Tests();
+  allResults.push(...calculus3Results);
+
+  console.log("Running Genomics tests...");
+  const genomicsResults = runGenomicsTests();
+  allResults.push(...genomicsResults);
 
   console.log("\n--- Results ---\n");
 

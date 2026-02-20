@@ -29,8 +29,12 @@ import { calculus2Chapters, calculus2Lessons } from "@/lib/lessons/calculus2";
 import { calculus3Chapters, calculus3Lessons } from "@/lib/lessons/calculus3";
 import { circuitsChapters, circuitsLessons } from "@/lib/lessons/circuits";
 import { sqliteChapters, sqliteLessons } from "@/lib/lessons/sqlite";
+import { redisChapters, redisLessons } from "@/lib/lessons/redis";
 import { cppChapters, cppLessons } from "@/lib/lessons/cpp";
 import { musicChapters, musicLessons } from "@/lib/lessons/music";
+import { classicalMechanicsChapters, classicalMechanicsLessons } from "@/lib/lessons/classical-mechanics";
+import { quantumChapters, quantumLessons } from "@/lib/lessons/quantum";
+import { genomicsChapters, genomicsLessons } from "@/lib/lessons/genomics";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -199,6 +203,78 @@ The best way to learn is to build. Some project ideas:
 - [Ziglings](https://codeberg.org/ziglings/exercises/) -- small exercises to learn Zig.
 - [Zig News](https://zig.news/) -- community articles and tutorials.
 - [Zig GitHub](https://github.com/ziglang/zig) -- the source code and issue tracker.
+`;
+
+const redisIntroductionContent = `
+## Why Redis?
+
+Redis is the world's most popular in-memory data structure store. It is used as a cache, message broker, and database. Sub-millisecond response times, hundreds of thousands of operations per second.
+
+- **Blazing fast** — all data lives in RAM; reads and writes in microseconds
+- **Versatile** — strings, lists, sets, hashes, sorted sets, streams, and more
+- **Persistent** — optional disk persistence; data survives restarts
+- **Atomic** — single commands are atomic; no race conditions
+- **Pub/Sub** — built-in messaging between clients
+- **TTL** — keys expire automatically; perfect for sessions and caches
+
+## The Story
+
+Redis was created by Salvatore Sanfilippo (antirez) in 2009 while working on a startup in Italy. He was frustrated with MySQL's performance for a real-time web analytics tool. He wrote the first version of Redis overnight and open-sourced it.
+
+Redis stands for **Re**mote **Di**ctionary **S**erver. Redis Labs (now Redis Inc.) funds its development. Redis 7.0 introduced radical improvements to performance and memory efficiency.
+
+## Who Uses Redis
+
+Redis is used in production by virtually every major technology company:
+
+- **Twitter** — caches timelines and user data
+- **GitHub** — queues background jobs
+- **Stack Overflow** — caches question and answer data
+- **Pinterest** — stores social graphs
+- **Snapchat** — stores message metadata
+- **Uber** — geospatial real-time driver tracking
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Strings** — SET/GET, string operations, TTL/expiry, atomic counters.
+2. **Collections** — Lists, Sets, Hashes, and Sorted Sets.
+3. **Key Operations** — KEYS, TYPE, RENAME, and cursor-based SCAN.
+4. **Patterns** — Transactions, caching patterns, and leaderboards.
+5. **Advanced** — HyperLogLog and data modeling.
+
+Each lesson explains a concept with examples and gives you an exercise to practice against a live Redis emulator in your browser.
+
+Let's get started.
+`;
+
+const redisWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now understand Redis's core data structures, key management, transactions, caching patterns, and HyperLogLog.
+
+## What to Explore Next
+
+- **Pub/Sub** — SUBSCRIBE/PUBLISH for real-time messaging between clients.
+- **Streams** — XADD/XREAD for durable, consumer-group message logs (Kafka-like).
+- **Lua Scripting** — EVAL for complex atomic server-side operations.
+- **Redis Modules** — RedisSearch (full-text), RedisJSON, RedisGraph, RedisTimeSeries.
+- **Redis Sentinel** — automatic failover and high availability.
+- **Redis Cluster** — horizontal scaling across multiple nodes.
+
+## Use Redis in Your Projects
+
+- **Node.js** — \`ioredis\` or the official \`@redis/client\`
+- **Python** — \`redis-py\` (\`pip install redis\`)
+- **Go** — \`github.com/redis/go-redis\`
+- **Bun** — use \`ioredis\` or \`@redis/client\`
+
+## References
+
+- [Redis Documentation](https://redis.io/docs/) — comprehensive command reference.
+- [Redis University](https://university.redis.com/) — free courses from Redis Inc.
+- [Try Redis](https://try.redis.io/) — interactive Redis in the browser.
 `;
 
 const sqliteIntroductionContent = `
@@ -2207,6 +2283,63 @@ You have completed all 15 lessons. You can now solve differential equations nume
 - [SciPy ODE documentation](https://docs.scipy.org/doc/scipy/reference/integrate.html) -- production-grade solvers
 `;
 
+const classicalMechanicsIntroductionContent = `
+## Why Classical Mechanics in C?
+
+Classical mechanics is the foundation of all physics. Every other field — thermodynamics, electromagnetism, quantum mechanics — builds on Newton's laws and the concept of energy. This course implements each fundamental law as a C function and verifies it numerically.
+
+- **Kinematics** — Velocity, free fall, and projectile motion: how objects move through space and time
+- **Forces & Newton's Laws** — Acceleration, friction, and centripetal motion: the causes of motion
+- **Energy & Momentum** — Kinetic and potential energy, elastic collisions, and power: the conserved quantities that make physics tractable
+- **Oscillations & Gravitation** — Simple harmonic motion, spring and pendulum periods, torque, and Newton's law of universal gravitation
+
+## The Computational Approach
+
+Rather than solving equations by hand, you implement each formula in C and verify it against known results. This builds both physical intuition and numerical fluency — the same approach used in physics simulations, game engines, and spacecraft trajectory planning.
+
+## Prerequisites
+
+Basic C programming (variables, functions, loops, \`printf\`). The C course on this platform is good preparation. No prior physics knowledge required — every concept is introduced from first principles.
+`;
+
+const classicalMechanicsWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons of Classical Mechanics in C. You can now compute velocity, free-fall distance, projectile range, Newton's-law acceleration, friction and centripetal forces, kinetic and potential energy, elastic collision outcomes, power, SHM displacement, spring and pendulum periods, torque, and Newton's gravitational force — all from scratch in C.
+
+## What to Explore Next
+
+- **Waves & Acoustics in JavaScript** — The next physics course: apply SHM to travelling waves, interference, Doppler effect, and resonance — then hear the results with the Web Audio API
+- **Circuits in C** — Ohm's law, RC transients, RLC oscillators: apply Newton's-style differential equations to electric circuits
+- **Orbital Mechanics in Three.js** — Use RK4 to integrate Newton's gravitational law and render live planetary orbits
+- **Calculus in C** — Numerical derivatives and integrals: the mathematical backbone behind every physics simulation
+
+## Key Formulas
+
+| Concept | Formula |
+|---------|---------|
+| Average velocity | \`v = Δx / Δt\` |
+| Free fall | \`h = v₀t + ½gt²\` |
+| Projectile range | \`R = v₀² sin(2θ) / g\` |
+| Newton's 2nd law | \`a = F / m\` |
+| Friction | \`f = μN\` |
+| Centripetal | \`a = v² / r\` |
+| Kinetic energy | \`KE = ½mv²\` |
+| Potential energy | \`PE = mgh\` |
+| Elastic collision | \`v₁' = ((m₁−m₂)v₁ + 2m₂v₂) / (m₁+m₂)\` |
+| Power | \`P = W / t\` |
+| SHM | \`x = A cos(ωt)\` |
+| Spring period | \`T = 2π√(m/k)\` |
+| Pendulum period | \`T = 2π√(L/g)\` |
+| Torque | \`τ = Fr sin(θ)\` |
+| Gravity | \`F = Gm₁m₂/r²\` |
+
+## References
+
+- [Feynman Lectures on Physics Vol. 1](https://www.feynmanlectures.caltech.edu/) — the most readable introduction to mechanics
+- [Classical Mechanics — Taylor](https://uscibooks.aip.org/books/classical-mechanics/) — the standard undergraduate text
+`;
+
 const musicIntroductionContent = `
 ## Why Music Programming?
 
@@ -2269,6 +2402,130 @@ You have completed all 15 lessons of Music Programming. You can now convert betw
 - [Music Theory for Computer Musicians](https://www.mikejohnsonmusic.net/) by Michael Johnson
 `;
 
+const quantumIntroductionContent = `
+## Why Quantum Computing?
+
+Classical computers represent information as bits — 0 or 1. Quantum computers use **qubits**, which can exist in superpositions of 0 and 1 simultaneously, and can become **entangled** in ways that have no classical analogue.
+
+This gives quantum computers extraordinary power for specific problems:
+
+- **Grover's algorithm** searches an unsorted database of N items in O(√N) steps — a quadratic speedup over classical O(N) search.
+- **Shor's algorithm** factors large integers in polynomial time, breaking RSA encryption.
+- **Quantum simulation** models molecules and materials exponentially faster than classical methods.
+- **Quantum key distribution** enables provably secure communication, guaranteed by the laws of physics.
+
+## The Story
+
+The idea that quantum mechanics could enable fundamentally new kinds of computation was first articulated by Richard Feynman in 1982. In 1985, David Deutsch formalized the quantum Turing machine and published the first quantum algorithm. Peter Shor's 1994 factoring algorithm and Lov Grover's 1996 search algorithm demonstrated concrete, dramatic speedups and sparked the modern era of quantum computing research.
+
+Today, IBM, Google, IonQ, and others operate real quantum hardware accessible over the cloud. Google claimed **quantum supremacy** in 2019 when their 53-qubit Sycamore processor completed a specific calculation in 200 seconds that would take a classical supercomputer approximately 10,000 years.
+
+## How This Course Works
+
+We simulate quantum systems in Python using the mathematical formalism directly — no special libraries, just vectors and arithmetic. This lets you see exactly what quantum gates do to quantum states.
+
+A qubit is represented as a 2-element list \`[alpha, beta]\`. Gates are functions that transform these lists. Multi-qubit systems are 4-element (or larger) lists using the tensor product.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Quantum Bits** -- Qubits, normalization, and measurement probability.
+2. **Single-Qubit Gates** -- The Hadamard, X, and Z gates.
+3. **Multi-Qubit Systems** -- Tensor products, CNOT, Bell states, and entanglement.
+4. **Quantum Algorithms** -- The Deutsch algorithm, Grover's search, quantum error correction, and BB84 key distribution.
+
+Let's get started.
+`;
+
+const quantumWhatsNextContent = `
+## Congratulations
+
+You have completed the Quantum Computing course. You can now simulate qubits, apply quantum gates, create entangled states, and implement foundational quantum algorithms from scratch.
+
+## What to Explore Next
+
+- **Shor's Algorithm** -- Factor integers using the quantum Fourier transform and period finding.
+- **Quantum Phase Estimation** -- A subroutine used in many advanced algorithms including HHL for linear systems.
+- **Variational Quantum Eigensolver (VQE)** -- A hybrid classical-quantum algorithm for chemistry simulation.
+- **Real Quantum Hardware** -- Run circuits on IBM Quantum (free tier) using the Qiskit SDK.
+
+## Frameworks and Libraries
+
+- [Qiskit](https://qiskit.org/) -- IBM's open-source quantum SDK for Python. The most widely used.
+- [Cirq](https://quantumai.google/cirq) -- Google's quantum computing framework.
+- [PennyLane](https://pennylane.ai/) -- Differentiable quantum programming for quantum machine learning.
+- [QuTiP](https://qutip.org/) -- Quantum Toolbox in Python for open quantum systems.
+
+## Further Reading
+
+- **Quantum Computation and Quantum Information** by Nielsen & Chuang -- the definitive textbook.
+- **Quantum Computing: An Applied Approach** by Jack Hidary -- more accessible, code-focused.
+- [IBM Quantum Learning](https://learning.quantum.ibm.com/) -- Free interactive courses with real hardware access.
+`;
+
+const genomicsIntroductionContent = `
+## Why Genomics?
+
+Every living cell contains a complete copy of the organism's **genome** — roughly 3 billion DNA base pairs in humans. That sequence is the source code of life: it encodes every protein, regulates when and where each gene turns on, and determines susceptibility to disease.
+
+For most of history, biologists had to study genes one at a time. Today, sequencing machines can read an entire genome in hours. The bottleneck is no longer generating the data — it is **understanding** it.
+
+Most of the genome does not code for proteins. The vast regulatory landscape — promoters, enhancers, silencers, splice signals — controls which genes are active in which cell. Single-letter changes in these regions can cause cancer, developmental disorders, or heart disease. But the functional rules encoded in DNA are far too complex to write by hand.
+
+**AlphaGenome**, released by Google DeepMind in 2025, is an AI model that reads up to one million base pairs of DNA and simultaneously predicts thousands of molecular properties: gene expression levels across tissues, RNA splice patterns, chromatin accessibility, transcription factor binding, histone marks, and more. It achieves state-of-the-art accuracy on 25 of 26 variant effect benchmarks.
+
+## How This Course Works
+
+This course teaches you the molecular biology and bioinformatics concepts behind AlphaGenome by implementing them yourself in Python. No biology background required — just Python.
+
+Each lesson builds on the previous one:
+- First you will understand what DNA is and how it encodes information.
+- Then you will learn how genes are read: transcription, translation, and splicing.
+- Then you will explore gene regulation: how the genome controls which genes turn on.
+- Finally you will see how all of these concepts map directly onto AlphaGenome's architecture.
+
+By the final lesson, you will have implemented — in miniature — the core operation that AlphaGenome performs: **variant effect prediction**.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **The DNA Alphabet** -- Sequences, base complement, GC content, and codons.
+2. **Reading the Genome** -- Open reading frames, transcription, translation, and splice sites.
+3. **Gene Regulation** -- Motif finding, CpG islands, single nucleotide variants.
+4. **Genomics Meets AI** -- One-hot encoding, k-mer features, regulatory scoring, and variant effect prediction.
+
+Let's get started.
+`;
+
+const genomicsWhatsNextContent = `
+## Congratulations
+
+You have completed the Genomics course. You now understand the molecular biology behind AlphaGenome — DNA sequences, gene expression, splicing, regulatory elements, and variant effect prediction.
+
+## What to Explore Next
+
+- **Run AlphaGenome yourself** -- The model is available for non-commercial use via the Python SDK at [deepmind.google.com/science/alphagenome](https://deepmind.google.com/science/alphagenome).
+- **Enformer** -- DeepMind's earlier genomics model (2021), which AlphaGenome improves upon. The original paper is a good read.
+- **Bioinformatics with Biopython** -- The \`biopython\` library implements professional versions of everything in this course.
+- **ENCODE Project** -- The experimental dataset that underpins AlphaGenome's training data.
+- **GTEx** -- Gene expression across human tissues; another key AlphaGenome training resource.
+
+## Tools and Libraries
+
+- [Biopython](https://biopython.org/) -- The standard Python library for bioinformatics.
+- [pysam](https://pysam.readthedocs.io/) -- Reading genome alignment files.
+- [pyBigWig](https://github.com/deeptools/pyBigWig) -- Reading genomic signal tracks.
+- [Kipooi](https://kipoi.org/) -- A model zoo for genomics ML models.
+
+## Further Reading
+
+- **Molecular Biology of the Gene** by Watson et al. -- The canonical textbook.
+- **Bioinformatics Algorithms** by Compeau & Pevzner -- Algorithmic approach to genomics.
+- [AlphaGenome paper on Nature](https://www.nature.com/articles/s41586-025-10014-0) -- The original publication.
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -2314,6 +2571,17 @@ export const courses: Course[] = [
     runtimeLabel: "SQLite runtime",
     introductionContent: sqliteIntroductionContent,
     whatsNextContent: sqliteWhatsNextContent,
+  },
+  {
+    id: "redis",
+    title: "Redis",
+    description: "Learn Redis from scratch. Master strings, lists, sets, hashes, sorted sets, transactions, and caching patterns — all in a live Redis emulator.",
+    language: "redis",
+    chapters: redisChapters,
+    lessons: redisLessons,
+    runtimeLabel: "Redis emulator",
+    introductionContent: redisIntroductionContent,
+    whatsNextContent: redisWhatsNextContent,
   },
   {
     id: "arm64",
@@ -2622,6 +2890,28 @@ export const courses: Course[] = [
     runtimeLabel: "Web Audio API",
     introductionContent: musicIntroductionContent,
     whatsNextContent: musicWhatsNextContent,
+  },
+  {
+    id: "quantum",
+    title: "Quantum Computing",
+    description: "Learn quantum computing from first principles. Simulate qubits, apply quantum gates, create entangled Bell states, and implement Grover's search, the Deutsch algorithm, and the BB84 quantum key distribution protocol — all in Python.",
+    language: "python",
+    chapters: quantumChapters,
+    lessons: quantumLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: quantumIntroductionContent,
+    whatsNextContent: quantumWhatsNextContent,
+  },
+  {
+    id: "genomics",
+    title: "Genomics",
+    description: "Learn computational genomics from first principles. Implement DNA complement, GC content, ORF finding, transcription, translation, splice site detection, motif search, CpG islands, one-hot encoding, and variant effect prediction — the exact concepts behind Google DeepMind's AlphaGenome.",
+    language: "python",
+    chapters: genomicsChapters,
+    lessons: genomicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: genomicsIntroductionContent,
+    whatsNextContent: genomicsWhatsNextContent,
   },
 ];
 
