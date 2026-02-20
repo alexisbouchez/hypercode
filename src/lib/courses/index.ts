@@ -22,6 +22,7 @@ import { pythonChapters, pythonLessons } from "@/lib/lessons/python";
 import { haskellChapters, haskellLessons } from "@/lib/lessons/haskell";
 import { graphsChapters, graphsLessons } from "@/lib/lessons/graphs";
 import { linearAlgebraChapters, linearAlgebraLessons } from "@/lib/lessons/linear-algebra";
+import { diffeqChapters, diffeqLessons } from "@/lib/lessons/diffeq";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -1717,6 +1718,57 @@ You have completed all 15 lessons. You now understand Haskell's core ideas: pure
 - [Haskell Wiki](https://wiki.haskell.org/) — Community-maintained documentation.
 `;
 
+const diffeqIntroductionContent = `
+## Why Differential Equations?
+
+Differential equations are the mathematical language of change. Any time a quantity evolves over time — populations, temperatures, voltages, positions — a differential equation describes it. They are the foundation of physics, engineering, biology, economics, and climate science.
+
+- **Physics** -- Newton's laws, electromagnetism, quantum mechanics, fluid dynamics
+- **Biology** -- population dynamics, epidemics, neuron firing, gene expression
+- **Engineering** -- control systems, circuit design, structural mechanics
+- **Finance** -- Black-Scholes option pricing model
+
+## Numerical Methods
+
+Most differential equations cannot be solved analytically. Instead, we approximate solutions numerically by taking small steps:
+
+- **Euler's method** -- the simplest approach: one step along the tangent line
+- **Runge-Kutta 4 (RK4)** -- the workhorse of scientific computing: 4 slope evaluations per step, dramatically more accurate
+
+These two methods form the foundation for every numerical ODE solver in production use (SciPy, MATLAB, Julia's DifferentialEquations.jl).
+
+## What You Will Learn
+
+This course teaches differential equations through code. Every concept is implemented from scratch in Python:
+
+1. **Numerical Methods** -- Euler step, Euler integration, RK4 step, RK4 integration
+2. **First-Order Models** -- Exponential decay, logistic growth, Newton's cooling law
+3. **Systems & Oscillations** -- Vector Euler, simple harmonic motion, damped oscillator, Lotka-Volterra predator-prey
+4. **Applications** -- SIR epidemic model, finding equilibria, stability analysis, Van der Pol oscillator
+
+No external libraries needed — just pure Python arithmetic. Everything runs in your browser.
+`;
+
+const diffeqWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You can now solve differential equations numerically — both scalar ODEs and systems — and analyze their qualitative behavior through equilibria and stability.
+
+## What to Explore Next
+
+- **SciPy** -- \`scipy.integrate.solve_ivp\` uses adaptive RK45 with error control. It handles stiff equations and automatic step-size selection far beyond what we built here.
+- **Stiff equations** -- Some ODEs require implicit methods (like backward Euler or the Runge-Kutta implicit family). Stiffness arises in chemical kinetics, electronics, and more.
+- **Partial differential equations (PDEs)** -- ODEs involve one independent variable (time). PDEs involve space and time: heat equation, wave equation, Navier-Stokes.
+- **Chaos theory** -- The Lorenz system (\`dx/dt = σ(y-x)\`, etc.) shows how deterministic ODEs can produce unpredictable, chaotic behavior.
+- **Bifurcation theory** -- How equilibria appear, disappear, or change stability as parameters vary.
+
+## References
+
+- [Differential Equations, Dynamical Systems, and an Introduction to Chaos](https://www.sciencedirect.com/book/9780123820105/) by Hirsch, Smale, Devaney
+- [Nonlinear Dynamics and Chaos](https://www.stevenstrogatz.com/books/nonlinear-dynamics-and-chaos-with-applications-to-physics-biology-chemistry-and-engineering) by Steven Strogatz — the most readable introduction to the subject
+- [SciPy ODE documentation](https://docs.scipy.org/doc/scipy/reference/integrate.html) -- production-grade solvers
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -1971,6 +2023,17 @@ export const courses: Course[] = [
     runtimeLabel: "Pyodide",
     introductionContent: linearAlgebraIntroductionContent,
     whatsNextContent: linearAlgebraWhatsNextContent,
+  },
+  {
+    id: "diffeq",
+    title: "Differential Equations in Python",
+    description: "Solve differential equations numerically in Python. Implement Euler's method and RK4, model exponential decay, logistic growth, oscillations, epidemics, and predator-prey dynamics from scratch.",
+    language: "python",
+    chapters: diffeqChapters,
+    lessons: diffeqLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: diffeqIntroductionContent,
+    whatsNextContent: diffeqWhatsNextContent,
   },
 ];
 
