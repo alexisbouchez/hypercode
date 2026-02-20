@@ -122,7 +122,7 @@ const tracks: { title: string; ids: string[] }[] = [
   },
   {
     title: "Web & Frontend",
-    ids: ["javascript", "typescript", "threejs"],
+    ids: ["javascript", "typescript", "threejs", "music"],
   },
   {
     title: "Data & Databases",

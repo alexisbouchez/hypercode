@@ -18,6 +18,8 @@ import { initThreeJsRunner, isThreeJsReady, runThreeJs, runTests as runThreeJsTe
 import { initPythonRunner, isPythonReady, runPython, runTests as runPythonTests } from "@/lib/python-runner";
 import { initHaskellRunner, isHaskellReady, runHaskell, runTests as runHaskellTests } from "@/lib/haskell-runner";
 import { initSqliteRunner, isSqliteReady, runSqlite, runTests as runSqliteTests } from "@/lib/sqlite-runner";
+import { initCppRunner, isCppReady, runCpp, runTests as runCppTests } from "@/lib/cpp-runner";
+import { initMusicRunner, isMusicReady, runMusic, runTests as runMusicTests } from "@/lib/music-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -69,6 +71,8 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return initPythonRunner();
     if (courseId === "haskell") return initHaskellRunner();
     if (courseId === "sqlite") return initSqliteRunner();
+    if (courseId === "cpp") return initCppRunner();
+    if (courseId === "music") return initMusicRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -102,6 +106,8 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return isPythonReady();
     if (courseId === "haskell") return isHaskellReady();
     if (courseId === "sqlite") return isSqliteReady();
+    if (courseId === "cpp") return isCppReady();
+    if (courseId === "music") return isMusicReady();
     return isGoReady();
   }, [courseId]);
 
@@ -135,6 +141,8 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return runPython(code);
     if (courseId === "haskell") return runHaskell(code);
     if (courseId === "sqlite") return runSqlite(code);
+    if (courseId === "cpp") return runCpp(code);
+    if (courseId === "music") return runMusic(code);
     return runGo(code);
   }, [courseId]);
 
@@ -168,6 +176,8 @@ export function LessonShellWrapper({
     if (courseId === "diffeq") return runPythonTests(code, tests);
     if (courseId === "haskell") return runHaskellTests(code, tests);
     if (courseId === "sqlite") return runSqliteTests(code, tests);
+    if (courseId === "cpp") return runCppTests(code, tests);
+    if (courseId === "music") return runMusicTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

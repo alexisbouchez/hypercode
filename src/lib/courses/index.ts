@@ -30,6 +30,7 @@ import { calculus3Chapters, calculus3Lessons } from "@/lib/lessons/calculus3";
 import { circuitsChapters, circuitsLessons } from "@/lib/lessons/circuits";
 import { sqliteChapters, sqliteLessons } from "@/lib/lessons/sqlite";
 import { cppChapters, cppLessons } from "@/lib/lessons/cpp";
+import { musicChapters, musicLessons } from "@/lib/lessons/music";
 
 const goIntroductionContent = `
 ## Why Go?
@@ -481,6 +482,84 @@ The best way to learn is to build. Some project ideas:
 - [Beej's Guide to C Programming](https://beej.us/guide/bgc/) -- free online guide, well-written and practical.
 - [Modern C](https://gustedt.gitlabpages.inria.fr/modern-c/) by Jens Gustedt -- a modern take on C programming.
 - [CS:APP](https://csapp.cs.cmu.edu/) -- *Computer Systems: A Programmer's Perspective* covers how C maps to machine code.
+`;
+
+const cppIntroductionContent = `
+## Why C++?
+
+C++ is one of the most powerful and widely deployed programming languages in history. Bjarne Stroustrup created it at Bell Labs starting in 1979 as "C with Classes," and the name \`C++\` (the increment operator applied to C) came in 1983.
+
+- **Systems-level power** -- C++ gives you manual memory control, zero-overhead abstractions, and direct hardware access — the same capabilities as C.
+- **Object-oriented** -- Classes, inheritance, and polymorphism let you model complex systems with clear structure.
+- **Generic programming** -- Templates let you write code once that works for any type, powering the entire Standard Library.
+- **The Standard Library** -- \`vector\`, \`string\`, \`map\`, \`algorithm\`, \`thread\` — a comprehensive toolkit built in.
+- **Zero overhead** -- Abstractions in C++ cost nothing at runtime. If you don't use it, you don't pay for it.
+
+## The Story
+
+C++ grew from the frustration that C, while powerful, lacked the tools to manage the complexity of large software projects. Stroustrup added classes (from Simula), virtual functions, operator overloading, and eventually templates — turning C into a multi-paradigm language.
+
+Major standardization milestones:
+- **C++98** — first standard, templates, STL
+- **C++11** — auto, lambda, range-based for, move semantics, smart pointers
+- **C++14/17** — refinements and new library features
+- **C++20** — concepts, ranges, coroutines, modules
+
+## Who Uses C++
+
+C++ powers some of the most demanding software in the world:
+
+- **Game engines** — Unreal Engine, id Tech, Frostbite are written in C++
+- **Browsers** — Chrome (V8, Blink), Firefox (Gecko) use C++ for performance-critical paths
+- **Databases** — MySQL, MongoDB, ClickHouse are C++
+- **Scientific computing** — LLVM, TensorFlow, OpenCV
+- **Finance** — High-frequency trading systems where microseconds matter
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **6 chapters**:
+
+1. **C++ Basics** -- Hello C++, variables and types, string operations.
+2. **Control Flow** -- Conditionals and loops including the range-based for.
+3. **Functions** -- Overloading, default arguments, and references.
+4. **Classes** -- Classes, constructors, and encapsulation.
+5. **Inheritance** -- Inheritance and virtual functions (polymorphism).
+6. **Templates & STL** -- Function templates and \`std::vector\`.
+
+Let's get started.
+`;
+
+const cppWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now understand C++'s core features: output with cout, variables, strings, control flow, function overloading, default arguments, references, classes, constructors, encapsulation, inheritance, virtual functions, function templates, and vectors.
+
+That is a strong foundation. C++ is a vast language, but these concepts unlock everything else.
+
+## What to Explore Next
+
+- **Smart pointers** -- \`unique_ptr\`, \`shared_ptr\`, and \`weak_ptr\` replace raw \`new\`/\`delete\`.
+- **Lambda expressions** -- anonymous functions for callbacks and algorithms: \`[](int x) { return x * 2; }\`
+- **The STL algorithms** -- \`std::sort\`, \`std::find\`, \`std::transform\`, \`std::accumulate\` work on any container.
+- **Move semantics** -- \`std::move\`, rvalue references, and move constructors for zero-copy transfers.
+- **Exceptions** -- \`try\`, \`catch\`, \`throw\` for error handling.
+- **Class templates** -- Generic classes like \`vector<T>\`, \`map<K,V>\`, and your own.
+- **Operator overloading** -- Make your classes work with \`+\`, \`==\`, \`<<\`, and other operators.
+
+## Build Something
+
+- **A stack or queue** -- implement using \`vector\` or a linked list
+- **A matrix class** -- with addition, multiplication, and transpose
+- **A simple expression parser** -- tokenize and evaluate arithmetic strings
+- **A polymorphic shape library** -- area, perimeter, and drawing for many shape types
+
+## References
+
+- [cppreference.com](https://en.cppreference.com/w/cpp) -- the definitive C++ reference.
+- *A Tour of C++* by Bjarne Stroustrup -- concise, authoritative overview of modern C++.
+- *Effective Modern C++* by Scott Meyers -- essential patterns for C++11/14.
+- [LearnCpp.com](https://www.learncpp.com/) -- free, thorough tutorial for beginners.
+- [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) -- best practices maintained by Stroustrup and Sutter.
 `;
 
 const gleamIntroductionContent = `
@@ -2128,6 +2207,68 @@ You have completed all 15 lessons. You can now solve differential equations nume
 - [SciPy ODE documentation](https://docs.scipy.org/doc/scipy/reference/integrate.html) -- production-grade solvers
 `;
 
+const musicIntroductionContent = `
+## Why Music Programming?
+
+Sound is mathematics made audible. Every note is a frequency, every rhythm is a time interval, every chord is a set of ratios. This course teaches you to generate, manipulate, and schedule sound directly in your browser using the **Web Audio API** — no plugins, no libraries, just JavaScript and math.
+
+- **Notes & Frequencies** — MIDI numbers, the equal-temperament formula, frequency conversion, note names, and scale construction
+- **Chords & Harmony** — Interval ratios, chord voicings (major, minor, dom7, maj7), and transposition
+- **Synthesis & Rhythm** — BPM and note durations, arpeggiation, and precise note scheduling with onset times
+- **Effects & Timbre** — Decibels, gain conversion, LFOs for tremolo and vibrato, and 16-step drum patterns
+
+## The Web Audio API
+
+The browser's built-in audio engine lets you create oscillators, connect them through gain and filter nodes, and schedule events with sample-accurate timing. Every lesson's code runs live in an iframe — you'll hear what you write.
+
+\`\`\`js
+const ac = new AudioContext();
+const osc = ac.createOscillator();
+const gain = ac.createGain();
+osc.frequency.value = 440; // A4
+osc.connect(gain);
+gain.connect(ac.destination);
+osc.start();
+osc.stop(ac.currentTime + 1);
+\`\`\`
+
+## Prerequisites
+
+Basic JavaScript (functions, arrays, Math object). No music theory background required — every concept is introduced from first principles.
+`;
+
+const musicWhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons of Music Programming. You can now convert between MIDI and frequencies, name notes, build scales and chords, transpose progressions, schedule melodies with precise timing, apply gain in decibels, modulate parameters with an LFO, and build a 16-step drum machine — all with the Web Audio API.
+
+## What to Explore Next
+
+- **Tone.js** — A higher-level audio framework built on the Web Audio API. Provides Transport, Sequencer, and a large library of synthesis and effects nodes
+- **Web MIDI API** — Connect a real MIDI keyboard and route its input to your Web Audio synthesis code
+- **AudioWorklet** — Run custom DSP code on the audio thread for custom oscillators, convolution reverb, and spectral processing
+- **SuperCollider** — The server-client audio synthesis language used by electronic musicians worldwide
+
+## Key Formulas
+
+| Concept | Formula |
+|---------|---------|
+| MIDI to frequency | \`440 × 2^((n − 69) / 12)\` |
+| Frequency to MIDI | \`round(69 + 12 × log₂(f / 440))\` |
+| Interval ratio | \`2^(semitones / 12)\` |
+| Beat duration | \`60 / bpm\` |
+| Note duration | \`60 / bpm × (4 / noteType)\` |
+| dB to gain | \`10^(dB / 20)\` |
+| Gain to dB | \`20 × log₁₀(gain)\` |
+| LFO | \`depth × sin(2π × rate × t)\` |
+
+## References
+
+- [MDN Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) — The canonical reference
+- [The Audio Programming Book](https://mitpress.mit.edu/9780262014465/) — Comprehensive DSP and synthesis theory
+- [Music Theory for Computer Musicians](https://www.mikejohnsonmusic.net/) by Michael Johnson
+`;
+
 export const courses: Course[] = [
   {
     id: "go",
@@ -2195,6 +2336,17 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: cIntroductionContent,
     whatsNextContent: cWhatsNextContent,
+  },
+  {
+    id: "cpp",
+    title: "C++",
+    description: "Learn C++ from scratch. Master object-oriented programming with classes, inheritance, virtual functions, and templates — compiled and run in your browser.",
+    language: "cpp",
+    chapters: cppChapters,
+    lessons: cppLessons,
+    runtimeLabel: "JSCPP",
+    introductionContent: cppIntroductionContent,
+    whatsNextContent: cppWhatsNextContent,
   },
   {
     id: "gleam",
@@ -2459,6 +2611,17 @@ export const courses: Course[] = [
     runtimeLabel: "TCC compiler",
     introductionContent: calculus3IntroductionContent,
     whatsNextContent: calculus3WhatsNextContent,
+  },
+  {
+    id: "music",
+    title: "Music Programming",
+    description: "Learn music programming with the Web Audio API. Generate tones, build chords and scales, schedule melodies with precise timing, apply LFOs and gain, and build a drum machine — all in JavaScript.",
+    language: "javascript",
+    chapters: musicChapters,
+    lessons: musicLessons,
+    runtimeLabel: "Web Audio API",
+    introductionContent: musicIntroductionContent,
+    whatsNextContent: musicWhatsNextContent,
   },
 ];
 
