@@ -132,6 +132,10 @@ const tracks: { title: string; ids: string[] }[] = [
     title: "Algorithms & Computer Science",
     ids: ["algorithms", "graphs", "trees", "linked-lists", "distributed-systems"],
   },
+  {
+    title: "Science & AI",
+    ids: ["quantum", "genomics"],
+  },
 ];
 
 export default function HomePage() {
