@@ -27,6 +27,7 @@ import { runCalculus3Tests } from "./test-runners/calculus3-test-runner";
 import { runGenomicsTests } from "./test-runners/genomics-test-runner";
 import { runMicrogptTests } from "./test-runners/microgpt-test-runner";
 import { runAdvancedLinearAlgebraTests } from "./test-runners/advanced-linear-algebra-test-runner";
+import { runAdvancedQuantumTests } from "./test-runners/advanced-quantum-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -147,6 +148,10 @@ async function main() {
   console.log("Running Advanced Linear Algebra tests...");
   const advancedLinearAlgebraResults = runAdvancedLinearAlgebraTests();
   allResults.push(...advancedLinearAlgebraResults);
+
+  console.log("Running Advanced Quantum Computing tests...");
+  const advancedQuantumResults = runAdvancedQuantumTests();
+  allResults.push(...advancedQuantumResults);
 
   console.log("\n--- Results ---\n");
 

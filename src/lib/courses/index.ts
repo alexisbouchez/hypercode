@@ -39,6 +39,7 @@ import { quantumChapters, quantumLessons } from "@/lib/lessons/quantum";
 import { genomicsChapters, genomicsLessons } from "@/lib/lessons/genomics";
 import { microgptChapters, microgptLessons } from "@/lib/lessons/microgpt";
 import { advancedLinearAlgebraChapters, advancedLinearAlgebraLessons } from "@/lib/lessons/advanced-linear-algebra";
+import { advancedQuantumChapters, advancedQuantumLessons } from "@/lib/lessons/advanced-quantum";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2636,6 +2637,63 @@ You have built linear algebra from the ground up. Here are natural next steps:
 - [Matrix Computations — Golub & Van Loan](https://jhupbooks.press.jhu.edu/title/matrix-computations) — The definitive reference for numerical algorithms
 `;
 
+const advancedQuantumIntroductionContent = `
+## Why Advanced Quantum Computing?
+
+You know qubits, gates, and basic algorithms. Now it is time to go deeper.
+
+This course covers the techniques that power real quantum algorithms: advanced single-qubit gates, multi-qubit operations, the quantum Fourier transform, quantum protocols, and variational hybrid methods. These are the building blocks of Shor's algorithm, quantum error correction, quantum chemistry simulation, and combinatorial optimization.
+
+## What You Will Build
+
+Every lesson is hands-on. You implement the quantum operations directly as matrix math in Python — no simulator library, just NumPy. By the end you will have built:
+
+- **Advanced gates** — S, T, Rx/Ry/Rz, Toffoli, SWAP, controlled-phase
+- **Quantum Fourier Transform** — forward and inverse, from scratch
+- **Quantum protocols** — teleportation, superdense coding, Bell/CHSH inequality
+- **Variational algorithms** — VQE and QAOA for MaxCut
+
+## How This Course Works
+
+Each lesson provides a short theory section with the math, then asks you to implement a single function. The expected output is printed to stdout and checked automatically.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Advanced Quantum Gates** — S, T, rotation gates, Bloch sphere, Toffoli, SWAP, controlled-phase
+2. **Quantum Fourier Transform** — QFT, inverse QFT, and phase estimation
+3. **Quantum Protocols** — Teleportation, superdense coding, and Bell inequality
+4. **Variational Quantum Computing** — Pauli expectation values, VQE, and QAOA
+
+Let's go deeper.
+`;
+
+const advancedQuantumWhatsNextContent = `
+## What's Next
+
+You have implemented the core techniques of advanced quantum computing. Here are natural next steps:
+
+- **Shor's Algorithm** — Use the QFT and phase estimation you built to factor integers in polynomial time.
+- **Quantum Error Correction** — Protect logical qubits with the Shor code, Steane code, or surface codes.
+- **Real Hardware** — Run circuits on IBM Quantum (free tier) using Qiskit, or on Google's devices via Cirq.
+- **Quantum Machine Learning** — Combine variational circuits with classical gradients using PennyLane.
+
+## Frameworks and Libraries
+
+- [Qiskit](https://qiskit.org/) — IBM's open-source quantum SDK. Most widely used, best hardware access.
+- [Cirq](https://quantumai.google/cirq) — Google's framework, excellent for NISQ algorithms.
+- [PennyLane](https://pennylane.ai/) — Differentiable quantum programming for QML.
+- [Strawberry Fields](https://strawberryfields.ai/) — Photonic quantum computing from Xanadu.
+
+## Further Reading
+
+- **Quantum Computation and Quantum Information** by Nielsen & Chuang — the definitive textbook.
+- **An Introduction to Quantum Computing** by Kaye, Laflamme & Mosca — more concise and accessible.
+- [Qiskit Textbook](https://qiskit.org/learn/) — Free, interactive, with real hardware exercises.
+- [PennyLane Demos](https://pennylane.ai/qml/demonstrations/) — Hands-on variational algorithm tutorials.
+`;
+
 const microgptIntroductionContent = `
 ## Why Build a GPT From Scratch?
 
@@ -3136,6 +3194,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: advancedLinearAlgebraIntroductionContent,
     whatsNextContent: advancedLinearAlgebraWhatsNextContent,
+  },
+  {
+    id: "advanced-quantum",
+    title: "Advanced Quantum Computing",
+    description: "Go beyond basic qubits and gates. Implement advanced single-qubit gates, the quantum Fourier transform, quantum teleportation, superdense coding, Bell inequality, VQE, and QAOA for MaxCut — all in pure Python with NumPy.",
+    language: "python",
+    chapters: advancedQuantumChapters,
+    lessons: advancedQuantumLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: advancedQuantumIntroductionContent,
+    whatsNextContent: advancedQuantumWhatsNextContent,
   },
 ];
 
