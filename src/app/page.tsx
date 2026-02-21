@@ -91,6 +91,53 @@ const courseLogos: Record<string, React.ReactNode> = {
       <path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121S24 18.211 24 12.031c0-6.18-3.403-5.96-3.403-5.96h-2.031v2.867s.109 3.402-3.35 3.402H9.454s-3.24-.052-3.24 3.13V17.81S5.72 24 12.086 24zm3.2-1.848a1.047 1.047 0 1 1 0-2.094 1.046 1.046 0 0 1 0 2.094z" fill="#FFE052"/>
     </svg>
   ),
+  "financial-math": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="3" y="24" fontSize="20" fontFamily="Georgia, serif" fill="#4ade80">$</text>
+      <path d="M14 8 L28 8" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M14 14 L24 14" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M14 20 L26 20" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  ),
+  "quant-stats": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <path d="M4 28 Q8 10 12 18 Q16 26 20 12 Q24 2 28 8" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  ),
+  "time-series": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <polyline points="4,24 8,18 12,20 16,12 20,16 24,8 28,10" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="4" y1="28" x2="28" y2="28" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  ),
+  "portfolio-theory": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <circle cx="16" cy="16" r="10" stroke="#4ade80" strokeWidth="1.5"/>
+      <path d="M16 6 L22 22 L10 14 L22 14 L10 22 Z" stroke="#4ade80" strokeWidth="1.5" strokeLinejoin="round"/>
+    </svg>
+  ),
+  "options-pricing": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <path d="M4 26 Q10 26 14 20 Q18 14 28 6" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="4" y1="6" x2="4" y2="28" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="4" y1="28" x2="28" y2="28" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  ),
+  "algo-trading": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <rect x="4" y="18" width="5" height="10" rx="1" fill="#4ade80"/>
+      <rect x="11" y="12" width="5" height="16" rx="1" fill="#4ade80"/>
+      <rect x="18" y="6" width="5" height="22" rx="1" fill="#4ade80"/>
+      <polyline points="6,16 13,10 20,4" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  ),
+  "risk-management": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <path d="M16 4 L28 10 L28 20 C28 25 22 29 16 30 C10 29 4 25 4 20 L4 10 Z" stroke="#4ade80" strokeWidth="1.5" strokeLinejoin="round"/>
+      <line x1="16" y1="13" x2="16" y2="19" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="16" cy="22" r="1.2" fill="#4ade80"/>
+    </svg>
+  ),
 };
 
 const mathInCCurriculum = [
@@ -182,6 +229,18 @@ const tracks: { title: string; ids: string[] }[] = [
       "astrophysics",
       "complex-systems",
       "chaos-theory",
+    ],
+  },
+  {
+    title: "Quantitative Finance",
+    ids: [
+      "financial-math",
+      "quant-stats",
+      "time-series",
+      "portfolio-theory",
+      "options-pricing",
+      "algo-trading",
+      "risk-management",
     ],
   },
 ];

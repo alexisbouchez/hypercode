@@ -64,6 +64,13 @@ import { complexSystemsChapters, complexSystemsLessons } from "@/lib/lessons/com
 import { chaosTheoryChapters, chaosTheoryLessons } from "@/lib/lessons/chaos-theory";
 import { rustChapters, rustLessons } from "@/lib/lessons/rust";
 import { functionalDiffGeoChapters, functionalDiffGeoLessons } from "@/lib/lessons/functional-diff-geo";
+import { algoTradingChapters, algoTradingLessons } from "@/lib/lessons/algo-trading";
+import { financialMathChapters, financialMathLessons } from "@/lib/lessons/financial-math";
+import { quantStatsChapters, quantStatsLessons } from "@/lib/lessons/quant-stats";
+import { timeSeriesChapters, timeSeriesLessons } from "@/lib/lessons/time-series";
+import { portfolioTheoryChapters, portfolioTheoryLessons } from "@/lib/lessons/portfolio-theory";
+import { optionsPricingChapters, optionsPricingLessons } from "@/lib/lessons/options-pricing";
+import { riskManagementChapters, riskManagementLessons } from "@/lib/lessons/risk-management";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -4452,6 +4459,210 @@ You have implemented the core machinery of differential geometry in Python — f
 - *Gravitation* by Misner, Thorne & Wheeler — The comprehensive reference for general relativity, with extensive use of differential geometry.
 - *Differential Geometry, Gauge Theories, and Gravity* by Göckeler & Schücker — Bridges differential geometry and physics.
 - *Geometry, Topology and Physics* by Nakahara — Graduate-level treatment connecting geometry to quantum field theory.
+`,
+  },
+  {
+    id: "algo-trading",
+    title: "Algorithmic Trading in Python",
+    description: "Build algorithmic trading strategies from scratch in pure Python. Implement moving averages, Bollinger Bands, RSI, MACD, SMA crossover, momentum signals, z-score mean reversion, pairs trading, portfolio rebalancing, a backtest engine, slippage modeling, Sharpe ratio, walk-forward validation, and Kelly criterion position sizing.",
+    language: "python",
+    chapters: algoTradingChapters,
+    lessons: algoTradingLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Algorithmic Trading?
+
+Algorithmic trading is the practice of using computer programs to execute trading strategies automatically. Nearly all professional trading today is algorithmic — from high-frequency market making to systematic hedge funds. Understanding the mathematics and code behind these strategies gives you a window into one of the most quantitative fields in finance.
+
+This course teaches algorithmic trading by implementing everything from scratch in pure Python. No pandas, no numpy, no scipy — just the mathematics expressed as functions. Each lesson introduces one concept, explains the financial intuition, and asks you to write the implementation.
+
+You will build:
+
+- **Moving Averages** — Simple and exponential moving averages; the building blocks of all technical indicators
+- **Bollinger Bands** — Volatility envelopes using rolling mean and standard deviation
+- **RSI** — Relative Strength Index; a momentum oscillator ranging from 0 to 100
+- **MACD** — Moving Average Convergence Divergence; a trend-following momentum indicator
+- **SMA Crossover** — The classic trend-following signal: buy when fast crosses above slow
+- **Momentum Strategy** — Return over a lookback period; buy winners, short losers
+- **Trend Following Returns** — Simulate strategy P&L using momentum signals
+- **Z-Score Mean Reversion** — Rolling z-score to identify statistical extremes
+- **Pairs Trading** — Spread between correlated assets; trade the divergence from equilibrium
+- **Portfolio Rebalancing** — Compute trades needed to return to target weights
+- **Backtest Engine** — Simulate a trading strategy on historical prices, tracking cash and position
+- **Slippage & Transaction Costs** — Model the real-world impact of market impact and commissions
+- **Sharpe Ratio** — The canonical risk-adjusted performance metric; annualized via sqrt(252)
+- **Walk-Forward Validation** — Time-series cross-validation that prevents look-ahead bias
+- **Kelly Criterion** — Optimal position sizing to maximize long-term geometric growth`,
+    whatsNextContent: `## What's Next
+
+You have implemented the core toolkit of quantitative trading strategies. Here are natural next steps:
+
+- **Backtesting Frameworks** — Apply your knowledge to Backtrader or Zipline to run backtests on real historical data with more realistic market simulation.
+- **Portfolio Theory** — Explore mean-variance optimization, the efficient frontier, and factor models (Fama-French).
+- **Options Pricing** — Learn Black-Scholes, the Greeks, and delta hedging — the mathematics of derivatives.
+- **Time Series Analysis** — ARIMA, GARCH, cointegration tests (Engle-Granger, Johansen), and the Kalman filter for dynamic hedge ratios.
+- **Machine Learning for Trading** — Feature engineering from technical indicators, cross-validation for financial data, and regime detection.
+
+## Resources
+
+- **Quantitative Trading** by Ernest Chan — Practical guide to building systematic strategies; excellent treatment of backtesting pitfalls.
+- **Advances in Financial Machine Learning** by Marcos López de Prado — State-of-the-art techniques for applying ML to financial data.
+- **Algorithmic Trading and DMA** by Barry Johnson — Deep dive into market microstructure, execution, and transaction cost analysis.
+- **Active Portfolio Management** by Grinold & Kahn — The foundational text on quantitative active management and the fundamental law of active management.
+- **Options, Futures, and Other Derivatives** by John Hull — The standard reference for derivatives pricing and risk management.
+`,
+  },
+  {
+    id: "financial-math",
+    title: "Financial Mathematics in Python",
+    description: "Master the mathematics of finance from scratch in pure Python. Implement present and future value, annuities, NPV, IRR, bond pricing, Macaulay and modified duration, convexity, yield to maturity, spot rates, forward rates, bootstrapping, continuous compounding, discount factors, the Vasicek interest rate model, and par/swap rates.",
+    language: "python",
+    chapters: financialMathChapters,
+    lessons: financialMathLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Financial Mathematics?
+
+Financial mathematics is the quantitative foundation of all of finance. Before you can price a bond, value an option, or manage a portfolio, you need to understand how money moves through time. This course builds that foundation from first principles — implementing every formula as a Python function.
+
+You will implement:
+
+- **Time Value of Money** — Present value, future value, annuities, perpetuities, NPV, and IRR
+- **Bond Mathematics** — Coupon bond pricing, Macaulay duration, modified duration, convexity
+- **Yield Analysis** — Yield to maturity, spot rates, forward rates, and bootstrapping
+- **Interest Rate Models** — Continuous compounding, discount factors, and the Vasicek model
+- **Yield Curves** — Par rates, swap rates, and term structure construction`,
+    whatsNextContent: `## What's Next
+
+- **Quantitative Statistics** — Build on TVM with return distributions, risk metrics, and regression
+- **Portfolio Theory** — Apply discount rates to multi-asset portfolio optimization
+- **Options Pricing** — Black-Scholes uses continuous compounding and risk-neutral pricing
+- **Fixed Income** — Extend bond math to mortgage-backed securities, credit derivatives, and interest rate swaps
+`,
+  },
+  {
+    id: "quant-stats",
+    title: "Quantitative Statistics in Python",
+    description: "Build the statistical toolkit of quantitative finance from scratch in pure Python. Implement log and arithmetic returns, moments (mean, variance, skewness, kurtosis), rolling statistics, covariance and correlation, z-scores, historical volatility, drawdown, Sharpe and Sortino ratios, beta and alpha, t-tests, OLS regression, R-squared, the Jarque-Bera test, Monte Carlo sampling, and bootstrapping.",
+    language: "python",
+    chapters: quantStatsChapters,
+    lessons: quantStatsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Quantitative Statistics?
+
+Every quantitative finance strategy rests on statistical foundations. Before you can backtest a trading strategy, optimize a portfolio, or price a derivative, you need tools to measure returns, quantify risk, and test hypotheses. This course builds those tools from scratch in pure Python.
+
+You will implement:
+
+- **Return Analysis** — Log vs arithmetic returns, moments, rolling statistics, covariance and correlation
+- **Risk Metrics** — Normal distribution, historical volatility, drawdown, Sharpe and Sortino ratios
+- **Statistical Testing** — Beta and alpha, t-tests, OLS regression, R-squared, Jarque-Bera
+- **Simulation** — Monte Carlo sampling via Box-Muller, bootstrap confidence intervals`,
+    whatsNextContent: `## What's Next
+
+- **Time Series Analysis** — Apply autocorrelation, ARIMA, and GARCH models to financial data
+- **Portfolio Theory** — Use covariance matrices for mean-variance optimization
+- **Algorithmic Trading** — Turn statistical signals into executable trading strategies
+`,
+  },
+  {
+    id: "time-series",
+    title: "Time Series Analysis in Python",
+    description: "Implement time series analysis for financial data from scratch in pure Python. Build the autocorrelation function (ACF), partial autocorrelation (PACF), stationarity tests, differencing, MA(q) and AR(p) models, ARMA, ARIMA, exponential smoothing, Holt-Winters, volatility clustering, ARCH, GARCH(1,1), realized volatility, and a 1D Kalman filter.",
+    language: "python",
+    chapters: timeSeriesChapters,
+    lessons: timeSeriesLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Time Series Analysis?
+
+Financial prices are time series — sequences of values indexed by time. Understanding their structure is essential for forecasting, risk management, and strategy design. This course implements the canonical models of time series analysis in pure Python, from basic autocorrelation to GARCH volatility modeling.
+
+You will implement:
+
+- **Autocorrelation** — ACF, PACF, stationarity tests, differencing, and integration
+- **ARMA Models** — MA(q), AR(p), ARMA(p,q), and ARIMA forecasting
+- **Smoothing Methods** — Exponential smoothing and Holt-Winters linear trend
+- **Volatility Models** — Volatility clustering, ARCH, GARCH(1,1), realized volatility, and Kalman filtering`,
+    whatsNextContent: `## What's Next
+
+- **Algorithmic Trading** — Use time series models to build systematic signals
+- **Risk Management** — GARCH volatility forecasts power VaR and position sizing
+- **Portfolio Theory** — Cointegration and dynamic hedge ratios via the Kalman filter
+`,
+  },
+  {
+    id: "portfolio-theory",
+    title: "Portfolio Theory in Python",
+    description: "Implement modern portfolio theory from scratch in pure Python. Build portfolio expected return, 2-asset variance, N-asset covariance matrices, the minimum variance portfolio, efficient frontier, tangency portfolio, capital market line, CAPM, security market line, Jensen's alpha, risk decomposition, single-factor models, diversification ratios, Black-Litterman views, and risk parity weights.",
+    language: "python",
+    chapters: portfolioTheoryChapters,
+    lessons: portfolioTheoryLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Portfolio Theory?
+
+Modern portfolio theory, developed by Harry Markowitz in 1952, revolutionized finance by showing that diversification reduces risk without sacrificing return. The key insight: what matters for a portfolio is not each asset's individual risk, but how assets move together. This course implements the complete framework from scratch in pure Python.
+
+You will implement:
+
+- **Return & Risk** — Portfolio expected return, 2-asset variance, and N-asset covariance matrices
+- **Optimization** — Minimum variance portfolio, efficient frontier, and tangency portfolio
+- **Capital Market Theory** — Capital market line, CAPM beta, security market line, Jensen's alpha
+- **Factor Models** — Risk decomposition, single-factor models, Black-Litterman, and risk parity`,
+    whatsNextContent: `## What's Next
+
+- **Options Pricing** — Options change the return distribution of a portfolio; delta hedging is a portfolio problem
+- **Risk Management** — Portfolio VaR, component VaR, and stress testing build on the covariance framework
+- **Algorithmic Trading** — Systematic rebalancing and factor strategies apply portfolio theory to live markets
+`,
+  },
+  {
+    id: "options-pricing",
+    title: "Options Pricing in Python",
+    description: "Implement options pricing from scratch in pure Python. Build call and put payoffs, put-call parity, intrinsic and time value, the Black-Scholes formula, implied volatility via bisection, all five Greeks (delta, gamma, theta, vega, rho), 1-step and N-step CRR binomial trees, American options with early exercise, Monte Carlo pricing, Asian options, and barrier options.",
+    language: "python",
+    chapters: optionsPricingChapters,
+    lessons: optionsPricingLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Options Pricing?
+
+Options are financial contracts that give the holder the right — but not the obligation — to buy or sell an asset at a fixed price before a given date. Pricing them correctly is one of the central problems of quantitative finance. The Black-Scholes formula, published in 1973, earned its inventors the Nobel Prize in Economics and launched the modern derivatives industry.
+
+This course implements options pricing from first principles in pure Python. No scipy, no numpy — just the mathematics as code.
+
+You will implement:
+
+- **Basics** — Call and put payoffs, put-call parity, intrinsic and time value
+- **Black-Scholes** — The closed-form formula using the normal CDF, plus implied volatility via bisection
+- **Greeks** — Delta, gamma, theta, vega, and rho — the sensitivities that drive hedging
+- **Numerical Methods** — Binomial trees (1-step and N-step), American options, Monte Carlo, Asian options, and barrier options`,
+    whatsNextContent: `## What's Next
+
+- **Risk Management** — Delta hedging, vega risk, and Greeks-based position management
+- **Algorithmic Trading** — Options strategies (spreads, straddles, condors) as systematic positions
+- **Stochastic Calculus** — The Itô calculus that underlies Black-Scholes and its extensions
+`,
+  },
+  {
+    id: "risk-management",
+    title: "Risk Management in Python",
+    description: "Implement quantitative risk management from scratch in pure Python. Build historical VaR, parametric VaR, Monte Carlo VaR, CVaR (expected shortfall), marginal and component VaR, stress testing, scenario P&L, drawdown analysis, recovery time, Kelly criterion, fixed fractional sizing, volatility targeting, delta hedging, and risk-adjusted performance metrics.",
+    language: "python",
+    chapters: riskManagementChapters,
+    lessons: riskManagementLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Risk Management?
+
+Every trading strategy, portfolio, and financial institution faces risk — the possibility of loss. Risk management is the discipline of measuring, monitoring, and controlling that risk. This course implements the quantitative tools of professional risk management from scratch in pure Python.
+
+You will implement:
+
+- **Market Risk** — Historical VaR, parametric VaR, Monte Carlo VaR, and conditional VaR (expected shortfall)
+- **Statistical Risk** — Marginal VaR, component VaR, stress testing, and scenario P&L
+- **Tail Risk** — Drawdown analysis, recovery time, Kelly criterion, and fixed fractional sizing
+- **Position Management** — Volatility targeting, delta hedging, and risk-adjusted performance metrics`,
+    whatsNextContent: `## What's Next
+
+- **Options Pricing** — The Greeks underpin delta hedging and options risk management
+- **Portfolio Theory** — Covariance-based VaR and risk decomposition
+- **Algorithmic Trading** — Apply Kelly criterion and volatility targeting to live strategy sizing
 `,
   },
 ];

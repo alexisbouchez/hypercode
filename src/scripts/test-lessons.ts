@@ -57,6 +57,13 @@ import { runMusicTests } from "./test-runners/music-test-runner";
 import { runWavesTests } from "./test-runners/waves-test-runner";
 import { runRustTests } from "./test-runners/rust-test-runner";
 import { runFunctionalDiffGeoTests } from "./test-runners/functional-diff-geo-test-runner";
+import { runFinancialMathTests } from "./test-runners/financial-math-test-runner";
+import { runQuantStatsTests } from "./test-runners/quant-stats-test-runner";
+import { runPortfolioTheoryTests } from "./test-runners/portfolio-theory-test-runner";
+import { runOptionsPricingTests } from "./test-runners/options-pricing-test-runner";
+import { runTimeSeriesTests } from "./test-runners/time-series-test-runner";
+import { runAlgoTradingTests } from "./test-runners/algo-trading-test-runner";
+import { runRiskManagementTests } from "./test-runners/risk-management-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -297,6 +304,34 @@ async function main() {
   console.log("Running Functional Differential Geometry tests...");
   const functionalDiffGeoResults = runFunctionalDiffGeoTests();
   allResults.push(...functionalDiffGeoResults);
+
+  console.log("Running Financial Mathematics tests...");
+  const financialMathResults = runFinancialMathTests();
+  allResults.push(...financialMathResults);
+
+  console.log("Running Quantitative Statistics tests...");
+  const quantStatsResults = runQuantStatsTests();
+  allResults.push(...quantStatsResults);
+
+  console.log("Running Time Series Analysis tests...");
+  const timeSeriesResults = runTimeSeriesTests();
+  allResults.push(...timeSeriesResults);
+
+  console.log("Running Portfolio Theory tests...");
+  const portfolioTheoryResults = runPortfolioTheoryTests();
+  allResults.push(...portfolioTheoryResults);
+
+  console.log("Running Options Pricing tests...");
+  const optionsPricingResults = runOptionsPricingTests();
+  allResults.push(...optionsPricingResults);
+
+  console.log("Running Algorithmic Trading tests...");
+  const algoTradingResults = runAlgoTradingTests();
+  allResults.push(...algoTradingResults);
+
+  console.log("Running Risk Management tests...");
+  const riskManagementResults = runRiskManagementTests();
+  allResults.push(...riskManagementResults);
 
   console.log("\n--- Results ---\n");
 
