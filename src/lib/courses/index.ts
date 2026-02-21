@@ -40,6 +40,7 @@ import { genomicsChapters, genomicsLessons } from "@/lib/lessons/genomics";
 import { microgptChapters, microgptLessons } from "@/lib/lessons/microgpt";
 import { advancedLinearAlgebraChapters, advancedLinearAlgebraLessons } from "@/lib/lessons/advanced-linear-algebra";
 import { advancedQuantumChapters, advancedQuantumLessons } from "@/lib/lessons/advanced-quantum";
+import { thermodynamicsChapters, thermodynamicsLessons } from "@/lib/lessons/thermodynamics";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2637,6 +2638,46 @@ You have built linear algebra from the ground up. Here are natural next steps:
 - [Matrix Computations — Golub & Van Loan](https://jhupbooks.press.jhu.edu/title/matrix-computations) — The definitive reference for numerical algorithms
 `;
 
+const thermodynamicsIntroductionContent = `
+## Why Thermodynamics?
+
+Thermodynamics governs everything from steam engines to black holes. It answers questions like: why does heat flow from hot to cold, what is the maximum efficiency of any engine, and why can't you unscramble an egg?
+
+The four laws of thermodynamics are among the most fundamental in all of physics. Unlike quantum mechanics or relativity, they apply at every scale — from individual molecules to the entire universe.
+
+## How This Course Works
+
+You will implement thermodynamic calculations in pure Python — no libraries, just the laws of physics expressed as functions. Each lesson introduces one concept, explains the math, and asks you to write the equation as code.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Laws of Thermodynamics** — Temperature scales, the First Law, heat capacity, the ideal gas law, and thermal expansion.
+2. **Thermodynamic Processes** — Isothermal and adiabatic processes, entropy, Gibbs free energy, and entropy of mixing.
+3. **Heat Engines & Cycles** — Carnot efficiency, the Carnot cycle, refrigerators, and heat pumps.
+4. **Statistical Thermodynamics** — Boltzmann distribution, partition functions, and the Maxwell-Boltzmann speed distribution.
+
+Let's start with temperature.
+`;
+
+const thermodynamicsWhatsNextContent = `
+## What's Next
+
+You have implemented the core equations of classical and statistical thermodynamics. Here are natural next steps:
+
+- **Quantum Statistical Mechanics** — Fermi-Dirac and Bose-Einstein distributions replace Maxwell-Boltzmann at quantum scales.
+- **Chemical Thermodynamics** — Reaction equilibria, electrochemistry, and phase diagrams using Gibbs free energy.
+- **Fluid Mechanics** — Bernoulli's equation, viscosity, and turbulence build on thermodynamic foundations.
+- **Classical Mechanics in C** — Extend your physics toolkit to Newton's laws, oscillations, and orbital mechanics.
+
+## Further Reading
+
+- **Thermodynamics: An Engineering Approach** by Çengel & Boles — The standard engineering textbook, rigorous and practical.
+- **Thermal Physics** by Kittel & Kroemer — Statistical mechanics from a physics perspective.
+- **An Introduction to Thermal Physics** by Schroeder — Accessible and beautifully written, great problems.
+`;
+
 const advancedQuantumIntroductionContent = `
 ## Why Advanced Quantum Computing?
 
@@ -3205,6 +3246,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: advancedQuantumIntroductionContent,
     whatsNextContent: advancedQuantumWhatsNextContent,
+  },
+  {
+    id: "thermodynamics",
+    title: "Thermodynamics in Python",
+    description: "Learn thermodynamics by implementing the equations in Python. Compute temperature conversions, ideal gas pressures, Carnot efficiencies, entropy changes, Boltzmann distributions, and Maxwell-Boltzmann speeds from scratch.",
+    language: "python",
+    chapters: thermodynamicsChapters,
+    lessons: thermodynamicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: thermodynamicsIntroductionContent,
+    whatsNextContent: thermodynamicsWhatsNextContent,
   },
 ];
 
