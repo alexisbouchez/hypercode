@@ -140,16 +140,38 @@ const courseLogos: Record<string, React.ReactNode> = {
   ),
 };
 
-const mathInCCurriculum = [
-  { id: "calculus", label: "1" },
-  { id: "calculus2", label: "2" },
-  { id: "calculus3", label: "3" },
-];
-
-const tracks: { title: string; ids: string[] }[] = [
+// Tracks where courses should be taken in order (ids listed from first to last)
+const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] = [
   {
     title: "Mathematics in C",
+    subtitle: "Implement university mathematics in C — from limits and integrals to Taylor series and curvature. Each course builds on the previous.",
     ids: ["calculus", "calculus2", "calculus3"],
+  },
+  {
+    title: "Quantitative Finance",
+    subtitle: "Build the complete quantitative finance toolkit from scratch in Python — from time value of money to live trading strategies.",
+    ids: [
+      "financial-math",
+      "quant-stats",
+      "time-series",
+      "portfolio-theory",
+      "options-pricing",
+      "algo-trading",
+      "risk-management",
+    ],
+  },
+  {
+    title: "Systems & Low-Level",
+    subtitle: "Understand how computers work at the metal — from ARM64 assembly to a C compiler, Linux shell, and kernel primitives.",
+    ids: ["arm64", "c", "linux", "kernel", "coreutils"],
+  },
+];
+
+// Unordered tracks — take any course in any order
+const tracks: { title: string; ids: string[] }[] = [
+  {
+    title: "Languages",
+    ids: ["go", "zig", "rust", "cpp", "gleam", "ruby", "haskell", "holyc"],
   },
   {
     title: "Mathematics in Python",
@@ -164,10 +186,6 @@ const tracks: { title: string; ids: string[] }[] = [
       "information-theory",
       "functional-diff-geo",
     ],
-  },
-  {
-    title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "gleam", "ruby", "haskell", "holyc"],
   },
   {
     title: "Classical Physics",
@@ -195,10 +213,6 @@ const tracks: { title: string; ids: string[] }[] = [
       "biophysics",
       "mathematical-physics",
     ],
-  },
-  {
-    title: "Systems & Low-Level",
-    ids: ["arm64", "c", "linux", "kernel", "coreutils"],
   },
   {
     title: "Web & Frontend",
@@ -231,18 +245,6 @@ const tracks: { title: string; ids: string[] }[] = [
       "chaos-theory",
     ],
   },
-  {
-    title: "Quantitative Finance",
-    ids: [
-      "financial-math",
-      "quant-stats",
-      "time-series",
-      "portfolio-theory",
-      "options-pricing",
-      "algo-trading",
-      "risk-management",
-    ],
-  },
 ];
 
 export default function HomePage() {
@@ -267,58 +269,56 @@ export default function HomePage() {
           Write code, get instant feedback.
         </p>
 
-        {/* Mathematics in C — featured curriculum */}
-        <section className="mb-14">
-          <div className="mb-4 flex items-center gap-3">
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Mathematics in C — Curriculum
-            </h2>
-            <div className="flex-1 h-px bg-border" />
-          </div>
+        {/* Ordered curriculums */}
+        {orderedCurriculums.map((curriculum) => {
+          const curriculumCourses = curriculum.ids.map((id) => courseMap[id]).filter(Boolean);
+          if (curriculumCourses.length === 0) return null;
+          return (
+            <section key={curriculum.title} className="mb-14">
+              <div className="mb-4 flex items-center gap-3">
+                <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  {curriculum.title} — Curriculum
+                </h2>
+                <div className="flex-1 h-px bg-border" />
+              </div>
 
-          <p className="text-sm text-muted-foreground mb-5 max-w-xl">
-            Implement the core algorithms of university mathematics in C — from limits and integrals
-            to Taylor series, parametric curves, and curvature. Each concept runs live in your browser
-            via TCC.
-          </p>
+              <p className="text-sm text-muted-foreground mb-5 max-w-xl">
+                {curriculum.subtitle}
+              </p>
 
-          {/* Learning path */}
-          <div className="flex items-stretch gap-0 mb-2">
-            {mathInCCurriculum.map(({ id, label }, i) => {
-              const course = courseMap[id];
-              if (!course) return null;
-              return (
-                <div key={id} className="flex items-center gap-0 flex-1">
+              <div className="flex flex-col -space-y-px">
+                {curriculumCourses.map((course, i) => (
                   <Link
-                    href={`/${id}`}
-                    className="group flex-1 flex items-center gap-4 border border-border px-5 py-4 transition-colors hover:bg-accent/50"
+                    key={course.id}
+                    href={`/${course.id}`}
+                    className="group flex items-center gap-4 border border-border px-5 py-4 transition-colors hover:bg-accent/50"
                   >
-                    <div className="shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground font-mono">
-                      {label}
+                    <div className="shrink-0 w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground font-mono">
+                      {i + 1}
+                    </div>
+                    <div className="shrink-0">
+                      {courseLogos[course.id] ?? (
+                        <div className="w-8 h-8 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-mono font-bold">
+                          {course.language.slice(0, 2).toUpperCase()}
+                        </div>
+                      )}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="text-sm font-semibold text-foreground font-display">{course.title}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{course.runtimeLabel}</div>
+                      <div className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{course.description}</div>
                     </div>
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 text-muted-foreground/40 transition-all group-hover:text-foreground group-hover:translate-x-0.5">
                       <path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </Link>
-                  {i < mathInCCurriculum.length - 1 && (
-                    <div className="shrink-0 px-2 text-muted-foreground/40 text-xs font-mono">→</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                ))}
+              </div>
+            </section>
+          );
+        })}
 
-          <p className="text-xs text-muted-foreground/60 mt-2">
-            Start with Calculus 1, then continue to Calculus 2. Each course builds on the previous.
-          </p>
-        </section>
-
-        {/* All other tracks */}
-        {tracks.slice(1).map((track) => {
+        {/* Unordered tracks */}
+        {tracks.map((track) => {
           const trackCourses = track.ids.map((id) => courseMap[id]).filter(Boolean);
           if (trackCourses.length === 0) return null;
           return (
