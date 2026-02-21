@@ -172,13 +172,14 @@ async function cached_or_fetch(path: string) {
   }
 
   const cache = await caches.open("rust-quest");
-  const cached = await cache.match(path);
+  const absoluteUrl = new URL(path, self.location.origin).href;
+  const cached = await cache.match(absoluteUrl);
   if (cached) {
     return cached;
   }
-  
+
   const file = await fetch(path);
-  cache.put(path, file.clone());
+  cache.put(absoluteUrl, file.clone());
   return file;
 }
 
