@@ -7,7 +7,6 @@ import {
 } from "@/lib/sql-shared";
 
 let pgliteReady = false;
-let pgliteLoading = false;
 let pgliteLoadPromise: Promise<void> | null = null;
 
 export function isSqlReady(): boolean {
@@ -19,7 +18,6 @@ export function initSqlRunner(): Promise<void> {
   if (pgliteLoadPromise) return pgliteLoadPromise;
 
   pgliteLoadPromise = (async () => {
-    pgliteLoading = true;
     try {
       const { PGlite } = await import("@electric-sql/pglite");
       const db = new PGlite();
@@ -28,8 +26,6 @@ export function initSqlRunner(): Promise<void> {
       pgliteReady = true;
     } catch {
       pgliteReady = false;
-    } finally {
-      pgliteLoading = false;
     }
   })();
 

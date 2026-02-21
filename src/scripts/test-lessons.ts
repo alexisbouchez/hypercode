@@ -69,284 +69,87 @@ import { runDigitalLogicTests } from "./test-runners/digital-logic-test-runner";
 import { runPcbDesignTests } from "./test-runners/pcb-design-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
+type TestRunner = () => LessonTestResult[] | Promise<LessonTestResult[]>;
+
+const runners: Array<[string, TestRunner]> = [
+  ["Go", runGoTests],
+  ["Zig", runZigTests],
+  ["SQL", runSqlTests],
+  ["ARM64", runArm64Tests],
+  ["C", runCTests],
+  ["Gleam", runGleamTests],
+  ["R", runRTests],
+  ["HolyC", runHolycTests],
+  ["Linux", runLinuxTests],
+  ["Coreutils", runCoreutilsTests],
+  ["JavaScript", runJsTests],
+  ["TypeScript", runTsTests],
+  ["Ruby", runRubyTests],
+  ["Trees", runTreesTests],
+  ["Kernel", runKernelTests],
+  ["Linked Lists", runLinkedListsTests],
+  ["Haskell", runHaskellTests],
+  ["Lean", runLeanTests],
+  ["Linear Algebra", runLinearAlgebraTests],
+  ["Statistics", runStatisticsTests],
+  ["SQLite", runSqliteTests],
+  ["Redis", runRedisTests],
+  ["C++", runCppTests],
+  ["Ray Tracer", runRaytracerTests],
+  ["Quantum Computing", runQuantumTests],
+  ["Calculus 1", runCalculusTests],
+  ["Calculus 2", runCalculus2Tests],
+  ["Calculus 3", runCalculus3Tests],
+  ["Genomics", runGenomicsTests],
+  ["MicroGPT", runMicrogptTests],
+  ["Advanced Linear Algebra", runAdvancedLinearAlgebraTests],
+  ["Advanced Quantum Computing", runAdvancedQuantumTests],
+  ["Thermodynamics", runThermodynamicsTests],
+  ["Special Relativity", runSpecialRelativityTests],
+  ["Fluid Mechanics", runFluidMechanicsTests],
+  ["Optics", runOpticsTests],
+  ["General Relativity", runGeneralRelativityTests],
+  ["Nuclear Physics", runNuclearPhysicsTests],
+  ["Particle Physics", runParticlePhysicsTests],
+  ["Number Theory", runNumberTheoryTests],
+  ["Cryptography", runCryptographyTests],
+  ["Cosmology", runCosmologyTests],
+  ["Astrophysics", runAstrophysicsTests],
+  ["Plasma Physics", runPlasmaPhysicsTests],
+  ["Condensed Matter", runCondensedMatterTests],
+  ["Biophysics", runBiophysicsTests],
+  ["Signal Processing", runSignalProcessingTests],
+  ["Machine Learning", runMachineLearningTests],
+  ["Information Theory", runInformationTheoryTests],
+  ["MySQL", runMysqlTests],
+  ["Circuits", runCircuitsTests],
+  ["Classical Mechanics", runClassicalMechanicsTests],
+  ["Differential Equations", runDiffeqTests],
+  ["Mathematical Physics", runMathematicalPhysicsTests],
+  ["Complex Systems", runComplexSystemsTests],
+  ["Chaos Theory", runChaosTheoryTests],
+  ["Music", runMusicTests],
+  ["Waves", runWavesTests],
+  ["Rust", runRustTests],
+  ["Functional Differential Geometry", runFunctionalDiffGeoTests],
+  ["Financial Mathematics", runFinancialMathTests],
+  ["Quantitative Statistics", runQuantStatsTests],
+  ["Time Series Analysis", runTimeSeriesTests],
+  ["Portfolio Theory", runPortfolioTheoryTests],
+  ["Options Pricing", runOptionsPricingTests],
+  ["Algorithmic Trading", runAlgoTradingTests],
+  ["Risk Management", runRiskManagementTests],
+  ["Digital Logic", runDigitalLogicTests],
+  ["PCB Design", runPcbDesignTests],
+];
+
 async function main() {
   const allResults: LessonTestResult[] = [];
 
-  console.log("Running Go tests...");
-  const goResults = runGoTests();
-  allResults.push(...goResults);
-
-  console.log("Running Zig tests...");
-  const zigResults = runZigTests();
-  allResults.push(...zigResults);
-
-  console.log("Running SQL tests...");
-  const sqlResults = await runSqlTests();
-  allResults.push(...sqlResults);
-
-  console.log("Running ARM64 tests...");
-  const arm64Results = runArm64Tests();
-  allResults.push(...arm64Results);
-
-  console.log("Running C tests...");
-  const cResults = await runCTests();
-  allResults.push(...cResults);
-
-  console.log("Running Gleam tests...");
-  const gleamResults = runGleamTests();
-  allResults.push(...gleamResults);
-
-  console.log("Running R tests...");
-  const rResults = runRTests();
-  allResults.push(...rResults);
-
-  console.log("Running HolyC tests...");
-  const holycResults = runHolycTests();
-  allResults.push(...holycResults);
-
-  console.log("Running Linux tests...");
-  const linuxResults = runLinuxTests();
-  allResults.push(...linuxResults);
-
-  console.log("Running Coreutils tests...");
-  const coreutilsResults = await runCoreutilsTests();
-  allResults.push(...coreutilsResults);
-
-  console.log("Running JavaScript tests...");
-  const jsResults = runJsTests();
-  allResults.push(...jsResults);
-
-  console.log("Running TypeScript tests...");
-  const tsResults = runTsTests();
-  allResults.push(...tsResults);
-
-  console.log("Running Ruby tests...");
-  const rubyResults = runRubyTests();
-  allResults.push(...rubyResults);
-
-  console.log("Running Trees tests...");
-  const treesResults = await runTreesTests();
-  allResults.push(...treesResults);
-
-  console.log("Running Kernel tests...");
-  const kernelResults = await runKernelTests();
-  allResults.push(...kernelResults);
-
-  console.log("Running Linked Lists tests...");
-  const linkedListsResults = await runLinkedListsTests();
-  allResults.push(...linkedListsResults);
-
-  console.log("Running Haskell tests...");
-  const haskellResults = runHaskellTests();
-  allResults.push(...haskellResults);
-
-  console.log("Running Lean tests...");
-  const leanResults = runLeanTests();
-  allResults.push(...leanResults);
-
-  console.log("Running Linear Algebra tests...");
-  const linearAlgebraResults = runLinearAlgebraTests();
-  allResults.push(...linearAlgebraResults);
-
-  console.log("Running Statistics tests...");
-  const statisticsResults = runStatisticsTests();
-  allResults.push(...statisticsResults);
-
-  console.log("Running SQLite tests...");
-  const sqliteResults = runSqliteTests();
-  allResults.push(...sqliteResults);
-
-  console.log("Running Redis tests...");
-  const redisResults = runRedisTests();
-  allResults.push(...redisResults);
-
-  console.log("Running C++ tests...");
-  const cppResults = runCppTests();
-  allResults.push(...cppResults);
-
-  console.log("Running Ray Tracer tests...");
-  const raytracerResults = runRaytracerTests();
-  allResults.push(...raytracerResults);
-
-  console.log("Running Quantum Computing tests...");
-  const quantumResults = runQuantumTests();
-  allResults.push(...quantumResults);
-
-  console.log("Running Calculus 1 tests...");
-  const calculus1Results = await runCalculusTests();
-  allResults.push(...calculus1Results);
-
-  console.log("Running Calculus 2 tests...");
-  const calculus2Results = await runCalculus2Tests();
-  allResults.push(...calculus2Results);
-
-  console.log("Running Calculus 3 tests...");
-  const calculus3Results = await runCalculus3Tests();
-  allResults.push(...calculus3Results);
-
-  console.log("Running Genomics tests...");
-  const genomicsResults = runGenomicsTests();
-  allResults.push(...genomicsResults);
-
-  console.log("Running MicroGPT tests...");
-  const microgptResults = runMicrogptTests();
-  allResults.push(...microgptResults);
-
-  console.log("Running Advanced Linear Algebra tests...");
-  const advancedLinearAlgebraResults = runAdvancedLinearAlgebraTests();
-  allResults.push(...advancedLinearAlgebraResults);
-
-  console.log("Running Advanced Quantum Computing tests...");
-  const advancedQuantumResults = runAdvancedQuantumTests();
-  allResults.push(...advancedQuantumResults);
-
-  console.log("Running Thermodynamics tests...");
-  const thermodynamicsResults = runThermodynamicsTests();
-  allResults.push(...thermodynamicsResults);
-
-  console.log("Running Special Relativity tests...");
-  const specialRelativityResults = runSpecialRelativityTests();
-  allResults.push(...specialRelativityResults);
-
-  console.log("Running Fluid Mechanics tests...");
-  const fluidMechanicsResults = runFluidMechanicsTests();
-  allResults.push(...fluidMechanicsResults);
-
-  console.log("Running Optics tests...");
-  const opticsResults = runOpticsTests();
-  allResults.push(...opticsResults);
-
-  console.log("Running General Relativity tests...");
-  const generalRelativityResults = runGeneralRelativityTests();
-  allResults.push(...generalRelativityResults);
-
-  console.log("Running Nuclear Physics tests...");
-  const nuclearPhysicsResults = runNuclearPhysicsTests();
-  allResults.push(...nuclearPhysicsResults);
-
-  console.log("Running Particle Physics tests...");
-  const particlePhysicsResults = runParticlePhysicsTests();
-  allResults.push(...particlePhysicsResults);
-
-  console.log("Running Number Theory tests...");
-  const numberTheoryResults = runNumberTheoryTests();
-  allResults.push(...numberTheoryResults);
-
-  console.log("Running Cryptography tests...");
-  const cryptographyResults = runCryptographyTests();
-  allResults.push(...cryptographyResults);
-
-  console.log("Running Cosmology tests...");
-  const cosmologyResults = runCosmologyTests();
-  allResults.push(...cosmologyResults);
-
-  console.log("Running Astrophysics tests...");
-  const astrophysicsResults = runAstrophysicsTests();
-  allResults.push(...astrophysicsResults);
-
-  console.log("Running Plasma Physics tests...");
-  const plasmaPhysicsResults = runPlasmaPhysicsTests();
-  allResults.push(...plasmaPhysicsResults);
-
-  console.log("Running Condensed Matter tests...");
-  const condensedMatterResults = runCondensedMatterTests();
-  allResults.push(...condensedMatterResults);
-
-  console.log("Running Biophysics tests...");
-  const biophysicsResults = runBiophysicsTests();
-  allResults.push(...biophysicsResults);
-
-  console.log("Running Signal Processing tests...");
-  const signalProcessingResults = runSignalProcessingTests();
-  allResults.push(...signalProcessingResults);
-
-  console.log("Running Machine Learning tests...");
-  const machineLearningResults = runMachineLearningTests();
-  allResults.push(...machineLearningResults);
-
-  console.log("Running Information Theory tests...");
-  const informationTheoryResults = runInformationTheoryTests();
-  allResults.push(...informationTheoryResults);
-
-  console.log("Running MySQL tests...");
-  const mysqlResults = runMysqlTests();
-  allResults.push(...mysqlResults);
-
-  console.log("Running Circuits tests...");
-  const circuitsResults = runCircuitsTests();
-  allResults.push(...circuitsResults);
-
-  console.log("Running Classical Mechanics tests...");
-  const classicalMechanicsResults = runClassicalMechanicsTests();
-  allResults.push(...classicalMechanicsResults);
-
-  console.log("Running Differential Equations tests...");
-  const diffeqResults = runDiffeqTests();
-  allResults.push(...diffeqResults);
-
-  console.log("Running Mathematical Physics tests...");
-  const mathematicalPhysicsResults = runMathematicalPhysicsTests();
-  allResults.push(...mathematicalPhysicsResults);
-
-  console.log("Running Complex Systems tests...");
-  const complexSystemsResults = runComplexSystemsTests();
-  allResults.push(...complexSystemsResults);
-
-  console.log("Running Chaos Theory tests...");
-  const chaosTheoryResults = runChaosTheoryTests();
-  allResults.push(...chaosTheoryResults);
-
-  console.log("Running Music tests...");
-  const musicResults = runMusicTests();
-  allResults.push(...musicResults);
-
-  console.log("Running Waves tests...");
-  const wavesResults = runWavesTests();
-  allResults.push(...wavesResults);
-
-  console.log("Running Rust tests...");
-  const rustResults = runRustTests();
-  allResults.push(...rustResults);
-
-  console.log("Running Functional Differential Geometry tests...");
-  const functionalDiffGeoResults = runFunctionalDiffGeoTests();
-  allResults.push(...functionalDiffGeoResults);
-
-  console.log("Running Financial Mathematics tests...");
-  const financialMathResults = runFinancialMathTests();
-  allResults.push(...financialMathResults);
-
-  console.log("Running Quantitative Statistics tests...");
-  const quantStatsResults = runQuantStatsTests();
-  allResults.push(...quantStatsResults);
-
-  console.log("Running Time Series Analysis tests...");
-  const timeSeriesResults = runTimeSeriesTests();
-  allResults.push(...timeSeriesResults);
-
-  console.log("Running Portfolio Theory tests...");
-  const portfolioTheoryResults = runPortfolioTheoryTests();
-  allResults.push(...portfolioTheoryResults);
-
-  console.log("Running Options Pricing tests...");
-  const optionsPricingResults = runOptionsPricingTests();
-  allResults.push(...optionsPricingResults);
-
-  console.log("Running Algorithmic Trading tests...");
-  const algoTradingResults = runAlgoTradingTests();
-  allResults.push(...algoTradingResults);
-
-  console.log("Running Risk Management tests...");
-  const riskManagementResults = runRiskManagementTests();
-  allResults.push(...riskManagementResults);
-
-  console.log("Running Digital Logic tests...");
-  const digitalLogicResults = runDigitalLogicTests();
-  allResults.push(...digitalLogicResults);
-
-  console.log("Running PCB Design tests...");
-  const pcbDesignResults = runPcbDesignTests();
-  allResults.push(...pcbDesignResults);
+  for (const [name, fn] of runners) {
+    console.log(`Running ${name} tests...`);
+    allResults.push(...await fn());
+  }
 
   console.log("\n--- Results ---\n");
 

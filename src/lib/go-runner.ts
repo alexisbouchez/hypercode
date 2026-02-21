@@ -1,4 +1,4 @@
-import type { GoResult, Test, TestResult } from "@/lib/lessons/types";
+import type { BaseRunResult, Test, TestResult } from "@/lib/lessons/types";
 
 declare global {
   interface Window {
@@ -8,7 +8,6 @@ declare global {
 }
 
 let wasmReady = false;
-let wasmLoading = false;
 let wasmLoadPromise: Promise<void> | null = null;
 
 export function isGoReady(): boolean {
@@ -20,7 +19,6 @@ export function initGoRunner(): Promise<void> {
   if (wasmLoadPromise) return wasmLoadPromise;
 
   wasmLoadPromise = (async () => {
-    wasmLoading = true;
     try {
       await new Promise<void>((resolve, reject) => {
         const script = document.createElement("script");
@@ -41,19 +39,13 @@ export function initGoRunner(): Promise<void> {
       wasmReady = true;
     } catch {
       wasmReady = false;
-    } finally {
-      wasmLoading = false;
     }
   })();
 
   return wasmLoadPromise;
 }
 
-export function isGoLoading(): boolean {
-  return wasmLoading;
-}
-
-export async function runGo(code: string): Promise<GoResult> {
+export async function runGo(code: string): Promise<BaseRunResult> {
   if (!wasmReady || !window._yaegiRun) {
     return {
       stdout: "",

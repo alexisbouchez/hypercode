@@ -7,8 +7,8 @@ export interface Test {
   name: string;
   expected: string;
   /**
-   * Complete Go source template for testing functions.
-   * Use {{FUNC}} as placeholder for the user's function definitions.
+   * Language-agnostic source template for testing.
+   * Use {{FUNC}} as a placeholder for the user's extracted function definitions.
    * If not set, the user's full code is run as-is.
    */
   code?: string;
@@ -24,13 +24,13 @@ export interface Lesson {
   tests: Test[];
 }
 
-export interface GoResult {
+export interface BaseRunResult {
   stdout: string;
   stderr: string;
   error: string;
 }
 
-export type RunResult = GoResult & { generatedCode?: string; previewHtml?: string };
+export type RunResult = BaseRunResult & { generatedCode?: string; previewHtml?: string };
 
 export interface TestResult {
   name: string;

@@ -43,7 +43,8 @@ export interface LessonShellProps {
 function useIsMac() {
   const [isMac, setIsMac] = useState(false);
   useEffect(() => {
-    setIsMac(navigator.platform.startsWith("Mac"));
+    const platform = (navigator as Navigator & { userAgentData?: { platform: string } }).userAgentData?.platform ?? navigator.userAgent;
+    setIsMac(platform.includes("Mac"));
   }, []);
   return isMac;
 }
@@ -63,12 +64,11 @@ export function LessonShell({
 }: LessonShellProps) {
   const isMac = useIsMac();
   const mod = isMac ? "⌘" : "Ctrl+";
-  const currentLesson = lesson;
-  const currentIndex = lessons.findIndex((l) => l.id === currentLesson.id);
+  const currentIndex = lessons.findIndex((l) => l.id === lesson.id);
   const hasPrev = currentIndex > 0;
   const hasNext = currentIndex < lessons.length - 1;
 
-  const [code, setCode] = useState(currentLesson.starterCode);
+  const [code, setCode] = useState(lesson.starterCode);
 
   // Expose setCode for E2E tests
   useEffect(() => {
@@ -95,13 +95,13 @@ export function LessonShell({
   useEffect(() => {
     const progress = loadProgress(courseId);
     setCompletedLessons(progress.completedLessons);
-    setCurrentLesson(courseId, currentLesson.id);
+    setCurrentLesson(courseId, lesson.id);
 
-    const saved = getSavedCode(courseId, currentLesson.id);
+    const saved = getSavedCode(courseId, lesson.id);
     if (saved) {
       setCode(saved);
     } else {
-      setCode(currentLesson.starterCode);
+      setCode(lesson.starterCode);
     }
 
     // Reset editor state on lesson change
@@ -109,7 +109,7 @@ export function LessonShell({
     setError("");
     setTestResults([]);
     setShowSolution(false);
-  }, [courseId, currentLesson.id, currentLesson.starterCode]);
+  }, [courseId, lesson.id, lesson.starterCode]);
 
   // Initialize runner (skip in read mode)
   useEffect(() => {
@@ -138,7 +138,7 @@ export function LessonShell({
     setIsRunning(true);
     setShowSolution(false);
 
-    saveCode(courseId, currentLesson.id, code);
+    saveCode(courseId, lesson.id, code);
 
     const result = await runCode(code);
     setOutput(result.stdout);
@@ -146,50 +146,50 @@ export function LessonShell({
     setGeneratedCode(result.generatedCode);
     setPreviewHtml(result.previewHtml);
 
-    const results = await runTests(code, currentLesson.tests);
+    const results = await runTests(code, lesson.tests);
     setTestResults(results);
 
     const allPassed = results.every((t) => t.passed);
     if (allPassed) {
-      markCompleted(courseId, currentLesson.id);
+      markCompleted(courseId, lesson.id);
       setCompletedLessons((prev) =>
-        prev.includes(currentLesson.id) ? prev : [...prev, currentLesson.id],
+        prev.includes(lesson.id) ? prev : [...prev, lesson.id],
       );
     }
 
     setIsRunning(false);
-  }, [courseId, code, currentLesson.id, currentLesson.tests, runCode, runTests]);
+  }, [courseId, code, lesson.id, lesson.tests, runCode, runTests]);
 
   const handleViewSolution = useCallback(() => {
     setShowSolution((prev) => !prev);
   }, []);
 
   const handleResetCode = useCallback(() => {
-    setCode(currentLesson.starterCode);
+    setCode(lesson.starterCode);
     setOutput("");
     setError("");
     setTestResults([]);
     setShowSolution(false);
-  }, [currentLesson.starterCode]);
+  }, [lesson.starterCode]);
 
   // Save code before navigating away
   const handleBeforeNavigate = useCallback(() => {
-    saveCode(courseId, currentLesson.id, code);
-  }, [courseId, currentLesson.id, code]);
+    saveCode(courseId, lesson.id, code);
+  }, [courseId, lesson.id, code]);
 
   const showDiff = showSolution;
 
-  const isCurrentCompleted = completedLessons.includes(currentLesson.id);
+  const isCurrentCompleted = completedLessons.includes(lesson.id);
 
   const handleToggleComplete = useCallback(() => {
     if (isCurrentCompleted) {
-      unmarkCompleted(courseId, currentLesson.id);
-      setCompletedLessons((prev) => prev.filter((id) => id !== currentLesson.id));
+      unmarkCompleted(courseId, lesson.id);
+      setCompletedLessons((prev) => prev.filter((id) => id !== lesson.id));
     } else {
-      markCompleted(courseId, currentLesson.id);
-      setCompletedLessons((prev) => [...prev, currentLesson.id]);
+      markCompleted(courseId, lesson.id);
+      setCompletedLessons((prev) => [...prev, lesson.id]);
     }
-  }, [courseId, currentLesson.id, isCurrentCompleted]);
+  }, [courseId, lesson.id, isCurrentCompleted]);
 
   const topBar = (
     <div className="px-4 py-2 border-b border-border flex items-center gap-2 shrink-0">
@@ -276,10 +276,10 @@ export function LessonShell({
         <div className={readMode ? "max-w-3xl mx-auto w-full" : undefined}>
           <div className="mb-6">
             <h1 className="text-3xl font-bold tracking-tight text-foreground font-display">
-              {currentLesson.title}
+              {lesson.title}
             </h1>
           </div>
-          <LessonContent content={currentLesson.content} />
+          <LessonContent content={lesson.content} />
         </div>
       </div>
       {navigation}
@@ -294,7 +294,7 @@ export function LessonShell({
           chapters={chapters}
           lessons={lessons}
           pdfPath={pdfPath}
-          currentLessonId={currentLesson.id}
+          currentLessonId={lesson.id}
           completedLessons={completedLessons}
         />
         <SidebarInset className="overflow-hidden h-full">
@@ -311,7 +311,7 @@ export function LessonShell({
         chapters={chapters}
         lessons={lessons}
         pdfPath={pdfPath}
-        currentLessonId={currentLesson.id}
+        currentLessonId={lesson.id}
         completedLessons={completedLessons}
       />
       <SidebarInset className="overflow-hidden h-full">
@@ -384,7 +384,7 @@ export function LessonShell({
                         value={code}
                         onChange={(v) => setCode(v)}
                         language={language}
-                        solution={showDiff ? currentLesson.solution : undefined}
+                        solution={showDiff ? lesson.solution : undefined}
                         onRun={handleRun}
                       />
                     </div>
