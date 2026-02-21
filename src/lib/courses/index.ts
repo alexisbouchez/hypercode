@@ -55,9 +55,11 @@ import { informationTheoryChapters, informationTheoryLessons } from "@/lib/lesso
 import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
 import { astrophysicsChapters, astrophysicsLessons } from "@/lib/lessons/astrophysics";
 import { plasmaPhysicsChapters, plasmaPhysicsLessons } from "@/lib/lessons/plasma-physics";
+import { raytracerChapters, raytracerLessons } from "@/lib/lessons/raytracer";
 import { condensedMatterChapters, condensedMatterLessons } from "@/lib/lessons/condensed-matter";
 import { biophysicsChapters, biophysicsLessons } from "@/lib/lessons/biophysics";
 import { mysqlChapters, mysqlLessons } from "@/lib/lessons/mysql";
+import { mathematicalPhysicsChapters, mathematicalPhysicsLessons } from "@/lib/lessons/mathematical-physics";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -658,6 +660,71 @@ That is a strong foundation. C++ is a vast language, but these concepts unlock e
 - *Effective Modern C++* by Scott Meyers -- essential patterns for C++11/14.
 - [LearnCpp.com](https://www.learncpp.com/) -- free, thorough tutorial for beginners.
 - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) -- best practices maintained by Stroustrup and Sutter.
+`;
+
+const raytracerIntroductionContent = `
+## The Ray Tracer Challenge
+
+This course follows *The Ray Tracer Challenge* by Jamis Buck — a test-driven guide to building a photorealistic 3D renderer from scratch using C++ and mathematics.
+
+A ray tracer works by casting rays from a virtual camera into a scene, computing intersections with objects, and calculating how light bounces to determine each pixel's color. The result is photorealistic rendering: shadows, reflections, refraction, and more.
+
+## What You Will Build
+
+Every lesson adds one piece of the renderer:
+
+1. **Vectors & Points** — the fundamental 4-component tuple used for all positions and directions in 3D space.
+2. **Colors** — represent RGB color and compute lighting effects.
+3. **Matrices** — 4×4 matrices are the engine of all 3D transformations.
+4. **Transformations** — translation, scaling, and rotation let you position objects and cameras.
+5. **Rays & Spheres** — cast rays into the scene and solve for intersections with spheres.
+6. **Phong Lighting** — the classic ambient + diffuse + specular lighting model that makes 3D objects look real.
+
+## Why Build a Ray Tracer?
+
+Ray tracers are one of the best projects in computer graphics because:
+
+- **The math is pure and beautiful** — linear algebra, geometry, and physics combine elegantly.
+- **The output is immediately visual** — your code produces images.
+- **It exercises everything** — classes, functions, floating-point math, recursion.
+- **The algorithm is timeless** — every rendering engine, from Pixar's to NVIDIA's RTX, builds on these ideas.
+
+Let's cast the first ray.
+`;
+
+const raytracerWhatsNextContent = `
+## Congratulations
+
+You've built the mathematical foundation of a 3D ray tracer from scratch: vectors, colors, matrices, transformations, ray-sphere intersection, and Phong lighting.
+
+## Extend Your Ray Tracer
+
+The book *The Ray Tracer Challenge* by Jamis Buck covers much more:
+
+- **Shadows** — cast shadow rays to determine if a point is blocked from the light.
+- **Planes** — add flat infinite surfaces alongside spheres.
+- **Patterns** — striped, gradient, ring, and checker textures on any surface.
+- **Reflection** — mirror-like surfaces with recursive ray casting.
+- **Refraction** — transparent materials bending light via Snell's law.
+- **Cubes and cylinders** — extend the shape vocabulary beyond spheres.
+- **CSG** — constructive solid geometry for union, intersection, and difference of shapes.
+
+## Full C++ Implementation
+
+To build the complete ray tracer in real C++:
+
+- Use operator overloading (\`+\`, \`*\`, \`==\`) on Tuple and Matrix4 for cleaner code.
+- Add a \`Canvas\` class that writes PPM image files.
+- Implement matrix inverse for correct normal transformations on scaled shapes.
+- Use a \`World\` class to hold multiple objects and a point light source.
+- Add a \`Camera\` with \`view_transform\` for arbitrary scene positioning.
+
+## References
+
+- *The Ray Tracer Challenge* by Jamis Buck (Pragmatic Bookshelf) — the book this course is based on.
+- *Physically Based Rendering* by Pharr, Jakob & Humphreys — the definitive reference for production rendering.
+- [scratchapixel.com](https://www.scratchapixel.com/) — free in-depth tutorials on ray tracing and rendering.
+- [Ray Tracing in One Weekend](https://raytracing.github.io/) — a fast-paced C++ ray tracer series.
 `;
 
 const gleamIntroductionContent = `
@@ -3296,6 +3363,17 @@ export const courses: Course[] = [
     whatsNextContent: cppWhatsNextContent,
   },
   {
+    id: "raytracer",
+    title: "Ray Tracer",
+    description: "Build a photorealistic 3D ray tracer from scratch in C++. Master the linear algebra of 3D graphics: vectors, matrices, transformations, ray-sphere intersection, and Phong lighting.",
+    language: "cpp",
+    chapters: raytracerChapters,
+    lessons: raytracerLessons,
+    runtimeLabel: "JSCPP",
+    introductionContent: raytracerIntroductionContent,
+    whatsNextContent: raytracerWhatsNextContent,
+  },
+  {
     id: "gleam",
     title: "Gleam",
     description: "Learn the Gleam programming language from scratch. Build type-safe, functional programs with pattern matching, the pipe operator, and the Result type.",
@@ -4082,6 +4160,53 @@ You have completed the MySQL course. Here are natural next steps:
 - [Use The Index, Luke](https://use-the-index-luke.com/) — An exceptional free guide to SQL indexing and performance.
 - **Learning MySQL** by Dyer, Beaulieu & Pachev — Practical O'Reilly introduction.
 - **High Performance MySQL** by Schwartz, Zaitsev & Tkachenko — The definitive guide to MySQL at scale.`,
+  },
+  {
+    id: "mathematical-physics",
+    title: "Mathematical Physics in Python",
+    description: "Learn mathematical physics by implementing the essential tools of theoretical physics in Python. Compute Fourier series, DFT, Laplace transforms, Legendre/Hermite/Bessel polynomials, the Gamma function, heat and wave equation solutions, Euler-Lagrange equations, Green's functions, perturbation theory, tensor operations, and Monte Carlo integration from scratch.",
+    language: "python",
+    chapters: mathematicalPhysicsChapters,
+    lessons: mathematicalPhysicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Mathematical Physics?
+
+Mathematical physics is the toolkit of theoretical physics — the collection of analytical and numerical methods that physicists use to solve the equations governing nature. Fourier transforms decompose signals into frequencies. Special functions — Legendre polynomials, Bessel functions, Hermite polynomials — are the exact solutions to the differential equations of quantum mechanics, electrostatics, and wave propagation. Green's functions express the response of a system to any forcing in terms of its response to a point source.
+
+This course implements these methods from scratch in pure Python. No scipy, no numpy — just the mathematics expressed as functions. Each lesson introduces one technique, explains why it matters in physics, and asks you to write the algorithm as code.
+
+You will implement:
+
+- **Fourier series** — Decompose a periodic function into sine and cosine harmonics
+- **Discrete Fourier Transform** — Compute the frequency spectrum of a discrete signal
+- **Legendre polynomials** — Solutions to Legendre's equation; appear in multipole expansions and quantum angular momentum
+- **Gamma function** — The Lanczos approximation; generalizes the factorial to real and complex arguments
+- **Bessel functions** — Solutions to Bessel's equation; govern waves in cylindrical geometries
+- **Hermite polynomials** — Eigenfunctions of the quantum harmonic oscillator
+- **Heat equation** — Separation of variables and Fourier mode decomposition
+- **Wave equation** — d'Alembert's solution and standing waves
+- **Euler-Lagrange equation** — The calculus of variations; the pendulum and the principle of least action
+- **Runge-Kutta RK4** — Fourth-order numerical integration of ordinary differential equations
+- **Laplace transform** — Analytic transform pairs and numerical integration
+- **Green's functions** — The impulse response of the 1D Poisson equation
+- **Perturbation theory** — First-order energy corrections for the particle in a box
+- **Tensor operations** — Metric tensor, Christoffel symbols, and index gymnastics in polar coordinates
+- **Monte Carlo integration** — Random sampling, variance reduction, and π from uniform deviates`,
+    whatsNextContent: `## What's Next
+
+You have implemented the core toolkit of mathematical physics. Here are natural next steps:
+
+- **Signal Processing** — The DFT you implemented is the foundation; FFT algorithms, digital filters, and spectral analysis extend it to real-world signals.
+- **Quantum Mechanics** — Hermite and Legendre polynomials are the wavefunctions of the harmonic oscillator and hydrogen atom. The perturbation theory lesson is the first step toward time-dependent quantum mechanics.
+- **General Relativity** — Tensor operations and Christoffel symbols are the language of curved spacetime and Einstein's field equations.
+- **Differential Equations** — The RK4 and heat equation methods generalize to stiff ODEs, finite element methods, and spectral solvers.
+
+## Resources
+
+- **Mathematical Methods for Physics and Engineering** by Riley, Hobson & Bence — The most comprehensive undergraduate reference; covers every topic in this course.
+- **Mathematical Physics** by Hassani — Rigorous graduate-level treatment of all the methods here.
+- **Numerical Recipes** by Press et al. — The practical guide to implementing numerical algorithms.
+- **Methods of Mathematical Physics** by Courant & Hilbert — The classic two-volume reference for PDEs and spectral theory.`,
   },
 ];
 

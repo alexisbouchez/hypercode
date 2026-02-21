@@ -20,6 +20,7 @@ import { runStatisticsTests } from "./test-runners/statistics-test-runner";
 import { runSqliteTests } from "./test-runners/sqlite-test-runner";
 import { runRedisTests } from "./test-runners/redis-test-runner";
 import { runCppTests } from "./test-runners/cpp-test-runner";
+import { runRaytracerTests } from "./test-runners/raytracer-test-runner";
 import { runQuantumTests } from "./test-runners/quantum-test-runner";
 import { runCalculusTests } from "./test-runners/calculus-test-runner";
 import { runCalculus2Tests } from "./test-runners/calculus2-test-runner";
@@ -46,6 +47,12 @@ import { runSignalProcessingTests } from "./test-runners/signal-processing-test-
 import { runMachineLearningTests } from "./test-runners/machine-learning-test-runner";
 import { runInformationTheoryTests } from "./test-runners/information-theory-test-runner";
 import { runMysqlTests } from "./test-runners/mysql-test-runner";
+import { runCircuitsTests } from "./test-runners/circuits-test-runner";
+import { runClassicalMechanicsTests } from "./test-runners/classical-mechanics-test-runner";
+import { runDiffeqTests } from "./test-runners/diffeq-test-runner";
+import { runMathematicalPhysicsTests } from "./test-runners/mathematical-physics-test-runner";
+import { runMusicTests } from "./test-runners/music-test-runner";
+import { runWavesTests } from "./test-runners/waves-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -138,6 +145,10 @@ async function main() {
   console.log("Running C++ tests...");
   const cppResults = runCppTests();
   allResults.push(...cppResults);
+
+  console.log("Running Ray Tracer tests...");
+  const raytracerResults = runRaytracerTests();
+  allResults.push(...raytracerResults);
 
   console.log("Running Quantum Computing tests...");
   const quantumResults = runQuantumTests();
@@ -242,6 +253,30 @@ async function main() {
   console.log("Running MySQL tests...");
   const mysqlResults = runMysqlTests();
   allResults.push(...mysqlResults);
+
+  console.log("Running Circuits tests...");
+  const circuitsResults = runCircuitsTests();
+  allResults.push(...circuitsResults);
+
+  console.log("Running Classical Mechanics tests...");
+  const classicalMechanicsResults = runClassicalMechanicsTests();
+  allResults.push(...classicalMechanicsResults);
+
+  console.log("Running Differential Equations tests...");
+  const diffeqResults = runDiffeqTests();
+  allResults.push(...diffeqResults);
+
+  console.log("Running Mathematical Physics tests...");
+  const mathematicalPhysicsResults = runMathematicalPhysicsTests();
+  allResults.push(...mathematicalPhysicsResults);
+
+  console.log("Running Music tests...");
+  const musicResults = runMusicTests();
+  allResults.push(...musicResults);
+
+  console.log("Running Waves tests...");
+  const wavesResults = runWavesTests();
+  allResults.push(...wavesResults);
 
   console.log("\n--- Results ---\n");
 

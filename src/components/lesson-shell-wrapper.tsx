@@ -79,6 +79,7 @@ export function LessonShellWrapper({
     if (courseId === "sqlite") return initSqliteRunner();
     if (courseId === "redis") return initRedisRunner();
     if (courseId === "cpp") return initCppRunner();
+    if (courseId === "raytracer") return initCppRunner();
     if (courseId === "music") return initMusicRunner();
     if (courseId === "waves") return initMusicRunner();
     if (courseId === "electromagnetism") return initPythonRunner();
@@ -98,6 +99,7 @@ export function LessonShellWrapper({
     if (courseId === "plasma-physics") return initPythonRunner();
     if (courseId === "condensed-matter") return initPythonRunner();
     if (courseId === "biophysics") return initPythonRunner();
+    if (courseId === "mathematical-physics") return initPythonRunner();
     if (courseId === "signal-processing") return initPythonRunner();
     if (courseId === "machine-learning") return initPythonRunner();
     if (courseId === "information-theory") return initPythonRunner();
@@ -141,6 +143,7 @@ export function LessonShellWrapper({
     if (courseId === "sqlite") return isSqliteReady();
     if (courseId === "redis") return isRedisReady();
     if (courseId === "cpp") return isCppReady();
+    if (courseId === "raytracer") return isCppReady();
     if (courseId === "music") return isMusicReady();
     if (courseId === "waves") return isMusicReady();
     if (courseId === "electromagnetism") return isPythonReady();
@@ -160,6 +163,7 @@ export function LessonShellWrapper({
     if (courseId === "plasma-physics") return isPythonReady();
     if (courseId === "condensed-matter") return isPythonReady();
     if (courseId === "biophysics") return isPythonReady();
+    if (courseId === "mathematical-physics") return isPythonReady();
     if (courseId === "signal-processing") return isPythonReady();
     if (courseId === "machine-learning") return isPythonReady();
     if (courseId === "information-theory") return isPythonReady();
@@ -203,6 +207,7 @@ export function LessonShellWrapper({
     if (courseId === "sqlite") return runSqlite(code);
     if (courseId === "redis") return runRedis(code);
     if (courseId === "cpp") return runCpp(code);
+    if (courseId === "raytracer") return runCpp(code);
     if (courseId === "music") return runMusic(code);
     if (courseId === "waves") return runMusic(code);
     if (courseId === "electromagnetism") return runPython(code);
@@ -222,6 +227,7 @@ export function LessonShellWrapper({
     if (courseId === "plasma-physics") return runPython(code);
     if (courseId === "condensed-matter") return runPython(code);
     if (courseId === "biophysics") return runPython(code);
+    if (courseId === "mathematical-physics") return runPython(code);
     if (courseId === "signal-processing") return runPython(code);
     if (courseId === "machine-learning") return runPython(code);
     if (courseId === "information-theory") return runPython(code);
@@ -265,6 +271,7 @@ export function LessonShellWrapper({
     if (courseId === "sqlite") return runSqliteTests(code, tests);
     if (courseId === "redis") return runRedisTests(code, tests);
     if (courseId === "cpp") return runCppTests(code, tests);
+    if (courseId === "raytracer") return runCppTests(code, tests);
     if (courseId === "music") return runMusicTests(code, tests);
     if (courseId === "waves") return runMusicTests(code, tests);
     if (courseId === "electromagnetism") return runPythonTests(code, tests);
@@ -284,6 +291,7 @@ export function LessonShellWrapper({
     if (courseId === "plasma-physics") return runPythonTests(code, tests);
     if (courseId === "condensed-matter") return runPythonTests(code, tests);
     if (courseId === "biophysics") return runPythonTests(code, tests);
+    if (courseId === "mathematical-physics") return runPythonTests(code, tests);
     if (courseId === "signal-processing") return runPythonTests(code, tests);
     if (courseId === "machine-learning") return runPythonTests(code, tests);
     if (courseId === "information-theory") return runPythonTests(code, tests);
