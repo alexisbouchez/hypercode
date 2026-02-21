@@ -6,46 +6,43 @@ export const laplacian2d: Lesson = {
 	chapterId: "optimization",
 	content: `## The Laplacian
 
-The **Laplacian** of f(x, y) is the sum of its second-order partial derivatives:
+The **Laplacian** of $f(x, y)$ is the sum of its second-order partial derivatives:
 
-\`\`\`
-∇²f = ∂²f/∂x² + ∂²f/∂y²
-\`\`\`
+$$\\nabla^2 f = \\frac{\\partial^2 f}{\\partial x^2} + \\frac{\\partial^2 f}{\\partial y^2}$$
 
-It measures **how much f differs from its average** in the neighborhood of a point.
+It measures **how much $f$ differs from its average** in the neighborhood of a point.
 
 ### Computing Second Derivatives Numerically
 
 Using central differences twice:
 
-\`\`\`
-∂²f/∂x² ≈ [f(x+h,y) - 2f(x,y) + f(x-h,y)] / h²
-∂²f/∂y² ≈ [f(x,y+h) - 2f(x,y) + f(x,y-h)] / h²
-\`\`\`
+$$\\frac{\\partial^2 f}{\\partial x^2} \\approx \\frac{f(x+h,y) - 2f(x,y) + f(x-h,y)}{h^2}$$
+
+$$\\frac{\\partial^2 f}{\\partial y^2} \\approx \\frac{f(x,y+h) - 2f(x,y) + f(x,y-h)}{h^2}$$
 
 ### Applications
 
 The Laplacian appears throughout physics and engineering:
-- **Heat equation**: ∂T/∂t = α∇²T (how temperature diffuses)
-- **Wave equation**: ∂²u/∂t² = c²∇²u
-- **Electrostatics**: ∇²φ = 0 in free space (Laplace's equation)
+- **Heat equation**: $\\partial T / \\partial t = \\alpha \\nabla^2 T$ (how temperature diffuses)
+- **Wave equation**: $\\partial^2 u / \\partial t^2 = c^2 \\nabla^2 u$
+- **Electrostatics**: $\\nabla^2 \\varphi = 0$ in free space (Laplace's equation)
 - **Image processing**: edge detection (Laplacian filter)
 
 ### Interpretation
 
-- ∇²f > 0 at a point: f is below its local average (like a bowl)
-- ∇²f < 0 at a point: f is above its local average (like a hill)
-- ∇²f = 0: **harmonic function** — a steady-state distribution
+- $\\nabla^2 f > 0$ at a point: $f$ is below its local average (like a bowl)
+- $\\nabla^2 f < 0$ at a point: $f$ is above its local average (like a hill)
+- $\\nabla^2 f = 0$: **harmonic function** — a steady-state distribution
 
 ### Example
 
-For f(x,y) = x² + y²:
-- ∂²f/∂x² = 2
-- ∂²f/∂y² = 2
-- ∇²f = 4 everywhere
+For $f(x,y) = x^2 + y^2$:
+- $\\partial^2 f / \\partial x^2 = 2$
+- $\\partial^2 f / \\partial y^2 = 2$
+- $\\nabla^2 f = 4$ everywhere
 
-For f(x,y) = x² - y²:
-- ∇²f = 2 + (-2) = 0 (harmonic!)
+For $f(x,y) = x^2 - y^2$:
+- $\\nabla^2 f = 2 + (-2) = 0$ (harmonic!)
 
 ### Your Task
 

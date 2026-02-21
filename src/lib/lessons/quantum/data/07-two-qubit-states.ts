@@ -6,17 +6,15 @@ export const twoQubitStates: Lesson = {
 	chapterId: "multi-qubit",
 	content: `## Combining Qubits
 
-To build quantum systems, we combine multiple qubits using the **tensor product** (⊗). Two qubits [α, β] and [γ, δ] combine into a 4-element state:
+To build quantum systems, we combine multiple qubits using the **tensor product** ($\otimes$). Two qubits $[\alpha, \beta]$ and $[\gamma, \delta]$ combine into a 4-element state:
 
-\`\`\`
-[α, β] ⊗ [γ, δ] = [αγ, αδ, βγ, βδ]
-\`\`\`
+$$[\alpha, \beta] \otimes [\gamma, \delta] = [\alpha\gamma,\ \alpha\delta,\ \beta\gamma,\ \beta\delta]$$
 
 The four elements represent amplitudes for the four basis states:
-- Index 0: |00⟩ (first=0, second=0)
-- Index 1: |01⟩ (first=0, second=1)
-- Index 2: |10⟩ (first=1, second=0)
-- Index 3: |11⟩ (first=1, second=1)
+- Index 0: $|00\rangle$ (first=0, second=0)
+- Index 1: $|01\rangle$ (first=0, second=1)
+- Index 2: $|10\rangle$ (first=1, second=0)
+- Index 3: $|11\rangle$ (first=1, second=1)
 
 \`\`\`python
 def tensor_product(q1, q2):

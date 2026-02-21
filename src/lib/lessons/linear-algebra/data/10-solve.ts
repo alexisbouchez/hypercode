@@ -8,12 +8,10 @@ export const solve: Lesson = {
 
 A **system of linear equations** like:
 
-\`\`\`
-2x + y = 5
- x + y = 3
-\`\`\`
+$$2x + y = 5$$
+$$x + y = 3$$
 
-can be written in matrix form as \`Ax = b\`:
+can be written in matrix form as $\mathbf{A}\mathbf{x} = \mathbf{b}$:
 
 \`\`\`python
 A = [[2, 1],
@@ -23,7 +21,7 @@ b = [5, 3]
 
 ### Gaussian Elimination
 
-We solve this by **row reduction** — transforming A into upper triangular form, then back-substituting:
+We solve this by **row reduction** — transforming $\mathbf{A}$ into upper triangular form, then back-substituting:
 
 \`\`\`python
 def solve(A, b):
@@ -48,12 +46,12 @@ print(x)  # [2.0, 1.0]  →  x=2, y=1
 ### Why Gaussian Elimination?
 
 - More numerically stable than computing the inverse
-- Works directly on the augmented matrix \`[A|b]\`
+- Works directly on the augmented matrix $[\mathbf{A} \mid \mathbf{b}]$
 - Basis for LU decomposition
 
 ### Verifying the Solution
 
-Check: \`A @ x\` should equal \`b\`:
+Check: $\mathbf{A}\mathbf{x}$ should equal $\mathbf{b}$:
 
 \`\`\`python
 Ax = [sum(A[i][j]*x[j] for j in range(len(x))) for i in range(len(A))]
@@ -62,7 +60,7 @@ print(all(abs(Ax[i] - b[i]) < 1e-9 for i in range(len(b))))  # True
 
 ### Your Task
 
-Implement \`solve(A, b)\` that returns the solution vector \`x\` to \`Ax = b\`, rounded to 1 decimal place.`,
+Implement \`solve(A, b)\` that returns the solution vector $\mathbf{x}$ to $\mathbf{A}\mathbf{x} = \mathbf{b}$, rounded to 1 decimal place.`,
 
 	starterCode: `def solve(A, b):
     # Return the solution x to Ax = b, rounded to 1 decimal place

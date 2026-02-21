@@ -8,33 +8,31 @@ export const dopplerEffectLesson: Lesson = {
 
 When a sound source moves toward you, successive wavefronts are compressed — the frequency you hear is higher. Moving away stretches them — the frequency is lower.
 
-\`\`\`
-f_observed = f\u2080 \u00d7 v / (v \u2212 v_s)
-\`\`\`
+$$f_\text{obs} = f_0 \cdot \frac{v}{v - v_s}$$
 
-- **f\u2080** — emitted frequency (Hz)
-- **v** = 343 m/s — speed of sound
-- **v_s** — source velocity (m/s): positive = moving toward observer
+- $f_0$ — emitted frequency (Hz)
+- $v = 343$ m/s — speed of sound
+- $v_s$ — source velocity (m/s): positive = moving toward observer
 
 ### Sign Convention
 
-| v_s | Effect |
+| $v_s$ | Effect |
 |-----|--------|
 | > 0 | source approaching — higher pitch |
 | = 0 | source stationary — unchanged |
 | < 0 | source receding — lower pitch |
 
-### Examples (f\u2080 = 440 Hz)
+### Examples ($f_0 = 440$ Hz)
 
-| v_s (m/s) | f_observed (Hz) |
+| $v_s$ (m/s) | $f_\text{obs}$ (Hz) |
 |-----------|----------------|
 | 0 | **440.0000** |
-| 34.3 (\u2248 Mach 0.1) | **488.8889** |
-| \u221234.3 | **400.0000** |
+| 34.3 ($\approx$ Mach 0.1) | **488.8889** |
+| −34.3 | **400.0000** |
 
 ### Your Task
 
-Implement \`dopplerShift(f0, vSource)\` returning the observed frequency (v = 343 m/s).
+Implement \`dopplerShift(f0, vSource)\` returning the observed frequency ($v = 343$ m/s).
 
 Run the code to **hear the Doppler shift** — ascending then descending pitch.`,
 

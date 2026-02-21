@@ -6,31 +6,27 @@ export const projectileRangeLesson: Lesson = {
 	chapterId: "kinematics",
 	content: `## Projectile Motion
 
-When an object is launched at speed v₀ and angle θ above horizontal (ignoring air resistance), it follows a parabolic path. Horizontal and vertical motion are **independent**.
+When an object is launched at speed $v_0$ and angle $\\theta$ above horizontal (ignoring air resistance), it follows a parabolic path. Horizontal and vertical motion are **independent**.
 
 ### Horizontal Range
 
 The total horizontal distance (range) when landing at the same height:
 
-\`\`\`
-R = v₀² × sin(2θ) / g
-\`\`\`
+$$R = \\frac{v_0^2 \\sin(2\\theta)}{g}$$
 
 ### Maximum Height
 
-\`\`\`
-h_max = v₀² × sin²(θ) / (2g)
-\`\`\`
+$$h_{\\max} = \\frac{v_0^2 \\sin^2(\\theta)}{2g}$$
 
 ### Key Observations
 
-- **45° gives maximum range**: sin(2 × 45°) = sin(90°) = 1
-- **Complementary angles have equal range**: 30° and 60° give the same R
-- Range scales as v₀² — doubling launch speed quadruples range
+- **45° gives maximum range**: $\\sin(2 \\times 45°) = \\sin(90°) = 1$
+- **Complementary angles have equal range**: 30° and 60° give the same $R$
+- Range scales as $v_0^2$ — doubling launch speed quadruples range
 
-### Examples at v₀ = 20 m/s
+### Examples at $v_0 = 20$ m/s
 
-| θ | R (m) |
+| $\\theta$ | $R$ (m) |
 |---|-------|
 | 30° | 35.3119 |
 | 45° | 40.7747 |
@@ -40,7 +36,7 @@ h_max = v₀² × sin²(θ) / (2g)
 
 Implement \`projectileRange(v0, angle_deg)\` returning range in metres.
 
-**Hint:** Convert degrees to radians: \`angle_rad = angle_deg × π / 180\`.`,
+**Hint:** Convert degrees to radians: $\\text{angle\\_rad} = \\text{angle\\_deg} \\times \\pi / 180$.`,
 
 	starterCode: `#include <stdio.h>
 #include <math.h>

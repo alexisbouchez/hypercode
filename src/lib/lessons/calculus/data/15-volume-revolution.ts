@@ -6,46 +6,40 @@ export const volumeRevolution: Lesson = {
 	chapterId: "integral-applications",
 	content: `## Volume of Revolution
 
-Rotating a curve \`y = f(x)\` around the **x-axis** sweeps out a solid. We can find its volume using the **disk method**.
+Rotating a curve $y = f(x)$ around the **x-axis** sweeps out a solid. We can find its volume using the **disk method**.
 
 ### Disk Method
 
-At each \`x\`, the cross-section is a disk with radius \`f(x)\` and area \`π·f(x)²\`. Integrating these areas:
+At each $x$, the cross-section is a disk with radius $f(x)$ and area $\\pi [f(x)]^2$. Integrating these areas:
 
-\`\`\`
-V = π · ∫_a^b [f(x)]² dx
-\`\`\`
+$$V = \\pi \\int_a^b [f(x)]^2\\, dx$$
 
 ### Washer Method
 
-Rotating the region between two curves \`f(x)\` (outer) and \`g(x)\` (inner):
+Rotating the region between two curves $f(x)$ (outer) and $g(x)$ (inner):
 
-\`\`\`
-V = π · ∫_a^b ([f(x)]² - [g(x)]²) dx
-\`\`\`
+$$V = \\pi \\int_a^b \\left([f(x)]^2 - [g(x)]^2\\right) dx$$
 
 Each cross-section is a **washer** (disk with hole).
 
 ### Classic Examples
 
-**Cylinder**: rotate \`f(x) = r\` (constant) on \`[0, h]\`:
-\`\`\`
-V = π·r²·h
-\`\`\`
+**Cylinder**: rotate $f(x) = r$ (constant) on $[0, h]$:
 
-**Cone**: rotate \`f(x) = rx/h\` (line) on \`[0, h]\`:
-\`\`\`
-V = π · ∫₀ʰ (rx/h)² dx = (π·r²/h²) · h³/3 = π·r²·h/3
-\`\`\`
+$$V = \\pi r^2 h$$
 
-**Sphere**: rotate \`f(x) = √(r²-x²)\` on \`[-r, r]\`:
-\`\`\`
-V = π · ∫₋ᵣʳ (r²-x²) dx = (4/3)π·r³
-\`\`\`
+**Cone**: rotate $f(x) = \\frac{rx}{h}$ (line) on $[0, h]$:
+
+$$V = \\pi \\int_0^h \\left(\\frac{rx}{h}\\right)^2 dx = \\frac{\\pi r^2}{h^2} \\cdot \\frac{h^3}{3} = \\frac{\\pi r^2 h}{3}$$
+
+**Sphere**: rotate $f(x) = \\sqrt{r^2 - x^2}$ on $[-r, r]$:
+
+$$V = \\pi \\int_{-r}^{r} (r^2 - x^2)\\, dx = \\frac{4}{3}\\pi r^3$$
 
 ### Numerical Implementation
 
 Use the midpoint rule:
+
 \`\`\`c
 #define PI 3.14159265358979
 for each midpoint x:
@@ -55,7 +49,7 @@ return PI * sum * h
 
 ### Your Task
 
-Implement \`double volume_disk(double (*f)(double), double a, double b, int n)\` that computes \`π ∫_a^b f(x)² dx\` using the midpoint rule.`,
+Implement \`double volume_disk(double (*f)(double), double a, double b, int n)\` that computes $\\pi \\int_a^b [f(x)]^2\\, dx$ using the midpoint rule.`,
 
 	starterCode: `#include <stdio.h>
 #define PI 3.14159265358979

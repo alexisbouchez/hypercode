@@ -23,7 +23,7 @@ print(scaled) # [[3, 6], [9, 12]]
 
 ### Transpose
 
-The **transpose** \`Aᵀ\` flips a matrix along its diagonal — rows become columns:
+The **transpose** $\mathbf{A}^T$ flips a matrix along its diagonal — rows become columns:
 
 \`\`\`python
 A = [[1, 2, 3],
@@ -37,7 +37,7 @@ print(AT)
 
 ### Symmetric Matrices
 
-A matrix is **symmetric** if \`A = Aᵀ\`. Covariance matrices and Gram matrices are always symmetric.
+A matrix is **symmetric** if $\mathbf{A} = \mathbf{A}^T$. Covariance matrices and Gram matrices are always symmetric.
 
 ### Your Task
 

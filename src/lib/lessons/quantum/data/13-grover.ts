@@ -6,9 +6,9 @@ export const grover: Lesson = {
 	chapterId: "algorithms",
 	content: `## Quantum Search
 
-**Grover's algorithm** searches an unsorted database of N items in O(√N) steps — a quadratic speedup over classical O(N) linear search.
+**Grover's algorithm** searches an unsorted database of $N$ items in $O(\sqrt{N})$ steps — a quadratic speedup over classical $O(N)$ linear search.
 
-The algorithm works on a uniform superposition of all N states and amplifies the amplitude of the target state through two operations:
+The algorithm works on a uniform superposition of all $N$ states and amplifies the amplitude of the target state through two operations:
 
 **1. Oracle** — Flips the phase of the target state (marks it):
 \`\`\`python
@@ -26,7 +26,7 @@ def diffusion(state):
     return [2 * avg - a for a in state]
 \`\`\`
 
-For N=4 states, one iteration is enough to find the target with certainty:
+For $N = 4$ states, one iteration is enough to find the target with certainty:
 
 \`\`\`python
 import math

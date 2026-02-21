@@ -6,27 +6,24 @@ export const qrDecompositionLesson: Lesson = {
 	chapterId: "orthogonality",
 	content: `## QR Decomposition
 
-Every matrix A can be factored as **A = QR** where:
-- **Q** has orthonormal columns (Q^T Q = I)
-- **R** is upper triangular with positive diagonal entries
+Every matrix $A$ can be factored as $A = QR$ where:
+- $Q$ has orthonormal columns ($Q^T Q = I$)
+- $R$ is upper triangular with positive diagonal entries
 
 QR decomposition is the foundation for numerically stable least-squares, eigenvalue algorithms, and more.
 
 ### Algorithm via Gram-Schmidt
 
-Process each column of A left-to-right:
-- Apply Gram-Schmidt to produce orthonormal column qⱼ
-- R[i][j] = dot(aⱼ, qᵢ) for i < j  (how much of each previous q is in aⱼ)
-- R[j][j] = ‖wⱼ‖  (the norm of the residual)
+Process each column of $A$ left-to-right:
+- Apply Gram-Schmidt to produce orthonormal column $\\mathbf{q}_{j}$
+- $R_{ij} = \\mathbf{a}_{j} \\cdot \\mathbf{q}_{i}$ for $i < j$ (how much of each previous $\\mathbf{q}$ is in $\\mathbf{a}_{j}$)
+- $R_{jj} = \\|\\mathbf{w}_{j}\\|$ (the norm of the residual)
 
 ### Example
 
-\`\`\`
-A = [[3, 2],    Q = [[0.9487, -0.3162],    R = [[3.1623, 2.5298],
-     [1, 2]]         [0.3162,  0.9487]]         [0.0000, 1.2649]]
-\`\`\`
+$$A = \\begin{pmatrix} 3 & 2 \\\\ 1 & 2 \\end{pmatrix}, \\quad Q = \\begin{pmatrix} 0.9487 & -0.3162 \\\\ 0.3162 & 0.9487 \\end{pmatrix}, \\quad R = \\begin{pmatrix} 3.1623 & 2.5298 \\\\ 0 & 1.2649 \\end{pmatrix}$$
 
-Verify: Q^T Q = I and Q × R = A.
+Verify: $Q^T Q = I$ and $Q \\times R = A$.
 
 ### Your Task
 

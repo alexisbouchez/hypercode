@@ -8,9 +8,7 @@ export const improperIntegrals: Lesson = {
 
 An integral with an **infinite limit** is defined as a limit:
 
-\`\`\`
-∫_a^∞ f(x) dx = lim_{T→∞} ∫_a^T f(x) dx
-\`\`\`
+$$\int_a^{\infty} f(x) \, dx = \lim_{T \to \infty} \int_a^T f(x) \, dx$$
 
 If the limit exists, the integral **converges**. Otherwise, it **diverges**.
 
@@ -18,28 +16,27 @@ If the limit exists, the integral **converges**. Otherwise, it **diverges**.
 
 | Integral | Result | Converges? |
 |----------|--------|------------|
-| \`∫_1^∞ 1/x dx\` | ∞ | No |
-| \`∫_1^∞ 1/x² dx\` | 1 | Yes |
-| \`∫_1^∞ 1/x^p dx\` | 1/(p-1) | Yes if p > 1 |
+| $\int_1^{\infty} \frac{1}{x} \, dx$ | $\infty$ | No |
+| $\int_1^{\infty} \frac{1}{x^2} \, dx$ | $1$ | Yes |
+| $\int_1^{\infty} \frac{1}{x^p} \, dx$ | $\frac{1}{p-1}$ | Yes if $p > 1$ |
 
 ### The p-Test
 
-\`∫_1^∞ 1/x^p dx\` converges if and only if **p > 1**.
+$\int_1^{\infty} \frac{1}{x^p} \, dx$ converges if and only if **$p > 1$**.
 
-This is why the harmonic series Σ1/n diverges (p=1), but Σ1/n² converges (p=2).
+This is why the harmonic series $\sum \frac{1}{n}$ diverges ($p=1$), but $\sum \frac{1}{n^2}$ converges ($p=2$).
 
 ### Numerical Approach
 
-Integrate to a large finite \`T\`:
-\`\`\`
-∫_a^∞ f(x) dx ≈ ∫_a^T f(x) dx  (T large)
-\`\`\`
+Integrate to a large finite $T$:
 
-The truncation error is roughly \`|∫_T^∞ f(x) dx|\`. For \`1/x²\`, this is \`1/T\`, so T=100000 gives 5-decimal accuracy.
+$$\int_a^{\infty} f(x) \, dx \approx \int_a^T f(x) \, dx \quad (T \text{ large})$$
+
+The truncation error is roughly $\left|\int_T^{\infty} f(x) \, dx\right|$. For $\frac{1}{x^2}$, this is $\frac{1}{T}$, so $T=100000$ gives 5-decimal accuracy.
 
 ### Your Task
 
-Implement \`double improper_integral(double (*f)(double), double a, double T, int n)\` that approximates \`∫_a^T f(x) dx\` using the midpoint rule.`,
+Implement \`double improper_integral(double (*f)(double), double a, double T, int n)\` that approximates $\int_a^T f(x) \, dx$ using the midpoint rule.`,
 
 	starterCode: `#include <stdio.h>
 

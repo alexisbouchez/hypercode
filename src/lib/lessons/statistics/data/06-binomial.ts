@@ -6,7 +6,11 @@ export const binomialDistribution: Lesson = {
 	chapterId: "distributions",
 	content: `## Counting Successes
 
-The **binomial distribution** models the number of successes in \`n\` independent trials, each with success probability \`p\`.
+The **binomial distribution** models the number of successes in $n$ independent trials, each with success probability $p$. We write $X \sim \text{Binomial}(n, p)$.
+
+The PMF is:
+
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
 \`\`\`python
 import math
@@ -20,19 +24,19 @@ def binom_cdf(k, n, p):
 # Flip a fair coin 5 times. What is P(exactly 2 heads)?
 n, p = 5, 0.5
 print(round(binom_pmf(2, n, p), 4))   # 0.3125 — P(X = 2)
-print(round(binom_cdf(2, n, p), 4))   # 0.5    — P(X ≤ 2)
+print(round(binom_cdf(2, n, p), 4))   # 0.5    — P(X <= 2)
 \`\`\`
 
 ### PMF vs CDF
 
-- **PMF** (probability mass function): P(X = k) — the probability of exactly k successes
-- **CDF**: P(X ≤ k) — the probability of k or fewer successes
+- **PMF** (probability mass function): $P(X = k)$ — the probability of exactly $k$ successes
+- **CDF**: $P(X \leq k)$ — the probability of $k$ or fewer successes
 
 ### Parameters
 
-- **n** — number of trials
-- **p** — probability of success per trial
-- **k** — number of successes to query
+- $n$ — number of trials
+- $p$ — probability of success per trial
+- $k$ — number of successes to query
 
 ### Example: Quality Control
 
@@ -45,8 +49,8 @@ print(round(binom_pmf(2, n=20, p=0.1), 4))  # 0.2852
 ### Your Task
 
 Implement \`binomial_stats(n, p, k)\` that prints:
-1. P(X = k) — the PMF (rounded to 4 decimal places)
-2. P(X ≤ k) — the CDF (rounded to 4 decimal places)`,
+1. $P(X = k)$ — the PMF (rounded to 4 decimal places)
+2. $P(X \leq k)$ — the CDF (rounded to 4 decimal places)`,
 
 	starterCode: `import math
 

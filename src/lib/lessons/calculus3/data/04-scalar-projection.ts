@@ -6,43 +6,37 @@ export const scalarProjection: Lesson = {
 	chapterId: "vectors-in-3d",
 	content: `## Scalar Projection
 
-The **scalar projection** of **a** onto **b** answers: "how much of **a** points in the direction of **b**?"
+The **scalar projection** of $\\mathbf{a}$ onto $\\mathbf{b}$ answers: "how much of $\\mathbf{a}$ points in the direction of $\\mathbf{b}$?"
 
-\`\`\`
-comp_b(a) = (a · b) / |b|
-\`\`\`
+$$\\text{comp}_{\\mathbf{b}}(\\mathbf{a}) = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{|\\mathbf{b}|}$$
 
-This is the signed length of the shadow of **a** onto the line through **b**.
+This is the signed length of the shadow of $\\mathbf{a}$ onto the line through $\\mathbf{b}$.
 
 ### Derivation
 
-From the dot product formula: **a · b** = |**a**| · |**b**| · cos(θ)
+From the dot product formula: $\\mathbf{a} \\cdot \\mathbf{b} = |\\mathbf{a}| \\cdot |\\mathbf{b}| \\cdot \\cos(\\theta)$
 
-Dividing by |**b**|:
+Dividing by $|\\mathbf{b}|$:
 
-\`\`\`
-comp_b(a) = |a| cos(θ) = (a · b) / |b|
-\`\`\`
+$$\\text{comp}_{\\mathbf{b}}(\\mathbf{a}) = |\\mathbf{a}| \\cos(\\theta) = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{|\\mathbf{b}|}$$
 
 ### Vector Projection
 
 The **vector projection** (not required here) returns the actual vector:
 
-\`\`\`
-proj_b(a) = ((a · b) / |b|²) · b
-\`\`\`
+$$\\text{proj}_{\\mathbf{b}}(\\mathbf{a}) = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{|\\mathbf{b}|^2} \\cdot \\mathbf{b}$$
 
 ### Examples
 
-| **a** | **b** | comp_b(**a**) |
+| $\\mathbf{a}$ | $\\mathbf{b}$ | $\\text{comp}_{\\mathbf{b}}(\\mathbf{a})$ |
 |-------|-------|---------------|
 | (3,4,0) | (1,0,0) | 3 (just the x-component) |
 | (1,1,1) | (0,1,0) | 1 (just the y-component) |
-| (3,4,0) | (3,4,0) | 5 = |**a**| (projecting onto itself) |
+| (3,4,0) | (3,4,0) | $5 = |\\mathbf{a}|$ (projecting onto itself) |
 
 ### Your Task
 
-Implement \`double scalar_proj(double ax, double ay, double az, double bx, double by, double bz)\` that returns the scalar projection of **a** onto **b**.
+Implement \`double scalar_proj(double ax, double ay, double az, double bx, double by, double bz)\` that returns the scalar projection of $\\mathbf{a}$ onto $\\mathbf{b}$.
 
 Use \`#include <math.h>\` for \`sqrt\`.`,
 

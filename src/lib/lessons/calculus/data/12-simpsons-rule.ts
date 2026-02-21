@@ -10,11 +10,9 @@ export const simpsonsRule: Lesson = {
 
 ### Formula
 
-With \`n\` subintervals (**n must be even**), \`h = (b-a)/n\`:
+With $n$ subintervals (**$n$ must be even**), $h = \\frac{b-a}{n}$:
 
-\`\`\`
-h/3 · [f(x₀) + 4f(x₁) + 2f(x₂) + 4f(x₃) + 2f(x₄) + ... + 4f(xₙ₋₁) + f(xₙ)]
-\`\`\`
+$$\\frac{h}{3} \\cdot \\left[f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) + 2f(x_4) + \\cdots + 4f(x_{n-1}) + f(x_n)\\right]$$
 
 Pattern of coefficients: **1, 4, 2, 4, 2, ..., 4, 1**
 
@@ -22,30 +20,28 @@ Odd-indexed points get weight **4**, even-indexed interior points get weight **2
 
 ### Why 1-4-2-4-1?
 
-Each pair of subintervals uses the exact integral of the parabola through 3 points, which equals \`h/3·(f(a) + 4f(mid) + f(b))\`. Combining n/2 such pairs gives the pattern.
+Each pair of subintervals uses the exact integral of the parabola through 3 points, which equals $\\frac{h}{3}(f(a) + 4f(\\text{mid}) + f(b))$. Combining $\\frac{n}{2}$ such pairs gives the pattern.
 
 ### Accuracy
 
-Error is \`O(h⁴)\` — much better than trapezoid (\`O(h²)\`):
+Error is $O(h^4)$ — much better than trapezoid ($O(h^2)$):
 
-\`\`\`
-Error ≤ (b-a)⁵/(180n⁴) · max|f⁽⁴⁾(x)|
-\`\`\`
+$$\\text{Error} \\leq \\frac{(b-a)^5}{180 n^4} \\cdot \\max|f^{(4)}(x)|$$
 
-Simpson's rule is **exact for polynomials of degree ≤ 3**.
+Simpson's rule is **exact for polynomials of degree $\\leq 3$**.
 
-### Comparison for \`∫₀¹ x² dx = 1/3\`
+### Comparison for $\\int_0^1 x^2\\, dx = \\frac{1}{3}$
 
-| n | Trapezoid | Simpson's |
+| $n$ | Trapezoid | Simpson's |
 |---|-----------|-----------|
 | 2 | 0.375 | **0.3333** (exact!) |
 | 4 | 0.344 | **0.3333** (exact!) |
 
-Simpson's rule gives the exact answer for x² with just n=2!
+Simpson's rule gives the exact answer for $x^2$ with just $n=2$!
 
 ### Your Task
 
-Implement \`double simpson(double (*f)(double), double a, double b, int n)\`. Assume \`n\` is even.`,
+Implement \`double simpson(double (*f)(double), double a, double b, int n)\`. Assume $n$ is even.`,
 
 	starterCode: `#include <stdio.h>
 

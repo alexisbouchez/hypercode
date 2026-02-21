@@ -6,43 +6,39 @@ export const divergence2d: Lesson = {
 	chapterId: "multiple-integrals",
 	content: `## Divergence of a 2D Vector Field
 
-A **vector field** F(x,y) = (Fx(x,y), Fy(x,y)) assigns a vector to every point in the plane.
+A **vector field** $\\mathbf{F}(x,y) = (F_x(x,y),\\; F_y(x,y))$ assigns a vector to every point in the plane.
 
 The **divergence** measures how much the field "spreads out" at a point:
 
-\`\`\`
-div F = ∂Fx/∂x + ∂Fy/∂y
-\`\`\`
+$$\\nabla \\cdot \\mathbf{F} = \\frac{\\partial F_x}{\\partial x} + \\frac{\\partial F_y}{\\partial y}$$
 
 ### Interpretation
 
-- **div F > 0**: the field is a **source** — fluid flows outward
-- **div F < 0**: the field is a **sink** — fluid flows inward
-- **div F = 0**: **incompressible** flow — no net gain or loss
+- $\\nabla \\cdot \\mathbf{F} > 0$: the field is a **source** — fluid flows outward
+- $\\nabla \\cdot \\mathbf{F} < 0$: the field is a **sink** — fluid flows inward
+- $\\nabla \\cdot \\mathbf{F} = 0$: **incompressible** flow — no net gain or loss
 
 ### The Divergence Theorem
 
 In 2D, the divergence theorem relates the integral of divergence over a region to flow across the boundary:
 
-\`\`\`
-∬_R div F dA = ∮_∂R F · n ds
-\`\`\`
+$$\\iint_R \\nabla \\cdot \\mathbf{F}\\, dA = \\oint_{\\partial R} \\mathbf{F} \\cdot \\mathbf{n}\\, ds$$
 
 This is the 2D version of Gauss's law.
 
 ### Examples
 
-**F = (x, y)** (radially outward):
-- ∂Fx/∂x = 1, ∂Fy/∂y = 1
-- div F = 2 (constant — uniform spreading)
+**$\\mathbf{F} = (x, y)$** (radially outward):
+- $\\partial F_x / \\partial x = 1$, $\\partial F_y / \\partial y = 1$
+- $\\nabla \\cdot \\mathbf{F} = 2$ (constant — uniform spreading)
 
-**F = (-y, x)** (rotation):
-- ∂Fx/∂x = 0, ∂Fy/∂y = 0
-- div F = 0 (incompressible rotation — no sources or sinks)
+**$\\mathbf{F} = (-y, x)$** (rotation):
+- $\\partial F_x / \\partial x = 0$, $\\partial F_y / \\partial y = 0$
+- $\\nabla \\cdot \\mathbf{F} = 0$ (incompressible rotation — no sources or sinks)
 
-**F = (x², y²)**:
-- ∂Fx/∂x = 2x, ∂Fy/∂y = 2y
-- div F = 2(x+y)
+**$\\mathbf{F} = (x^2, y^2)$**:
+- $\\partial F_x / \\partial x = 2x$, $\\partial F_y / \\partial y = 2y$
+- $\\nabla \\cdot \\mathbf{F} = 2(x+y)$
 
 ### Your Task
 

@@ -6,7 +6,7 @@ export const numericalLimit: Lesson = {
 	chapterId: "limits-and-derivatives",
 	content: `## Limits
 
-The **limit** is the foundation of calculus. Informally, \`lim_{x→a} f(x) = L\` means: as \`x\` gets arbitrarily close to \`a\`, \`f(x)\` gets arbitrarily close to \`L\`.
+The **limit** is the foundation of calculus. Informally, $\\lim_{x \\to a} f(x) = L$ means: as $x$ gets arbitrarily close to $a$, $f(x)$ gets arbitrarily close to $L$.
 
 ### Why Limits Matter
 
@@ -14,31 +14,29 @@ Limits let us deal with quantities we can't compute directly — like the slope 
 
 ### Numerical Approximation
 
-We can approximate a limit numerically by evaluating \`f\` at points very close to \`a\`, approaching from both sides:
+We can approximate a limit numerically by evaluating $f$ at points very close to $a$, approaching from both sides:
 
-\`\`\`
-lim_{x→a} f(x) ≈ (f(a - h) + f(a + h)) / 2
-\`\`\`
+$$\\lim_{x \\to a} f(x) \\approx \\frac{f(a - h) + f(a + h)}{2}$$
 
-For a smooth function, this central average is very accurate when \`h\` is small (e.g., \`h = 1e-7\`).
+For a smooth function, this central average is very accurate when $h$ is small (e.g., \`h = 1e-7\`).
 
 ### Examples
 
 | Function | Point | Limit |
 |----------|-------|-------|
-| \`x²\` | \`x → 3\` | \`9\` |
-| \`(x² - 4)/(x - 2)\` | \`x → 2\` | \`4\` |
-| \`(sin x)/x\` | \`x → 0\` | \`1\` |
+| $x^2$ | $x \\to 3$ | $9$ |
+| $\\frac{x^2 - 4}{x - 2}$ | $x \\to 2$ | $4$ |
+| $\\frac{\\sin x}{x}$ | $x \\to 0$ | $1$ |
 
-The third example is famous: \`f(0)\` is undefined (division by zero), but the limit exists.
+The third example is famous: $f(0)$ is undefined (division by zero), but the limit exists.
 
 ### Removable Discontinuities
 
-When \`f(a)\` is undefined but the limit exists, the point is called a **removable discontinuity**. The function \`(x² - 4)/(x - 2) = (x+2)(x-2)/(x-2) = x + 2\` has a hole at \`x = 2\`, but the limit is \`4\`.
+When $f(a)$ is undefined but the limit exists, the point is called a **removable discontinuity**. The function $\\frac{x^2 - 4}{x - 2} = \\frac{(x+2)(x-2)}{x-2} = x + 2$ has a hole at $x = 2$, but the limit is $4$.
 
 ### Your Task
 
-Implement \`double limit(double (*f)(double), double x, double h)\` that approximates the limit of \`f\` at \`x\` using step size \`h\`.`,
+Implement \`double limit(double (*f)(double), double x, double h)\` that approximates the limit of $f$ at $x$ using step size $h$.`,
 
 	starterCode: `#include <stdio.h>
 

@@ -6,43 +6,39 @@ export const conditionNumberLesson: Lesson = {
 	chapterId: "matrix-analysis",
 	content: `## Condition Number
 
-The **condition number** κ(A) measures how sensitive a linear system Ax = b is to small perturbations:
+The **condition number** $\\kappa(A)$ measures how sensitive a linear system $Ax = b$ is to small perturbations:
 
-\`\`\`
-κ(A) = λ_max / λ_min   (for symmetric positive definite matrices)
-\`\`\`
+$$\\kappa(A) = \\frac{\\lambda_{\\max}}{\\lambda_{\\min}} \\quad (\\text{for symmetric positive definite matrices})$$
 
-A large condition number means the system is **ill-conditioned**: tiny errors in b can cause enormous errors in x.
+A large condition number means the system is **ill-conditioned**: tiny errors in $b$ can cause enormous errors in $x$.
 
 ### 2×2 Eigenvalues via Trace and Determinant
 
 For a 2×2 symmetric matrix, eigenvalues are:
 
-\`\`\`
-λ = (tr ± √(tr² − 4·det)) / 2
-\`\`\`
+$$\\lambda = \\frac{\\text{tr} \\pm \\sqrt{\\text{tr}^2 - 4 \\cdot \\det}}{2}$$
 
-where tr = A[0][0] + A[1][1] and det = A[0][0]·A[1][1] − A[0][1]·A[1][0].
+where $\\text{tr} = A_{00} + A_{11}$ and $\\det = A_{00} A_{11} - A_{01} A_{10}$.
 
 ### Interpretation
 
-| κ(A) | Meaning |
+| $\\kappa(A)$ | Meaning |
 |------|---------|
-| ~1 | Well-conditioned; safe to solve |
-| ~10⁶ | Lose about 6 digits of precision |
-| ~10¹⁶ | Essentially singular on 64-bit floats |
+| $\\approx 1$ | Well-conditioned; safe to solve |
+| $\\approx 10^6$ | Lose about 6 digits of precision |
+| $\\approx 10^{16}$ | Essentially singular on 64-bit floats |
 
 ### Examples
 
-\`\`\`
-A = [[3, 1], [1, 3]]   tr=6, det=8   λ = (6±2)/2 = 4, 2   κ = 2.0
-B = [[2, 1], [1, 2]]   tr=4, det=3   λ = (4±2)/2 = 3, 1   κ = 3.0
-C = [[1, 0], [0, 1]]   tr=2, det=1   λ = 1, 1              κ = 1.0
-\`\`\`
+$$A = \\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}: \\; \\text{tr}=6,\\ \\det=8,\\ \\lambda = \\tfrac{6\\pm2}{2} = 4, 2 \\;\\ \\Rightarrow \\;\\ \\kappa = 2.0$$
+
+$$B = \\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}: \\; \\text{tr}=4,\\ \\det=3,\\ \\lambda = 3, 1 \\;\\ \\Rightarrow \\;\\ \\kappa = 3.0$$
+
+$$C = I: \\; \\lambda = 1, 1 \\;\\ \\Rightarrow \\;\\ \\kappa = 1.0$$
 
 ### Your Task
 
-Implement \`condition_number_2x2(A)\` that computes κ = λ_max / λ_min for a 2×2 symmetric positive definite matrix using the trace-determinant formula.`,
+Implement \`condition_number_2x2(A)\` that computes $\\kappa = \\lambda_{\\max} / \\lambda_{\\min}$ for a 2×2 symmetric positive definite matrix using the trace-determinant formula.`,
 
 	starterCode: `import math
 

@@ -8,9 +8,7 @@ export const parallelResistanceLesson: Lesson = {
 
 When resistors are connected side-by-side (in parallel), they share the same voltage. The total resistance is always **less** than the smallest individual resistor:
 
-\`\`\`
-1/R_total = 1/R₁ + 1/R₂ + 1/R₃ + …
-\`\`\`
+$$\frac{1}{R_\text{total}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \cdots$$
 
 ### Why?
 
@@ -20,9 +18,7 @@ Each parallel path gives current another route through the circuit. Adding a par
 
 A useful shorthand: **product over sum**
 
-\`\`\`
-R_total = R₁ × R₂ / (R₁ + R₂)
-\`\`\`
+$$R_\text{total} = \frac{R_1 R_2}{R_1 + R_2}$$
 
 ### Examples
 

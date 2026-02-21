@@ -6,21 +6,19 @@ export const waveSpeedLesson: Lesson = {
 	chapterId: "wave-fundamentals",
 	content: `## Wave Speed
 
-A wave has both frequency and spatial extent. The **wavelength** \u03bb is the distance between successive crests. The wave equation connects all three quantities:
+A wave has both frequency and spatial extent. The **wavelength** $\lambda$ is the distance between successive crests. The wave equation connects all three quantities:
 
-\`\`\`
-v = f \u00d7 \u03bb
-\`\`\`
+$$v = f\lambda$$
 
 - **v** — wave speed (m/s)
 - **f** — frequency (Hz)
-- **\u03bb** — wavelength (m)
+- $\lambda$ — wavelength (m)
 
 ### Sound in Air
 
-Sound travels at \u2248 343 m/s at 20 \u00b0C. This links frequency and wavelength for every audible tone:
+Sound travels at $\approx 343$ m/s at 20 °C. This links frequency and wavelength for every audible tone:
 
-| f (Hz) | \u03bb (m) | v (m/s) |
+| f (Hz) | $\lambda$ (m) | v (m/s) |
 |--------|-------|---------|
 | 440 | 0.780 | **343.20** |
 | 1000 | 0.343 | **343.00** |

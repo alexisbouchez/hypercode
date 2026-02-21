@@ -6,38 +6,34 @@ export const springPeriodLesson: Lesson = {
 	chapterId: "oscillations-and-gravitation",
 	content: `## Period of a Spring-Mass System
 
-A mass m on a spring with constant k oscillates with angular frequency:
+A mass $m$ on a spring with constant $k$ oscillates with angular frequency:
 
-\`\`\`
-ω = √(k/m)
-\`\`\`
+$$\\omega = \\sqrt{\\frac{k}{m}}$$
 
 The **period** (time for one complete oscillation):
 
-\`\`\`
-T = 2π/ω = 2π√(m/k)
-\`\`\`
+$$T = \\frac{2\\pi}{\\omega} = 2\\pi\\sqrt{\\frac{m}{k}}$$
 
 Units: seconds.
 
 ### Hooke's Law
 
-The spring force: F = −kx. The spring constant k (N/m) measures stiffness — a stiffer spring (larger k) oscillates faster.
+The spring force: $F = -kx$. The spring constant $k$ (N/m) measures stiffness — a stiffer spring (larger $k$) oscillates faster.
 
 ### Key Observations
 
-- **Period increases with mass**: heavier objects oscillate more slowly (T ∝ √m)
-- **Period decreases with stiffness**: stiffer springs oscillate faster (T ∝ 1/√k)
+- **Period increases with mass**: heavier objects oscillate more slowly ($T \\propto \\sqrt{m}$)
+- **Period decreases with stiffness**: stiffer springs oscillate faster ($T \\propto 1/\\sqrt{k}$)
 - **Period is independent of amplitude**: whether you stretch the spring 1 cm or 10 cm, the period is the same (for ideal springs)
 
 ### Examples
 
-| m (kg) | k (N/m) | T (s) |
+| $m$ (kg) | $k$ (N/m) | $T$ (s) |
 |--------|---------|-------|
-| 1 | 1 | **6.2832** = 2π |
-| 4 | 1 | **12.5664** = 4π |
-| 1 | 4 | **3.1416** = π |
-| 2 | 8 | **3.1416** = π |
+| 1 | 1 | **6.2832** $= 2\\pi$ |
+| 4 | 1 | **12.5664** $= 4\\pi$ |
+| 1 | 4 | **3.1416** $= \\pi$ |
+| 2 | 8 | **3.1416** $= \\pi$ |
 
 ### Your Task
 

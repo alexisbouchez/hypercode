@@ -8,9 +8,7 @@ export const standardError: Lesson = {
 
 The **standard error (SE)** measures the variability of a sample mean. It tells you how much sample means vary from the true population mean:
 
-\`\`\`
-SE = s / √n
-\`\`\`
+$$\text{SE} = \frac{s}{\sqrt{n}}$$
 
 \`\`\`python
 import math, statistics
@@ -22,15 +20,15 @@ print(round(se, 4))   # 0.7071
 
 ### Central Limit Theorem (CLT)
 
-One of the most important results in statistics: **regardless of the shape of the population distribution**, the distribution of sample means approaches a **normal distribution** as n increases.
+One of the most important results in statistics: **regardless of the shape of the population distribution**, the distribution of sample means approaches a **normal distribution** as $n$ increases.
 
 This means:
-- The mean of sample means ≈ population mean
-- The std of sample means ≈ SE = σ/√n
+- The mean of sample means $\approx \mu$ (population mean)
+- The std of sample means $\approx \text{SE} = \frac{\sigma}{\sqrt{n}}$
 
 ### Implications
 
-A larger sample size → smaller SE → more precise estimates.
+A larger sample size $n$ leads to a smaller SE and more precise estimates.
 
 \`\`\`python
 import math
@@ -47,7 +45,7 @@ for n in [10, 100, 1000]:
 
 ### Your Task
 
-Implement \`std_error(data)\` that computes the **standard error of the mean** (sample std divided by √n), returned as a float rounded to 4 decimal places.`,
+Implement \`std_error(data)\` that computes the **standard error of the mean** (sample std divided by $\sqrt{n}$), returned as a float rounded to 4 decimal places.`,
 
 	starterCode: `import math, statistics
 

@@ -6,31 +6,28 @@ export const parametricArcLength: Lesson = {
 	chapterId: "parametric-and-polar",
 	content: `## Parametric Arc Length
 
-A **parametric curve** is defined by two functions of a parameter \`t\`:
-\`\`\`
-x = x(t),  y = y(t),  t ∈ [t₀, t₁]
-\`\`\`
+A **parametric curve** is defined by two functions of a parameter $t$:
+
+$$x = x(t), \quad y = y(t), \quad t \in [t_0, t_1]$$
 
 The arc length is:
-\`\`\`
-L = ∫_{t₀}^{t₁} √([x'(t)]² + [y'(t)]²) dt
-\`\`\`
+
+$$L = \int_{t_0}^{t_1} \sqrt{[x'(t)]^2 + [y'(t)]^2} \, dt$$
 
 ### Why It Works
 
-At parameter \`t\`, the curve moves \`x'dt\` in x and \`y'dt\` in y. The Pythagorean theorem gives length \`√(x'²+y'²)dt\`.
+At parameter $t$, the curve moves $x'dt$ in $x$ and $y'dt$ in $y$. The Pythagorean theorem gives length $\sqrt{x'^2+y'^2}\,dt$.
 
 ### Examples
 
-**Diagonal line** \`x=t, y=t\` on \`[0,1]\`: \`x'=y'=1\`, so \`L = √2 ≈ 1.4142\`
+**Diagonal line** $x=t, y=t$ on $[0,1]$: $x'=y'=1$, so $L = \sqrt{2} \approx 1.4142$
 
-**Line with slope** \`x=t, y=2t\` on \`[0,1]\`: \`x'=1, y'=2\`, so \`L = √5 ≈ 2.2361\`
+**Line with slope** $x=t, y=2t$ on $[0,1]$: $x'=1$, $y'=2$, so $L = \sqrt{5} \approx 2.2361$
 
-**Circle** \`x=cos(t), y=sin(t)\` on \`[0,2π]\`:
-\`\`\`
-x'=-sin(t), y'=cos(t)  →  √(sin²+cos²) = 1
-L = ∫_0^{2π} 1 dt = 2π ≈ 6.2832
-\`\`\`
+**Circle** $x=\cos(t), y=\sin(t)$ on $[0,2\pi]$:
+
+$$x'=-\sin(t),\ y'=\cos(t) \implies \sqrt{\sin^2 t + \cos^2 t} = 1$$
+$$L = \int_0^{2\pi} 1 \, dt = 2\pi \approx 6.2832$$
 
 ### Numerical Approach
 

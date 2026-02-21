@@ -8,9 +8,7 @@ export const ohmsLawLesson: Lesson = {
 
 The most fundamental relationship in circuit analysis: **voltage, current, and resistance are proportional**.
 
-\`\`\`
-V = I × R      →      I = V / R      →      R = V / I
-\`\`\`
+$$V = IR \qquad I = \frac{V}{R} \qquad R = \frac{V}{I}$$
 
 - **V** — voltage (volts, V)
 - **I** — current (amperes, A)

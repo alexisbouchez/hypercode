@@ -8,15 +8,11 @@ export const electricPowerLesson: Lesson = {
 
 Power is the rate of energy transfer. For an electrical component:
 
-\`\`\`
-P = V × I
-\`\`\`
+$$P = VI$$
 
-Combined with Ohm's law (V = IR), three equivalent forms emerge:
+Combined with Ohm's law ($V = IR$), three equivalent forms emerge:
 
-\`\`\`
-P = V × I = I² × R = V² / R
-\`\`\`
+$$P = VI = I^2 R = \frac{V^2}{R}$$
 
 - **P** — power (watts, W)
 - **V** — voltage (V)
@@ -27,9 +23,9 @@ P = V × I = I² × R = V² / R
 
 | Known | Want P |
 |-------|--------|
-| V, I | V × I |
-| I, R | I² × R |
-| V, R | V² / R |
+| V, I | $VI$ |
+| I, R | $I^2 R$ |
+| V, R | $V^2 / R$ |
 
 ### Examples
 

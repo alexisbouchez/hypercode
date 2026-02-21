@@ -8,34 +8,28 @@ export const work: Lesson = {
 
 When force varies with position, work is the integral of force over displacement:
 
-\`\`\`
-W = ∫_a^b F(x) dx
-\`\`\`
+$$W = \int_a^b F(x) \, dx$$
 
 ### Physical Interpretation
 
-- \`F(x)\` is the force (in Newtons) at position \`x\` (in meters)
+- $F(x)$ is the force (in Newtons) at position $x$ (in meters)
 - Work is measured in Joules (N·m)
-- **Constant force**: \`W = F · d\` (special case where F is uniform)
+- **Constant force**: $W = F \cdot d$ (special case where F is uniform)
 
 ### Hooke's Law (Spring)
 
-A spring with stiffness \`k\` exerts force \`F(x) = kx\` when stretched by \`x\`:
+A spring with stiffness $k$ exerts force $F(x) = kx$ when stretched by $x$:
 
-\`\`\`
-W = ∫_0^d kx dx = k·d²/2
-\`\`\`
+$$W = \int_0^d kx \, dx = \frac{k \cdot d^2}{2}$$
 
-**Example**: spring constant \`k=4\`, stretched \`3m\`:
-\`W = ∫_0^3 4x dx = [2x²]_0^3 = 18 J\`
+**Example**: spring constant $k=4$, stretched $3\text{m}$:
+$W = \int_0^3 4x \, dx = [2x^2]_0^3 = 18 \text{ J}$
 
 ### Lifting Variable-Weight Loads
 
-A chain of linear density \`ρ\` being lifted: \`F(x) = ρ·(L-x)\` where \`L\` is chain length. The work to lift the full chain:
+A chain of linear density $\rho$ being lifted: $F(x) = \rho \cdot (L-x)$ where $L$ is chain length. The work to lift the full chain:
 
-\`\`\`
-W = ∫_0^L ρ(L-x) dx = ρL²/2
-\`\`\`
+$$W = \int_0^L \rho(L-x) \, dx = \frac{\rho L^2}{2}$$
 
 ### Your Task
 

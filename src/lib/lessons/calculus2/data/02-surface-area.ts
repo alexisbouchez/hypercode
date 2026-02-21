@@ -6,24 +6,21 @@ export const surfaceArea: Lesson = {
 	chapterId: "integration-applications",
 	content: `## Surface Area of Revolution
 
-Rotating \`y = f(x)\` around the **x-axis** creates a surface. Its area is:
+Rotating $y = f(x)$ around the **x-axis** creates a surface. Its area is:
 
-\`\`\`
-SA = 2π · ∫_a^b f(x) · √(1 + [f'(x)]²) dx
-\`\`\`
+$$SA = 2\pi \int_a^b f(x) \cdot \sqrt{1 + [f'(x)]^2} \, dx$$
 
 ### Why It Works
 
-Each strip of width \`dx\` wraps into a ribbon of radius \`f(x)\` and slant height \`√(1+f'²)dx\`. The ribbon's area is \`2π·f(x)·√(1+f'²)dx\`.
+Each strip of width $dx$ wraps into a ribbon of radius $f(x)$ and slant height $\sqrt{1+f'^2}\,dx$. The ribbon's area is $2\pi \cdot f(x) \cdot \sqrt{1+f'^2}\,dx$.
 
 ### Classic Examples
 
-**Cylinder** \`f(x) = r\` on \`[0, L]\`: \`f' = 0\`, so \`SA = 2πrL\`
+**Cylinder** $f(x) = r$ on $[0, L]$: $f' = 0$, so $SA = 2\pi r L$
 
-**Cone** \`f(x) = x\` on \`[0, 1]\`: \`f' = 1\`, so:
-\`\`\`
-SA = 2π ∫_0^1 x·√2 dx = 2π√2 · [x²/2]_0^1 = π√2 ≈ 4.4429
-\`\`\`
+**Cone** $f(x) = x$ on $[0, 1]$: $f' = 1$, so:
+
+$$SA = 2\pi \int_0^1 x\cdot\sqrt{2} \, dx = 2\pi\sqrt{2} \cdot \left[\frac{x^2}{2}\right]_0^1 = \pi\sqrt{2} \approx 4.4429$$
 
 ### Numerical Approach
 

@@ -8,9 +8,7 @@ export const lcResonanceLesson: Lesson = {
 
 An inductor (L) and capacitor (C) in series or parallel exchange energy back and forth at a natural resonant frequency:
 
-\`\`\`
-f = 1 / (2π √(LC))
-\`\`\`
+$$f = \frac{1}{2\pi\sqrt{LC}}$$
 
 - **f** — resonant frequency (Hz)
 - **L** — inductance (H)
@@ -18,7 +16,7 @@ f = 1 / (2π √(LC))
 
 ### The Energy Seesaw
 
-The capacitor stores energy in its electric field (E = ½CV²); the inductor stores energy in its magnetic field (E = ½LI²). At resonance they alternate — like a pendulum swapping kinetic and potential energy — at frequency f.
+The capacitor stores energy in its electric field ($E = \frac{1}{2}CV^2$); the inductor stores energy in its magnetic field ($E = \frac{1}{2}LI^2$). At resonance they alternate — like a pendulum swapping kinetic and potential energy — at frequency f.
 
 ### Relation to the Pendulum
 
@@ -27,7 +25,7 @@ The capacitor stores energy in its electric field (E = ½CV²); the inductor sto
 | Charge q | Displacement x |
 | Inductance L | Mass m |
 | 1/C | Spring constant k |
-| f = 1/(2π√LC) | f = 1/(2π√(m/k)) |
+| $f = \frac{1}{2\pi\sqrt{LC}}$ | $f = \frac{1}{2\pi}\sqrt{\frac{k}{m}}$ |
 
 ### Radio Tuning
 

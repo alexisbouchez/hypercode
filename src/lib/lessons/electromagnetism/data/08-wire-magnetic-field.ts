@@ -8,12 +8,10 @@ export const wireMagneticFieldLesson: Lesson = {
 
 A current-carrying wire creates a magnetic field that wraps around it in concentric circles. The field strength at distance r from an infinite straight wire:
 
-\`\`\`
-B = μ₀ × I / (2π × r)
-\`\`\`
+$$B = \frac{\mu_0 I}{2\pi r}$$
 
 - **B** — magnetic field (tesla, T)
-- **μ₀** = 4π × 10⁻⁷ T·m/A — permeability of free space
+- $\mu_0 = 4\pi \times 10^{-7}$ T·m/A — permeability of free space
 - **I** — current (amperes)
 - **r** — perpendicular distance from wire (m)
 
@@ -23,11 +21,9 @@ Use the **right-hand rule**: point your thumb in the direction of current flow; 
 
 ### Simplification
 
-Since μ₀ / (2π) = 2 × 10⁻⁷ T·m/A exactly, the formula simplifies to:
+Since $\mu_0 / (2\pi) = 2 \times 10^{-7}$ T·m/A exactly, the formula simplifies to:
 
-\`\`\`
-B = 2 × 10⁻⁷ × I / r
-\`\`\`
+$$B = \frac{2 \times 10^{-7} \cdot I}{r}$$
 
 ### Examples
 
@@ -40,7 +36,7 @@ B = 2 × 10⁻⁷ × I / r
 
 ### Your Task
 
-Implement \`wire_magnetic_field(I, r)\` returning B in tesla (μ₀ = 4π × 10⁻⁷).`,
+Implement \`wire_magnetic_field(I, r)\` returning B in tesla ($\mu_0 = 4\pi \times 10^{-7}$).`,
 
 	starterCode: `import math
 

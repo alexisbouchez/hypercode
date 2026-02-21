@@ -8,10 +8,9 @@ export const determinant: Lesson = {
 
 The **determinant** of a square matrix is a single number that encodes how the matrix scales area (2D) or volume (3D).
 
-For a 2×2 matrix:
-\`\`\`
-det([[a, b], [c, d]]) = a·d - b·c
-\`\`\`
+For a $2 \times 2$ matrix:
+
+$$\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$$
 
 \`\`\`python
 def det(A):
@@ -32,12 +31,12 @@ print(int(round(det(A))))  # 6  — scales area by 6
 
 ### What the Determinant Tells You
 
-| det(A) | Meaning |
+| $\det(\mathbf{A})$ | Meaning |
 |--------|---------|
-| = 0    | Matrix is **singular** — no inverse exists, squishes space to a lower dimension |
-| > 0    | Preserves orientation |
-| < 0    | Flips orientation |
-| = 1    | Preserves area/volume |
+| $= 0$  | Matrix is **singular** — no inverse exists, squishes space to a lower dimension |
+| $> 0$  | Preserves orientation |
+| $< 0$  | Flips orientation |
+| $= 1$  | Preserves area/volume |
 
 ### Singular Matrices
 

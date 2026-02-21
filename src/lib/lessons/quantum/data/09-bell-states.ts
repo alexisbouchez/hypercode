@@ -8,20 +8,18 @@ export const bellStates: Lesson = {
 
 The **Bell states** are the simplest examples of quantum entanglement — two qubits whose fates are linked no matter how far apart they are.
 
-The most famous Bell state is **Φ+** (phi-plus):
+The most famous Bell state is $|\Phi^+\rangle$ (phi-plus):
 
-**Φ+ = (|00⟩ + |11⟩) / √2**
+$$|\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}$$
 
 To create it:
-1. Start with |00⟩
-2. Apply H to the first qubit → (|0⟩ + |1⟩)/√2 ⊗ |0⟩ = (|00⟩ + |10⟩)/√2
-3. Apply CNOT → (|00⟩ + |11⟩)/√2
+1. Start with $|00\rangle$
+2. Apply H to the first qubit: $\frac{|0\rangle + |1\rangle}{\sqrt{2}} \otimes |0\rangle = \frac{|00\rangle + |10\rangle}{\sqrt{2}}$
+3. Apply CNOT: $\frac{|00\rangle + |11\rangle}{\sqrt{2}}$
 
-Applying H to the first qubit of a 4-element state [a, b, c, d]:
+Applying H to the first qubit of a 4-element state $[a, b, c, d]$:
 
-\`\`\`
-H⊗I [a, b, c, d] = [(a+c)/√2, (b+d)/√2, (a-c)/√2, (b-d)/√2]
-\`\`\`
+$$(H \otimes I)[a, b, c, d] = \left[\frac{a+c}{\sqrt{2}},\ \frac{b+d}{\sqrt{2}},\ \frac{a-c}{\sqrt{2}},\ \frac{b-d}{\sqrt{2}}\right]$$
 
 \`\`\`python
 import math
@@ -45,7 +43,7 @@ phi_plus = cnot(h_on_first(ket_00))
 
 ### Your Task
 
-Implement \`h_on_first(state)\` that applies H to the first qubit of a 2-qubit state. Then create the Bell state Φ+.`,
+Implement \`h_on_first(state)\` that applies H to the first qubit of a 2-qubit state. Then create the Bell state $|\Phi^+\rangle$.`,
 
 	starterCode: `import math
 

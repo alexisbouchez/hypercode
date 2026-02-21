@@ -8,30 +8,27 @@ export const elasticCollisionLesson: Lesson = {
 
 In any collision, **total momentum is conserved**:
 
-\`\`\`
-m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'
-\`\`\`
+$$m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'$$
 
 ### Elastic Collisions
 
 An **elastic** collision also conserves kinetic energy. Solving both conservation equations simultaneously gives the final velocities:
 
-\`\`\`
-v₁' = ((m₁ − m₂)v₁ + 2m₂v₂) / (m₁ + m₂)
-v₂' = ((m₂ − m₁)v₂ + 2m₁v₁) / (m₁ + m₂)
-\`\`\`
+$$v_1' = \\frac{(m_1 - m_2)v_1 + 2m_2 v_2}{m_1 + m_2}$$
+
+$$v_2' = \\frac{(m_2 - m_1)v_2 + 2m_1 v_1}{m_1 + m_2}$$
 
 ### Special Cases
 
 | Scenario | Result |
 |----------|--------|
-| Equal masses (v₂=0) | v₁'=0, v₂'=v₁ (complete transfer) |
-| Heavy hits light (m₁≫m₂) | v₁'≈v₁, v₂'≈2v₁ (light bounces fast) |
-| Light hits heavy (m₁≪m₂) | v₁'≈−v₁, v₂'≈0 (light bounces back) |
+| Equal masses ($v_2=0$) | $v_1'=0$, $v_2'=v_1$ (complete transfer) |
+| Heavy hits light ($m_1 \\gg m_2$) | $v_1' \\approx v_1$, $v_2' \\approx 2v_1$ (light bounces fast) |
+| Light hits heavy ($m_1 \\ll m_2$) | $v_1' \\approx -v_1$, $v_2' \\approx 0$ (light bounces back) |
 
 ### Examples
 
-| m₁ | v₁ | m₂ | v₂ | v₁' |
+| $m_1$ | $v_1$ | $m_2$ | $v_2$ | $v_1'$ |
 |----|----|----|----|----|
 | 1 | 10 | 1 | 0 | 0.0000 (stops) |
 | 2 | 10 | 1 | 0 | 3.3333 |

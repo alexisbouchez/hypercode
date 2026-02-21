@@ -23,16 +23,15 @@ print(round(chi2, 4))   # chi-square statistic
 
 ### How It Works
 
-For each category:
-\`\`\`
-chi2_contribution = (observed - expected)² / expected
-\`\`\`
+For each category, compute:
 
-Sum all contributions to get the chi-square statistic. If observed matches expected perfectly, chi2 = 0.
+$$\chi^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}$$
+
+where $O_i$ is the observed count and $E_i$ is the expected count. If observed matches expected perfectly, $\chi^2 = 0$.
 
 ### Degrees of Freedom
 
-For k categories: df = k − 1. More categories → larger chi2 needed for significance.
+For $k$ categories: $df = k - 1$. More categories require a larger $\chi^2$ value for significance.
 
 ### Custom Expected Frequencies
 
@@ -40,7 +39,7 @@ You can also test against non-uniform expectations by providing your own expecte
 
 ### Your Task
 
-Implement \`chi_square_test(observed)\` that tests whether the observed frequencies are **uniformly distributed** (equal expected frequency for each category). Print the chi-square statistic (rounded to 4 decimal places) and the p-value (rounded to 4 decimal places).`,
+Implement \`chi_square_test(observed)\` that tests whether the observed frequencies are **uniformly distributed** (equal expected frequency for each category). Print the $\chi^2$ statistic (rounded to 4 decimal places) and the $p$-value (rounded to 4 decimal places).`,
 
 	starterCode: `import math
 

@@ -6,23 +6,19 @@ export const leftRiemann: Lesson = {
 	chapterId: "integration",
 	content: `## The Definite Integral
 
-The **definite integral** \`∫_a^b f(x) dx\` is the signed area between \`f\` and the x-axis from \`a\` to \`b\`.
+The **definite integral** $\\int_a^b f(x)\\, dx$ is the signed area between $f$ and the x-axis from $a$ to $b$.
 
 It is defined as the limit of **Riemann sums** — sums of rectangle areas:
 
-\`\`\`
-∫_a^b f(x) dx = lim_{n→∞} Σ f(xᵢ) · Δx
-\`\`\`
+$$\\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i} f(x_i) \\cdot \\Delta x$$
 
-where \`Δx = (b-a)/n\` and \`xᵢ\` is some point in the i-th subinterval.
+where $\\Delta x = \\frac{b-a}{n}$ and $x_i$ is some point in the $i$-th subinterval.
 
 ### Left Riemann Sum
 
 Use the **left endpoint** of each subinterval:
 
-\`\`\`
-Σᵢ₌₀ⁿ⁻¹ f(a + i·h) · h     where h = (b-a)/n
-\`\`\`
+$$\\sum_{i=0}^{n-1} f(a + i \\cdot h) \\cdot h \\quad \\text{where } h = \\frac{b-a}{n}$$
 
 \`\`\`
 a    a+h  a+2h       b
@@ -33,15 +29,15 @@ left endpoints used
 
 ### Accuracy
 
-For an increasing function, the left sum **underestimates** the integral (the rectangles don't reach the curve). For a decreasing function, it **overestimates**. Error is \`O(h)\` — halving \`n\` halves the error.
+For an increasing function, the left sum **underestimates** the integral (the rectangles don't reach the curve). For a decreasing function, it **overestimates**. Error is $O(h)$ — halving $n$ halves the error.
 
 ### Example
 
-\`∫₀¹ x² dx\` with n=4, h=0.25:
-- \`0.25·(f(0) + f(0.25) + f(0.5) + f(0.75))\`
-- \`= 0.25·(0 + 0.0625 + 0.25 + 0.5625)\`
-- \`= 0.25·0.875 = 0.21875\`
-- Exact: \`1/3 ≈ 0.3333\` — the left sum underestimates
+$\\int_0^1 x^2\\, dx$ with $n=4$, $h=0.25$:
+- $0.25 \\cdot (f(0) + f(0.25) + f(0.5) + f(0.75))$
+- $= 0.25 \\cdot (0 + 0.0625 + 0.25 + 0.5625)$
+- $= 0.25 \\cdot 0.875 = 0.21875$
+- Exact: $\\frac{1}{3} \\approx 0.3333$ — the left sum underestimates
 
 ### Your Task
 

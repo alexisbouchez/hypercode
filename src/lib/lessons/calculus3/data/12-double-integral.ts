@@ -8,42 +8,36 @@ export const doubleIntegral: Lesson = {
 
 A **double integral** integrates a function of two variables over a 2D region:
 
-\`\`\`
-∬_R f(x,y) dA
-\`\`\`
+$$\\iint_R f(x,y)\\, dA$$
 
-Over a rectangular region [xa, xb] × [ya, yb].
+Over a rectangular region $[x_a, x_b] \\times [y_a, y_b]$.
 
 ### The Midpoint Rule in 2D
 
-Divide the region into nx × ny small rectangles. Evaluate f at each midpoint:
+Divide the region into $n_x \\times n_y$ small rectangles. Evaluate $f$ at each midpoint:
 
-\`\`\`
-∬f dA ≈ Σ_i Σ_j f(x_i, y_j) · Δx · Δy
-\`\`\`
+$$\\iint f\\, dA \\approx \\sum_i \\sum_j f(x_i, y_j) \\cdot \\Delta x \\cdot \\Delta y$$
 
-Where x_i = xa + (i + 0.5)·Δx and y_j = ya + (j + 0.5)·Δy.
+Where $x_i = x_a + (i + 0.5) \\Delta x$ and $y_j = y_a + (j + 0.5) \\Delta y$.
 
 ### Geometric Meaning
 
-- ∬1 dA = area of the region
-- ∬f dA = **signed volume** between z=f(x,y) and the xy-plane
+- $\\iint 1\\, dA$ = area of the region
+- $\\iint f\\, dA$ = **signed volume** between $z = f(x,y)$ and the $xy$-plane
 
 ### Examples
 
-**∬ 1 dA over [0,3]×[0,4]** = 12 (area of 3×4 rectangle)
+$\\iint 1\\, dA$ **over $[0,3] \\times [0,4]$** $= 12$ (area of $3 \\times 4$ rectangle)
 
-**∬ (x+y) dA over [0,1]×[0,1]** = 1 (by exact integration: ½ + ½)
+$\\iint (x+y)\\, dA$ **over $[0,1] \\times [0,1]$** $= 1$ (by exact integration: $\\frac{1}{2} + \\frac{1}{2}$)
 
-**∬ x²y dA over [0,2]×[0,3]** = (8/3)·(9/2) = 12
+$\\iint x^2 y\\, dA$ **over $[0,2] \\times [0,3]$** $= \\frac{8}{3} \\cdot \\frac{9}{2} = 12$
 
 ### Fubini's Theorem
 
-For continuous f, you can integrate one variable at a time:
+For continuous $f$, you can integrate one variable at a time:
 
-\`\`\`
-∬f dA = ∫_ya^yb [∫_xa^xb f(x,y) dx] dy
-\`\`\`
+$$\\iint f\\, dA = \\int_{y_a}^{y_b} \\left[ \\int_{x_a}^{x_b} f(x,y)\\, dx \\right] dy$$
 
 ### Your Task
 

@@ -8,15 +8,15 @@ export const deutsch: Lesson = {
 
 The **Deutsch algorithm** was the first quantum algorithm to demonstrate a speedup over classical computation. It solves a specific problem in 1 query that classically requires 2.
 
-**The problem:** Given a function f: {0, 1} → {0, 1}, determine if f is:
-- **Constant**: f(0) = f(1) (always outputs 0, or always outputs 1)
-- **Balanced**: f(0) ≠ f(1) (outputs 0 for one input and 1 for the other)
+**The problem:** Given a function $f: \{0, 1\} \to \{0, 1\}$, determine if $f$ is:
+- **Constant**: $f(0) = f(1)$ (always outputs 0, or always outputs 1)
+- **Balanced**: $f(0) \neq f(1)$ (outputs 0 for one input and 1 for the other)
 
-Classically, you must evaluate f(0) and f(1) separately — 2 queries.
+Classically, you must evaluate $f(0)$ and $f(1)$ separately — 2 queries.
 
-The Deutsch algorithm evaluates f in **quantum superposition**, getting the answer in 1 query.
+The Deutsch algorithm evaluates $f$ in **quantum superposition**, getting the answer in 1 query.
 
-The algorithm's outcome is determined by **f(0) XOR f(1)**:
+The algorithm's outcome is determined by $f(0) \oplus f(1)$:
 - 0 → constant
 - 1 → balanced
 
@@ -30,7 +30,7 @@ def deutsch(f):
 
 There are exactly 4 possible functions:
 
-| Function | f(0) | f(1) | Type |
+| Function | $f(0)$ | $f(1)$ | Type |
 |----------|------|------|------|
 | always 0 | 0    | 0    | constant |
 | always 1 | 1    | 1    | constant |

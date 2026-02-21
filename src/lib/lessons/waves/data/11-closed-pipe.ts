@@ -8,13 +8,11 @@ export const closedPipeLesson: Lesson = {
 
 A pipe closed at one end (clarinet, stopped organ pipe) has a **pressure node** at the closed end and a **pressure antinode** at the open end. This boundary condition permits only **odd harmonics**:
 
-\`\`\`
-fₙ = (2n − 1) × v / (4L)        n = 1, 2, 3, …
-\`\`\`
+$$f_n = \frac{(2n-1)v}{4L}, \quad n = 1, 2, 3, \ldots$$
 
-- n=1 gives the fundamental: f₁ = v / 4L
-- n=2 gives the 3rd harmonic: f₂ = 3v / 4L
-- n=3 gives the 5th harmonic: f₃ = 5v / 4L
+- $n=1$ gives the fundamental: $f_1 = \frac{v}{4L}$
+- $n=2$ gives the 3rd harmonic: $f_2 = \frac{3v}{4L}$
+- $n=3$ gives the 5th harmonic: $f_3 = \frac{5v}{4L}$
 
 ### Why Only Odd Harmonics?
 
@@ -24,7 +22,7 @@ The closed end forces a node; the open end forces an antinode. Only standing wav
 
 A closed pipe's fundamental is one octave **lower** than an open pipe of the same length — the same reason a stopped organ pipe sounds an octave below its open counterpart.
 
-| n | fₙ (L=1 m) | Harmonic |
+| n | $f_n$ (L=1 m) | Harmonic |
 |---|-----------|----------|
 | 1 | **85.7500** | 1st |
 | 2 | **257.2500** | 3rd |
@@ -32,7 +30,7 @@ A closed pipe's fundamental is one octave **lower** than an open pipe of the sam
 
 ### Your Task
 
-Implement \`closedPipeMode(n, L)\` returning the nth resonant frequency (v = 343 m/s).
+Implement \`closedPipeMode(n, L)\` returning the nth resonant frequency ($v = 343$ m/s).
 
 Run the code to hear the hollow, woody tone of odd harmonics only.`,
 

@@ -8,29 +8,27 @@ export const superpositionLesson: Lesson = {
 
 When two waves of equal frequency but different phases and amplitudes meet, their amplitudes add vectorially. The **resultant amplitude** is:
 
-\`\`\`
-A = √(A₁² + A₂² + 2·A₁·A₂·cos φ)
-\`\`\`
+$$A = \sqrt{A_1^2 + A_2^2 + 2A_1 A_2 \cos\phi}$$
 
-- **A₁, A₂** — individual amplitudes
-- **φ** — phase difference (radians)
+- $A_1, A_2$ — individual amplitudes
+- $\phi$ — phase difference (radians)
 - **A** — resultant amplitude
 
 ### Two Extremes
 
-| φ | Result | Name |
+| $\phi$ | Result | Name |
 |---|--------|------|
-| 0 | A₁ + A₂ | **Constructive interference** |
-| π | \|A₁ − A₂\| | **Destructive interference** |
-| π/2 | √(A₁² + A₂²) | Quadrature |
+| 0 | $A_1 + A_2$ | **Constructive interference** |
+| $\pi$ | $|A_1 - A_2|$ | **Destructive interference** |
+| $\pi/2$ | $\sqrt{A_1^2 + A_2^2}$ | Quadrature |
 
 ### Examples
 
-| A₁ | A₂ | φ | A |
+| $A_1$ | $A_2$ | $\phi$ | A |
 |----|----|----|---|
 | 1 | 1 | 0 | **2.0000** (double) |
-| 1 | 1 | π | **0.0000** (cancel) |
-| 1 | 1 | π/2 | **1.4142** (√2) |
+| 1 | 1 | $\pi$ | **0.0000** (cancel) |
+| 1 | 1 | $\pi/2$ | **1.4142** ($\sqrt{2}$) |
 | 3 | 4 | 0 | **7.0000** |
 
 ### Your Task

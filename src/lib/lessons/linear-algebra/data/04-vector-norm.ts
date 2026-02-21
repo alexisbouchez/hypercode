@@ -8,9 +8,7 @@ export const vectorNorm: Lesson = {
 
 The **norm** (or magnitude) of a vector is its length:
 
-\`\`\`
-‖v‖ = √(v₀² + v₁² + ... + vₙ²)
-\`\`\`
+$$\lVert \mathbf{v} \rVert = \sqrt{v_0^2 + v_1^2 + \cdots + v_n^2} = \sqrt{\sum_{i=0}^{n} v_i^2}$$
 
 \`\`\`python
 import math
@@ -39,12 +37,12 @@ Unit vectors preserve direction but discard magnitude. They answer: *which way?*
 ### Why It Matters
 
 - **Normalization** is used everywhere in ML: embeddings, attention weights, cosine similarity
-- The dot product formula \`a · b = ‖a‖‖b‖cos(θ)\` uses norms to extract the angle
+- The dot product formula $\mathbf{a} \cdot \mathbf{b} = \lVert \mathbf{a} \rVert \lVert \mathbf{b} \rVert \cos(\theta)$ uses norms to extract the angle
 - **L2 regularization** in neural networks penalizes the norm of the weight vector
 
 ### Your Task
 
-Implement \`normalize(v)\` that returns the unit vector in the direction of \`v\`, with each component rounded to 2 decimal places.`,
+Implement \`normalize(v)\` that returns the unit vector in the direction of $\mathbf{v}$, with each component rounded to 2 decimal places.`,
 
 	starterCode: `import math
 

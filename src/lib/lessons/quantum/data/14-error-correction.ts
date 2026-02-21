@@ -9,8 +9,8 @@ export const errorCorrection: Lesson = {
 Quantum computers are fragile — qubits interact with their environment, causing **decoherence** and bit-flip errors. Quantum error correction protects information by encoding a single logical qubit into multiple physical qubits.
 
 The simplest scheme is the **3-qubit bit-flip code**:
-- Logical |0⟩ is encoded as physical |000⟩
-- Logical |1⟩ is encoded as physical |111⟩
+- Logical $|0\rangle$ is encoded as physical $|000\rangle$
+- Logical $|1\rangle$ is encoded as physical $|111\rangle$
 
 If one of the three physical qubits flips, we can detect and correct the error by **majority vote** — two qubits always agree on the original value.
 

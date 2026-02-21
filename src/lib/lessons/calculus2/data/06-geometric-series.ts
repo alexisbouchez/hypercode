@@ -8,44 +8,38 @@ export const geometricSeries: Lesson = {
 
 A **geometric series** has each term a constant multiple of the previous:
 
-\`\`\`
-Σ_{k=0}^{n-1} a·rᵏ = a + ar + ar² + ... + ar^{n-1}
-\`\`\`
+$$\sum_{k=0}^{n-1} a \cdot r^k = a + ar + ar^2 + \cdots + ar^{n-1}$$
 
 ### Closed-Form Formula
 
-For \`r ≠ 1\`:
-\`\`\`
-S_n = a · (1 - rⁿ) / (1 - r)
-\`\`\`
+For $r \neq 1$:
+
+$$S_n = a \cdot \frac{1 - r^n}{1 - r}$$
 
 ### Convergence
 
-The infinite geometric series \`Σ a·rᵏ\` converges if and only if \`|r| < 1\`:
-\`\`\`
-Σ_{k=0}^∞ a·rᵏ = a / (1 - r)  when |r| < 1
-\`\`\`
+The infinite geometric series $\sum a \cdot r^k$ converges if and only if $|r| < 1$:
 
-| r | Series behavior |
-|---|-----------------|
-| \`r = 0.5\` | converges to \`2a\` |
-| \`r = 1\` | diverges (grows linearly) |
-| \`r = 2\` | diverges (grows exponentially) |
-| \`r = -1\` | oscillates (diverges) |
+$$\sum_{k=0}^{\infty} a \cdot r^k = \frac{a}{1 - r} \quad \text{when } |r| < 1$$
+
+| $r$ | Series behavior |
+|-----|-----------------|
+| $r = 0.5$ | converges to $2a$ |
+| $r = 1$ | diverges (grows linearly) |
+| $r = 2$ | diverges (grows exponentially) |
+| $r = -1$ | oscillates (diverges) |
 
 ### Example
 
-\`a = 1, r = 0.5, n = 10\`:
-\`\`\`
-S_10 = 1 + 0.5 + 0.25 + ... + 1/512 = 1·(1 - 0.5^10)/(1 - 0.5)
-     = 2·(1 - 1/1024) ≈ 1.9980
-\`\`\`
+$a = 1$, $r = 0.5$, $n = 10$:
 
-The infinite sum: \`1/(1-0.5) = 2\` — the partial sum already reached \`1.998\`.
+$$S_{10} = 1 + 0.5 + 0.25 + \cdots + \frac{1}{512} = \frac{1 \cdot (1 - 0.5^{10})}{1 - 0.5} = 2 \cdot \left(1 - \frac{1}{1024}\right) \approx 1.9980$$
+
+The infinite sum: $\frac{1}{1-0.5} = 2$ — the partial sum already reached $1.998$.
 
 ### Your Task
 
-Implement \`double geometric_partial(double a, double r, int n)\` that computes \`Σ_{k=0}^{n-1} a·rᵏ\` using a loop.`,
+Implement \`double geometric_partial(double a, double r, int n)\` that computes $\sum_{k=0}^{n-1} a \cdot r^k$ using a loop.`,
 
 	starterCode: `#include <stdio.h>
 

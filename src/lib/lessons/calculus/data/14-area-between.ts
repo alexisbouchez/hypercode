@@ -6,35 +6,31 @@ export const areaBetween: Lesson = {
 	chapterId: "integral-applications",
 	content: `## Area Between Two Curves
 
-The area between two curves \`f(x)\` and \`g(x)\` on \`[a, b]\` is:
+The area between two curves $f(x)$ and $g(x)$ on $[a, b]$ is:
 
-\`\`\`
-A = ∫_a^b |f(x) - g(x)| dx
-\`\`\`
+$$A = \\int_a^b |f(x) - g(x)|\\, dx$$
 
 The absolute value handles the case where the curves cross (one is above the other at different points).
 
-### When f ≥ g Everywhere
+### When $f \\geq g$ Everywhere
 
-If \`f(x) ≥ g(x)\` throughout \`[a, b]\`, the area simplifies to:
+If $f(x) \\geq g(x)$ throughout $[a, b]$, the area simplifies to:
 
-\`\`\`
-A = ∫_a^b [f(x) - g(x)] dx = ∫_a^b f(x) dx - ∫_a^b g(x) dx
-\`\`\`
+$$A = \\int_a^b [f(x) - g(x)]\\, dx = \\int_a^b f(x)\\, dx - \\int_a^b g(x)\\, dx$$
 
 ### Finding Intersection Points
 
-To split the interval where the curves cross, find \`x\` where \`f(x) = g(x)\` — this is a root-finding problem.
+To split the interval where the curves cross, find $x$ where $f(x) = g(x)$ — this is a root-finding problem.
 
 ### Classic Example
 
-Area between \`y = x\` and \`y = x²\` on \`[0, 1]\`:
-- \`x ≥ x²\` on \`[0, 1]\` since \`x - x² = x(1-x) ≥ 0\`
-- Area \`= ∫₀¹ (x - x²) dx = [x²/2 - x³/3]₀¹ = 1/2 - 1/3 = 1/6 ≈ 0.1667\`
+Area between $y = x$ and $y = x^2$ on $[0, 1]$:
+- $x \\geq x^2$ on $[0, 1]$ since $x - x^2 = x(1-x) \\geq 0$
+- Area $= \\int_0^1 (x - x^2)\\, dx = \\left[\\frac{x^2}{2} - \\frac{x^3}{3}\\right]_0^1 = \\frac{1}{2} - \\frac{1}{3} = \\frac{1}{6} \\approx 0.1667$
 
 ### Numerically
 
-Use the midpoint rule on \`|f(x) - g(x)|\`:
+Use the midpoint rule on $|f(x) - g(x)|$:
 
 \`\`\`c
 for (int i = 0; i < n; i++) {
@@ -46,7 +42,7 @@ for (int i = 0; i < n; i++) {
 
 ### Your Task
 
-Implement \`double area_between(double (*f)(double), double (*g)(double), double a, double b, int n)\` that returns \`∫_a^b |f(x) - g(x)| dx\`.`,
+Implement \`double area_between(double (*f)(double), double (*g)(double), double a, double b, int n)\` that returns $\\int_a^b |f(x) - g(x)|\\, dx$.`,
 
 	starterCode: `#include <stdio.h>
 

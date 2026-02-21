@@ -6,42 +6,29 @@ export const pseudoinverseLesson: Lesson = {
 	chapterId: "matrix-analysis",
 	content: `## Moore-Penrose Pseudoinverse
 
-The **pseudoinverse** A⁺ generalises the matrix inverse to non-square and singular matrices. It gives the minimum-norm least-squares solution to Ax = b:
+The **pseudoinverse** $A^+$ generalises the matrix inverse to non-square and singular matrices. It gives the minimum-norm least-squares solution to $Ax = b$:
 
-\`\`\`
-x = A⁺ b
-\`\`\`
+$$x = A^+ b$$
 
-### For Full Column Rank (m ≥ n, rank n)
+### For Full Column Rank ($m \\geq n$, rank $n$)
 
-When A has full column rank, the pseudoinverse is:
+When $A$ has full column rank, the pseudoinverse is:
 
-\`\`\`
-A⁺ = (AᵀA)⁻¹ Aᵀ
-\`\`\`
+$$A^+ = (A^T A)^{-1} A^T$$
 
 This is exactly the least-squares formula.
 
-### For Square Invertible A
+### For Square Invertible $A$
 
-\`\`\`
-A⁺ = A⁻¹
-\`\`\`
+$$A^+ = A^{-1}$$
 
 ### Example
 
-\`\`\`
-A = [[1, 0],    AᵀA = [[1,0],[0,1]]    A⁺ = AᵀA⁻¹ Aᵀ = Aᵀ
-     [0, 1],
-     [0, 0]]
-
-A⁺ = [[1, 0, 0],
-      [0, 1, 0]]
-\`\`\`
+$$A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \\end{pmatrix}, \\quad A^T A = \\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}, \\quad A^+ = (A^T A)^{-1} A^T = A^T = \\begin{pmatrix}1&0&0\\\\0&1&0\\end{pmatrix}$$
 
 ### Your Task
 
-Implement \`pseudoinverse(A)\` for matrices with full column rank using the formula A⁺ = (AᵀA)⁻¹ Aᵀ. The helper \`inv_square\` handles both 1×1 and 2×2 square matrices.`,
+Implement \`pseudoinverse(A)\` for matrices with full column rank using the formula $A^+ = (A^T A)^{-1} A^T$. The helper \`inv_square\` handles both 1×1 and 2×2 square matrices.`,
 
 	starterCode: `def transpose(A):
     return [[A[j][i] for j in range(len(A))] for i in range(len(A[0]))]

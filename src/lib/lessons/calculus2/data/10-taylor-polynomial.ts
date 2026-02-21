@@ -6,29 +6,26 @@ export const taylorPolynomial: Lesson = {
 	chapterId: "taylor-series",
 	content: `## Taylor Polynomial
 
-The **Taylor polynomial of degree n** approximates \`f(x)\` near point \`a\`:
+The **Taylor polynomial of degree $n$** approximates $f(x)$ near point $a$:
 
-\`\`\`
-P_n(x) = Σ_{k=0}^n f^(k)(a)/k! · (x-a)^k
-\`\`\`
+$$P_n(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!} \cdot (x-a)^k$$
 
-Where \`f^(k)(a)\` is the k-th derivative of \`f\` at \`a\`.
+Where $f^{(k)}(a)$ is the $k$-th derivative of $f$ at $a$.
 
 ### Building Intuition
 
-- \`P_0(x) = f(a)\` — constant (matches value at \`a\`)
-- \`P_1(x) = f(a) + f'(a)(x-a)\` — linear (also matches slope)
-- \`P_2(x)\` — also matches curvature
-- Each higher term matches one more derivative at \`a\`
+- $P_0(x) = f(a)$ — constant (matches value at $a$)
+- $P_1(x) = f(a) + f'(a)(x-a)$ — linear (also matches slope)
+- $P_2(x)$ — also matches curvature
+- Each higher term matches one more derivative at $a$
 
 ### Exact for Polynomials
 
-A degree-\`n\` Taylor polynomial reproduces any degree-\`n\` polynomial **exactly**:
+A degree-$n$ Taylor polynomial reproduces any degree-$n$ polynomial **exactly**:
 
-\`f(x) = x²\` at \`a=0\`:
-\`\`\`
-P_2(x) = f(0) + f'(0)x + f''(0)/2! x² = 0 + 0 + 2/2·x² = x²  ✓
-\`\`\`
+$f(x) = x^2$ at $a=0$:
+
+$$P_2(x) = f(0) + f'(0)x + \frac{f''(0)}{2!} x^2 = 0 + 0 + \frac{2}{2} x^2 = x^2 \checkmark$$
 
 ### Numerical nth Derivative
 
@@ -38,7 +35,7 @@ f^(0)(x) = f(x)
 f^(n)(x) ≈ (f^(n-1)(x+h) - f^(n-1)(x-h)) / (2h)
 \`\`\`
 
-This is accurate to \`O(h²)\` at each level. Keep \`n ≤ 4\` and \`h ≈ 1e-3\` for best results.
+This is accurate to $O(h^2)$ at each level. Keep $n \leq 4$ and $h \approx 10^{-3}$ for best results.
 
 ### Your Task
 

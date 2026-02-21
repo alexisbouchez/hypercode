@@ -6,42 +6,40 @@ export const secondDerivative: Lesson = {
 	chapterId: "limits-and-derivatives",
 	content: `## The Second Derivative
 
-The **second derivative** \`f''(x)\` is the derivative of \`f'(x)\` — the rate of change of the slope.
+The **second derivative** $f''(x)$ is the derivative of $f'(x)$ — the rate of change of the slope.
 
 ### Geometric Meaning
 
-- \`f''(x) > 0\`: curve is **concave up** (holds water, like a bowl)
-- \`f''(x) < 0\`: curve is **concave down** (spills water, like a hill)
-- \`f''(x) = 0\`: possible **inflection point** (concavity changes)
+- $f''(x) > 0$: curve is **concave up** (holds water, like a bowl)
+- $f''(x) < 0$: curve is **concave down** (spills water, like a hill)
+- $f''(x) = 0$: possible **inflection point** (concavity changes)
 
 ### Numerical Formula
 
-The second derivative can be approximated directly from \`f\` without computing \`f'\` first:
+The second derivative can be approximated directly from $f$ without computing $f'$ first:
 
-\`\`\`
-f''(x) ≈ (f(x+h) - 2·f(x) + f(x-h)) / h²
-\`\`\`
+$$f''(x) \\approx \\frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$$
 
-**Derivation**: expand \`f(x+h)\` and \`f(x-h)\` using Taylor series:
-\`\`\`
-f(x+h) = f(x) + h·f'(x) + h²/2·f''(x) + O(h³)
-f(x-h) = f(x) - h·f'(x) + h²/2·f''(x) + O(h³)
-\`\`\`
-Add them: \`f(x+h) + f(x-h) = 2f(x) + h²·f''(x)\`, so:
-\`\`\`
-f''(x) = (f(x+h) - 2f(x) + f(x-h)) / h²
-\`\`\`
+**Derivation**: expand $f(x+h)$ and $f(x-h)$ using Taylor series:
+
+$$f(x+h) = f(x) + h f'(x) + \\frac{h^2}{2} f''(x) + O(h^3)$$
+
+$$f(x-h) = f(x) - h f'(x) + \\frac{h^2}{2} f''(x) + O(h^3)$$
+
+Add them: $f(x+h) + f(x-h) = 2f(x) + h^2 f''(x)$, so:
+
+$$f''(x) = \\frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$$
 
 ### Inflection Points
 
-At an inflection point, \`f''(c) = 0\` and the sign of \`f''\` changes. Example: \`f(x) = x³\` has an inflection at \`x = 0\`.
+At an inflection point, $f''(c) = 0$ and the sign of $f''$ changes. Example: $f(x) = x^3$ has an inflection at $x = 0$.
 
 ### Second Derivative Test
 
-For a critical point \`c\` where \`f'(c) = 0\`:
-- \`f''(c) > 0\` → local **minimum**
-- \`f''(c) < 0\` → local **maximum**
-- \`f''(c) = 0\` → inconclusive
+For a critical point $c$ where $f'(c) = 0$:
+- $f''(c) > 0$ → local **minimum**
+- $f''(c) < 0$ → local **maximum**
+- $f''(c) = 0$ → inconclusive
 
 ### Your Task
 

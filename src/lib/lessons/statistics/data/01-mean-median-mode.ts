@@ -8,7 +8,7 @@ export const meanMedianMode: Lesson = {
 
 The three most important measures of central tendency:
 
-- **Mean** — the arithmetic average: sum divided by count
+- **Mean** — the arithmetic average: $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$
 - **Median** — the middle value when data is sorted
 - **Mode** — the most frequently occurring value
 

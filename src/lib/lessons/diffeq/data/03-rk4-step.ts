@@ -10,25 +10,23 @@ Euler's method uses only the slope at the start of each step. The **Runge-Kutta 
 
 ### The Formula
 
-\`\`\`
-k1 = f(t,        y             )
-k2 = f(t + h/2,  y + h/2 * k1 )
-k3 = f(t + h/2,  y + h/2 * k2 )
-k4 = f(t + h,    y + h   * k3 )
+$$k_1 = f(t,\\; y)$$
+$$k_2 = f\\!\\left(t + \\tfrac{h}{2},\\; y + \\tfrac{h}{2} k_1\\right)$$
+$$k_3 = f\\!\\left(t + \\tfrac{h}{2},\\; y + \\tfrac{h}{2} k_2\\right)$$
+$$k_4 = f(t + h,\\; y + h\\, k_3)$$
 
-y_next = y + h/6 * (k1 + 2*k2 + 2*k3 + k4)
-\`\`\`
+$$y_{\\text{next}} = y + \\frac{h}{6}\\left(k_1 + 2k_2 + 2k_3 + k_4\\right)$$
 
-- \`k1\`: slope at the start
-- \`k2\`: slope at the midpoint using \`k1\`
-- \`k3\`: slope at the midpoint using \`k2\` (refined)
-- \`k4\`: slope at the end using \`k3\`
+- $k_1$: slope at the start
+- $k_2$: slope at the midpoint using $k_1$
+- $k_3$: slope at the midpoint using $k_2$ (refined)
+- $k_4$: slope at the end using $k_3$
 
-The weights \`(1, 2, 2, 1)\` follow Simpson's rule for numerical integration.
+The weights $(1, 2, 2, 1)$ follow Simpson's rule for numerical integration.
 
 ### Why RK4?
 
-With the same step size, RK4 is dramatically more accurate than Euler. For \`dy/dt = y\` with \`h = 0.1\`:
+With the same step size, RK4 is dramatically more accurate than Euler. For $\\frac{dy}{dt} = y$ with $h = 0.1$:
 
 - Euler: error ~0.005 per step
 - RK4: error ~0.000000002 per step

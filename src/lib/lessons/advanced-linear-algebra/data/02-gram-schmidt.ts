@@ -10,19 +10,17 @@ Given a set of linearly independent vectors, Gram-Schmidt produces an **orthonor
 
 ### Algorithm
 
-For each vector v in turn:
+For each vector **v** in turn:
 1. Subtract its projection onto every previously found basis vector
 2. Normalize the result
 
-\`\`\`
-u₁ = v₁ / ‖v₁‖
+$$\\mathbf{q}_{1} = \\frac{\\mathbf{v}_{1}}{\\|\\mathbf{v}_{1}\\|}$$
 
-For i = 2, 3, …:
-  wᵢ = vᵢ − Σⱼ<ᵢ (vᵢ·qⱼ) qⱼ   ← subtract projections onto q₁…qᵢ₋₁
-  qᵢ = wᵢ / ‖wᵢ‖
-\`\`\`
+For $i = 2, 3, \\ldots$:
 
-Since each qⱼ is already normalized (length 1), the projection coefficient simplifies to just vᵢ·qⱼ.
+$$\\mathbf{w}_{i} = \\mathbf{v}_{i} - \\sum_{j < i} (\\mathbf{v}_{i} \\cdot \\mathbf{q}_{j})\\, \\mathbf{q}_{j}, \\qquad \\mathbf{q}_{i} = \\frac{\\mathbf{w}_{i}}{\\|\\mathbf{w}_{i}\\|}$$
+
+Since each $\\mathbf{q}_{j}$ is already normalized (length 1), the projection coefficient simplifies to just $\\mathbf{v}_{i} \\cdot \\mathbf{q}_{j}$.
 
 ### Example
 
@@ -30,9 +28,9 @@ Input vectors: [1,1,0], [1,0,1], [0,1,1]
 
 | Step | Result |
 |------|--------|
-| q₁ = [1,1,0]/√2 | [0.7071, 0.7071, 0.0000] |
-| q₂ from [1,0,1] | [0.4082, -0.4082, 0.8165] |
-| q₃ from [0,1,1] | [-0.5774, 0.5774, 0.5774] |
+| $\\mathbf{q}_{1} = [1,1,0]/\\sqrt{2}$ | [0.7071, 0.7071, 0.0000] |
+| $\\mathbf{q}_{2}$ from [1,0,1] | [0.4082, -0.4082, 0.8165] |
+| $\\mathbf{q}_{3}$ from [0,1,1] | [-0.5774, 0.5774, 0.5774] |
 
 ### Your Task
 

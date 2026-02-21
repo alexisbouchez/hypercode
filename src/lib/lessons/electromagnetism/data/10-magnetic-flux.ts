@@ -6,28 +6,26 @@ export const magneticFluxLesson: Lesson = {
 	chapterId: "magnetism",
 	content: `## Magnetic Flux
 
-**Magnetic flux** Φ quantifies how much of a magnetic field passes through a surface:
+**Magnetic flux** $\Phi$ quantifies how much of a magnetic field passes through a surface:
 
-\`\`\`
-Φ = B × A × cos(θ)
-\`\`\`
+$$\Phi = BA\cos\theta$$
 
-- **Φ** — magnetic flux (weber, Wb = V·s)
+- $\Phi$ — magnetic flux (weber, Wb = V·s)
 - **B** — magnetic field strength (T)
 - **A** — area of the surface (m²)
-- **θ** — angle between B and the surface normal
+- $\theta$ — angle between B and the surface normal
 
 ### The Cosine Factor
 
-| θ | cos(θ) | Flux |
+| $\theta$ | $\cos\theta$ | Flux |
 |---|--------|------|
 | 0° | 1 | maximum — field perpendicular to surface |
-| 45° | √2/2 | intermediate |
+| 45° | $\sqrt{2}/2$ | intermediate |
 | 90° | 0 | zero — field parallel to surface |
 
 ### Why It Matters
 
-Flux is the key quantity in **Faraday's law of induction**: a changing flux induces an EMF. It is also conserved — magnetic field lines that enter a closed surface must exit it (Gauss's law for magnetism: div B = 0).
+Flux is the key quantity in **Faraday's law of induction**: a changing flux induces an EMF. It is also conserved — magnetic field lines that enter a closed surface must exit it (Gauss's law for magnetism: $\nabla \cdot \vec{B} = 0$).
 
 ### Examples
 
@@ -40,7 +38,7 @@ Flux is the key quantity in **Faraday's law of induction**: a changing flux indu
 
 ### Your Task
 
-Implement \`magnetic_flux(B, A, theta_deg)\` returning Φ in webers.`,
+Implement \`magnetic_flux(B, A, theta_deg)\` returning $\Phi$ in webers.`,
 
 	starterCode: `import math
 

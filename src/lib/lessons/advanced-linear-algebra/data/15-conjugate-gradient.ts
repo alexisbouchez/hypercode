@@ -6,37 +6,33 @@ export const conjugateGradientLesson: Lesson = {
 	chapterId: "applications",
 	content: `## Conjugate Gradient Method
 
-The **Conjugate Gradient (CG)** method solves symmetric positive definite systems Ax = b iteratively — without factoring A. It is the algorithm of choice for large sparse systems.
+The **Conjugate Gradient (CG)** method solves symmetric positive definite systems $Ax = b$ iteratively — without factoring $A$. It is the algorithm of choice for large sparse systems.
 
 ### Key Idea
 
-CG builds a sequence of search directions p₀, p₁, … that are **A-conjugate** (mutually orthogonal in the energy inner product ⟨u,v⟩_A = uᵀAv). Each step minimises the error over an expanding Krylov subspace.
+CG builds a sequence of search directions $\\mathbf{p}_0, \\mathbf{p}_1, \\ldots$ that are **A-conjugate** (mutually orthogonal in the energy inner product $\\langle \\mathbf{u}, \\mathbf{v} \\rangle_A = \\mathbf{u}^T A \\mathbf{v}$). Each step minimises the error over an expanding Krylov subspace.
 
 ### Algorithm
 
-\`\`\`
-x₀ = 0,  r₀ = b,  p₀ = b
+$$\\mathbf{x}_0 = \\mathbf{0}, \\quad \\mathbf{r}_0 = b, \\quad \\mathbf{p}_0 = b$$
 
-for k = 0, 1, 2, …:
-    α  = rₖᵀrₖ / (pₖᵀ A pₖ)   ← optimal step size
-    x  = x + α pₖ
-    r  = r − α A pₖ
-    β  = rₖ₊₁ᵀrₖ₊₁ / rₖᵀrₖ    ← correction factor
-    p  = r + β pₖ
-\`\`\`
+For $k = 0, 1, 2, \\ldots$:
 
-For an n×n SPD system, CG converges in **at most n iterations** (exactly, in exact arithmetic).
+$$\\alpha_k = \\frac{\\mathbf{r}_k^T \\mathbf{r}_k}{\\mathbf{p}_k^T A \\mathbf{p}_k} \\quad (\\text{optimal step size})$$
+
+$$\\mathbf{x} \\leftarrow \\mathbf{x} + \\alpha_k \\mathbf{p}_k, \\qquad \\mathbf{r} \\leftarrow \\mathbf{r} - \\alpha_k A \\mathbf{p}_k$$
+
+$$\\beta_k = \\frac{\\mathbf{r}_{k+1}^T \\mathbf{r}_{k+1}}{\\mathbf{r}_k^T \\mathbf{r}_k} \\quad (\\text{correction factor}), \\qquad \\mathbf{p} \\leftarrow \\mathbf{r} + \\beta_k \\mathbf{p}_k$$
+
+For an $n \\times n$ SPD system, CG converges in **at most $n$ iterations** (exactly, in exact arithmetic).
 
 ### Example
 
-\`\`\`
-A = [[4, 1],   b = [1, 2]   →   x = [1/11, 7/11] ≈ [0.0909, 0.6364]
-     [1, 3]]
-\`\`\`
+$$A = \\begin{pmatrix}4 & 1\\\\1 & 3\\end{pmatrix}, \\quad b = \\begin{pmatrix}1\\\\2\\end{pmatrix} \\quad \\Rightarrow \\quad x = \\begin{pmatrix}1/11\\\\7/11\\end{pmatrix} \\approx \\begin{pmatrix}0.0909\\\\0.6364\\end{pmatrix}$$
 
 ### Your Task
 
-Implement \`conjugate_gradient(A, b)\` that solves Ax = b for symmetric positive definite A.`,
+Implement \`conjugate_gradient(A, b)\` that solves $Ax = b$ for symmetric positive definite $A$.`,
 
 	starterCode: `def dot(a, b):
     return sum(x * y for x, y in zip(a, b))

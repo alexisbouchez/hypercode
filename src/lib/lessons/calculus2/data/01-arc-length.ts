@@ -6,22 +6,20 @@ export const arcLength: Lesson = {
 	chapterId: "integration-applications",
 	content: `## Arc Length
 
-The **length** of a curve \`y = f(x)\` from \`a\` to \`b\`:
+The **length** of a curve $y = f(x)$ from $a$ to $b$:
 
-\`\`\`
-L = ∫_a^b √(1 + [f'(x)]²) dx
-\`\`\`
+$$L = \int_a^b \sqrt{1 + [f'(x)]^2} \, dx$$
 
 ### Why It Works
 
-At each \`x\`, the curve moves right by \`dx\` and up by \`f'(x)dx\`. By the Pythagorean theorem, the infinitesimal piece has length \`√(dx² + (f'dx)²) = √(1+f'²) dx\`.
+At each $x$, the curve moves right by $dx$ and up by $f'(x)dx$. By the Pythagorean theorem, the infinitesimal piece has length $\sqrt{dx^2 + (f'dx)^2} = \sqrt{1+f'^2} \, dx$.
 
 ### Examples
 
-**Straight line** \`y = mx\` on \`[a, b]\`: \`f' = m\`, so \`L = (b-a)√(1+m²)\`
+**Straight line** $y = mx$ on $[a, b]$: $f' = m$, so $L = (b-a)\sqrt{1+m^2}$
 
-- \`y = x\` on \`[0,3]\`: \`L = 3√2 ≈ 4.2426\`
-- \`y = 3x\` on \`[0,4]\`: \`L = 4√10 ≈ 12.6491\`
+- $y = x$ on $[0,3]$: $L = 3\sqrt{2} \approx 4.2426$
+- $y = 3x$ on $[0,4]$: $L = 4\sqrt{10} \approx 12.6491$
 
 ### Numerical Approach
 
@@ -39,7 +37,7 @@ return sum * dx;
 
 Implement \`double arc_length(double (*f)(double), double a, double b, int n, double h)\`.
 
-Use the midpoint rule with step \`dx = (b-a)/n\` and central difference with step \`h\` for the derivative. A Newton's-method sqrt helper is provided.`,
+Use the midpoint rule with step $dx = (b-a)/n$ and central difference with step $h$ for the derivative. A Newton's-method sqrt helper is provided.`,
 
 	starterCode: `#include <stdio.h>
 

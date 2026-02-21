@@ -6,44 +6,35 @@ export const matrixNormsLesson: Lesson = {
 	chapterId: "matrix-analysis",
 	content: `## Matrix Norms
 
-A matrix norm ‖A‖ measures the "size" of a matrix. Different norms capture different aspects of the matrix.
+A matrix norm $\\|A\\|$ measures the "size" of a matrix. Different norms capture different aspects of the matrix.
 
 ### Frobenius Norm
 
 The most common: sum of squares of all entries, then square root.
 
-\`\`\`
-‖A‖_F = sqrt( Σᵢⱼ aᵢⱼ² )
-\`\`\`
+$$\\|A\\|_F = \\sqrt{\\sum_{i,j} a_{ij}^2}$$
 
 Analogous to the Euclidean length of the vector of all entries.
 
 ### Infinity Norm (Max Row Sum)
 
-The maximum absolute row sum — the worst-case amplification when multiplying a vector with ‖v‖_∞ ≤ 1.
+The maximum absolute row sum — the worst-case amplification when multiplying a vector with $\\|\\mathbf{v}\\|_\\infty \\leq 1$.
 
-\`\`\`
-‖A‖_∞ = max_i ( Σⱼ |aᵢⱼ| )
-\`\`\`
+$$\\|A\\|_\\infty = \\max_i \\sum_j |a_{ij}|$$
 
 ### 1-Norm (Max Column Sum)
 
 The maximum absolute column sum.
 
-\`\`\`
-‖A‖_₁ = max_j ( Σᵢ |aᵢⱼ| )
-\`\`\`
+$$\\|A\\|_1 = \\max_j \\sum_i |a_{ij}|$$
 
 ### Example
 
-\`\`\`
-A = [[1, 2],
-     [3, 4]]
+$$A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$$
 
-‖A‖_F = sqrt(1+4+9+16) = sqrt(30) ≈ 5.4772
-‖A‖_∞ = max(1+2, 3+4) = max(3, 7) = 7.0000
-‖A‖_₁ = max(1+3, 2+4) = max(4, 6) = 6.0000
-\`\`\`
+$$\\|A\\|_F = \\sqrt{1+4+9+16} = \\sqrt{30} \\approx 5.4772$$
+
+$$\\|A\\|_\\infty = \\max(1+2,\\ 3+4) = 7.0000, \\qquad \\|A\\|_1 = \\max(1+3,\\ 2+4) = 6.0000$$
 
 ### Your Task
 

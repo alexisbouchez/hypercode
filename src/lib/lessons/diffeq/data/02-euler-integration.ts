@@ -6,7 +6,7 @@ export const eulerIntegration: Lesson = {
 	chapterId: "numerical-methods",
 	content: `## Euler Integration
 
-A single Euler step gives one point. To approximate an entire trajectory, we repeat the step \`n\` times from \`t0\` to \`t_end\`.
+A single Euler step gives one point. To approximate an entire trajectory, we repeat the step $n$ times from $t_0$ to $t_{\\text{end}}$.
 
 ### Algorithm
 
@@ -22,11 +22,11 @@ def euler(f, t0, y0, t_end, n):
     return ys
 \`\`\`
 
-The step size is \`h = (t_end - t0) / n\`. Smaller \`h\` (more steps) gives higher accuracy, at the cost of more computation.
+The step size is $h = (t_{\\text{end}} - t_0) / n$. Smaller $h$ (more steps) gives higher accuracy, at the cost of more computation.
 
 ### Accuracy vs. Step Size
 
-Euler's method has **first-order** accuracy: if you halve \`h\`, the global error halves too. For the ODE \`dy/dt = y\` with \`y(0) = 1\`:
+Euler's method has **first-order** accuracy: if you halve $h$, the global error halves too. For the ODE $\\frac{dy}{dt} = y$ with $y(0) = 1$:
 
 | n steps | y(1) approximation | exact e ≈ 2.71828 |
 |---------|-------------------|-------------------|
@@ -36,7 +36,7 @@ Euler's method has **first-order** accuracy: if you halve \`h\`, the global erro
 
 ### Your Task
 
-Implement \`euler(f, t0, y0, t_end, n)\` that returns a list of \`n+1\` values (including the initial value).`,
+Implement \`euler(f, t0, y0, t_end, n)\` that returns a list of $n+1$ values (including the initial value).`,
 
 	starterCode: `def euler(f, t0, y0, t_end, n):
     h = (t_end - t0) / n

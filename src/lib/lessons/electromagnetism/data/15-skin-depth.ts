@@ -6,30 +6,28 @@ export const skinDepthLesson: Lesson = {
 	chapterId: "em-induction",
 	content: `## The Skin Effect
 
-At high frequencies, alternating current doesn't flow uniformly through a conductor — it concentrates near the surface. The **skin depth** δ (delta) is the depth at which the current density falls to 1/e ≈ 37% of its surface value:
+At high frequencies, alternating current doesn't flow uniformly through a conductor — it concentrates near the surface. The **skin depth** $\delta$ is the depth at which the current density falls to $1/e \approx 37\%$ of its surface value:
 
-\`\`\`
-δ = √(2ρ / (ω μ))  =  √(ρ / (π f μ))
-\`\`\`
+$$\delta = \sqrt{\frac{2\rho}{\omega\mu}} = \sqrt{\frac{\rho}{\pi f \mu}}$$
 
-- **δ** — skin depth (m)
-- **ρ** — resistivity of the conductor (Ω·m)
+- $\delta$ — skin depth (m)
+- $\rho$ — resistivity of the conductor (Ω·m)
 - **f** — frequency (Hz)
-- **μ** = μ₀ μᵣ — magnetic permeability (H/m)
+- $\mu = \mu_0 \mu_r$ — magnetic permeability (H/m)
 
-For non-magnetic materials μ ≈ μ₀ = 4π × 10⁻⁷ H/m.
+For non-magnetic materials $\mu \approx \mu_0 = 4\pi \times 10^{-7}$ H/m.
 
 ### Practical Consequences
 
 | Material | f | δ |
 |----------|---|---|
-| Copper (ρ = 1.68×10⁻⁸) at 50 Hz | ~9 mm |
+| Copper ($\rho = 1.68\times10^{-8}$) at 50 Hz | ~9 mm |
 | Copper at 1 MHz | ~66 μm |
 | Copper at 1 GHz | ~2 μm |
 
 At RF frequencies, only a thin surface layer carries current. High-frequency cables are plated with silver (lower resistivity) to reduce loss.
 
-### Examples (copper, ρ = 1.68×10⁻⁸ Ω·m, μ = μ₀)
+### Examples (copper, $\rho = 1.68\times10^{-8}$ Ω·m, $\mu = \mu_0$)
 
 | f (Hz) | δ (m) |
 |--------|-------|
@@ -40,7 +38,7 @@ At RF frequencies, only a thin surface layer carries current. High-frequency cab
 
 ### Your Task
 
-Implement \`skin_depth(rho, f, mu)\` returning δ in metres.`,
+Implement \`skin_depth(rho, f, mu)\` returning $\delta$ in metres.`,
 
 	starterCode: `import math
 

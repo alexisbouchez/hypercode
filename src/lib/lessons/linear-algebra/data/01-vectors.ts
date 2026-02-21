@@ -25,7 +25,7 @@ Python uses 0-based indexing. \`v[0]\` is the first element, \`v[-1]\` is the la
 
 ### Length
 
-\`len(v)\` returns the number of elements. For a vector in **ℝⁿ**, this is \`n\`.
+\`len(v)\` returns the number of elements. For a vector in $\\mathbb{R}^n$, this is $n$.
 
 ### Your Task
 

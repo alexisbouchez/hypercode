@@ -8,15 +8,13 @@ export const vectorProjectionLesson: Lesson = {
 
 The **projection of v onto u** is the component of v that lies in the direction of u:
 
-\`\`\`
-proj_u(v) = (v·u / u·u) × u
-\`\`\`
+$$\\text{proj}_{\\mathbf{u}}\\mathbf{v} = \\frac{\\mathbf{v} \\cdot \\mathbf{u}}{\\mathbf{u} \\cdot \\mathbf{u}} \\, \\mathbf{u}$$
 
-The scalar coefficient v·u / u·u scales u to exactly the "shadow" of v along u.
+The scalar coefficient $\\frac{\\mathbf{v} \\cdot \\mathbf{u}}{\\mathbf{u} \\cdot \\mathbf{u}}$ scales **u** to exactly the "shadow" of **v** along **u**.
 
 ### Geometric Intuition
 
-Imagine shining a light perpendicular to u — the shadow of v cast onto the line through u is exactly the projection. The perpendicular component v − proj_u(v) is orthogonal to u.
+Imagine shining a light perpendicular to **u** — the shadow of **v** cast onto the line through **u** is exactly the projection. The perpendicular component $\\mathbf{v} - \\text{proj}_{\\mathbf{u}}\\mathbf{v}$ is orthogonal to **u**.
 
 ### Examples
 
@@ -26,7 +24,7 @@ Imagine shining a light perpendicular to u — the shadow of v cast onto the lin
 | [1, 2, 3] | [1, 1, 1] | [2.0000, 2.0000, 2.0000] |
 | [0, 5] | [3, 4] | [2.4000, 3.2000] |
 
-**Note:** For [1,2,3] onto [1,1,1]: the sum is 6, so the coefficient is 6/3 = 2, giving [2, 2, 2].
+**Note:** For [1,2,3] onto [1,1,1]: the sum is 6, so the coefficient is $6/3 = 2$, giving [2, 2, 2].
 
 ### Your Task
 

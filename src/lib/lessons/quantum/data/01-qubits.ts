@@ -8,18 +8,18 @@ export const qubits: Lesson = {
 
 A classical bit is either 0 or 1. A **qubit** (quantum bit) can be in a superposition of both states simultaneously — until it is measured.
 
-We represent a qubit as a pair of amplitudes **[α, β]** where:
+We represent a qubit as a pair of amplitudes $[\alpha, \beta]$ where:
 
-- α is the amplitude for the |0⟩ state
-- β is the amplitude for the |1⟩ state
-- α² + β² = 1 (the probabilities must sum to 1)
+- $\alpha$ is the amplitude for the $|0\rangle$ state
+- $\beta$ is the amplitude for the $|1\rangle$ state
+- $|\alpha|^2 + |\beta|^2 = 1$ (the probabilities must sum to 1)
 
 The two **basis states** are:
 
 | State | Notation | Vector |
 |-------|----------|--------|
-| Zero  | \|0⟩     | [1.0, 0.0] |
-| One   | \|1⟩     | [0.0, 1.0] |
+| Zero  | $|0\rangle$ | [1.0, 0.0] |
+| One   | $|1\rangle$ | [0.0, 1.0] |
 
 \`\`\`python
 def ket_zero():
@@ -34,7 +34,7 @@ print(zero)    # [1.0, 0.0]
 print(one)     # [0.0, 1.0]
 \`\`\`
 
-The alpha (α) amplitude is at index 0 and beta (β) is at index 1.
+The alpha ($\alpha$) amplitude is at index 0 and beta ($\beta$) is at index 1.
 
 ### Your Task
 

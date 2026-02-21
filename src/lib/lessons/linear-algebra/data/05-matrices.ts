@@ -6,7 +6,7 @@ export const matrices: Lesson = {
 	chapterId: "matrices",
 	content: `## Matrices in Python
 
-A **matrix** is a 2D array of numbers with \`m\` rows and \`n\` columns — an \`m × n\` matrix. In Python, we represent it as a list of lists.
+A **matrix** is a 2D array of numbers with $m$ rows and $n$ columns — an $m \times n$ matrix. In Python, we represent it as a list of lists.
 
 \`\`\`python
 A = [[1, 2, 3],
@@ -34,11 +34,11 @@ I = [[1 if i == j else 0 for j in range(3)] for i in range(3)]
 
 ### The Identity Matrix
 
-The identity matrix \`I\` is the matrix equivalent of the number 1: \`A · I = A\` for any matrix \`A\`. It has 1s on the diagonal and 0s everywhere else.
+The identity matrix $I$ is the matrix equivalent of the number 1: $\mathbf{A} \cdot I = \mathbf{A}$ for any matrix $\mathbf{A}$. It has 1s on the diagonal and 0s everywhere else.
 
 ### Your Task
 
-Implement \`identity(n)\` that returns the \`n × n\` identity matrix as a list of lists.`,
+Implement \`identity(n)\` that returns the $n \times n$ identity matrix as a list of lists.`,
 
 	starterCode: `def identity(n):
     # Return the n×n identity matrix as a list of lists

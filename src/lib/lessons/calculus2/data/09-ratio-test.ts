@@ -6,48 +6,43 @@ export const ratioTest: Lesson = {
 	chapterId: "sequences-and-series",
 	content: `## Ratio Test
 
-For a series \`Σ a_n\`, compute:
-\`\`\`
-L = lim_{n→∞} |a_{n+1} / a_n|
-\`\`\`
+For a series $\sum a_n$, compute:
 
-- **L < 1**: series converges absolutely
-- **L > 1**: series diverges
-- **L = 1**: inconclusive (try another test)
+$$L = \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right|$$
+
+- **$L < 1$**: series converges absolutely
+- **$L > 1$**: series diverges
+- **$L = 1$**: inconclusive (try another test)
 
 ### Why It Works
 
-If the ratio approaches \`L < 1\`, the tail of the series eventually behaves like a geometric series with ratio \`L\`, which converges.
+If the ratio approaches $L < 1$, the tail of the series eventually behaves like a geometric series with ratio $L$, which converges.
 
 ### Examples
 
-**Factorial series** \`Σ 1/n!\`:
-\`\`\`
-|a_{n+1}/a_n| = n!/(n+1)! = 1/(n+1) → 0  (L=0 < 1, converges)
-\`\`\`
+**Factorial series** $\sum \frac{1}{n!}$:
 
-**Power series** \`Σ xⁿ/n!\` (Taylor series for eˣ):
-\`\`\`
-|a_{n+1}/a_n| = |x|/(n+1) → 0  (converges for all x)
-\`\`\`
+$$\left|\frac{a_{n+1}}{a_n}\right| = \frac{n!}{(n+1)!} = \frac{1}{n+1} \to 0 \quad (L=0 < 1, \text{ converges})$$
 
-**Geometric series** \`Σ rⁿ\`:
-\`\`\`
-|a_{n+1}/a_n| = |r|  (constant — converges iff |r| < 1)
-\`\`\`
+**Power series** $\sum \frac{x^n}{n!}$ (Taylor series for $e^x$):
 
-**Harmonic** \`Σ 1/n\`:
-\`\`\`
-|a_{n+1}/a_n| = n/(n+1) → 1  (L=1, inconclusive)
-\`\`\`
+$$\left|\frac{a_{n+1}}{a_n}\right| = \frac{|x|}{n+1} \to 0 \quad (\text{converges for all } x)$$
+
+**Geometric series** $\sum r^n$:
+
+$$\left|\frac{a_{n+1}}{a_n}\right| = |r| \quad (\text{constant — converges iff } |r| < 1)$$
+
+**Harmonic** $\sum \frac{1}{n}$:
+
+$$\left|\frac{a_{n+1}}{a_n}\right| = \frac{n}{n+1} \to 1 \quad (L=1, \text{ inconclusive})$$
 
 ### Numerically
 
-Compute \`a_n(n+1) / a_n(n)\` for a large \`n\` to approximate \`L\`.
+Compute $a_n(n+1) / a_n(n)$ for a large $n$ to approximate $L$.
 
 ### Your Task
 
-Implement \`double ratio_test_limit(double (*a_n)(int), int n)\` that returns \`a_n(n+1) / a_n(n)\`, approximating the ratio test limit.`,
+Implement \`double ratio_test_limit(double (*a_n)(int), int n)\` that returns $a_n(n+1) / a_n(n)$, approximating the ratio test limit.`,
 
 	starterCode: `#include <stdio.h>
 

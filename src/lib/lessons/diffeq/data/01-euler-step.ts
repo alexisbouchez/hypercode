@@ -8,31 +8,25 @@ export const eulerStep: Lesson = {
 
 Differential equations describe how quantities change over time. A first-order ODE has the form:
 
-\`\`\`
-dy/dt = f(t, y),   y(t0) = y0
-\`\`\`
+$$\\frac{dy}{dt} = f(t, y), \\quad y(t_0) = y_0$$
 
 We cannot always solve this analytically. **Euler's method** is the simplest numerical approach: approximate the solution by taking small steps along the tangent line.
 
 ### The Formula
 
-Given the current state \`(t, y)\`, take a small step of size \`h\`:
+Given the current state $(t, y)$, take a small step of size $h$:
 
-\`\`\`
-y_next = y + h * f(t, y)
-\`\`\`
+$$y_{\\text{next}} = y + h \\cdot f(t, y)$$
 
-The idea: \`f(t, y)\` is the slope (derivative) at the current point. Moving \`h\` forward in time, we step \`h * slope\` in the y-direction.
+The idea: $f(t, y)$ is the slope (derivative) at the current point. Moving $h$ forward in time, we step $h \\times \\text{slope}$ in the y-direction.
 
 ### Example
 
-For \`dy/dt = y\` (exponential growth) with \`y(0) = 1\` and \`h = 0.1\`:
+For $\\frac{dy}{dt} = y$ (exponential growth) with $y(0) = 1$ and $h = 0.1$:
 
-\`\`\`
-y_next = 1 + 0.1 * 1 = 1.1
-\`\`\`
+$$y_{\\text{next}} = 1 + 0.1 \\times 1 = 1.1$$
 
-The exact answer at \`t = 0.1\` is \`e^0.1 ≈ 1.10517\`. Euler's method gives \`1.1\` — a reasonable approximation for a single step.
+The exact answer at $t = 0.1$ is $e^{0.1} \\approx 1.10517$. Euler's method gives $1.1$ — a reasonable approximation for a single step.
 
 ### Your Task
 

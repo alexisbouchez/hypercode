@@ -28,18 +28,18 @@ def rk4(f, t0, y0, t_end, n):
 
 ### RK4 vs Euler: A Comparison
 
-For \`dy/dt = y\`, \`y(0) = 1\`, approximate \`y(1) = e ≈ 2.71828\`:
+For $\\frac{dy}{dt} = y$, $y(0) = 1$, approximate $y(1) = e \\approx 2.71828$:
 
 | Method  | n=10    | n=100   |
 |---------|---------|---------|
 | Euler   | 2.5937  | 2.7048  |
 | RK4     | 2.7183  | 2.71828 |
 
-With just 10 steps, RK4 matches \`e\` to 4 decimal places. Euler needs thousands of steps for similar accuracy.
+With just 10 steps, RK4 matches $e$ to 4 decimal places. Euler needs thousands of steps for similar accuracy.
 
 ### Your Task
 
-Implement \`rk4(f, t0, y0, t_end, n)\` that applies \`n\` RK4 steps and returns a list of \`n+1\` values.`,
+Implement \`rk4(f, t0, y0, t_end, n)\` that applies $n$ RK4 steps and returns a list of $n+1$ values.`,
 
 	starterCode: `def rk4(f, t0, y0, t_end, n):
     h = (t_end - t0) / n

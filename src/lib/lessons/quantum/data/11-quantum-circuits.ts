@@ -17,9 +17,9 @@ def apply_gates(state, gates):
     return state
 \`\`\`
 
-**Example: H → X → H = Z**
+**Example: $H \to X \to H = Z$**
 
-Applying these three gates in sequence to |0⟩ is equivalent to applying the Z gate:
+Applying these three gates in sequence to $|0\rangle$ is equivalent to applying the Z gate:
 
 \`\`\`python
 import math
@@ -38,7 +38,7 @@ print(round(result[0], 4))  # 1.0 — same as Z|0⟩ = |0⟩
 print(round(result[1], 4))  # 0.0
 \`\`\`
 
-This is called a **circuit identity**: H·X·H = Z.
+This is called a **circuit identity**: $H \cdot X \cdot H = Z$.
 
 ### Your Task
 

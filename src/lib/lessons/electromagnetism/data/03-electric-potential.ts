@@ -8,12 +8,10 @@ export const electricPotentialLesson: Lesson = {
 
 **Electric potential** V is the potential energy per unit charge at a point in space. For a point charge:
 
-\`\`\`
-V = k × q / r
-\`\`\`
+$$V = \frac{kq}{r}$$
 
 - **V** — electric potential (volts, J/C)
-- **k** = 8.99 × 10⁹ N·m²/C²
+- **k** = $8.99 \times 10^9 \text{ N·m}^2/\text{C}^2$
 - **q** — source charge (C)
 - **r** — distance from charge (m)
 
@@ -21,18 +19,16 @@ V = k × q / r
 
 | Quantity | Falls off as | Units |
 |----------|-------------|-------|
-| Electric field E | 1/r² | N/C = V/m |
-| Electric potential V | 1/r | V (volts) |
+| Electric field E | $1/r^2$ | N/C = V/m |
+| Electric potential V | $1/r$ | V (volts) |
 
-The field is the (negative) gradient of the potential: E = −dV/dr.
+The field is the (negative) gradient of the potential: $E = -dV/dr$.
 
 ### Potential Energy of Two Charges
 
 The energy stored in a pair of charges is:
 
-\`\`\`
-U = k × q₁ × q₂ / r
-\`\`\`
+$$U = \frac{k q_1 q_2}{r}$$
 
 Positive for like charges (repulsive — you must do work to push them together), negative for opposite charges (attractive — they release energy as they approach).
 

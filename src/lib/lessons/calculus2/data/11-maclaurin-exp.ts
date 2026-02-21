@@ -4,41 +4,37 @@ export const maclaurinExp: Lesson = {
 	id: "maclaurin-exp",
 	title: "Maclaurin Series for eˣ",
 	chapterId: "taylor-series",
-	content: `## Maclaurin Series for eˣ
+	content: `## Maclaurin Series for $e^x$
 
-The most important Taylor series is for \`eˣ\` centered at \`a = 0\` (Maclaurin):
+The most important Taylor series is for $e^x$ centered at $a = 0$ (Maclaurin):
 
-\`\`\`
-eˣ = Σ_{k=0}^∞ xᵏ/k! = 1 + x + x²/2! + x³/3! + x⁴/4! + ...
-\`\`\`
+$$e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots$$
 
 ### Why This Works
 
-Every derivative of \`eˣ\` is \`eˣ\`, so \`f^(k)(0) = e⁰ = 1\` for all \`k\`. The Taylor series becomes:
-\`\`\`
-P_n(x) = Σ_{k=0}^n xᵏ/k!
-\`\`\`
+Every derivative of $e^x$ is $e^x$, so $f^{(k)}(0) = e^0 = 1$ for all $k$. The Taylor series becomes:
+
+$$P_n(x) = \sum_{k=0}^n \frac{x^k}{k!}$$
 
 ### Convergence
 
-This series converges for **all** \`x\`. By the ratio test:
-\`\`\`
-|a_{k+1}/a_k| = |x|/(k+1) → 0  as k → ∞
-\`\`\`
+This series converges for **all** $x$. By the ratio test:
+
+$$\left|\frac{a_{k+1}}{a_k}\right| = \frac{|x|}{k+1} \to 0 \quad \text{as } k \to \infty$$
 
 ### How Fast It Converges
 
-For \`x=1\` (computing \`e\`):
+For $x=1$ (computing $e$):
 
-| n | P_n(1) | Error |
-|---|--------|-------|
-| 5 | 2.7167 | 0.0016 |
-| 10 | 2.71828 | < 1e-7 |
-| 20 | 2.71828182... | machine precision |
+| $n$ | $P_n(1)$ | Error |
+|-----|----------|-------|
+| $5$ | $2.7167$ | $0.0016$ |
+| $10$ | $2.71828$ | $< 10^{-7}$ |
+| $20$ | $2.71828182\ldots$ | machine precision |
 
 ### Efficient Evaluation (Horner's Method Alternative)
 
-Instead of computing \`xᵏ/k!\` from scratch each time, update iteratively:
+Instead of computing $x^k/k!$ from scratch each time, update iteratively:
 \`\`\`c
 double term = 1.0;   // x^0 / 0! = 1
 for k = 0 to n:
@@ -50,7 +46,7 @@ Each iteration does just 2 operations — no power or factorial needed.
 
 ### Your Task
 
-Implement \`double maclaurin_exp(double x, int n)\` that computes \`Σ_{k=0}^n xᵏ/k!\`.`,
+Implement \`double maclaurin_exp(double x, int n)\` that computes $\sum_{k=0}^n \frac{x^k}{k!}$.`,
 
 	starterCode: `#include <stdio.h>
 

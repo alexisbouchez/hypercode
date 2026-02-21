@@ -8,39 +8,33 @@ export const trapezoidRule: Lesson = {
 
 Instead of rectangles, use **trapezoids** — connect adjacent points with line segments:
 
-\`\`\`
-h/2 · [f(a) + 2·f(a+h) + 2·f(a+2h) + ... + 2·f(b-h) + f(b)]
-\`\`\`
+$$\\frac{h}{2} \\cdot \\left[f(a) + 2f(a+h) + 2f(a+2h) + \\cdots + 2f(b-h) + f(b)\\right]$$
 
-where \`h = (b-a)/n\`.
+where $h = \\frac{b-a}{n}$.
 
 ### Derivation
 
-Each trapezoid has two parallel sides \`f(xᵢ)\` and \`f(xᵢ₊₁)\` and width \`h\`. Its area is \`h·(f(xᵢ) + f(xᵢ₊₁))/2\`. Sum all n trapezoids — the interior points appear twice:
+Each trapezoid has two parallel sides $f(x_i)$ and $f(x_{i+1})$ and width $h$. Its area is $\\frac{h \\cdot (f(x_i) + f(x_{i+1}))}{2}$. Sum all $n$ trapezoids — the interior points appear twice:
 
-\`\`\`
-Area = h/2 · [f(x₀) + 2f(x₁) + 2f(x₂) + ... + 2f(xₙ₋₁) + f(xₙ)]
-\`\`\`
+$$\\text{Area} = \\frac{h}{2} \\cdot \\left[f(x_0) + 2f(x_1) + 2f(x_2) + \\cdots + 2f(x_{n-1}) + f(x_n)\\right]$$
 
 ### Accuracy
 
-Error is \`O(h²)\` — halving \`n\` reduces error by factor of 4. The trapezoidal rule is **exact for linear functions**.
+Error is $O(h^2)$ — halving $n$ reduces error by factor of 4. The trapezoidal rule is **exact for linear functions**.
 
 ### Error Formula
 
-\`\`\`
-Error ≤ (b-a)³/(12n²) · max|f''(x)|
-\`\`\`
+$$\\text{Error} \\leq \\frac{(b-a)^3}{12n^2} \\cdot \\max|f''(x)|$$
 
-For \`f(x) = sin(x)\`, \`max|f''| = 1\`, so on \`[0, π]\` with n=100: error ≤ π³/120000 ≈ 0.000258.
+For $f(x) = \\sin(x)$, $\\max|f''| = 1$, so on $[0, \\pi]$ with $n=100$: error $\\leq \\frac{\\pi^3}{120000} \\approx 0.000258$.
 
 ### Comparison
 
 | Rule | Error order | Exact for |
 |------|------------|-----------|
-| Left/Right | \`O(h)\` | Constants |
-| Trapezoid | \`O(h²)\` | Linear |
-| Simpson | \`O(h⁴)\` | Cubic |
+| Left/Right | $O(h)$ | Constants |
+| Trapezoid | $O(h^2)$ | Linear |
+| Simpson | $O(h^4)$ | Cubic |
 
 ### Your Task
 

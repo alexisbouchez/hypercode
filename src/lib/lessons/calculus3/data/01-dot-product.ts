@@ -6,38 +6,34 @@ export const dotProduct3: Lesson = {
 	chapterId: "vectors-in-3d",
 	content: `## The Dot Product in 3D
 
-The **dot product** of two vectors **a** = (ax, ay, az) and **b** = (bx, by, bz) is:
+The **dot product** of two vectors $\\mathbf{a} = (a_x, a_y, a_z)$ and $\\mathbf{b} = (b_x, b_y, b_z)$ is:
 
-\`\`\`
-a · b = ax·bx + ay·by + az·bz
-\`\`\`
+$$\\mathbf{a} \\cdot \\mathbf{b} = a_x b_x + a_y b_y + a_z b_z$$
 
 The result is a **scalar** — a single number, not a vector.
 
 ### Geometric Interpretation
 
-\`\`\`
-a · b = |a| · |b| · cos(θ)
-\`\`\`
+$$\\mathbf{a} \\cdot \\mathbf{b} = |\\mathbf{a}| \\cdot |\\mathbf{b}| \\cdot \\cos(\\theta)$$
 
-Where θ is the angle between the vectors. This means:
-- If **a · b > 0**: vectors point in a similar direction (θ < 90°)
-- If **a · b = 0**: vectors are **perpendicular** (θ = 90°)
-- If **a · b < 0**: vectors point in opposite directions (θ > 90°)
+Where $\\theta$ is the angle between the vectors. This means:
+- If $\\mathbf{a} \\cdot \\mathbf{b} > 0$: vectors point in a similar direction ($\\theta < 90°$)
+- If $\\mathbf{a} \\cdot \\mathbf{b} = 0$: vectors are **perpendicular** ($\\theta = 90°$)
+- If $\\mathbf{a} \\cdot \\mathbf{b} < 0$: vectors point in opposite directions ($\\theta > 90°$)
 
 ### Applications
 
 - **Checking orthogonality**: two vectors are perpendicular if and only if their dot product is zero
-- **Work**: W = **F** · **d** (force dot displacement)
+- **Work**: $W = \\mathbf{F} \\cdot \\mathbf{d}$ (force dot displacement)
 - **Projections**: computing how much one vector points along another
 
 ### Examples
 
-| **a** | **b** | **a · b** |
+| $\\mathbf{a}$ | $\\mathbf{b}$ | $\\mathbf{a} \\cdot \\mathbf{b}$ |
 |-------|-------|-----------|
 | (1,0,0) | (0,1,0) | 0 (perpendicular) |
 | (1,2,3) | (4,5,6) | 4+10+18 = 32 |
-| (2,2,1) | (2,2,1) | 4+4+1 = 9 = |a|² |
+| (2,2,1) | (2,2,1) | $4+4+1 = 9 = |\\mathbf{a}|^2$ |
 
 ### Your Task
 

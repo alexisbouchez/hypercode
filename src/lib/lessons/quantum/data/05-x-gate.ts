@@ -8,14 +8,16 @@ export const xGate: Lesson = {
 
 The **Pauli-X gate** (X) is the quantum equivalent of the classical NOT gate. It flips the amplitudes:
 
-- X|0⟩ = |1⟩
-- X|1⟩ = |0⟩
+- $X|0\rangle = |1\rangle$
+- $X|1\rangle = |0\rangle$
 
-On a general state [α, β], it simply swaps the two amplitudes:
+As a matrix:
 
-\`\`\`
-X[α, β] = [β, α]
-\`\`\`
+$$X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$$
+
+On a general state $[\alpha, \beta]$, it simply swaps the two amplitudes:
+
+$$X[\alpha, \beta] = [\beta, \alpha]$$
 
 \`\`\`python
 def x_gate(state):
@@ -30,7 +32,7 @@ print(x_gate(one))   # [1.0, 0.0]  — flipped to |0⟩
 
 Like the Hadamard gate, **X applied twice is the identity** — applying NOT twice returns to the original state.
 
-On a superposition state [1/√2, 1/√2], X has no effect because both amplitudes are equal. On [1/√2, -1/√2], X flips the sign pattern.
+On a superposition state $\left[\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right]$, X has no effect because both amplitudes are equal. On $\left[\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right]$, X flips the sign pattern.
 
 ### Your Task
 

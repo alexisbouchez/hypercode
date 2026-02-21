@@ -8,35 +8,31 @@ export const torqueLesson: Lesson = {
 
 **Torque** is the rotational analogue of force. It measures how effectively a force causes rotation about a pivot:
 
-\`\`\`
-τ = F × r × sin(θ)
-\`\`\`
+$$\\tau = F r \\sin(\\theta)$$
 
-- **F** — applied force (N)
-- **r** — moment arm — distance from pivot to point of application (m)
-- **θ** — angle between force vector and the moment arm
-- **τ** — torque (N·m)
+- $F$ — applied force (N)
+- $r$ — moment arm — distance from pivot to point of application (m)
+- $\\theta$ — angle between force vector and the moment arm
+- $\\tau$ — torque (N·m)
 
 ### When is torque maximum?
 
-When θ = 90° (force perpendicular to the arm): sin(90°) = 1, so τ = Fr.
+When $\\theta = 90°$ (force perpendicular to the arm): $\\sin(90°) = 1$, so $\\tau = Fr$.
 
-Pushing a door at the handle (far from hinge, θ=90°) is far more effective than pushing near the hinge or pushing at an angle.
+Pushing a door at the handle (far from hinge, $\\theta = 90°$) is far more effective than pushing near the hinge or pushing at an angle.
 
 ### Newton's 2nd Law for Rotation
 
-\`\`\`
-τ_net = I × α
-\`\`\`
+$$\\tau_{\\text{net}} = I \\alpha$$
 
-where I is the moment of inertia and α is angular acceleration — the rotational analogue of F=ma.
+where $I$ is the moment of inertia and $\\alpha$ is angular acceleration — the rotational analogue of $F = ma$.
 
 ### Examples
 
-| F (N) | r (m) | θ | τ (N·m) |
+| $F$ (N) | $r$ (m) | $\\theta$ | $\\tau$ (N·m) |
 |-------|-------|---|---------|
 | 10 | 2 | 90° | **20.0000** |
-| 10 | 2 | 30° | **10.0000** (sin 30°=0.5) |
+| 10 | 2 | 30° | **10.0000** ($\\sin 30° = 0.5$) |
 | 50 | 3 | 90° | **150.0000** |
 | 100 | 0.5 | 45° | **35.3553** |
 

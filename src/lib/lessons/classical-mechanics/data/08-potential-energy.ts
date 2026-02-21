@@ -6,34 +6,29 @@ export const potentialEnergyLesson: Lesson = {
 	chapterId: "energy-and-momentum",
 	content: `## Gravitational Potential Energy
 
-An object at height h above a reference level has **gravitational potential energy**:
+An object at height $h$ above a reference level has **gravitational potential energy**:
 
-\`\`\`
-PE = mgh
-\`\`\`
+$$PE = mgh$$
 
-- **m** — mass in kg
-- **g** — 9.81 m/s² (gravitational acceleration)
-- **h** — height above reference level in metres
+- $m$ — mass in kg
+- $g$ — 9.81 m/s² (gravitational acceleration)
+- $h$ — height above reference level in metres
 
 ### Conservation of Energy
 
 In the absence of friction, mechanical energy is conserved:
 
-\`\`\`
-KE + PE = constant
-½mv² + mgh = constant
-\`\`\`
+$$KE + PE = \\text{constant}$$
 
-This means PE converts to KE as an object falls, and vice versa as it rises. A ball dropped from height h reaches the ground with speed:
+$$\\frac{1}{2}mv^2 + mgh = \\text{constant}$$
 
-\`\`\`
-v = √(2gh)
-\`\`\`
+This means PE converts to KE as an object falls, and vice versa as it rises. A ball dropped from height $h$ reaches the ground with speed:
+
+$$v = \\sqrt{2gh}$$
 
 ### Examples
 
-| m (kg) | h (m) | PE (J) |
+| $m$ (kg) | $h$ (m) | PE (J) |
 |--------|-------|--------|
 | 10 | 5 | **490.5** |
 | 1 | 10 | **98.1** |

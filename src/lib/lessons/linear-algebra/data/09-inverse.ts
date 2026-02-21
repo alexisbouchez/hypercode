@@ -6,11 +6,9 @@ export const inverse: Lesson = {
 	chapterId: "systems",
 	content: `## The Matrix Inverse
 
-The **inverse** of a matrix \`A\` is the matrix \`A⁻¹\` such that:
+The **inverse** of a matrix $\mathbf{A}$ is the matrix $\mathbf{A}^{-1}$ such that:
 
-\`\`\`
-A · A⁻¹ = A⁻¹ · A = I
-\`\`\`
+$$\mathbf{A} \cdot \mathbf{A}^{-1} = \mathbf{A}^{-1} \cdot \mathbf{A} = I$$
 
 ### When Does an Inverse Exist?
 
@@ -32,7 +30,7 @@ print(abs(det(S)) > 1e-10)   # False
 
 ### Why Invertibility Matters
 
-The equation \`Ax = b\` can be solved as \`x = A⁻¹b\` — *if* \`A\` is invertible. In practice, use Gaussian elimination instead (it's faster and more numerically stable).
+The equation $\mathbf{A}\mathbf{x} = \mathbf{b}$ can be solved as $\mathbf{x} = \mathbf{A}^{-1}\mathbf{b}$ — *if* $\mathbf{A}$ is invertible. In practice, use Gaussian elimination instead (it's faster and more numerically stable).
 
 ### Your Task
 

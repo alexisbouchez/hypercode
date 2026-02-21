@@ -8,9 +8,7 @@ export const lorentzForceLesson: Lesson = {
 
 A charged particle moving through a magnetic field experiences a force perpendicular to both its velocity and the field:
 
-\`\`\`
-F = q × v × B  (when v ⊥ B)
-\`\`\`
+$$F = qvB \quad (\text{when } v \perp B)$$
 
 - **F** — magnetic force (N)
 - **q** — charge (C)
@@ -23,9 +21,7 @@ The force direction follows the **right-hand rule** (or left-hand for negative c
 
 ### Full Vector Form
 
-\`\`\`
-F = q (v × B)
-\`\`\`
+$$\vec{F} = q(\vec{v} \times \vec{B})$$
 
 The cross product means the force is always perpendicular to velocity — a magnetic field does no work on a charge. Instead it deflects moving charges into circular orbits, which is how cyclotrons and mass spectrometers work.
 
@@ -33,9 +29,7 @@ The cross product means the force is always perpendicular to velocity — a magn
 
 For circular orbit of radius r:
 
-\`\`\`
-r = m × v / (q × B)
-\`\`\`
+$$r = \frac{mv}{qB}$$
 
 ### Examples (v ⊥ B)
 
@@ -48,7 +42,7 @@ r = m × v / (q × B)
 
 ### Your Task
 
-Implement \`lorentz_force(q, v, B)\` returning the force magnitude (assuming v ⊥ B).`,
+Implement \`lorentz_force(q, v, B)\` returning the force magnitude (assuming $v \perp B$).`,
 
 	starterCode: `def lorentz_force(q, v, B):
     # F = q * v * B  (when v perpendicular to B)

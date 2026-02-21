@@ -6,13 +6,11 @@ export const newtonRaphson: Lesson = {
 	chapterId: "numerical",
 	content: `## Newton's Method for Root-Finding
 
-The **Newton-Raphson method** is an iterative algorithm for finding roots of equations — values of \`x\` where \`f(x) = 0\`.
+The **Newton-Raphson method** is an iterative algorithm for finding roots of equations — values of $x$ where $f(x) = 0$.
 
-Starting from an initial guess \`x₀\`, it repeatedly improves the estimate:
+Starting from an initial guess $x_0$, it repeatedly improves the estimate:
 
-\`\`\`
-x_{n+1} = x_n - f(x_n) / f'(x_n)
-\`\`\`
+$$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
 
 \`\`\`python
 def newton(f, df, x0, tol=1e-6):
@@ -37,8 +35,8 @@ Newton's method uses the **tangent line** at the current point to approximate wh
 ### Convergence
 
 The method converges quickly when:
-- The initial guess \`x₀\` is close to the root
-- \`f'(x)\` is not near zero at the root
+- The initial guess $x_0$ is close to the root
+- $f'(x)$ is not near zero at the root
 
 ### Applications
 
@@ -48,7 +46,7 @@ The method converges quickly when:
 
 ### Your Task
 
-Implement \`newton(f, df, x0, tol=1e-6)\` that returns the root of \`f\` starting from \`x0\`, rounded to 6 decimal places.`,
+Implement \`newton(f, df, x0, tol=1e-6)\` that returns the root of $f$ starting from $x_0$, rounded to 6 decimal places.`,
 
 	starterCode: `def newton(f, df, x0, tol=1e-6):
     # Iterate: x = x - f(x)/df(x) until |f(x)| < tol

@@ -11,25 +11,22 @@ PCA finds the directions of maximum variance in data — the **principal compone
 ### Algorithm
 
 1. **Centre** the data by subtracting the mean
-2. **Compute the covariance matrix** C = (1/n) Xᵀ X
-3. **Find the dominant eigenvector** of C via power iteration
+2. **Compute the covariance matrix** $C = \\frac{1}{n} X^T X$
+3. **Find the dominant eigenvector** of $C$ via power iteration
 
 The dominant eigenvector is the first principal component.
 
 ### Example
 
-Data: (2,1), (4,2), (6,3), (8,4) — perfectly collinear along y = x/2
+Data: $(2,1),\\ (4,2),\\ (6,3),\\ (8,4)$ — perfectly collinear along $y = x/2$
 
 After centring, the covariance matrix is:
-\`\`\`
-C = [[5.0, 2.5],
-     [2.5, 1.25]]
-\`\`\`
 
-The first PC (dominant eigenvector) points along [2, 1] / √5:
-\`\`\`
-PC₁ = [0.8944, 0.4472]
-\`\`\`
+$$C = \\begin{pmatrix} 5.0 & 2.5 \\\\ 2.5 & 1.25 \\end{pmatrix}$$
+
+The first PC (dominant eigenvector) points along $[2,\\ 1]/\\sqrt{5}$:
+
+$$\\text{PC}_{1} = [0.8944,\\ 0.4472]$$
 
 ### Your Task
 

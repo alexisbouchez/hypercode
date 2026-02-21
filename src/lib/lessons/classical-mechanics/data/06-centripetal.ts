@@ -8,27 +8,23 @@ export const centripetalLesson: Lesson = {
 
 An object moving in a circle at constant speed still **accelerates** — its direction changes continuously. This **centripetal acceleration** always points toward the centre:
 
-\`\`\`
-a_c = v² / r
-\`\`\`
+$$a_c = \\frac{v^2}{r}$$
 
-- **v** — speed (m/s)
-- **r** — radius of circular path (m)
-- **a_c** — centripetal acceleration (m/s²)
+- $v$ — speed (m/s)
+- $r$ — radius of circular path (m)
+- $a_c$ — centripetal acceleration (m/s²)
 
 ### Centripetal Force
 
 By Newton's second law, the net force required to maintain circular motion:
 
-\`\`\`
-F_c = m × a_c = mv² / r
-\`\`\`
+$$F_c = m a_c = \\frac{mv^2}{r}$$
 
 This is not a new kind of force — it is whatever force provides the centripetal acceleration (tension in a string, gravity for orbits, friction for a car cornering).
 
 ### Examples
 
-| v (m/s) | r (m) | a_c (m/s²) |
+| $v$ (m/s) | $r$ (m) | $a_c$ (m/s²) |
 |---------|-------|------------|
 | 10 | 5 | **20.0** |
 | 20 | 4 | **100.0** |

@@ -8,20 +8,18 @@ export const stringHarmonicLesson: Lesson = {
 
 A stretched string fixed at both ends supports **standing waves**. Only wavelengths that fit a whole number of half-wavelengths between the endpoints are allowed:
 
-\`\`\`
-fₙ = n × v / (2L)
-\`\`\`
+$$f_n = \frac{nv}{2L}$$
 
 - **n** — harmonic number (1, 2, 3 …)
 - **v** — wave speed along the string (m/s)
 - **L** — string length (m)
-- **fₙ** — frequency of the nth harmonic (Hz)
+- $f_n$ — frequency of the nth harmonic (Hz)
 
 ### Harmonic Series
 
-n = 1 is the **fundamental** (lowest pitch). Higher harmonics are integer multiples — the tone colour (timbre) of an instrument depends on how much energy each harmonic carries.
+$n = 1$ is the **fundamental** (lowest pitch). Higher harmonics are integer multiples — the tone colour (timbre) of an instrument depends on how much energy each harmonic carries.
 
-| n | fₙ (343 m/s, L=1 m) |
+| n | $f_n$ (343 m/s, L=1 m) |
 |---|---------------------|
 | 1 | **171.5000** Hz |
 | 2 | **343.0000** Hz |

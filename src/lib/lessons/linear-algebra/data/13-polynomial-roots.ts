@@ -6,17 +6,15 @@ export const polynomialRoots: Lesson = {
 	chapterId: "numerical",
 	content: `## Finding Roots of Quadratics
 
-A **quadratic** equation \`ax² + bx + c = 0\` has roots given by the **quadratic formula**:
+A **quadratic** equation $ax^2 + bx + c = 0$ has roots given by the **quadratic formula**:
 
-\`\`\`
-x = (-b ± √(b² - 4ac)) / (2a)
-\`\`\`
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 
-The expression under the square root, \`Δ = b² - 4ac\`, is the **discriminant**:
+The expression under the square root, $\Delta = b^2 - 4ac$, is the **discriminant**:
 
-- **Δ > 0** → two distinct real roots
-- **Δ = 0** → one repeated real root
-- **Δ < 0** → no real roots (complex)
+- $\Delta > 0$ → two distinct real roots
+- $\Delta = 0$ → one repeated real root
+- $\Delta < 0$ → no real roots (complex)
 
 \`\`\`python
 import math
@@ -42,7 +40,7 @@ print(quadratic_roots(1, 0, 1))    # None (complex roots)
 
 ### Your Task
 
-Implement \`quadratic_roots(a, b, c)\` that returns a sorted list of real roots \`[x1, x2]\` rounded to 6 decimal places, or \`None\` if the roots are complex (discriminant < 0).`,
+Implement \`quadratic_roots(a, b, c)\` that returns a sorted list of real roots \`[x1, x2]\` rounded to 6 decimal places, or \`None\` if the roots are complex (discriminant $< 0$).`,
 
 	starterCode: `import math
 

@@ -6,41 +6,30 @@ export const triangularSolversLesson: Lesson = {
 	chapterId: "decompositions",
 	content: `## Triangular System Solvers
 
-After LU decomposition, solving Ax = b reduces to two cheap triangular solves:
+After LU decomposition, solving $Ax = b$ reduces to two cheap triangular solves:
 
-\`\`\`
-A = LU  →  LUx = b
-Step 1: Ly = b  (forward substitution)
-Step 2: Ux = y  (backward substitution)
-\`\`\`
+$$A = LU \\ \\Rightarrow \\ LUx = b$$
 
-### Forward Substitution (Ly = b)
+- Step 1: $Ly = b$ (forward substitution)
+- Step 2: $Ux = y$ (backward substitution)
 
-L is lower triangular, so solve top-to-bottom:
+### Forward Substitution ($Ly = b$)
 
-\`\`\`
-y[0] = b[0] / L[0][0]
-y[i] = (b[i] - Σⱼ<ᵢ L[i][j] y[j]) / L[i][i]
-\`\`\`
+$L$ is lower triangular, so solve top-to-bottom:
 
-### Backward Substitution (Ux = y)
+$$y_{0} = \\frac{b_{0}}{L_{00}}, \\qquad y_{i} = \\frac{b_{i} - \\sum_{j < i} L_{ij}\\, y_{j}}{L_{ii}}$$
 
-U is upper triangular, so solve bottom-to-top:
+### Backward Substitution ($Ux = y$)
 
-\`\`\`
-x[n-1] = y[n-1] / U[n-1][n-1]
-x[i]   = (y[i] - Σⱼ>ᵢ U[i][j] x[j]) / U[i][i]
-\`\`\`
+$U$ is upper triangular, so solve bottom-to-top:
+
+$$x_{n-1} = \\frac{y_{n-1}}{U_{n-1,n-1}}, \\qquad x_{i} = \\frac{y_{i} - \\sum_{j > i} U_{ij}\\, x_{j}}{U_{ii}}$$
 
 ### Example
 
-\`\`\`
-L = [[1,0,0],[2,1,0],[4,3,1]]   b = [1, 3, 9]
-U = [[2,1,1],[0,1,1],[0,0,2]]
+$$L = \\begin{pmatrix} 1&0&0\\\\2&1&0\\\\4&3&1 \\end{pmatrix}, \\quad U = \\begin{pmatrix} 2&1&1\\\\0&1&1\\\\0&0&2 \\end{pmatrix}, \\quad b = \\begin{pmatrix} 1\\\\3\\\\9 \\end{pmatrix}$$
 
-Ly = b  →  y = [1.0, 1.0, 2.0]
-Ux = y  →  x = [0.0, 0.0, 1.0]
-\`\`\`
+$$Ly = b \\;\\ \\Rightarrow \\;\\ y = \\begin{pmatrix}1.0\\\\1.0\\\\2.0\\end{pmatrix}, \\qquad Ux = y \\;\\ \\Rightarrow \\;\\ x = \\begin{pmatrix}0.0\\\\0.0\\\\1.0\\end{pmatrix}$$
 
 ### Your Task
 

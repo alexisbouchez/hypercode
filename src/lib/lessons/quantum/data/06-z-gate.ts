@@ -6,16 +6,18 @@ export const zGate: Lesson = {
 	chapterId: "gates",
 	content: `## The Phase Flip Gate
 
-The **Pauli-Z gate** flips the *phase* (sign) of the |1⟩ amplitude while leaving |0⟩ unchanged:
+The **Pauli-Z gate** flips the *phase* (sign) of the $|1\rangle$ amplitude while leaving $|0\rangle$ unchanged:
 
-- Z|0⟩ = |0⟩
-- Z|1⟩ = −|1⟩
+- $Z|0\rangle = |0\rangle$
+- $Z|1\rangle = -|1\rangle$
 
-On a general state [α, β]:
+As a matrix:
 
-\`\`\`
-Z[α, β] = [α, -β]
-\`\`\`
+$$Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$$
+
+On a general state $[\alpha, \beta]$:
+
+$$Z[\alpha, \beta] = [\alpha, -\beta]$$
 
 \`\`\`python
 def z_gate(state):
@@ -24,7 +26,7 @@ def z_gate(state):
 
 The Z gate has no classical equivalent — it introduces a **phase** that is invisible when measuring in the computational basis, but becomes observable when combined with other gates.
 
-For example, Z transforms |+⟩ into |−⟩:
+For example, Z transforms $|+\rangle$ into $|-\rangle$:
 
 \`\`\`python
 import math

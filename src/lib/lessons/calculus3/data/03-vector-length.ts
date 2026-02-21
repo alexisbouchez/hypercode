@@ -6,11 +6,9 @@ export const vectorLength3: Lesson = {
 	chapterId: "vectors-in-3d",
 	content: `## Vector Magnitude in 3D
 
-The **magnitude** (or length) of a vector **v** = (x, y, z) is:
+The **magnitude** (or length) of a vector $\\mathbf{v} = (x, y, z)$ is:
 
-\`\`\`
-|v| = sqrt(x² + y² + z²)
-\`\`\`
+$$|\\mathbf{v}| = \\sqrt{x^2 + y^2 + z^2}$$
 
 This is a direct extension of the Pythagorean theorem into three dimensions.
 
@@ -18,26 +16,22 @@ This is a direct extension of the Pythagorean theorem into three dimensions.
 
 A vector with magnitude 1 is called a **unit vector**. To normalize any vector:
 
-\`\`\`
-v̂ = v / |v| = (x/|v|, y/|v|, z/|v|)
-\`\`\`
+$$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{|\\mathbf{v}|} = \\left(\\frac{x}{|\\mathbf{v}|},\\; \\frac{y}{|\\mathbf{v}|},\\; \\frac{z}{|\\mathbf{v}|}\\right)$$
 
 Unit vectors indicate **direction only**.
 
 ### Distance Between Points
 
-The distance between P1 = (x1, y1, z1) and P2 = (x2, y2, z2) is the magnitude of their difference:
+The distance between $P_1 = (x_1, y_1, z_1)$ and $P_2 = (x_2, y_2, z_2)$ is the magnitude of their difference:
 
-\`\`\`
-d = |(x2-x1, y2-y1, z2-z1)| = sqrt((x2-x1)² + (y2-y1)² + (z2-z1)²)
-\`\`\`
+$$d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}$$
 
 ### Examples
 
 | Vector | Magnitude |
 |--------|-----------|
 | (3, 4, 0) | 5 |
-| (1, 1, 1) | √3 ≈ 1.7321 |
+| (1, 1, 1) | $\\sqrt{3} \\approx 1.7321$ |
 | (2, 2, 1) | 3 |
 | (0, 0, 0) | 0 |
 

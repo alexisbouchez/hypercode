@@ -8,14 +8,16 @@ export const hadamardGate: Lesson = {
 
 The **Hadamard gate** (H) is the most fundamental quantum gate. It transforms basis states into equal superpositions:
 
-- H|0⟩ = (|0⟩ + |1⟩) / √2 = |+⟩
-- H|1⟩ = (|0⟩ - |1⟩) / √2 = |−⟩
+- $H|0\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}} = |+\rangle$
+- $H|1\rangle = \frac{|0\rangle - |1\rangle}{\sqrt{2}} = |-\rangle$
 
-As a matrix operation on [α, β]:
+As a matrix:
 
-\`\`\`
-H[α, β] = [(α + β)/√2, (α - β)/√2]
-\`\`\`
+$$H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$$
+
+Applied to $[\alpha, \beta]$:
+
+$$H[\alpha, \beta] = \left[\frac{\alpha + \beta}{\sqrt{2}},\ \frac{\alpha - \beta}{\sqrt{2}}\right]$$
 
 \`\`\`python
 import math

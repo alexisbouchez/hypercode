@@ -8,19 +8,15 @@ export const powerLesson: Lesson = {
 
 **Power** is the rate at which work is done — energy transferred per unit time:
 
-\`\`\`
-P = W / t
-\`\`\`
+$$P = \\frac{W}{t}$$
 
-Units: Watts (W = J/s). One watt is one joule delivered per second.
+Units: Watts ($\\text{W} = \\text{J/s}$). One watt is one joule delivered per second.
 
 ### Alternative Forms
 
-Since W = F × d and v = d/t:
+Since $W = F \\cdot d$ and $v = d/t$:
 
-\`\`\`
-P = F × v
-\`\`\`
+$$P = F \\cdot v$$
 
 Power equals force times velocity — useful for engines and motors.
 
@@ -35,7 +31,7 @@ Power equals force times velocity — useful for engines and motors.
 
 ### Horsepower
 
-1 horsepower (hp) ≈ 746 W. A 100 hp engine ≈ 74.6 kW.
+1 horsepower (hp) $\\approx$ 746 W. A 100 hp engine $\\approx$ 74.6 kW.
 
 ### Examples
 

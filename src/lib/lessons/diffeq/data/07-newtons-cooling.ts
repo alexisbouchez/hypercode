@@ -8,21 +8,17 @@ export const newtonsCooling: Lesson = {
 
 The rate of heat loss of an object is proportional to the difference between the object's temperature and the ambient (surrounding) temperature:
 
-\`\`\`
-dT/dt = -k * (T - T_env)
-\`\`\`
+$$\\frac{dT}{dt} = -k \\cdot (T - T_{\\text{env}})$$
 
-- \`T\`: object temperature
-- \`T_env\`: ambient temperature (constant)
-- \`k > 0\`: cooling constant (depends on material and environment)
+- $T$: object temperature
+- $T_{\\text{env}}$: ambient temperature (constant)
+- $k > 0$: cooling constant (depends on material and environment)
 
 ### Exact Solution
 
-\`\`\`
-T(t) = T_env + (T0 - T_env) * e^(-k*t)
-\`\`\`
+$$T(t) = T_{\\text{env}} + (T_0 - T_{\\text{env}}) \\cdot e^{-kt}$$
 
-The object approaches \`T_env\` exponentially. This is just exponential decay applied to the temperature difference \`(T - T_env)\`.
+The object approaches $T_{\\text{env}}$ exponentially. This is just exponential decay applied to the temperature difference $(T - T_{\\text{env}})$.
 
 ### Applications
 
@@ -33,13 +29,11 @@ The object approaches \`T_env\` exponentially. This is just exponential decay ap
 
 ### Worked Example
 
-A cup of coffee at 90°C in a 20°C room with k = 0.1:
+A cup of coffee at 90°C in a 20°C room with $k = 0.1$:
 
-\`\`\`
-T(t) = 20 + 70 * e^(-0.1*t)
-T(10) = 20 + 70 * e^(-1) ≈ 20 + 25.7 = 45.7°C
-T(30) ≈ 20 + 3.5 = 23.5°C
-\`\`\`
+$$T(t) = 20 + 70 \\cdot e^{-0.1t}$$
+$$T(10) = 20 + 70 \\cdot e^{-1} \\approx 20 + 25.7 = 45.7°C$$
+$$T(30) \\approx 20 + 3.5 = 23.5°C$$
 
 ### Your Task
 

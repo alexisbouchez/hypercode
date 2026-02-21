@@ -6,48 +6,43 @@ export const polarDoubleIntegral: Lesson = {
 	chapterId: "multiple-integrals",
 	content: `## Integration in Polar Coordinates
 
-Some regions are naturally described in polar coordinates (r, θ) rather than Cartesian (x, y).
+Some regions are naturally described in polar coordinates $(r, \\theta)$ rather than Cartesian $(x, y)$.
 
 ### The Polar Jacobian
 
-When converting to polar coordinates x = r·cos(θ), y = r·sin(θ), the area element becomes:
+When converting to polar coordinates $x = r\\cos(\\theta)$, $y = r\\sin(\\theta)$, the area element becomes:
 
-\`\`\`
-dA = r · dr · dθ
-\`\`\`
+$$dA = r\\, dr\\, d\\theta$$
 
-The extra **r** factor (the Jacobian) accounts for the stretching near the origin.
+The extra $r$ factor (the Jacobian) accounts for the stretching near the origin.
 
 ### The Formula
 
-\`\`\`
-∬_R f(x,y) dA = ∫_a^b ∫_r0^r1 f(r·cosθ, r·sinθ) · r dr dθ
-\`\`\`
+$$\\iint_R f(x,y)\\, dA = \\int_a^b \\int_{r_0}^{r_1} f(r\\cos\\theta,\\, r\\sin\\theta) \\cdot r\\, dr\\, d\\theta$$
 
 ### Midpoint Rule in Polar Coordinates
 
-Divide [r0, r1] into nr strips and [a, b] into ntheta angular sectors:
+Divide $[r_0, r_1]$ into $n_r$ strips and $[a, b]$ into $n_\\theta$ angular sectors:
 
-\`\`\`
-≈ Σ_i Σ_j f(r_i·cosθ_j, r_i·sinθ_j) · r_i · Δr · Δθ
-\`\`\`
+$$\\approx \\sum_i \\sum_j f(r_i \\cos\\theta_j,\\, r_i \\sin\\theta_j) \\cdot r_i \\cdot \\Delta r \\cdot \\Delta\\theta$$
 
 ### Classic Example: Area of a Disk
 
-For a disk of radius R:
-- ∫_0^{2π} ∫_0^R 1·r dr dθ = 2π · R²/2 = πR²  ✓
+For a disk of radius $R$:
+
+$$\\int_0^{2\\pi} \\int_0^R r\\, dr\\, d\\theta = 2\\pi \\cdot \\frac{R^2}{2} = \\pi R^2 \\checkmark$$
 
 ### Applications
 
 - Area of circles, sectors, rings
 - Volume of cylinders and cones
-- Integrals with x²+y² in them (naturally round)
+- Integrals with $x^2 + y^2$ in them (naturally round)
 
 ### Your Task
 
 Implement \`double polar_double_integral(double (*f)(double, double), double r0, double r1, double a, double b, int nr, int ntheta)\`.
 
-The function f takes Cartesian (x,y) coordinates. Inside, convert (r,θ) to (x,y) and include the r factor.
+The function $f$ takes Cartesian $(x,y)$ coordinates. Inside, convert $(r, \\theta)$ to $(x, y)$ and include the $r$ factor.
 
 Use \`#include <math.h>\` for \`cos\` and \`sin\`.`,
 

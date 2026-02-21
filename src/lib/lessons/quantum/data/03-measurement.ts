@@ -6,14 +6,14 @@ export const measurement: Lesson = {
 	chapterId: "qubits",
 	content: `## The Born Rule
 
-When we **measure** a qubit, the superposition collapses to either |0⟩ or |1⟩. The probabilities are given by the **Born rule**:
+When we **measure** a qubit, the superposition collapses to either $|0\rangle$ or $|1\rangle$. The probabilities are given by the **Born rule**:
 
-- P(|0⟩) = α²
-- P(|1⟩) = β²
+- $P(|0\rangle) = |\alpha|^2$
+- $P(|1\rangle) = |\beta|^2$
 
-For the |0⟩ state [1.0, 0.0]: P(0) = 1, P(1) = 0 — certain outcome.
+For the $|0\rangle$ state [1.0, 0.0]: $P(0) = 1$, $P(1) = 0$ — certain outcome.
 
-For the equal superposition [1/√2, 1/√2]: P(0) = 0.5, P(1) = 0.5 — truly random.
+For the equal superposition $\left[\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right]$: $P(0) = 0.5$, $P(1) = 0.5$ — truly random.
 
 \`\`\`python
 import math

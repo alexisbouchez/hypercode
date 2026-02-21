@@ -8,19 +8,17 @@ export const solenoidInductanceLesson: Lesson = {
 
 A **solenoid** is a coil of N turns wound over length l. When current flows, it creates a nearly uniform magnetic field inside. Its inductance is:
 
-\`\`\`
-L = μ₀ × N² × A / l
-\`\`\`
+$$L = \frac{\mu_0 N^2 A}{l}$$
 
 - **L** — inductance (henrys, H)
-- **μ₀** = 4π × 10⁻⁷ H/m — permeability of free space
+- $\mu_0 = 4\pi \times 10^{-7}$ H/m — permeability of free space
 - **N** — total number of turns
 - **A** — cross-sectional area (m²)
 - **l** — length of the solenoid (m)
 
 ### Why N²?
 
-Each turn contributes to the field, and the total flux linkage is N × (flux per turn). Since flux per turn is also proportional to N (more turns = stronger field), inductance grows as N².
+Each turn contributes to the field, and the total flux linkage is $N \times$ (flux per turn). Since flux per turn is also proportional to N (more turns = stronger field), inductance grows as $N^2$.
 
 ### Applications
 

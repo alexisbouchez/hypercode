@@ -8,6 +8,12 @@ export const varianceStd: Lesson = {
 
 **Variance** and **standard deviation** measure how spread out data is around the mean.
 
+The sample variance is:
+
+$$s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2$$
+
+The sample standard deviation is $s = \sqrt{s^2}$.
+
 \`\`\`python
 import statistics
 
@@ -27,12 +33,12 @@ Use \`statistics.variance\` / \`statistics.stdev\` for a **sample** — when you
 
 ### Standard Deviation
 
-The standard deviation is the square root of variance — it has the **same units as the data**, making it easier to interpret.
+The standard deviation $\sigma$ is the square root of variance — it has the **same units as the data**, making it easier to interpret.
 
 For normally distributed data, approximately:
-- **68%** of values fall within ±1 std
-- **95%** of values fall within ±2 std
-- **99.7%** of values fall within ±3 std
+- **68%** of values fall within $\pm 1\sigma$
+- **95%** of values fall within $\pm 2\sigma$
+- **99.7%** of values fall within $\pm 3\sigma$
 
 ### Your Task
 

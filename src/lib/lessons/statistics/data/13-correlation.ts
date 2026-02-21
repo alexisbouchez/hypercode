@@ -6,7 +6,9 @@ export const correlation: Lesson = {
 	chapterId: "regression",
 	content: `## Measuring Linear Relationships
 
-**Pearson's r** measures the strength and direction of a linear relationship between two variables. It ranges from −1 to +1.
+**Pearson's r** measures the strength and direction of a linear relationship between two variables. It ranges from $-1$ to $+1$.
+
+$$r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2 \sum_{i=1}^n (y_i - \bar{y})^2}}$$
 
 \`\`\`python
 def pearson_r(x, y):
@@ -26,26 +28,30 @@ print(round(r, 4))   # 1.0
 
 ### Interpreting r
 
-| r value | Interpretation |
+| $r$ value | Interpretation |
 |---------|---------------|
-| r = 1.0 | Perfect positive linear relationship |
-| r = 0.7 | Strong positive |
-| r = 0.3 | Weak positive |
-| r = 0.0 | No linear relationship |
-| r = −0.7 | Strong negative |
-| r = −1.0 | Perfect negative linear relationship |
+| $r = 1.0$ | Perfect positive linear relationship |
+| $r = 0.7$ | Strong positive |
+| $r = 0.3$ | Weak positive |
+| $r = 0.0$ | No linear relationship |
+| $r = -0.7$ | Strong negative |
+| $r = -1.0$ | Perfect negative linear relationship |
 
-### Correlation ≠ Causation
+### Correlation does not imply Causation
 
-A high correlation between X and Y does not mean X causes Y. There may be a confounding variable, or the relationship may be coincidental.
+A high correlation between $X$ and $Y$ does not mean $X$ causes $Y$. There may be a confounding variable, or the relationship may be coincidental.
 
 ### Significance
 
-The t-statistic \`t = r √((n-2)/(1-r²))\` follows a t-distribution with df = n−2, allowing us to test if r is significantly different from 0.
+The $t$-statistic
+
+$$t = r\sqrt{\frac{n-2}{1-r^2}}$$
+
+follows a $t$-distribution with $df = n - 2$, allowing us to test if $r$ is significantly different from 0.
 
 ### Your Task
 
-Implement \`pearson_r(x, y)\` that prints the correlation coefficient \`r\` (rounded to 4 decimal places) and whether the relationship is statistically significant (\`p < 0.001\`).`,
+Implement \`pearson_r(x, y)\` that prints the correlation coefficient $r$ (rounded to 4 decimal places) and whether the relationship is statistically significant ($p < 0.001$).`,
 
 	starterCode: `import math
 

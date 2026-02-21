@@ -6,53 +6,49 @@ export const discriminant2d: Lesson = {
 	chapterId: "optimization",
 	content: `## Critical Points and the Second Derivative Test
 
-For a function f(x,y), critical points occur where ∇f = 0 (both partial derivatives are zero).
+For a function $f(x,y)$, critical points occur where $\\nabla f = \\mathbf{0}$ (both partial derivatives are zero).
 
 ### The Discriminant
 
-At a critical point (x₀, y₀), classify it using:
+At a critical point $(x_0, y_0)$, classify it using:
 
-\`\`\`
-D = fxx · fyy - (fxy)²
-\`\`\`
+$$D = f_{xx} \\cdot f_{yy} - (f_{xy})^2$$
 
 Where:
-- fxx = ∂²f/∂x²
-- fyy = ∂²f/∂y²
-- fxy = ∂²f/∂x∂y (mixed partial)
+- $f_{xx} = \\partial^2 f / \\partial x^2$
+- $f_{yy} = \\partial^2 f / \\partial y^2$
+- $f_{xy} = \\partial^2 f / \\partial x \\partial y$ (mixed partial)
 
 ### Classification Rules
 
-| D | fxx | Type |
+| $D$ | $f_{xx}$ | Type |
 |---|-----|------|
-| D > 0 | fxx > 0 | Local **minimum** |
-| D > 0 | fxx < 0 | Local **maximum** |
-| D < 0 | — | **Saddle point** |
-| D = 0 | — | Test **inconclusive** |
+| $D > 0$ | $f_{xx} > 0$ | Local **minimum** |
+| $D > 0$ | $f_{xx} < 0$ | Local **maximum** |
+| $D < 0$ | — | **Saddle point** |
+| $D = 0$ | — | Test **inconclusive** |
 
 ### Examples
 
-**f(x,y) = x² + y²** at (0,0):
-- fxx = 2, fyy = 2, fxy = 0
-- D = 4 - 0 = 4 > 0, fxx > 0 → **local minimum** ✓
+**$f(x,y) = x^2 + y^2$** at $(0,0)$:
+- $f_{xx} = 2$, $f_{yy} = 2$, $f_{xy} = 0$
+- $D = 4 - 0 = 4 > 0$, $f_{xx} > 0$ → **local minimum** ✓
 
-**f(x,y) = x² - y²** at (0,0):
-- fxx = 2, fyy = -2, fxy = 0
-- D = -4 < 0 → **saddle point** ✓
+**$f(x,y) = x^2 - y^2$** at $(0,0)$:
+- $f_{xx} = 2$, $f_{yy} = -2$, $f_{xy} = 0$
+- $D = -4 < 0$ → **saddle point** ✓
 
-**f(x,y) = -(x² + y²)** at (0,0):
-- fxx = -2, fyy = -2, fxy = 0
-- D = 4 > 0, fxx < 0 → **local maximum** ✓
+**$f(x,y) = -(x^2 + y^2)$** at $(0,0)$:
+- $f_{xx} = -2$, $f_{yy} = -2$, $f_{xy} = 0$
+- $D = 4 > 0$, $f_{xx} < 0$ → **local maximum** ✓
 
-### Computing fxy Numerically
+### Computing $f_{xy}$ Numerically
 
-\`\`\`
-fxy ≈ [f(x+h,y+h) - f(x+h,y-h) - f(x-h,y+h) + f(x-h,y-h)] / (4h²)
-\`\`\`
+$$f_{xy} \\approx \\frac{f(x+h,y+h) - f(x+h,y-h) - f(x-h,y+h) + f(x-h,y-h)}{4h^2}$$
 
 ### Your Task
 
-Implement \`double discriminant_2d(double (*f)(double, double), double x, double y, double h)\` that computes D = fxx·fyy - fxy².`,
+Implement \`double discriminant_2d(double (*f)(double, double), double x, double y, double h)\` that computes $D = f_{xx} \\cdot f_{yy} - f_{xy}^2$.`,
 
 	starterCode: `#include <stdio.h>
 

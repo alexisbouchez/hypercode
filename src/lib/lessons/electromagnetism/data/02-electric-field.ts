@@ -8,12 +8,10 @@ export const electricFieldLesson: Lesson = {
 
 The **electric field** at a point in space describes the force per unit charge that would act on a positive test charge placed there:
 
-\`\`\`
-E = k × q / r²
-\`\`\`
+$$E = \frac{kq}{r^2}$$
 
 - **E** — electric field strength (N/C = V/m)
-- **k** = 8.99 × 10⁹ N·m²/C²
+- **k** = $8.99 \times 10^9 \text{ N·m}^2/\text{C}^2$
 - **q** — source charge (C)
 - **r** — distance from the charge (m)
 
@@ -21,11 +19,11 @@ E = k × q / r²
 
 | Quantity | Formula | Units |
 |----------|---------|-------|
-| Force | F = k q₁q₂/r² | N |
-| Field | E = k q/r² | N/C |
-| Relation | F = q × E | — |
+| Force | $F = \frac{kq_1 q_2}{r^2}$ | N |
+| Field | $E = \frac{kq}{r^2}$ | N/C |
+| Relation | $F = qE$ | — |
 
-The field is a property of the source charge alone. Any other charge q₀ placed in the field experiences F = q₀ × E.
+The field is a property of the source charge alone. Any other charge $q_0$ placed in the field experiences $F = q_0 E$.
 
 ### Examples (q = 1 μC)
 
@@ -37,7 +35,7 @@ The field is a property of the source charge alone. Any other charge q₀ placed
 
 ### Your Task
 
-Implement \`electric_field(q, r)\` returning E in N/C (k = 8.99 × 10⁹).`,
+Implement \`electric_field(q, r)\` returning E in N/C ($k = 8.99 \times 10^9$).`,
 
 	starterCode: `K = 8.99e9
 

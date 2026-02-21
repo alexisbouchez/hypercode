@@ -6,21 +6,17 @@ export const directionalDerivative: Lesson = {
 	chapterId: "partial-derivatives",
 	content: `## The Directional Derivative
 
-The **directional derivative** measures the rate of change of f in a specific direction **u**:
+The **directional derivative** measures the rate of change of $f$ in a specific direction $\\mathbf{u}$:
 
-\`\`\`
-D_u f(x, y) = ∇f · û
-\`\`\`
+$$D_{\\mathbf{u}} f(x, y) = \\nabla f \\cdot \\hat{\\mathbf{u}}$$
 
-Where **û** = (ux, uy) is a **unit vector** (|**û**| = 1).
+Where $\\hat{\\mathbf{u}} = (u_x, u_y)$ is a **unit vector** ($|\\hat{\\mathbf{u}}| = 1$).
 
 This is the dot product of the gradient with the direction vector.
 
 ### Expanding the Formula
 
-\`\`\`
-D_u f = (∂f/∂x)·ux + (∂f/∂y)·uy
-\`\`\`
+$$D_{\\mathbf{u}} f = \\frac{\\partial f}{\\partial x} u_x + \\frac{\\partial f}{\\partial y} u_y$$
 
 ### Why Unit Vectors?
 
@@ -28,22 +24,22 @@ Using a unit vector normalizes the measurement. If we doubled the direction vect
 
 ### Special Cases
 
-- **u = (1, 0)**: directional derivative = ∂f/∂x
-- **u = (0, 1)**: directional derivative = ∂f/∂y
-- **u = ∇f/|∇f|**: maximum directional derivative = |∇f|
-- **u = -∇f/|∇f|**: minimum (most negative) directional derivative = -|∇f|
+- $\\mathbf{u} = (1, 0)$: directional derivative $= \\partial f / \\partial x$
+- $\\mathbf{u} = (0, 1)$: directional derivative $= \\partial f / \\partial y$
+- $\\mathbf{u} = \\nabla f / |\\nabla f|$: maximum directional derivative $= |\\nabla f|$
+- $\\mathbf{u} = -\\nabla f / |\\nabla f|$: minimum (most negative) directional derivative $= -|\\nabla f|$
 
 ### Example
 
-For f(x,y) = x² + y² at (1, 1), direction u = (1/√2, 1/√2):
-- ∇f = (2, 2)
-- D_u f = (2)(1/√2) + (2)(1/√2) = 4/√2 = 2√2 ≈ 2.8284
+For $f(x,y) = x^2 + y^2$ at $(1, 1)$, direction $\\mathbf{u} = (\\frac{1}{\\sqrt{2}}, \\frac{1}{\\sqrt{2}})$:
+- $\\nabla f = (2, 2)$
+- $D_{\\mathbf{u}} f = 2 \\cdot \\frac{1}{\\sqrt{2}} + 2 \\cdot \\frac{1}{\\sqrt{2}} = \\frac{4}{\\sqrt{2}} = 2\\sqrt{2} \\approx 2.8284$
 
 ### Your Task
 
 Implement \`double directional_deriv(double (*f)(double, double), double x, double y, double ux, double uy, double h)\` that computes the directional derivative using central differences and the dot product formula.
 
-Note: assume (ux, uy) is already a unit vector.`,
+Note: assume $(u_x, u_y)$ is already a unit vector.`,
 
 	starterCode: `#include <stdio.h>
 

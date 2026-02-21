@@ -11,8 +11,8 @@ export const qkd: Lesson = {
 The **BB84 protocol** (Bennett & Brassard, 1984) works as follows:
 
 1. **Alice** prepares qubits in one of two bases:
-   - **Z basis** (computational): 0 → |0⟩, 1 → |1⟩
-   - **X basis** (diagonal): 0 → |+⟩, 1 → |−⟩
+   - **Z basis** (computational): $0 \to |0\rangle$, $1 \to |1\rangle$
+   - **X basis** (diagonal): $0 \to |+\rangle$, $1 \to |-\rangle$
 
 2. **Bob** measures each qubit in a randomly chosen basis.
 

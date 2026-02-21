@@ -6,46 +6,42 @@ export const criticalPoints: Lesson = {
 	chapterId: "derivative-applications",
 	content: `## Critical Points
 
-A **critical point** is where \`f'(x) = 0\` or \`f'(x)\` is undefined. Critical points are candidates for local maxima and minima.
+A **critical point** is where $f'(x) = 0$ or $f'(x)$ is undefined. Critical points are candidates for local maxima and minima.
 
 ### Finding Critical Points Numerically
 
-We use **bisection** on \`f'(x)\`: if \`f'(a) < 0\` and \`f'(b) > 0\` (or vice versa), by the Intermediate Value Theorem there must be a zero of \`f'\` between \`a\` and \`b\`.
+We use **bisection** on $f'(x)$: if $f'(a) < 0$ and $f'(b) > 0$ (or vice versa), by the Intermediate Value Theorem there must be a zero of $f'$ between $a$ and $b$.
 
-\`\`\`
-while (b - a > tolerance):
-    m = (a + b) / 2
-    if f'(a) and f'(m) have the same sign:
-        a = m
-    else:
-        b = m
-return (a + b) / 2
-\`\`\`
+$$\\text{while } (b - a) > \\text{tolerance}:$$
+$$\\quad m = \\frac{a + b}{2}$$
+$$\\quad \\text{if } f'(a) \\text{ and } f'(m) \\text{ have the same sign: } a = m$$
+$$\\quad \\text{else: } b = m$$
+$$\\text{return } \\frac{a + b}{2}$$
 
 ### Classifying Critical Points
 
-Once we find \`c\` where \`f'(c) = 0\`:
+Once we find $c$ where $f'(c) = 0$:
 
 | Second derivative | Classification |
 |-------------------|---------------|
-| \`f''(c) > 0\` | Local **minimum** (concave up) |
-| \`f''(c) < 0\` | Local **maximum** (concave down) |
-| \`f''(c) = 0\` | Inconclusive (use first derivative test) |
+| $f''(c) > 0$ | Local **minimum** (concave up) |
+| $f''(c) < 0$ | Local **maximum** (concave down) |
+| $f''(c) = 0$ | Inconclusive (use first derivative test) |
 
 ### Example
 
-For \`f(x) = x² - 4x + 3\`:
-- \`f'(x) = 2x - 4 = 0\` → \`x = 2\`
-- \`f''(2) = 2 > 0\` → local minimum
-- \`f(2) = 4 - 8 + 3 = -1\` is the minimum value
+For $f(x) = x^2 - 4x + 3$:
+- $f'(x) = 2x - 4 = 0$ → $x = 2$
+- $f''(2) = 2 > 0$ → local minimum
+- $f(2) = 4 - 8 + 3 = -1$ is the minimum value
 
 ### Global Extrema
 
-On a closed interval \`[a, b]\`, the global max/min occurs either at a critical point or at an endpoint. Evaluate \`f\` at all critical points and both endpoints, take the largest/smallest.
+On a closed interval $[a, b]$, the global max/min occurs either at a critical point or at an endpoint. Evaluate $f$ at all critical points and both endpoints, take the largest/smallest.
 
 ### Your Task
 
-Implement \`double critical_point(double (*f)(double), double a, double b, int n, double h)\` that uses bisection on \`f'\` to find a critical point in \`[a, b]\`. Run \`n\` bisection steps; \`h\` is the step for numerical differentiation.`,
+Implement \`double critical_point(double (*f)(double), double a, double b, int n, double h)\` that uses bisection on $f'$ to find a critical point in $[a, b]$. Run $n$ bisection steps; $h$ is the step for numerical differentiation.`,
 
 	starterCode: `#include <stdio.h>
 

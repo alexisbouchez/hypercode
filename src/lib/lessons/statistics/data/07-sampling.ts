@@ -29,7 +29,9 @@ Setting a random seed makes results **reproducible** — running the same code g
 
 ### Law of Large Numbers
 
-As sample size increases, the sample mean converges to the true population mean.
+As sample size $n$ increases, the sample mean $\bar{x}$ converges to the true population mean $\mu$:
+
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i \xrightarrow{n \to \infty} \mu$$
 
 \`\`\`python
 # Larger samples are more accurate
@@ -40,7 +42,7 @@ for n in [5, 20, 100]:
 
 ### Your Task
 
-Implement \`sample_mean(population, n, seed)\` that takes a random sample of size \`n\` (without replacement) using the given seed and returns the sample mean rounded to 2 decimal places.`,
+Implement \`sample_mean(population, n, seed)\` that takes a random sample of size $n$ (without replacement) using the given seed and returns the sample mean rounded to 2 decimal places.`,
 
 	starterCode: `import random
 

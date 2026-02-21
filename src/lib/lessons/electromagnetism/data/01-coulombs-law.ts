@@ -8,18 +8,16 @@ export const coulombsLawLesson: Lesson = {
 
 Every charged particle exerts a force on every other. Charles-Augustin de Coulomb measured this in 1785:
 
-\`\`\`
-F = k × q₁ × q₂ / r²
-\`\`\`
+$$F = \frac{k q_1 q_2}{r^2}$$
 
-- **k** = 8.99 × 10⁹ N·m²/C² — Coulomb's constant
+- **k** = $8.99 \times 10^9 \text{ N·m}^2/\text{C}^2$ — Coulomb's constant
 - **q₁, q₂** — charges in Coulombs (positive or negative)
 - **r** — distance between charges (m)
 - **F** — force in Newtons (positive = repulsive, negative = attractive)
 
 ### The Inverse-Square Law
 
-Coulomb's law has the same r² dependence as Newton's gravity — both are long-range forces that never reach zero. The crucial difference: gravity is always attractive, while electric force can attract or repel.
+Coulomb's law has the same $r^2$ dependence as Newton's gravity — both are long-range forces that never reach zero. The crucial difference: gravity is always attractive, while electric force can attract or repel.
 
 ### Examples (q₁ = q₂ = 1 μC)
 
@@ -31,7 +29,7 @@ Coulomb's law has the same r² dependence as Newton's gravity — both are long-
 
 ### Your Task
 
-Implement \`coulomb_force(q1, q2, r)\` returning the force in Newtons (k = 8.99 × 10⁹).`,
+Implement \`coulomb_force(q1, q2, r)\` returning the force in Newtons ($k = 8.99 \times 10^9$).`,
 
 	starterCode: `import math
 

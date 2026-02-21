@@ -9,8 +9,8 @@ export const ttestTwoSample: Lesson = {
 The **two-sample t-test** checks whether two independent groups have different means.
 
 **Hypotheses:**
-- H₀: μ₁ = μ₂ (no difference between groups)
-- H₁: μ₁ ≠ μ₂
+- $H_0$: $\mu_1 = \mu_2$ (no difference between groups)
+- $H_1$: $\mu_1 \neq \mu_2$
 
 \`\`\`python
 import math, statistics
@@ -29,23 +29,25 @@ print(round(t_stat, 4))   # -5.0
 
 ### Welch's t-Test
 
-Use Welch's formula (no equal-variance assumption) for the most robust results. The degrees of freedom use the Welch-Satterthwaite equation:
+Use Welch's formula (no equal-variance assumption) for the most robust results. The t-statistic is:
 
-\`\`\`
-df = (v1/n1 + v2/n2)² / ((v1/n1)²/(n1-1) + (v2/n2)²/(n2-1))
-\`\`\`
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
+
+The degrees of freedom use the Welch-Satterthwaite equation:
+
+$$df = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1} + \frac{(s_2^2/n_2)^2}{n_2-1}}$$
 
 ### Effect Size vs Statistical Significance
 
-A statistically significant result (p < 0.05) does not necessarily mean the difference is **practically important**. With large samples, even tiny differences become significant.
+A statistically significant result ($p < 0.05$) does not necessarily mean the difference is **practically important**. With large samples, even tiny differences become significant.
 
 ### Same Groups → t = 0
 
-When both groups are identical, t = 0 and p = 1.0.
+When both groups are identical, $t = 0$ and $p = 1.0$.
 
 ### Your Task
 
-Implement \`ttest_independent(group_a, group_b)\` that prints the t-statistic (rounded to 4 decimal places) and whether the result is significant (\`p < 0.05\`).`,
+Implement \`ttest_independent(group_a, group_b)\` that prints the $t$-statistic (rounded to 4 decimal places) and whether the result is significant ($p < 0.05$).`,
 
 	starterCode: `import math, statistics
 

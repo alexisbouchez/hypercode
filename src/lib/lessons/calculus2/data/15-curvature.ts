@@ -6,34 +6,32 @@ export const curvature: Lesson = {
 	chapterId: "parametric-and-polar",
 	content: `## Curvature
 
-**Curvature** \`κ\` measures how sharply a curve bends at a point. For \`y = f(x)\`:
+**Curvature** $\kappa$ measures how sharply a curve bends at a point. For $y = f(x)$:
 
-\`\`\`
-κ = |f''(x)| / (1 + [f'(x)]²)^{3/2}
-\`\`\`
+$$\kappa = \frac{|f''(x)|}{\left(1 + [f'(x)]^2\right)^{3/2}}$$
 
 ### Intuition
 
-- **Straight line**: \`f'' = 0\`, so \`κ = 0\` (no bending)
-- **Circle of radius R**: \`κ = 1/R\` everywhere (constant curvature)
-- **Parabola** \`y = x²\` at \`x=0\`: tightest bend is at the vertex
+- **Straight line**: $f'' = 0$, so $\kappa = 0$ (no bending)
+- **Circle of radius $R$**: $\kappa = \frac{1}{R}$ everywhere (constant curvature)
+- **Parabola** $y = x^2$ at $x=0$: tightest bend is at the vertex
 
-The **radius of curvature** is \`R = 1/κ\` — the radius of the osculating (best-fit) circle.
+The **radius of curvature** is $R = \frac{1}{\kappa}$ — the radius of the osculating (best-fit) circle.
 
-### Example: Parabola y = x²
+### Example: Parabola $y = x^2$
 
-\`\`\`
-f'(x) = 2x,  f''(x) = 2
-κ(x) = 2 / (1 + 4x²)^{3/2}
-\`\`\`
+$$f'(x) = 2x, \quad f''(x) = 2$$
+$$\kappa(x) = \frac{2}{(1 + 4x^2)^{3/2}}$$
 
-At \`x=0\`: \`κ = 2/1 = 2\` (tightest)
-At \`x=1\`: \`κ = 2/(1+4)^{3/2} = 2/5√5 ≈ 0.1789\` (much gentler)
-As \`x→∞\`: \`κ → 0\` (nearly straight)
+At $x=0$: $\kappa = \frac{2}{1} = 2$ (tightest)
 
-### Computing (1+f'²)^{3/2}
+At $x=1$: $\kappa = \frac{2}{(1+4)^{3/2}} = \frac{2}{5\sqrt{5}} \approx 0.1789$ (much gentler)
 
-Without \`pow()\`, use the identity \`u^{3/2} = u · √u\`:
+As $x \to \infty$: $\kappa \to 0$ (nearly straight)
+
+### Computing $(1+f'^2)^{3/2}$
+
+Without \`pow()\`, use the identity $u^{3/2} = u \cdot \sqrt{u}$:
 \`\`\`c
 double u = 1.0 + fp * fp;
 double kappa = fpp_abs / (u * my_sqrt(u));
@@ -41,7 +39,7 @@ double kappa = fpp_abs / (u * my_sqrt(u));
 
 ### Your Task
 
-Implement \`double curvature(double (*f)(double), double x, double h)\` using central differences for \`f'\` and \`f''\`.`,
+Implement \`double curvature(double (*f)(double), double x, double h)\` using central differences for $f'$ and $f''$.`,
 
 	starterCode: `#include <stdio.h>
 

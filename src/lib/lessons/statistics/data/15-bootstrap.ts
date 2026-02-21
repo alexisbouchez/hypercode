@@ -35,7 +35,7 @@ print(round(pct(2.5), 1), round(pct(97.5), 1))
 
 ### Why Bootstrap?
 
-- Works for **any statistic** (median, std, correlation, custom metrics)
+- Works for **any statistic** (median, $\sigma$, correlation, custom metrics)
 - No assumptions about the underlying distribution
 - Especially useful for small samples or unusual statistics
 
@@ -48,6 +48,8 @@ Sampling **with replacement** means each draw comes from the full original datas
 The **percentile method** extracts the CI directly from the bootstrap distribution:
 - Lower bound: 2.5th percentile of bootstrap means
 - Upper bound: 97.5th percentile of bootstrap means
+
+The 95% bootstrap CI is $[\hat{\theta}_{2.5\%},\, \hat{\theta}_{97.5\%}]$, where $\hat{\theta}$ is the statistic computed on each bootstrap sample.
 
 ### Your Task
 

@@ -6,19 +6,17 @@ export const reverberationLesson: Lesson = {
 	chapterId: "room-acoustics",
 	content: `## Sabine's Formula
 
-**Reverberation time** (T₆₀) is how long it takes a sound to decay by 60 dB after the source stops. Wallace Sabine derived in 1900:
+**Reverberation time** ($T_{60}$) is how long it takes a sound to decay by 60 dB after the source stops. Wallace Sabine derived in 1900:
 
-\`\`\`
-T₆₀ = 0.161 × V / A
-\`\`\`
+$$T_{60} = \frac{0.161 \cdot V}{A}$$
 
 - **V** — room volume (m³)
-- **A** — total acoustic absorption (m² sabins) = Σ(surface area × absorption coefficient)
-- **T₆₀** — reverberation time (s)
+- **A** — total acoustic absorption (m² sabins) = $\sum(\text{surface area} \times \text{absorption coefficient})$
+- $T_{60}$ — reverberation time (s)
 
 ### What It Means
 
-| T₆₀ (s) | Acoustic character |
+| $T_{60}$ (s) | Acoustic character |
 |---------|-------------------|
 | < 0.5 | dead / anechoic |
 | 0.5–1.0 | speech intelligibility (lecture hall) |
@@ -27,7 +25,7 @@ T₆₀ = 0.161 × V / A
 
 ### Examples
 
-| V (m³) | A (m²) | T₆₀ (s) |
+| V (m³) | A (m²) | $T_{60}$ (s) |
 |--------|--------|---------|
 | 100 | 10 | **1.6100** |
 | 200 | 20 | **1.6100** |
@@ -36,7 +34,7 @@ T₆₀ = 0.161 × V / A
 
 ### Your Task
 
-Implement \`reverbTime(V, A)\` returning T₆₀ in seconds.`,
+Implement \`reverbTime(V, A)\` returning $T_{60}$ in seconds.`,
 
 	starterCode: `function reverbTime(V, A) {
   // T60 = 0.161 * V / A

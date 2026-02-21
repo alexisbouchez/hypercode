@@ -8,32 +8,23 @@ export const powerIterationLesson: Lesson = {
 
 Power iteration finds the **dominant eigenvalue** (largest in magnitude) and its eigenvector by repeated matrix-vector multiplication:
 
-\`\`\`
-v₀ = random unit vector
-vₖ₊₁ = A vₖ / ‖A vₖ‖
-λ = vᵀ A v   (Rayleigh quotient)
-\`\`\`
+$$\\mathbf{v}_{0} = \\text{random unit vector}, \\qquad \\mathbf{v}_{k+1} = \\frac{A\\mathbf{v}_{k}}{\\|A\\mathbf{v}_{k}\\|}, \\qquad \\lambda = \\mathbf{v}^T A \\mathbf{v} \\; (\\text{Rayleigh quotient})$$
 
 ### Why It Works
 
-Expand v₀ in the eigenbasis: v₀ = Σ cᵢ uᵢ. After k multiplications:
+Expand $\\mathbf{v}_{0}$ in the eigenbasis: $\\mathbf{v}_{0} = \\sum_i c_i \\mathbf{u}_{i}$. After $k$ multiplications:
 
-\`\`\`
-Aᵏ v₀ = Σ cᵢ λᵢᵏ uᵢ  ≈  c₁ λ₁ᵏ u₁  (since λ₁ > |λ₂| ≥ … )
-\`\`\`
+$$A^k \\mathbf{v}_{0} = \\sum_i c_i \\lambda_i^k \\mathbf{u}_{i} \\approx c_1 \\lambda_1^k \\mathbf{u}_{1} \\quad (\\text{since } |\\lambda_1| > |\\lambda_2| \\geq \\ldots)$$
 
 The dominant component grows fastest and eventually dominates.
 
 ### Convergence
 
-The rate is |λ₂/λ₁|. If the second eigenvalue is small relative to the first, convergence is fast.
+The rate is $|\\lambda_2 / \\lambda_1|$. If the second eigenvalue is small relative to the first, convergence is fast.
 
 ### Example
 
-\`\`\`
-A = [[4, 1],   eigenvalues: 5, 2
-     [2, 3]]   dominant eigenvector: [0.7071, 0.7071]
-\`\`\`
+$$A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}, \\quad \\text{eigenvalues: } 5, 2, \\quad \\text{dominant eigenvector: } [0.7071,\\ 0.7071]$$
 
 ### Your Task
 

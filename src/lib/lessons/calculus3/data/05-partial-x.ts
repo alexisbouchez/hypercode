@@ -6,37 +6,35 @@ export const partialX: Lesson = {
 	chapterId: "partial-derivatives",
 	content: `## Partial Derivatives
 
-A function of two variables, f(x, y), has two partial derivatives — one for each variable.
+A function of two variables, $f(x, y)$, has two partial derivatives — one for each variable.
 
-### ∂f/∂x
+### $\\partial f / \\partial x$
 
-The partial derivative with respect to x treats y as a constant and differentiates normally:
+The partial derivative with respect to $x$ treats $y$ as a constant and differentiates normally:
 
-\`\`\`
-∂f/∂x = lim_{h→0} [f(x+h, y) - f(x-h, y)] / (2h)
-\`\`\`
+$$\\frac{\\partial f}{\\partial x} = \\lim_{h \\to 0} \\frac{f(x+h,\\, y) - f(x-h,\\, y)}{2h}$$
 
 This is the **central difference** approximation — more accurate than a one-sided difference.
 
 ### Intuition
 
-- **∂f/∂x** measures the rate of change of f as you move in the x-direction
-- Think of it as the slope of f along the x-axis, holding y frozen
+- $\\partial f / \\partial x$ measures the rate of change of $f$ as you move in the $x$-direction
+- Think of it as the slope of $f$ along the $x$-axis, holding $y$ frozen
 
 ### Examples
 
-For f(x, y) = x² + y²:
-- **∂f/∂x** = 2x (treat y² as constant → derivative is 0)
+For $f(x, y) = x^2 + y^2$:
+- $\\partial f / \\partial x = 2x$ (treat $y^2$ as constant → derivative is 0)
 
-For f(x, y) = x·y:
-- **∂f/∂x** = y (treat y as a constant multiplier)
+For $f(x, y) = x \\cdot y$:
+- $\\partial f / \\partial x = y$ (treat $y$ as a constant multiplier)
 
-For f(x, y) = x³ + 2xy:
-- **∂f/∂x** = 3x² + 2y
+For $f(x, y) = x^3 + 2xy$:
+- $\\partial f / \\partial x = 3x^2 + 2y$
 
 ### Your Task
 
-Implement \`double partial_x(double (*f)(double, double), double x, double y, double h)\` that approximates ∂f/∂x at (x, y) using step size h.`,
+Implement \`double partial_x(double (*f)(double, double), double x, double y, double h)\` that approximates $\\partial f / \\partial x$ at $(x, y)$ using step size $h$.`,
 
 	starterCode: `#include <stdio.h>
 

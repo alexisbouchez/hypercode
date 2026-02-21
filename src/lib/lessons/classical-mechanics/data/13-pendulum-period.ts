@@ -6,13 +6,11 @@ export const pendulumPeriodLesson: Lesson = {
 	chapterId: "oscillations-and-gravitation",
 	content: `## The Simple Pendulum
 
-A mass on a string of length L, swinging under gravity, oscillates with period:
+A mass on a string of length $L$, swinging under gravity, oscillates with period:
 
-\`\`\`
-T = 2π√(L/g)
-\`\`\`
+$$T = 2\\pi\\sqrt{\\frac{L}{g}}$$
 
-where g = 9.81 m/s².
+where $g = 9.81$ m/s².
 
 ### Historical Importance
 
@@ -20,26 +18,26 @@ Galileo noticed that pendulum period is independent of amplitude (for small angl
 
 ### The Small-Angle Approximation
 
-This formula holds when the angle is small (≲15°). For large angles, the true period is longer and requires an elliptic integral to compute exactly.
+This formula holds when the angle is small ($\\lesssim 15°$). For large angles, the true period is longer and requires an elliptic integral to compute exactly.
 
 ### Period vs Spring-Mass
 
 | | Spring-Mass | Pendulum |
 |--|------------|---------|
-| Formula | 2π√(m/k) | 2π√(L/g) |
-| Restoring force | Spring: F=kx | Gravity: F≈mg·θ |
-| Effective "k" | k | mg/L |
+| Formula | $2\\pi\\sqrt{m/k}$ | $2\\pi\\sqrt{L/g}$ |
+| Restoring force | Spring: $F = kx$ | Gravity: $F \\approx mg\\theta$ |
+| Effective "k" | $k$ | $mg/L$ |
 
-For the pendulum, the "spring constant" is mg/L — so mass cancels out and period is mass-independent.
+For the pendulum, the "spring constant" is $mg/L$ — so mass cancels out and period is mass-independent.
 
 ### Examples
 
-| L (m) | T (s) |
+| $L$ (m) | $T$ (s) |
 |-------|-------|
 | 1.000 | **2.0061** |
 | 4.000 | **4.0122** |
-| 9.810 | **6.2832** = 2π |
-| 0.248 | **0.9990** ≈ 1 s (a seconds pendulum) |
+| 9.810 | **6.2832** $= 2\\pi$ |
+| 0.248 | **0.9990** $\\approx 1$ s (a seconds pendulum) |
 
 ### Your Task
 

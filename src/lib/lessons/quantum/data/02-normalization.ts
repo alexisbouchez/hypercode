@@ -8,9 +8,9 @@ export const normalization: Lesson = {
 
 Not every pair of numbers is a valid qubit. The **normalization condition** requires:
 
-**α² + β² = 1**
+$$|\alpha|^2 + |\beta|^2 = 1$$
 
-This ensures the probabilities of all outcomes sum to 1. The quantity \`sqrt(α² + β²)\` is called the **norm** of the state.
+This ensures the probabilities of all outcomes sum to 1. The quantity $\sqrt{\alpha^2 + \beta^2}$ is called the **norm** of the state.
 
 \`\`\`python
 import math

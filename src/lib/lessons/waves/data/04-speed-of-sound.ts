@@ -8,11 +8,9 @@ export const speedOfSoundLesson: Lesson = {
 
 Sound speed in air depends on temperature. The linear approximation:
 
-\`\`\`
-v \u2248 331 + 0.6 \u00d7 T_C
-\`\`\`
+$$v \approx 331 + 0.6 \cdot T_C$$
 
-where **T_C** is the temperature in Celsius.
+where $T_C$ is the temperature in Celsius.
 
 ### Physics Behind It
 
@@ -20,9 +18,9 @@ Sound travels by compressing adjacent air molecules. Warmer air has faster-movin
 
 ### Effect on Tuning
 
-An orchestra tunes at 20 \u00b0C (343 m/s). If the stage warms to 30 \u00b0C (349 m/s), instruments that haven't warmed up play sharp — wavelengths shorten at higher speeds.
+An orchestra tunes at 20 °C (343 m/s). If the stage warms to 30 °C (349 m/s), instruments that haven't warmed up play sharp — wavelengths shorten at higher speeds.
 
-| T (\u00b0C) | v (m/s) |
+| T (°C) | v (m/s) |
 |--------|---------|
 | -20 | **319.0** |
 | 0 | **331.0** |

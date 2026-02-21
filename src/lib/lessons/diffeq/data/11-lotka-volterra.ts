@@ -6,17 +6,15 @@ export const lotkaVolterra: Lesson = {
 	chapterId: "systems-and-oscillations",
 	content: `## Lotka-Volterra Equations
 
-The **predator-prey model** describes two interacting populations: prey \`x\` (rabbits) and predators \`y\` (foxes):
+The **predator-prey model** describes two interacting populations: prey $x$ (rabbits) and predators $y$ (foxes):
 
-\`\`\`
-dx/dt = α·x - β·x·y     (prey grow, but die when meeting predators)
-dy/dt = δ·x·y - γ·y     (predators grow by eating prey, die naturally)
-\`\`\`
+$$\\frac{dx}{dt} = \\alpha x - \\beta x y \quad \\text{(prey grow, but die when meeting predators)}$$
+$$\\frac{dy}{dt} = \\delta x y - \\gamma y \quad \\text{(predators grow by eating prey, die naturally)}$$
 
-- \`α\`: prey birth rate
-- \`β\`: predation rate (prey killed per encounter)
-- \`δ\`: predator growth rate per prey eaten
-- \`γ\`: predator death rate
+- $\\alpha$: prey birth rate
+- $\\beta$: predation rate (prey killed per encounter)
+- $\\delta$: predator growth rate per prey eaten
+- $\\gamma$: predator death rate
 
 ### Oscillations
 
@@ -26,9 +24,7 @@ The populations oscillate: when prey are abundant, predators multiply. More pred
 
 There is a non-trivial equilibrium where both populations are constant:
 
-\`\`\`
-x* = γ/δ,   y* = α/β
-\`\`\`
+$$x^* = \\frac{\\gamma}{\\delta}, \\quad y^* = \\frac{\\alpha}{\\beta}$$
 
 Starting exactly at this point, populations stay fixed forever.
 
@@ -36,9 +32,7 @@ Starting exactly at this point, populations stay fixed forever.
 
 The Lotka-Volterra system has a conserved quantity (a "first integral"):
 
-\`\`\`
-V = δ·x - γ·ln(x) + β·y - α·ln(y) = constant
-\`\`\`
+$$V = \\delta x - \\gamma \\ln x + \\beta y - \\alpha \\ln y = \\text{constant}$$
 
 This means the phase-plane trajectories are closed curves.
 

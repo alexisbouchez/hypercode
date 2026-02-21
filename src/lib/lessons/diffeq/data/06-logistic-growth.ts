@@ -6,23 +6,19 @@ export const logisticGrowth: Lesson = {
 	chapterId: "first-order-models",
 	content: `## Logistic Growth
 
-Pure exponential growth is unrealistic — populations cannot grow forever. The **logistic equation** adds a carrying capacity \`K\`:
+Pure exponential growth is unrealistic — populations cannot grow forever. The **logistic equation** adds a carrying capacity $K$:
 
-\`\`\`
-dy/dt = r * y * (1 - y/K)
-\`\`\`
+$$\\frac{dy}{dt} = r \\cdot y \\cdot \\left(1 - \\frac{y}{K}\\right)$$
 
-- When \`y << K\`: growth is approximately exponential (\`1 - y/K ≈ 1\`)
-- When \`y = K\`: growth stops (\`1 - y/K = 0\`)
-- When \`y > K\`: growth is negative (population declines toward \`K\`)
+- When $y \\ll K$: growth is approximately exponential ($1 - y/K \\approx 1$)
+- When $y = K$: growth stops ($1 - y/K = 0$)
+- When $y > K$: growth is negative (population declines toward $K$)
 
 ### Exact Solution
 
-\`\`\`
-y(t) = K / (1 + ((K - y0) / y0) * e^(-r*t))
-\`\`\`
+$$y(t) = \\frac{K}{1 + \\dfrac{K - y_0}{y_0}\\, e^{-rt}}$$
 
-The solution forms an **S-shaped curve** (sigmoid), starting slow, accelerating, then leveling off at \`K\`.
+The solution forms an **S-shaped curve** (sigmoid), starting slow, accelerating, then leveling off at $K$.
 
 ### Applications
 
@@ -34,8 +30,8 @@ The solution forms an **S-shaped curve** (sigmoid), starting slow, accelerating,
 ### Equilibria
 
 The logistic equation has two equilibria:
-- \`y = 0\`: unstable (any small population grows)
-- \`y = K\`: stable (perturbations return to carrying capacity)
+- $y = 0$: unstable (any small population grows)
+- $y = K$: stable (perturbations return to carrying capacity)
 
 ### Your Task
 

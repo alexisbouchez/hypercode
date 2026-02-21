@@ -6,37 +6,27 @@ export const luDecompositionLesson: Lesson = {
 	chapterId: "decompositions",
 	content: `## LU Decomposition
 
-Every square matrix A (with non-zero pivots) can be factored as **A = LU** where:
-- **L** is lower triangular with 1s on the diagonal
-- **U** is upper triangular
+Every square matrix $A$ (with non-zero pivots) can be factored as $A = LU$ where:
+- $L$ is lower triangular with 1s on the diagonal
+- $U$ is upper triangular
 
 This is Gaussian elimination written as a matrix product.
 
 ### Algorithm
 
-For each pivot column k, eliminate below the diagonal by subtracting scaled rows:
+For each pivot column $k$, eliminate below the diagonal by subtracting scaled rows:
 
-\`\`\`
-factor = U[i][k] / U[k][k]
-L[i][k] = factor
-U[i] -= factor * U[k]
-\`\`\`
+$$\\text{factor} = \\frac{U_{ik}}{U_{kk}}, \\quad L_{ik} = \\text{factor}, \\quad U_{i} \\leftarrow U_{i} - \\text{factor} \\cdot U_{k}$$
 
-The multipliers become the entries of L.
+The multipliers become the entries of $L$.
 
 ### Example
 
-\`\`\`
-A = [[2, 1, 1],   L = [[1, 0, 0],   U = [[2, 1, 1],
-     [4, 3, 3],        [2, 1, 0],        [0, 1, 1],
-     [8, 7, 9]]        [4, 3, 1]]        [0, 0, 2]]
-\`\`\`
-
-Verify: L × U = A.
+$$A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 4 & 3 & 3 \\\\ 8 & 7 & 9 \\end{pmatrix} = \\underbrace{\\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ 4 & 3 & 1 \\end{pmatrix}}_{L} \\underbrace{\\begin{pmatrix} 2 & 1 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 2 \\end{pmatrix}}_{U}$$
 
 ### Why LU?
 
-Once A = LU, solving Ax = b costs O(n²) — just two triangular solves — instead of rerunning Gaussian elimination for each new b.
+Once $A = LU$, solving $Ax = b$ costs $O(n^2)$ — just two triangular solves — instead of rerunning Gaussian elimination for each new $b$.
 
 ### Your Task
 

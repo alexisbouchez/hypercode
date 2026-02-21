@@ -10,43 +10,36 @@ Finding an equilibrium is only half the story. We also need to know: will the sy
 
 ### Linearization
 
-For \`dy/dt = f(y)\` near an equilibrium \`y*\`:
+For $\\frac{dy}{dt} = f(y)$ near an equilibrium $y^*$:
 
-\`\`\`
-f(y) ≈ f(y*) + f'(y*) · (y - y*)
-     = f'(y*) · (y - y*)      (since f(y*) = 0)
-\`\`\`
+$$f(y) \\approx f(y^*) + f'(y^*) \\cdot (y - y^*) = f'(y^*) \\cdot (y - y^*)$$
 
-The small perturbation \`δ = y - y*\` satisfies:
+since $f(y^*) = 0$. The small perturbation $\\delta = y - y^*$ satisfies:
 
-\`\`\`
-dδ/dt = f'(y*) · δ
-\`\`\`
+$$\\frac{d\\delta}{dt} = f'(y^*) \\cdot \\delta$$
 
-This is just exponential growth/decay! The solution is \`δ(t) = δ(0) · e^(f'(y*) · t)\`.
+This is just exponential growth/decay! The solution is $\\delta(t) = \\delta(0) \\cdot e^{f'(y^*) \\cdot t}$.
 
 ### Stability Criterion
 
 | Condition | Behavior | Classification |
 |-----------|----------|----------------|
-| \`f'(y*) < 0\` | Perturbations decay | **Stable** |
-| \`f'(y*) > 0\` | Perturbations grow | **Unstable** |
-| \`f'(y*) = 0\` | Need higher-order analysis | **Neutral** |
+| $f'(y^*) < 0$ | Perturbations decay | **Stable** |
+| $f'(y^*) > 0$ | Perturbations grow | **Unstable** |
+| $f'(y^*) = 0$ | Need higher-order analysis | **Neutral** |
 
 ### Example
 
-For logistic growth \`f(y) = y(1 - y)\`:
-- \`f'(y) = 1 - 2y\`
-- At \`y* = 0\`: \`f'(0) = 1 > 0\` → **unstable** (population grows away from 0)
-- At \`y* = 1\`: \`f'(1) = -1 < 0\` → **stable** (population returns to carrying capacity)
+For logistic growth $f(y) = y(1 - y)$:
+- $f'(y) = 1 - 2y$
+- At $y^* = 0$: $f'(0) = 1 > 0$ → **unstable** (population grows away from 0)
+- At $y^* = 1$: $f'(1) = -1 < 0$ → **stable** (population returns to carrying capacity)
 
 ### Numerical Derivative
 
-We estimate \`f'(y*)\` using the central difference:
+We estimate $f'(y^*)$ using the central difference:
 
-\`\`\`
-f'(y*) ≈ (f(y* + ε) - f(y* - ε)) / (2ε)
-\`\`\`
+$$f'(y^*) \\approx \\frac{f(y^* + \\varepsilon) - f(y^* - \\varepsilon)}{2\\varepsilon}$$
 
 ### Your Task
 

@@ -6,20 +6,16 @@ export const derivative: Lesson = {
 	chapterId: "limits-and-derivatives",
 	content: `## The Derivative
 
-The **derivative** of \`f\` at \`x\` is the instantaneous rate of change — the slope of the tangent line at that point:
+The **derivative** of $f$ at $x$ is the instantaneous rate of change — the slope of the tangent line at that point:
 
-\`\`\`
-f'(x) = lim_{h→0} (f(x+h) - f(x)) / h
-\`\`\`
+$$f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$$
 
 ### Central Difference Formula
 
-The forward difference \`(f(x+h) - f(x)) / h\` has error \`O(h)\`.
-The **central difference** is more accurate — error \`O(h²)\`:
+The forward difference $\\frac{f(x+h) - f(x)}{h}$ has error $O(h)$.
+The **central difference** is more accurate — error $O(h^2)$:
 
-\`\`\`
-f'(x) ≈ (f(x+h) - f(x-h)) / (2h)
-\`\`\`
+$$f'(x) \\approx \\frac{f(x+h) - f(x-h)}{2h}$$
 
 This is what you should implement. With \`h = 1e-6\`, results match analytic derivatives to 9+ significant figures.
 
@@ -29,17 +25,17 @@ For reference, the exact rules you can verify numerically:
 
 | Function | Derivative |
 |----------|-----------|
-| \`xⁿ\` | \`n·xⁿ⁻¹\` (power rule) |
-| \`sin(x)\` | \`cos(x)\` |
-| \`eˣ\` | \`eˣ\` |
-| \`ln(x)\` | \`1/x\` |
-| \`f(g(x))\` | \`f'(g(x))·g'(x)\` (chain rule) |
+| $x^n$ | $n \\cdot x^{n-1}$ (power rule) |
+| $\\sin(x)$ | $\\cos(x)$ |
+| $e^x$ | $e^x$ |
+| $\\ln(x)$ | $\\frac{1}{x}$ |
+| $f(g(x))$ | $f'(g(x)) \\cdot g'(x)$ (chain rule) |
 
 ### Verification
 
-For \`f(x) = x²\`:
-- Analytic: \`f'(2) = 2·2 = 4\`
-- Central difference: \`((2+h)² - (2-h)²) / (2h) = 8h / 2h = 4\` ✓ (exact, regardless of h)
+For $f(x) = x^2$:
+- Analytic: $f'(2) = 2 \\cdot 2 = 4$
+- Central difference: $\\frac{(2+h)^2 - (2-h)^2}{2h} = \\frac{8h}{2h} = 4$ ✓ (exact, regardless of $h$)
 
 ### Your Task
 

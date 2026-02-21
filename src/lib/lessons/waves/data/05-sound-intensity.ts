@@ -6,21 +6,19 @@ export const soundIntensityLesson: Lesson = {
 	chapterId: "intensity-and-perception",
 	content: `## Intensity of a Point Source
 
-A speaker radiates power P (watts) equally in all directions. At distance r, that power is spread over a sphere of surface area 4\u03c0r\u00b2:
+A speaker radiates power P (watts) equally in all directions. At distance r, that power is spread over a sphere of surface area $4\pi r^2$:
 
-\`\`\`
-I = P / (4\u03c0 r\u00b2)
-\`\`\`
+$$I = \frac{P}{4\pi r^2}$$
 
-- **I** — intensity (W/m\u00b2)
+- **I** — intensity (W/m²)
 - **P** — acoustic power (W)
 - **r** — distance from source (m)
 
 ### Inverse-Square Law
 
-Doubling the distance quarters the intensity — the same r\u00b2 dependence as gravity and light. This is why outdoor concerts sound quiet from far away.
+Doubling the distance quarters the intensity — the same $r^2$ dependence as gravity and light. This is why outdoor concerts sound quiet from far away.
 
-| P (W) | r (m) | I (W/m\u00b2) |
+| P (W) | r (m) | I (W/m²) |
 |-------|-------|-----------|
 | 1 | 1 | **0.0796** |
 | 100 | 10 | **0.0796** |
@@ -29,7 +27,7 @@ Doubling the distance quarters the intensity — the same r\u00b2 dependence as 
 
 ### Your Task
 
-Implement \`soundIntensity(P, r)\` returning intensity in W/m\u00b2.`,
+Implement \`soundIntensity(P, r)\` returning intensity in W/m².`,
 
 	starterCode: `function soundIntensity(P, r) {
   // I = P / (4 * PI * r^2)

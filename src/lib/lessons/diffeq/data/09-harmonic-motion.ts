@@ -8,45 +8,37 @@ export const harmonicMotion: Lesson = {
 
 A mass on a spring oscillates. The restoring force is proportional to displacement:
 
-\`\`\`
-F = -k * x   →   m * x'' = -k * x
-\`\`\`
+$$F = -k x \quad \Rightarrow \quad m x'' = -k x$$
 
-Dividing by mass and letting \`ω² = k/m\`:
+Dividing by mass and letting $\\omega^2 = k/m$:
 
-\`\`\`
-x'' = -ω² * x
-\`\`\`
+$$x'' = -\\omega^2 x$$
 
 ### Reducing to a System
 
-A second-order ODE like this is converted to a **first-order system** by introducing velocity \`v = x'\`:
+A second-order ODE like this is converted to a **first-order system** by introducing velocity $v = x'$:
 
-\`\`\`
-dx/dt = v
-dv/dt = -ω² * x
-\`\`\`
+$$\\frac{dx}{dt} = v$$
+$$\\frac{dv}{dt} = -\\omega^2 x$$
 
-State vector: \`[x, v]\`. This is the standard trick — any nth-order ODE becomes a first-order system of n equations.
+State vector: $[x, v]$. This is the standard trick — any nth-order ODE becomes a first-order system of $n$ equations.
 
 ### Symplectic Euler
 
 For oscillatory problems, the standard Euler method adds energy over time (unstable). The **symplectic** (semi-implicit) variant updates velocity first, then uses the updated velocity for position:
 
 \`\`\`python
-v = v + h * (-ω² * x)   # update v first
-x = x + h * v            # use new v for x
+v = v + h * (-omega**2 * x)   # update v first
+x = x + h * v                  # use new v for x
 \`\`\`
 
 This conserves energy long-term, making it suitable for simulating oscillations.
 
 ### Exact Solution
 
-\`\`\`
-x(t) = x0 * cos(ωt) + (v0/ω) * sin(ωt)
-\`\`\`
+$$x(t) = x_0 \\cos(\\omega t) + \\frac{v_0}{\\omega} \\sin(\\omega t)$$
 
-The motion is sinusoidal with period \`T = 2π/ω\`.
+The motion is sinusoidal with period $T = 2\\pi / \\omega$.
 
 ### Your Task
 

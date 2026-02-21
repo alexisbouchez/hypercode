@@ -6,15 +6,13 @@ export const matrixExponentialLesson: Lesson = {
 	chapterId: "applications",
 	content: `## Matrix Exponential
 
-The **matrix exponential** eᴬ extends the scalar exponential to matrices via the Taylor series:
+The **matrix exponential** $e^A$ extends the scalar exponential to matrices via the Taylor series:
 
-\`\`\`
-eᴬ = I + A + A²/2! + A³/3! + A⁴/4! + …
-\`\`\`
+$$e^A = I + A + \\frac{A^2}{2!} + \\frac{A^3}{3!} + \\frac{A^4}{4!} + \\cdots$$
 
 ### Applications
 
-- **Differential equations**: the solution to ẋ = Ax with x(0) = x₀ is x(t) = e^(tA) x₀
+- **Differential equations**: the solution to $\\dot{x} = Ax$ with $x(0) = x_0$ is $x(t) = e^{tA} x_0$
 - **Control theory**: state transition matrices
 - **Quantum mechanics**: time evolution operator
 
@@ -22,22 +20,13 @@ eᴬ = I + A + A²/2! + A³/3! + A⁴/4! + …
 
 Accumulate terms until convergence:
 
-\`\`\`
-result = I
-term = I
-for k = 1, 2, 3, …:
-    term = term × A / k
-    result += term
-\`\`\`
+$$\\text{result} = I, \\quad \\text{term} = I, \\quad \\text{for } k = 1, 2, 3, \\ldots: \\quad \\text{term} = \\text{term} \\times A / k, \\quad \\text{result} += \\text{term}$$
 
 ### Example: Rotation Generator
 
-The matrix A = [[0, 1], [-1, 0]] is the generator of 2D rotation. Its exponential is exactly the rotation matrix:
+The matrix $A = \\begin{pmatrix}0 & 1 \\\\ -1 & 0\\end{pmatrix}$ is the generator of 2D rotation. Its exponential is exactly the rotation matrix:
 
-\`\`\`
-e^A = [[cos(1), sin(1)],   ≈ [[0.5403,  0.8415],
-       [-sin(1), cos(1)]]      [-0.8415, 0.5403]]
-\`\`\`
+$$e^A = \\begin{pmatrix}\\cos(1) & \\sin(1) \\\\ -\\sin(1) & \\cos(1)\\end{pmatrix} \\approx \\begin{pmatrix}0.5403 & 0.8415 \\\\ -0.8415 & 0.5403\\end{pmatrix}$$
 
 ### Your Task
 

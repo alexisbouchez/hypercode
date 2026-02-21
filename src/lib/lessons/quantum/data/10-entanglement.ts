@@ -8,9 +8,9 @@ export const entanglement: Lesson = {
 
 A 2-qubit state is **separable** if it can be written as a tensor product of two single-qubit states:
 
-[α₀₀, α₀₁, α₁₀, α₁₁] = [a, b] ⊗ [c, d]
+$$[\alpha_{00}, \alpha_{01}, \alpha_{10}, \alpha_{11}] = [a, b] \otimes [c, d]$$
 
-This requires: **α₀₀ · α₁₁ = α₀₁ · α₁₀**
+This requires: $\alpha_{00} \cdot \alpha_{11} = \alpha_{01} \cdot \alpha_{10}$
 
 If this equality does not hold, the state is **entangled** — it cannot be factored into independent parts.
 

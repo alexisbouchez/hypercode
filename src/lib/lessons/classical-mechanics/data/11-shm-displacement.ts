@@ -6,42 +6,36 @@ export const shmDisplacementLesson: Lesson = {
 	chapterId: "oscillations-and-gravitation",
 	content: `## Simple Harmonic Motion
 
-**Simple Harmonic Motion (SHM)** occurs when a restoring force is proportional to displacement (Hooke's law: F = −kx). The resulting motion is sinusoidal:
+**Simple Harmonic Motion (SHM)** occurs when a restoring force is proportional to displacement (Hooke's law: $F = -kx$). The resulting motion is sinusoidal:
 
-\`\`\`
-x(t) = A cos(ωt)
-\`\`\`
+$$x(t) = A \\cos(\\omega t)$$
 
-- **A** — amplitude (maximum displacement, metres)
-- **ω** — angular frequency (rad/s): ω = 2πf = 2π/T
-- **t** — time (seconds)
+- $A$ — amplitude (maximum displacement, metres)
+- $\\omega$ — angular frequency (rad/s): $\\omega = 2\\pi f = 2\\pi / T$
+- $t$ — time (seconds)
 
-Starting at t=0, the object is at maximum displacement x=A.
+Starting at $t = 0$, the object is at maximum displacement $x = A$.
 
 ### Key Quantities
 
-\`\`\`
-Period:    T = 2π/ω
-Frequency: f = ω/(2π)
-\`\`\`
+$$T = \\frac{2\\pi}{\\omega} \qquad f = \\frac{\\omega}{2\\pi}$$
 
 ### Velocity and Acceleration in SHM
 
-\`\`\`
-v(t) = −Aω sin(ωt)
-a(t) = −Aω² cos(ωt) = −ω²x
-\`\`\`
+$$v(t) = -A\\omega \\sin(\\omega t)$$
+
+$$a(t) = -A\\omega^2 \\cos(\\omega t) = -\\omega^2 x$$
 
 The acceleration always opposes displacement — this is the hallmark of SHM.
 
 ### Examples
 
-| A | ω | t | x(t) |
+| $A$ | $\\omega$ | $t$ | $x(t)$ |
 |---|---|---|------|
 | 1 | 1 | 0 | **1.0000** (at maximum) |
 | 5 | 2 | 0 | **5.0000** |
-| 3 | 1 | π | **−3.0000** (at minimum) |
-| 10 | 1 | 2π | **10.0000** (back to start) |
+| 3 | 1 | $\\pi$ | **−3.0000** (at minimum) |
+| 10 | 1 | $2\\pi$ | **10.0000** (back to start) |
 
 ### Your Task
 

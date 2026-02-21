@@ -6,41 +6,38 @@ export const newtonsMethod: Lesson = {
 	chapterId: "derivative-applications",
 	content: `## Newton's Method
 
-**Newton's method** (also called Newton-Raphson) finds roots of \`f(x) = 0\` using derivatives. It is one of the most important applications of calculus in numerical computing.
+**Newton's method** (also called Newton-Raphson) finds roots of $f(x) = 0$ using derivatives. It is one of the most important applications of calculus in numerical computing.
 
 ### Idea
 
-Starting from a guess \`x₀\`, draw the tangent line at \`(x₀, f(x₀))\`. Where does the tangent line cross the x-axis? That crossing is a better guess.
+Starting from a guess $x_0$, draw the tangent line at $(x_0, f(x_0))$. Where does the tangent line cross the x-axis? That crossing is a better guess.
 
-\`\`\`
-Tangent line: y = f(x₀) + f'(x₀)·(x - x₀)
-Set y = 0: x₁ = x₀ - f(x₀)/f'(x₀)
-\`\`\`
+$$\\text{Tangent line: } y = f(x_0) + f'(x_0) \\cdot (x - x_0)$$
 
-Repeat: \`xₙ₊₁ = xₙ - f(xₙ)/f'(xₙ)\`
+$$\\text{Set } y = 0: \\quad x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}$$
+
+Repeat: $x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}$
 
 ### Convergence
 
 Newton's method has **quadratic convergence**: the number of correct decimal places roughly doubles each iteration. Starting from a decent guess, 10 iterations typically gives machine precision (15+ digits).
 
-### Example: √2
+### Example: $\\sqrt{2}$
 
-Find the root of \`f(x) = x² - 2\`, so \`f'(x) = 2x\`:
+Find the root of $f(x) = x^2 - 2$, so $f'(x) = 2x$:
 
-\`\`\`
-x₀ = 2.0
-x₁ = 2 - (4-2)/4 = 2 - 0.5 = 1.5
-x₂ = 1.5 - (2.25-2)/3 = 1.5 - 0.0833 = 1.4167
-x₃ = 1.4167 - ... = 1.41422
-\`\`\`
+$$x_0 = 2.0$$
+$$x_1 = 2 - \\frac{4-2}{4} = 2 - 0.5 = 1.5$$
+$$x_2 = 1.5 - \\frac{2.25-2}{3} = 1.5 - 0.0833 = 1.4167$$
+$$x_3 = 1.4167 - \\cdots = 1.41422$$
 
-After 5 steps: \`1.41421356\` — 8 correct digits from 3 iterations.
+After 5 steps: $1.41421356$ — 8 correct digits from 3 iterations.
 
 ### Pitfalls
 
-- If \`f'(xₙ) = 0\`, the method fails (division by zero)
+- If $f'(x_n) = 0$, the method fails (division by zero)
 - A bad initial guess can diverge or cycle
-- Works best near a simple root where \`f'(x) ≠ 0\`
+- Works best near a simple root where $f'(x) \\neq 0$
 
 ### Your Task
 

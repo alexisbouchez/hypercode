@@ -9,8 +9,8 @@ export const ttestOneSample: Lesson = {
 The **one-sample t-test** checks whether the mean of your data is significantly different from a hypothesized value.
 
 **Hypotheses:**
-- H₀ (null): μ = μ₀ (the mean equals the hypothesized value)
-- H₁ (alternative): μ ≠ μ₀
+- $H_0$ (null): $\mu = \mu_0$ (the mean equals the hypothesized value)
+- $H_1$ (alternative): $\mu \neq \mu_0$
 
 \`\`\`python
 import math, statistics
@@ -25,26 +25,24 @@ print(round(t_stat, 4))   # 4.0
 
 ### The t-Statistic
 
-\`\`\`
-t = (x̄ - μ₀) / (s / √n)
-\`\`\`
+$$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}$$
 
-A large |t| means the sample mean is far from μ₀ relative to the data's variability.
+A large $|t|$ means the sample mean is far from $\mu_0$ relative to the data's variability.
 
 ### The p-value
 
-The p-value is the probability of observing a t-statistic this extreme (or more) if H₀ were true.
+The $p$-value is the probability of observing a $t$-statistic this extreme (or more) if $H_0$ were true.
 
-- **p < 0.05** → statistically significant (reject H₀ at 5% significance level)
-- **p ≥ 0.05** → insufficient evidence to reject H₀
+- $p < 0.05$ → statistically significant (reject $H_0$ at 5% significance level)
+- $p \geq 0.05$ → insufficient evidence to reject $H_0$
 
 ### Special Case: Testing Against the Sample Mean
 
-When μ₀ equals the sample mean exactly, t = 0 and p = 1.0.
+When $\mu_0$ equals the sample mean exactly, $t = 0$ and $p = 1.0$.
 
 ### Your Task
 
-Implement \`ttest_one_sample(data, mu)\` that prints the t-statistic (rounded to 4 decimal places) and whether the result is significant (\`p < 0.05\`).`,
+Implement \`ttest_one_sample(data, mu)\` that prints the $t$-statistic (rounded to 4 decimal places) and whether the result is significant ($p < 0.05$).`,
 
 	starterCode: `import math, statistics
 

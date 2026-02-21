@@ -8,36 +8,36 @@ export const meanValueTheorem: Lesson = {
 
 The **Mean Value Theorem (MVT)** is one of the most important theorems in calculus:
 
-> If \`f\` is continuous on \`[a, b]\` and differentiable on \`(a, b)\`, then there exists at least one point \`c ∈ (a, b)\` such that:
+> If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists at least one point $c \\in (a, b)$ such that:
 >
-> \`f'(c) = (f(b) - f(a)) / (b - a)\`
+> $$f'(c) = \\frac{f(b) - f(a)}{b - a}$$
 
 In plain English: at some point, the **instantaneous rate of change** equals the **average rate of change** over the interval.
 
 ### Geometric Interpretation
 
-Draw the secant line through \`(a, f(a))\` and \`(b, f(b))\`. The MVT says there is at least one point where the tangent line is **parallel** to that secant line.
+Draw the secant line through $(a, f(a))$ and $(b, f(b))$. The MVT says there is at least one point where the tangent line is **parallel** to that secant line.
 
 ### Finding the MVT Point Numerically
 
-We want \`c\` where \`f'(c) = (f(b) - f(a)) / (b - a)\`. This is a root-finding problem on \`g(x) = f'(x) - slope\`, solved by bisection.
+We want $c$ where $f'(c) = \\frac{f(b) - f(a)}{b - a}$. This is a root-finding problem on $g(x) = f'(x) - \\text{slope}$, solved by bisection.
 
 ### Example
 
-For \`f(x) = x²\` on \`[0, 4]\`:
-- Average slope: \`(16 - 0) / (4 - 0) = 4\`
-- \`f'(c) = 2c = 4\` → \`c = 2\` ✓ (which is the midpoint — always true for parabolas)
+For $f(x) = x^2$ on $[0, 4]$:
+- Average slope: $\\frac{16 - 0}{4 - 0} = 4$
+- $f'(c) = 2c = 4$ → $c = 2$ ✓ (which is the midpoint — always true for parabolas)
 
 ### Applications
 
 - **Speed enforcement**: if your average speed between two cameras was 80 mph, at some moment you were going exactly 80 mph
 - **Proof of L'Hôpital's rule**
 - **Error estimation** in numerical integration
-- **Rolle's Theorem**: special case where \`f(a) = f(b)\`, implying \`f'(c) = 0\`
+- **Rolle's Theorem**: special case where $f(a) = f(b)$, implying $f'(c) = 0$
 
 ### Your Task
 
-Implement \`double mvt_point(double (*f)(double), double a, double b, int n, double h)\` that finds the MVT point \`c\` using bisection on \`g(x) = f'(x) - average_slope\`.`,
+Implement \`double mvt_point(double (*f)(double), double a, double b, int n, double h)\` that finds the MVT point $c$ using bisection on $g(x) = f'(x) - \\text{average\\_slope}$.`,
 
 	starterCode: `#include <stdio.h>
 

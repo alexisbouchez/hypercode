@@ -8,29 +8,25 @@ export const dampedOscillator: Lesson = {
 
 Real oscillators lose energy to friction and air resistance. The damped oscillator adds a velocity-proportional damping term:
 
-\`\`\`
-x'' + 2ζω x' + ω² x = 0
-\`\`\`
+$$x'' + 2\\zeta\\omega\\, x' + \\omega^2 x = 0$$
 
-- \`ω\`: natural frequency (rad/s)
-- \`ζ\` (zeta): damping ratio (dimensionless)
+- $\\omega$: natural frequency (rad/s)
+- $\\zeta$ (zeta): damping ratio (dimensionless)
 
 ### Three Regimes
 
 | Condition | Behavior |
 |-----------|----------|
-| \`ζ < 1\` | **Underdamped**: oscillates with decaying amplitude |
-| \`ζ = 1\` | **Critically damped**: fastest return to 0 without oscillating |
-| \`ζ > 1\` | **Overdamped**: slowly returns to 0 without oscillating |
+| $\\zeta < 1$ | **Underdamped**: oscillates with decaying amplitude |
+| $\\zeta = 1$ | **Critically damped**: fastest return to 0 without oscillating |
+| $\\zeta > 1$ | **Overdamped**: slowly returns to 0 without oscillating |
 
 ### As a System
 
-Let \`v = x'\`:
+Let $v = x'$:
 
-\`\`\`
-dx/dt = v
-dv/dt = -2ζω v - ω² x
-\`\`\`
+$$\\frac{dx}{dt} = v$$
+$$\\frac{dv}{dt} = -2\\zeta\\omega\\, v - \\omega^2 x$$
 
 ### Numerical Solution (Symplectic Euler)
 
@@ -42,7 +38,7 @@ x = x + h * v
 
 ### Applications
 
-- Suspension systems in cars (want ζ ≈ 0.7 for comfortable ride)
+- Suspension systems in cars (want $\\zeta \\approx 0.7$ for comfortable ride)
 - Building dampers for earthquake resistance
 - RLC circuits in electronics
 - Atomic force microscopy cantilevers

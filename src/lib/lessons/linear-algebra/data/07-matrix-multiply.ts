@@ -8,11 +8,9 @@ export const matrixMultiply: Lesson = {
 
 Matrix multiplication is **not** element-wise. Each entry of the result is a **dot product** of a row from the left matrix with a column from the right matrix.
 
-For \`A (m×n)\` and \`B (n×p)\`, the result is \`C (m×p)\`:
+For $\mathbf{A}$ of shape $(m \times n)$ and $\mathbf{B}$ of shape $(n \times p)$, the result $\mathbf{C}$ has shape $(m \times p)$:
 
-\`\`\`
-C[i][j] = row i of A · column j of B
-\`\`\`
+$$C_{ij} = \sum_{k=1}^{n} A_{ik} \cdot B_{kj}$$
 
 \`\`\`python
 A = [[1, 2],
@@ -34,15 +32,15 @@ print(mat_mul(A, B))
 
 ### Shape Rule
 
-The **inner dimensions must match**: if \`A\` is \`(m × n)\` and \`B\` is \`(n × p)\`, then \`A @ B\` is \`(m × p)\`.
+The **inner dimensions must match**: if $\mathbf{A}$ is $(m \times n)$ and $\mathbf{B}$ is $(n \times p)$, then $\mathbf{A}\mathbf{B}$ is $(m \times p)$.
 
 ### Non-Commutativity
 
-\`A @ B ≠ B @ A\` in general. Order matters.
+$\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}$ in general. Order matters.
 
 ### Your Task
 
-Implement \`mat_mul(A, B)\` that returns the matrix product \`A @ B\` as a list of lists.`,
+Implement \`mat_mul(A, B)\` that returns the matrix product $\mathbf{A}\mathbf{B}$ as a list of lists.`,
 
 	starterCode: `def mat_mul(A, B):
     # Return the matrix product A @ B as a list of lists

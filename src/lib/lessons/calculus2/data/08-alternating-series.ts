@@ -8,42 +8,38 @@ export const alternatingSeries: Lesson = {
 
 An **alternating series** has terms that switch sign:
 
-\`\`\`
-Σ_{k=1}^∞ (-1)^{k+1} a_k = a_1 - a_2 + a_3 - a_4 + ...
-\`\`\`
+$$\sum_{k=1}^{\infty} (-1)^{k+1} a_k = a_1 - a_2 + a_3 - a_4 + \cdots$$
 
 ### Alternating Series Test (Leibniz)
 
-If \`a_k > 0\`, \`a_k\` is decreasing, and \`a_k → 0\`, then the series **converges**.
+If $a_k > 0$, $a_k$ is decreasing, and $a_k \to 0$, then the series **converges**.
 
 ### Famous Example: Alternating Harmonic
 
-\`\`\`
-1 - 1/2 + 1/3 - 1/4 + ... = ln(2) ≈ 0.6931
-\`\`\`
+$$1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots = \ln(2) \approx 0.6931$$
 
-The partial sums oscillate around \`ln(2)\`, narrowing with each term.
+The partial sums oscillate around $\ln(2)$, narrowing with each term.
 
 ### Error Bound
 
-The error of stopping at term \`n\` is at most \`|a_{n+1}|\` — the next term's absolute value. This makes alternating series easy to approximate with controlled accuracy.
+The error of stopping at term $n$ is at most $|a_{n+1}|$ — the next term's absolute value. This makes alternating series easy to approximate with controlled accuracy.
 
 ### Comparison
 
-| n | S_n (alternating harmonic) |
-|---|---------------------------|
-| 1 | 1.0000 |
-| 2 | 0.5000 |
-| 3 | 0.8333 |
-| 4 | 0.5833 |
-| 5 | 0.7833 |
-| ∞ | 0.6931 |
+| $n$ | $S_n$ (alternating harmonic) |
+|-----|------------------------------|
+| $1$ | $1.0000$ |
+| $2$ | $0.5000$ |
+| $3$ | $0.8333$ |
+| $4$ | $0.5833$ |
+| $5$ | $0.7833$ |
+| $\infty$ | $0.6931$ |
 
-The partial sums zigzag toward ln(2), each one closer than the last.
+The partial sums zigzag toward $\ln(2)$, each one closer than the last.
 
 ### Your Task
 
-Implement \`double alternating_sum(double (*a_n)(int), int n)\` that computes \`Σ_{k=1}^n (-1)^{k+1} a_n(k)\`.`,
+Implement \`double alternating_sum(double (*a_n)(int), int n)\` that computes $\sum_{k=1}^n (-1)^{k+1} a_n(k)$.`,
 
 	starterCode: `#include <stdio.h>
 

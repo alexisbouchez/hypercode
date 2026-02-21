@@ -6,23 +6,21 @@ export const beatFrequencyLesson: Lesson = {
 	chapterId: "intensity-and-perception",
 	content: `## Acoustic Beats
 
-When two tones of slightly different frequencies f\u2081 and f\u2082 are played together, they alternate between constructive and destructive interference. The result is a pulsing "wah-wah" — **acoustic beats**.
+When two tones of slightly different frequencies $f_1$ and $f_2$ are played together, they alternate between constructive and destructive interference. The result is a pulsing "wah-wah" — **acoustic beats**.
 
-\`\`\`
-f_beat = |f\u2081 \u2212 f\u2082|
-\`\`\`
+$$f_\text{beat} = |f_1 - f_2|$$
 
 The beat frequency equals the absolute difference of the two source frequencies.
 
 ### Why It Happens
 
-The two waves periodically come in and out of phase. When aligned (phase difference = 0) their amplitudes add; half a beat period later (phase = \u03c0) they cancel.
+The two waves periodically come in and out of phase. When aligned (phase difference = 0) their amplitudes add; half a beat period later (phase = $\pi$) they cancel.
 
 ### Used for Tuning
 
 Musicians tune by beating: play two strings and listen for the pulsing. Slow the beating until it disappears — the strings are in unison.
 
-| f\u2081 (Hz) | f\u2082 (Hz) | f_beat (Hz) |
+| $f_1$ (Hz) | $f_2$ (Hz) | $f_\text{beat}$ (Hz) |
 |---------|---------|-------------|
 | 440 | 441 | **1.0000** |
 | 440 | 443 | **3.0000** |

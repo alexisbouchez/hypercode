@@ -8,15 +8,13 @@ export const kineticEnergyLesson: Lesson = {
 
 **Kinetic energy** is the energy an object possesses by virtue of its motion:
 
-\`\`\`
-KE = ½mv²
-\`\`\`
+$$KE = \\frac{1}{2}mv^2$$
 
-Units: Joules (J = kg·m²/s²).
+Units: Joules ($\\text{J} = \\text{kg} \\cdot \\text{m}^2/\\text{s}^2$).
 
 ### Key Properties
 
-- Always **non-negative** (v² is always ≥ 0)
+- Always **non-negative** ($v^2$ is always $\\geq 0$)
 - Scales with **mass linearly**: doubling mass doubles KE
 - Scales with **velocity squared**: doubling speed quadruples KE
 
@@ -24,15 +22,13 @@ Units: Joules (J = kg·m²/s²).
 
 The net work done on an object equals its change in kinetic energy:
 
-\`\`\`
-W_net = ΔKE = ½mv_f² − ½mv_i²
-\`\`\`
+$$W_{\\text{net}} = \\Delta KE = \\frac{1}{2}mv_f^2 - \\frac{1}{2}mv_i^2$$
 
 This connects forces (work) to motion (energy) without needing to track the path taken.
 
 ### Examples
 
-| m (kg) | v (m/s) | KE (J) |
+| $m$ (kg) | $v$ (m/s) | KE (J) |
 |--------|---------|--------|
 | 2 | 10 | **100** |
 | 5 | 4 | **40** |

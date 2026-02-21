@@ -6,37 +6,31 @@ export const averageValue: Lesson = {
 	chapterId: "integral-applications",
 	content: `## Average Value of a Function
 
-The **average value** of \`f\` on \`[a, b]\` is:
+The **average value** of $f$ on $[a, b]$ is:
 
-\`\`\`
-f_avg = (1/(b-a)) · ∫_a^b f(x) dx
-\`\`\`
+$$f_{\\text{avg}} = \\frac{1}{b-a} \\int_a^b f(x)\\, dx$$
 
-This generalizes the discrete average \`(f₁ + f₂ + ... + fₙ)/n\` to a continuous function.
+This generalizes the discrete average $\\frac{f_1 + f_2 + \\cdots + f_n}{n}$ to a continuous function.
 
 ### Mean Value Theorem for Integrals
 
-If \`f\` is continuous on \`[a, b]\`, there exists \`c ∈ [a, b]\` such that:
+If $f$ is continuous on $[a, b]$, there exists $c \\in [a, b]$ such that:
 
-\`\`\`
-f(c) = f_avg = (1/(b-a)) · ∫_a^b f(x) dx
-\`\`\`
+$$f(c) = f_{\\text{avg}} = \\frac{1}{b-a} \\int_a^b f(x)\\, dx$$
 
-In other words, \`f\` actually achieves its average value somewhere in the interval.
+In other words, $f$ actually achieves its average value somewhere in the interval.
 
 ### Geometric Interpretation
 
-The average value is the height of a rectangle with base \`(b-a)\` that has the **same area** as the region under \`f\`:
+The average value is the height of a rectangle with base $(b-a)$ that has the **same area** as the region under $f$:
 
-\`\`\`
-f_avg · (b-a) = ∫_a^b f(x) dx
-\`\`\`
+$$f_{\\text{avg}} \\cdot (b-a) = \\int_a^b f(x)\\, dx$$
 
 ### Examples
 
-- \`f(x) = x\` on \`[0, 4]\`: \`f_avg = (1/4)·8 = 2\` (the midpoint — makes sense for a linear function)
-- \`f(x) = x²\` on \`[0, 3]\`: \`f_avg = (1/3)·9 = 3\`
-- \`f(x) = 1\` on any interval: \`f_avg = 1\` (average of a constant is itself)
+- $f(x) = x$ on $[0, 4]$: $f_{\\text{avg}} = \\frac{1}{4} \\cdot 8 = 2$ (the midpoint — makes sense for a linear function)
+- $f(x) = x^2$ on $[0, 3]$: $f_{\\text{avg}} = \\frac{1}{3} \\cdot 9 = 3$
+- $f(x) = 1$ on any interval: $f_{\\text{avg}} = 1$ (average of a constant is itself)
 
 ### Applications
 

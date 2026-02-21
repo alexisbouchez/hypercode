@@ -6,33 +6,29 @@ export const tripleIntegral: Lesson = {
 	chapterId: "multiple-integrals",
 	content: `## Triple Integrals
 
-A **triple integral** integrates over a 3D box [xa,xb] × [ya,yb] × [za,zb]:
+A **triple integral** integrates over a 3D box $[x_a, x_b] \\times [y_a, y_b] \\times [z_a, z_b]$:
 
-\`\`\`
-∭_V f(x,y,z) dV
-\`\`\`
+$$\\iiint_V f(x,y,z)\\, dV$$
 
 ### The 3D Midpoint Rule
 
-Divide each axis into n equal intervals. Evaluate f at each cell center:
+Divide each axis into $n$ equal intervals. Evaluate $f$ at each cell center:
 
-\`\`\`
-∭f dV ≈ Σ_i Σ_j Σ_k f(x_i, y_j, z_k) · Δx · Δy · Δz
-\`\`\`
+$$\\iiint f\\, dV \\approx \\sum_i \\sum_j \\sum_k f(x_i, y_j, z_k) \\cdot \\Delta x \\cdot \\Delta y \\cdot \\Delta z$$
 
 ### Geometric Meaning
 
-- **∭ 1 dV** = volume of the region
-- **∭ ρ(x,y,z) dV** = total mass, if ρ is density
-- **∭ f dV / Volume** = average value of f over the region
+- $\\iiint 1\\, dV$ = volume of the region
+- $\\iiint \\rho(x,y,z)\\, dV$ = total mass, if $\\rho$ is density
+- $\\iiint f\\, dV \\;/\\; \\text{Volume}$ = average value of $f$ over the region
 
 ### Examples
 
-**∭ 1 dV over [0,2]×[0,3]×[0,4]** = 24 (volume of the box)
+$\\iiint 1\\, dV$ **over $[0,2] \\times [0,3] \\times [0,4]$** $= 24$ (volume of the box)
 
-**∭ x dV over [0,1]³** = ½ · 1 · 1 = ½
+$\\iiint x\\, dV$ **over $[0,1]^3$** $= \\frac{1}{2} \\cdot 1 \\cdot 1 = \\frac{1}{2}$
 
-**∭ (x+y+z) dV over [0,1]³** = 3/2 (by symmetry and linearity)
+$\\iiint (x+y+z)\\, dV$ **over $[0,1]^3$** $= \\frac{3}{2}$ (by symmetry and linearity)
 
 ### Applications
 
@@ -43,7 +39,7 @@ Divide each axis into n equal intervals. Evaluate f at each cell center:
 
 ### Your Task
 
-Implement \`double triple_integral(double (*f)(double, double, double), double xa, double xb, double ya, double yb, double za, double zb, int n)\` using the 3D midpoint rule with n divisions per axis.`,
+Implement \`double triple_integral(double (*f)(double, double, double), double xa, double xb, double ya, double yb, double za, double zb, int n)\` using the 3D midpoint rule with $n$ divisions per axis.`,
 
 	starterCode: `#include <stdio.h>
 

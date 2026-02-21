@@ -6,45 +6,39 @@ export const tangentLine: Lesson = {
 	chapterId: "limits-and-derivatives",
 	content: `## Tangent Line
 
-The **tangent line** at a point \`(x₀, f(x₀))\` is the line that just touches the curve there, with slope equal to \`f'(x₀)\`.
+The **tangent line** at a point $(x_0, f(x_0))$ is the line that just touches the curve there, with slope equal to $f'(x_0)$.
 
 ### Equation
 
-\`\`\`
-y = f(x₀) + f'(x₀) · (x - x₀)
-\`\`\`
+$$y = f(x_0) + f'(x_0) \\cdot (x - x_0)$$
 
 This is the **point-slope form** of a line, using the derivative as the slope.
 
 ### Linearization
 
-The tangent line is also called the **linear approximation** (or linearization) of \`f\` near \`x₀\`:
+The tangent line is also called the **linear approximation** (or linearization) of $f$ near $x_0$:
 
-\`\`\`
-f(x) ≈ f(x₀) + f'(x₀) · (x - x₀)   for x near x₀
-\`\`\`
+$$f(x) \\approx f(x_0) + f'(x_0) \\cdot (x - x_0) \\quad \\text{for } x \\text{ near } x_0$$
 
 This is the foundation of calculus-based approximation. It says: near any point, a smooth curve looks like a straight line.
 
 ### Example
 
-For \`f(x) = x²\` at \`x₀ = 3\`:
-- \`f(3) = 9\`
-- \`f'(3) = 6\`
-- Tangent line: \`y = 9 + 6(x - 3) = 6x - 9\`
-- At \`x = 4\`: \`y = 15\` (exact: \`f(4) = 16\`, error = 1 — small for nearby x)
+For $f(x) = x^2$ at $x_0 = 3$:
+- $f(3) = 9$
+- $f'(3) = 6$
+- Tangent line: $y = 9 + 6(x - 3) = 6x - 9$
+- At $x = 4$: $y = 15$ (exact: $f(4) = 16$, error = 1 — small for nearby $x$)
 
 ### Normal Line
 
 The **normal line** is perpendicular to the tangent:
 
-\`\`\`
-y = f(x₀) - (1/f'(x₀)) · (x - x₀)
-\`\`\`
+$$y = f(x_0) - \\frac{1}{f'(x_0)} \\cdot (x - x_0)$$
 
 ### Your Task
 
-Implement \`double tangent_y(double (*f)(double), double x0, double x, double h)\` that returns the y-value of the tangent line at \`x₀\`, evaluated at \`x\`. Use the central difference formula to compute \`f'(x₀)\`.`,
+Implement \`double tangent_y(double (*f)(double), double x0, double x, double h)\` that returns the y-value of the tangent line at $x_0$, evaluated at $x$. Use the central difference formula to compute $f'(x_0)$.`,
 
 	starterCode: `#include <stdio.h>
 

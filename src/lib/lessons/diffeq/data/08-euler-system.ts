@@ -8,17 +8,12 @@ export const eulerSystem: Lesson = {
 
 A single ODE describes one unknown. Many real problems involve multiple quantities that interact — requiring a **system** of ODEs:
 
-\`\`\`
-dy1/dt = f1(t, y1, y2, ...)
-dy2/dt = f2(t, y1, y2, ...)
-...
-\`\`\`
+$$\\frac{dy_1}{dt} = f_1(t, y_1, y_2, \\ldots)$$
+$$\\frac{dy_2}{dt} = f_2(t, y_1, y_2, \\ldots)$$
 
-We represent the state as a vector \`y = [y1, y2, ...]\` and the derivative function returns a vector too:
+We represent the state as a vector $\\mathbf{y} = [y_1, y_2, \\ldots]$ and the derivative function returns a vector too:
 
-\`\`\`
-dy/dt = f(t, y)   where y ∈ ℝⁿ
-\`\`\`
+$$\\frac{d\\mathbf{y}}{dt} = f(t, \\mathbf{y}), \\quad \\mathbf{y} \\in \\mathbb{R}^n$$
 
 ### Vector Euler's Method
 
@@ -51,7 +46,7 @@ All future lessons use this vector pattern: simple harmonic motion, predator-pre
 
 ### Your Task
 
-Implement \`euler_system(f, t0, y0, t_end, n)\` where \`f(t, y)\` returns a list of derivatives and \`y0\` is a list of initial values. Return a list of \`n+1\` state vectors.`,
+Implement \`euler_system(f, t0, y0, t_end, n)\` where \`f(t, y)\` returns a list of derivatives and \`y0\` is a list of initial values. Return a list of $n+1$ state vectors.`,
 
 	starterCode: `def euler_system(f, t0, y0, t_end, n):
     h = (t_end - t0) / n

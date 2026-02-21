@@ -6,34 +6,27 @@ export const leastSquaresQrLesson: Lesson = {
 	chapterId: "orthogonality",
 	content: `## Least Squares via QR
 
-For an overdetermined system Ax ≈ b (more equations than unknowns), the least-squares solution minimises ‖Ax − b‖².
+For an overdetermined system $Ax \\approx b$ (more equations than unknowns), the least-squares solution minimises $\\|Ax - b\\|^2$.
 
 ### Why QR?
 
-The normal equations (A^T A x = A^T b) work but are numerically unstable — squaring A doubles the condition number. QR decomposition solves the same problem with far better numerical stability.
+The normal equations ($A^T A x = A^T b$) work but are numerically unstable — squaring $A$ doubles the condition number. QR decomposition solves the same problem with far better numerical stability.
 
 ### Algorithm
 
-Given thin QR decomposition A = QR (Q is m×n, R is n×n):
+Given thin QR decomposition $A = QR$ ($Q$ is $m \\times n$, $R$ is $n \\times n$):
 
-\`\`\`
-Rx = Q^T b
-\`\`\`
+$$Rx = Q^T b$$
 
 Solve this upper-triangular system via back-substitution — done.
 
 ### Example
 
-Fit y = a + bx to data: (1, 2), (2, 4), (3, 5), (4, 4)
+Fit $y = a + bx$ to data: $(1, 2),\\ (2, 4),\\ (3, 5),\\ (4, 4)$
 
-\`\`\`
-A = [[1, 1],   b = [2,    Solution: a = 2.0000
-     [1, 2],        4,               b = 0.7000
-     [1, 3],        5,
-     [1, 4]]        4]
-\`\`\`
+$$A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\\\ 1 & 3 \\\\ 1 & 4 \\end{pmatrix}, \\quad b = \\begin{pmatrix} 2 \\\\ 4 \\\\ 5 \\\\ 4 \\end{pmatrix}, \\quad \\text{Solution: } a = 2.0000,\\ b = 0.7000$$
 
-The best-fit line is y = 2.0 + 0.7x.
+The best-fit line is $y = 2.0 + 0.7x$.
 
 ### Your Task
 

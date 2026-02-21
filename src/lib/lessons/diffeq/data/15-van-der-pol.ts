@@ -8,30 +8,26 @@ export const vanDerPol: Lesson = {
 
 The **Van der Pol oscillator** is a nonlinear system that models self-sustaining oscillations:
 
-\`\`\`
-x'' - μ(1 - x²)x' + x = 0
-\`\`\`
+$$x'' - \\mu(1 - x^2)x' + x = 0$$
 
-- \`μ = 0\`: reduces to simple harmonic motion
-- \`μ > 0\`: nonlinear damping
+- $\\mu = 0$: reduces to simple harmonic motion
+- $\\mu > 0$: nonlinear damping
 
 ### Nonlinear Damping
 
-The term \`-μ(1 - x²)x'\` is the key:
+The term $-\\mu(1 - x^2)x'$ is the key:
 
-- When \`|x| < 1\`: the factor \`(1 - x²) > 0\`, so damping is **negative** — the system adds energy. Small oscillations grow.
-- When \`|x| > 1\`: the factor \`(1 - x²) < 0\`, so damping is **positive** — the system removes energy. Large oscillations shrink.
+- When $|x| < 1$: the factor $(1 - x^2) > 0$, so damping is **negative** — the system adds energy. Small oscillations grow.
+- When $|x| > 1$: the factor $(1 - x^2) < 0$, so damping is **positive** — the system removes energy. Large oscillations shrink.
 
-This creates a **limit cycle**: regardless of starting conditions (except at rest), the system settles into a specific periodic orbit with amplitude ≈ 2.
+This creates a **limit cycle**: regardless of starting conditions (except at rest), the system settles into a specific periodic orbit with amplitude $\\approx 2$.
 
 ### As a System
 
-Let \`v = x'\`:
+Let $v = x'$:
 
-\`\`\`
-dx/dt = v
-dv/dt = μ(1 - x²)v - x
-\`\`\`
+$$\\frac{dx}{dt} = v$$
+$$\\frac{dv}{dt} = \\mu(1 - x^2)v - x$$
 
 ### Historical Context
 

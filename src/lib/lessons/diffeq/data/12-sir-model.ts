@@ -14,36 +14,30 @@ The **SIR model** divides a population into three compartments:
 
 ### Equations
 
-\`\`\`
-dS/dt = -β · S · I / N
-dI/dt =  β · S · I / N  -  γ · I
-dR/dt =  γ · I
-\`\`\`
+$$\\frac{dS}{dt} = -\\beta \\cdot \\frac{S \\cdot I}{N}$$
+$$\\frac{dI}{dt} = \\beta \\cdot \\frac{S \\cdot I}{N} - \\gamma \\cdot I$$
+$$\\frac{dR}{dt} = \\gamma \\cdot I$$
 
-- \`β\`: transmission rate (contacts per day × probability of transmission)
-- \`γ\`: recovery rate (1/days infectious)
-- \`N = S + I + R\`: total population (constant)
+- $\\beta$: transmission rate (contacts per day $\\times$ probability of transmission)
+- $\\gamma$: recovery rate (1/days infectious)
+- $N = S + I + R$: total population (constant)
 
 ### Key Metric: Basic Reproduction Number
 
-\`\`\`
-R₀ = β / γ
-\`\`\`
+$$\\mathcal{R}_0 = \\frac{\\beta}{\\gamma}$$
 
-- \`R₀ > 1\`: epidemic grows (each infected person infects more than one)
-- \`R₀ < 1\`: epidemic dies out
+- $\\mathcal{R}_0 > 1$: epidemic grows (each infected person infects more than one)
+- $\\mathcal{R}_0 < 1$: epidemic dies out
 
-COVID-19 had R₀ ≈ 2-3. Measles has R₀ ≈ 12-18.
+COVID-19 had $\\mathcal{R}_0 \\approx 2$–$3$. Measles has $\\mathcal{R}_0 \\approx 12$–$18$.
 
 ### Herd Immunity Threshold
 
 An epidemic can't grow if enough people are immune. The threshold:
 
-\`\`\`
-fraction immune needed = 1 - 1/R₀
-\`\`\`
+$$\\text{fraction immune needed} = 1 - \\frac{1}{\\mathcal{R}_0}$$
 
-For R₀ = 3: need 1 - 1/3 = 67% immune.
+For $\\mathcal{R}_0 = 3$: need $1 - 1/3 = 67\\%$ immune.
 
 ### Your Task
 

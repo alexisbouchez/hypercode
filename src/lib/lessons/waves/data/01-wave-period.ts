@@ -8,9 +8,7 @@ export const wavePeriodLesson: Lesson = {
 
 A wave oscillates in time. Two quantities describe this:
 
-\`\`\`
-T = 1 / f          f = 1 / T
-\`\`\`
+$$T = \frac{1}{f} \qquad f = \frac{1}{T}$$
 
 - **T** — period (s): time for one complete cycle
 - **f** — frequency (Hz): cycles per second

@@ -8,32 +8,28 @@ export const gravitationalForceLesson: Lesson = {
 
 Every mass attracts every other mass. Newton's law of universal gravitation:
 
-\`\`\`
-F = G × m₁ × m₂ / r²
-\`\`\`
+$$F = \\frac{G m_1 m_2}{r^2}$$
 
-- **G** = 6.674 × 10⁻¹¹ N·m²/kg² — the gravitational constant
-- **m₁, m₂** — masses in kg
-- **r** — distance between centres in metres
-- **F** — attractive force in Newtons
+- $G = 6.674 \\times 10^{-11}$ N·m²/kg² — the gravitational constant
+- $m_1, m_2$ — masses in kg
+- $r$ — distance between centres in metres
+- $F$ — attractive force in Newtons
 
 ### The Inverse-Square Law
 
-Force falls off as 1/r². Double the distance → one quarter the force. This is why the Moon orbits Earth rather than flying away — gravity weakens with distance, but never reaches zero.
+Force falls off as $1/r^2$. Double the distance $\\to$ one quarter the force. This is why the Moon orbits Earth rather than flying away — gravity weakens with distance, but never reaches zero.
 
-### Relation to g = 9.81 m/s²
+### Relation to $g = 9.81$ m/s²
 
-At Earth's surface (r = 6.371 × 10⁶ m, M_Earth = 5.972 × 10²⁴ kg):
+At Earth's surface ($r = 6.371 \\times 10^6$ m, $M_{\\text{Earth}} = 5.972 \\times 10^{24}$ kg):
 
-\`\`\`
-g = G × M_Earth / r² ≈ 9.81 m/s²
-\`\`\`
+$$g = \\frac{G M_{\\text{Earth}}}{r^2} \\approx 9.81 \\ \\text{m/s}^2$$
 
-The familiar constant g is just Newton's law applied at Earth's surface.
+The familiar constant $g$ is just Newton's law applied at Earth's surface.
 
-### Examples (using m₁ = m₂ = 10¹⁰ kg)
+### Examples (using $m_1 = m_2 = 10^{10}$ kg)
 
-| r (m) | F (N) |
+| $r$ (m) | $F$ (N) |
 |-------|-------|
 | 1 | **6.6740** |
 | 2 | **1.6685** |

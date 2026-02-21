@@ -8,9 +8,7 @@ export const midpointRule: Lesson = {
 
 Use the **midpoint** of each subinterval:
 
-\`\`\`
-Σᵢ₌₀ⁿ⁻¹ f(a + (i + 0.5)·h) · h
-\`\`\`
+$$\\sum_{i=0}^{n-1} f\\!\\left(a + \\left(i + 0.5\\right) h\\right) \\cdot h$$
 
 \`\`\`
 a   a+h  a+2h        b
@@ -21,21 +19,21 @@ a   a+h  a+2h        b
 
 ### Why Midpoints Are Better
 
-The midpoint rule has \`O(h²)\` error — the same order as the trapezoidal rule, and better than left/right (\`O(h)\`). Intuitively, the midpoint is the "best representative" of a subinterval because it cancels out the linear error terms from both sides.
+The midpoint rule has $O(h^2)$ error — the same order as the trapezoidal rule, and better than left/right ($O(h)$). Intuitively, the midpoint is the "best representative" of a subinterval because it cancels out the linear error terms from both sides.
 
-### Comparison for \`∫₀¹ x² dx = 1/3\`
+### Comparison for $\\int_0^1 x^2\\, dx = \\frac{1}{3}$
 
-| n | Left | Midpoint | Trapezoid | Right |
+| $n$ | Left | Midpoint | Trapezoid | Right |
 |---|------|----------|-----------|-------|
 | 4 | 0.219 | **0.328** | 0.344 | 0.469 |
 
-The midpoint rule is more accurate than both left and right for the same \`n\`.
+The midpoint rule is more accurate than both left and right for the same $n$.
 
 ### Exact for Linear Functions
 
-The midpoint rule integrates **linear functions exactly**, regardless of \`n\`. For \`f(x) = 2x + 1\` on \`[0, 3]\`:
-- \`∫₀³ (2x+1) dx = [x²+x]₀³ = 12\`
-- Midpoint rule with any n: \`Σ f(a + (i+0.5)h) · h = 12\` ✓
+The midpoint rule integrates **linear functions exactly**, regardless of $n$. For $f(x) = 2x + 1$ on $[0, 3]$:
+- $\\int_0^3 (2x+1)\\, dx = \\left[x^2+x\\right]_0^3 = 12$
+- Midpoint rule with any $n$: $\\sum f(a + (i+0.5)h) \\cdot h = 12$ ✓
 
 ### Your Task
 

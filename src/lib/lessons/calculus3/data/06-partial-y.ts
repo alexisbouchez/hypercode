@@ -6,38 +6,36 @@ export const partialY: Lesson = {
 	chapterId: "partial-derivatives",
 	content: `## Partial Derivative with Respect to y
 
-Just as ∂f/∂x differentiates with x varying and y fixed, ∂f/∂y differentiates with y varying and x fixed:
+Just as $\\partial f / \\partial x$ differentiates with $x$ varying and $y$ fixed, $\\partial f / \\partial y$ differentiates with $y$ varying and $x$ fixed:
 
-\`\`\`
-∂f/∂y = lim_{h→0} [f(x, y+h) - f(x, y-h)] / (2h)
-\`\`\`
+$$\\frac{\\partial f}{\\partial y} = \\lim_{h \\to 0} \\frac{f(x,\\, y+h) - f(x,\\, y-h)}{2h}$$
 
 ### Symmetry Between Variables
 
-For a "symmetric" function like f(x,y) = x² + y², we get:
-- ∂f/∂x = 2x
-- ∂f/∂y = 2y
+For a "symmetric" function like $f(x,y) = x^2 + y^2$, we get:
+- $\\partial f / \\partial x = 2x$
+- $\\partial f / \\partial y = 2y$
 
-They have the same form — x and y play identical roles.
+They have the same form — $x$ and $y$ play identical roles.
 
 ### Mixed Partials
 
-Higher-order mixed partials ∂²f/∂x∂y = ∂²f/∂y∂x for smooth functions (Schwarz's theorem). This symmetry is a powerful fact used throughout multivariable calculus.
+Higher-order mixed partials $\\frac{\\partial^2 f}{\\partial x \\partial y} = \\frac{\\partial^2 f}{\\partial y \\partial x}$ for smooth functions (Schwarz's theorem). This symmetry is a powerful fact used throughout multivariable calculus.
 
 ### Examples
 
-For f(x, y) = x²y + sin(y):
-- ∂f/∂y = x² + cos(y)
+For $f(x, y) = x^2 y + \\sin(y)$:
+- $\\partial f / \\partial y = x^2 + \\cos(y)$
 
-For f(x, y) = e^x · y²:
-- ∂f/∂y = 2y · e^x
+For $f(x, y) = e^x \\cdot y^2$:
+- $\\partial f / \\partial y = 2y \\cdot e^x$
 
-For f(x, y) = x³ + 3xy²:
-- ∂f/∂y = 6xy
+For $f(x, y) = x^3 + 3xy^2$:
+- $\\partial f / \\partial y = 6xy$
 
 ### Your Task
 
-Implement \`double partial_y(double (*f)(double, double), double x, double y, double h)\` that approximates ∂f/∂y at (x, y) using central differences.`,
+Implement \`double partial_y(double (*f)(double, double), double x, double y, double h)\` that approximates $\\partial f / \\partial y$ at $(x, y)$ using central differences.`,
 
 	starterCode: `#include <stdio.h>
 

@@ -8,13 +8,11 @@ export const accelerationLesson: Lesson = {
 
 The most important equation in classical mechanics:
 
-\`\`\`
-F = ma    →    a = F / m
-\`\`\`
+$$F = ma \quad \Rightarrow \quad a = \frac{F}{m}$$
 
-**Force** (F) is measured in Newtons (N = kg·m/s²).
-**Mass** (m) in kilograms.
-**Acceleration** (a) in m/s².
+**Force** ($F$) is measured in Newtons ($\\text{N} = \\text{kg} \\cdot \\text{m/s}^2$).
+**Mass** ($m$) in kilograms.
+**Acceleration** ($a$) in m/s².
 
 ### Physical Meaning
 
@@ -31,7 +29,7 @@ A net force causes acceleration proportional to the force and inversely proporti
 
 ### Net Force
 
-The F in F=ma is always the **net** force — the vector sum of all forces acting on the object. If you push a block with 50 N and friction provides 20 N opposing, the net force is 30 N.
+The $F$ in $F = ma$ is always the **net** force — the vector sum of all forces acting on the object. If you push a block with 50 N and friction provides 20 N opposing, the net force is 30 N.
 
 ### Your Task
 

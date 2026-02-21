@@ -6,29 +6,25 @@ export const polarArea: Lesson = {
 	chapterId: "parametric-and-polar",
 	content: `## Polar Area
 
-In **polar coordinates**, a curve is defined by radius as a function of angle: \`r = r(θ)\`.
+In **polar coordinates**, a curve is defined by radius as a function of angle: $r = r(\theta)$.
 
-The area enclosed by a polar curve from \`θ = a\` to \`θ = b\`:
+The area enclosed by a polar curve from $\theta = a$ to $\theta = b$:
 
-\`\`\`
-A = ½ · ∫_a^b [r(θ)]² dθ
-\`\`\`
+$$A = \frac{1}{2} \int_a^b [r(\theta)]^2 \, d\theta$$
 
 ### Why the Formula Works
 
-Each infinitesimal slice at angle \`θ\` is a sector with radius \`r(θ)\` and angle \`dθ\`. A sector's area is \`½r²dθ\` (fraction of circle area \`πr²\`).
+Each infinitesimal slice at angle $\theta$ is a sector with radius $r(\theta)$ and angle $d\theta$. A sector's area is $\frac{1}{2}r^2 d\theta$ (fraction of circle area $\pi r^2$).
 
 ### Classic Examples
 
-**Full circle** \`r = R\` on \`[0, 2π]\`:
-\`\`\`
-A = ½ ∫_0^{2π} R² dθ = ½ · R² · 2π = πR²
-\`\`\`
+**Full circle** $r = R$ on $[0, 2\pi]$:
 
-**Semicircle** \`r = 1\` on \`[0, π]\`:
-\`\`\`
-A = ½ ∫_0^π 1 dθ = π/2 ≈ 1.5708
-\`\`\`
+$$A = \frac{1}{2} \int_0^{2\pi} R^2 \, d\theta = \frac{1}{2} \cdot R^2 \cdot 2\pi = \pi R^2$$
+
+**Semicircle** $r = 1$ on $[0, \pi]$:
+
+$$A = \frac{1}{2} \int_0^{\pi} 1 \, d\theta = \frac{\pi}{2} \approx 1.5708$$
 
 **Rose curves** and **limaçons**: more complex integrands requiring numerical integration.
 

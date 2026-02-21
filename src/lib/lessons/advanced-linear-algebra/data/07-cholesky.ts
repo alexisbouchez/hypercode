@@ -6,36 +6,29 @@ export const choleskyLesson: Lesson = {
 	chapterId: "decompositions",
 	content: `## Cholesky Decomposition
 
-For a **symmetric positive definite (SPD)** matrix A, the Cholesky decomposition gives:
+For a **symmetric positive definite (SPD)** matrix $A$, the Cholesky decomposition gives:
 
-\`\`\`
-A = L × L^T
-\`\`\`
+$$A = L L^T$$
 
-where L is lower triangular with positive diagonal entries.
+where $L$ is lower triangular with positive diagonal entries.
 
 ### Why Cholesky?
 
 - Twice as fast as LU (exploits symmetry)
 - Numerically more stable
-- The positive diagonal entries confirm A is truly SPD
+- The positive diagonal entries confirm $A$ is truly SPD
 
 ### Algorithm
 
-\`\`\`
-L[i][j] = (A[i][j] − Σₖ<ⱼ L[i][k] L[j][k]) / L[j][j]   (off-diagonal, i > j)
-L[j][j] = sqrt(A[j][j] − Σₖ<ⱼ L[j][k]²)                  (diagonal)
-\`\`\`
+$$L_{ij} = \\frac{A_{ij} - \\sum_{k < j} L_{ik}\\, L_{jk}}{L_{jj}} \\quad (i > j, \\text{ off-diagonal})$$
+
+$$L_{jj} = \\sqrt{A_{jj} - \\sum_{k < j} L_{jk}^2} \\quad (\\text{diagonal})$$
 
 ### Example
 
-\`\`\`
-A = [[4, 2, 2],   L = [[2.0000, 0.0000, 0.0000],
-     [2, 5, 3],        [1.0000, 2.0000, 0.0000],
-     [2, 3, 6]]        [1.0000, 1.0000, 2.0000]]
-\`\`\`
+$$A = \\begin{pmatrix} 4 & 2 & 2 \\\\ 2 & 5 & 3 \\\\ 2 & 3 & 6 \\end{pmatrix}, \\quad L = \\begin{pmatrix} 2 & 0 & 0 \\\\ 1 & 2 & 0 \\\\ 1 & 1 & 2 \\end{pmatrix}$$
 
-Check: L × L^T = A.
+Check: $L L^T = A$.
 
 ### Your Task
 

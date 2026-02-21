@@ -21,11 +21,9 @@ scale = [2 * x for x in a]                   # [2, 4, 6]
 
 The most fundamental vector operation is a **linear combination**:
 
-\`\`\`
-c = α·a + β·b
-\`\`\`
+$$c = \alpha \cdot \mathbf{a} + \beta \cdot \mathbf{b}$$
 
-Every vector in the **span** of \`a\` and \`b\` can be expressed this way.
+Every vector in the **span** of $\mathbf{a}$ and $\mathbf{b}$ can be expressed this way.
 
 \`\`\`python
 alpha, beta = 2, 3
@@ -39,7 +37,7 @@ Multiplying a vector by a scalar scales every component. It stretches or shrinks
 
 ### Your Task
 
-Implement \`linear_combination(a, b, alpha, beta)\` that returns \`alpha * a + beta * b\` as a list.`,
+Implement \`linear_combination(a, b, alpha, beta)\` that returns $\\alpha \\cdot \\mathbf{a} + \\beta \\cdot \\mathbf{b}$ as a list.`,
 
 	starterCode: `def linear_combination(a, b, alpha, beta):
     # Return alpha * a + beta * b as a list

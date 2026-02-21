@@ -6,7 +6,7 @@ export const percentiles: Lesson = {
 	chapterId: "descriptive",
 	content: `## Percentiles
 
-The **p-th percentile** is the value below which p% of the data falls.
+The **p-th percentile** is the value below which $p$% of the data falls.
 
 \`\`\`python
 def percentile(data, p):
@@ -30,11 +30,17 @@ print(round(iqr, 2))   # 4.5
 
 ### Interquartile Range (IQR)
 
-The **IQR** is the range of the middle 50% of the data: Q3 − Q1. It is resistant to outliers, making it a robust measure of spread.
+The **IQR** is the range of the middle 50% of the data:
+
+$$\text{IQR} = Q_3 - Q_1$$
+
+It is resistant to outliers, making it a robust measure of spread.
 
 ### Outlier Detection
 
-A common rule: a value is an outlier if it is more than **1.5 × IQR** below Q1 or above Q3.
+A common rule: a value is an outlier if it falls outside the fences:
+
+$$Q_1 - 1.5 \times \text{IQR} \quad \text{or} \quad Q_3 + 1.5 \times \text{IQR}$$
 
 \`\`\`python
 lower_fence = q1 - 1.5 * iqr
@@ -47,7 +53,7 @@ upper_fence = q3 + 1.5 * iqr
 
 ### Your Task
 
-Implement \`quartiles(data)\` that prints Q1, Q3, and IQR, each rounded to 2 decimal places.`,
+Implement \`quartiles(data)\` that prints $Q_1$, $Q_3$, and IQR, each rounded to 2 decimal places.`,
 
 	starterCode: `def percentile(data, p):
     s = sorted(data)

@@ -8,23 +8,21 @@ export const faradaysLawLesson: Lesson = {
 
 A **changing magnetic flux** through a coil induces an electromotive force (EMF). Michael Faraday discovered this in 1831:
 
-\`\`\`
-EMF = N × ΔΦ / Δt
-\`\`\`
+$$\mathcal{E} = N \frac{\Delta\Phi}{\Delta t}$$
 
 - **N** — number of turns in the coil
-- **ΔΦ** — change in magnetic flux (Wb)
-- **Δt** — time over which the flux changes (s)
-- **EMF** — induced voltage (volts)
+- $\Delta\Phi$ — change in magnetic flux (Wb)
+- $\Delta t$ — time over which the flux changes (s)
+- $\mathcal{E}$ — induced voltage (volts)
 
 ### Lenz's Law
 
-The induced EMF always opposes the change that caused it (the negative sign in the full equation, EMF = −N dΦ/dt). This is why braking electromagnets resist motion, and transformers have opposing primary and secondary currents.
+The induced EMF always opposes the change that caused it (the negative sign in the full equation, $\mathcal{E} = -N \frac{d\Phi}{dt}$). This is why braking electromagnets resist motion, and transformers have opposing primary and secondary currents.
 
 ### Applications
 
 Faraday's law is the operating principle of:
-- **Generators** — rotating coil changes flux → AC electricity
+- **Generators** — rotating coil changes flux $\to$ AC electricity
 - **Transformers** — changing primary flux induces secondary EMF
 - **Induction cooktops** — changing field induces currents in the pot
 

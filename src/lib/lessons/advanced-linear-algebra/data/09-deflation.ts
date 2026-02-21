@@ -10,38 +10,31 @@ Power iteration finds only the dominant eigenvalue. **Deflation** lets you find 
 
 ### Idea
 
-After finding (λ₁, v₁), subtract its contribution from A:
+After finding $(\\lambda_1, \\mathbf{v}_1)$, subtract its contribution from $A$:
 
-\`\`\`
-A' = A − λ₁ v₁ v₁ᵀ
-\`\`\`
+$$A' = A - \\lambda_1 \\mathbf{v}_1 \\mathbf{v}_1^T$$
 
-For symmetric A, A' has the same eigenvectors as A but eigenvalue λ₁ becomes 0. Applying power iteration to A' now converges to λ₂.
+For symmetric $A$, $A'$ has the same eigenvectors as $A$ but eigenvalue $\\lambda_1$ becomes 0. Applying power iteration to $A'$ now converges to $\\lambda_2$.
 
 ### Why This Works
 
-If u is an eigenvector of A with eigenvalue λ ≠ λ₁:
+If $\\mathbf{u}$ is an eigenvector of $A$ with eigenvalue $\\lambda \\neq \\lambda_1$:
 
-\`\`\`
-A'u = Au − λ₁(v₁·u)v₁ = λu − 0 = λu
-\`\`\`
+$$A'\\mathbf{u} = A\\mathbf{u} - \\lambda_1 (\\mathbf{v}_1 \\cdot \\mathbf{u})\\mathbf{v}_1 = \\lambda\\mathbf{u} - 0 = \\lambda\\mathbf{u}$$
 
-(Since eigenvectors of a symmetric matrix are orthogonal: v₁·u = 0.)
+(Since eigenvectors of a symmetric matrix are orthogonal: $\\mathbf{v}_1 \\cdot \\mathbf{u} = 0$.)
 
 ### Example
 
-\`\`\`
-A = [[6, 2],   eigenvalues: 7, 2
-     [2, 3]]
+$$A = \\begin{pmatrix} 6 & 2 \\\\ 2 & 3 \\end{pmatrix}, \\quad \\text{eigenvalues: } 7, 2$$
 
-After deflation by λ₁=7, v₁=[0.8944, 0.4472]:
-A' = [[0.4, -0.8],   →   dominant eigenvalue = 2
-      [-0.8, 1.6]]
-\`\`\`
+After deflation by $\\lambda_1 = 7$, $\\mathbf{v}_1 = [0.8944,\\ 0.4472]$:
+
+$$A' = \\begin{pmatrix} 0.4 & -0.8 \\\\ -0.8 & 1.6 \\end{pmatrix} \\quad \\Rightarrow \\quad \\text{dominant eigenvalue} = 2$$
 
 ### Your Task
 
-Implement \`deflate(A, lam, v)\` that removes the (λ, v) component from A, then use it with power iteration to extract the second eigenvalue.`,
+Implement \`deflate(A, lam, v)\` that removes the $(\\lambda, \\mathbf{v})$ component from $A$, then use it with power iteration to extract the second eigenvalue.`,
 
 	starterCode: `import math
 

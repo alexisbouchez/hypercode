@@ -8,7 +8,7 @@ export const powerIteration: Lesson = {
 
 **Power iteration** is an iterative algorithm that finds the **largest eigenvalue** (in magnitude) of a matrix.
 
-Starting from a random vector, repeatedly multiply by \`A\` and normalize:
+Starting from a random vector, repeatedly multiply by $\mathbf{A}$ and normalize:
 
 \`\`\`python
 import math
@@ -36,16 +36,15 @@ print(power_iteration(A))   # 5.0
 
 ### Why It Works
 
-Multiplying any vector by \`A\` amplifies the component in the direction of the largest eigenvector. After enough iterations, the vector aligns with that eigenvector, and the **Rayleigh quotient** gives the eigenvalue.
+Multiplying any vector by $\mathbf{A}$ amplifies the component in the direction of the largest eigenvector. After enough iterations, the vector aligns with that eigenvector, and the **Rayleigh quotient** gives the eigenvalue.
 
 ### The Rayleigh Quotient
 
-For a vector \`v\` and matrix \`A\`:
-\`\`\`
-λ ≈ (vᵀAv) / (vᵀv)
-\`\`\`
+For a vector $\mathbf{v}$ and matrix $\mathbf{A}$:
 
-This converges to the dominant eigenvalue as \`v\` aligns with the dominant eigenvector.
+$$\lambda \approx \frac{\mathbf{v}^T \mathbf{A} \mathbf{v}}{\mathbf{v}^T \mathbf{v}}$$
+
+This converges to the dominant eigenvalue as $\mathbf{v}$ aligns with the dominant eigenvector.
 
 ### Applications
 
@@ -55,7 +54,7 @@ This converges to the dominant eigenvalue as \`v\` aligns with the dominant eige
 
 ### Your Task
 
-Implement \`power_iteration(A, num_iter=100)\` that returns the dominant eigenvalue of \`A\`, rounded to 4 decimal places.`,
+Implement \`power_iteration(A, num_iter=100)\` that returns the dominant eigenvalue of $\mathbf{A}$, rounded to 4 decimal places.`,
 
 	starterCode: `import math
 

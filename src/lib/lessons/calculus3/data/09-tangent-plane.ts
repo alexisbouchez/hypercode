@@ -6,36 +6,34 @@ export const tangentPlane: Lesson = {
 	chapterId: "optimization",
 	content: `## The Tangent Plane
 
-Just as a tangent line approximates a 1D curve near a point, a **tangent plane** approximates a 2D surface near a point (x₀, y₀):
+Just as a tangent line approximates a 1D curve near a point, a **tangent plane** approximates a 2D surface near a point $(x_0, y_0)$:
 
-\`\`\`
-L(x, y) = f(x₀, y₀) + fx(x₀,y₀)·(x - x₀) + fy(x₀,y₀)·(y - y₀)
-\`\`\`
+$$L(x, y) = f(x_0, y_0) + f_x(x_0, y_0)(x - x_0) + f_y(x_0, y_0)(y - y_0)$$
 
-This is called the **linear approximation** or **linearization** of f at (x₀, y₀).
+This is called the **linear approximation** or **linearization** of $f$ at $(x_0, y_0)$.
 
 ### Why It Works
 
-Near (x₀, y₀), f changes approximately linearly:
-- Moving Δx in the x-direction changes f by ≈ fx · Δx
-- Moving Δy in the y-direction changes f by ≈ fy · Δy
+Near $(x_0, y_0)$, $f$ changes approximately linearly:
+- Moving $\\Delta x$ in the $x$-direction changes $f$ by $\\approx f_x \\cdot \\Delta x$
+- Moving $\\Delta y$ in the $y$-direction changes $f$ by $\\approx f_y \\cdot \\Delta y$
 
 The tangent plane captures both effects simultaneously.
 
 ### Error of Approximation
 
-The error |f(x,y) - L(x,y)| is small near (x₀, y₀) — it's O(||(x,y)-(x₀,y₀)||²) for smooth functions.
+The error $|f(x,y) - L(x,y)|$ is small near $(x_0, y_0)$ — it's $O(\\|(x,y)-(x_0,y_0)\\|^2)$ for smooth functions.
 
 ### Examples
 
-For f(x,y) = x² + y² at (1, 2):
-- fx = 2, fy = 4, f(1,2) = 5
-- L(x,y) = 5 + 2(x-1) + 4(y-2)
-- L(1.1, 2.1) ≈ 5 + 0.2 + 0.4 = 5.6 (exact: 1.21+4.41=5.62)
+For $f(x,y) = x^2 + y^2$ at $(1, 2)$:
+- $f_x = 2$, $f_y = 4$, $f(1,2) = 5$
+- $L(x,y) = 5 + 2(x-1) + 4(y-2)$
+- $L(1.1,\\; 2.1) \\approx 5 + 0.2 + 0.4 = 5.6$ (exact: $1.21+4.41=5.62$)
 
 ### Your Task
 
-Implement \`double tangent_plane(double (*f)(double, double), double x0, double y0, double x, double y, double h)\` that evaluates the linear approximation L(x, y) at the given (x, y) point, using partial derivatives computed with step size h.`,
+Implement \`double tangent_plane(double (*f)(double, double), double x0, double y0, double x, double y, double h)\` that evaluates the linear approximation $L(x, y)$ at the given $(x, y)$ point, using partial derivatives computed with step size $h$.`,
 
 	starterCode: `#include <stdio.h>
 

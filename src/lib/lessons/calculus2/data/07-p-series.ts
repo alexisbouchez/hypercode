@@ -7,39 +7,37 @@ export const pSeries: Lesson = {
 	content: `## p-Series
 
 A **p-series** has the form:
-\`\`\`
-Σ_{k=1}^∞ 1/kᵖ = 1 + 1/2ᵖ + 1/3ᵖ + ...
-\`\`\`
+
+$$\sum_{k=1}^{\infty} \frac{1}{k^p} = 1 + \frac{1}{2^p} + \frac{1}{3^p} + \cdots$$
 
 ### Convergence Test
 
-The p-series converges if and only if **p > 1**.
+The p-series converges if and only if **$p > 1$**.
 
-| p | Series | Converges? | Limit |
-|---|--------|------------|-------|
-| 1 | harmonic Σ1/k | No | ∞ |
-| 2 | Basel Σ1/k² | Yes | π²/6 ≈ 1.6449 |
-| 3 | Apéry Σ1/k³ | Yes | ≈ 1.2021 |
-| 4 | Σ1/k⁴ | Yes | π⁴/90 ≈ 1.0823 |
+| $p$ | Series | Converges? | Limit |
+|-----|--------|------------|-------|
+| $1$ | harmonic $\sum 1/k$ | No | $\infty$ |
+| $2$ | Basel $\sum 1/k^2$ | Yes | $\pi^2/6 \approx 1.6449$ |
+| $3$ | Apéry $\sum 1/k^3$ | Yes | $\approx 1.2021$ |
+| $4$ | $\sum 1/k^4$ | Yes | $\pi^4/90 \approx 1.0823$ |
 
 ### Why p=1 Diverges
 
 Group the harmonic series:
-\`\`\`
-1 + (1/2) + (1/3+1/4) + (1/5+...+1/8) + ...
-     ≥ 1/2    ≥ 1/2        ≥ 1/2
-\`\`\`
-Each group sums to at least 1/2, so the total diverges.
+
+$$1 + \frac{1}{2} + \left(\frac{1}{3}+\frac{1}{4}\right) + \left(\frac{1}{5}+\cdots+\frac{1}{8}\right) + \cdots$$
+
+Each group sums to at least $\frac{1}{2}$, so the total diverges.
 
 ### Why p=2 Converges
 
-The Basel problem — Euler showed the sum equals \`π²/6\` using the factorization of \`sin(x)/x\`. Numerically, the partial sums converge slowly: \`S_{1000} ≈ 1.6439\`, approaching \`1.6449\`.
+The Basel problem — Euler showed the sum equals $\frac{\pi^2}{6}$ using the factorization of $\frac{\sin(x)}{x}$. Numerically, the partial sums converge slowly: $S_{1000} \approx 1.6439$, approaching $1.6449$.
 
 ### Your Task
 
-Implement \`double p_series(int p, int n)\` that computes \`Σ_{k=1}^n 1/kᵖ\`.
+Implement \`double p_series(int p, int n)\` that computes $\sum_{k=1}^n \frac{1}{k^p}$.
 
-Use a loop to compute \`kᵖ\` without \`math.h\`.`,
+Use a loop to compute $k^p$ without \`math.h\`.`,
 
 	starterCode: `#include <stdio.h>
 

@@ -6,39 +6,35 @@ export const partialSums: Lesson = {
 	chapterId: "sequences-and-series",
 	content: `## Partial Sums of Series
 
-An infinite series \`Σ a_n\` is defined as the limit of **partial sums**:
+An infinite series $\sum a_n$ is defined as the limit of **partial sums**:
 
-\`\`\`
-S_n = a_1 + a_2 + ... + a_n = Σ_{k=1}^n a_k
-\`\`\`
+$$S_n = a_1 + a_2 + \cdots + a_n = \sum_{k=1}^n a_k$$
 
-If \`lim_{n→∞} S_n = L\`, the series **converges** to \`L\`.
+If $\lim_{n \to \infty} S_n = L$, the series **converges** to $L$.
 
 ### Famous Series
 
 **Harmonic series** (diverges):
-\`\`\`
-Σ 1/k = 1 + 1/2 + 1/3 + 1/4 + ... → ∞
-\`\`\`
 
-**Basel problem** (converges to π²/6 ≈ 1.6449):
-\`\`\`
-Σ 1/k² = 1 + 1/4 + 1/9 + 1/16 + ...
-\`\`\`
+$$\sum \frac{1}{k} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \cdots \to \infty$$
+
+**Basel problem** (converges to $\pi^2/6 \approx 1.6449$):
+
+$$\sum \frac{1}{k^2} = 1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots$$
 
 **Telescoping** (exact finite sum):
-\`\`\`
-Σ_{k=1}^n 1/(k(k+1)) = 1 - 1/(n+1)
-\`\`\`
-Because \`1/(k(k+1)) = 1/k - 1/(k+1)\`, most terms cancel.
+
+$$\sum_{k=1}^n \frac{1}{k(k+1)} = 1 - \frac{1}{n+1}$$
+
+Because $\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}$, most terms cancel.
 
 ### Convergence Test: Divergence
 
-If \`lim_{n→∞} a_n ≠ 0\`, the series **must** diverge. (But \`a_n → 0\` alone doesn't guarantee convergence — the harmonic series is the classic counterexample.)
+If $\lim_{n \to \infty} a_n \neq 0$, the series **must** diverge. (But $a_n \to 0$ alone doesn't guarantee convergence — the harmonic series is the classic counterexample.)
 
 ### Your Task
 
-Implement \`double partial_sum(double (*a_n)(int), int n)\` that computes \`Σ_{k=1}^n a_n(k)\`.`,
+Implement \`double partial_sum(double (*a_n)(int), int n)\` that computes $\sum_{k=1}^n a_n(k)$.`,
 
 	starterCode: `#include <stdio.h>
 

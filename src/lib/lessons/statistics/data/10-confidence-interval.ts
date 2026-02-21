@@ -8,6 +8,8 @@ export const confidenceInterval: Lesson = {
 
 A **confidence interval (CI)** gives a range of plausible values for the population mean, based on a sample.
 
+$$\bar{x} \pm t^* \cdot \frac{s}{\sqrt{n}}$$
+
 \`\`\`python
 import math, statistics
 
@@ -16,8 +18,8 @@ n = len(data)
 mean = statistics.fmean(data)
 sem = statistics.stdev(data) / math.sqrt(n)
 
-# 95% CI: mean ± t_critical * sem
-# t_critical for df=4, 95% ≈ 2.7764
+# 95% CI: mean +/- t_critical * sem
+# t_critical for df=4, 95% ~= 2.7764
 t_crit = 2.7764
 print(round(mean - t_crit * sem, 2))   # 1.04
 print(round(mean + t_crit * sem, 2))   # 4.96
@@ -25,20 +27,20 @@ print(round(mean + t_crit * sem, 2))   # 4.96
 
 ### Interpretation
 
-A 95% CI means: if you repeated this sampling process 100 times, approximately **95 of the resulting CIs** would contain the true population mean.
+A 95% CI means: if you repeated this sampling process 100 times, approximately **95 of the resulting CIs** would contain the true population mean $\mu$.
 
 **Common misconception**: It does NOT mean "there's a 95% chance the true mean is in this interval." The true mean is fixed; the interval is random.
 
 ### Width of the CI
 
 The CI gets narrower (more precise) when:
-- Sample size **n** increases
-- Data variability **σ** decreases
+- Sample size $n$ increases
+- Data variability $\sigma$ decreases
 - Confidence level decreases (e.g., 90% CI is narrower than 95%)
 
 ### t vs z
 
-We use the **t-distribution** (not normal) because we estimate σ from the sample. As n → ∞, the t-distribution approaches the normal distribution.
+We use the **t-distribution** (not normal) because we estimate $\sigma$ from the sample. As $n \to \infty$, the t-distribution approaches the normal distribution.
 
 ### Your Task
 

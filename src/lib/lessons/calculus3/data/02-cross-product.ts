@@ -6,39 +6,31 @@ export const crossProduct3: Lesson = {
 	chapterId: "vectors-in-3d",
 	content: `## The Cross Product
 
-The **cross product** of **a** = (ax, ay, az) and **b** = (bx, by, bz) produces a **new vector** perpendicular to both:
+The **cross product** of $\\mathbf{a} = (a_x, a_y, a_z)$ and $\\mathbf{b} = (b_x, b_y, b_z)$ produces a **new vector** perpendicular to both:
 
-\`\`\`
-a × b = (ay·bz - az·by,
-         az·bx - ax·bz,
-         ax·by - ay·bx)
-\`\`\`
+$$\\mathbf{a} \\times \\mathbf{b} = (a_y b_z - a_z b_y,\\; a_z b_x - a_x b_z,\\; a_x b_y - a_y b_x)$$
 
 ### Key Properties
 
-- **Direction**: perpendicular to both **a** and **b** (right-hand rule)
-- **Magnitude**: |**a × b**| = |**a**| · |**b**| · sin(θ)
-- **Anti-commutative**: **a × b** = −(**b × a**)
-- If **a** and **b** are parallel: **a × b** = **0**
+- **Direction**: perpendicular to both $\\mathbf{a}$ and $\\mathbf{b}$ (right-hand rule)
+- **Magnitude**: $|\\mathbf{a} \\times \\mathbf{b}| = |\\mathbf{a}| \\cdot |\\mathbf{b}| \\cdot \\sin(\\theta)$
+- **Anti-commutative**: $\\mathbf{a} \\times \\mathbf{b} = -(\\mathbf{b} \\times \\mathbf{a})$
+- If $\\mathbf{a}$ and $\\mathbf{b}$ are parallel: $\\mathbf{a} \\times \\mathbf{b} = \\mathbf{0}$
 
 ### Geometric Meaning
 
-The magnitude |**a × b**| equals the **area of the parallelogram** spanned by **a** and **b**.
+The magnitude $|\\mathbf{a} \\times \\mathbf{b}|$ equals the **area of the parallelogram** spanned by $\\mathbf{a}$ and $\\mathbf{b}$.
 
 ### Memory Aid: The Determinant Formula
 
-\`\`\`
-     | i   j   k  |
-a×b = | ax  ay  az |
-     | bx  by  bz |
-\`\`\`
+$$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ a_x & a_y & a_z \\\\ b_x & b_y & b_z \\end{vmatrix}$$
 
 Expanding along the first row gives the formula above.
 
 ### Applications
 
 - **Normal vectors** to planes and surfaces
-- **Torque**: τ = **r × F**
+- **Torque**: $\\boldsymbol{\\tau} = \\mathbf{r} \\times \\mathbf{F}$
 - **Area** of triangles and parallelograms in 3D
 
 ### Your Task

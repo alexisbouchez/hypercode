@@ -8,21 +8,17 @@ export const freeFallLesson: Lesson = {
 
 Near Earth's surface, gravity accelerates every object downward at:
 
-\`\`\`
-g = 9.81 m/s²
-\`\`\`
+$$g = 9.81 \\ \\text{m/s}^2$$
 
-For an object with initial downward velocity v₀, the distance fallen after time t is:
+For an object with initial downward velocity $v_0$, the distance fallen after time $t$ is:
 
-\`\`\`
-h(t) = v₀t + ½gt²
-\`\`\`
+$$h(t) = v_0 t + \\frac{1}{2}g t^2$$
 
-The first term is the constant-velocity contribution. The second term is the quadratic acceleration term — it grows as t².
+The first term is the constant-velocity contribution. The second term is the quadratic acceleration term — it grows as $t^2$.
 
 ### Examples
 
-| v₀ (m/s) | t (s) | h (m) |
+| $v_0$ (m/s) | $t$ (s) | $h$ (m) |
 |----------|-------|-------|
 | 0 | 1 | 4.905 |
 | 0 | 2 | 19.62 |
@@ -31,7 +27,7 @@ The first term is the constant-velocity contribution. The second term is the qua
 
 ### Galileo's Insight
 
-Galileo showed that the distance fallen from rest is proportional to t². Doubling the fall time quadruples the distance fallen. Mass does not appear — all objects fall at the same rate (ignoring air resistance).
+Galileo showed that the distance fallen from rest is proportional to $t^2$. Doubling the fall time quadruples the distance fallen. Mass does not appear — all objects fall at the same rate (ignoring air resistance).
 
 ### Your Task
 

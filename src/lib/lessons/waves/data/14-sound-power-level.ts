@@ -8,28 +8,26 @@ export const soundPowerLevelLesson: Lesson = {
 
 **Sound power** W (watts) measures total acoustic energy per second radiated by a source. Like sound pressure level, it is expressed on a logarithmic scale:
 
-\`\`\`
-L_W = 10 × log₁₀(W / W₀)
-\`\`\`
+$$L_W = 10 \log_{10}\!\left(\frac{W}{W_0}\right)$$
 
 - **W** — sound power (W)
-- **W₀** = 10⁻¹² W — reference sound power
-- **L_W** — sound power level (dB re 1 pW)
+- $W_0 = 10^{-12}$ W — reference sound power
+- $L_W$ — sound power level (dB re 1 pW)
 
 ### Power Level vs Pressure Level
 
 Sound power level is a **source property** — it doesn't depend on distance or room acoustics. Sound pressure level (SPL) depends on where you stand. A louder room or closer listener gives higher SPL from the same source.
 
-| W (watts) | L_W (dB) | Example |
+| W (watts) | $L_W$ (dB) | Example |
 |-----------|---------|---------|
-| 10⁻¹² | **0** | threshold of hearing |
-| 10⁻⁶ | **60** | whisper |
+| $10^{-12}$ | **0** | threshold of hearing |
+| $10^{-6}$ | **60** | whisper |
 | 1 | **120** | rock singer |
 | 100 | **140** | jet engine |
 
 ### Your Task
 
-Implement \`soundPowerLevel(W)\` returning L_W in dB.`,
+Implement \`soundPowerLevel(W)\` returning $L_W$ in dB.`,
 
 	starterCode: `function soundPowerLevel(W) {
   // Lw = 10 * log10(W / 1e-12)

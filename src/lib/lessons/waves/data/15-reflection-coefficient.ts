@@ -6,24 +6,22 @@ export const reflectionCoefficientLesson: Lesson = {
 	chapterId: "room-acoustics",
 	content: `## Acoustic Impedance & Reflection
 
-When a sound wave hits a boundary between two media, part is reflected and part is transmitted. The fraction of intensity reflected depends on the **acoustic impedances** Z₁ and Z₂:
+When a sound wave hits a boundary between two media, part is reflected and part is transmitted. The fraction of intensity reflected depends on the **acoustic impedances** $Z_1$ and $Z_2$:
 
-\`\`\`
-R = ((Z₂ − Z₁) / (Z₂ + Z₁))²
-\`\`\`
+$$R = \left(\frac{Z_2 - Z_1}{Z_2 + Z_1}\right)^2$$
 
-- **Z = ρv** — acoustic impedance (Pa·s/m), where ρ is density and v is sound speed
+- $Z = \rho v$ — acoustic impedance (Pa·s/m), where $\rho$ is density and $v$ is sound speed
 - **R** — reflection coefficient (0 to 1)
 
 ### Matched Impedance
 
-When Z₁ = Z₂ (same medium on both sides), R = 0 — no reflection, perfect transmission. This is why ultrasound gel is used: it matches skin and water impedances to minimise reflection.
+When $Z_1 = Z_2$ (same medium on both sides), $R = 0$ — no reflection, perfect transmission. This is why ultrasound gel is used: it matches skin and water impedances to minimise reflection.
 
 ### Large Mismatch
 
-Air (Z ≈ 413 Pa·s/m) vs water (Z ≈ 1.48 × 10⁶ Pa·s/m) have such different impedances that nearly all sound reflects — explaining why you can't hear underwater from above.
+Air ($Z \approx 413$ Pa·s/m) vs water ($Z \approx 1.48 \times 10^6$ Pa·s/m) have such different impedances that nearly all sound reflects — explaining why you can't hear underwater from above.
 
-| Z₁ | Z₂ | R |
+| $Z_1$ | $Z_2$ | R |
 |----|----|----|
 | 1 | 1 | **0.0000** (no reflection) |
 | 1 | 3 | **0.2500** |

@@ -8,26 +8,24 @@ export const frictionLesson: Lesson = {
 
 **Friction** is the contact force that opposes relative motion between surfaces. It is modelled as proportional to the normal force:
 
-\`\`\`
-f = μ × N
-\`\`\`
+$$f = \\mu N$$
 
-- **μ** (mu) — coefficient of friction (dimensionless, depends on surface pair)
-- **N** — normal force in Newtons (perpendicular to surface)
-- **f** — friction force in Newtons
+- $\\mu$ (mu) — coefficient of friction (dimensionless, depends on surface pair)
+- $N$ — normal force in Newtons (perpendicular to surface)
+- $f$ — friction force in Newtons
 
 ### Static vs Kinetic
 
-| Type | Condition | Typical μ |
+| Type | Condition | Typical $\\mu$ |
 |------|-----------|-----------|
-| Static (μₛ) | Object at rest | Higher |
-| Kinetic (μₖ) | Object sliding | Lower |
+| Static ($\\mu_s$) | Object at rest | Higher |
+| Kinetic ($\\mu_k$) | Object sliding | Lower |
 
-For a block on a horizontal surface: N = mg, so f = μmg.
+For a block on a horizontal surface: $N = mg$, so $f = \\mu mg$.
 
 ### Typical Coefficients
 
-| Surface pair | μₖ |
+| Surface pair | $\\mu_k$ |
 |---|---|
 | Rubber on dry concrete | 0.8 |
 | Steel on steel | 0.57 |

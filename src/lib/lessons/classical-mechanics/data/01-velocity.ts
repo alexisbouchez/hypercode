@@ -6,19 +6,17 @@ export const velocityLesson: Lesson = {
 	chapterId: "kinematics",
 	content: `## Velocity and Displacement
 
-**Displacement** is the change in position: Δx = x₁ − x₀.
+**Displacement** is the change in position: $\\Delta x = x_1 - x_0$.
 
 **Average velocity** is displacement divided by elapsed time:
 
-\`\`\`
-v = Δx / Δt = (x₁ − x₀) / dt
-\`\`\`
+$$v = \\frac{\\Delta x}{\\Delta t} = \\frac{x_1 - x_0}{\\Delta t}$$
 
 Units: metres per second (m/s). Velocity can be negative — it just means motion in the negative direction.
 
 ### Examples
 
-| x₀ (m) | x₁ (m) | Δt (s) | v (m/s) |
+| $x_0$ (m) | $x_1$ (m) | $\\Delta t$ (s) | $v$ (m/s) |
 |--------|--------|--------|---------|
 | 0 | 10 | 2 | **5.0** |
 | 100 | 50 | 5 | **−10.0** |
@@ -26,7 +24,7 @@ Units: metres per second (m/s). Velocity can be negative — it just means motio
 
 ### Instantaneous vs Average
 
-Average velocity is measured over a finite interval. As Δt → 0, it becomes the **instantaneous velocity** — the derivative dx/dt. For constant velocity the two are identical.
+Average velocity is measured over a finite interval. As $\\Delta t \\to 0$, it becomes the **instantaneous velocity** — the derivative $dx/dt$. For constant velocity the two are identical.
 
 ### Your Task
 

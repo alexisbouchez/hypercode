@@ -8,31 +8,28 @@ export const rcTimeConstantLesson: Lesson = {
 
 A resistor and capacitor in series form an **RC circuit**. When charged or discharged, the voltage decays exponentially with time constant:
 
-\`\`\`
-τ = R × C
-\`\`\`
+$$\tau = RC$$
 
-- **τ** (tau) — time constant (seconds)
+- $\tau$ (tau) — time constant (seconds)
 - **R** — resistance (Ω)
 - **C** — capacitance (farads, F)
 
 ### What τ Means
 
-After one time constant τ, the voltage has decayed to **1/e ≈ 36.8%** of its initial value. After 5τ it is essentially zero (0.7%).
+After one time constant $\tau$, the voltage has decayed to **1/e ≈ 36.8%** of its initial value. After $5\tau$ it is essentially zero (0.7%).
 
 | Time | Voltage remaining |
 |------|------------------|
 | 0 | 100% |
-| τ | 36.8% |
-| 2τ | 13.5% |
-| 5τ | 0.7% (fully discharged) |
+| $\tau$ | 36.8% |
+| $2\tau$ | 13.5% |
+| $5\tau$ | 0.7% (fully discharged) |
 
 ### Charging and Discharging
 
-\`\`\`
-Discharging: V(t) = V₀ × e^(−t/τ)
-Charging:    V(t) = V₀ × (1 − e^(−t/τ))
-\`\`\`
+$$\text{Discharging: } V(t) = V_0 e^{-t/\tau}$$
+
+$$\text{Charging: } V(t) = V_0 \left(1 - e^{-t/\tau}\right)$$
 
 ### Applications
 
@@ -49,7 +46,7 @@ RC time constants set the frequency response of filters and timing circuits — 
 
 ### Your Task
 
-Implement \`rc_time_constant(R, C)\` returning τ in seconds.`,
+Implement \`rc_time_constant(R, C)\` returning $\tau$ in seconds.`,
 
 	starterCode: `def rc_time_constant(R, C):
     # tau = R * C

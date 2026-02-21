@@ -6,23 +6,19 @@ export const soundWavelengthLesson: Lesson = {
 	chapterId: "wave-fundamentals",
 	content: `## Wavelength of Sound
 
-Rearranging the wave equation (v = f \u00d7 \u03bb) for wavelength:
+Rearranging the wave equation ($v = f\lambda$) for wavelength:
 
-\`\`\`
-\u03bb = v / f
-\`\`\`
+$$\lambda = \frac{v}{f}$$
 
-In air at 20 \u00b0C, v = 343 m/s. So for any audible frequency:
+In air at 20 °C, $v = 343$ m/s. So for any audible frequency:
 
-\`\`\`
-\u03bb = 343 / f
-\`\`\`
+$$\lambda = \frac{343}{f}$$
 
 ### Why It Matters
 
-Wavelength governs diffraction: sound bends around obstacles whose size is comparable to \u03bb. Bass frequencies (long \u03bb) bend around walls; treble frequencies (short \u03bb) are more directional.
+Wavelength governs diffraction: sound bends around obstacles whose size is comparable to $\lambda$. Bass frequencies (long $\lambda$) bend around walls; treble frequencies (short $\lambda$) are more directional.
 
-| f (Hz) | \u03bb (m) | Example |
+| f (Hz) | $\lambda$ (m) | Example |
 |--------|-------|---------|
 | 100 | **3.4300** | ~door width |
 | 343 | **1.0000** | ~1 m |
@@ -31,7 +27,7 @@ Wavelength governs diffraction: sound bends around obstacles whose size is compa
 
 ### Your Task
 
-Implement \`soundWavelength(f)\` returning the wavelength in metres (v = 343 m/s).`,
+Implement \`soundWavelength(f)\` returning the wavelength in metres ($v = 343$ m/s).`,
 
 	starterCode: `function soundWavelength(f) {
   // lambda = 343 / f

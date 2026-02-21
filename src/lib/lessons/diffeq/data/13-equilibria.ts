@@ -6,11 +6,9 @@ export const equilibria: Lesson = {
 	chapterId: "applications",
 	content: `## Finding Equilibria
 
-An **equilibrium** (or fixed point) of \`dy/dt = f(y)\` is a value \`y*\` where the derivative is zero:
+An **equilibrium** (or fixed point) of $\\frac{dy}{dt} = f(y)$ is a value $y^*$ where the derivative is zero:
 
-\`\`\`
-f(y*) = 0
-\`\`\`
+$$f(y^*) = 0$$
 
 At an equilibrium, the system does not change. Equilibria are the long-term destinations (or starting points) of solutions.
 
@@ -18,13 +16,13 @@ At an equilibrium, the system does not change. Equilibria are the long-term dest
 
 | System | Equilibria |
 |--------|-----------|
-| \`dy/dt = -y\` | \`y* = 0\` |
-| \`dy/dt = y(1 - y)\` | \`y* = 0\` and \`y* = 1\` |
-| \`dy/dt = sin(y)\` | \`y* = nπ\` for all integers n |
+| $\\frac{dy}{dt} = -y$ | $y^* = 0$ |
+| $\\frac{dy}{dt} = y(1 - y)$ | $y^* = 0$ and $y^* = 1$ |
+| $\\frac{dy}{dt} = \\sin(y)$ | $y^* = n\\pi$ for all integers $n$ |
 
 ### Numerical Root Finding: Bisection
 
-To find equilibria numerically, we look for **sign changes** in \`f\` over an interval. Between any two points where \`f\` changes sign, there must be a zero (Intermediate Value Theorem).
+To find equilibria numerically, we look for **sign changes** in $f$ over an interval. Between any two points where $f$ changes sign, there must be a zero (Intermediate Value Theorem).
 
 For each sign change, we narrow down the root using **bisection**:
 
@@ -38,11 +36,11 @@ for _ in range(50):
         lo = mid
 \`\`\`
 
-50 bisection steps gives precision ≈ interval / 2⁵⁰ ≈ 10⁻¹⁵.
+50 bisection steps gives precision $\\approx \\text{interval} / 2^{50} \\approx 10^{-15}$.
 
 ### Your Task
 
-Implement \`find_equilibria(f, a, b)\` that finds all zeros of \`f\` in \`[a, b]\` using sign changes and bisection. Return a list of equilibrium values rounded to 6 decimal places.`,
+Implement \`find_equilibria(f, a, b)\` that finds all zeros of $f$ in $[a, b]$ using sign changes and bisection. Return a list of equilibrium values rounded to 6 decimal places.`,
 
 	starterCode: `def find_equilibria(f, a, b, n=1000):
     dx = (b - a) / n

@@ -6,7 +6,7 @@ export const leastSquares: Lesson = {
 	chapterId: "systems",
 	content: `## Least Squares: Fitting a Line
 
-When you have data points and want to fit a line \`y = mx + c\`, the **least squares** method finds the slope and intercept that minimize the sum of squared residuals.
+When you have data points and want to fit a line $y = mx + c$, the **least squares** method finds the slope and intercept that minimize the sum of squared residuals.
 
 ### Normal Equations
 
@@ -36,7 +36,9 @@ Even with noisy data, least squares finds the best-fit line — the one that min
 
 ### The Normal Equations (Matrix Form)
 
-For overdetermined systems with matrix \`A\` and vector \`b\`, least squares minimizes \`‖Ax - b‖²\`. The solution satisfies: \`AᵀAx = Aᵀb\`.
+For overdetermined systems with matrix $\mathbf{A}$ and vector $\mathbf{b}$, least squares minimizes $\lVert \mathbf{A}\mathbf{x} - \mathbf{b} \rVert^2$. The solution satisfies:
+
+$$\mathbf{A}^T \mathbf{A} \mathbf{x} = \mathbf{A}^T \mathbf{b}$$
 
 ### Your Task
 

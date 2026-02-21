@@ -6,46 +6,41 @@ export const taylorError: Lesson = {
 	chapterId: "taylor-series",
 	content: `## Taylor Series Error
 
-The error of a degree-\`n\` Taylor approximation is:
+The error of a degree-$n$ Taylor approximation is:
 
-\`\`\`
-E_n(x) = |f(x) - P_n(x)|
-\`\`\`
+$$E_n(x) = |f(x) - P_n(x)|$$
 
 ### Taylor's Remainder Theorem
 
-There exists some \`c\` between \`a\` and \`x\` such that:
+There exists some $c$ between $a$ and $x$ such that:
 
-\`\`\`
-E_n(x) = |f^{(n+1)}(c)| / (n+1)! · |x-a|^{n+1}
-\`\`\`
+$$E_n(x) = \frac{|f^{(n+1)}(c)|}{(n+1)!} \cdot |x-a|^{n+1}$$
 
-This bounds the error by the **next term** of the series (at the worst \`c\`).
+This bounds the error by the **next term** of the series (at the worst $c$).
 
 ### Intuition
 
-- The degree-\`n\` polynomial matches \`f\` through all derivatives up to order \`n\` at \`a\`
-- The first "mismatch" comes from the \`(n+1)\`-th derivative
-- The further \`x\` is from \`a\`, the larger the error (raised to the \`n+1\` power)
+- The degree-$n$ polynomial matches $f$ through all derivatives up to order $n$ at $a$
+- The first "mismatch" comes from the $(n+1)$-th derivative
+- The further $x$ is from $a$, the larger the error (raised to the $n+1$ power)
 
-### Example: x³ with P_2
+### Example: $x^3$ with $P_2$
 
-For \`f(x) = x³\`, the Taylor polynomial at \`a=0\` with \`n=2\`:
-\`\`\`
-P_2(x) = f(0) + f'(0)x + f''(0)/2!·x²
-       = 0 + 0 + 0 = 0
-\`\`\`
-At \`x=2\`: error = |8 - 0| = **8**.
+For $f(x) = x^3$, the Taylor polynomial at $a=0$ with $n=2$:
 
-The bound from the theorem: \`|f'''(c)|/3! · |2|³ = 6/6 · 8 = 8\`. Tight!
+$$P_2(x) = f(0) + f'(0)x + \frac{f''(0)}{2!} x^2 = 0 + 0 + 0 = 0$$
+
+At $x=2$: error $= |8 - 0| =$ **8**.
+
+The bound from the theorem: $\frac{|f'''(c)|}{3!} \cdot |2|^3 = \frac{6}{6} \cdot 8 = 8$. Tight!
 
 ### Convergence Check
 
-For polynomial \`f(x) = x^k\`, a Taylor polynomial of degree \`k\` at \`a=0\` has **zero error** (it's exact).
+For polynomial $f(x) = x^k$, a Taylor polynomial of degree $k$ at $a=0$ has **zero error** (it's exact).
 
 ### Your Task
 
-Implement \`double taylor_error(double (*f)(double), double a, double x, int n, double h)\` that returns \`|f(x) - P_n(x)|\`.
+Implement \`double taylor_error(double (*f)(double), double a, double x, int n, double h)\` that returns $|f(x) - P_n(x)|$.
 
 Helper functions from the Taylor polynomial lesson are provided.`,
 

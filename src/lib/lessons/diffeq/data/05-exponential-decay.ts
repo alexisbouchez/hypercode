@@ -8,15 +8,11 @@ export const exponentialDecay: Lesson = {
 
 The simplest real-world ODE:
 
-\`\`\`
-dy/dt = -k * y,   y(0) = y0
-\`\`\`
+$$\\frac{dy}{dt} = -k \\cdot y, \\quad y(0) = y_0$$
 
 The rate of change is proportional to the current value. The exact solution is:
 
-\`\`\`
-y(t) = y0 * e^(-k*t)
-\`\`\`
+$$y(t) = y_0 \\cdot e^{-kt}$$
 
 ### Applications
 
@@ -27,16 +23,13 @@ y(t) = y0 * e^(-k*t)
 
 ### Half-Life
 
-The **half-life** is the time for \`y\` to reach half its initial value:
+The **half-life** is the time for $y$ to reach half its initial value:
 
-\`\`\`
-y0/2 = y0 * e^(-k * t_half)
-t_half = ln(2) / k ≈ 0.693 / k
-\`\`\`
+$$\\frac{y_0}{2} = y_0 \\cdot e^{-k \\cdot t_{\\text{half}}} \\implies t_{\\text{half}} = \\frac{\\ln 2}{k} \\approx \\frac{0.693}{k}$$
 
 ### Numerical Solution
 
-Using Euler's method with \`n\` steps:
+Using Euler's method with $n$ steps:
 
 \`\`\`python
 def exponential_decay(k, y0, t_end, n):
@@ -49,7 +42,7 @@ def exponential_decay(k, y0, t_end, n):
 
 ### Your Task
 
-Implement \`exponential_decay(k, y0, t_end, n)\` that numerically solves \`dy/dt = -k*y\` and returns the final value \`y(t_end)\`.`,
+Implement \`exponential_decay(k, y0, t_end, n)\` that numerically solves $\\frac{dy}{dt} = -k \\cdot y$ and returns the final value $y(t_{\\text{end}})$.`,
 
 	starterCode: `def exponential_decay(k, y0, t_end, n):
     h = t_end / n

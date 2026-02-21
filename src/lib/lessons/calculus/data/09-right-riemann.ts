@@ -8,9 +8,7 @@ export const rightRiemann: Lesson = {
 
 Use the **right endpoint** of each subinterval:
 
-\`\`\`
-Σᵢ₌₁ⁿ f(a + i·h) · h     where h = (b-a)/n
-\`\`\`
+$$\\sum_{i=1}^{n} f(a + i \\cdot h) \\cdot h \\quad \\text{where } h = \\frac{b-a}{n}$$
 
 \`\`\`
 a    a+h  a+2h       b
@@ -21,7 +19,7 @@ a    a+h  a+2h       b
 
 ### Left vs. Right vs. Exact
 
-For \`∫₀¹ x² dx = 1/3\`:
+For $\\int_0^1 x^2\\, dx = \\frac{1}{3}$:
 
 | Method | n=10 | n=100 | n=1000 |
 |--------|------|-------|--------|
@@ -29,21 +27,19 @@ For \`∫₀¹ x² dx = 1/3\`:
 | Right  | 0.385 | 0.338 | 0.334  |
 | Exact  | 0.333 | 0.333 | 0.333  |
 
-The left sum underestimates (for increasing f) and the right sum overestimates. The true integral is sandwiched between them:
+The left sum underestimates (for increasing $f$) and the right sum overestimates. The true integral is sandwiched between them:
 
-\`\`\`
-riemann_left(f, a, b, n) ≤ ∫_a^b f(x)dx ≤ riemann_right(f, a, b, n)
-\`\`\`
+$$\\text{riemann\\_left}(f, a, b, n) \\leq \\int_a^b f(x)\\, dx \\leq \\text{riemann\\_right}(f, a, b, n)$$
 
-(assuming f is increasing; swap inequality if decreasing)
+(assuming $f$ is increasing; swap inequality if decreasing)
 
 ### Average of Left and Right
 
-The average of the left and right Riemann sums is the **trapezoidal rule** (next lesson), which has \`O(h²)\` error.
+The average of the left and right Riemann sums is the **trapezoidal rule** (next lesson), which has $O(h^2)$ error.
 
 ### Your Task
 
-Implement \`double riemann_right(double (*f)(double), double a, double b, int n)\`. The loop runs from \`i=1\` to \`i=n\` (inclusive).`,
+Implement \`double riemann_right(double (*f)(double), double a, double b, int n)\`. The loop runs from $i=1$ to $i=n$ (inclusive).`,
 
 	starterCode: `#include <stdio.h>
 

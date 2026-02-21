@@ -6,21 +6,17 @@ export const eigenvalues: Lesson = {
 	chapterId: "systems",
 	content: `## Eigenvalues and Eigenvectors
 
-An **eigenvector** \`v\` of a matrix \`A\` is a vector that only gets **scaled** (not rotated) when multiplied by \`A\`:
+An **eigenvector** $\mathbf{v}$ of a matrix $\mathbf{A}$ is a vector that only gets **scaled** (not rotated) when multiplied by $\mathbf{A}$:
 
-\`\`\`
-A · v = λ · v
-\`\`\`
+$$\mathbf{A} \cdot \mathbf{v} = \lambda \cdot \mathbf{v}$$
 
-The scalar \`λ\` (lambda) is the **eigenvalue** — it tells you *how much* the eigenvector is stretched.
+The scalar $\lambda$ (lambda) is the **eigenvalue** — it tells you *how much* the eigenvector is stretched.
 
 ### The Characteristic Equation
 
-Eigenvalues satisfy \`det(A - λI) = 0\`. For a 2×2 matrix:
+Eigenvalues satisfy $\det(\mathbf{A} - \lambda I) = 0$. For a $2 \times 2$ matrix this yields:
 
-\`\`\`
-λ² - trace(A)·λ + det(A) = 0
-\`\`\`
+$$\lambda^2 - \text{trace}(\mathbf{A}) \cdot \lambda + \det(\mathbf{A}) = 0$$
 
 Using the quadratic formula:
 
@@ -51,7 +47,7 @@ For diagonal matrices, the eigenvalues are just the diagonal entries.
 
 ### Your Task
 
-Implement \`sorted_eigenvalues(A)\` that returns the eigenvalues of a 2×2 matrix \`A\` sorted in ascending order, as a list of integers.`,
+Implement \`sorted_eigenvalues(A)\` that returns the eigenvalues of a $2 \times 2$ matrix $\mathbf{A}$ sorted in ascending order, as a list of integers.`,
 
 	starterCode: `import math
 

@@ -8,9 +8,7 @@ export const dotProduct: Lesson = {
 
 The **dot product** of two vectors multiplies corresponding elements and sums the results:
 
-\`\`\`
-a · b = a₀·b₀ + a₁·b₁ + a₂·b₂ + ...
-\`\`\`
+$$\mathbf{a} \cdot \mathbf{b} = a_0 b_0 + a_1 b_1 + a_2 b_2 + \cdots = \sum_{i=0}^{n-1} a_i b_i$$
 
 \`\`\`python
 a = [1, 2, 3]
@@ -23,15 +21,13 @@ print(result)
 
 ### Geometric Meaning
 
-\`\`\`
-a · b = ‖a‖ · ‖b‖ · cos(θ)
-\`\`\`
+$$\mathbf{a} \cdot \mathbf{b} = \lVert \mathbf{a} \rVert \cdot \lVert \mathbf{b} \rVert \cdot \cos(\theta)$$
 
-Where \`θ\` is the angle between the vectors.
+Where $\theta$ is the angle between the vectors.
 
-- If \`a · b = 0\` → vectors are **orthogonal** (perpendicular, 90°)
-- If \`a · b > 0\` → vectors point in similar directions (θ < 90°)
-- If \`a · b < 0\` → vectors point in opposite directions (θ > 90°)
+- If $\mathbf{a} \cdot \mathbf{b} = 0$ → vectors are **orthogonal** (perpendicular, 90°)
+- If $\mathbf{a} \cdot \mathbf{b} > 0$ → vectors point in similar directions ($\theta < 90°$)
+- If $\mathbf{a} \cdot \mathbf{b} < 0$ → vectors point in opposite directions ($\theta > 90°$)
 
 \`\`\`python
 # Orthogonal vectors — dot product is 0

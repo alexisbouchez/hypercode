@@ -8,12 +8,10 @@ export const openPipeLesson: Lesson = {
 
 A pipe open at both ends (flute, organ open pipe) has **pressure antinodes** at each end. The resonant frequencies follow the same formula as a string:
 
-\`\`\`
-fₙ = n × v / (2L)        n = 1, 2, 3, …
-\`\`\`
+$$f_n = \frac{nv}{2L}, \quad n = 1, 2, 3, \ldots$$
 
 - **n** — harmonic number
-- **v** = 343 m/s (speed of sound in air)
+- $v = 343$ m/s (speed of sound in air)
 - **L** — pipe length (m)
 
 ### All Harmonics Present
@@ -32,7 +30,7 @@ Halving the pipe length doubles the frequency — one octave up. This is why flu
 
 ### Your Task
 
-Implement \`openPipeMode(n, L)\` returning the nth resonant frequency (v = 343 m/s).
+Implement \`openPipeMode(n, L)\` returning the nth resonant frequency ($v = 343$ m/s).
 
 Run the code to hear the fundamental and second harmonic of a 1-metre open pipe.`,
 

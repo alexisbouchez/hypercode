@@ -8,9 +8,7 @@ export const seriesResistanceLesson: Lesson = {
 
 When resistors are connected end-to-end (in series), the same current flows through all of them. The total resistance is simply their sum:
 
-\`\`\`
-R_total = R₁ + R₂ + R₃ + …
-\`\`\`
+$$R_\text{total} = R_1 + R_2 + R_3 + \cdots$$
 
 ### Why?
 
@@ -20,9 +18,7 @@ Each resistor impedes the current. Placing two resistors in series is like addin
 
 The voltage across each resistor is proportional to its resistance:
 
-\`\`\`
-Vₙ = V_total × Rₙ / R_total
-\`\`\`
+$$V_n = V_\text{total} \cdot \frac{R_n}{R_\text{total}}$$
 
 This **voltage divider** principle is used everywhere — from sensor circuits to audio volume controls.
 

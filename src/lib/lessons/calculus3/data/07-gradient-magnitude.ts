@@ -6,39 +6,35 @@ export const gradientMagnitude: Lesson = {
 	chapterId: "partial-derivatives",
 	content: `## The Gradient
 
-The **gradient** of f(x, y) is the vector of its partial derivatives:
+The **gradient** of $f(x, y)$ is the vector of its partial derivatives:
 
-\`\`\`
-∇f = (∂f/∂x, ∂f/∂y)
-\`\`\`
+$$\\nabla f = \\left(\\frac{\\partial f}{\\partial x},\\; \\frac{\\partial f}{\\partial y}\\right)$$
 
 ### The Gradient Points Uphill
 
 The gradient vector always points in the **direction of steepest ascent**. Its magnitude tells you how steep that ascent is.
 
-\`\`\`
-|∇f| = sqrt((∂f/∂x)² + (∂f/∂y)²)
-\`\`\`
+$$|\\nabla f| = \\sqrt{\\left(\\frac{\\partial f}{\\partial x}\\right)^2 + \\left(\\frac{\\partial f}{\\partial y}\\right)^2}$$
 
 ### Key Facts
 
-- **∇f = 0** at critical points (local minima, maxima, saddle points)
+- $\\nabla f = \\mathbf{0}$ at critical points (local minima, maxima, saddle points)
 - The gradient is perpendicular to level curves (contour lines)
 - Moving **against** the gradient is steepest descent — the basis of gradient descent in machine learning
 
 ### Examples
 
-For f(x,y) = x² + y²:
-- ∇f = (2x, 2y)
-- At (3, 4): |∇f| = √(36 + 64) = √100 = 10
+For $f(x,y) = x^2 + y^2$:
+- $\\nabla f = (2x,\\; 2y)$
+- At $(3, 4)$: $|\\nabla f| = \\sqrt{36 + 64} = \\sqrt{100} = 10$
 
-For f(x,y) = xy:
-- ∇f = (y, x)
-- At (1, 1): |∇f| = √(1 + 1) = √2 ≈ 1.4142
+For $f(x,y) = xy$:
+- $\\nabla f = (y,\\; x)$
+- At $(1, 1)$: $|\\nabla f| = \\sqrt{1 + 1} = \\sqrt{2} \\approx 1.4142$
 
 ### Your Task
 
-Implement \`double gradient_magnitude(double (*f)(double, double), double x, double y, double h)\` that computes |∇f| at (x, y) using central differences for the partial derivatives.`,
+Implement \`double gradient_magnitude(double (*f)(double, double), double x, double y, double h)\` that computes $|\\nabla f|$ at $(x, y)$ using central differences for the partial derivatives.`,
 
 	starterCode: `#include <stdio.h>
 #include <math.h>

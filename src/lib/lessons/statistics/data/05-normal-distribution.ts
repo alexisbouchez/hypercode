@@ -6,7 +6,11 @@ export const normalDistribution: Lesson = {
 	chapterId: "distributions",
 	content: `## The Bell Curve
 
-The **normal distribution** is the most important distribution in statistics. It is symmetric around the mean and fully described by two parameters: mean (μ) and standard deviation (σ).
+The **normal distribution** is the most important distribution in statistics. It is symmetric around the mean and fully described by two parameters: mean $\mu$ and standard deviation $\sigma$. We write $X \sim \mathcal{N}(\mu, \sigma^2)$.
+
+The probability density function is:
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$
 
 \`\`\`python
 import math
@@ -17,28 +21,28 @@ def normal_cdf(x, mu=0, sigma=1):
 def normal_pdf(x, mu=0, sigma=1):
     return (1 / (sigma * math.sqrt(2 * math.pi))) * math.exp(-0.5 * ((x - mu) / sigma) ** 2)
 
-# Standard normal: μ=0, σ=1
+# Standard normal: mu=0, sigma=1
 print(normal_cdf(0))          # 0.5
 print(round(normal_pdf(0), 4))  # 0.3989
 \`\`\`
 
 ### CDF vs PDF
 
-- **PDF** (probability density function): the height of the curve at x. Not a probability itself.
-- **CDF** (cumulative distribution function): P(X ≤ x). This IS a probability (0 to 1).
+- **PDF** (probability density function): the height of the curve at $x$. Not a probability itself.
+- **CDF** (cumulative distribution function): $P(X \leq x)$. This IS a probability (0 to 1).
 
 ### The 68-95-99.7 Rule
 
-For a normal distribution N(μ, σ):
-- P(μ - σ ≤ X ≤ μ + σ) ≈ **68%**
-- P(μ - 2σ ≤ X ≤ μ + 2σ) ≈ **95%**
-- P(μ - 3σ ≤ X ≤ μ + 3σ) ≈ **99.7%**
+For a normal distribution $\mathcal{N}(\mu, \sigma^2)$:
+- $P(\mu - \sigma \leq X \leq \mu + \sigma) \approx$ **68%**
+- $P(\mu - 2\sigma \leq X \leq \mu + 2\sigma) \approx$ **95%**
+- $P(\mu - 3\sigma \leq X \leq \mu + 3\sigma) \approx$ **99.7%**
 
 ### Your Task
 
 Implement \`normal_stats(mu, sigma, x)\` that prints:
-1. \`CDF(x)\` — the probability that X ≤ x (rounded to 4 decimal places)
-2. \`PDF(x)\` — the density at x (rounded to 4 decimal places)`,
+1. \`CDF(x)\` — the probability that $X \leq x$ (rounded to 4 decimal places)
+2. \`PDF(x)\` — the density at $x$ (rounded to 4 decimal places)`,
 
 	starterCode: `import math
 

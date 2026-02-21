@@ -8,9 +8,9 @@ export const linearRegression: Lesson = {
 
 **Linear regression** finds the best-fit line through data points:
 
-\`\`\`
-y = slope · x + intercept
-\`\`\`
+$$\hat{y} = \beta_1 x + \beta_0$$
+
+where $\beta_1$ is the slope and $\beta_0$ is the intercept.
 
 \`\`\`python
 def linear_regression(x, y):
@@ -33,14 +33,23 @@ print(round(intercept, 4))  # 1.0
 
 ### Least Squares
 
-The formula minimizes the **sum of squared residuals** — the vertical distances between data points and the line.
+The formula minimizes the **sum of squared residuals**:
 
-### R² (Coefficient of Determination)
+$$\text{SSR} = \sum_{i=1}^n (y_i - \hat{y}_i)^2$$
 
-R² measures how much variance in y is explained by x:
-- **R² = 1.0** — perfect fit, all points on the line
-- **R² = 0.0** — the line explains nothing
-- **R² = 0.8** — the line explains 80% of the variance
+The closed-form solution is:
+
+$$\beta_1 = \frac{n\sum x_i y_i - \sum x_i \sum y_i}{n\sum x_i^2 - \left(\sum x_i\right)^2}$$
+
+### $R^2$ (Coefficient of Determination)
+
+$R^2$ measures how much variance in $y$ is explained by $x$:
+
+$$R^2 = 1 - \frac{\text{SSR}}{\text{SST}} = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$$
+
+- $R^2 = 1.0$ — perfect fit, all points on the line
+- $R^2 = 0.0$ — the line explains nothing
+- $R^2 = 0.8$ — the line explains 80% of the variance
 
 \`\`\`python
 mean_y = sy / n
@@ -53,14 +62,14 @@ r_sq = 1 - ss_res / ss_tot
 ### Assumptions
 
 Linear regression assumes:
-1. Linear relationship between x and y
+1. Linear relationship between $x$ and $y$
 2. Homoscedasticity (equal variance of residuals)
 3. Independent observations
 4. Approximately normal residuals
 
 ### Your Task
 
-Implement \`linear_regression(x, y)\` that prints the **slope**, **intercept**, and **R²** (coefficient of determination), each rounded to 4 decimal places.`,
+Implement \`linear_regression(x, y)\` that prints the **slope**, **intercept**, and $R^2$ (coefficient of determination), each rounded to 4 decimal places.`,
 
 	starterCode: `def linear_regression(x, y):
     # Print slope, intercept, and R², each rounded to 4 decimal places

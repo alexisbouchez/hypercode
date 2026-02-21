@@ -8,9 +8,7 @@ export const zScores: Lesson = {
 
 A **z-score** measures how many standard deviations a value is from the mean:
 
-\`\`\`
-z = (x - μ) / σ
-\`\`\`
+$$z = \frac{x - \mu}{\sigma}$$
 
 \`\`\`python
 import statistics
@@ -33,10 +31,10 @@ A standardized dataset always has:
 
 | Z-score | Meaning |
 |---------|---------|
-| z = 0 | Exactly at the mean |
-| z = 1 | One std above the mean |
-| z = -2 | Two stds below the mean |
-| \|z\| > 3 | Likely an outlier |
+| $z = 0$ | Exactly at the mean |
+| $z = 1$ | One $\sigma$ above the mean |
+| $z = -2$ | Two $\sigma$ below the mean |
+| $|z| > 3$ | Likely an outlier |
 
 ### Use Cases
 

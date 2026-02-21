@@ -6,22 +6,20 @@ export const cnot: Lesson = {
 	chapterId: "multi-qubit",
 	content: `## Controlled Operations
 
-The **CNOT gate** (Controlled-NOT) is the most important two-qubit gate. It flips the second qubit (target) if and only if the first qubit (control) is |1⟩:
+The **CNOT gate** (Controlled-NOT) is the most important two-qubit gate. It flips the second qubit (target) if and only if the first qubit (control) is $|1\rangle$:
 
 | Input | Output |
 |-------|--------|
-| |00⟩  | |00⟩   |
-| |01⟩  | |01⟩   |
-| |10⟩  | |11⟩   |
-| |11⟩  | |10⟩   |
+| $|00\rangle$ | $|00\rangle$ |
+| $|01\rangle$ | $|01\rangle$ |
+| $|10\rangle$ | $|11\rangle$ |
+| $|11\rangle$ | $|10\rangle$ |
 
-In terms of the 4-element state vector [α₀₀, α₀₁, α₁₀, α₁₁]:
+In terms of the 4-element state vector $[\alpha_{00}, \alpha_{01}, \alpha_{10}, \alpha_{11}]$:
 
-\`\`\`
-CNOT[α₀₀, α₀₁, α₁₀, α₁₁] = [α₀₀, α₀₁, α₁₁, α₁₀]
-\`\`\`
+$$\text{CNOT}[\alpha_{00}, \alpha_{01}, \alpha_{10}, \alpha_{11}] = [\alpha_{00}, \alpha_{01}, \alpha_{11}, \alpha_{10}]$$
 
-Indices 2 and 3 (the |10⟩ and |11⟩ amplitudes) are swapped.
+Indices 2 and 3 (the $|10\rangle$ and $|11\rangle$ amplitudes) are swapped.
 
 \`\`\`python
 def cnot(state):

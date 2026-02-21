@@ -8,23 +8,21 @@ export const decibelLevelLesson: Lesson = {
 
 Human hearing spans an enormous range — from a pin drop to a jet engine. The decibel (dB) scale compresses this using a logarithm:
 
-\`\`\`
-L = 10 \u00d7 log\u2081\u2080(I / I\u2080)
-\`\`\`
+$$L = 10 \log_{10}\!\left(\frac{I}{I_0}\right)$$
 
 - **L** — sound pressure level (dB)
-- **I** — intensity (W/m\u00b2)
-- **I\u2080** = 10\u207b\u00b9\u00b2 W/m\u00b2 — threshold of hearing (reference level)
+- **I** — intensity (W/m²)
+- $I_0 = 10^{-12}$ W/m² — threshold of hearing (reference level)
 
 ### Why Logarithm?
 
-Each +10 dB represents a 10\u00d7 increase in intensity. A 60 dB conversation is 10\u2076 times louder than the quietest audible sound.
+Each +10 dB represents a $10\times$ increase in intensity. A 60 dB conversation is $10^6$ times louder than the quietest audible sound.
 
-| I (W/m\u00b2) | L (dB) | Example |
+| I (W/m²) | L (dB) | Example |
 |----------|--------|---------|
-| 10\u207b\u00b9\u00b2 | **0** | threshold of hearing |
-| 10\u207b\u2076 | **60** | normal conversation |
-| 10\u207b\u00b2 | **100** | underground train |
+| $10^{-12}$ | **0** | threshold of hearing |
+| $10^{-6}$ | **60** | normal conversation |
+| $10^{-2}$ | **100** | underground train |
 | 1 | **120** | threshold of pain |
 
 ### Your Task
