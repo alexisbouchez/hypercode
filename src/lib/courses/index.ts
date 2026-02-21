@@ -42,6 +42,7 @@ import { advancedLinearAlgebraChapters, advancedLinearAlgebraLessons } from "@/l
 import { advancedQuantumChapters, advancedQuantumLessons } from "@/lib/lessons/advanced-quantum";
 import { thermodynamicsChapters, thermodynamicsLessons } from "@/lib/lessons/thermodynamics";
 import { specialRelativityChapters, specialRelativityLessons } from "@/lib/lessons/special-relativity";
+import { fluidMechanicsChapters, fluidMechanicsLessons } from "@/lib/lessons/fluid-mechanics";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2679,6 +2680,45 @@ You have implemented the core equations of special relativity. Here are natural 
 - [MIT OpenCourseWare 8.033](https://ocw.mit.edu/courses/8-033-relativity-fall-2006/) — Full lecture notes and problem sets, free.
 `;
 
+const fluidMechanicsIntroductionContent = `
+## Why Fluid Mechanics?
+
+Fluid mechanics governs the flow of water through pipes, the lift on aircraft wings, the pumping of blood through arteries, and the movement of the atmosphere. It is one of the richest branches of classical physics — simple equations that produce astonishing complexity.
+
+## How This Course Works
+
+You will implement the core equations of fluid mechanics in pure Python. Each lesson introduces one concept — a physical law or empirical formula — explains the math, and asks you to write the equation as a function. All constants (gravitational acceleration $g = 9.81$ m/s², water density $\\rho_w = 1000$ kg/m³) are defined inside each function for clarity.
+
+## What You Will Learn
+
+This course contains **16 lessons** organized into **4 chapters**:
+
+1. **Fluid Fundamentals** — Density, pressure, and the gauge/absolute pressure distinction.
+2. **Fluid Statics** — Hydrostatic pressure, Archimedes' principle, buoyancy, and manometers.
+3. **Fluid Dynamics** — The continuity equation, Bernoulli's theorem, the Reynolds number, drag force, Venturi meters, Pitot tubes, and Mach numbers.
+4. **Viscous Flow** — Newton's law of viscosity, Hagen-Poiseuille flow, Darcy-Weisbach pipe losses, Stokes' law, and surface tension.
+
+Let's start with density.
+`;
+
+const fluidMechanicsWhatsNextContent = `
+## What's Next
+
+You have implemented the foundational equations of fluid mechanics. Here are natural next steps:
+
+- **Computational Fluid Dynamics** — Solve the Navier-Stokes equations numerically with finite-difference or finite-element methods.
+- **Thermodynamics** — Compressible flow connects fluid mechanics with thermodynamics; Mach numbers, shock waves, and isentropic relations.
+- **Aerodynamics** — Lift, drag, boundary layers, and the Kutta-Joukowski theorem build on Bernoulli and viscous flow.
+- **Hydraulics and Pipe Networks** — Real-world pipe systems use the Darcy-Weisbach equation and iterative solvers.
+
+## Further Reading
+
+- **Fluid Mechanics** by Frank White — Comprehensive, well-structured, the standard undergraduate text.
+- **Introduction to Fluid Mechanics** by Fox, McDonald & Pritchard — Strong on worked examples and problem sets.
+- **Viscous Fluid Flow** by Frank White — Advanced treatment of viscosity, boundary layers, and turbulence.
+- [MIT OpenCourseWare 2.20](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/) — Marine hydrodynamics lecture notes, free.
+`;
+
 const thermodynamicsIntroductionContent = `
 ## Why Thermodynamics?
 
@@ -3309,6 +3349,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: specialRelativityIntroductionContent,
     whatsNextContent: specialRelativityWhatsNextContent,
+  },
+  {
+    id: "fluid-mechanics",
+    title: "Fluid Mechanics in Python",
+    description: "Learn fluid mechanics by implementing the equations in Python. Compute density, hydrostatic pressure, buoyancy, continuity, Bernoulli flow, Reynolds numbers, drag forces, viscous pipe flow, Stokes drag, and Mach numbers from scratch.",
+    language: "python",
+    chapters: fluidMechanicsChapters,
+    lessons: fluidMechanicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: fluidMechanicsIntroductionContent,
+    whatsNextContent: fluidMechanicsWhatsNextContent,
   },
 ];
 

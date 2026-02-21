@@ -85,6 +85,7 @@ export function LessonShellWrapper({
     if (courseId === "advanced-quantum") return initPythonRunner();
     if (courseId === "thermodynamics") return initPythonRunner();
     if (courseId === "special-relativity") return initPythonRunner();
+    if (courseId === "fluid-mechanics") return initPythonRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -131,6 +132,7 @@ export function LessonShellWrapper({
     if (courseId === "advanced-quantum") return isPythonReady();
     if (courseId === "thermodynamics") return isPythonReady();
     if (courseId === "special-relativity") return isPythonReady();
+    if (courseId === "fluid-mechanics") return isPythonReady();
     return isGoReady();
   }, [courseId]);
 
@@ -177,6 +179,7 @@ export function LessonShellWrapper({
     if (courseId === "advanced-quantum") return runPython(code);
     if (courseId === "thermodynamics") return runPython(code);
     if (courseId === "special-relativity") return runPython(code);
+    if (courseId === "fluid-mechanics") return runPython(code);
     return runGo(code);
   }, [courseId]);
 
@@ -223,6 +226,7 @@ export function LessonShellWrapper({
     if (courseId === "advanced-quantum") return runPythonTests(code, tests);
     if (courseId === "thermodynamics") return runPythonTests(code, tests);
     if (courseId === "special-relativity") return runPythonTests(code, tests);
+    if (courseId === "fluid-mechanics") return runPythonTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

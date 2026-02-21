@@ -30,6 +30,7 @@ import { runAdvancedLinearAlgebraTests } from "./test-runners/advanced-linear-al
 import { runAdvancedQuantumTests } from "./test-runners/advanced-quantum-test-runner";
 import { runThermodynamicsTests } from "./test-runners/thermodynamics-test-runner";
 import { runSpecialRelativityTests } from "./test-runners/special-relativity-test-runner";
+import { runFluidMechanicsTests } from "./test-runners/fluid-mechanics-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -162,6 +163,10 @@ async function main() {
   console.log("Running Special Relativity tests...");
   const specialRelativityResults = runSpecialRelativityTests();
   allResults.push(...specialRelativityResults);
+
+  console.log("Running Fluid Mechanics tests...");
+  const fluidMechanicsResults = runFluidMechanicsTests();
+  allResults.push(...fluidMechanicsResults);
 
   console.log("\n--- Results ---\n");
 
