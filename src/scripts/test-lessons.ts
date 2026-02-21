@@ -52,9 +52,11 @@ import { runClassicalMechanicsTests } from "./test-runners/classical-mechanics-t
 import { runDiffeqTests } from "./test-runners/diffeq-test-runner";
 import { runMathematicalPhysicsTests } from "./test-runners/mathematical-physics-test-runner";
 import { runComplexSystemsTests } from "./test-runners/complex-systems-test-runner";
+import { runChaosTheoryTests } from "./test-runners/chaos-theory-test-runner";
 import { runMusicTests } from "./test-runners/music-test-runner";
 import { runWavesTests } from "./test-runners/waves-test-runner";
 import { runRustTests } from "./test-runners/rust-test-runner";
+import { runFunctionalDiffGeoTests } from "./test-runners/functional-diff-geo-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -276,6 +278,10 @@ async function main() {
   const complexSystemsResults = runComplexSystemsTests();
   allResults.push(...complexSystemsResults);
 
+  console.log("Running Chaos Theory tests...");
+  const chaosTheoryResults = runChaosTheoryTests();
+  allResults.push(...chaosTheoryResults);
+
   console.log("Running Music tests...");
   const musicResults = runMusicTests();
   allResults.push(...musicResults);
@@ -287,6 +293,10 @@ async function main() {
   console.log("Running Rust tests...");
   const rustResults = runRustTests();
   allResults.push(...rustResults);
+
+  console.log("Running Functional Differential Geometry tests...");
+  const functionalDiffGeoResults = runFunctionalDiffGeoTests();
+  allResults.push(...functionalDiffGeoResults);
 
   console.log("\n--- Results ---\n");
 

@@ -61,7 +61,9 @@ import { biophysicsChapters, biophysicsLessons } from "@/lib/lessons/biophysics"
 import { mysqlChapters, mysqlLessons } from "@/lib/lessons/mysql";
 import { mathematicalPhysicsChapters, mathematicalPhysicsLessons } from "@/lib/lessons/mathematical-physics";
 import { complexSystemsChapters, complexSystemsLessons } from "@/lib/lessons/complex-systems";
+import { chaosTheoryChapters, chaosTheoryLessons } from "@/lib/lessons/chaos-theory";
 import { rustChapters, rustLessons } from "@/lib/lessons/rust";
+import { functionalDiffGeoChapters, functionalDiffGeoLessons } from "@/lib/lessons/functional-diff-geo";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -4259,6 +4261,54 @@ You have implemented the foundational models of complex systems science. Here ar
 - **The Santa Fe Institute** (santafe.edu) — The leading research center for complex systems; lectures and courses freely available online.`,
   },
   {
+    id: "chaos-theory",
+    title: "Chaos Theory in Python",
+    description: "Learn chaos theory by implementing the canonical models of nonlinear dynamics in Python. Simulate tent maps, Lyapunov exponents, Poincaré maps, Rössler attractors, Duffing oscillators, Hénon maps, Van der Pol oscillators, Ikeda maps, fractal dimensions, Mandelbrot sets, Julia sets, Feigenbaum constants, bifurcation diagrams, and chaos synchronization from scratch.",
+    language: "python",
+    chapters: chaosTheoryChapters,
+    lessons: chaosTheoryLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Chaos Theory?
+
+Chaos theory studies how deterministic systems — governed by exact mathematical rules — can produce behavior that appears random and is exquisitely sensitive to initial conditions. A small change in starting conditions leads to wildly different outcomes: the butterfly effect. Yet beneath this apparent randomness lies rich geometric structure: strange attractors, fractal boundaries, and universal constants that appear across completely different systems.
+
+This course implements the canonical models of chaos theory in pure Python. No scipy, no numpy — just the mathematics expressed as functions. Each lesson introduces one concept, explains the underlying dynamics, and asks you to write the simulation as code.
+
+You will implement:
+
+- **Tent map** — Piecewise linear chaos; the simplest exactly solvable chaotic map with Lyapunov exponent ln(r)
+- **Lyapunov exponents** — Quantify the rate of exponential divergence; the signature of chaos
+- **Poincaré maps** — Cross-sections of trajectories; reduce continuous flows to discrete maps
+- **Rössler attractor** — A three-dimensional chaotic flow with spiral structure; simpler than Lorenz
+- **Duffing oscillator** — Periodically forced nonlinear oscillator; period-doubling route to chaos
+- **Hénon map** — Two-dimensional quadratic map with a strange attractor (a=1.4, b=0.3)
+- **Van der Pol oscillator** — Limit cycles and relaxation oscillations; the prototypical self-sustained oscillator
+- **Ikeda map** — Optical cavity map; complex-plane chaos from a simple recurrence
+- **Box-counting dimension** — Fractal dimension of the Cantor set via box-covering
+- **Correlation dimension** — Grassberger-Procaccia algorithm; D₂ from pair distances in an attractor
+- **Mandelbrot set** — Escape-time algorithm; the iconic fractal boundary of bounded orbits
+- **Julia sets** — Fixed-c iterations; connected vs disconnected fractals
+- **Feigenbaum constants** — Universal constants (δ ≈ 4.6692) governing period-doubling cascades
+- **Bifurcation diagram** — The full period-doubling tree of the logistic map
+- **Chaos synchronization** — Master-slave coupling; two chaotic systems locking to the same trajectory`,
+    whatsNextContent: `## What's Next
+
+You have implemented the foundational models of chaos theory. Here are natural next steps:
+
+- **Nonlinear Dynamics** — Strogatz's textbook covers everything in this course and beyond: limit cycles, bifurcations in 2D, the center manifold theorem, and Hopf bifurcations.
+- **Complex Systems** — Chaos is one piece of a larger picture. Network science, self-organized criticality, and agent-based models all involve emergent complexity.
+- **Fractal Geometry** — The Mandelbrot and Julia sets are entry points. Explore iterated function systems (IFS), L-systems, and multifractal analysis.
+- **Time Series Analysis** — Chaos theory has practical applications in analyzing real-world time series: embedding theorems, recurrence plots, and surrogate data tests.
+
+## Resources
+
+- **Nonlinear Dynamics and Chaos** by Strogatz — The definitive introductory textbook. Clear physical intuition and excellent exercises.
+- **An Introduction to Chaos in Nonequilibrium Statistical Mechanics** by Dorfman — Graduate-level treatment connecting chaos to statistical physics.
+- **Chaos: Making a New Science** by Gleick — The popular history of chaos theory; excellent background reading.
+- **The Beauty of Fractals** by Peitgen & Richter — Visual exploration of Julia sets, Mandelbrot sets, and related fractals.
+- **Nonlinear Time Series Analysis** by Kantz & Schreiber — Practical methods for detecting chaos in real data.`,
+  },
+  {
     id: "rust",
     title: "Rust",
     description: "Master Rust from scratch. Implement ownership, borrowing, structs, enums, traits, generics, closures, iterators, and collections — the systems language that guarantees memory safety without a garbage collector.",
@@ -4348,6 +4398,61 @@ Rust's ownership system makes concurrent programming safe:
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/) — The dark arts of unsafe Rust.
 - [crates.io](https://crates.io) — Browse the Rust package ecosystem.
 - *Programming Rust* by Blandy, Orendorff & Tindall (O'Reilly) — The most comprehensive Rust book.`,
+  },
+  {
+    id: "functional-diff-geo",
+    title: "Functional Differential Geometry",
+    description: "Learn differential geometry the way Sussman and Wisdom teach it at MIT — by programming it. Implement function composition, numerical derivatives, coordinate systems, Jacobians, tangent vectors, vector fields, one-forms, exterior derivatives, Lie brackets, metrics, Christoffel symbols, parallel transport, the Riemann curvature tensor, and geodesics in pure Python.",
+    language: "python",
+    chapters: functionalDiffGeoChapters,
+    lessons: functionalDiffGeoLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Functional Differential Geometry?
+
+Differential geometry is the mathematical language of general relativity, gauge theory, and modern theoretical physics. But it is notorious for its dense notation — indices, summation conventions, and abstract tensor calculus that obscure the underlying ideas.
+
+Gerald Jay Sussman and Jack Wisdom (authors of *Structure and Interpretation of Classical Mechanics* and creators of Scheme) wrote *Functional Differential Geometry* to fix this. Their insight: **by programming the mathematics, you are forced to be precise**. A computer will not tolerate vague or incomplete constructions. Every ambiguity in the notation must be resolved before you can write working code.
+
+This course follows their approach, translated into Python. Every concept — derivative, tangent vector, metric, curvature — is represented as a Python function or higher-order function. You will implement differential geometry from scratch, building up from function composition to geodesics on the sphere.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Functional Foundations** — Function composition, the derivative operator \`D\` as a higher-order function, and partial derivatives as operators.
+2. **Manifolds** — Coordinate systems as pairs of inverse functions (chart/point), the Jacobian of coordinate transformations, and tangent vectors as derivations.
+3. **Vector & Form Fields** — Vector fields as differential operators, one-form fields as duals of vector fields, the exterior derivative (curl), and the Lie bracket.
+4. **Connections & Curvature** — The metric tensor, Christoffel symbols from the metric, parallel transport along curves, the Riemann curvature tensor, and geodesic equations.
+
+By the end, you will have implemented the mathematical machinery needed to describe curved spacetime — the foundation of general relativity.
+
+## Prerequisites
+
+- Basic Python (functions, lists, loops)
+- Calculus (derivatives, partial derivatives)
+- Linear algebra (vectors, matrices) is helpful
+
+## The Book
+
+This course is based on *Functional Differential Geometry* by Gerald Jay Sussman and Jack Wisdom (MIT Press, 2013). The original uses Scheme; we use Python. The ideas are identical.
+`,
+    whatsNextContent: `## What's Next
+
+You have implemented the core machinery of differential geometry in Python — from function composition to Riemann curvature and geodesics. Here are natural next steps:
+
+- **General Relativity** — Apply what you built to the Schwarzschild metric (spacetime around a black hole). Compute geodesics in Schwarzschild coordinates to see light bending and orbital precession.
+- **Gauge Theory** — The connection and curvature you implemented are the mathematical heart of Yang-Mills theory and the Standard Model of particle physics.
+- **The Original Book** — Read *Functional Differential Geometry* by Sussman and Wisdom. The Scheme code maps directly to your Python implementation.
+- **SICM** — *Structure and Interpretation of Classical Mechanics* by the same authors applies functional programming to classical mechanics with the same philosophy.
+- **Differential Forms** — Deepen your understanding of exterior algebra, Stokes's theorem in full generality, and de Rham cohomology.
+
+## Further Reading
+
+- *Functional Differential Geometry* by Sussman & Wisdom (MIT Press) — The source for this course. Free PDF at groups.csail.mit.edu.
+- *Gravitation* by Misner, Thorne & Wheeler — The comprehensive reference for general relativity, with extensive use of differential geometry.
+- *Differential Geometry, Gauge Theories, and Gravity* by Göckeler & Schücker — Bridges differential geometry and physics.
+- *Geometry, Topology and Physics* by Nakahara — Graduate-level treatment connecting geometry to quantum field theory.
+`,
   },
 ];
 

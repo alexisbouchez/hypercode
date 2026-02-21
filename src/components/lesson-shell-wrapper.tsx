@@ -102,6 +102,7 @@ export function LessonShellWrapper({
     if (courseId === "biophysics") return initPythonRunner();
     if (courseId === "mathematical-physics") return initPythonRunner();
     if (courseId === "complex-systems") return initPythonRunner();
+    if (courseId === "chaos-theory") return initPythonRunner();
     if (courseId === "signal-processing") return initPythonRunner();
     if (courseId === "machine-learning") return initPythonRunner();
     if (courseId === "information-theory") return initPythonRunner();
@@ -168,6 +169,7 @@ export function LessonShellWrapper({
     if (courseId === "biophysics") return isPythonReady();
     if (courseId === "mathematical-physics") return isPythonReady();
     if (courseId === "complex-systems") return isPythonReady();
+    if (courseId === "chaos-theory") return isPythonReady();
     if (courseId === "signal-processing") return isPythonReady();
     if (courseId === "machine-learning") return isPythonReady();
     if (courseId === "information-theory") return isPythonReady();
@@ -234,6 +236,7 @@ export function LessonShellWrapper({
     if (courseId === "biophysics") return runPython(code);
     if (courseId === "mathematical-physics") return runPython(code);
     if (courseId === "complex-systems") return runPython(code);
+    if (courseId === "chaos-theory") return runPython(code);
     if (courseId === "signal-processing") return runPython(code);
     if (courseId === "machine-learning") return runPython(code);
     if (courseId === "information-theory") return runPython(code);
@@ -300,6 +303,7 @@ export function LessonShellWrapper({
     if (courseId === "biophysics") return runPythonTests(code, tests);
     if (courseId === "mathematical-physics") return runPythonTests(code, tests);
     if (courseId === "complex-systems") return runPythonTests(code, tests);
+    if (courseId === "chaos-theory") return runPythonTests(code, tests);
     if (courseId === "signal-processing") return runPythonTests(code, tests);
     if (courseId === "machine-learning") return runPythonTests(code, tests);
     if (courseId === "information-theory") return runPythonTests(code, tests);
