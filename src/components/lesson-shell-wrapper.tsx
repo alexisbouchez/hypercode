@@ -86,6 +86,10 @@ export function LessonShellWrapper({
     if (courseId === "thermodynamics") return initPythonRunner();
     if (courseId === "special-relativity") return initPythonRunner();
     if (courseId === "fluid-mechanics") return initPythonRunner();
+    if (courseId === "general-relativity") return initPythonRunner();
+    if (courseId === "nuclear-physics") return initPythonRunner();
+    if (courseId === "number-theory") return initPythonRunner();
+    if (courseId === "optics") return initPythonRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -133,6 +137,10 @@ export function LessonShellWrapper({
     if (courseId === "thermodynamics") return isPythonReady();
     if (courseId === "special-relativity") return isPythonReady();
     if (courseId === "fluid-mechanics") return isPythonReady();
+    if (courseId === "general-relativity") return isPythonReady();
+    if (courseId === "nuclear-physics") return isPythonReady();
+    if (courseId === "number-theory") return isPythonReady();
+    if (courseId === "optics") return isPythonReady();
     return isGoReady();
   }, [courseId]);
 
@@ -180,6 +188,10 @@ export function LessonShellWrapper({
     if (courseId === "thermodynamics") return runPython(code);
     if (courseId === "special-relativity") return runPython(code);
     if (courseId === "fluid-mechanics") return runPython(code);
+    if (courseId === "general-relativity") return runPython(code);
+    if (courseId === "nuclear-physics") return runPython(code);
+    if (courseId === "number-theory") return runPython(code);
+    if (courseId === "optics") return runPython(code);
     return runGo(code);
   }, [courseId]);
 
@@ -227,6 +239,10 @@ export function LessonShellWrapper({
     if (courseId === "thermodynamics") return runPythonTests(code, tests);
     if (courseId === "special-relativity") return runPythonTests(code, tests);
     if (courseId === "fluid-mechanics") return runPythonTests(code, tests);
+    if (courseId === "general-relativity") return runPythonTests(code, tests);
+    if (courseId === "nuclear-physics") return runPythonTests(code, tests);
+    if (courseId === "number-theory") return runPythonTests(code, tests);
+    if (courseId === "optics") return runPythonTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

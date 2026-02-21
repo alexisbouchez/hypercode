@@ -43,6 +43,9 @@ import { advancedQuantumChapters, advancedQuantumLessons } from "@/lib/lessons/a
 import { thermodynamicsChapters, thermodynamicsLessons } from "@/lib/lessons/thermodynamics";
 import { specialRelativityChapters, specialRelativityLessons } from "@/lib/lessons/special-relativity";
 import { fluidMechanicsChapters, fluidMechanicsLessons } from "@/lib/lessons/fluid-mechanics";
+import { generalRelativityChapters, generalRelativityLessons } from "@/lib/lessons/general-relativity";
+import { opticsChapters, opticsLessons } from "@/lib/lessons/optics";
+import { numberTheoryChapters, numberTheoryLessons } from "@/lib/lessons/number-theory";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2719,6 +2722,122 @@ You have implemented the foundational equations of fluid mechanics. Here are nat
 - [MIT OpenCourseWare 2.20](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/) — Marine hydrodynamics lecture notes, free.
 `;
 
+const generalRelativityIntroductionContent = `
+## Why General Relativity?
+
+In 1915, Einstein replaced Newton's theory of gravity with a geometric one: mass and energy curve spacetime, and that curvature tells matter how to move. The results are stranger and richer than anything Newton imagined — black holes, gravitational waves, and a universe that expands.
+
+General relativity has been confirmed to extraordinary precision: gravitational time dilation is corrected for in every GPS receiver you carry. The first gravitational wave detection in 2015 matched GR predictions to within measurement error. The black hole image from M87 matched GR within 10%.
+
+## How This Course Works
+
+You will implement the equations of general relativity in pure Python. Each lesson introduces one concept — a formula from GR — explains the physics, and asks you to write the equation as a function. Two constants underpin almost everything: $G = 6.674 \\times 10^{-11}$ m³ kg⁻¹ s⁻² and $c = 299{,}792{,}458$ m/s. Both are defined inside each function.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Schwarzschild Geometry** — The Schwarzschild radius, gravitational time dilation, gravitational redshift, relativistic escape velocity, and the photon sphere and ISCO.
+2. **Black Holes** — Hawking temperature and black hole entropy.
+3. **GR Predictions** — Gravitational lensing, the Shapiro delay, and perihelion precession — the three classic tests of GR (beyond light deflection).
+4. **Gravitational Waves** — Chirp mass, GW frequency and ISCO, strain amplitude, radiated power, and the Peters inspiral time.
+
+Let's start with the Schwarzschild radius.
+`;
+
+const generalRelativityWhatsNextContent = `
+## What's Next
+
+You have implemented the core equations of general relativity. Here are natural next steps:
+
+- **Numerical Relativity** — Simulating binary black hole mergers requires solving the full Einstein field equations on a computer. Codes like Einstein Toolkit and GR-Hydro use this.
+- **Cosmology** — The Friedmann equations describe the expanding universe using GR. Dark energy, inflation, and the CMB all follow from Einstein's field equations applied to the universe as a whole.
+- **Quantum Gravity** — String theory and loop quantum gravity attempt to reconcile GR with quantum mechanics. No complete theory exists yet.
+- **LIGO/Virgo/KAGRA** — The gravitational-wave detectors measure strains you computed in this course. Their open data is publicly available for analysis.
+
+## Further Reading
+
+- **Gravitation** by Misner, Thorne & Wheeler — The definitive GR textbook, encyclopedic and rigorous.
+- **A First Course in General Relativity** by Schutz — The most accessible introduction, excellent for self-study.
+- **Spacetime and Geometry** by Carroll — Modern treatment with differential geometry, free lecture notes available.
+- [MIT OpenCourseWare 8.962](https://ocw.mit.edu/courses/8-962-general-relativity-spring-2020/) — Graduate GR course by Scott Hughes, full lecture notes and problem sets.
+`;
+
+const opticsIntroductionContent = `
+## Why Optics?
+
+Optics is the branch of physics that studies light — how it propagates, bends, interferes, and interacts with matter. It underpins everything from eyeglasses and cameras to fiber-optic internet, lasers, and quantum computers.
+
+This course implements the core equations of optics in pure Python. No libraries — just the laws of physics expressed as functions. Each lesson introduces one concept, explains the mathematics, and asks you to write the formula as code.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **3 chapters**:
+
+1. **Geometric Optics** — Snell's law, mirrors, thin lenses, the lensmaker's equation, and optical instruments.
+2. **Wave Optics** — Speed of light in media, Young's double-slit interference, thin film interference, diffraction, and polarization.
+3. **Modern Optics** — Photon energy, the photoelectric effect, lasers, fiber optics, dispersion, and optical path length.
+
+Let's start with the law that governs how light bends at every interface in the universe.
+`;
+
+const opticsWhatsNextContent = `
+## What's Next
+
+You have implemented the foundational equations of optics, from Snell's law to optical path length. Here are natural next steps:
+
+- **Electromagnetism** — Maxwell's equations unify electricity, magnetism, and light. The wave equation for light emerges directly from Maxwell's equations.
+- **Quantum Mechanics** — The photoelectric effect you implemented was the first clue that light comes in quanta. Quantum optics studies the full quantum nature of light.
+- **Fourier Optics** — Diffraction and imaging are naturally described using Fourier transforms. This connects to signal processing and holography.
+- **Photonics** — Waveguides, photonic crystals, and integrated optical circuits are the optical analog of electronic circuits.
+
+## Further Reading
+
+- **Introduction to Optics** by Pedrotti, Pedrotti & Pedrotti — Comprehensive undergraduate textbook, covers geometric, wave, and modern optics.
+- **Hecht Optics** by Eugene Hecht — The classic optics textbook, thorough and well-illustrated.
+- **Fundamentals of Photonics** by Saleh & Teich — Advanced treatment connecting classical and quantum optics.
+- [MIT OpenCourseWare 8.03](https://ocw.mit.edu/courses/8-03-physics-iii-vibrations-and-waves-fall-2004/) — Waves and optics lecture notes, free.
+`;
+
+const numberTheoryIntroductionContent = `
+## Why Number Theory?
+
+Number theory is the study of integers — their structure, divisibility, and the primes that underlie all of arithmetic. It is one of the oldest branches of mathematics, yet it drives modern cryptography, error-correcting codes, and computer algorithms.
+
+Despite its ancient roots, number theory is full of unsolved problems. Goldbach's conjecture, the Twin Prime Conjecture, and the Riemann Hypothesis remain open — yet the tools you will build in this course are used every day in software, cryptography, and mathematics.
+
+## How This Course Works
+
+Each lesson introduces one concept, explains the mathematics, and asks you to implement it in pure Python — no libraries beyond the standard library. You will implement everything from scratch: GCD via the Euclidean algorithm, prime sieves, the Chinese Remainder Theorem, and full RSA encryption.
+
+## What You Will Build
+
+1. **Divisibility** — GCD, LCM, prime factorization, divisors, perfect numbers, and the Extended Euclidean Algorithm
+2. **Prime Numbers** — Primality testing, the Sieve of Eratosthenes, prime gaps, Goldbach's conjecture, and the prime counting function
+3. **Modular Arithmetic** — Modular addition, multiplication, fast exponentiation, Euler's totient, and the Chinese Remainder Theorem
+4. **Applications** — Fermat's Little Theorem, modular inverses, and a working RSA encryption system
+
+Let's start with the most fundamental operation in all of number theory.
+`;
+
+const numberTheoryWhatsNextContent = `
+## What's Next
+
+You have implemented the core algorithms of number theory — from the Euclidean GCD to a working RSA cryptosystem. Here are natural next steps:
+
+- **Cryptography** — AES, elliptic curve cryptography (ECC), and digital signatures all build on modular arithmetic
+- **Algebraic Number Theory** — Extend the integers to rings like the Gaussian integers $\\mathbb{Z}[i]$ and $p$-adic numbers
+- **Analytic Number Theory** — The Riemann zeta function and the distribution of prime numbers
+- **Computational Number Theory** — Pollard's rho factorization, Miller-Rabin primality, Baby-step giant-step discrete logarithm
+
+## Further Reading
+
+- **An Introduction to the Theory of Numbers** by Hardy & Wright — The classic reference, elegant and comprehensive.
+- **Elementary Number Theory** by David Burton — Clear exposition, ideal for self-study.
+- **A Course in Number Theory and Cryptography** by Neal Koblitz — Bridges pure number theory and modern cryptography.
+- [Project Euler](https://projecteuler.net/) — 800+ mathematical programming problems, many in number theory.
+`;
+
 const thermodynamicsIntroductionContent = `
 ## Why Thermodynamics?
 
@@ -3360,6 +3479,39 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: fluidMechanicsIntroductionContent,
     whatsNextContent: fluidMechanicsWhatsNextContent,
+  },
+  {
+    id: "general-relativity",
+    title: "General Relativity in Python",
+    description: "Learn general relativity by implementing Einstein's equations in Python. Compute Schwarzschild radii, gravitational time dilation, redshift, Hawking temperature, black hole entropy, gravitational lensing, perihelion precession, and gravitational wave strain from scratch.",
+    language: "python",
+    chapters: generalRelativityChapters,
+    lessons: generalRelativityLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: generalRelativityIntroductionContent,
+    whatsNextContent: generalRelativityWhatsNextContent,
+  },
+  {
+    id: "optics",
+    title: "Optics in Python",
+    description: "Learn optics by implementing the equations in Python. Compute refraction angles, mirror and lens image distances, thin film thicknesses, diffraction angles, photon energies, numerical apertures, and optical path lengths from scratch.",
+    language: "python",
+    chapters: opticsChapters,
+    lessons: opticsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: opticsIntroductionContent,
+    whatsNextContent: opticsWhatsNextContent,
+  },
+  {
+    id: "number-theory",
+    title: "Number Theory in Python",
+    description: "Master the mathematics of integers with Python. Implement the Euclidean algorithm, prime factorization, the Sieve of Eratosthenes, Euler's totient, the Chinese Remainder Theorem, Fermat's Little Theorem, and RSA encryption from scratch.",
+    language: "python",
+    chapters: numberTheoryChapters,
+    lessons: numberTheoryLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: numberTheoryIntroductionContent,
+    whatsNextContent: numberTheoryWhatsNextContent,
   },
 ];
 

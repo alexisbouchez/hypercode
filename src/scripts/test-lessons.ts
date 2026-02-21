@@ -31,6 +31,10 @@ import { runAdvancedQuantumTests } from "./test-runners/advanced-quantum-test-ru
 import { runThermodynamicsTests } from "./test-runners/thermodynamics-test-runner";
 import { runSpecialRelativityTests } from "./test-runners/special-relativity-test-runner";
 import { runFluidMechanicsTests } from "./test-runners/fluid-mechanics-test-runner";
+import { runOpticsTests } from "./test-runners/optics-test-runner";
+import { runGeneralRelativityTests } from "./test-runners/general-relativity-test-runner";
+import { runNuclearPhysicsTests } from "./test-runners/nuclear-physics-test-runner";
+import { runNumberTheoryTests } from "./test-runners/number-theory-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -167,6 +171,22 @@ async function main() {
   console.log("Running Fluid Mechanics tests...");
   const fluidMechanicsResults = runFluidMechanicsTests();
   allResults.push(...fluidMechanicsResults);
+
+  console.log("Running Optics tests...");
+  const opticsResults = runOpticsTests();
+  allResults.push(...opticsResults);
+
+  console.log("Running General Relativity tests...");
+  const generalRelativityResults = runGeneralRelativityTests();
+  allResults.push(...generalRelativityResults);
+
+  console.log("Running Nuclear Physics tests...");
+  const nuclearPhysicsResults = runNuclearPhysicsTests();
+  allResults.push(...nuclearPhysicsResults);
+
+  console.log("Running Number Theory tests...");
+  const numberTheoryResults = runNumberTheoryTests();
+  allResults.push(...numberTheoryResults);
 
   console.log("\n--- Results ---\n");
 
