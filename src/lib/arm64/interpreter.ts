@@ -75,9 +75,416 @@ function resolveAddr(op: Operand, regs: RegisterFile): { addr: number; preWrite:
   return { addr: accessAddr, preWrite: null, postWrite: null };
 }
 
+function executeFP(opcode: number, fpRegs: Float64Array, regs: RegisterFile, mem: Memory): void {
+  const flags = regs; // RegisterFile has .n .z .c .v directly
+  // FP data-processing 2-register: 0 0 0 11110 01 1 Rm opcode 10 Rn Rd
+  // Mask: 0xFF200C00, Value: 0x1E200800 (double, type=01)
+  if ((opcode & 0xFF200C00) === 0x1E200800) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rm = (opcode >> 16) & 0x1F;
+    const op = (opcode >> 12) & 0xF;
+    switch (op) {
+      case 0x0: fpRegs[rd] = fpRegs[rn] * fpRegs[rm]; break; // FMUL
+      case 0x1: fpRegs[rd] = fpRegs[rn] / fpRegs[rm]; break; // FDIV
+      case 0x2: fpRegs[rd] = fpRegs[rn] + fpRegs[rm]; break; // FADD
+      case 0x3: fpRegs[rd] = fpRegs[rn] - fpRegs[rm]; break; // FSUB
+      case 0x4: fpRegs[rd] = Math.max(fpRegs[rn], fpRegs[rm]); break; // FMAX
+      case 0x5: fpRegs[rd] = Math.min(fpRegs[rn], fpRegs[rm]); break; // FMIN
+    }
+    return;
+  }
+
+  // FP data-processing 1-register: 0 0 0 11110 01 1 opcode 10000 Rn Rd
+  if ((opcode & 0xFF3FFC00) === 0x1E204000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const op = (opcode >> 15) & 0x3F;
+    switch (op) {
+      case 0x0: fpRegs[rd] = fpRegs[rn]; break;            // FMOV Dd, Dn (register copy)
+      case 0x1: fpRegs[rd] = Math.abs(fpRegs[rn]); break;  // FABS
+      case 0x2: fpRegs[rd] = -fpRegs[rn]; break;           // FNEG
+      case 0x3: fpRegs[rd] = Math.sqrt(fpRegs[rn]); break; // FSQRT
+      case 0x8: fpRegs[rd] = Math.round(fpRegs[rn]); break; // FRINTN
+      case 0x9: fpRegs[rd] = Math.ceil(fpRegs[rn]); break;  // FRINTP
+      case 0xA: fpRegs[rd] = Math.floor(fpRegs[rn]); break; // FRINTM
+      case 0xB: fpRegs[rd] = Math.trunc(fpRegs[rn]); break; // FRINTZ
+      case 0xC: fpRegs[rd] = Math.round(fpRegs[rn]); break; // FRINTA
+    }
+    return;
+  }
+
+  // FCMP / FCMPE: set flags from FP comparison
+  // Encoding: 0 0 0 11110 01 1 Rm 00 1000 Rn 0 0000 (FCMP Dn, Dm)
+  if ((opcode & 0xFF20FC07) === 0x1E202000) {
+    const rn = (opcode >> 5) & 0x1F;
+    const rm = (opcode >> 16) & 0x1F;
+    const a = fpRegs[rn];
+    const b = fpRegs[rm];
+    flags.n = a < b;
+    flags.z = a === b;
+    flags.c = a >= b;
+    flags.v = isNaN(a) || isNaN(b);
+    return;
+  }
+  // FCMP Dn, #0.0 (opcode bit4=0, opc=0)
+  if ((opcode & 0xFF20FC1F) === 0x1E202008) {
+    const rn = (opcode >> 5) & 0x1F;
+    const a = fpRegs[rn];
+    flags.n = a < 0;
+    flags.z = a === 0;
+    flags.c = a >= 0;
+    flags.v = isNaN(a);
+    return;
+  }
+
+  // FCVTZS Xd, Dn (FP -> signed 64-bit int): sf=1 S=0 type=01 rmode=11 opcode=000
+  if (((opcode & 0xFFFFFC00) >>> 0) === 0x9E780000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const val = Math.trunc(fpRegs[rn]);
+    regs.setX(rd, isNaN(val) ? 0n : BigInt(val));
+    return;
+  }
+  // FCVTZS Wd, Dn (32-bit): sf=0
+  if ((opcode & 0xFFFFFC00) === 0x1E780000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    regs.setW(rd, Math.trunc(fpRegs[rn]) | 0);
+    return;
+  }
+
+  // SCVTF Dd, Xn (signed 64-bit int -> FP): sf=1 S=0 type=01 rmode=00 opcode=010
+  if (((opcode & 0xFFFFFC00) >>> 0) === 0x9E620000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    fpRegs[rd] = Number(BigInt.asIntN(64, regs.getX(rn)));
+    return;
+  }
+  // SCVTF Dd, Wn (signed 32-bit int -> FP): sf=0
+  if ((opcode & 0xFFFFFC00) === 0x1E620000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    fpRegs[rd] = regs.getW(rn) | 0; // sign extend 32-bit
+    return;
+  }
+  // UCVTF Dd, Xn (unsigned 64-bit int -> FP)
+  if (((opcode & 0xFFFFFC00) >>> 0) === 0x9E630000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    fpRegs[rd] = Number(BigInt.asUintN(64, regs.getX(rn)));
+    return;
+  }
+
+  // FMOV Xd, Dn (64-bit GP <- FP): sf=1 type=01 rmode=11 opcode=110
+  if (((opcode & 0xFFFFFC00) >>> 0) === 0x9E660000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const buf = new ArrayBuffer(8);
+    new DataView(buf).setFloat64(0, fpRegs[rn], true);
+    regs.setX(rd, new DataView(buf).getBigUint64(0, true));
+    return;
+  }
+  // FMOV Dn, Xm (64-bit FP <- GP): sf=1 type=01 rmode=11 opcode=111
+  if (((opcode & 0xFFFFFC00) >>> 0) === 0x9E670000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const buf = new ArrayBuffer(8);
+    new DataView(buf).setBigUint64(0, BigInt.asUintN(64, regs.getX(rn)), true);
+    fpRegs[rd] = new DataView(buf).getFloat64(0, true);
+    return;
+  }
+  // FMOV Dd, #imm8 (immediate): 0 0 0 11110 01 1 imm8 1 0 0 0 0 0 0 0 Rd
+  if ((opcode & 0xFFE0FC00) === 0x1E201000) {
+    const rd = opcode & 0x1F;
+    const imm8 = (opcode >> 13) & 0xFF;
+    // Decode VFPExpandImm
+    const sign = (imm8 >> 7) & 1;
+    const exp = (((imm8 >> 6) & 1) ? 0x3FC : 0x400) | ((imm8 >> 4) & 3);
+    const mant = (imm8 & 0xF) << 48;
+    const bits64 = (BigInt(sign) << 63n) | (BigInt(exp) << 52n) | BigInt(mant);
+    const buf = new ArrayBuffer(8);
+    new DataView(buf).setBigUint64(0, bits64, true);
+    fpRegs[rd] = new DataView(buf).getFloat64(0, true);
+    return;
+  }
+
+  // LDR Dn, [Xn, #imm12] (FP load, 64-bit): size=11 V=1 opc=01 imm12 Rn Rt
+  // 1 1 1 1 1 1 0 1 0 1 imm12 Rn Rt  (0xFD400000 family)
+  if (((opcode & 0xFFC00000) >>> 0) === 0xFD400000) {
+    const rt = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const imm12 = (opcode >> 10) & 0xFFF;
+    const offset = imm12 * 8;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const buf = mem.readBytes(addr, 8);
+    fpRegs[rt] = new DataView(buf.buffer, buf.byteOffset, 8).getFloat64(0, true);
+    return;
+  }
+  // STR Dn, [Xn, #imm12] (FP store, 64-bit): 0xFD000000 family
+  if (((opcode & 0xFFC00000) >>> 0) === 0xFD000000) {
+    const rt = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const imm12 = (opcode >> 10) & 0xFFF;
+    const offset = imm12 * 8;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const buf = new ArrayBuffer(8);
+    new DataView(buf).setFloat64(0, fpRegs[rt], true);
+    mem.writeBytes(addr, new Uint8Array(buf));
+    return;
+  }
+
+  // STR Sn, [Xn, #imm12] (FP store, 32-bit): size=10 V=1 opc=00 (0xBD000000)
+  if (((opcode & 0xFFC00000) >>> 0) === 0xBD000000) {
+    const rt = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const imm12 = (opcode >> 10) & 0xFFF;
+    const offset = imm12 * 4;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const buf = new ArrayBuffer(4);
+    new DataView(buf).setFloat32(0, fpRegs[rt], true);
+    mem.writeBytes(addr, new Uint8Array(buf));
+    return;
+  }
+  // LDR Sn, [Xn, #imm12] (FP load, 32-bit): 0xBD400000
+  if (((opcode & 0xFFC00000) >>> 0) === 0xBD400000) {
+    const rt = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const imm12 = (opcode >> 10) & 0xFFF;
+    const offset = imm12 * 4;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const buf = mem.readBytes(addr, 4);
+    fpRegs[rt] = new DataView(buf.buffer, buf.byteOffset, 4).getFloat32(0, true);
+    return;
+  }
+
+  // STUR Dn, [Xn, #simm9] (unscaled FP store, 64-bit): 0xFC000000 family
+  if (((opcode & 0xFFE00C00) >>> 0) === 0xFC000000) {
+    const rt = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    let simm9 = (opcode >> 12) & 0x1FF;
+    if (simm9 & 0x100) simm9 |= ~0x1FF; // sign extend
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + simm9;
+    const buf = new ArrayBuffer(8);
+    new DataView(buf).setFloat64(0, fpRegs[rt], true);
+    mem.writeBytes(addr, new Uint8Array(buf));
+    return;
+  }
+  // LDUR Dn, [Xn, #simm9] (unscaled FP load, 64-bit): 0xFC400000 family
+  if (((opcode & 0xFFE00C00) >>> 0) === 0xFC400000) {
+    const rt = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    let simm9 = (opcode >> 12) & 0x1FF;
+    if (simm9 & 0x100) simm9 |= ~0x1FF;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + simm9;
+    const buf = mem.readBytes(addr, 8);
+    fpRegs[rt] = new DataView(buf.buffer, buf.byteOffset, 8).getFloat64(0, true);
+    return;
+  }
+
+  // STP Dn, Dm, [Xn, #imm7] (FP store pair, 64-bit): opc=01 V=1 (0x6D000000..0x6D7FFFFF)
+  if ((opcode & 0xFFC00000) === 0x6D000000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 8;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const buf1 = new ArrayBuffer(8); new DataView(buf1).setFloat64(0, fpRegs[rt1], true); mem.writeBytes(addr, new Uint8Array(buf1));
+    const buf2 = new ArrayBuffer(8); new DataView(buf2).setFloat64(0, fpRegs[rt2], true); mem.writeBytes(addr + 8, new Uint8Array(buf2));
+    return;
+  }
+  // LDP Dn, Dm, [Xn, #imm7] (FP load pair, 64-bit): 0x6D400000
+  if ((opcode & 0xFFC00000) === 0x6D400000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 8;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const b1 = mem.readBytes(addr, 8); fpRegs[rt1] = new DataView(b1.buffer, b1.byteOffset, 8).getFloat64(0, true);
+    const b2 = mem.readBytes(addr + 8, 8); fpRegs[rt2] = new DataView(b2.buffer, b2.byteOffset, 8).getFloat64(0, true);
+    return;
+  }
+
+  // STP Qn, Qm, [Xn, #imm7] (128-bit pair): opc=10 V=1  (0xAD000000)
+  if (((opcode & 0xFFC00000) >>> 0) === 0xAD000000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 16;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    // Save lower 64 bits (D register) of each Q register
+    const buf1 = new ArrayBuffer(16); new DataView(buf1).setFloat64(0, fpRegs[rt1], true); mem.writeBytes(addr, new Uint8Array(buf1));
+    const buf2 = new ArrayBuffer(16); new DataView(buf2).setFloat64(0, fpRegs[rt2], true); mem.writeBytes(addr + 16, new Uint8Array(buf2));
+    return;
+  }
+  // LDP Qn, Qm, [Xn, #imm7] (128-bit pair): 0xAD400000
+  if (((opcode & 0xFFC00000) >>> 0) === 0xAD400000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 16;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const b1 = mem.readBytes(addr, 8); fpRegs[rt1] = new DataView(b1.buffer, b1.byteOffset, 8).getFloat64(0, true);
+    const b2 = mem.readBytes(addr + 16, 8); fpRegs[rt2] = new DataView(b2.buffer, b2.byteOffset, 8).getFloat64(0, true);
+    return;
+  }
+
+  // STP Dn, Dm, [Xn, #imm7]! (pre-index): 0x6D800000
+  if ((opcode & 0xFFC00000) === 0x6D800000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 8;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const buf1 = new ArrayBuffer(8); new DataView(buf1).setFloat64(0, fpRegs[rt1], true); mem.writeBytes(addr, new Uint8Array(buf1));
+    const buf2 = new ArrayBuffer(8); new DataView(buf2).setFloat64(0, fpRegs[rt2], true); mem.writeBytes(addr + 8, new Uint8Array(buf2));
+    if (rn === 31) regs.setSP(BigInt(addr)); else regs.setX(rn, BigInt(addr));
+    return;
+  }
+  // LDP Dn, Dm, [Xn], #imm7 (post-index): 0x6CC00000
+  if ((opcode & 0xFFC00000) === 0x6CC00000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const b1 = mem.readBytes(base, 8); fpRegs[rt1] = new DataView(b1.buffer, b1.byteOffset, 8).getFloat64(0, true);
+    const b2 = mem.readBytes(base + 8, 8); fpRegs[rt2] = new DataView(b2.buffer, b2.byteOffset, 8).getFloat64(0, true);
+    if (rn === 31) regs.setSP(BigInt(base + imm7 * 8)); else regs.setX(rn, BigInt(base + imm7 * 8));
+    return;
+  }
+  // LDP Dn, Dm, [Xn, #imm7]! (pre-index load pair): 0x6DC00000
+  if ((opcode & 0xFFC00000) === 0x6DC00000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 8;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const b1 = mem.readBytes(addr, 8); fpRegs[rt1] = new DataView(b1.buffer, b1.byteOffset, 8).getFloat64(0, true);
+    const b2 = mem.readBytes(addr + 8, 8); fpRegs[rt2] = new DataView(b2.buffer, b2.byteOffset, 8).getFloat64(0, true);
+    if (rn === 31) regs.setSP(BigInt(addr)); else regs.setX(rn, BigInt(addr));
+    return;
+  }
+  // STP Qn, Qm, [Xn, #imm7]! (128-bit pre-index): 0xAD800000
+  if (((opcode & 0xFFC00000) >>> 0) === 0xAD800000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 16;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const buf1 = new ArrayBuffer(16); new DataView(buf1).setFloat64(0, fpRegs[rt1], true); mem.writeBytes(addr, new Uint8Array(buf1));
+    const buf2 = new ArrayBuffer(16); new DataView(buf2).setFloat64(0, fpRegs[rt2], true); mem.writeBytes(addr + 16, new Uint8Array(buf2));
+    if (rn === 31) regs.setSP(BigInt(addr)); else regs.setX(rn, BigInt(addr));
+    return;
+  }
+  // LDP Qn, Qm, [Xn], #imm7 (128-bit post-index): 0xACC00000
+  if (((opcode & 0xFFC00000) >>> 0) === 0xACC00000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const b1 = mem.readBytes(base, 8); fpRegs[rt1] = new DataView(b1.buffer, b1.byteOffset, 8).getFloat64(0, true);
+    const b2 = mem.readBytes(base + 16, 8); fpRegs[rt2] = new DataView(b2.buffer, b2.byteOffset, 8).getFloat64(0, true);
+    if (rn === 31) regs.setSP(BigInt(base + imm7 * 16)); else regs.setX(rn, BigInt(base + imm7 * 16));
+    return;
+  }
+  // LDP Qn, Qm, [Xn, #imm7]! (128-bit pre-index load): 0xADC00000
+  if (((opcode & 0xFFC00000) >>> 0) === 0xADC00000) {
+    const rt1 = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const rt2 = (opcode >> 10) & 0x1F;
+    let imm7 = (opcode >> 15) & 0x7F;
+    if (imm7 & 0x40) imm7 |= ~0x7F;
+    const offset = imm7 * 16;
+    const base = rn === 31 ? Number(regs.getSP()) : Number(regs.getX(rn));
+    const addr = base + offset;
+    const b1 = mem.readBytes(addr, 8); fpRegs[rt1] = new DataView(b1.buffer, b1.byteOffset, 8).getFloat64(0, true);
+    const b2 = mem.readBytes(addr + 16, 8); fpRegs[rt2] = new DataView(b2.buffer, b2.byteOffset, 8).getFloat64(0, true);
+    if (rn === 31) regs.setSP(BigInt(addr)); else regs.setX(rn, BigInt(addr));
+    return;
+  }
+  // FCSEL Dd, Dn, Dm, cond
+  if ((opcode & 0xFF200C00) === 0x1E200C00) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const cond = (opcode >> 12) & 0xF;
+    const rm = (opcode >> 16) & 0x1F;
+    // evaluate condition using flags
+    let taken = false;
+    switch (cond >> 1) {
+      case 0: taken = flags.z; break;          // EQ/NE
+      case 1: taken = flags.c; break;          // CS/CC
+      case 2: taken = flags.n; break;          // MI/PL
+      case 3: taken = flags.v; break;          // VS/VC
+      case 4: taken = flags.c && !flags.z; break; // HI/LS
+      case 5: taken = flags.n === flags.v; break;  // GE/LT
+      case 6: taken = flags.n === flags.v && !flags.z; break; // GT/LE
+      case 7: taken = true; break;             // AL
+    }
+    if (cond & 1) taken = !taken; // negate for odd conditions (NE, CC, etc.)
+    fpRegs[rd] = taken ? fpRegs[rn] : fpRegs[rm];
+    return;
+  }
+
+  // FP data-processing 3-source (double): FMADD/FMSUB/FNMADD/FNMSUB
+  // 0 0 0 11111 01 o1 Rm o0 Ra Rn Rd  (type=01 for double)
+  if ((opcode & 0xFF200000) === 0x1F400000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    const ra = (opcode >> 10) & 0x1F;
+    const o0 = (opcode >> 15) & 1;
+    const rm = (opcode >> 16) & 0x1F;
+    const o1 = (opcode >> 21) & 1;
+    if (o1 === 0 && o0 === 0) fpRegs[rd] = fpRegs[rn] * fpRegs[rm] + fpRegs[ra];       // FMADD
+    else if (o1 === 0 && o0 === 1) fpRegs[rd] = -(fpRegs[rn] * fpRegs[rm]) + fpRegs[ra]; // FMSUB
+    else if (o1 === 1 && o0 === 0) fpRegs[rd] = -(fpRegs[rn] * fpRegs[rm]) - fpRegs[ra]; // FNMADD
+    else fpRegs[rd] = fpRegs[rn] * fpRegs[rm] - fpRegs[ra];                               // FNMSUB
+    return;
+  }
+
+  // FCVTZU Xd, Dn (unsigned FP->int 64-bit): sf=1 type=01 rmode=11 opcode=001
+  if (((opcode & 0xFFFFFC00) >>> 0) === 0x9E790000) {
+    const rd = opcode & 0x1F;
+    const rn = (opcode >> 5) & 0x1F;
+    regs.setX(rd, BigInt(Math.trunc(Math.max(0, fpRegs[rn]))));
+    return;
+  }
+}
+
 export function execute(program: AssembledProgram): ExecutionResult {
   const regs = new RegisterFile();
   const mem = new Memory();
+  const fpRegs = new Float64Array(32); // D0-D31
   let stdout = "";
 
   // Load data segment into memory
@@ -704,6 +1111,12 @@ export function execute(program: AssembledProgram): ExecutionResult {
 
         case "nop":
           break;
+
+        case "rawword": {
+          const opcode = Number(getImm(ops[0]));
+          executeFP(opcode, fpRegs, regs, mem);
+          break;
+        }
 
         default:
           throw new Error(`Line ${instr.line}: Unimplemented instruction: ${instr.op}`);

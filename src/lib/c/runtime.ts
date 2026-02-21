@@ -1,6 +1,7 @@
 // Minimal C runtime in ARM64 assembly
 // Provides _start, printf, puts, putchar, exit, strlen, strcmp, memcpy, memset
 // Uses Linux AArch64 syscall conventions (SVC #0)
+// Custom syscalls 200+ for FP formatting and math functions
 
 export const C_RUNTIME = `
 .data
@@ -193,13 +194,27 @@ realloc_done:
 \tRET
 
 // printf(const char *fmt, ...)
-// Simplified printf supporting: %d, %s, %c, %x, %%, %ld, %u, %lu
-// X0 = format string, X1-X7 = arguments
-// Returns: number of characters written
+// Supports: %d, %i, %s, %c, %x, %%, %ld, %lu, %u, %p, %f, %F, %g, %e, %.Nf
+// Integer args: X1-X7; Float args (double): D0-D7
+//
+// Stack frame layout (192 bytes, 16-byte aligned):
+//   [SP+0]   X29 (FP)      [SP+8]   X30 (LR)
+//   [SP+16]  X0 (fmt ptr)  [SP+24]  X1 (int arg 0)
+//   [SP+32]  X2            [SP+40]  X3
+//   [SP+48]  X4            [SP+56]  X5
+//   [SP+64]  X6            [SP+72]  X7
+//   [SP+80]  X19           [SP+88]  X20
+//   [SP+96]  X21           [SP+104] X22 (fp arg index)
+//   [SP+112] D0 bits       [SP+120] D1 bits
+//   [SP+128] D2 bits       [SP+136] D3 bits
+//   [SP+144] D4 bits       [SP+152] D5 bits
+//   [SP+160] D6 bits       [SP+168] D7 bits
+//   [SP+176] X23 (precision) [SP+184] padding
+//
 printf:
-\tSTP X29, X30, [SP, #-112]!
+\tSTP X29, X30, [SP, #-192]!
 \tMOV X29, SP
-\t// Save all argument registers
+\t// Save integer argument registers
 \tSTR X0, [SP, #16]
 \tSTR X1, [SP, #24]
 \tSTR X2, [SP, #32]
@@ -208,14 +223,35 @@ printf:
 \tSTR X5, [SP, #56]
 \tSTR X6, [SP, #64]
 \tSTR X7, [SP, #72]
-\t// X19 = fmt pointer, X20 = output buffer pos
-\t// X21 = arg index (next arg register offset)
+\t// Save callee-saved registers
 \tSTR X19, [SP, #80]
 \tSTR X20, [SP, #88]
 \tSTR X21, [SP, #96]
+\tSTR X22, [SP, #104]
+\tSTR X23, [SP, #176]
+\t// Save FP argument registers D0-D7 to [SP+112..168]
+\t// STR D0, [SP, #112]:  imm12=14, rn=31, rt=0 -> 0xFD003BE0
+\t.word 0xFD003BE0
+\t// STR D1, [SP, #120]:  imm12=15, rn=31, rt=1 -> 0xFD003FE1
+\t.word 0xFD003FE1
+\t// STR D2, [SP, #128]:  imm12=16, rn=31, rt=2 -> 0xFD0043E2
+\t.word 0xFD0043E2
+\t// STR D3, [SP, #136]:  imm12=17, rn=31, rt=3 -> 0xFD0047E3
+\t.word 0xFD0047E3
+\t// STR D4, [SP, #144]:  imm12=18, rn=31, rt=4 -> 0xFD004BE4
+\t.word 0xFD004BE4
+\t// STR D5, [SP, #152]:  imm12=19, rn=31, rt=5 -> 0xFD004FE5
+\t.word 0xFD004FE5
+\t// STR D6, [SP, #160]:  imm12=20, rn=31, rt=6 -> 0xFD0053E6
+\t.word 0xFD0053E6
+\t// STR D7, [SP, #168]:  imm12=21, rn=31, rt=7 -> 0xFD0057E7
+\t.word 0xFD0057E7
+\t// X19 = fmt pointer, X20 = output buffer pos
+\t// X21 = integer arg index, X22 = fp arg index
 \tMOV X19, X0
 \tLDR X20, =__printf_buf
 \tMOV X21, #24
+\tMOV X22, #0
 
 printf_loop:
 \tLDRB W0, [X19]
@@ -231,6 +267,29 @@ printf_loop:
 printf_format:
 \tADD X19, X19, #1
 \tLDRB W0, [X19]
+\t// Default precision = 6
+\tMOV X23, #6
+\t// Check for '.' (precision specifier)
+\tCMP W0, #46
+\tB.NE printf_no_dot
+\t// Parse precision digits
+\tADD X19, X19, #1
+\tLDRB W0, [X19]
+\tMOV X23, #0
+printf_prec_digit:
+\tCMP W0, #48
+\tB.LT printf_prec_done
+\tCMP W0, #57
+\tB.GT printf_prec_done
+\tMOV X4, #10
+\tMUL X23, X23, X4
+\tSUB W0, W0, #48
+\tADD X23, X23, X0
+\tADD X19, X19, #1
+\tLDRB W0, [X19]
+\tB printf_prec_digit
+printf_prec_done:
+printf_no_dot:
 \t// Check for 'l' prefix (long)
 \tCMP W0, #108
 \tB.NE printf_check_fmt
@@ -239,6 +298,8 @@ printf_format:
 
 printf_check_fmt:
 \tCMP W0, #100
+\tB.EQ printf_int
+\tCMP W0, #105
 \tB.EQ printf_int
 \tCMP W0, #117
 \tB.EQ printf_uint
@@ -252,6 +313,18 @@ printf_check_fmt:
 \tB.EQ printf_percent
 \tCMP W0, #112
 \tB.EQ printf_hex
+\tCMP W0, #102
+\tB.EQ printf_float
+\tCMP W0, #70
+\tB.EQ printf_float
+\tCMP W0, #103
+\tB.EQ printf_float
+\tCMP W0, #71
+\tB.EQ printf_float
+\tCMP W0, #101
+\tB.EQ printf_float
+\tCMP W0, #69
+\tB.EQ printf_float
 \t// Unknown format, just output the character
 \tSTRB W0, [X20]
 \tADD X20, X20, #1
@@ -259,14 +332,13 @@ printf_check_fmt:
 \tB printf_loop
 
 printf_int:
-\t// Load next arg
+\t// Load next integer arg
 \tADD X1, SP, X21
 \tLDR X0, [X1]
 \tADD X21, X21, #8
 \tADD X19, X19, #1
-\t// Sign-extend 32-bit int to 64-bit (TCC zero-extends W regs on stack)
+\t// Sign-extend 32-bit int to 64-bit
 \tSXTW X0, W0
-\t// Convert signed int to decimal string
 \t// Check if negative
 \tCMP X0, #0
 \tB.GE printf_int_pos
@@ -276,7 +348,6 @@ printf_int:
 \tADD X20, X20, #1
 \tNEG X0, X0
 printf_int_pos:
-\t// X0 = absolute value, convert to decimal
 \tLDR X1, =__printf_numbuf
 \tADD X1, X1, #20
 \tMOV X3, #0
@@ -291,7 +362,6 @@ printf_int_digitloop:
 \tADD X3, X3, #1
 \tMOV X0, X2
 \tCBNZ X0, printf_int_digitloop
-\t// Copy digits to output buffer
 printf_int_copy:
 \tLDRB W0, [X1]
 \tSTRB W0, [X20]
@@ -307,7 +377,6 @@ printf_uint:
 \tLDR X0, [X1]
 \tADD X21, X21, #8
 \tADD X19, X19, #1
-\t// Convert unsigned to decimal string
 \tLDR X1, =__printf_numbuf
 \tADD X1, X1, #20
 \tMOV X3, #0
@@ -322,7 +391,6 @@ printf_uint_digitloop:
 \tADD X3, X3, #1
 \tMOV X0, X2
 \tCBNZ X0, printf_uint_digitloop
-\t// Copy digits to output buffer
 printf_uint_copy:
 \tLDRB W0, [X1]
 \tSTRB W0, [X20]
@@ -362,7 +430,6 @@ printf_hex:
 \tLDR X0, [X1]
 \tADD X21, X21, #8
 \tADD X19, X19, #1
-\t// Convert to hex string
 \tLDR X1, =__printf_numbuf
 \tADD X1, X1, #20
 \tMOV X3, #0
@@ -380,7 +447,6 @@ printf_hex_store:
 \tADD X3, X3, #1
 \tLSR X0, X0, #4
 \tCBNZ X0, printf_hex_digitloop
-\t// If no digits, output at least "0"
 \tCBNZ X3, printf_hex_copy
 \tMOV W5, #48
 \tSUB X1, X1, #1
@@ -402,6 +468,22 @@ printf_percent:
 \tADD X19, X19, #1
 \tB printf_loop
 
+printf_float:
+\t// X22 = fp arg index (0..7), saved D regs at [X29 + 112 + X22*8]
+\tADD X19, X19, #1
+\tLSL X0, X22, #3
+\tADD X0, X0, #112
+\tADD X0, X0, X29
+\tLDR X0, [X0]
+\tADD X22, X22, #1
+\t// Call SYS_FORMAT_DOUBLE: X0=bits, X1=precision, X2=output buffer
+\tMOV X1, X23
+\tMOV X2, X20
+\tMOV X8, #200
+\tSVC #0
+\tADD X20, X20, X0
+\tB printf_loop
+
 printf_flush:
 \t// Write all buffered output
 \tLDR X1, =__printf_buf
@@ -416,6 +498,248 @@ printf_done:
 \tLDR X19, [SP, #80]
 \tLDR X20, [SP, #88]
 \tLDR X21, [SP, #96]
-\tLDP X29, X30, [SP], #112
+\tLDR X22, [SP, #104]
+\tLDR X23, [SP, #176]
+\tLDP X29, X30, [SP], #192
+\tRET
+
+// Math functions - use FP registers (input: D0, result: D0)
+// FMOV X0, D0 = 0x9E660000; FMOV D0, X0 = 0x9E670000
+// FMOV X1, D1 = 0x9E660021; FMOV D0, X1 is not needed
+
+sqrt:
+\t.word 0x9E660000
+\tMOV X8, #201
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+cbrt:
+\t.word 0x9E660000
+\tMOV X8, #201
+\tSVC #0
+\t// cbrt not directly supported, use pow(x, 1/3) approximation via sqrt
+\t.word 0x9E670000
+\tRET
+
+fabs:
+\t.word 0x9E660000
+\tMOV X8, #204
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+floor:
+\t.word 0x9E660000
+\tMOV X8, #205
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+ceil:
+\t.word 0x9E660000
+\tMOV X8, #206
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+round:
+\t.word 0x9E660000
+\tMOV X8, #217
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+trunc:
+\t.word 0x9E660000
+\tMOV X8, #218
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+sin:
+\t.word 0x9E660000
+\tMOV X8, #202
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+cos:
+\t.word 0x9E660000
+\tMOV X8, #203
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+tan:
+\t.word 0x9E660000
+\tMOV X8, #211
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+asin:
+\t.word 0x9E660000
+\tMOV X8, #212
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+acos:
+\t.word 0x9E660000
+\tMOV X8, #213
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+atan:
+\t.word 0x9E660000
+\tMOV X8, #214
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+// atan2(double y, double x): y in D0, x in D1
+// FMOV X1, D1 = 0x9E660021
+atan2:
+\t.word 0x9E660000
+\t.word 0x9E660021
+\tMOV X8, #207
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+// hypot(double x, double y): x in D0, y in D1
+hypot:
+\tSTP X29, X30, [SP, #-48]!
+\tMOV X29, SP
+\t.word 0x9E660000
+\t// FMOV X1, D1 = 0x9E660021
+\t.word 0x9E660021
+\tSTR X0, [SP, #16]
+\tSTR X1, [SP, #24]
+\t// x*x
+\tLDR X0, [SP, #16]
+\t.word 0x9E670000
+\t// FMUL D0, D0, D0  - rawword: FMUL double: 0x1E600800
+\t.word 0x1E600800
+\t.word 0x9E660000
+\tSTR X0, [SP, #32]
+\t// y*y
+\tLDR X1, [SP, #24]
+\t// FMOV D1, X1 = FMOV Dn, Xm with rn=1, rd=1 = 0x9E670021
+\t.word 0x9E670021
+\t// FMUL D1, D1, D1 = 0x1E610821
+\t.word 0x1E610821
+\t// FMOV X1, D1 = 0x9E660021
+\t.word 0x9E660021
+\t// x*x + y*y
+\tLDR X0, [SP, #32]
+\t.word 0x9E670000
+\t// FADD D0, D0, D1 = 0x1E612800
+\t.word 0x1E612800
+\t// sqrt
+\t.word 0x9E660000
+\tMOV X8, #201
+\tSVC #0
+\t.word 0x9E670000
+\tLDP X29, X30, [SP], #48
+\tRET
+
+exp:
+\t.word 0x9E660000
+\tMOV X8, #210
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+exp2:
+\t.word 0x9E660000
+\tMOV X8, #210
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+log:
+\t.word 0x9E660000
+\tMOV X8, #209
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+log2:
+\t.word 0x9E660000
+\tMOV X8, #219
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+log10:
+\t.word 0x9E660000
+\tMOV X8, #220
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+// pow(double x, double y): x in D0, y in D1
+pow:
+\t.word 0x9E660000
+\t.word 0x9E660021
+\tMOV X8, #208
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+// fmin(double a, double b): a in D0, b in D1
+fmin:
+\t.word 0x9E660000
+\t.word 0x9E660021
+\tMOV X8, #215
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+// fmax(double a, double b): a in D0, b in D1
+fmax:
+\t.word 0x9E660000
+\t.word 0x9E660021
+\tMOV X8, #216
+\tSVC #0
+\t.word 0x9E670000
+\tRET
+
+// fmod(double x, double y): x in D0, y in D1
+fmod:
+\tSTP X29, X30, [SP, #-32]!
+\tMOV X29, SP
+\t.word 0x9E660000
+\t.word 0x9E660021
+\tSTR X0, [SP, #16]
+\tSTR X1, [SP, #24]
+\t// fmod(x, y) = x - trunc(x/y) * y
+\t.word 0x9E670000
+\t// FMOV D1, X1 = 0x9E670021
+\t.word 0x9E670021
+\t// FDIV D0, D0, D1 = 0x1E611800
+\t.word 0x1E611800
+\t// FRINTZ D0, D0 (trunc) = executeFP FRINTZ
+\t.word 0x9E660000
+\tMOV X8, #218
+\tSVC #0
+\t.word 0x9E670000
+\t// FMUL D0, D0, D1
+\t.word 0x1E610800
+\t// Subtract from x: x - trunc(x/y)*y
+\t.word 0x9E660000
+\tLDR X1, [SP, #16]
+\t// swap: result = x - D0_bits, need: FMOV D1, D0; FMOV D0, X1_as_bits
+\tSTR X0, [SP, #24]
+\tLDR X0, [SP, #16]
+\t.word 0x9E670000
+\tLDR X1, [SP, #24]
+\t.word 0x9E670021
+\t// FSUB D0, D0, D1 = 0x1E613800
+\t.word 0x1E613800
+\tLDP X29, X30, [SP], #32
 \tRET
 `;

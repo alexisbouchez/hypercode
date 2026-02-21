@@ -98,7 +98,6 @@ int main() {
 		{
 			name: "y=x (line) at x=5: κ = 0.0000 (straight line, no curvature)",
 			code: `#include <stdio.h>
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double line(double x) { return x; }
 int main() {
@@ -110,9 +109,7 @@ int main() {
 		{
 			name: "y=x² at x=1: κ = 2/(5√5) ≈ 0.1789",
 			code: `#include <stdio.h>
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
-double parabola(double x) { return x * x; }
 int main() {
 \tprintf("%.4f\\n", curvature(parabola, 1.0, 1e-4));
 \treturn 0;
@@ -122,7 +119,6 @@ int main() {
 		{
 			name: "y=4x² at x=0: κ = 8/(1)^(3/2) = 8.0000",
 			code: `#include <stdio.h>
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double wide(double x) { return 4.0 * x * x; }
 int main() {

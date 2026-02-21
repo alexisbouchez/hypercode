@@ -125,7 +125,6 @@ int main() {
 			code: `#include <stdio.h>
 #define PI 3.14159265358979
 {{FUNC}}
-double two(double theta) { return 2.0; }
 int main() {
 \tprintf("%.4f\\n", polar_area(two, 0.0, PI / 2.0, 100000));
 \treturn 0;

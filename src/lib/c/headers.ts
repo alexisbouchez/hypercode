@@ -121,6 +121,51 @@ typedef long ptrdiff_t;
 #endif
 `;
 
+export const MATH_H = `
+#ifndef _MATH_H
+#define _MATH_H
+
+#define M_PI    3.14159265358979323846
+#define M_E     2.71828182845904523536
+#define M_SQRT2 1.41421356237309504880
+#define M_LN2   0.69314718055994530942
+#define M_LOG2E 1.44269504088896340736
+
+double sqrt(double x);
+double cbrt(double x);
+double fabs(double x);
+double floor(double x);
+double ceil(double x);
+double round(double x);
+double trunc(double x);
+double sin(double x);
+double cos(double x);
+double tan(double x);
+double asin(double x);
+double acos(double x);
+double atan(double x);
+double atan2(double y, double x);
+double sinh(double x);
+double cosh(double x);
+double tanh(double x);
+double exp(double x);
+double exp2(double x);
+double log(double x);
+double log2(double x);
+double log10(double x);
+double pow(double x, double y);
+double hypot(double x, double y);
+double fmin(double x, double y);
+double fmax(double x, double y);
+double fmod(double x, double y);
+
+#define HUGE_VAL (1.0/0.0)
+#define INFINITY (1.0/0.0)
+#define NAN      (0.0/0.0)
+
+#endif
+`;
+
 export const STDARG_H = `
 #ifndef _STDARG_H
 #define _STDARG_H
@@ -142,4 +187,5 @@ export const HEADERS: Record<string, string> = {
 	"stdint.h": STDINT_H,
 	"stddef.h": STDDEF_H,
 	"stdarg.h": STDARG_H,
+	"math.h": MATH_H,
 };

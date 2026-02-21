@@ -136,17 +136,6 @@ int main() {
 		{
 			name: "x², P_2 at a=0, x=2: exact polynomial, error ≈ 0.0000",
 			code: `#include <stdio.h>
-static double factorial(int n) { double r=1.0; for(int i=2;i<=n;i++) r*=i; return r; }
-static double powi(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
-static double nth_deriv(double (*f)(double), double x, int n, double h) {
-\tif (n==0) return f(x);
-\treturn (nth_deriv(f,x+h,n-1,h)-nth_deriv(f,x-h,n-1,h))/(2.0*h);
-}
-static double taylor_poly(double (*f)(double), double a, double x, int n, double h) {
-\tdouble sum=0.0;
-\tfor(int k=0;k<=n;k++) sum+=nth_deriv(f,a,k,h)/factorial(k)*powi(x-a,k);
-\treturn sum;
-}
 {{FUNC}}
 double quad(double x) { return x * x; }
 int main() {
@@ -158,17 +147,6 @@ int main() {
 		{
 			name: "x⁴, P_3 at a=0, x=2: P_3=0, error = 16.0000",
 			code: `#include <stdio.h>
-static double factorial(int n) { double r=1.0; for(int i=2;i<=n;i++) r*=i; return r; }
-static double powi(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
-static double nth_deriv(double (*f)(double), double x, int n, double h) {
-\tif (n==0) return f(x);
-\treturn (nth_deriv(f,x+h,n-1,h)-nth_deriv(f,x-h,n-1,h))/(2.0*h);
-}
-static double taylor_poly(double (*f)(double), double a, double x, int n, double h) {
-\tdouble sum=0.0;
-\tfor(int k=0;k<=n;k++) sum+=nth_deriv(f,a,k,h)/factorial(k)*powi(x-a,k);
-\treturn sum;
-}
 {{FUNC}}
 double quart(double x) { return x * x * x * x; }
 int main() {
@@ -180,17 +158,6 @@ int main() {
 		{
 			name: "x², P_1 at a=0, x=3: P_1=0, error = 9.0000",
 			code: `#include <stdio.h>
-static double factorial(int n) { double r=1.0; for(int i=2;i<=n;i++) r*=i; return r; }
-static double powi(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
-static double nth_deriv(double (*f)(double), double x, int n, double h) {
-\tif (n==0) return f(x);
-\treturn (nth_deriv(f,x+h,n-1,h)-nth_deriv(f,x-h,n-1,h))/(2.0*h);
-}
-static double taylor_poly(double (*f)(double), double a, double x, int n, double h) {
-\tdouble sum=0.0;
-\tfor(int k=0;k<=n;k++) sum+=nth_deriv(f,a,k,h)/factorial(k)*powi(x-a,k);
-\treturn sum;
-}
 {{FUNC}}
 double quad(double x) { return x * x; }
 int main() {

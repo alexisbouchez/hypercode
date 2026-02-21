@@ -92,7 +92,6 @@ int main() {
 		{
 			name: "p=2, n=5: 1+1/4+1/9+1/16+1/25 ≈ 1.4636",
 			code: `#include <stdio.h>
-static double int_pow(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
 {{FUNC}}
 int main() {
 \tprintf("%.4f\\n", p_series(2, 5));
@@ -103,7 +102,6 @@ int main() {
 		{
 			name: "p=3, n=3: 1+1/8+1/27 ≈ 1.1620",
 			code: `#include <stdio.h>
-static double int_pow(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
 {{FUNC}}
 int main() {
 \tprintf("%.4f\\n", p_series(3, 3));
@@ -114,7 +112,6 @@ int main() {
 		{
 			name: "p=2, n=1: just the first term = 1.0000",
 			code: `#include <stdio.h>
-static double int_pow(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
 {{FUNC}}
 int main() {
 \tprintf("%.4f\\n", p_series(2, 1));

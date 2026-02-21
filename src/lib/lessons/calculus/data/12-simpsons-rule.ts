@@ -117,7 +117,6 @@ int main() {
 			name: "x^2 from 0 to 2 with n=4: exactly 8/3",
 			code: `#include <stdio.h>
 {{FUNC}}
-double quad(double x) { return x * x; }
 int main() {
 \tprintf("%.4f\\n", simpson(quad, 0.0, 2.0, 4));
 \treturn 0;

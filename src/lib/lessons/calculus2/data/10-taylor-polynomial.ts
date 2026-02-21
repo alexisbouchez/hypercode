@@ -123,12 +123,6 @@ int main() {
 		{
 			name: "P_3 of x³ at a=0, x=2: exact = 8.0000",
 			code: `#include <stdio.h>
-static double factorial(int n) { double r=1.0; for(int i=2;i<=n;i++) r*=i; return r; }
-static double powi(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
-static double nth_deriv(double (*f)(double), double x, int n, double h) {
-\tif (n==0) return f(x);
-\treturn (nth_deriv(f,x+h,n-1,h)-nth_deriv(f,x-h,n-1,h))/(2.0*h);
-}
 {{FUNC}}
 double cubic(double x) { return x * x * x; }
 int main() {
@@ -140,14 +134,7 @@ int main() {
 		{
 			name: "P_2 of x² at a=1, x=3: exact = 9.0000",
 			code: `#include <stdio.h>
-static double factorial(int n) { double r=1.0; for(int i=2;i<=n;i++) r*=i; return r; }
-static double powi(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
-static double nth_deriv(double (*f)(double), double x, int n, double h) {
-\tif (n==0) return f(x);
-\treturn (nth_deriv(f,x+h,n-1,h)-nth_deriv(f,x-h,n-1,h))/(2.0*h);
-}
 {{FUNC}}
-double quad(double x) { return x * x; }
 int main() {
 \tprintf("%.4f\\n", taylor_poly(quad, 1.0, 3.0, 2, 1e-3));
 \treturn 0;
@@ -157,14 +144,7 @@ int main() {
 		{
 			name: "P_1 of x² at a=0, x=3: P_1=0 (misses x² term), = 0.0000",
 			code: `#include <stdio.h>
-static double factorial(int n) { double r=1.0; for(int i=2;i<=n;i++) r*=i; return r; }
-static double powi(double base, int exp) { double r=1.0; for(int i=0;i<exp;i++) r*=base; return r; }
-static double nth_deriv(double (*f)(double), double x, int n, double h) {
-\tif (n==0) return f(x);
-\treturn (nth_deriv(f,x+h,n-1,h)-nth_deriv(f,x-h,n-1,h))/(2.0*h);
-}
 {{FUNC}}
-double quad(double x) { return x * x; }
 int main() {
 \tprintf("%.4f\\n", taylor_poly(quad, 0.0, 3.0, 1, 1e-3));
 \treturn 0;

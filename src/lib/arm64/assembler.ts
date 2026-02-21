@@ -342,6 +342,10 @@ export function assemble(source: string): AssembledProgram {
     if (currentSection === "text" && p.instruction) {
       instrIndex++;
     }
+    // .word in text section = raw FP/SIMD instruction word
+    if (currentSection === "text" && p.directive && (p.directive.name === "word" || p.directive.name === "4byte")) {
+      instrIndex++;
+    }
   }
 
   // Second pass: generate data segment and instructions
@@ -422,6 +426,12 @@ export function assemble(source: string): AssembledProgram {
     if (currentSection === "text" && p.instruction) {
       const instr = parseInstruction(p.instruction.mnemonic, p.instruction.operandsRaw, p.lineNum);
       instructions.push(instr);
+    }
+    // .word in text section = raw ARM64 FP/SIMD instruction word
+    if (currentSection === "text" && p.directive && (p.directive.name === "word" || p.directive.name === "4byte")) {
+      const val = p.directive.args.trim();
+      const raw = val.startsWith("0x") || val.startsWith("0X") ? parseInt(val, 16) : parseInt(val, 10);
+      instructions.push({ op: "rawword", operands: [{ kind: "imm", value: BigInt(raw >>> 0) }], line: p.lineNum });
     }
   }
 

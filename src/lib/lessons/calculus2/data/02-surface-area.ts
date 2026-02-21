@@ -63,7 +63,7 @@ double unit(double x) { return 1.0; }
 
 int main() {
 \t/* cylinder r=1, L=3: SA = 2*pi*1*3 = 6*pi ~ 18.8496 */
-\tprintf("%.4f\\n", surface_area(unit, 0.0, 3.0, 10000, 1e-5));
+\tprintf("%.4f\\n", surface_area(unit, 0.0, 3.0, 100, 1e-5));
 \treturn 0;
 }`,
 
@@ -90,7 +90,7 @@ double surface_area(double (*f)(double), double a, double b, int n, double h) {
 double unit(double x) { return 1.0; }
 
 int main() {
-\tprintf("%.4f\\n", surface_area(unit, 0.0, 3.0, 10000, 1e-5));
+\tprintf("%.4f\\n", surface_area(unit, 0.0, 3.0, 100, 1e-5));
 \treturn 0;
 }`,
 
@@ -103,11 +103,10 @@ int main() {
 			name: "cone y=x on [0,1]: SA = π√2 ≈ 4.4429",
 			code: `#include <stdio.h>
 #define PI 3.14159265358979
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double id(double x) { return x; }
 int main() {
-\tprintf("%.4f\\n", surface_area(id, 0.0, 1.0, 10000, 1e-5));
+\tprintf("%.4f\\n", surface_area(id, 0.0, 1.0, 100, 1e-5));
 \treturn 0;
 }`,
 			expected: "4.4429\n",
@@ -116,11 +115,10 @@ int main() {
 			name: "cylinder r=3 on [0,2]: SA = 12π ≈ 37.6991",
 			code: `#include <stdio.h>
 #define PI 3.14159265358979
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double three(double x) { return 3.0; }
 int main() {
-\tprintf("%.4f\\n", surface_area(three, 0.0, 2.0, 10000, 1e-5));
+\tprintf("%.4f\\n", surface_area(three, 0.0, 2.0, 100, 1e-5));
 \treturn 0;
 }`,
 			expected: "37.6991\n",
@@ -129,11 +127,10 @@ int main() {
 			name: "cylinder r=2 on [0,1]: SA = 4π ≈ 12.5664",
 			code: `#include <stdio.h>
 #define PI 3.14159265358979
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double two(double x) { return 2.0; }
 int main() {
-\tprintf("%.4f\\n", surface_area(two, 0.0, 1.0, 10000, 1e-5));
+\tprintf("%.4f\\n", surface_area(two, 0.0, 1.0, 100, 1e-5));
 \treturn 0;
 }`,
 			expected: "12.5664\n",

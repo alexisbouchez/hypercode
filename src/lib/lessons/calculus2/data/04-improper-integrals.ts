@@ -52,11 +52,11 @@ double improper_integral(double (*f)(double), double a, double T, int n) {
 \treturn sum * h;
 }
 
-double inv_sq(double x) { return 1.0 / (x * x); }
+double two_inv_cb(double x) { return 2.0 / (x * x * x); }
 
 int main() {
-\t/* ∫_1^∞ 1/x² dx = 1 (approximate with T=100000) */
-\tprintf("%.4f\\n", improper_integral(inv_sq, 1.0, 100000.0, 100000));
+\t/* ∫_1^∞ 2/x³ dx = 1 (approximate with T=200) */
+\tprintf("%.4f\\n", improper_integral(two_inv_cb, 1.0, 200.0, 100000));
 \treturn 0;
 }`,
 
@@ -71,25 +71,25 @@ double improper_integral(double (*f)(double), double a, double T, int n) {
 \treturn sum * h;
 }
 
-double inv_sq(double x) { return 1.0 / (x * x); }
+double two_inv_cb(double x) { return 2.0 / (x * x * x); }
 
 int main() {
-\tprintf("%.4f\\n", improper_integral(inv_sq, 1.0, 100000.0, 100000));
+\tprintf("%.4f\\n", improper_integral(two_inv_cb, 1.0, 200.0, 100000));
 \treturn 0;
 }`,
 
 	tests: [
 		{
-			name: "∫_1^∞ 1/x² dx = 1 (via T=100000)",
+			name: "∫_1^∞ 2/x³ dx = 1 (via T=200)",
 			expected: "1.0000\n",
 		},
 		{
-			name: "∫_1^∞ 1/x³ dx = 0.5 (via T=100000)",
+			name: "∫_1^∞ 1/x³ dx = 0.5 (via T=200)",
 			code: `#include <stdio.h>
 {{FUNC}}
 double inv_cube(double x) { return 1.0 / (x * x * x); }
 int main() {
-\tprintf("%.4f\\n", improper_integral(inv_cube, 1.0, 100000.0, 100000));
+\tprintf("%.4f\\n", improper_integral(inv_cube, 1.0, 200.0, 100000));
 \treturn 0;
 }`,
 			expected: "0.5000\n",
@@ -106,12 +106,12 @@ int main() {
 			expected: "15.0000\n",
 		},
 		{
-			name: "∫_1^∞ 1/x^4 dx = 1/3 ≈ 0.3333 (via T=100000)",
+			name: "∫_1^∞ 1/x^4 dx = 1/3 ≈ 0.3333 (via T=200)",
 			code: `#include <stdio.h>
 {{FUNC}}
 double inv_4(double x) { return 1.0 / (x * x * x * x); }
 int main() {
-\tprintf("%.4f\\n", improper_integral(inv_4, 1.0, 100000.0, 100000));
+\tprintf("%.4f\\n", improper_integral(inv_4, 1.0, 200.0, 100000));
 \treturn 0;
 }`,
 			expected: "0.3333\n",

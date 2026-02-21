@@ -106,7 +106,6 @@ int main() {
 			name: "∭1 dV over [0,1]³ = 1",
 			code: `#include <stdio.h>
 {{FUNC}}
-double one(double x, double y, double z) { return 1.0; }
 int main() {
 \tprintf("%.4f\\n", triple_integral(one, 0,1, 0,1, 0,1, 20));
 \treturn 0;

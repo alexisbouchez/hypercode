@@ -102,7 +102,7 @@ int main() {
 			expected: "0.0000\n",
 		},
 		{
-			name: "∇²(x³+y³) at (1,1) = 6",
+			name: "∇²(x³+y³) at (1,1) = 12",
 			code: `#include <stdio.h>
 {{FUNC}}
 double g(double x, double y) { return x*x*x + y*y*y; }
@@ -110,7 +110,7 @@ int main() {
 \tprintf("%.4f\\n", laplacian_2d(g, 1.0, 1.0, 1e-4));
 \treturn 0;
 }`,
-			expected: "6.0000\n",
+			expected: "12.0000\n",
 		},
 		{
 			name: "∇²(x·y) = 0 (harmonic — no pure second partials)",

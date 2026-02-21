@@ -54,6 +54,7 @@ double critical_point(double (*f)(double), double a, double b, int n, double h) 
 \tfor (int i = 0; i < n; i++) {
 \t\tdouble m = (a + b) / 2.0;
 \t\tdouble fm = (f(m + h) - f(m - h)) / (2.0 * h);
+\t\tif (fm == 0.0) { a = b = m; break; }
 \t\tif (fa * fm < 0.0) { b = m; }
 \t\telse { a = m; fa = fm; }
 \t}
@@ -76,6 +77,7 @@ double critical_point(double (*f)(double), double a, double b, int n, double h) 
 \tfor (int i = 0; i < n; i++) {
 \t\tdouble m = (a + b) / 2.0;
 \t\tdouble fm = (f(m + h) - f(m - h)) / (2.0 * h);
+\t\tif (fm == 0.0) { a = b = m; break; }
 \t\tif (fa * fm < 0.0) { b = m; }
 \t\telse { a = m; fa = fm; }
 \t}

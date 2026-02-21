@@ -91,7 +91,6 @@ int main() {
 			name: "alternating harmonic n=1: just 1.0000",
 			code: `#include <stdio.h>
 {{FUNC}}
-double inv_k(int k) { return 1.0 / (double)k; }
 int main() {
 \tprintf("%.4f\\n", alternating_sum(inv_k, 1));
 \treturn 0;

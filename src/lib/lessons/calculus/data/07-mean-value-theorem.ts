@@ -95,7 +95,6 @@ int main() {
 			name: "x^2 on [1,5]: avg slope=6, c=3",
 			code: `#include <stdio.h>
 {{FUNC}}
-double quad(double x) { return x * x; }
 int main() {
 \tprintf("%.4f\\n", mvt_point(quad, 1.0, 5.0, 60, 1e-6));
 \treturn 0;

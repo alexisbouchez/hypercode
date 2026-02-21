@@ -19,6 +19,29 @@ export const REG_NAMES_32: Record<string, number> = {
 export const SYS_WRITE = 64;
 export const SYS_EXIT = 93;
 
+// Custom syscalls for FP/math operations
+export const SYS_FORMAT_DOUBLE = 200;
+export const SYS_SQRT = 201;
+export const SYS_SIN = 202;
+export const SYS_COS = 203;
+export const SYS_FABS = 204;
+export const SYS_FLOOR = 205;
+export const SYS_CEIL = 206;
+export const SYS_ATAN2 = 207;
+export const SYS_POW = 208;
+export const SYS_LOG = 209;
+export const SYS_EXP = 210;
+export const SYS_TAN = 211;
+export const SYS_ASIN = 212;
+export const SYS_ACOS = 213;
+export const SYS_ATAN = 214;
+export const SYS_FMIN = 215;
+export const SYS_FMAX = 216;
+export const SYS_ROUND = 217;
+export const SYS_TRUNC = 218;
+export const SYS_LOG2 = 219;
+export const SYS_LOG10 = 220;
+
 // Memory layout
 export const CODE_BASE = 0x400000;
 export const DATA_BASE = 0x500000;
@@ -33,4 +56,4 @@ export const COND_CODES: Record<string, number> = {
   al: 14,
 };
 
-export const MAX_INSTRUCTIONS = 100000;
+export const MAX_INSTRUCTIONS = 5000000;

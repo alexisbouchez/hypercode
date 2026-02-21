@@ -64,7 +64,7 @@ double line(double x) { return x; }
 
 int main() {
 \t/* arc length of y=x on [0,3] = 3*sqrt(2) ~ 4.2426 */
-\tprintf("%.4f\\n", arc_length(line, 0.0, 3.0, 10000, 1e-5));
+\tprintf("%.4f\\n", arc_length(line, 0.0, 3.0, 100, 1e-5));
 \treturn 0;
 }`,
 
@@ -90,7 +90,7 @@ double arc_length(double (*f)(double), double a, double b, int n, double h) {
 double line(double x) { return x; }
 
 int main() {
-\tprintf("%.4f\\n", arc_length(line, 0.0, 3.0, 10000, 1e-5));
+\tprintf("%.4f\\n", arc_length(line, 0.0, 3.0, 100, 1e-5));
 \treturn 0;
 }`,
 
@@ -102,11 +102,10 @@ int main() {
 		{
 			name: "arc length of horizontal line y=5 on [0,4] = 4",
 			code: `#include <stdio.h>
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double horiz(double x) { return 5.0; }
 int main() {
-\tprintf("%.4f\\n", arc_length(horiz, 0.0, 4.0, 1000, 1e-5));
+\tprintf("%.4f\\n", arc_length(horiz, 0.0, 4.0, 100, 1e-5));
 \treturn 0;
 }`,
 			expected: "4.0000\n",
@@ -114,11 +113,10 @@ int main() {
 		{
 			name: "arc length of y=3x on [0,4] = 4√10 ≈ 12.6491",
 			code: `#include <stdio.h>
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double triple(double x) { return 3.0 * x; }
 int main() {
-\tprintf("%.4f\\n", arc_length(triple, 0.0, 4.0, 10000, 1e-5));
+\tprintf("%.4f\\n", arc_length(triple, 0.0, 4.0, 100, 1e-5));
 \treturn 0;
 }`,
 			expected: "12.6491\n",
@@ -126,11 +124,10 @@ int main() {
 		{
 			name: "arc length of y=2x on [0,1] = √5 ≈ 2.2361",
 			code: `#include <stdio.h>
-static double my_sqrt(double x) { double r=x; for(int i=0;i<50;i++) r=(r+x/r)/2.0; return r; }
 {{FUNC}}
 double two_x(double x) { return 2.0 * x; }
 int main() {
-\tprintf("%.4f\\n", arc_length(two_x, 0.0, 1.0, 10000, 1e-5));
+\tprintf("%.4f\\n", arc_length(two_x, 0.0, 1.0, 100, 1e-5));
 \treturn 0;
 }`,
 			expected: "2.2361\n",

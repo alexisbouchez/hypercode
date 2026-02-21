@@ -86,7 +86,6 @@ int main() {
 			name: "tangent at tangent point equals f(x0)",
 			code: `#include <stdio.h>
 {{FUNC}}
-double quad(double x) { return x * x; }
 int main() {
 \tprintf("%.4f\\n", tangent_y(quad, 3.0, 3.0, 1e-6));
 \treturn 0;

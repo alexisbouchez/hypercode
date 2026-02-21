@@ -104,7 +104,6 @@ int main() {
 			name: "area between y=x and y=x^2 on [0,1] is 1/6",
 			code: `#include <stdio.h>
 {{FUNC}}
-double id(double x) { return x; }
 double sq(double x) { return x * x; }
 int main() {
 \tprintf("%.4f\\n", area_between(id, sq, 0.0, 1.0, 10000));

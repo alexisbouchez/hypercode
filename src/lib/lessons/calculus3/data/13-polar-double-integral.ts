@@ -116,7 +116,6 @@ int main() {
 #include <math.h>
 #define PI 3.14159265358979
 {{FUNC}}
-double one(double x, double y) { return 1.0; }
 int main() {
 \tprintf("%.4f\\n", polar_double_integral(one, 0, 2, 0, 2*PI, 200, 200));
 \treturn 0;
@@ -129,7 +128,6 @@ int main() {
 #include <math.h>
 #define PI 3.14159265358979
 {{FUNC}}
-double one(double x, double y) { return 1.0; }
 int main() {
 \tprintf("%.4f\\n", polar_double_integral(one, 0, 1, 0, PI, 200, 200));
 \treturn 0;
