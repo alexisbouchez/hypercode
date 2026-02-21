@@ -29,6 +29,7 @@ import { runMicrogptTests } from "./test-runners/microgpt-test-runner";
 import { runAdvancedLinearAlgebraTests } from "./test-runners/advanced-linear-algebra-test-runner";
 import { runAdvancedQuantumTests } from "./test-runners/advanced-quantum-test-runner";
 import { runThermodynamicsTests } from "./test-runners/thermodynamics-test-runner";
+import { runSpecialRelativityTests } from "./test-runners/special-relativity-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -157,6 +158,10 @@ async function main() {
   console.log("Running Thermodynamics tests...");
   const thermodynamicsResults = runThermodynamicsTests();
   allResults.push(...thermodynamicsResults);
+
+  console.log("Running Special Relativity tests...");
+  const specialRelativityResults = runSpecialRelativityTests();
+  allResults.push(...specialRelativityResults);
 
   console.log("\n--- Results ---\n");
 

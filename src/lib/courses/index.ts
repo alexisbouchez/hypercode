@@ -41,6 +41,7 @@ import { microgptChapters, microgptLessons } from "@/lib/lessons/microgpt";
 import { advancedLinearAlgebraChapters, advancedLinearAlgebraLessons } from "@/lib/lessons/advanced-linear-algebra";
 import { advancedQuantumChapters, advancedQuantumLessons } from "@/lib/lessons/advanced-quantum";
 import { thermodynamicsChapters, thermodynamicsLessons } from "@/lib/lessons/thermodynamics";
+import { specialRelativityChapters, specialRelativityLessons } from "@/lib/lessons/special-relativity";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2638,6 +2639,46 @@ You have built linear algebra from the ground up. Here are natural next steps:
 - [Matrix Computations — Golub & Van Loan](https://jhupbooks.press.jhu.edu/title/matrix-computations) — The definitive reference for numerical algorithms
 `;
 
+const specialRelativityIntroductionContent = `
+## Why Special Relativity?
+
+In 1905, Einstein published a paper that demolished two centuries of intuition about space and time. His two postulates — that the laws of physics are the same in all inertial frames, and that the speed of light is constant for all observers — lead to consequences that feel impossible: moving clocks run slow, moving objects shrink, and mass and energy are the same thing.
+
+These aren't approximations or illusions. They are experimentally confirmed at particle accelerators every day. GPS satellites would drift by kilometers per day without relativistic corrections.
+
+## How This Course Works
+
+You will implement the equations of special relativity in pure Python. Each lesson introduces one concept, explains the math, and asks you to write the equation as a function. The speed of light $c = 299{,}792{,}458$ m/s is your fundamental constant.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **3 chapters**:
+
+1. **Relativistic Kinematics** — The Lorentz factor, time dilation, length contraction, relativistic velocity addition, and the relativistic Doppler effect.
+2. **Spacetime Geometry** — The Lorentz transformation, the spacetime interval, proper time, and rapidity.
+3. **Relativistic Dynamics** — Relativistic momentum, energy ($E = \\gamma mc^2$), the energy-momentum relation ($E^2 = (pc)^2 + (mc^2)^2$), 4-vectors, relativistic collisions, and mass-energy equivalence.
+
+Let's start with the Lorentz factor.
+`;
+
+const specialRelativityWhatsNextContent = `
+## What's Next
+
+You have implemented the core equations of special relativity. Here are natural next steps:
+
+- **General Relativity** — Curved spacetime, the Einstein field equations, black holes, and gravitational waves.
+- **Quantum Field Theory** — Combining special relativity with quantum mechanics gives the Standard Model.
+- **Particle Physics** — Every calculation at the LHC uses relativistic kinematics and the energy-momentum relation you built.
+- **Electrodynamics** — Maxwell's equations are automatically Lorentz-covariant; special relativity is hidden in classical EM.
+
+## Further Reading
+
+- **Special Relativity** by A.P. French — Clear, concise, with good problems. The classic undergraduate text.
+- **Spacetime Physics** by Taylor & Wheeler — Geometrical approach, teaches you to think in 4D. Free online.
+- **Introduction to Classical Mechanics** by Morin — The chapter on relativity is excellent.
+- [MIT OpenCourseWare 8.033](https://ocw.mit.edu/courses/8-033-relativity-fall-2006/) — Full lecture notes and problem sets, free.
+`;
+
 const thermodynamicsIntroductionContent = `
 ## Why Thermodynamics?
 
@@ -3257,6 +3298,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: thermodynamicsIntroductionContent,
     whatsNextContent: thermodynamicsWhatsNextContent,
+  },
+  {
+    id: "special-relativity",
+    title: "Special Relativity in Python",
+    description: "Learn special relativity by implementing Einstein's equations in Python. Compute Lorentz factors, time dilation, length contraction, relativistic velocity addition, spacetime intervals, relativistic energy, and mass-energy equivalence from scratch.",
+    language: "python",
+    chapters: specialRelativityChapters,
+    lessons: specialRelativityLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: specialRelativityIntroductionContent,
+    whatsNextContent: specialRelativityWhatsNextContent,
   },
 ];
 
