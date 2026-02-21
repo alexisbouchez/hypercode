@@ -93,49 +93,49 @@ const courseLogos: Record<string, React.ReactNode> = {
   ),
   "financial-math": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-      <text x="3" y="24" fontSize="20" fontFamily="Georgia, serif" fill="#4ade80">$</text>
-      <path d="M14 8 L28 8" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M14 14 L24 14" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M14 20 L26 20" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
+      <text x="3" y="24" fontSize="20" fontFamily="Georgia, serif" fill="#10b981">$</text>
+      <path d="M14 8 L28 8" stroke="#10b981" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M14 14 L24 14" stroke="#10b981" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M14 20 L26 20" stroke="#10b981" strokeWidth="2" strokeLinecap="round"/>
     </svg>
   ),
   "quant-stats": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-      <path d="M4 28 Q8 10 12 18 Q16 26 20 12 Q24 2 28 8" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M4 28 Q8 10 12 18 Q16 26 20 12 Q24 2 28 8" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   "time-series": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-      <polyline points="4,24 8,18 12,20 16,12 20,16 24,8 28,10" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <line x1="4" y1="28" x2="28" y2="28" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"/>
+      <polyline points="4,24 8,18 12,20 16,12 20,16 24,8 28,10" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="4" y1="28" x2="28" y2="28" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   ),
   "portfolio-theory": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-      <circle cx="16" cy="16" r="10" stroke="#4ade80" strokeWidth="1.5"/>
-      <path d="M16 6 L22 22 L10 14 L22 14 L10 22 Z" stroke="#4ade80" strokeWidth="1.5" strokeLinejoin="round"/>
+      <circle cx="16" cy="16" r="10" stroke="#10b981" strokeWidth="1.5"/>
+      <path d="M16 6 L22 22 L10 14 L22 14 L10 22 Z" stroke="#10b981" strokeWidth="1.5" strokeLinejoin="round"/>
     </svg>
   ),
   "options-pricing": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-      <path d="M4 26 Q10 26 14 20 Q18 14 28 6" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
-      <line x1="4" y1="6" x2="4" y2="28" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="4" y1="28" x2="28" y2="28" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M4 26 Q10 26 14 20 Q18 14 28 6" stroke="#10b981" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="4" y1="6" x2="4" y2="28" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="4" y1="28" x2="28" y2="28" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   ),
   "algo-trading": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-      <rect x="4" y="18" width="5" height="10" rx="1" fill="#4ade80"/>
-      <rect x="11" y="12" width="5" height="16" rx="1" fill="#4ade80"/>
-      <rect x="18" y="6" width="5" height="22" rx="1" fill="#4ade80"/>
-      <polyline points="6,16 13,10 20,4" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect x="4" y="18" width="5" height="10" rx="1" fill="#10b981"/>
+      <rect x="11" y="12" width="5" height="16" rx="1" fill="#10b981"/>
+      <rect x="18" y="6" width="5" height="22" rx="1" fill="#10b981"/>
+      <polyline points="6,16 13,10 20,4" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   "risk-management": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
-      <path d="M16 4 L28 10 L28 20 C28 25 22 29 16 30 C10 29 4 25 4 20 L4 10 Z" stroke="#4ade80" strokeWidth="1.5" strokeLinejoin="round"/>
-      <line x1="16" y1="13" x2="16" y2="19" stroke="#4ade80" strokeWidth="2" strokeLinecap="round"/>
-      <circle cx="16" cy="22" r="1.2" fill="#4ade80"/>
+      <path d="M16 4 L28 10 L28 20 C28 25 22 29 16 30 C10 29 4 25 4 20 L4 10 Z" stroke="#10b981" strokeWidth="1.5" strokeLinejoin="round"/>
+      <line x1="16" y1="13" x2="16" y2="19" stroke="#10b981" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="16" cy="22" r="1.2" fill="#10b981"/>
     </svg>
   ),
 };
