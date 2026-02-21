@@ -14,7 +14,7 @@ import { pipeLosses } from "./data/12-pipe-losses";
 import { stokesLaw } from "./data/13-stokes-law";
 import { surfaceTension } from "./data/14-surface-tension";
 import { flowMeasurement } from "./data/15-flow-measurement";
-import { machNumber } from "./data/15-mach-number";
+import { machNumber } from "./data/16-mach-number";
 
 export const fluidMechanicsChapters: Chapter[] = [
 	{ id: "fundamentals", title: "Fundamentals" },
