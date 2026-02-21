@@ -56,6 +56,7 @@ import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
 import { astrophysicsChapters, astrophysicsLessons } from "@/lib/lessons/astrophysics";
 import { plasmaPhysicsChapters, plasmaPhysicsLessons } from "@/lib/lessons/plasma-physics";
 import { condensedMatterChapters, condensedMatterLessons } from "@/lib/lessons/condensed-matter";
+import { mysqlChapters, mysqlLessons } from "@/lib/lessons/mysql";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -3983,6 +3984,56 @@ You have implemented the foundational equations of condensed matter physics. Her
 - **Solid State Physics** by Ashcroft & Mermin — The definitive graduate reference, rigorous and complete.
 - **The Oxford Solid State Basics** by Simon — Modern, concise, and accessible introduction.
 - **Superconductivity, Superfluidity and Condensate** by Annett — Clear treatment of quantum phenomena in condensed matter.`,
+  },
+  {
+    id: "mysql",
+    title: "MySQL",
+    description: "Learn MySQL from scratch. Master SELECT, WHERE, JOIN, GROUP BY, aggregations, subqueries, and CTEs with a live in-browser database.",
+    language: "mysql",
+    chapters: mysqlChapters,
+    lessons: mysqlLessons,
+    runtimeLabel: "MySQL runtime",
+    introductionContent: `## Why MySQL?
+
+MySQL is the most widely deployed open-source relational database in the world. It powers WordPress (40% of all websites), Wikipedia, GitHub, Facebook, and countless web applications. If you have ever filled out a web form, placed an online order, or logged into a website, there is a good chance MySQL stored the data.
+
+### The Relational Model
+
+MySQL organizes data into **tables** — structured grids of rows and columns. Tables are linked through **foreign keys**, eliminating data duplication and maintaining consistency. Instead of storing a customer's name on every order, you store a customer id. This is the heart of relational database design.
+
+### SQL — One Language for Everything
+
+SQL (Structured Query Language) is a declarative language: you describe *what* you want, and the database figures out *how* to retrieve it efficiently. The same SQL you write today will work in MySQL 5.7, MySQL 8.0, MariaDB, and — with minor adjustments — PostgreSQL and SQLite.
+
+### What You Will Learn
+
+This course contains **15 lessons** across **6 chapters**:
+
+1. **Getting Started** — The SELECT statement, column aliases, DISTINCT, and filtering with WHERE.
+2. **Querying Data** — Sorting with ORDER BY, pagination with LIMIT/OFFSET, NULL handling, and string functions.
+3. **Table Design** — CREATE TABLE, MySQL data types, inserting, updating, and deleting rows.
+4. **Joins** — INNER JOIN to match rows, LEFT JOIN to include unmatched rows.
+5. **Aggregations** — COUNT, SUM, AVG, MIN, MAX, GROUP BY, and HAVING.
+6. **Advanced Queries** — Subqueries, EXISTS, and Common Table Expressions (CTEs).
+
+Each lesson explains a concept with real examples and gives you an exercise to practice against a live database.`,
+    whatsNextContent: `## What's Next
+
+You have completed the MySQL course. Here are natural next steps:
+
+- **PostgreSQL** — MySQL's most capable open-source competitor. Adds native JSON (JSONB), better window functions, full-text search, and stricter SQL standards compliance.
+- **SQLite** — The world's most deployed database. Zero configuration, a single file, and perfect for local tools, mobile apps, and testing.
+- **Database design** — Study normalization (1NF, 2NF, 3NF, BCNF), ER diagrams, and indexing strategies. The schema design behind an application determines its performance for years.
+- **Query optimization** — Learn how MySQL's query planner works. Use \`EXPLAIN\` to see execution plans, add indexes, and avoid full table scans.
+- **Transactions** — MySQL supports ACID transactions with \`BEGIN\`, \`COMMIT\`, and \`ROLLBACK\`. Understand isolation levels (READ COMMITTED, REPEATABLE READ, SERIALIZABLE).
+- **Replication** — MySQL's primary-replica replication scales reads horizontally across many servers.
+
+## Resources
+
+- [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/) — The complete official documentation.
+- [Use The Index, Luke](https://use-the-index-luke.com/) — An exceptional free guide to SQL indexing and performance.
+- **Learning MySQL** by Dyer, Beaulieu & Pachev — Practical O'Reilly introduction.
+- **High Performance MySQL** by Schwartz, Zaitsev & Tkachenko — The definitive guide to MySQL at scale.`,
   },
 ];
 

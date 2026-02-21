@@ -44,6 +44,7 @@ import { runCondensedMatterTests } from "./test-runners/condensed-matter-test-ru
 import { runSignalProcessingTests } from "./test-runners/signal-processing-test-runner";
 import { runMachineLearningTests } from "./test-runners/machine-learning-test-runner";
 import { runInformationTheoryTests } from "./test-runners/information-theory-test-runner";
+import { runMysqlTests } from "./test-runners/mysql-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -232,6 +233,10 @@ async function main() {
   console.log("Running Information Theory tests...");
   const informationTheoryResults = runInformationTheoryTests();
   allResults.push(...informationTheoryResults);
+
+  console.log("Running MySQL tests...");
+  const mysqlResults = runMysqlTests();
+  allResults.push(...mysqlResults);
 
   console.log("\n--- Results ---\n");
 

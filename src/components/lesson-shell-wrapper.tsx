@@ -21,6 +21,7 @@ import { initSqliteRunner, isSqliteReady, runSqlite, runTests as runSqliteTests 
 import { initRedisRunner, isRedisReady, runRedis, runTests as runRedisTests } from "@/lib/redis-runner";
 import { initCppRunner, isCppReady, runCpp, runTests as runCppTests } from "@/lib/cpp-runner";
 import { initMusicRunner, isMusicReady, runMusic, runTests as runMusicTests } from "@/lib/music-runner";
+import { initMysqlRunner, isMysqlReady, runMysql, runTests as runMysqlTests } from "@/lib/mysql-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -99,6 +100,7 @@ export function LessonShellWrapper({
     if (courseId === "signal-processing") return initPythonRunner();
     if (courseId === "machine-learning") return initPythonRunner();
     if (courseId === "information-theory") return initPythonRunner();
+    if (courseId === "mysql") return initMysqlRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -159,6 +161,7 @@ export function LessonShellWrapper({
     if (courseId === "signal-processing") return isPythonReady();
     if (courseId === "machine-learning") return isPythonReady();
     if (courseId === "information-theory") return isPythonReady();
+    if (courseId === "mysql") return isMysqlReady();
     return isGoReady();
   }, [courseId]);
 
@@ -219,6 +222,7 @@ export function LessonShellWrapper({
     if (courseId === "signal-processing") return runPython(code);
     if (courseId === "machine-learning") return runPython(code);
     if (courseId === "information-theory") return runPython(code);
+    if (courseId === "mysql") return runMysql(code);
     return runGo(code);
   }, [courseId]);
 
@@ -279,6 +283,7 @@ export function LessonShellWrapper({
     if (courseId === "signal-processing") return runPythonTests(code, tests);
     if (courseId === "machine-learning") return runPythonTests(code, tests);
     if (courseId === "information-theory") return runPythonTests(code, tests);
+    if (courseId === "mysql") return runMysqlTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 
