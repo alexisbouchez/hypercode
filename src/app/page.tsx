@@ -106,15 +106,48 @@ const tracks: { title: string; ids: string[] }[] = [
   },
   {
     title: "Mathematics in Python",
-    ids: ["linear-algebra", "statistics", "diffeq"],
+    ids: [
+      "linear-algebra",
+      "advanced-linear-algebra",
+      "statistics",
+      "diffeq",
+      "number-theory",
+      "cryptography",
+      "signal-processing",
+      "information-theory",
+      "functional-diff-geo",
+    ],
   },
   {
     title: "Languages",
-    ids: ["go", "zig", "gleam", "ruby", "haskell", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "gleam", "ruby", "haskell", "holyc"],
   },
   {
-    title: "Physics & Acoustics",
-    ids: ["classical-mechanics", "waves", "electromagnetism", "circuits"],
+    title: "Classical Physics",
+    ids: [
+      "classical-mechanics",
+      "thermodynamics",
+      "waves",
+      "electromagnetism",
+      "circuits",
+      "fluid-mechanics",
+      "optics",
+    ],
+  },
+  {
+    title: "Modern & Theoretical Physics",
+    ids: [
+      "special-relativity",
+      "general-relativity",
+      "quantum",
+      "advanced-quantum",
+      "nuclear-physics",
+      "particle-physics",
+      "plasma-physics",
+      "condensed-matter",
+      "biophysics",
+      "mathematical-physics",
+    ],
   },
   {
     title: "Systems & Low-Level",
@@ -126,15 +159,30 @@ const tracks: { title: string; ids: string[] }[] = [
   },
   {
     title: "Data & Databases",
-    ids: ["postgresql", "r", "python"],
+    ids: ["postgresql", "mysql", "sqlite", "redis", "r", "python"],
   },
   {
     title: "Algorithms & Computer Science",
-    ids: ["algorithms", "graphs", "trees", "linked-lists", "distributed-systems"],
+    ids: [
+      "algorithms",
+      "graphs",
+      "trees",
+      "linked-lists",
+      "distributed-systems",
+      "raytracer",
+    ],
   },
   {
     title: "Science & AI",
-    ids: ["quantum", "genomics"],
+    ids: [
+      "genomics",
+      "microgpt",
+      "machine-learning",
+      "cosmology",
+      "astrophysics",
+      "complex-systems",
+      "chaos-theory",
+    ],
   },
 ];
 
