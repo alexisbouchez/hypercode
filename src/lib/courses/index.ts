@@ -47,7 +47,11 @@ import { generalRelativityChapters, generalRelativityLessons } from "@/lib/lesso
 import { opticsChapters, opticsLessons } from "@/lib/lessons/optics";
 import { numberTheoryChapters, numberTheoryLessons } from "@/lib/lessons/number-theory";
 import { nuclearPhysicsChapters, nuclearPhysicsLessons } from "@/lib/lessons/nuclear-physics";
+import { cryptographyChapters, cryptographyLessons } from "@/lib/lessons/cryptography";
 import { particlePhysicsChapters, particlePhysicsLessons } from "@/lib/lessons/particle-physics";
+import { signalProcessingChapters, signalProcessingLessons } from "@/lib/lessons/signal-processing";
+import { machineLearningChapters, machineLearningLessons } from "@/lib/lessons/machine-learning";
+import { informationTheoryChapters, informationTheoryLessons } from "@/lib/lessons/information-theory";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2841,6 +2845,86 @@ You have implemented the foundational equations of particle physics. Here are na
 - [PDG Review of Particle Physics](https://pdg.lbl.gov/) — The authoritative reference for all particle masses, lifetimes, and branching ratios.
 `;
 
+const signalProcessingIntroductionContent = `
+## Why Signal Processing?
+
+Signal processing is the mathematical language of the physical world. Audio, radio, seismic, medical imaging, radar, communications — every digital system that interacts with the real world processes signals. It sits at the intersection of mathematics, physics, and engineering.
+
+The Fourier transform alone underpins MP3, JPEG, Wi-Fi, MRI, spectroscopy, speech recognition, and gravitational wave detection. Understanding it at the algorithmic level gives you a window into how the digital world actually works.
+
+## How This Course Works
+
+Each lesson introduces one concept, explains the mathematics, and asks you to implement it in pure Python — no NumPy or SciPy. You will build everything from scratch: sinusoids, DFT, windowing, FIR and IIR filters, convolution, correlation, and spectral features.
+
+## What You Will Build
+
+1. **Signal Fundamentals** — Sinusoids, the Nyquist theorem, quantization, signal power, energy, RMS, and linear convolution
+2. **Fourier Analysis** — DFT, IDFT, power spectrum, Hann windowing, and STFT frame extraction
+3. **Digital Filters** — Moving average, FIR filters with sinc kernels, and first-order IIR filters
+4. **Applications** — Cross-correlation, autocorrelation, spectral centroid, and spectral flatness
+
+Let's start with the simplest signal there is.
+`;
+
+const signalProcessingWhatsNextContent = `
+## What's Next
+
+You have built the core algorithms of digital signal processing from scratch. Here are natural next steps:
+
+- **Fast Fourier Transform (FFT)** — The DFT you implemented runs in $O(N^2)$. The Cooley-Tukey FFT reduces this to $O(N \\log N)$, making real-time processing possible
+- **Filter Design** — Kaiser windows, Parks-McClellan equiripple FIR, and Butterworth/Chebyshev IIR filters designed in the frequency domain
+- **Audio DSP** — Pitch shifting, time stretching, reverb, vocoder, and audio compression (MP3/AAC)
+- **Communications** — OFDM, QAM modulation, channel equalization, and spread-spectrum techniques
+- **Machine Learning** — Mel spectrograms, MFCCs, and convolutional networks applied to audio and time series
+
+## Further Reading
+
+- **Discrete-Time Signal Processing** by Oppenheim & Schafer — The definitive graduate text on DSP
+- **The Scientist and Engineer's Guide to Digital Signal Processing** by Steven Smith — Free online, very approachable
+- **Understanding Digital Signal Processing** by Lyons — Practical intuition-first approach, highly recommended
+- [DSPRelated.com](https://www.dsprelated.com/) — Articles, tutorials, and a community for DSP practitioners
+`;
+
+const machineLearningIntroductionContent = `
+## Why Machine Learning?
+
+Machine learning is the discipline of teaching computers to learn patterns from data. It powers recommendation systems, computer vision, speech recognition, language models, medical diagnosis, and scientific discovery. Understanding ML at the algorithmic level — rather than through library calls — gives you deep intuition for what is really happening under the hood.
+
+This course implements every algorithm from scratch in pure Python, with no NumPy or scikit-learn. When you know how to derive the gradient of MSE and implement gradient descent by hand, the theory becomes concrete and the libraries make sense.
+
+## How This Course Works
+
+Each lesson introduces one algorithm, explains the mathematics with derivations, and asks you to implement it in Python. Tests verify your implementation against exact expected outputs.
+
+## What You Will Build
+
+1. **Supervised Learning** — Linear regression, MSE loss, R², gradient descent, multivariate regression, logistic regression, sigmoid, binary cross-entropy, and classification metrics
+2. **Unsupervised Learning** — Euclidean, Manhattan and cosine distances, k-NN classification, k-means clustering, PCA with covariance matrices, and DBSCAN core operations
+3. **Neural Networks** — The perceptron learning rule, ReLU, Leaky ReLU, tanh, softmax, and a full feed-forward layer forward pass
+4. **Model Evaluation** — Deterministic train/test splitting, stratified ratios, L1/L2 regularization, elastic net, and the ridge gradient
+
+Let's begin with the simplest model in all of machine learning.
+`;
+
+const machineLearningWhatsNextContent = `
+## What's Next
+
+You have implemented the foundational algorithms of machine learning from scratch — from a single linear neuron to gradient descent, k-means, and regularized regression. Here are natural next steps:
+
+- **Deep Learning** — Implement backpropagation and multi-layer networks. Add batch normalisation, dropout, and Adam optimisation
+- **Convolutional Networks** — 2D convolution, pooling, and feature maps for image classification
+- **Recurrent Networks** — LSTMs and GRUs for sequence modelling, time series, and language
+- **Tree-Based Methods** — Decision trees, random forests, and gradient-boosted trees (XGBoost)
+- **Probabilistic ML** — Gaussian processes, variational autoencoders, and Bayesian inference
+
+## Further Reading
+
+- **The Elements of Statistical Learning** by Hastie, Tibshirani & Friedman — The definitive statistical ML reference, freely available online
+- **Pattern Recognition and Machine Learning** by Bishop — Bayesian perspective, rigorous treatment
+- **Deep Learning** by Goodfellow, Bengio & Courville — Covers neural networks from perceptrons to attention
+- [fast.ai](https://www.fast.ai/) — Practical deep learning top-down course, highly recommended alongside theory
+`;
+
 const opticsIntroductionContent = `
 ## Why Optics?
 
@@ -2914,6 +2998,49 @@ You have implemented the core algorithms of number theory — from the Euclidean
 - **Elementary Number Theory** by David Burton — Clear exposition, ideal for self-study.
 - **A Course in Number Theory and Cryptography** by Neal Koblitz — Bridges pure number theory and modern cryptography.
 - [Project Euler](https://projecteuler.net/) — 800+ mathematical programming problems, many in number theory.
+`;
+
+const cryptographyIntroductionContent = `
+## What Is Cryptography?
+
+Cryptography is the science of securing communication — transforming information so that only authorized parties can read it. From Caesar's battlefield ciphers to the RSA keys that protect your bank transactions, cryptography sits at the intersection of mathematics, computer science, and security engineering.
+
+This course implements the core algorithms of cryptography in pure Python — no libraries, no black boxes. You will build ciphers from scratch, implement public-key systems, construct hash functions, and explore the protocols that underpin modern security.
+
+## Prerequisites
+
+- Basic Python (functions, lists, string operations)
+- Modular arithmetic is helpful but reviewed where needed
+
+## What You Will Build
+
+This course contains **15 lessons** organized into **5 chapters**:
+
+1. **Classical Ciphers** — Caesar, Vigenère, and XOR: the foundational ideas of substitution and stream ciphers.
+2. **Symmetric Cryptography** — Affine ciphers, block cipher modes (ECB and CBC), and Feistel networks — the structure behind DES and AES.
+3. **Asymmetric Cryptography** — Diffie-Hellman key exchange, RSA, and ElGamal: public-key systems based on hard mathematical problems.
+4. **Hash Functions & MAC** — DJB2, polynomial hashing, HMAC, and the birthday paradox that sets the security bar for collision resistance.
+5. **Cryptographic Protocols** — Commitment schemes, Shamir's Secret Sharing, and Schnorr zero-knowledge proofs.
+
+Let's start at the very beginning.
+`;
+
+const cryptographyWhatsNextContent = `
+## What's Next
+
+You have built cryptographic primitives from scratch — from Caesar ciphers to zero-knowledge proofs. Here are natural next steps:
+
+- **AES and ChaCha20** — The symmetric ciphers used in TLS today. AES uses a substitution-permutation network; ChaCha20 uses ARX (add-rotate-XOR) operations. Both are more sophisticated than the Feistel example here.
+- **Elliptic Curve Cryptography (ECC)** — Replace RSA's integer arithmetic with points on an elliptic curve. ECDH and ECDSA achieve the same security as RSA with much smaller key sizes.
+- **TLS and PKI** — The Transport Layer Security protocol combines Diffie-Hellman key exchange, digital signatures, and symmetric encryption. Certificate authorities form the Public Key Infrastructure that secures HTTPS.
+- **Post-Quantum Cryptography** — RSA and ECC are broken by Shor's algorithm on a quantum computer. NIST-standardized replacements (CRYSTALS-Kyber, CRYSTALS-Dilithium) use lattice-based hard problems.
+
+## Further Reading
+
+- **Introduction to Modern Cryptography** by Katz & Lindell — The standard academic text, rigorous and complete.
+- **A Graduate Course in Applied Cryptography** by Boneh & Shoup — Free online, covers everything from symmetric primitives to advanced protocols.
+- **The Cryptopals Challenges** ([cryptopals.com](https://cryptopals.com/)) — Hands-on challenges that break real-world crypto, including CBC padding oracles and HMAC timing attacks. Essential practice.
+- **Serious Cryptography** by Jean-Philippe Aumasson — Practical focus, covers AES, RSA, ECC, TLS, and hash functions with clear explanations.
 `;
 
 const thermodynamicsIntroductionContent = `
@@ -3603,6 +3730,17 @@ export const courses: Course[] = [
     whatsNextContent: nuclearPhysicsWhatsNextContent,
   },
   {
+    id: "cryptography",
+    title: "Cryptography in Python",
+    description: "Learn cryptography by implementing the algorithms in Python. Build Caesar, Vigenère, and XOR ciphers, Feistel networks, RSA and ElGamal public-key systems, DJB2 hashing, HMAC, Shamir's Secret Sharing, and Schnorr zero-knowledge proofs from scratch.",
+    language: "python",
+    chapters: cryptographyChapters,
+    lessons: cryptographyLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: cryptographyIntroductionContent,
+    whatsNextContent: cryptographyWhatsNextContent,
+  },
+  {
     id: "particle-physics",
     title: "Particle Physics in Python",
     description: "Learn particle physics by implementing the equations in Python. Compute invariant masses, center-of-mass energies, decay widths, branching ratios, Rutherford cross sections, Breit-Wigner resonances, the Weinberg angle, running couplings, and the Higgs mechanism from scratch.",
@@ -3612,6 +3750,56 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: particlePhysicsIntroductionContent,
     whatsNextContent: particlePhysicsWhatsNextContent,
+  },
+  {
+    id: "signal-processing",
+    title: "Signal Processing in Python",
+    description: "Learn digital signal processing by implementing the algorithms in Python. Compute signal power, sample rates, DFT/IDFT, power spectra, windowing, FIR/IIR filters, convolution, cross-correlation, and spectral analysis from scratch.",
+    language: "python",
+    chapters: signalProcessingChapters,
+    lessons: signalProcessingLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: signalProcessingIntroductionContent,
+    whatsNextContent: signalProcessingWhatsNextContent,
+  },
+  {
+    id: "machine-learning",
+    title: "Machine Learning in Python",
+    description: "Learn machine learning from scratch by implementing the algorithms in Python. Build linear and logistic regression, gradient descent, k-NN, k-means clustering, PCA, perceptrons, activation functions, and model evaluation — no libraries, just pure math.",
+    language: "python",
+    chapters: machineLearningChapters,
+    lessons: machineLearningLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: machineLearningIntroductionContent,
+    whatsNextContent: machineLearningWhatsNextContent,
+  },
+  {
+    id: "information-theory",
+    title: "Information Theory in Python",
+    description: "Learn information theory by implementing Shannon's framework in Python. Compute self-information, Shannon entropy, joint and conditional entropy, mutual information, KL divergence, cross-entropy, Huffman code lengths, channel capacity, and Levenshtein distance from scratch.",
+    language: "python",
+    chapters: informationTheoryChapters,
+    lessons: informationTheoryLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Information Theory?
+
+Information theory, founded by Claude Shannon in 1948, is the mathematical foundation of modern communication, compression, and machine learning. Every time you send a message, compress a file, or train a neural network, you are applying information theory.
+
+- **Entropy** — quantifies uncertainty and the fundamental limits of compression.
+- **Mutual information** — measures statistical dependence, used in feature selection and causal inference.
+- **KL divergence and cross-entropy** — the loss functions of modern deep learning.
+- **Channel capacity** — the theoretical maximum throughput of any noisy communication system.
+- **Coding theory** — bridges abstract math with practical data compression.
+
+This course implements every concept from scratch in Python, giving you both the mathematical intuition and the computational tools.`,
+    whatsNextContent: `## What's Next?
+
+With information theory mastered, you are ready for:
+
+- **Machine Learning** — cross-entropy loss, mutual information feature selection, variational autoencoders
+- **Statistics** — maximum likelihood, Bayesian inference, the connection between KL divergence and likelihood ratios
+- **Cryptography** — Shannon's perfect secrecy, one-time pads, and entropy in key generation
+- **Signal Processing** — source coding, channel coding, and the Shannon-Hartley theorem`,
   },
 ];
 

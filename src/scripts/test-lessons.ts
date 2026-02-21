@@ -36,6 +36,10 @@ import { runGeneralRelativityTests } from "./test-runners/general-relativity-tes
 import { runNuclearPhysicsTests } from "./test-runners/nuclear-physics-test-runner";
 import { runParticlePhysicsTests } from "./test-runners/particle-physics-test-runner";
 import { runNumberTheoryTests } from "./test-runners/number-theory-test-runner";
+import { runCryptographyTests } from "./test-runners/cryptography-test-runner";
+import { runSignalProcessingTests } from "./test-runners/signal-processing-test-runner";
+import { runMachineLearningTests } from "./test-runners/machine-learning-test-runner";
+import { runInformationTheoryTests } from "./test-runners/information-theory-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -192,6 +196,22 @@ async function main() {
   console.log("Running Number Theory tests...");
   const numberTheoryResults = runNumberTheoryTests();
   allResults.push(...numberTheoryResults);
+
+  console.log("Running Cryptography tests...");
+  const cryptographyResults = runCryptographyTests();
+  allResults.push(...cryptographyResults);
+
+  console.log("Running Signal Processing tests...");
+  const signalProcessingResults = runSignalProcessingTests();
+  allResults.push(...signalProcessingResults);
+
+  console.log("Running Machine Learning tests...");
+  const machineLearningResults = runMachineLearningTests();
+  allResults.push(...machineLearningResults);
+
+  console.log("Running Information Theory tests...");
+  const informationTheoryResults = runInformationTheoryTests();
+  allResults.push(...informationTheoryResults);
 
   console.log("\n--- Results ---\n");
 

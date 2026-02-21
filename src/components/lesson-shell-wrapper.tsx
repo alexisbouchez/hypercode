@@ -91,6 +91,11 @@ export function LessonShellWrapper({
     if (courseId === "particle-physics") return initPythonRunner();
     if (courseId === "number-theory") return initPythonRunner();
     if (courseId === "optics") return initPythonRunner();
+    if (courseId === "cryptography") return initPythonRunner();
+    if (courseId === "cosmology") return initPythonRunner();
+    if (courseId === "signal-processing") return initPythonRunner();
+    if (courseId === "machine-learning") return initPythonRunner();
+    if (courseId === "information-theory") return initPythonRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -143,6 +148,10 @@ export function LessonShellWrapper({
     if (courseId === "particle-physics") return isPythonReady();
     if (courseId === "number-theory") return isPythonReady();
     if (courseId === "optics") return isPythonReady();
+    if (courseId === "cryptography") return isPythonReady();
+    if (courseId === "signal-processing") return isPythonReady();
+    if (courseId === "machine-learning") return isPythonReady();
+    if (courseId === "information-theory") return isPythonReady();
     return isGoReady();
   }, [courseId]);
 
@@ -195,6 +204,10 @@ export function LessonShellWrapper({
     if (courseId === "particle-physics") return runPython(code);
     if (courseId === "number-theory") return runPython(code);
     if (courseId === "optics") return runPython(code);
+    if (courseId === "cryptography") return runPython(code);
+    if (courseId === "signal-processing") return runPython(code);
+    if (courseId === "machine-learning") return runPython(code);
+    if (courseId === "information-theory") return runPython(code);
     return runGo(code);
   }, [courseId]);
 
@@ -247,6 +260,10 @@ export function LessonShellWrapper({
     if (courseId === "particle-physics") return runPythonTests(code, tests);
     if (courseId === "number-theory") return runPythonTests(code, tests);
     if (courseId === "optics") return runPythonTests(code, tests);
+    if (courseId === "cryptography") return runPythonTests(code, tests);
+    if (courseId === "signal-processing") return runPythonTests(code, tests);
+    if (courseId === "machine-learning") return runPythonTests(code, tests);
+    if (courseId === "information-theory") return runPythonTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 
