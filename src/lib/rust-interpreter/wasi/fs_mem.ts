@@ -1,6 +1,6 @@
-import { debug } from "./debug.js";
-import * as wasi from "./wasi_defs.js";
-import { Fd, Inode } from "./fd.js";
+import { debug } from "./debug";
+import * as wasi from "./wasi_defs";
+import { Fd, Inode } from "./fd";
 
 export class OpenFile extends Fd {
   file: File;

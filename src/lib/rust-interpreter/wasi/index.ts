@@ -1,7 +1,7 @@
-import WASI, { WASIProcExit } from "./wasi.js";
+import WASI, { WASIProcExit } from "./wasi";
 export { WASI, WASIProcExit };
 
-export { Fd, Inode } from "./fd.js";
+export { Fd, Inode } from "./fd";
 export {
   File,
   Directory,
@@ -9,7 +9,7 @@ export {
   OpenDirectory,
   PreopenDirectory,
   ConsoleStdout,
-} from "./fs_mem.js";
-export { SyncOPFSFile, OpenSyncOPFSFile } from "./fs_opfs.js";
-export { strace } from "./strace.js";
-export * as wasi from "./wasi_defs.js";
+} from "./fs_mem";
+export { SyncOPFSFile, OpenSyncOPFSFile } from "./fs_opfs";
+export { strace } from "./strace";
+export * as wasi from "./wasi_defs";

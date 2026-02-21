@@ -1,5 +1,5 @@
-import * as wasi from "./wasi_defs.js";
-import { Fd, Inode } from "./fd.js";
+import * as wasi from "./wasi_defs";
+import { Fd, Inode } from "./fd";
 
 // Shim for https://developer.mozilla.org/en-US/docs/Web/API/FileSystemSyncAccessHandle
 // This is not part of the public interface.

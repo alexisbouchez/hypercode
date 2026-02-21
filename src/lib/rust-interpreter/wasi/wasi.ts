@@ -1,6 +1,6 @@
-import * as wasi from "./wasi_defs.js";
-import { Fd } from "./fd.js";
-import { debug } from "./debug.js";
+import * as wasi from "./wasi_defs";
+import { Fd } from "./fd";
+import { debug } from "./debug";
 
 export interface Options {
   debug?: boolean;

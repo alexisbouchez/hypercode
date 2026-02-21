@@ -1,5 +1,5 @@
 /* eslint @typescript-eslint/no-unused-vars:0 */
-import * as wasi from "./wasi_defs.js";
+import * as wasi from "./wasi_defs";
 
 export abstract class Fd {
   fd_allocate(offset: bigint, len: bigint): number {
