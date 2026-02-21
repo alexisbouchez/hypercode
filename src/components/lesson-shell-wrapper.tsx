@@ -97,6 +97,7 @@ export function LessonShellWrapper({
     if (courseId === "astrophysics") return initPythonRunner();
     if (courseId === "plasma-physics") return initPythonRunner();
     if (courseId === "condensed-matter") return initPythonRunner();
+    if (courseId === "biophysics") return initPythonRunner();
     if (courseId === "signal-processing") return initPythonRunner();
     if (courseId === "machine-learning") return initPythonRunner();
     if (courseId === "information-theory") return initPythonRunner();
@@ -158,6 +159,7 @@ export function LessonShellWrapper({
     if (courseId === "astrophysics") return isPythonReady();
     if (courseId === "plasma-physics") return isPythonReady();
     if (courseId === "condensed-matter") return isPythonReady();
+    if (courseId === "biophysics") return isPythonReady();
     if (courseId === "signal-processing") return isPythonReady();
     if (courseId === "machine-learning") return isPythonReady();
     if (courseId === "information-theory") return isPythonReady();
@@ -219,6 +221,7 @@ export function LessonShellWrapper({
     if (courseId === "astrophysics") return runPython(code);
     if (courseId === "plasma-physics") return runPython(code);
     if (courseId === "condensed-matter") return runPython(code);
+    if (courseId === "biophysics") return runPython(code);
     if (courseId === "signal-processing") return runPython(code);
     if (courseId === "machine-learning") return runPython(code);
     if (courseId === "information-theory") return runPython(code);
@@ -280,6 +283,7 @@ export function LessonShellWrapper({
     if (courseId === "astrophysics") return runPythonTests(code, tests);
     if (courseId === "plasma-physics") return runPythonTests(code, tests);
     if (courseId === "condensed-matter") return runPythonTests(code, tests);
+    if (courseId === "biophysics") return runPythonTests(code, tests);
     if (courseId === "signal-processing") return runPythonTests(code, tests);
     if (courseId === "machine-learning") return runPythonTests(code, tests);
     if (courseId === "information-theory") return runPythonTests(code, tests);

@@ -41,6 +41,7 @@ import { runCosmologyTests } from "./test-runners/cosmology-test-runner";
 import { runAstrophysicsTests } from "./test-runners/astrophysics-test-runner";
 import { runPlasmaPhysicsTests } from "./test-runners/plasma-physics-test-runner";
 import { runCondensedMatterTests } from "./test-runners/condensed-matter-test-runner";
+import { runBiophysicsTests } from "./test-runners/biophysics-test-runner";
 import { runSignalProcessingTests } from "./test-runners/signal-processing-test-runner";
 import { runMachineLearningTests } from "./test-runners/machine-learning-test-runner";
 import { runInformationTheoryTests } from "./test-runners/information-theory-test-runner";
@@ -221,6 +222,10 @@ async function main() {
   console.log("Running Condensed Matter tests...");
   const condensedMatterResults = runCondensedMatterTests();
   allResults.push(...condensedMatterResults);
+
+  console.log("Running Biophysics tests...");
+  const biophysicsResults = runBiophysicsTests();
+  allResults.push(...biophysicsResults);
 
   console.log("Running Signal Processing tests...");
   const signalProcessingResults = runSignalProcessingTests();

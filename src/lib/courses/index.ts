@@ -56,6 +56,7 @@ import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
 import { astrophysicsChapters, astrophysicsLessons } from "@/lib/lessons/astrophysics";
 import { plasmaPhysicsChapters, plasmaPhysicsLessons } from "@/lib/lessons/plasma-physics";
 import { condensedMatterChapters, condensedMatterLessons } from "@/lib/lessons/condensed-matter";
+import { biophysicsChapters, biophysicsLessons } from "@/lib/lessons/biophysics";
 import { mysqlChapters, mysqlLessons } from "@/lib/lessons/mysql";
 const goIntroductionContent = `
 ## Why Go?
@@ -3984,6 +3985,53 @@ You have implemented the foundational equations of condensed matter physics. Her
 - **Solid State Physics** by Ashcroft & Mermin — The definitive graduate reference, rigorous and complete.
 - **The Oxford Solid State Basics** by Simon — Modern, concise, and accessible introduction.
 - **Superconductivity, Superfluidity and Condensate** by Annett — Clear treatment of quantum phenomena in condensed matter.`,
+  },
+  {
+    id: "biophysics",
+    title: "Biophysics in Python",
+    description: "Learn biophysics by implementing the equations that govern living systems in Python. Compute diffusion coefficients, Nernst potentials, Michaelis-Menten kinetics, FRET efficiency, DNA elasticity, cooperative binding, osmotic pressure, Beer-Lambert absorption, sedimentation coefficients, action potentials, and single-molecule forces from scratch.",
+    language: "python",
+    chapters: biophysicsChapters,
+    lessons: biophysicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Biophysics?
+
+Life is physics. Every process in a living cell — from proteins folding in milliseconds to ions crossing membranes in microseconds — obeys the same laws of thermodynamics, mechanics, and electromagnetism that govern inanimate matter. Biophysics is the discipline that applies the quantitative tools of physics to understand how life works at the molecular and cellular level.
+
+This course implements the core equations of biophysics in pure Python. No libraries — just the mathematics of living systems expressed as functions. Each lesson introduces one concept, explains the physics, and asks you to write the formula as code.
+
+You will implement:
+
+- **Diffusion & Brownian motion** — the Stokes-Einstein relation and mean squared displacement
+- **Nernst equation** — electrochemical equilibrium and the Goldman equation for membrane potential
+- **Michaelis-Menten kinetics** — enzyme reaction rates, turnover numbers, and competitive inhibition
+- **FRET** — Förster resonance energy transfer efficiency and the R⁶ distance dependence
+- **Worm-like chain** — the Marko-Siggia force-extension model for DNA elasticity
+- **Hill equation** — cooperative binding, hemoglobin oxygen saturation, and the Hill coefficient
+- **Osmotic pressure** — van't Hoff equation and osmolarity calculations
+- **Beer-Lambert law** — optical absorbance, transmittance, and concentration measurement
+- **Sedimentation** — Svedberg coefficients and ultracentrifugation pelleting times
+- **Cable equation** — neuronal space constant, time constant, and signal propagation
+- **Radiation biology** — absorbed dose, equivalent dose, and the linear-quadratic survival model
+- **Patch clamp** — single-channel currents, Boltzmann open probability, and whole-cell current
+- **Membrane elasticity** — bending modulus, sphere bending energy, and lytic tension
+- **Protein folding** — two-state thermodynamics, melting temperature, and denaturant titration
+- **Force spectroscopy** — Bell-Evans rupture forces, optical trap fluctuations, and Stokes drag`,
+    whatsNextContent: `## What's Next
+
+You have implemented the foundational equations of biophysics. Here are natural next steps:
+
+- **Biochemistry** — The chemical reactions of life: metabolic pathways, enzyme mechanisms, and signal transduction cascades.
+- **Genomics** — DNA sequencing, sequence alignment, and statistical models of mutation and evolution.
+- **Condensed Matter Physics** — The physics of lipid bilayers, polymer physics of DNA, and glass transitions in cells borrow heavily from soft condensed matter.
+- **Neuroscience** — The Hodgkin-Huxley model, synaptic integration, and neural coding extend the cable equation into full action potential dynamics.
+
+## Resources
+
+- **Biological Physics** by Nelson — The best undergraduate biophysics text. Covers every topic in this course with beautiful physical intuition.
+- **Physical Biology of the Cell** by Phillips, Kondev & Theriot — Comprehensive, quantitative, and modern. The standard graduate reference.
+- **Mechanics of Motor Proteins and the Cytoskeleton** by Howard — Essential for molecular motors and cytoskeletal mechanics.
+- **Ion Channels of Excitable Membranes** by Hille — The definitive reference for membrane biophysics and electrophysiology.`,
   },
   {
     id: "mysql",
