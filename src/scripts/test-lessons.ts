@@ -34,6 +34,7 @@ import { runFluidMechanicsTests } from "./test-runners/fluid-mechanics-test-runn
 import { runOpticsTests } from "./test-runners/optics-test-runner";
 import { runGeneralRelativityTests } from "./test-runners/general-relativity-test-runner";
 import { runNuclearPhysicsTests } from "./test-runners/nuclear-physics-test-runner";
+import { runParticlePhysicsTests } from "./test-runners/particle-physics-test-runner";
 import { runNumberTheoryTests } from "./test-runners/number-theory-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
@@ -183,6 +184,10 @@ async function main() {
   console.log("Running Nuclear Physics tests...");
   const nuclearPhysicsResults = runNuclearPhysicsTests();
   allResults.push(...nuclearPhysicsResults);
+
+  console.log("Running Particle Physics tests...");
+  const particlePhysicsResults = runParticlePhysicsTests();
+  allResults.push(...particlePhysicsResults);
 
   console.log("Running Number Theory tests...");
   const numberTheoryResults = runNumberTheoryTests();

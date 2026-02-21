@@ -47,6 +47,7 @@ import { generalRelativityChapters, generalRelativityLessons } from "@/lib/lesso
 import { opticsChapters, opticsLessons } from "@/lib/lessons/optics";
 import { numberTheoryChapters, numberTheoryLessons } from "@/lib/lessons/number-theory";
 import { nuclearPhysicsChapters, nuclearPhysicsLessons } from "@/lib/lessons/nuclear-physics";
+import { particlePhysicsChapters, particlePhysicsLessons } from "@/lib/lessons/particle-physics";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2805,6 +2806,41 @@ You have implemented the foundational equations of nuclear physics. Here are nat
 - [MIT OpenCourseWare 22.101](https://ocw.mit.edu/courses/22-101-applied-nuclear-physics-fall-2006/) — Applied nuclear physics, full lecture notes and problem sets.
 `;
 
+const particlePhysicsIntroductionContent = `
+## Why Particle Physics?
+
+Particle physics is the study of the most fundamental constituents of matter and the forces that govern them. It is the deepest layer of physical reality we have access to — quarks, leptons, and the bosons that mediate the electromagnetic, weak, and strong forces, all unified in the Standard Model.
+
+Every collision at the LHC, every neutrino that passes through the Earth, every decay of a muon is governed by the equations you will implement in this course. Particle physics gave us the Higgs boson, quantum electrodynamics (the most precisely tested theory in science), and the prediction that there are exactly three families of matter particles.
+
+This course implements the core equations of particle physics in pure Python. No libraries — just the mathematics of special relativity, quantum field theory, and experimental particle physics expressed as functions. Each lesson introduces one formula, explains the physics, and asks you to write it as code.
+
+You will implement:
+- **Relativistic kinematics** — invariant mass, center-of-mass energy, threshold energies
+- **Particle decays** — decay widths, branching ratios, lab frame decay lengths
+- **Scattering** — Rutherford cross sections, Breit-Wigner resonances, the fine structure constant
+- **Standard Model** — the Weinberg angle, running couplings, the Higgs mechanism
+
+Let's start with natural units.
+`;
+
+const particlePhysicsWhatsNextContent = `
+## What's Next
+
+You have implemented the foundational equations of particle physics. Here are natural next steps:
+
+- **Quantum Field Theory** — The deeper mathematical framework behind the Standard Model. Feynman diagrams, propagators, and renormalization explain why couplings run with energy.
+- **Nuclear Physics** — The strong force that binds quarks into protons and neutrons also holds nuclei together as a residual interaction. The courses complement each other.
+- **Cosmology** — The Big Bang nucleosynthesis, the matter-antimatter asymmetry, and dark matter searches all connect directly to particle physics.
+
+## Further Reading
+
+- **Introduction to Elementary Particles** by Griffiths — The standard undergraduate text, clear and approachable.
+- **Modern Particle Physics** by Thomson — Comprehensive coverage through the Higgs discovery, with detailed worked examples.
+- **The Particle Odyssey** by Close, Marten & Sutton — A visual history of particle physics.
+- [PDG Review of Particle Physics](https://pdg.lbl.gov/) — The authoritative reference for all particle masses, lifetimes, and branching ratios.
+`;
+
 const opticsIntroductionContent = `
 ## Why Optics?
 
@@ -3565,6 +3601,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: nuclearPhysicsIntroductionContent,
     whatsNextContent: nuclearPhysicsWhatsNextContent,
+  },
+  {
+    id: "particle-physics",
+    title: "Particle Physics in Python",
+    description: "Learn particle physics by implementing the equations in Python. Compute invariant masses, center-of-mass energies, decay widths, branching ratios, Rutherford cross sections, Breit-Wigner resonances, the Weinberg angle, running couplings, and the Higgs mechanism from scratch.",
+    language: "python",
+    chapters: particlePhysicsChapters,
+    lessons: particlePhysicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: particlePhysicsIntroductionContent,
+    whatsNextContent: particlePhysicsWhatsNextContent,
   },
 ];
 

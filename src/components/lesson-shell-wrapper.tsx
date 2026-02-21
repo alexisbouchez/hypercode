@@ -88,6 +88,7 @@ export function LessonShellWrapper({
     if (courseId === "fluid-mechanics") return initPythonRunner();
     if (courseId === "general-relativity") return initPythonRunner();
     if (courseId === "nuclear-physics") return initPythonRunner();
+    if (courseId === "particle-physics") return initPythonRunner();
     if (courseId === "number-theory") return initPythonRunner();
     if (courseId === "optics") return initPythonRunner();
     return initGoRunner();
@@ -139,6 +140,7 @@ export function LessonShellWrapper({
     if (courseId === "fluid-mechanics") return isPythonReady();
     if (courseId === "general-relativity") return isPythonReady();
     if (courseId === "nuclear-physics") return isPythonReady();
+    if (courseId === "particle-physics") return isPythonReady();
     if (courseId === "number-theory") return isPythonReady();
     if (courseId === "optics") return isPythonReady();
     return isGoReady();
@@ -190,6 +192,7 @@ export function LessonShellWrapper({
     if (courseId === "fluid-mechanics") return runPython(code);
     if (courseId === "general-relativity") return runPython(code);
     if (courseId === "nuclear-physics") return runPython(code);
+    if (courseId === "particle-physics") return runPython(code);
     if (courseId === "number-theory") return runPython(code);
     if (courseId === "optics") return runPython(code);
     return runGo(code);
@@ -241,6 +244,7 @@ export function LessonShellWrapper({
     if (courseId === "fluid-mechanics") return runPythonTests(code, tests);
     if (courseId === "general-relativity") return runPythonTests(code, tests);
     if (courseId === "nuclear-physics") return runPythonTests(code, tests);
+    if (courseId === "particle-physics") return runPythonTests(code, tests);
     if (courseId === "number-theory") return runPythonTests(code, tests);
     if (courseId === "optics") return runPythonTests(code, tests);
     return runGoTests(code, tests);
