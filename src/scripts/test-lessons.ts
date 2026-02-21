@@ -51,8 +51,10 @@ import { runCircuitsTests } from "./test-runners/circuits-test-runner";
 import { runClassicalMechanicsTests } from "./test-runners/classical-mechanics-test-runner";
 import { runDiffeqTests } from "./test-runners/diffeq-test-runner";
 import { runMathematicalPhysicsTests } from "./test-runners/mathematical-physics-test-runner";
+import { runComplexSystemsTests } from "./test-runners/complex-systems-test-runner";
 import { runMusicTests } from "./test-runners/music-test-runner";
 import { runWavesTests } from "./test-runners/waves-test-runner";
+import { runRustTests } from "./test-runners/rust-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -270,6 +272,10 @@ async function main() {
   const mathematicalPhysicsResults = runMathematicalPhysicsTests();
   allResults.push(...mathematicalPhysicsResults);
 
+  console.log("Running Complex Systems tests...");
+  const complexSystemsResults = runComplexSystemsTests();
+  allResults.push(...complexSystemsResults);
+
   console.log("Running Music tests...");
   const musicResults = runMusicTests();
   allResults.push(...musicResults);
@@ -277,6 +283,10 @@ async function main() {
   console.log("Running Waves tests...");
   const wavesResults = runWavesTests();
   allResults.push(...wavesResults);
+
+  console.log("Running Rust tests...");
+  const rustResults = runRustTests();
+  allResults.push(...rustResults);
 
   console.log("\n--- Results ---\n");
 

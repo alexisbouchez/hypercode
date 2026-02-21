@@ -60,6 +60,8 @@ import { condensedMatterChapters, condensedMatterLessons } from "@/lib/lessons/c
 import { biophysicsChapters, biophysicsLessons } from "@/lib/lessons/biophysics";
 import { mysqlChapters, mysqlLessons } from "@/lib/lessons/mysql";
 import { mathematicalPhysicsChapters, mathematicalPhysicsLessons } from "@/lib/lessons/mathematical-physics";
+import { complexSystemsChapters, complexSystemsLessons } from "@/lib/lessons/complex-systems";
+import { rustChapters, rustLessons } from "@/lib/lessons/rust";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -4207,6 +4209,145 @@ You have implemented the core toolkit of mathematical physics. Here are natural 
 - **Mathematical Physics** by Hassani — Rigorous graduate-level treatment of all the methods here.
 - **Numerical Recipes** by Press et al. — The practical guide to implementing numerical algorithms.
 - **Methods of Mathematical Physics** by Courant & Hilbert — The classic two-volume reference for PDEs and spectral theory.`,
+  },
+  {
+    id: "complex-systems",
+    title: "Complex Systems in Python",
+    description: "Learn complex systems science by implementing the core models of chaos, networks, statistical physics, and emergence in Python. Simulate logistic maps, Lorenz attractors, small-world networks, Ising models, cellular automata, random walks, fractals, percolation, self-organized criticality, bifurcations, and agent-based models from scratch.",
+    language: "python",
+    chapters: complexSystemsChapters,
+    lessons: complexSystemsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Complex Systems?
+
+Complex systems science studies how simple rules give rise to rich, emergent behavior — how a handful of interacting agents produce patterns that no single agent intended. It is the science of chaos, networks, self-organization, and emergence.
+
+This course implements the canonical models of complex systems in pure Python. No scipy, no numpy, no networkx — just the mathematics expressed as functions. Each lesson introduces one model, explains the underlying science, and asks you to write the simulation as code.
+
+You will implement:
+
+- **Logistic map** — The canonical chaotic system; period-doubling and the Lyapunov exponent
+- **Lorenz attractor** — The butterfly effect; RK4 integration of a three-dimensional chaotic flow
+- **Fixed points** — Stability analysis via the Jacobian; stable, unstable, and saddle points
+- **Network degree** — Degree distributions, clustering coefficients, and average path length
+- **Small-world networks** — Watts-Strogatz ring lattice rewiring and BFS path length
+- **Scale-free networks** — Power-law degree distributions and MLE exponent fitting
+- **Ising model** — 1D Metropolis Monte Carlo; spontaneous magnetization and phase transitions
+- **Cellular automata** — Wolfram elementary rules; Rule 110 and computational universality
+- **Random walk** — Mean displacement, variance, and the diffusion limit
+- **Shannon entropy** — Information content, KL divergence, and mutual information
+- **Fractals** — Hausdorff dimension via box-counting; Cantor, Koch, and Sierpinski constructions
+- **Percolation** — 1D site percolation; cluster statistics and the critical threshold
+- **Self-organized criticality** — 1D BTW sandpile; avalanche size distributions and power laws
+- **Bifurcation theory** — Saddle-node, pitchfork, and transcritical bifurcations
+- **Agent-based models** — Schelling segregation; local rules and global segregation patterns`,
+    whatsNextContent: `## What's Next
+
+You have implemented the foundational models of complex systems science. Here are natural next steps:
+
+- **Nonlinear Dynamics** — The logistic map and Lorenz attractor are entry points to a vast field. Explore the full bifurcation diagram, the Mandelbrot set, and strange attractors in higher dimensions.
+- **Network Science** — The degree and small-world lessons are the foundation. Extend to directed networks, weighted edges, community detection, and epidemic spreading on networks.
+- **Statistical Physics** — The Ising model generalizes to 2D (where it has an exact analytic solution), to the Potts model, and to spin glasses. Finite-size scaling reveals universal critical exponents.
+- **Information Theory** — Shannon entropy is the foundation of data compression, channel coding, and machine learning. Study the channel capacity theorem and its applications.
+
+## Resources
+
+- **Nonlinear Dynamics and Chaos** by Strogatz — The best introduction to dynamical systems and chaos. Clear, physical, and beautifully written.
+- **Sync** by Strogatz — A popular account of synchronization and emergence in complex systems.
+- **Networks: An Introduction** by Newman — The comprehensive reference for network science.
+- **Introduction to the Theory of Complex Systems** by Thurner, Hanel & Klimek — A rigorous modern treatment.
+- **The Santa Fe Institute** (santafe.edu) — The leading research center for complex systems; lectures and courses freely available online.`,
+  },
+  {
+    id: "rust",
+    title: "Rust",
+    description: "Master Rust from scratch. Implement ownership, borrowing, structs, enums, traits, generics, closures, iterators, and collections — the systems language that guarantees memory safety without a garbage collector.",
+    language: "rust",
+    chapters: rustChapters,
+    lessons: rustLessons,
+    runtimeLabel: "Rust (Miri)",
+    introductionContent: `## Why Rust?
+
+Rust is a systems programming language designed for performance, reliability, and productivity. It gives you control over low-level details like memory layout and allocation — without the segfaults, buffer overflows, and data races that make C and C++ so error-prone.
+
+The key insight behind Rust is its **ownership system**: a set of compile-time rules that guarantee memory safety without needing a garbage collector. No runtime pauses. No dangling pointers. No use-after-free. These bugs are caught at compile time, not at 3 AM in production.
+
+- **Memory safety without GC** — The borrow checker enforces ownership rules at compile time, eliminating entire classes of bugs.
+- **Zero-cost abstractions** — High-level features like iterators, closures, and generics compile down to the same machine code as hand-written C.
+- **Fearless concurrency** — The ownership system prevents data races at compile time, making parallel code safe to write.
+- **Expressive type system** — Algebraic data types, traits, generics, and pattern matching let you model your domain precisely.
+
+## The Story
+
+Rust was created by Graydon Hoare at Mozilla in 2006. Mozilla adopted the language in 2009 and released Rust 1.0 in May 2015 with a stability guarantee: code written for Rust 1.0 would compile correctly on every future Rust release.
+
+The Rust compiler is now maintained by the Rust Foundation, formed in 2021, with founding members including AWS, Google, Microsoft, Huawei, and Mozilla. Rust has been the most loved programming language in the Stack Overflow Developer Survey for nine consecutive years.
+
+In 2022, Rust became the second language (after C and assembly) approved for Linux kernel development — a milestone that reflects the language's production readiness.
+
+## What You Will Learn
+
+This course contains **20 lessons** organized into **5 chapters**:
+
+1. **The Basics** — Hello World, variables and mutability, data types, functions, and control flow.
+2. **Ownership & Memory** — Rust's ownership model, references and borrowing, string types, and slices.
+3. **Structs, Enums & Patterns** — Defining custom types, implementing methods, Option, Result, and pattern matching.
+4. **Traits & Generics** — Defining shared behavior with traits, writing generic code, closures, and iterators.
+5. **Collections** — Vec, HashMap, and idiomatic collection manipulation.
+
+Each lesson explains the concept, shows examples, and gives you an exercise to implement.
+
+Let's get started.`,
+    whatsNextContent: `## Congratulations
+
+You have completed the Rust course. You now understand Rust's core features: ownership, borrowing, structs, enums, traits, generics, closures, iterators, and collections.
+
+That is a real foundation. Rust has a steep initial learning curve, and you have climbed it.
+
+## What to Explore Next
+
+### Lifetimes
+
+Lifetimes are explicit annotations that tell the compiler how long references are valid. They appear in function signatures when the compiler cannot infer the relationship:
+
+\`\`\`rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+\`\`\`
+
+### Smart Pointers
+
+- \`Box<T>\` — heap allocation; used for recursive types and large values
+- \`Rc<T>\` / \`Arc<T>\` — reference-counted shared ownership (single-threaded / thread-safe)
+- \`Cell<T>\` / \`RefCell<T>\` — interior mutability
+
+### Concurrency
+
+Rust's ownership system makes concurrent programming safe:
+
+- \`std::thread::spawn\` — spawn OS threads
+- \`std::sync::{Mutex, RwLock}\` — shared-state concurrency
+- \`std::sync::mpsc\` — message-passing channels
+- **Tokio** / **async-std** — async runtimes for I/O-bound work
+
+### The Ecosystem
+
+- **Cargo** — Rust's build tool and package manager. Add dependencies to \`Cargo.toml\`.
+- **crates.io** — The Rust package registry.
+- **serde** — Serialization/deserialization framework.
+- **tokio** — Async runtime for building reliable network applications.
+- **axum** / **actix-web** — Web frameworks built on tokio.
+- **rayon** — Data parallelism library.
+
+## Resources
+
+- [The Rust Book](https://doc.rust-lang.org/book/) — The official guide. Free online. Covers everything in this course and more.
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/) — Learn Rust through annotated examples.
+- [Rustlings](https://github.com/rust-lang/rustlings) — Small exercises for getting used to the compiler.
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/) — The dark arts of unsafe Rust.
+- [crates.io](https://crates.io) — Browse the Rust package ecosystem.
+- *Programming Rust* by Blandy, Orendorff & Tindall (O'Reilly) — The most comprehensive Rust book.`,
   },
 ];
 

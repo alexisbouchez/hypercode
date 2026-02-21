@@ -22,6 +22,7 @@ import { initRedisRunner, isRedisReady, runRedis, runTests as runRedisTests } fr
 import { initCppRunner, isCppReady, runCpp, runTests as runCppTests } from "@/lib/cpp-runner";
 import { initMusicRunner, isMusicReady, runMusic, runTests as runMusicTests } from "@/lib/music-runner";
 import { initMysqlRunner, isMysqlReady, runMysql, runTests as runMysqlTests } from "@/lib/mysql-runner";
+import { initRustRunner, isRustReady, runRust, runTests as runRustTests } from "@/lib/rust-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -100,10 +101,12 @@ export function LessonShellWrapper({
     if (courseId === "condensed-matter") return initPythonRunner();
     if (courseId === "biophysics") return initPythonRunner();
     if (courseId === "mathematical-physics") return initPythonRunner();
+    if (courseId === "complex-systems") return initPythonRunner();
     if (courseId === "signal-processing") return initPythonRunner();
     if (courseId === "machine-learning") return initPythonRunner();
     if (courseId === "information-theory") return initPythonRunner();
     if (courseId === "mysql") return initMysqlRunner();
+    if (courseId === "rust") return initRustRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -164,10 +167,12 @@ export function LessonShellWrapper({
     if (courseId === "condensed-matter") return isPythonReady();
     if (courseId === "biophysics") return isPythonReady();
     if (courseId === "mathematical-physics") return isPythonReady();
+    if (courseId === "complex-systems") return isPythonReady();
     if (courseId === "signal-processing") return isPythonReady();
     if (courseId === "machine-learning") return isPythonReady();
     if (courseId === "information-theory") return isPythonReady();
     if (courseId === "mysql") return isMysqlReady();
+    if (courseId === "rust") return isRustReady();
     return isGoReady();
   }, [courseId]);
 
@@ -228,10 +233,12 @@ export function LessonShellWrapper({
     if (courseId === "condensed-matter") return runPython(code);
     if (courseId === "biophysics") return runPython(code);
     if (courseId === "mathematical-physics") return runPython(code);
+    if (courseId === "complex-systems") return runPython(code);
     if (courseId === "signal-processing") return runPython(code);
     if (courseId === "machine-learning") return runPython(code);
     if (courseId === "information-theory") return runPython(code);
     if (courseId === "mysql") return runMysql(code);
+    if (courseId === "rust") return runRust(code);
     return runGo(code);
   }, [courseId]);
 
@@ -292,10 +299,12 @@ export function LessonShellWrapper({
     if (courseId === "condensed-matter") return runPythonTests(code, tests);
     if (courseId === "biophysics") return runPythonTests(code, tests);
     if (courseId === "mathematical-physics") return runPythonTests(code, tests);
+    if (courseId === "complex-systems") return runPythonTests(code, tests);
     if (courseId === "signal-processing") return runPythonTests(code, tests);
     if (courseId === "machine-learning") return runPythonTests(code, tests);
     if (courseId === "information-theory") return runPythonTests(code, tests);
     if (courseId === "mysql") return runMysqlTests(code, tests);
+    if (courseId === "rust") return runRustTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 
