@@ -46,6 +46,7 @@ import { fluidMechanicsChapters, fluidMechanicsLessons } from "@/lib/lessons/flu
 import { generalRelativityChapters, generalRelativityLessons } from "@/lib/lessons/general-relativity";
 import { opticsChapters, opticsLessons } from "@/lib/lessons/optics";
 import { numberTheoryChapters, numberTheoryLessons } from "@/lib/lessons/number-theory";
+import { nuclearPhysicsChapters, nuclearPhysicsLessons } from "@/lib/lessons/nuclear-physics";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -2763,6 +2764,47 @@ You have implemented the core equations of general relativity. Here are natural 
 - [MIT OpenCourseWare 8.962](https://ocw.mit.edu/courses/8-962-general-relativity-spring-2020/) — Graduate GR course by Scott Hughes, full lecture notes and problem sets.
 `;
 
+const nuclearPhysicsIntroductionContent = `
+## Why Nuclear Physics?
+
+Nuclear physics governs the energy source of every star, the origin of every element heavier than hydrogen, and the technology behind both nuclear power and nuclear weapons. It is a domain where quantum mechanics, special relativity, and thermodynamics all converge.
+
+The atomic nucleus — a sphere of protons and neutrons a hundred thousand times smaller than the atom itself — stores enormous energy in the strong nuclear force. Releasing even a small fraction of that energy, via fission or fusion, dwarfs any chemical reaction by a factor of millions.
+
+## How This Course Works
+
+You will implement the equations of nuclear physics in pure Python. Each lesson introduces one concept — a formula from nuclear science — explains the physics, and asks you to write it as a function. Key constants (speed of light $c$, atomic mass unit $u$, Boltzmann constant $k_B$) are defined inside each function.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Nuclear Structure** — Nuclear radius, mass defect, binding energy, and the semi-empirical Bethe-Weizsäcker mass formula.
+2. **Radioactive Decay** — Decay constant, half-life, the decay law, radiometric dating, and radioactive activity.
+3. **Nuclear Reactions** — Q-values, Coulomb barriers, and neutron cross sections.
+4. **Nuclear Energy** — Fission energy release, D-T fusion energy, radioactive decay chains, radiation dose, and neutron moderation.
+
+Let's start with the nuclear radius.
+`;
+
+const nuclearPhysicsWhatsNextContent = `
+## What's Next
+
+You have implemented the foundational equations of nuclear physics. Here are natural next steps:
+
+- **Reactor Physics** — Neutron transport, criticality calculations, and thermal reactor design use the cross-section and moderation concepts from this course.
+- **Astrophysical Nucleosynthesis** — The CNO cycle and pp chain power stars using the same Q-value and cross-section formulas you built.
+- **Particle Physics** — Quarks, gluons, and the Standard Model underlie the nuclear force itself. The strong interaction that binds nucleons is a residual effect of QCD.
+- **Medical Physics** — PET scans use positron annihilation (Q-value), radiation therapy uses dose calculations, and nuclear medicine uses radioactive tracers with the decay law.
+
+## Further Reading
+
+- **Nuclear Physics** by Krane — The standard undergraduate text, comprehensive and accessible.
+- **Introductory Nuclear Physics** by Wong — Strong on the shell model, decay modes, and reactions.
+- **Nuclear and Particle Physics** by Williams — Covers both nuclear and particle physics in one volume.
+- [MIT OpenCourseWare 22.101](https://ocw.mit.edu/courses/22-101-applied-nuclear-physics-fall-2006/) — Applied nuclear physics, full lecture notes and problem sets.
+`;
+
 const opticsIntroductionContent = `
 ## Why Optics?
 
@@ -3512,6 +3554,17 @@ export const courses: Course[] = [
     runtimeLabel: "Python runtime",
     introductionContent: numberTheoryIntroductionContent,
     whatsNextContent: numberTheoryWhatsNextContent,
+  },
+  {
+    id: "nuclear-physics",
+    title: "Nuclear Physics in Python",
+    description: "Learn nuclear physics by implementing the equations in Python. Compute nuclear radii, binding energies, decay constants, half-lives, radioactive decay, Q-values, Coulomb barriers, cross sections, and fission/fusion energy release from scratch.",
+    language: "python",
+    chapters: nuclearPhysicsChapters,
+    lessons: nuclearPhysicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: nuclearPhysicsIntroductionContent,
+    whatsNextContent: nuclearPhysicsWhatsNextContent,
   },
 ];
 
