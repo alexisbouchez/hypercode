@@ -54,6 +54,7 @@ import { machineLearningChapters, machineLearningLessons } from "@/lib/lessons/m
 import { informationTheoryChapters, informationTheoryLessons } from "@/lib/lessons/information-theory";
 import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
 import { astrophysicsChapters, astrophysicsLessons } from "@/lib/lessons/astrophysics";
+import { plasmaPhysicsChapters, plasmaPhysicsLessons } from "@/lib/lessons/plasma-physics";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -3887,6 +3888,53 @@ You have implemented the foundational equations of astrophysics. Here are natura
 - **Stellar Structure and Evolution** by Kippenhahn & Weigert — The standard graduate reference for stellar physics.
 - **Galactic Dynamics** by Binney & Tremaine — Deep coverage of galactic rotation, dark matter, and stellar dynamics.
 - **Black Holes, White Dwarfs and Neutron Stars** by Shapiro & Teukolsky — Essential for compact object physics.`,
+  },
+  {
+    id: "plasma-physics",
+    title: "Plasma Physics in Python",
+    description: "Learn plasma physics by implementing the equations that govern ionized gases in Python. Compute Debye shielding, plasma frequency, cyclotron motion, E×B drifts, magnetic mirrors, Alfvén waves, bremsstrahlung, the Saha equation, fusion power density, and Spitzer resistivity from scratch.",
+    language: "python",
+    chapters: plasmaPhysicsChapters,
+    lessons: plasmaPhysicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Plasma Physics?
+
+Plasma is the fourth state of matter — an ionized gas so hot that electrons have been stripped from atoms, leaving a soup of charged particles governed by electric and magnetic fields. Over 99% of the visible universe is plasma: the Sun, stars, nebulae, and the interstellar medium. On Earth, plasmas are the key to fusion energy, the most promising path to clean, limitless power.
+
+This course implements the core equations of plasma physics in pure Python. No libraries — just the mathematics of magnetized, ionized gases expressed as functions. Each lesson introduces one concept, explains the physics, and asks you to write the formula as code.
+
+You will implement:
+
+- **Debye length** — how a plasma shields electric fields over microscopic distances
+- **Plasma frequency** — the natural oscillation frequency of electrons in a plasma
+- **Cyclotron motion** — the spiral gyration of charged particles in magnetic fields
+- **Thermal velocity** — the characteristic speed of particles at a given temperature
+- **Plasma beta** — the ratio of thermal to magnetic pressure
+- **E×B drift** — the universal drift of all plasma species in crossed fields
+- **Magnetic mirror** — how converging field lines trap charged particles
+- **Alfvén speed** — the speed of magnetohydrodynamic waves in a plasma
+- **Bremsstrahlung** — radiation emitted as electrons scatter off ions
+- **Coulomb logarithm** — the effective range of Coulomb collisions
+- **Saha equation** — the ionization equilibrium of a plasma in thermal balance
+- **Langmuir probe** — the classic diagnostic for measuring plasma parameters
+- **Fusion power density** — the D-T reaction rate and Lawson criterion
+- **MHD equilibrium** — force balance in z-pinch and theta-pinch configurations
+- **Spitzer resistivity** — the electrical resistivity of a hot plasma`,
+    whatsNextContent: `## What's Next
+
+You have implemented the foundational equations of plasma physics. Here are natural next steps:
+
+- **Fusion Engineering** — Tokamaks, stellarators, and inertial confinement: the engineering challenges of confining a plasma at 100 million degrees.
+- **Magnetohydrodynamics** — The fluid description of plasmas, MHD instabilities, and magnetic reconnection.
+- **Astrophysics** — Stellar coronae, solar wind, pulsar magnetospheres, and accretion disks are all plasma physics problems at cosmic scales.
+- **General Relativity** — Plasma physics near black holes requires relativistic MHD.
+
+## Resources
+
+- **Introduction to Plasma Physics and Controlled Fusion** by Chen — The best undergraduate introduction to the field.
+- **Plasma Physics and Fusion Energy** by Freidberg — Comprehensive coverage from fundamentals to tokamak design.
+- **The Physics of Plasmas** by Boyd & Sanderson — Graduate-level treatment of plasma waves, instabilities, and kinetic theory.
+- **Principles of Plasma Physics** by Krall & Trivelpiece — Classic graduate reference with detailed derivations.`,
   },
 ];
 
