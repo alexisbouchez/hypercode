@@ -95,8 +95,8 @@ function executeFP(opcode: number, fpRegs: Float64Array, regs: RegisterFile, mem
     return;
   }
 
-  // FP data-processing 1-register: 0 0 0 11110 01 1 opcode 10000 Rn Rd
-  if ((opcode & 0xFF3FFC00) === 0x1E204000) {
+  // FP data-processing 1-register: 0 0 0 11110 type 1 opcode 10000 Rn Rd
+  if ((opcode & 0xFF207C00) === 0x1E204000) {
     const rd = opcode & 0x1F;
     const rn = (opcode >> 5) & 0x1F;
     const op = (opcode >> 15) & 0x3F;

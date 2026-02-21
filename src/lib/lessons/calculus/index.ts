@@ -14,12 +14,16 @@ import { simpsonsRule } from "./data/12-simpsons-rule";
 import { averageValue } from "./data/13-average-value";
 import { areaBetween } from "./data/14-area-between";
 import { volumeRevolution } from "./data/15-volume-revolution";
+import { chainRule } from "./data/16-chain-rule";
+import { lhopital } from "./data/17-lhopital";
+import { gradientDescent } from "./data/18-gradient-descent";
 
 export const calculusChapters: Chapter[] = [
 	{ id: "limits-and-derivatives", title: "Limits & Derivatives" },
 	{ id: "derivative-applications", title: "Derivative Applications" },
 	{ id: "integration", title: "Integration" },
 	{ id: "integral-applications", title: "Integral Applications" },
+	{ id: "differentiation-rules", title: "Differentiation Rules" },
 ];
 
 export const calculusLessons = [
@@ -38,4 +42,7 @@ export const calculusLessons = [
 	averageValue,
 	areaBetween,
 	volumeRevolution,
+	chainRule,
+	lhopital,
+	gradientDescent,
 ];

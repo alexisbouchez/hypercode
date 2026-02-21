@@ -24,6 +24,11 @@ import { linkedLists } from "./data/24-linked-lists";
 import { functionPointers } from "./data/21-function-pointers";
 import { preprocessorMacros } from "./data/22-preprocessor-macros";
 import { sorting } from "./data/23-variadic-functions";
+import { mathFunctions } from "./data/26-math-functions";
+import { floatingPoint } from "./data/27-floating-point";
+import { trigonometry } from "./data/28-trigonometry";
+import { logarithms } from "./data/29-logarithms";
+import { numberTheory } from "./data/30-number-theory";
 
 export const cChapters: Chapter[] = [
 	{ id: "basics", title: "C Basics" },
@@ -35,6 +40,7 @@ export const cChapters: Chapter[] = [
 	{ id: "structs", title: "Structs" },
 	{ id: "dynamic-memory", title: "Dynamic Memory" },
 	{ id: "advanced", title: "Advanced Concepts" },
+	{ id: "mathematics", title: "Mathematics" },
 ];
 
 export const cLessons: Lesson[] = [
@@ -63,4 +69,9 @@ export const cLessons: Lesson[] = [
 	functionPointers,
 	preprocessorMacros,
 	sorting,
+	mathFunctions,
+	floatingPoint,
+	trigonometry,
+	logarithms,
+	numberTheory,
 ];

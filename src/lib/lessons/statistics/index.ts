@@ -14,6 +14,9 @@ import { chiSquare } from "./data/12-chi-square";
 import { correlation } from "./data/13-correlation";
 import { linearRegression } from "./data/14-linear-regression";
 import { bootstrap } from "./data/15-bootstrap";
+import { skewness } from "./data/16-skewness";
+import { poissonDistribution } from "./data/17-poisson";
+import { anova } from "./data/18-anova";
 
 export const statisticsChapters: Chapter[] = [
 	{ id: "descriptive", title: "Descriptive Statistics" },
@@ -38,4 +41,7 @@ export const statisticsLessons: Lesson[] = [
 	correlation,
 	linearRegression,
 	bootstrap,
+	skewness,
+	poissonDistribution,
+	anova,
 ];

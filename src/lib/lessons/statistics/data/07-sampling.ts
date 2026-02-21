@@ -29,9 +29,9 @@ Setting a random seed makes results **reproducible** — running the same code g
 
 ### Law of Large Numbers
 
-As sample size $n$ increases, the sample mean $\bar{x}$ converges to the true population mean $\mu$:
+As sample size $n$ increases, the sample mean $\\bar{x}$ converges to the true population mean $\\mu$:
 
-$$\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i \xrightarrow{n \to \infty} \mu$$
+$$\\bar{x} = \\frac{1}{n}\\sum_{i=1}^n x_i \\xrightarrow{n \\to \\infty} \\mu$$
 
 \`\`\`python
 # Larger samples are more accurate

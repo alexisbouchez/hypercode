@@ -14,12 +14,16 @@ import { taylorError } from "./data/12-taylor-error";
 import { parametricArcLength } from "./data/13-parametric-arc-length";
 import { polarArea } from "./data/14-polar-area";
 import { curvature } from "./data/15-curvature";
+import { rootTest } from "./data/16-root-test";
+import { maclaurinCos } from "./data/17-maclaurin-cos";
+import { fourierSine } from "./data/18-fourier-sine";
 
 export const calculus2Chapters: Chapter[] = [
 	{ id: "integration-applications", title: "Integration Applications" },
 	{ id: "sequences-and-series", title: "Sequences & Series" },
 	{ id: "taylor-series", title: "Taylor Series" },
 	{ id: "parametric-and-polar", title: "Parametric & Polar" },
+	{ id: "fourier-series", title: "Fourier Series" },
 ];
 
 export const calculus2Lessons = [
@@ -38,4 +42,7 @@ export const calculus2Lessons = [
 	parametricArcLength,
 	polarArea,
 	curvature,
+	rootTest,
+	maclaurinCos,
+	fourierSine,
 ];

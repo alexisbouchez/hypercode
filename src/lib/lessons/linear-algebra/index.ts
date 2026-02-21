@@ -14,12 +14,16 @@ import { leastSquares } from "./data/12-least-squares";
 import { polynomialRoots } from "./data/13-polynomial-roots";
 import { newtonRaphson } from "./data/14-newton-raphson";
 import { powerIteration } from "./data/15-power-iteration";
+import { gramSchmidt } from "./data/16-gram-schmidt";
+import { luDecomp } from "./data/17-lu-decomp";
+import { matrixRank } from "./data/18-rank";
 
 export const linearAlgebraChapters: Chapter[] = [
 	{ id: "vectors", title: "Vectors" },
 	{ id: "matrices", title: "Matrices" },
 	{ id: "systems", title: "Linear Systems" },
 	{ id: "numerical", title: "Numerical Methods" },
+	{ id: "decompositions", title: "Decompositions" },
 ];
 
 export const linearAlgebraLessons: Lesson[] = [
@@ -38,4 +42,7 @@ export const linearAlgebraLessons: Lesson[] = [
 	polynomialRoots,
 	newtonRaphson,
 	powerIteration,
+	gramSchmidt,
+	luDecomp,
+	matrixRank,
 ];

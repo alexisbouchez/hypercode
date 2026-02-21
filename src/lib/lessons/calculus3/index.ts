@@ -14,12 +14,16 @@ import { doubleIntegral } from "./data/12-double-integral";
 import { polarDoubleIntegral } from "./data/13-polar-double-integral";
 import { tripleIntegral } from "./data/14-triple-integral";
 import { divergence2d } from "./data/15-divergence";
+import { curl2d } from "./data/16-curl";
+import { lineIntegral } from "./data/17-line-integral";
+import { greensTheorem } from "./data/18-greens-theorem";
 
 export const calculus3Chapters: Chapter[] = [
 	{ id: "vectors-in-3d", title: "Vectors in 3D" },
 	{ id: "partial-derivatives", title: "Partial Derivatives" },
 	{ id: "optimization", title: "Optimization" },
 	{ id: "multiple-integrals", title: "Multiple Integrals" },
+	{ id: "vector-calculus", title: "Vector Calculus" },
 ];
 
 export const calculus3Lessons = [
@@ -38,4 +42,7 @@ export const calculus3Lessons = [
 	polarDoubleIntegral,
 	tripleIntegral,
 	divergence2d,
+	curl2d,
+	lineIntegral,
+	greensTheorem,
 ];
