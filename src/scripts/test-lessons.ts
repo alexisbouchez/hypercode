@@ -64,6 +64,9 @@ import { runOptionsPricingTests } from "./test-runners/options-pricing-test-runn
 import { runTimeSeriesTests } from "./test-runners/time-series-test-runner";
 import { runAlgoTradingTests } from "./test-runners/algo-trading-test-runner";
 import { runRiskManagementTests } from "./test-runners/risk-management-test-runner";
+import { runLeanTests } from "./test-runners/lean-test-runner";
+import { runDigitalLogicTests } from "./test-runners/digital-logic-test-runner";
+import { runPcbDesignTests } from "./test-runners/pcb-design-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 async function main() {
@@ -136,6 +139,10 @@ async function main() {
   console.log("Running Haskell tests...");
   const haskellResults = runHaskellTests();
   allResults.push(...haskellResults);
+
+  console.log("Running Lean tests...");
+  const leanResults = runLeanTests();
+  allResults.push(...leanResults);
 
   console.log("Running Linear Algebra tests...");
   const linearAlgebraResults = runLinearAlgebraTests();
@@ -332,6 +339,14 @@ async function main() {
   console.log("Running Risk Management tests...");
   const riskManagementResults = runRiskManagementTests();
   allResults.push(...riskManagementResults);
+
+  console.log("Running Digital Logic tests...");
+  const digitalLogicResults = runDigitalLogicTests();
+  allResults.push(...digitalLogicResults);
+
+  console.log("Running PCB Design tests...");
+  const pcbDesignResults = runPcbDesignTests();
+  allResults.push(...pcbDesignResults);
 
   console.log("\n--- Results ---\n");
 

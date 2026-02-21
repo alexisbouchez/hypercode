@@ -23,6 +23,7 @@ import { initCppRunner, isCppReady, runCpp, runTests as runCppTests } from "@/li
 import { initMusicRunner, isMusicReady, runMusic, runTests as runMusicTests } from "@/lib/music-runner";
 import { initMysqlRunner, isMysqlReady, runMysql, runTests as runMysqlTests } from "@/lib/mysql-runner";
 import { initRustRunner, isRustReady, runRust, runTests as runRustTests } from "@/lib/rust-runner";
+import { initLeanRunner, isLeanReady, runLean, runTests as runLeanTests } from "@/lib/lean-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -108,6 +109,9 @@ export function LessonShellWrapper({
     if (courseId === "information-theory") return initPythonRunner();
     if (courseId === "mysql") return initMysqlRunner();
     if (courseId === "rust") return initRustRunner();
+    if (courseId === "lean") return initLeanRunner();
+    if (courseId === "digital-logic") return initJsRunner();
+    if (courseId === "pcb-design") return initJsRunner();
     return initGoRunner();
   }, [courseId]);
 
@@ -175,6 +179,9 @@ export function LessonShellWrapper({
     if (courseId === "information-theory") return isPythonReady();
     if (courseId === "mysql") return isMysqlReady();
     if (courseId === "rust") return isRustReady();
+    if (courseId === "lean") return isLeanReady();
+    if (courseId === "digital-logic") return isJsReady();
+    if (courseId === "pcb-design") return isJsReady();
     return isGoReady();
   }, [courseId]);
 
@@ -242,6 +249,9 @@ export function LessonShellWrapper({
     if (courseId === "information-theory") return runPython(code);
     if (courseId === "mysql") return runMysql(code);
     if (courseId === "rust") return runRust(code);
+    if (courseId === "lean") return runLean(code);
+    if (courseId === "digital-logic") return runJs(code);
+    if (courseId === "pcb-design") return runJs(code);
     return runGo(code);
   }, [courseId]);
 
@@ -309,6 +319,9 @@ export function LessonShellWrapper({
     if (courseId === "information-theory") return runPythonTests(code, tests);
     if (courseId === "mysql") return runMysqlTests(code, tests);
     if (courseId === "rust") return runRustTests(code, tests);
+    if (courseId === "lean") return runLeanTests(code, tests);
+    if (courseId === "digital-logic") return runJsTests(code, tests);
+    if (courseId === "pcb-design") return runJsTests(code, tests);
     return runGoTests(code, tests);
   }, [courseId]);
 

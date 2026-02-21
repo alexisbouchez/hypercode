@@ -20,6 +20,7 @@ import { threejsChapters, threejsLessons } from "@/lib/lessons/threejs";
 import { linkedListsChapters, linkedListsLessons } from "@/lib/lessons/linked-lists";
 import { pythonChapters, pythonLessons } from "@/lib/lessons/python";
 import { haskellChapters, haskellLessons } from "@/lib/lessons/haskell";
+import { leanChapters, leanLessons } from "@/lib/lessons/lean";
 import { graphsChapters, graphsLessons } from "@/lib/lessons/graphs";
 import { linearAlgebraChapters, linearAlgebraLessons } from "@/lib/lessons/linear-algebra";
 import { diffeqChapters, diffeqLessons } from "@/lib/lessons/diffeq";
@@ -71,6 +72,8 @@ import { timeSeriesChapters, timeSeriesLessons } from "@/lib/lessons/time-series
 import { portfolioTheoryChapters, portfolioTheoryLessons } from "@/lib/lessons/portfolio-theory";
 import { optionsPricingChapters, optionsPricingLessons } from "@/lib/lessons/options-pricing";
 import { riskManagementChapters, riskManagementLessons } from "@/lib/lessons/risk-management";
+import { digitalLogicChapters, digitalLogicLessons } from "@/lib/lessons/digital-logic";
+import { pcbDesignChapters, pcbDesignLessons } from "@/lib/lessons/pcb-design";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -3561,6 +3564,55 @@ export const courses: Course[] = [
     whatsNextContent: haskellWhatsNextContent,
   },
   {
+    id: "lean",
+    title: "Lean",
+    description: "Learn Lean 4, the language that bridges functional programming and formal mathematics. Master definitions, pattern matching, recursion, and higher-order functions — the foundation of machine-verified proofs.",
+    language: "lean",
+    chapters: leanChapters,
+    lessons: leanLessons,
+    runtimeLabel: "Lean",
+    introductionContent: `## Why Lean?
+
+Lean is a programming language and interactive theorem prover. It is used by mathematicians to write machine-verified proofs and by programmers who want the strongest possible guarantees about their code.
+
+- **Functional at its core** — Lean is a pure functional language with algebraic data types, pattern matching, and higher-order functions.
+- **Types as propositions** — In Lean, types and logical propositions are the same thing. A function that returns a proof is just a function.
+- **Mathlib** — The Lean community has formalized over 1,000,000 lines of mathematics. Real analysis, number theory, algebraic geometry — all machine-verified.
+- **Used in industry** — AWS uses Lean to verify the Cedar authorization language. Lean is increasingly used to verify critical software.
+
+## What You Will Learn
+
+This course contains **15 lessons** organized into **4 chapters**:
+
+1. **Foundations** — The basics: output, numbers, strings, booleans, and named definitions.
+2. **Functions** — Defining functions, multiple parameters, conditionals, and recursion.
+3. **Lists & Pattern Matching** — Working with lists and matching on structure.
+4. **Functional Programming** — Lambdas, \`map\`, \`filter\`, and \`foldl\`.
+
+Each lesson introduces a concept, shows an example, and gives you a hands-on exercise.
+
+Let's get started.
+`,
+    whatsNextContent: `## Congratulations
+
+You have completed all 15 lessons. You now know the core of Lean 4 as a functional programming language: definitions, functions, recursion, pattern matching, and higher-order functions.
+
+## What to Explore Next
+
+- **Theorem proving** — Lean's real superpower. Start with the [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4) to learn tactic-based proving interactively.
+- **Dependent types** — Types that depend on values. \`Vector Nat n\` is a list of exactly \`n\` elements, verified at compile time.
+- **Mathlib** — The world's largest library of formalized mathematics. Contribute a proof.
+
+## References
+
+- [Lean 4 Documentation](https://lean-lang.org/lean4/doc/) — Official language reference.
+- [Functional Programming in Lean](https://leanprover.github.io/functional_programming_in_lean/) — Free book, covers Lean as a programming language.
+- [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/) — Free book, the bridge from programming to formal proofs.
+- [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4) — The best hands-on introduction to Lean proofs.
+- [Mathlib4](https://leanprover-community.github.io/mathlib4_docs/) — 1M+ lines of formalized mathematics.
+`,
+  },
+  {
     id: "graphs",
     title: "Graphs in Python",
     description: "Master graph algorithms in Python. Implement BFS, DFS, Dijkstra, Bellman-Ford, topological sort, Union-Find, Kruskal's MST, and PageRank from scratch.",
@@ -4663,6 +4715,66 @@ You will implement:
 - **Options Pricing** — The Greeks underpin delta hedging and options risk management
 - **Portfolio Theory** — Covariance-based VaR and risk decomposition
 - **Algorithmic Trading** — Apply Kelly criterion and volatility targeting to live strategy sizing
+`,
+  },
+  {
+    id: "digital-logic",
+    title: "Digital Logic",
+    description: "Learn the building blocks of digital circuits in JavaScript. Implement logic gates, Boolean algebra, De Morgan's laws, truth tables, adders, multiplexers, decoders, latches, and binary counters — the foundations of every CPU, FPGA, and microcontroller.",
+    language: "javascript",
+    chapters: digitalLogicChapters,
+    lessons: digitalLogicLessons,
+    runtimeLabel: "JavaScript",
+    introductionContent: `## Why Digital Logic?
+
+Every digital system — from a microcontroller to a server CPU — is built from the same fundamental building blocks: logic gates. Understanding digital logic is the foundation of electronics, computer architecture, and hardware design.
+
+This course teaches you to implement and simulate digital circuits in JavaScript. Rather than abstract theory, you will write real functions that replicate the behavior of actual hardware gates and circuits.
+
+You will implement:
+
+- **Logic Gates** — AND, OR, NOT, NAND, NOR, XOR, XNOR and their truth tables
+- **Universal Gates** — How to build any logic function from NAND gates alone
+- **Boolean Algebra** — De Morgan's laws, sum-of-products canonical form, truth table generation
+- **Combinational Circuits** — Half adder, full adder, ripple carry adder, 4-to-1 multiplexer, 2-to-4 decoder
+- **Sequential Circuits** — SR latch, and 4-bit binary counter
+
+This is exactly the knowledge behind tools like [tscircuit](https://tscircuit.com/) — where digital components are assembled into real PCB designs using TypeScript and React.`,
+    whatsNextContent: `## What's Next
+
+- **PCB Design** — Apply digital logic to real board layout: trace impedance, via design, and signal integrity
+- **Circuits** — Analog circuit analysis: Ohm's law, RC transients, and filter design
+- **Embedded Systems** — Put digital logic into practice with GPIO, timers, and communication protocols
+`,
+  },
+  {
+    id: "pcb-design",
+    title: "PCB Design",
+    description: "Learn printed circuit board design by implementing the engineering formulas in JavaScript. Compute trace resistance, current capacity, propagation delay, microstrip and stripline impedance, differential pair coupling, via parasitics, decoupling capacitor selection, and signal integrity constraints.",
+    language: "javascript",
+    chapters: pcbDesignChapters,
+    lessons: pcbDesignLessons,
+    runtimeLabel: "JavaScript",
+    introductionContent: `## Why PCB Design?
+
+A **Printed Circuit Board (PCB)** is the physical substrate that connects electronic components. Designing one correctly requires understanding electrical engineering at every layer: how copper carries current, how signals propagate, how parasitic inductance and capacitance affect high-speed signals, and how to prevent noise from corrupting your circuits.
+
+This course implements the key PCB engineering formulas in JavaScript. You will compute real numbers used by professional PCB designers and EDA tools every day.
+
+You will implement:
+
+- **Trace Design** — Resistance, current capacity (IPC-2221), and propagation delay
+- **Impedance Control** — Microstrip, stripline, and differential pair characteristic impedance — the math behind 50Ω and 100Ω traces used in USB, PCIe, and Ethernet
+- **Via Design** — Via resistance and inductance, and why vias become problematic at GHz frequencies
+- **Power Integrity** — Self-resonant frequency, decoupling capacitor impedance, target impedance, and parallel capacitor strategies
+- **Signal Integrity** — Rise time, bandwidth, critical trace length, skin effect, and design rule checking
+
+This is the engineering behind tools like [tscircuit](https://tscircuit.com/) — where PCB layouts are generated from TypeScript and React components.`,
+    whatsNextContent: `## What's Next
+
+- **Digital Logic** — The gate-level logic that runs on the chips you're routing
+- **Circuits** — Analog circuit analysis: Ohm's law, RC transients, and filter design
+- **Electromagnetism** — The Maxwell's equations underlying transmission line theory
 `,
   },
 ];
