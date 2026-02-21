@@ -149,6 +149,7 @@ export function LessonShellWrapper({
     if (courseId === "number-theory") return isPythonReady();
     if (courseId === "optics") return isPythonReady();
     if (courseId === "cryptography") return isPythonReady();
+    if (courseId === "cosmology") return isPythonReady();
     if (courseId === "signal-processing") return isPythonReady();
     if (courseId === "machine-learning") return isPythonReady();
     if (courseId === "information-theory") return isPythonReady();
@@ -205,6 +206,7 @@ export function LessonShellWrapper({
     if (courseId === "number-theory") return runPython(code);
     if (courseId === "optics") return runPython(code);
     if (courseId === "cryptography") return runPython(code);
+    if (courseId === "cosmology") return runPython(code);
     if (courseId === "signal-processing") return runPython(code);
     if (courseId === "machine-learning") return runPython(code);
     if (courseId === "information-theory") return runPython(code);
@@ -261,6 +263,7 @@ export function LessonShellWrapper({
     if (courseId === "number-theory") return runPythonTests(code, tests);
     if (courseId === "optics") return runPythonTests(code, tests);
     if (courseId === "cryptography") return runPythonTests(code, tests);
+    if (courseId === "cosmology") return runPythonTests(code, tests);
     if (courseId === "signal-processing") return runPythonTests(code, tests);
     if (courseId === "machine-learning") return runPythonTests(code, tests);
     if (courseId === "information-theory") return runPythonTests(code, tests);

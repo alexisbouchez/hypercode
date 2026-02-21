@@ -52,6 +52,7 @@ import { particlePhysicsChapters, particlePhysicsLessons } from "@/lib/lessons/p
 import { signalProcessingChapters, signalProcessingLessons } from "@/lib/lessons/signal-processing";
 import { machineLearningChapters, machineLearningLessons } from "@/lib/lessons/machine-learning";
 import { informationTheoryChapters, informationTheoryLessons } from "@/lib/lessons/information-theory";
+import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -3800,6 +3801,44 @@ With information theory mastered, you are ready for:
 - **Statistics** — maximum likelihood, Bayesian inference, the connection between KL divergence and likelihood ratios
 - **Cryptography** — Shannon's perfect secrecy, one-time pads, and entropy in key generation
 - **Signal Processing** — source coding, channel coding, and the Shannon-Hartley theorem`,
+  },
+  {
+    id: "cosmology",
+    title: "Cosmology in Python",
+    description: "Learn cosmology by implementing the equations of the universe in Python. Compute Hubble expansion, Friedmann dynamics, redshifts, comoving distances, the CMB temperature history, critical density, matter-radiation equality, the age of the universe, Jeans instability, dark energy, and Planck units from scratch.",
+    language: "python",
+    chapters: cosmologyChapters,
+    lessons: cosmologyLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Cosmology?
+
+Cosmology is the study of the universe as a whole — its origin, evolution, large-scale structure, and ultimate fate. It is where general relativity, particle physics, thermodynamics, and quantum mechanics all converge on the grandest possible scale.
+
+The universe began in a hot, dense state 13.8 billion years ago and has been expanding ever since. Today it is filled with galaxies, dark matter, and dark energy, all governed by a handful of elegant equations. The Friedmann equation describes the expansion. The Boltzmann equation describes the thermal history. The Jeans criterion explains why galaxies and stars form.
+
+This course implements the core equations of cosmology in pure Python. No libraries — just the mathematics of an expanding universe expressed as functions. Each lesson introduces one concept, explains the physics, and asks you to write the formula as code.
+
+You will implement:
+- **Cosmic expansion** — Hubble's law, the Friedmann equation, redshift, and distances
+- **Thermal history** — CMB temperature, critical density, matter-radiation equality, age of the universe
+- **Structure formation** — Jeans instability and the growth factor
+- **Dark sector** — dark energy, Planck units, and neutrino temperature
+
+Let's start with Hubble's law.`,
+    whatsNextContent: `## What's Next
+
+You have implemented the foundational equations of cosmology. Here are natural next steps:
+
+- **General Relativity** — The Friedmann equations are solutions to Einstein's field equations. GR gives the geometric foundation for everything in this course.
+- **Particle Physics** — Big Bang nucleosynthesis, the matter-antimatter asymmetry, and the nature of dark matter are all particle physics questions.
+- **Observational Cosmology** — The Planck satellite, SDSS galaxy surveys, and gravitational wave detectors are testing these equations with exquisite precision.
+
+## Further Reading
+
+- **An Introduction to Modern Cosmology** by Liddle — Clear and accessible undergraduate text.
+- **Cosmology** by Weinberg — The definitive graduate-level reference.
+- **The Early Universe** by Kolb & Turner — Deep on the thermal history and particle cosmology.
+- [Planck 2018 Results](https://www.aanda.org/articles/aa/abs/2020/09/aa33910-18/aa33910-18.html) — The most precise measurement of cosmological parameters to date.`,
   },
 ];
 
