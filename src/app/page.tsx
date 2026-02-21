@@ -138,10 +138,527 @@ const courseLogos: Record<string, React.ReactNode> = {
       <circle cx="16" cy="22" r="1.2" fill="#10b981"/>
     </svg>
   ),
+  // Languages
+  rust: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="#CE422B">
+      <path d="M16 3C9 3 3 9 3 16s6 13 13 13 13-6 13-13S23 3 16 3zm0 24C10.5 27 6 22.5 6 17S10.5 7 16 7s10 4.5 10 10-4.5 10-10 10z"/>
+      <circle cx="16" cy="17" r="3.5"/>
+      <rect x="14.5" y="0" width="3" height="5" rx="1.5"/>
+      <rect x="14.5" y="27" width="3" height="5" rx="1.5"/>
+      <rect x="0" y="14.5" width="5" height="3" rx="1.5"/>
+      <rect x="27" y="14.5" width="5" height="3" rx="1.5"/>
+      <rect x="4.5" y="3" width="3" height="5" rx="1.5" transform="rotate(45 6 5.5)"/>
+      <rect x="24.5" y="3" width="3" height="5" rx="1.5" transform="rotate(-45 26 5.5)"/>
+      <rect x="4.5" y="24" width="3" height="5" rx="1.5" transform="rotate(-45 6 26.5)"/>
+      <rect x="24.5" y="24" width="3" height="5" rx="1.5" transform="rotate(45 26 26.5)"/>
+    </svg>
+  ),
+  cpp: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <rect width="32" height="32" rx="4" fill="#00599C"/>
+      <text x="3" y="22" fontSize="13" fontFamily="monospace" fill="white" fontWeight="bold">C++</text>
+    </svg>
+  ),
+  ruby: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <polygon points="16,3 27,11 27,21 16,29 5,21 5,11" fill="#CC342D"/>
+      <polygon points="16,3 27,11 16,16" fill="#E86060" opacity="0.5"/>
+      <polygon points="16,16 5,11 5,21 16,29" fill="#7B1010" opacity="0.5"/>
+      <line x1="5" y1="11" x2="27" y2="11" stroke="#FF9090" strokeWidth="0.8" opacity="0.4"/>
+    </svg>
+  ),
+  haskell: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="3" y="26" fontSize="26" fontFamily="Georgia, serif" fill="#5D4F85">λ</text>
+    </svg>
+  ),
+  holyc: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <rect x="4" y="6" width="24" height="2.5" rx="1" fill="#FFD700"/>
+      <rect x="4" y="23.5" width="24" height="2.5" rx="1" fill="#FFD700"/>
+      <rect x="5" y="8.5" width="3.5" height="15" rx="1" fill="#FFD700"/>
+      <rect x="14.25" y="8.5" width="3.5" height="15" rx="1" fill="#FFD700"/>
+      <rect x="23.5" y="8.5" width="3.5" height="15" rx="1" fill="#FFD700"/>
+    </svg>
+  ),
+  // Web & Frontend
+  javascript: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <rect width="32" height="32" rx="3" fill="#F7DF1E"/>
+      <path d="M8 22.5c.5 1 1.3 1.5 2.5 1.5 1.2 0 2-.6 2-1.8V15h2.5v7.4c0 2.7-1.6 4-3.9 4-2.1 0-3.3-1.1-3.9-2.5zM17.5 22c.6 1 1.6 1.7 3 1.7 1.3 0 2.2-.6 2.2-1.6 0-1-.8-1.4-2.2-2l-.7-.3c-2.2-.9-3.6-2-3.6-4.4 0-2.2 1.7-3.9 4.4-3.9 1.9 0 3.2.7 4.2 2.4l-2.2 1.4c-.5-.9-1-1.2-1.9-1.2-.9 0-1.5.5-1.5 1.2 0 .8.5 1.2 1.8 1.7l.7.3c2.5 1.1 3.9 2.2 3.9 4.6 0 2.7-2 4.1-4.8 4.1-2.7 0-4.5-1.3-5.3-3z" fill="#000"/>
+    </svg>
+  ),
+  typescript: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <rect width="32" height="32" rx="3" fill="#3178C6"/>
+      <path d="M5 15h9v2.5H11V27H8.5V17.5H5zM18.5 14.8c-1.6 0-3.1.9-3.1 2.5 0 1.8 1.2 2.5 3.1 3.2.6.2 1.2.5 1.6.8.4.3.5.7.5 1 0 .9-.8 1.4-1.8 1.4-1.3 0-2.2-.7-2.8-1.7l-2.2 1.2c.9 1.8 2.6 2.8 5 2.8 2.8 0 4.8-1.5 4.8-4 0-1.9-1.1-3-3.1-3.8-.7-.3-1.3-.5-1.7-.8-.4-.2-.6-.5-.6-.9 0-.7.5-1 1.4-1s1.7.5 2.3 1.4l2.1-1.3c-.9-1.5-2.3-1.8-3.5-1.8z" fill="white"/>
+    </svg>
+  ),
+  threejs: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="16,3 29,24 3,24"/>
+      <polygon points="16,9 24,24 8,24" opacity="0.45"/>
+      <line x1="16" y1="3" x2="16" y2="9"/>
+    </svg>
+  ),
+  music: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="currentColor">
+      <ellipse cx="11" cy="24" rx="4.5" ry="3" transform="rotate(-10 11 24)"/>
+      <ellipse cx="24" cy="21" rx="4.5" ry="3" transform="rotate(-10 24 21)"/>
+      <rect x="14.5" y="7" width="2" height="17.5" rx="1"/>
+      <rect x="27.5" y="4" width="2" height="17.5" rx="1"/>
+      <rect x="14.5" y="7" width="15" height="2" rx="1"/>
+      <rect x="14.5" y="11" width="15" height="2" rx="1"/>
+    </svg>
+  ),
+  // Data & Databases
+  mysql: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <ellipse cx="16" cy="8" rx="11" ry="4" fill="#5B9BD5"/>
+      <rect x="5" y="8" width="22" height="10" fill="#4479A1"/>
+      <ellipse cx="16" cy="18" rx="11" ry="4" fill="#5B9BD5"/>
+      <rect x="5" y="14" width="22" height="4" fill="#4479A1"/>
+      <ellipse cx="16" cy="8" rx="11" ry="4" fill="#5B9BD5"/>
+      <text x="10" y="16" fontSize="7" fontFamily="monospace" fill="white" fontWeight="bold">MY</text>
+    </svg>
+  ),
+  sqlite: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <ellipse cx="13" cy="7" rx="9" ry="3.5" fill="#0F6197"/>
+      <rect x="4" y="7" width="18" height="16" fill="#003B57"/>
+      <ellipse cx="13" cy="23" rx="9" ry="3.5" fill="#0F6197"/>
+      <ellipse cx="13" cy="7" rx="9" ry="3.5" fill="#1A8BBD"/>
+      <path d="M22 12 Q28 12 28 7 Q28 2 22 2" stroke="#4FC3F7" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    </svg>
+  ),
+  redis: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <ellipse cx="16" cy="24" rx="13" ry="4.5" fill="#A31515"/>
+      <rect x="3" y="18" width="26" height="6" fill="#DC382D"/>
+      <ellipse cx="16" cy="18" rx="13" ry="4.5" fill="#FF6B6B"/>
+      <rect x="3" y="12" width="26" height="6" fill="#DC382D"/>
+      <ellipse cx="16" cy="12" rx="13" ry="4.5" fill="#FF8C8C"/>
+    </svg>
+  ),
+  // Algorithms & CS
+  algorithms: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="currentColor">
+      <rect x="3" y="22" width="5" height="7" rx="1"/>
+      <rect x="10" y="16" width="5" height="13" rx="1"/>
+      <rect x="17" y="10" width="5" height="19" rx="1"/>
+      <rect x="24" y="14" width="5" height="15" rx="1"/>
+      <polyline points="5,20 12,14 19,8 26,12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  ),
+  graphs: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="16" cy="6" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="22" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="26" cy="22" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="16" r="3" fill="currentColor" stroke="none" opacity="0.6"/>
+      <line x1="16" y1="9" x2="6" y2="19"/>
+      <line x1="16" y1="9" x2="26" y2="19"/>
+      <line x1="9" y1="22" x2="23" y2="22"/>
+      <line x1="16" y1="9" x2="16" y2="13"/>
+      <line x1="16" y1="19" x2="9" y2="21"/>
+      <line x1="16" y1="19" x2="23" y2="21"/>
+    </svg>
+  ),
+  trees: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="16" cy="5" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="9" cy="15" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="23" cy="15" r="3" fill="currentColor" stroke="none"/>
+      <circle cx="5" cy="25" r="2.5" fill="currentColor" stroke="none" opacity="0.7"/>
+      <circle cx="13" cy="25" r="2.5" fill="currentColor" stroke="none" opacity="0.7"/>
+      <circle cx="23" cy="25" r="2.5" fill="currentColor" stroke="none" opacity="0.7"/>
+      <line x1="16" y1="8" x2="9" y2="12"/>
+      <line x1="16" y1="8" x2="23" y2="12"/>
+      <line x1="9" y1="18" x2="5" y2="22.5"/>
+      <line x1="9" y1="18" x2="13" y2="22.5"/>
+      <line x1="23" y1="18" x2="23" y2="22.5"/>
+    </svg>
+  ),
+  "linked-lists": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="1" y="12" width="8" height="8" rx="1.5"/>
+      <rect x="12" y="12" width="8" height="8" rx="1.5"/>
+      <rect x="23" y="12" width="8" height="8" rx="1.5"/>
+      <line x1="9" y1="16" x2="12" y2="16"/>
+      <line x1="20" y1="16" x2="23" y2="16"/>
+      <polyline points="21,14 23,16 21,18"/>
+      <polyline points="10,14 12,16 10,18"/>
+    </svg>
+  ),
+  "distributed-systems": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="16" cy="6" r="4" fill="currentColor" fillOpacity="0.2"/>
+      <circle cx="5" cy="25" r="4" fill="currentColor" fillOpacity="0.2"/>
+      <circle cx="27" cy="25" r="4" fill="currentColor" fillOpacity="0.2"/>
+      <line x1="16" y1="10" x2="5" y2="21"/>
+      <line x1="16" y1="10" x2="27" y2="21"/>
+      <line x1="9" y1="25" x2="23" y2="25"/>
+    </svg>
+  ),
+  raytracer: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="22" cy="20" r="7"/>
+      <line x1="2" y1="6" x2="16" y2="14.5"/>
+      <line x1="2" y1="6" x2="15.5" y2="16.5"/>
+      <line x1="2" y1="6" x2="15.5" y2="18.5"/>
+      <circle cx="2" cy="6" r="1.5" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  // Mathematics
+  calculus3: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="2" y="26" fontSize="26" fontFamily="Georgia, serif" fill="#A8B9CC">∇</text>
+    </svg>
+  ),
+  "advanced-linear-algebra": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="#A8B9CC" strokeWidth="1.5">
+      <rect x="4" y="4" width="11" height="11" rx="1"/>
+      <rect x="17" y="4" width="11" height="11" rx="1"/>
+      <rect x="4" y="17" width="11" height="11" rx="1"/>
+      <rect x="17" y="17" width="11" height="11" rx="1"/>
+      <text x="7.5" y="13" fontSize="8" fontFamily="Georgia, serif" fill="#A8B9CC" stroke="none">λ</text>
+    </svg>
+  ),
+  "number-theory": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="2" y="26" fontSize="22" fontFamily="Georgia, serif" fill="#A8B9CC">ℤ</text>
+    </svg>
+  ),
+  cryptography: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <rect x="8" y="14" width="16" height="13" rx="2"/>
+      <path d="M11 14v-3a5 5 0 0 1 10 0v3"/>
+      <circle cx="16" cy="20" r="2" fill="currentColor" stroke="none"/>
+      <line x1="16" y1="22" x2="16" y2="25"/>
+    </svg>
+  ),
+  "signal-processing": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="#A8B9CC" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M2 16 Q6 8 10 16 Q14 24 18 16 Q22 8 26 16 Q28 20 30 16"/>
+      <rect x="6" y="23" width="4" height="5" rx="0.5" fill="#A8B9CC" stroke="none"/>
+      <rect x="14" y="25" width="4" height="3" rx="0.5" fill="#A8B9CC" stroke="none"/>
+      <rect x="22" y="24" width="4" height="4" rx="0.5" fill="#A8B9CC" stroke="none"/>
+    </svg>
+  ),
+  "information-theory": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="2" y="24" fontSize="14" fontFamily="monospace" fill="#A8B9CC">H(X)</text>
+    </svg>
+  ),
+  "functional-diff-geo": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="#A8B9CC" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M3 22 Q8 8 16 14 Q24 20 29 10"/>
+      <path d="M3 26 Q8 12 16 18 Q24 24 29 14" opacity="0.4"/>
+      <line x1="3" y1="22" x2="3" y2="26" opacity="0.3"/>
+      <line x1="16" y1="14" x2="16" y2="18" opacity="0.3"/>
+      <line x1="29" y1="10" x2="29" y2="14" opacity="0.3"/>
+    </svg>
+  ),
+  // Classical Physics
+  "classical-mechanics": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <line x1="4" y1="4" x2="20" y2="4"/>
+      <line x1="12" y1="4" x2="22" y2="22"/>
+      <circle cx="22" cy="24" r="3" fill="currentColor" fillOpacity="0.3"/>
+      <path d="M8 14 Q16 18 22 22" strokeDasharray="3,2" opacity="0.5"/>
+    </svg>
+  ),
+  thermodynamics: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <rect x="13" y="5" width="6" height="16" rx="3"/>
+      <circle cx="16" cy="24" r="4"/>
+      <rect x="14" y="16" width="4" height="5" fill="currentColor" fillOpacity="0.4" stroke="none"/>
+      <circle cx="16" cy="24" r="4" fill="currentColor" fillOpacity="0.3" stroke="none"/>
+      <line x1="19" y1="9" x2="22" y2="9" strokeWidth="1"/>
+      <line x1="19" y1="12" x2="22" y2="12" strokeWidth="1"/>
+      <line x1="19" y1="15" x2="22" y2="15" strokeWidth="1"/>
+    </svg>
+  ),
+  waves: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M2 16 Q6 6 10 16 Q14 26 18 16 Q22 6 26 16 Q28 21 30 16"/>
+      <path d="M2 22 Q5 16 8 22 Q11 28 14 22 Q17 16 20 22 Q23 28 26 22" opacity="0.35"/>
+    </svg>
+  ),
+  electromagnetism: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M4 16 C4 8 12 8 16 16 C20 24 28 24 28 16"/>
+      <path d="M4 16 C4 24 12 24 16 16 C20 8 28 8 28 16" opacity="0.4"/>
+      <circle cx="4" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="28" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  circuits: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 16 H9"/>
+      <rect x="9" y="13" width="4" height="6" rx="0.5"/>
+      <path d="M13 16 H16"/>
+      <rect x="16" y="13" width="4" height="6" rx="0.5"/>
+      <path d="M20 16 H28"/>
+      <path d="M4 16 L4 24 L28 24 L28 16"/>
+      <circle cx="4" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  "fluid-mechanics": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M4 10 Q8 14 12 10 Q16 6 20 10 Q24 14 28 10"/>
+      <path d="M4 17 Q8 21 12 17 Q16 13 20 17 Q24 21 28 17"/>
+      <path d="M4 24 Q8 28 12 24 Q16 20 20 24 Q24 28 28 24"/>
+      <polyline points="26,14.5 28,17 26,19.5" strokeWidth="1.2"/>
+    </svg>
+  ),
+  optics: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <ellipse cx="14" cy="16" rx="3" ry="11"/>
+      <line x1="2" y1="11" x2="11.5" y2="13.5"/>
+      <line x1="2" y1="16" x2="11" y2="16"/>
+      <line x1="2" y1="21" x2="11.5" y2="18.5"/>
+      <line x1="16.5" y1="13.5" x2="28" y2="9"/>
+      <line x1="17" y1="16" x2="28" y2="16"/>
+      <line x1="16.5" y1="18.5" x2="28" y2="23"/>
+    </svg>
+  ),
+  // Modern & Theoretical Physics
+  "special-relativity": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <line x1="16" y1="2" x2="16" y2="30"/>
+      <line x1="2" y1="16" x2="30" y2="16"/>
+      <line x1="16" y1="16" x2="4" y2="4" strokeDasharray="3,2"/>
+      <line x1="16" y1="16" x2="28" y2="4" strokeDasharray="3,2"/>
+      <line x1="16" y1="16" x2="4" y2="28" strokeDasharray="3,2" opacity="0.4"/>
+      <line x1="16" y1="16" x2="28" y2="28" strokeDasharray="3,2" opacity="0.4"/>
+    </svg>
+  ),
+  "general-relativity": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M4 8 Q10 10 16 16 Q22 22 28 24"/>
+      <path d="M4 16 Q10 16 16 16 Q22 16 28 16" opacity="0.35"/>
+      <path d="M4 24 Q10 22 16 16 Q22 10 28 8"/>
+      <path d="M8 4 Q10 10 16 16 Q22 22 24 28" opacity="0.35"/>
+      <path d="M16 4 Q16 10 16 16 Q16 22 16 28" opacity="0.35"/>
+      <path d="M24 4 Q22 10 16 16 Q10 22 8 28" opacity="0.35"/>
+      <circle cx="16" cy="16" r="3" fill="currentColor" fillOpacity="0.4" stroke="none"/>
+    </svg>
+  ),
+  quantum: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="16" cy="16" r="3"/>
+      <ellipse cx="16" cy="16" rx="13" ry="5"/>
+      <ellipse cx="16" cy="16" rx="13" ry="5" transform="rotate(60 16 16)"/>
+      <ellipse cx="16" cy="16" rx="13" ry="5" transform="rotate(-60 16 16)"/>
+      <circle cx="16" cy="16" r="1.8" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  "advanced-quantum": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="2" y="22" fontSize="16" fontFamily="Georgia, serif" fill="#A8B9CC">|ψ⟩</text>
+    </svg>
+  ),
+  "nuclear-physics": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="16" cy="16" r="5" fill="currentColor" fillOpacity="0.25"/>
+      <circle cx="14" cy="14" r="2" fill="currentColor" stroke="none" opacity="0.9"/>
+      <circle cx="18" cy="14" r="2" fill="currentColor" stroke="none" opacity="0.7"/>
+      <circle cx="16" cy="18" r="2" fill="currentColor" stroke="none" opacity="0.8"/>
+      <ellipse cx="16" cy="16" rx="13" ry="5" opacity="0.4"/>
+      <ellipse cx="16" cy="16" rx="13" ry="5" transform="rotate(65 16 16)" opacity="0.3"/>
+    </svg>
+  ),
+  "particle-physics": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <line x1="4" y1="12" x2="16" y2="16"/>
+      <line x1="4" y1="20" x2="16" y2="16"/>
+      <line x1="16" y1="16" x2="28" y2="9"/>
+      <line x1="16" y1="16" x2="28" y2="23"/>
+      <path d="M16 16 Q20 11 25 16" strokeDasharray="2,2"/>
+      <circle cx="16" cy="16" r="2" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  "plasma-physics": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 3 L13 14 L18 14 L13 29 L26 13 L20 13 Z"/>
+    </svg>
+  ),
+  "condensed-matter": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+      <circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="6" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="26" cy="6" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="16" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="16" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="26" cy="16" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="26" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="26" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="26" cy="26" r="2" fill="currentColor" stroke="none"/>
+      <line x1="8" y1="6" x2="14" y2="6"/>
+      <line x1="18" y1="6" x2="24" y2="6"/>
+      <line x1="8" y1="16" x2="14" y2="16"/>
+      <line x1="18" y1="16" x2="24" y2="16"/>
+      <line x1="8" y1="26" x2="14" y2="26"/>
+      <line x1="18" y1="26" x2="24" y2="26"/>
+      <line x1="6" y1="8" x2="6" y2="14"/>
+      <line x1="16" y1="8" x2="16" y2="14"/>
+      <line x1="26" y1="8" x2="26" y2="14"/>
+      <line x1="6" y1="18" x2="6" y2="24"/>
+      <line x1="16" y1="18" x2="16" y2="24"/>
+      <line x1="26" y1="18" x2="26" y2="24"/>
+    </svg>
+  ),
+  biophysics: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M10 3 Q20 9 10 15 Q20 21 10 27"/>
+      <path d="M22 3 Q12 9 22 15 Q12 21 22 27"/>
+      <line x1="10" y1="7" x2="22" y2="7" strokeWidth="1.2" opacity="0.6"/>
+      <line x1="10" y1="13" x2="22" y2="13" strokeWidth="1.2" opacity="0.6"/>
+      <line x1="10" y1="19" x2="22" y2="19" strokeWidth="1.2" opacity="0.6"/>
+      <line x1="10" y1="25" x2="22" y2="25" strokeWidth="1.2" opacity="0.6"/>
+    </svg>
+  ),
+  "mathematical-physics": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <text x="4" y="26" fontSize="22" fontFamily="Georgia, serif" fill="#A8B9CC">∂</text>
+    </svg>
+  ),
+  // Science & AI
+  "machine-learning": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
+      <circle cx="5" cy="10" r="2.5" fill="currentColor" fillOpacity="0.3"/>
+      <circle cx="5" cy="22" r="2.5" fill="currentColor" fillOpacity="0.3"/>
+      <circle cx="16" cy="6" r="2.5" fill="currentColor" fillOpacity="0.5"/>
+      <circle cx="16" cy="16" r="2.5" fill="currentColor" fillOpacity="0.5"/>
+      <circle cx="16" cy="26" r="2.5" fill="currentColor" fillOpacity="0.5"/>
+      <circle cx="27" cy="11" r="2.5" fill="currentColor" fillOpacity="0.7"/>
+      <circle cx="27" cy="21" r="2.5" fill="currentColor" fillOpacity="0.7"/>
+      <line x1="7.5" y1="10" x2="13.5" y2="7"/>
+      <line x1="7.5" y1="10" x2="13.5" y2="16"/>
+      <line x1="7.5" y1="10" x2="13.5" y2="25"/>
+      <line x1="7.5" y1="22" x2="13.5" y2="7"/>
+      <line x1="7.5" y1="22" x2="13.5" y2="16"/>
+      <line x1="7.5" y1="22" x2="13.5" y2="25"/>
+      <line x1="18.5" y1="7" x2="24.5" y2="12"/>
+      <line x1="18.5" y1="7" x2="24.5" y2="21"/>
+      <line x1="18.5" y1="16" x2="24.5" y2="12"/>
+      <line x1="18.5" y1="16" x2="24.5" y2="21"/>
+      <line x1="18.5" y1="25" x2="24.5" y2="12"/>
+      <line x1="18.5" y1="25" x2="24.5" y2="21"/>
+    </svg>
+  ),
+  microgpt: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="22" width="7" height="7" rx="1.5"/>
+      <rect x="13" y="22" width="7" height="7" rx="1.5"/>
+      <rect x="23" y="22" width="7" height="7" rx="1.5"/>
+      <rect x="8" y="12" width="7" height="7" rx="1.5"/>
+      <rect x="18" y="12" width="7" height="7" rx="1.5"/>
+      <rect x="13" y="3" width="7" height="7" rx="1.5"/>
+      <line x1="6.5" y1="22" x2="11.5" y2="19"/>
+      <line x1="16.5" y1="22" x2="11.5" y2="19"/>
+      <line x1="16.5" y1="22" x2="21.5" y2="19"/>
+      <line x1="26.5" y1="22" x2="21.5" y2="19"/>
+      <line x1="11.5" y1="12" x2="16.5" y2="10"/>
+      <line x1="21.5" y1="12" x2="16.5" y2="10"/>
+    </svg>
+  ),
+  genomics: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M11 3 Q21 9 11 15 Q21 21 11 27"/>
+      <path d="M21 3 Q11 9 21 15 Q11 21 21 27"/>
+      <line x1="11" y1="6" x2="21" y2="6" strokeWidth="1.2" opacity="0.7"/>
+      <line x1="11" y1="12" x2="21" y2="12" strokeWidth="1.2" opacity="0.7"/>
+      <line x1="11" y1="18" x2="21" y2="18" strokeWidth="1.2" opacity="0.7"/>
+      <line x1="11" y1="24" x2="21" y2="24" strokeWidth="1.2" opacity="0.7"/>
+    </svg>
+  ),
+  cosmology: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="16" cy="16" r="13"/>
+      <ellipse cx="16" cy="16" rx="13" ry="5"/>
+      <circle cx="10" cy="10" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="22" cy="8" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="21" cy="22" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="8" cy="22" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="16" cy="5" r="0.8" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  astrophysics: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="16" cy="16" r="5" fill="currentColor" fillOpacity="0.25"/>
+      <line x1="16" y1="3" x2="16" y2="8"/>
+      <line x1="16" y1="24" x2="16" y2="29"/>
+      <line x1="3" y1="16" x2="8" y2="16"/>
+      <line x1="24" y1="16" x2="29" y2="16"/>
+      <line x1="7" y1="7" x2="10.5" y2="10.5"/>
+      <line x1="25" y1="7" x2="21.5" y2="10.5"/>
+      <line x1="7" y1="25" x2="10.5" y2="21.5"/>
+      <line x1="25" y1="25" x2="21.5" y2="21.5"/>
+    </svg>
+  ),
+  "complex-systems": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+      <circle cx="16" cy="16" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="6" cy="10" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="26" cy="8" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="10" cy="26" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="26" cy="24" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="4" cy="22" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="22" cy="4" r="2" fill="currentColor" stroke="none"/>
+      <line x1="16" y1="16" x2="6" y2="10"/>
+      <line x1="16" y1="16" x2="26" y2="8"/>
+      <line x1="16" y1="16" x2="10" y2="26"/>
+      <line x1="16" y1="16" x2="26" y2="24"/>
+      <line x1="16" y1="16" x2="4" y2="22"/>
+      <line x1="16" y1="16" x2="22" y2="4"/>
+      <line x1="6" y1="10" x2="22" y2="4"/>
+      <line x1="4" y1="22" x2="10" y2="26"/>
+      <line x1="26" y1="24" x2="10" y2="26"/>
+    </svg>
+  ),
+  "chaos-theory": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M16 16 C10 10 4 6 8 14 C12 22 16 16 16 16"/>
+      <path d="M16 16 C22 10 28 6 24 14 C20 22 16 16 16 16"/>
+      <circle cx="16" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  // Systems
+  linux: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="5" width="26" height="20" rx="3"/>
+      <line x1="3" y1="25" x2="29" y2="25"/>
+      <path d="M8 14 L12 17 L8 20"/>
+      <line x1="13" y1="20" x2="20" y2="20"/>
+    </svg>
+  ),
+  kernel: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="16" cy="16" r="3"/>
+      <circle cx="16" cy="16" r="7"/>
+      <circle cx="16" cy="16" r="12"/>
+    </svg>
+  ),
+  coreutils: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <rect x="3" y="5" width="26" height="22" rx="3"/>
+      <line x1="8" y1="12" x2="18" y2="12"/>
+      <line x1="8" y1="16" x2="22" y2="16"/>
+      <line x1="8" y1="20" x2="14" y2="20"/>
+      <polyline points="19,18 22,16 19,14" strokeWidth="1.2"/>
+    </svg>
+  ),
 };
 
 // Tracks where courses should be taken in order (ids listed from first to last)
 const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] = [
+  {
+    title: "Systems & Low-Level",
+    subtitle: "Understand how computers work at the metal — from ARM64 assembly to a C compiler, Linux shell, and kernel primitives.",
+    ids: ["arm64", "c", "linux", "kernel", "coreutils"],
+  },
   {
     title: "Mathematics in C",
     subtitle: "Implement university mathematics in C — from limits and integrals to Taylor series and curvature. Each course builds on the previous.",
@@ -160,18 +677,32 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
       "risk-management",
     ],
   },
-  {
-    title: "Systems & Low-Level",
-    subtitle: "Understand how computers work at the metal — from ARM64 assembly to a C compiler, Linux shell, and kernel primitives.",
-    ids: ["arm64", "c", "linux", "kernel", "coreutils"],
-  },
 ];
 
 // Unordered tracks — take any course in any order
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "gleam", "ruby", "haskell", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
+  },
+  {
+    title: "Web & Frontend",
+    ids: ["javascript", "typescript", "threejs", "music"],
+  },
+  {
+    title: "Data & Databases",
+    ids: ["postgresql", "mysql", "sqlite", "redis", "r"],
+  },
+  {
+    title: "Algorithms & Computer Science",
+    ids: [
+      "algorithms",
+      "graphs",
+      "trees",
+      "linked-lists",
+      "distributed-systems",
+      "raytracer",
+    ],
   },
   {
     title: "Mathematics in Python",
@@ -215,30 +746,11 @@ const tracks: { title: string; ids: string[] }[] = [
     ],
   },
   {
-    title: "Web & Frontend",
-    ids: ["javascript", "typescript", "threejs", "music"],
-  },
-  {
-    title: "Data & Databases",
-    ids: ["postgresql", "mysql", "sqlite", "redis", "r", "python"],
-  },
-  {
-    title: "Algorithms & Computer Science",
-    ids: [
-      "algorithms",
-      "graphs",
-      "trees",
-      "linked-lists",
-      "distributed-systems",
-      "raytracer",
-    ],
-  },
-  {
     title: "Science & AI",
     ids: [
-      "genomics",
-      "microgpt",
       "machine-learning",
+      "microgpt",
+      "genomics",
       "cosmology",
       "astrophysics",
       "complex-systems",
