@@ -73,23 +73,6 @@ for (let i = 0; i <= steps; i++) {
 console.log(lfoValue(0, 4, 1).toFixed(4));        // 0.0000
 console.log(lfoValue(0.25, 1, 1).toFixed(4));     // 1.0000
 console.log(lfoValue(0.0625, 4, 0.5).toFixed(4)); // 0.5000
-
-const ac = new AudioContext();
-const osc = ac.createOscillator();
-const gainNode = ac.createGain();
-osc.frequency.value = 440;
-osc.connect(gainNode);
-gainNode.connect(ac.destination);
-osc.start();
-osc.stop(ac.currentTime + 3);
-
-const steps = 300;
-const dur = 3;
-for (let i = 0; i <= steps; i++) {
-  const t = (i / steps) * dur;
-  const g = 0.5 + lfoValue(t, 4, 0.4);
-  gainNode.gain.setValueAtTime(Math.max(0, Math.min(1, g)), ac.currentTime + t);
-}
 `,
 
 	tests: [

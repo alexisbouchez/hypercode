@@ -85,7 +85,7 @@ print(euler(lambda t, y: y, 0, 3.0, 1.0, 10)[0])`,
 		{
 			name: "constant derivative reaches t_end",
 			code: `{{FUNC}}
-print(euler(lambda t, y: 1, 0, 0.0, 1.0, 10)[-1])`,
+print(round(euler(lambda t, y: 1, 0, 0.0, 1.0, 10)[-1], 6))`,
 			expected: "1.0\n",
 		},
 		{

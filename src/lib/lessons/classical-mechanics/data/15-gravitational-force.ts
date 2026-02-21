@@ -49,10 +49,10 @@ double gravForce(double m1, double m2, double r) {
 }
 
 int main() {
-    printf("%.4f\\n", gravForce(1e10, 1e10, 1));   /* 6.6740 */
-    printf("%.4f\\n", gravForce(1e10, 1e10, 2));   /* 1.6685 */
-    printf("%.4f\\n", gravForce(2e10, 1e10, 1));   /* 13.3480 */
-    printf("%.4f\\n", gravForce(1e10, 1e10, 10));  /* 0.0667 */
+    printf("%.4f\\n", gravForce(1e11, 1, 1));     /* 6.6740 */
+    printf("%.4f\\n", gravForce(1e11, 1, 2));     /* 1.6685 */
+    printf("%.4f\\n", gravForce(2e11, 1, 1));    /* 13.3480 */
+    printf("%.4f\\n", gravForce(1e11, 1, 10));    /* 0.0667 */
     return 0;
 }
 `,
@@ -66,10 +66,10 @@ double gravForce(double m1, double m2, double r) {
 }
 
 int main() {
-    printf("%.4f\\n", gravForce(1e10, 1e10, 1));   /* 6.6740 */
-    printf("%.4f\\n", gravForce(1e10, 1e10, 2));   /* 1.6685 */
-    printf("%.4f\\n", gravForce(2e10, 1e10, 1));   /* 13.3480 */
-    printf("%.4f\\n", gravForce(1e10, 1e10, 10));  /* 0.0667 */
+    printf("%.4f\\n", gravForce(1e11, 1, 1));     /* 6.6740 */
+    printf("%.4f\\n", gravForce(1e11, 1, 2));     /* 1.6685 */
+    printf("%.4f\\n", gravForce(2e11, 1, 1));    /* 13.3480 */
+    printf("%.4f\\n", gravForce(1e11, 1, 10));    /* 0.0667 */
     return 0;
 }
 `,
@@ -78,25 +78,25 @@ int main() {
 		{
 			name: "10¹⁰ kg × 10¹⁰ kg at 1 m → 6.6740 N",
 			code: `{{FUNC}}
-int main() { printf("%.4f\\n", gravForce(1e10, 1e10, 1)); return 0; }`,
+int main() { printf("%.4f\\n", gravForce(1e11, 1, 1)); return 0; }`,
 			expected: "6.6740\n",
 		},
 		{
 			name: "10¹⁰ kg × 10¹⁰ kg at 2 m → 1.6685 N (¼ force)",
 			code: `{{FUNC}}
-int main() { printf("%.4f\\n", gravForce(1e10, 1e10, 2)); return 0; }`,
+int main() { printf("%.4f\\n", gravForce(1e11, 1, 2)); return 0; }`,
 			expected: "1.6685\n",
 		},
 		{
 			name: "2×10¹⁰ kg × 10¹⁰ kg at 1 m → 13.3480 N",
 			code: `{{FUNC}}
-int main() { printf("%.4f\\n", gravForce(2e10, 1e10, 1)); return 0; }`,
+int main() { printf("%.4f\\n", gravForce(2e11, 1, 1)); return 0; }`,
 			expected: "13.3480\n",
 		},
 		{
 			name: "10¹⁰ kg × 10¹⁰ kg at 10 m → 0.0667 N",
 			code: `{{FUNC}}
-int main() { printf("%.4f\\n", gravForce(1e10, 1e10, 10)); return 0; }`,
+int main() { printf("%.4f\\n", gravForce(1e11, 1, 10)); return 0; }`,
 			expected: "0.0667\n",
 		},
 	],

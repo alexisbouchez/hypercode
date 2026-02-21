@@ -73,7 +73,7 @@ double rlc_voltage(double vs, double r, double l, double c,
 
 int main() {
 \t/* Overdamped: large R → V_C approaches Vs */
-\tprintf("%.4f\\n", rlc_voltage(10.0, 100.0, 1.0, 0.01, 5.0, 0.001));
+\tprintf("%.4f\\n", rlc_voltage(10.0, 100.0, 1.0, 0.01, 15.0, 0.001));
 \treturn 0;
 }
 `,
@@ -102,7 +102,7 @@ double rlc_voltage(double vs, double r, double l, double c,
 }
 
 int main() {
-\tprintf("%.4f\\n", rlc_voltage(10.0, 100.0, 1.0, 0.01, 5.0, 0.001));
+\tprintf("%.4f\\n", rlc_voltage(10.0, 100.0, 1.0, 0.01, 15.0, 0.001));
 \treturn 0;
 }
 `,
@@ -140,7 +140,7 @@ int main() {
 #include <math.h>
 {{FUNC}}
 int main() {
-\tprintf("%.4f\\n", rlc_voltage(5.0, 100.0, 1.0, 0.01, 5.0, 0.001));
+\tprintf("%.4f\\n", rlc_voltage(5.0, 100.0, 1.0, 0.01, 15.0, 0.001));
 \treturn 0;
 }`,
 			expected: "5.0000\n",

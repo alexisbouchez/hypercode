@@ -48,7 +48,9 @@ Implement \`find_equilibria(f, a, b)\` that finds all zeros of $f$ in $[a, b]$ u
     for i in range(n):
         x0 = a + i * dx
         x1 = x0 + dx
-        if f(x0) * f(x1) < 0:
+        if abs(f(x0)) < 1e-12:
+            result.append(round(x0, 6))
+        elif f(x0) * f(x1) < 0:
             lo, hi = x0, x1
             for _ in range(50):
                 mid = (lo + hi) / 2
@@ -57,7 +59,11 @@ Implement \`find_equilibria(f, a, b)\` that finds all zeros of $f$ in $[a, b]$ u
                 else:
                     lo = mid
             result.append(round((lo + hi) / 2, 6))
-    return result
+    deduped = []
+    for r in result:
+        if not deduped or abs(r - deduped[-1]) > 1e-4:
+            deduped.append(r)
+    return deduped
 
 # Linear: f(y) = y → equilibrium at 0
 print(find_equilibria(lambda y: y, -1, 1))
@@ -72,7 +78,9 @@ print(find_equilibria(lambda y: y * (1 - y), -0.5, 1.5))
     for i in range(n):
         x0 = a + i * dx
         x1 = x0 + dx
-        if f(x0) * f(x1) < 0:
+        if abs(f(x0)) < 1e-12:
+            result.append(round(x0, 6))
+        elif f(x0) * f(x1) < 0:
             lo, hi = x0, x1
             for _ in range(50):
                 mid = (lo + hi) / 2
@@ -81,7 +89,11 @@ print(find_equilibria(lambda y: y * (1 - y), -0.5, 1.5))
                 else:
                     lo = mid
             result.append(round((lo + hi) / 2, 6))
-    return result
+    deduped = []
+    for r in result:
+        if not deduped or abs(r - deduped[-1]) > 1e-4:
+            deduped.append(r)
+    return deduped
 
 print(find_equilibria(lambda y: y, -1, 1))
 print(find_equilibria(lambda y: y * (1 - y), -0.5, 1.5))

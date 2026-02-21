@@ -283,6 +283,12 @@ function parseInitList(
 function transformBody(body: string, knownClasses: Set<string>): string {
 	let r = body;
 	r = r.replace(/this\s*->\s*(\w+)/g, "this.$1");
+	// Fix: return ClassName(args) → return new ClassName(args)
+	// Fix: = ClassName(args) → = new ClassName(args)
+	for (const cls of knownClasses) {
+		r = r.replace(new RegExp(`\\breturn\\s+${cls}\\s*\\(`, "g"), `return new ${cls}(`);
+		r = r.replace(new RegExp(`=\\s*${cls}\\s*\\(`, "g"), `= new ${cls}(`);
+	}
 	r = transformCout(r);
 	r = r.replace(/\.push_back\s*\(/g, ".push(");
 	r = r.replace(/\.size\s*\(\s*\)/g, ".length");
@@ -301,6 +307,12 @@ function transformLocalDecls(code: string, knownClasses: Set<string>): string {
 		.map((line) => {
 			const t = line.trim();
 			const ind = line.slice(0, line.length - line.trimStart().length);
+
+			// Custom class: ClassName var = expr;
+			for (const cls of knownClasses) {
+				const clsAssign = t.match(new RegExp(`^${cls}\\s+(\\w+)\\s*=\\s*(.+);$`));
+				if (clsAssign) return `${ind}let ${clsAssign[1]} = ${clsAssign[2]};`;
+			}
 
 			// vector<T> v; → let v = [];
 			const vecMatch = t.match(/^vector\s*<[^>]+>\s+(\w+)\s*;$/);
@@ -446,6 +458,17 @@ function __cpp_str(x) {
   if (typeof x === "number" && !isFinite(x)) return x > 0 ? "Infinity" : "-Infinity";
   return String(x);
 }
+const sqrt = Math.sqrt;
+const pow = Math.pow;
+const abs = Math.abs;
+const floor = Math.floor;
+const ceil = Math.ceil;
+const round = Math.round;
+const cos = Math.cos;
+const sin = Math.sin;
+const tan = Math.tan;
+const atan2 = Math.atan2;
+const M_PI = Math.PI;
 `;
 
 /** Main transpilation entry point. */

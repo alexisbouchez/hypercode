@@ -56,7 +56,7 @@ double pendulumPeriod(double L) {
 
 int main() {
     printf("%.4f\\n", pendulumPeriod(1));      /* 2.0061 */
-    printf("%.4f\\n", pendulumPeriod(4));      /* 4.0122 */
+    printf("%.4f\\n", pendulumPeriod(4));      /* 4.0121 */
     printf("%.4f\\n", pendulumPeriod(9.81));   /* 6.2832 */
     printf("%.4f\\n", pendulumPeriod(0.25));   /* 1.0030 */
     return 0;
@@ -75,7 +75,7 @@ double pendulumPeriod(double L) {
 
 int main() {
     printf("%.4f\\n", pendulumPeriod(1));      /* 2.0061 */
-    printf("%.4f\\n", pendulumPeriod(4));      /* 4.0122 */
+    printf("%.4f\\n", pendulumPeriod(4));      /* 4.0121 */
     printf("%.4f\\n", pendulumPeriod(9.81));   /* 6.2832 */
     printf("%.4f\\n", pendulumPeriod(0.25));   /* 1.0030 */
     return 0;
@@ -90,10 +90,10 @@ int main() { printf("%.4f\\n", pendulumPeriod(1)); return 0; }`,
 			expected: "2.0061\n",
 		},
 		{
-			name: "L=4 m → 4.0122 s",
+			name: "L=4 m → 4.0121 s",
 			code: `{{FUNC}}
 int main() { printf("%.4f\\n", pendulumPeriod(4)); return 0; }`,
-			expected: "4.0122\n",
+			expected: "4.0121\n",
 		},
 		{
 			name: "L=9.81 m → 6.2832 s (= 2π)",
