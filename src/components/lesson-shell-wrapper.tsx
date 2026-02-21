@@ -93,6 +93,7 @@ export function LessonShellWrapper({
     if (courseId === "optics") return initPythonRunner();
     if (courseId === "cryptography") return initPythonRunner();
     if (courseId === "cosmology") return initPythonRunner();
+    if (courseId === "astrophysics") return initPythonRunner();
     if (courseId === "signal-processing") return initPythonRunner();
     if (courseId === "machine-learning") return initPythonRunner();
     if (courseId === "information-theory") return initPythonRunner();
@@ -150,6 +151,7 @@ export function LessonShellWrapper({
     if (courseId === "optics") return isPythonReady();
     if (courseId === "cryptography") return isPythonReady();
     if (courseId === "cosmology") return isPythonReady();
+    if (courseId === "astrophysics") return isPythonReady();
     if (courseId === "signal-processing") return isPythonReady();
     if (courseId === "machine-learning") return isPythonReady();
     if (courseId === "information-theory") return isPythonReady();
@@ -207,6 +209,7 @@ export function LessonShellWrapper({
     if (courseId === "optics") return runPython(code);
     if (courseId === "cryptography") return runPython(code);
     if (courseId === "cosmology") return runPython(code);
+    if (courseId === "astrophysics") return runPython(code);
     if (courseId === "signal-processing") return runPython(code);
     if (courseId === "machine-learning") return runPython(code);
     if (courseId === "information-theory") return runPython(code);
@@ -264,6 +267,7 @@ export function LessonShellWrapper({
     if (courseId === "optics") return runPythonTests(code, tests);
     if (courseId === "cryptography") return runPythonTests(code, tests);
     if (courseId === "cosmology") return runPythonTests(code, tests);
+    if (courseId === "astrophysics") return runPythonTests(code, tests);
     if (courseId === "signal-processing") return runPythonTests(code, tests);
     if (courseId === "machine-learning") return runPythonTests(code, tests);
     if (courseId === "information-theory") return runPythonTests(code, tests);

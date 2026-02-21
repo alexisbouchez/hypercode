@@ -53,6 +53,7 @@ import { signalProcessingChapters, signalProcessingLessons } from "@/lib/lessons
 import { machineLearningChapters, machineLearningLessons } from "@/lib/lessons/machine-learning";
 import { informationTheoryChapters, informationTheoryLessons } from "@/lib/lessons/information-theory";
 import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
+import { astrophysicsChapters, astrophysicsLessons } from "@/lib/lessons/astrophysics";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -3839,6 +3840,53 @@ You have implemented the foundational equations of cosmology. Here are natural n
 - **Cosmology** by Weinberg — The definitive graduate-level reference.
 - **The Early Universe** by Kolb & Turner — Deep on the thermal history and particle cosmology.
 - [Planck 2018 Results](https://www.aanda.org/articles/aa/abs/2020/09/aa33910-18/aa33910-18.html) — The most precise measurement of cosmological parameters to date.`,
+  },
+  {
+    id: "astrophysics",
+    title: "Astrophysics in Python",
+    description: "Learn astrophysics by implementing the equations that govern stars, compact objects, and galaxies in Python. Compute stellar luminosity, blackbody spectra, magnitudes, Eddington limits, nuclear timescales, Chandrasekhar mass, orbital mechanics, escape velocities, accretion luminosity, gravitational lensing, galactic rotation curves, and the virial theorem from scratch.",
+    language: "python",
+    chapters: astrophysicsChapters,
+    lessons: astrophysicsLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Astrophysics?
+
+Stars are the engines of the universe. They forge heavy elements in their cores, illuminate galaxies, and end their lives as white dwarfs, neutron stars, or black holes. Understanding stars means understanding physics at its most extreme — temperatures of millions of degrees, pressures beyond anything achievable in a laboratory, and gravity so strong it bends light.
+
+This course implements the core equations of astrophysics in pure Python. No libraries — just the mathematics of stellar physics expressed as functions. Each lesson introduces one concept, explains the physics, and asks you to write the formula as code.
+
+You will implement:
+
+- **Stellar luminosity** — Stefan-Boltzmann law relating luminosity to radius and temperature
+- **Wien's displacement law** — peak wavelength of stellar blackbody radiation
+- **Distance modulus** — how apparent magnitude depends on distance
+- **Eddington luminosity** — the maximum luminosity a star can sustain
+- **Nuclear timescale** — how long a star can shine on nuclear fuel
+- **Main sequence scaling** — mass-luminosity and mass-radius relations
+- **Hydrostatic equilibrium** — central pressure and freefall timescale
+- **Chandrasekhar mass** — the maximum mass of a white dwarf
+- **Orbital mechanics** — Kepler's third law applied to binary systems
+- **Escape velocity and Schwarzschild radius** — the edge of a black hole
+- **Accretion luminosity** — energy released by infalling matter
+- **Gravitational lensing** — the Einstein radius for a massive lens
+- **Galactic rotation curves** — dark matter inferred from rotation speeds
+- **Virial theorem** — mass estimation from velocity dispersions
+- **Stellar ages** — main sequence lifetime as a function of mass`,
+    whatsNextContent: `## What's Next
+
+You have implemented the foundational equations of astrophysics. Here are natural next steps:
+
+- **Cosmology** — How stars and galaxies fit into the expanding universe. The Friedmann equation governs everything on the largest scales.
+- **General Relativity** — The geometric foundation for black holes, gravitational waves, and spacetime curvature.
+- **Nuclear Physics** — The reactions powering stellar cores: proton-proton chain, CNO cycle, and neutron capture.
+- **Fluid Mechanics** — Stars are self-gravitating fluids. The Navier-Stokes equations describe convection and stellar winds.
+
+## Resources
+
+- **An Introduction to Modern Astrophysics** by Carroll & Ostlie — The definitive undergraduate textbook.
+- **Stellar Structure and Evolution** by Kippenhahn & Weigert — The standard graduate reference for stellar physics.
+- **Galactic Dynamics** by Binney & Tremaine — Deep coverage of galactic rotation, dark matter, and stellar dynamics.
+- **Black Holes, White Dwarfs and Neutron Stars** by Shapiro & Teukolsky — Essential for compact object physics.`,
   },
 ];
 
