@@ -404,6 +404,29 @@ const courseLogos: Record<string, React.ReactNode> = {
       <circle cx="4" cy="16" r="1.5" fill="currentColor" stroke="none"/>
     </svg>
   ),
+  "digital-logic": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="10" y="9" width="12" height="14" rx="1"/>
+      <path d="M6 13 H10"/>
+      <path d="M6 16 H10"/>
+      <path d="M6 19 H10"/>
+      <path d="M22 13 H26"/>
+      <path d="M22 19 H26"/>
+    </svg>
+  ),
+  "pcb-design": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="26" height="26" rx="2"/>
+      <rect x="10" y="10" width="12" height="12" rx="1"/>
+      <path d="M10 7 L10 3"/>
+      <path d="M16 7 L16 3"/>
+      <path d="M22 7 L22 3"/>
+      <path d="M10 25 L10 29"/>
+      <path d="M22 25 L22 29"/>
+      <path d="M3 16 L7 16"/>
+      <path d="M25 16 L29 16"/>
+    </svg>
+  ),
   "fluid-mechanics": (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
       <path d="M4 10 Q8 14 12 10 Q16 6 20 10 Q24 14 28 10"/>
@@ -719,13 +742,15 @@ const tracks: { title: string; ids: string[] }[] = [
     ],
   },
   {
-    title: "Classical Physics",
+    title: "Classical Physics & Electronics",
     ids: [
       "classical-mechanics",
       "thermodynamics",
       "waves",
       "electromagnetism",
       "circuits",
+      "digital-logic",
+      "pcb-design",
       "fluid-mechanics",
       "optics",
     ],
