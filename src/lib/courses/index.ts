@@ -55,6 +55,7 @@ import { informationTheoryChapters, informationTheoryLessons } from "@/lib/lesso
 import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
 import { astrophysicsChapters, astrophysicsLessons } from "@/lib/lessons/astrophysics";
 import { plasmaPhysicsChapters, plasmaPhysicsLessons } from "@/lib/lessons/plasma-physics";
+import { condensedMatterChapters, condensedMatterLessons } from "@/lib/lessons/condensed-matter";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -3935,6 +3936,53 @@ You have implemented the foundational equations of plasma physics. Here are natu
 - **Plasma Physics and Fusion Energy** by Freidberg — Comprehensive coverage from fundamentals to tokamak design.
 - **The Physics of Plasmas** by Boyd & Sanderson — Graduate-level treatment of plasma waves, instabilities, and kinetic theory.
 - **Principles of Plasma Physics** by Krall & Trivelpiece — Classic graduate reference with detailed derivations.`,
+  },
+  {
+    id: "condensed-matter",
+    title: "Condensed Matter Physics in Python",
+    description: "Learn condensed matter physics by implementing the equations that govern solids in Python. Compute Bragg diffraction, Fermi energies, Fermi-Dirac statistics, Debye and Einstein heat capacities, phonon dispersion, Hall coefficients, semiconductor carrier concentrations, BCS superconductivity, and magnetic susceptibility from scratch.",
+    language: "python",
+    chapters: condensedMatterChapters,
+    lessons: condensedMatterLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: `## Why Condensed Matter Physics?
+
+Condensed matter physics is the study of how quantum mechanics governs the collective behavior of enormous numbers of particles — the atoms, electrons, and phonons that make up solids and liquids. It is the largest branch of physics, and the most practically important: transistors, superconductors, LEDs, MRI machines, and hard drives all rest on condensed matter foundations.
+
+This course implements the core equations of condensed matter physics in pure Python. No libraries — just the mathematics of quantum solids expressed as functions. Each lesson introduces one concept, explains the physics, and asks you to write the formula as code.
+
+You will implement:
+
+- **Bragg diffraction** — X-ray scattering from crystal planes and d-spacing from Miller indices
+- **Fermi energy** — the highest occupied electron state in a free electron metal
+- **Fermi-Dirac distribution** — the quantum statistics governing electrons at finite temperature
+- **Debye model** — phonon heat capacity with the correct low-temperature T³ behavior
+- **Einstein model** — heat capacity from independent quantum oscillators
+- **Phonon dispersion** — the ω(k) relation for a 1D atomic chain
+- **Hall effect** — carrier density from transverse voltage in a magnetic field
+- **Semiconductor carriers** — intrinsic carrier concentration and the band gap
+- **Superconductivity** — BCS energy gap, London penetration depth, and GL parameter
+- **Curie-Weiss law** — magnetic susceptibility in paramagnets and ferromagnets
+- **Band gap and optical absorption** — photon absorption edge and direct-gap coefficient
+- **Thermal conductivity** — kinetic theory and the Wiedemann-Franz law
+- **Electronic heat capacity** — the Sommerfeld γT contribution from conduction electrons
+- **Tight-binding model** — band structure, effective mass, and group velocity in 1D
+- **Meissner effect** — field expulsion, London equations, and critical fields`,
+    whatsNextContent: `## What's Next
+
+You have implemented the foundational equations of condensed matter physics. Here are natural next steps:
+
+- **Plasma Physics** — The free electron gas in a metal is a dense, degenerate plasma. Plasma physics extends these ideas to unbound, hot ionized gases.
+- **Quantum Mechanics** — Many condensed matter results follow from the Schrödinger equation applied to periodic potentials (Bloch's theorem).
+- **Statistical Mechanics** — The partition function underlies the Fermi-Dirac and Bose-Einstein distributions that govern electrons and phonons.
+- **Materials Science** — How crystal defects, grain boundaries, and doping engineer the properties of real materials.
+
+## Resources
+
+- **Introduction to Solid State Physics** by Kittel — The classic undergraduate textbook, comprehensive and well-illustrated.
+- **Solid State Physics** by Ashcroft & Mermin — The definitive graduate reference, rigorous and complete.
+- **The Oxford Solid State Basics** by Simon — Modern, concise, and accessible introduction.
+- **Superconductivity, Superfluidity and Condensate** by Annett — Clear treatment of quantum phenomena in condensed matter.`,
   },
 ];
 
