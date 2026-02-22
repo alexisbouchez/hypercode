@@ -15,7 +15,13 @@ export async function initCSharpRunner(): Promise<void> {
 
   initPromise = (async () => {
     try {
-      const { WasmSharpModule } = await import("@wasmsharp/core");
+      // Load from public/wasmsharp/ (pre-built static assets) to avoid
+      // webpack/Turbopack issues with WasmSharp's binary file imports.
+      // webpackIgnore: true tells the bundler not to resolve this — the browser
+      // loads it at runtime as a native ES module from the static path.
+      const url = new URL("/wasmsharp/index.js", window.location.href).href;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { WasmSharpModule } = await import(/* webpackIgnore: true */ url as any);
       wasmSharpModule = await WasmSharpModule.initializeAsync({
         disableWebWorker: true,
       });

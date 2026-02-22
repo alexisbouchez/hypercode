@@ -20,5 +20,8 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "21"
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
       - run: bun install --frozen-lockfile
       - run: bun src/scripts/test-lessons.ts

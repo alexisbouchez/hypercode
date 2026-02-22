@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "build:book": "tectonic -o public src/go-book.tex",
+    "build:wasmsharp": "bun scripts/build-wasmsharp.ts",
     "test": "bun src/scripts/test-lessons.ts",
     "test:e2e": "playwright test"
   },
@@ -23,6 +24,7 @@
     "@ruby/3.4-wasm-wasi": "^2.8.1",
     "@ruby/wasm-wasi": "^2.8.1",
     "@types/sql.js": "^1.4.9",
+    "@wasmsharp/core": "^0.10.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "JSCPP": "^2.0.9",
