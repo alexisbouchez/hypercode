@@ -236,6 +236,18 @@ const courseLogos: Record<string, React.ReactNode> = {
       <rect x="6" y="20" width="20" height="6" rx="1" fill="url(#scalaGrad)" opacity="0.5"/>
     </svg>
   ),
+  fsharp: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <defs>
+        <linearGradient id="fsharpGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#378BBA"/>
+          <stop offset="100%" stopColor="#30B9DB"/>
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="4" fill="url(#fsharpGrad)"/>
+      <text x="16" y="22" textAnchor="middle" fontFamily="Georgia, serif" fontWeight="bold" fontSize="16" fill="white">F#</text>
+    </svg>
+  ),
   ruby: (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
       <polygon points="16,3 27,11 27,21 16,29 5,21 5,11" fill="#CC342D"/>
@@ -800,7 +812,7 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "java", "kotlin", "csharp", "swift", "elixir", "scala", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "java", "kotlin", "csharp", "swift", "elixir", "scala", "fsharp", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
   },
   {
     title: "Web & Frontend",

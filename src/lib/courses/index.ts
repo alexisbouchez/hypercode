@@ -86,6 +86,7 @@ import { kotlinChapters, kotlinLessons } from "@/lib/lessons/kotlin";
 import { swiftChapters, swiftLessons } from "@/lib/lessons/swift";
 import { elixirChapters, elixirLessons } from "@/lib/lessons/elixir";
 import { chapters as scalaChapters, lessons as scalaLessons } from "@/lib/lessons/scala";
+import { fsharpChapters, fsharpLessons } from "@/lib/lessons/fsharp";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -5404,6 +5405,63 @@ You now know the core of Scala. Here are natural next steps:
 - [Scala Exercises](https://www.scala-exercises.org/) — interactive exercises covering the standard library and key libraries.
 - [Programming in Scala](https://www.artima.com/shop/programming_in_scala) by Martin Odersky — the definitive book on Scala.
 - [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala) — advanced functional programming with Scala.
+`,
+  },
+  {
+    id: "fsharp",
+    title: "F#",
+    description: "Learn F# from scratch — values, pattern matching, functions, recursion, collections, records, and discriminated unions. Runs in your browser via a JS transpiler.",
+    language: "fsharp",
+    chapters: fsharpChapters,
+    lessons: fsharpLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why F#?
+
+F# is a functional-first, statically typed language for .NET. It blends the expressiveness of functional programming with full access to the .NET ecosystem — making it ideal for data analysis, financial modeling, and robust backend services.
+
+- **Functional-first** — immutable values, first-class functions, and pattern matching are the default.
+- **Concise** — type inference means you rarely need to write types, but the compiler still catches errors at compile time.
+- **Algebraic types** — discriminated unions and records let you model your domain precisely.
+- **Currying and pipes** — F# functions are curried by default; the \`|>\` pipe operator enables clean left-to-right data transformation.
+- **.NET interop** — F# runs on the same CLR as C#, giving you access to all .NET libraries.
+
+## What You Will Learn
+
+- Binding values with \`let\` (immutable and mutable)
+- String interpolation with \`$"..."\`
+- Conditionals as expressions (\`if/elif/else\`)
+- Pattern matching with \`match\`
+- Defining and applying functions (currying, partial application)
+- Recursive functions with \`let rec\`
+- Higher-order functions and anonymous \`fun\`
+- The pipe operator \`|>\`
+- Lists, ranges, and common \`List\` functions
+- Tuples, records, and discriminated unions
+
+## Resources
+
+- [F# Official Documentation](https://learn.microsoft.com/en-us/dotnet/fsharp/) — the official F# language reference.
+- [F# for Fun and Profit](https://fsharpforfunandprofit.com/) — comprehensive guide to functional programming in F#.
+- [Tour of F#](https://learn.microsoft.com/en-us/dotnet/fsharp/tour) — a quick walkthrough of F# features.
+- [Exercism F# Track](https://exercism.org/tracks/fsharp) — practice problems with mentoring.
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the F# course. You can now write idiomatic F# — defining functions, transforming collections with pipes, and modeling data with records and discriminated unions.
+
+## Go Deeper
+
+- **Option and Result types** — F#'s \`Option<'T>\` and \`Result<'T, 'E>\` replace null and exceptions for safe error handling.
+- **Computation expressions** — \`async { }\` and \`seq { }\` are built on a powerful abstraction for composing effects.
+- **Active patterns** — extend \`match\` with custom decompositions of any type.
+- **Type providers** — generate types at compile time from JSON, CSV, SQL, and more.
+- **Domain modeling** — use DUs and records to make illegal states unrepresentable.
+
+## Resources
+
+- [F# Official Documentation](https://learn.microsoft.com/en-us/dotnet/fsharp/) — the official F# language reference.
+- [F# for Fun and Profit](https://fsharpforfunandprofit.com/) — comprehensive guide to functional programming in F#.
+- [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/) by Scott Wlaschin — the definitive book on F# domain modeling.
 `,
   },
 ];
