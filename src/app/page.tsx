@@ -184,10 +184,31 @@ const courseLogos: Record<string, React.ReactNode> = {
       <text x="4" y="22" fontSize="12" fontFamily="monospace" fill="#F89820" fontWeight="bold">Java</text>
     </svg>
   ),
+  kotlin: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <defs>
+        <linearGradient id="ktGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#E44857"/>
+          <stop offset="50%" stopColor="#C711E1"/>
+          <stop offset="100%" stopColor="#7F52FF"/>
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="3" fill="url(#ktGrad)"/>
+      <polygon points="3,3 16,16 3,29" fill="white" opacity="0.9"/>
+      <polygon points="3,3 29,3 16,16" fill="white" opacity="0.7"/>
+      <polygon points="16,16 29,3 29,29" fill="white" opacity="0.85"/>
+    </svg>
+  ),
   csharp: (
     <svg viewBox="0 0 32 32" className="w-8 h-8">
       <rect width="32" height="32" rx="3" fill="#9B4F96"/>
       <text x="4" y="22" fontSize="13" fontFamily="monospace" fill="white" fontWeight="bold">C#</text>
+    </svg>
+  ),
+  swift: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <rect width="32" height="32" rx="3" fill="#F05138"/>
+      <text x="3" y="22" fontSize="10" fontFamily="monospace" fill="white" fontWeight="bold">Swift</text>
     </svg>
   ),
   ruby: (
@@ -754,7 +775,7 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "java", "csharp", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "java", "kotlin", "csharp", "swift", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
   },
   {
     title: "Web & Frontend",

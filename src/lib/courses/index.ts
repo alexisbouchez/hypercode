@@ -82,6 +82,8 @@ import { cssChapters, cssLessons } from "@/lib/lessons/css";
 import { tailwindChapters, tailwindLessons } from "@/lib/lessons/tailwind";
 import { csharpChapters, csharpLessons } from "@/lib/lessons/csharp";
 import { javaChapters, javaLessons } from "@/lib/lessons/java";
+import { kotlinChapters, kotlinLessons } from "@/lib/lessons/kotlin";
+import { swiftChapters, swiftLessons } from "@/lib/lessons/swift";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -5179,6 +5181,111 @@ You have mastered the core of C#. Here are natural next steps:
 - [C# in Depth by Jon Skeet](https://www.manning.com/books/c-sharp-in-depth-fourth-edition) — the definitive deep-dive into C# internals.
 - [dotnet/runtime](https://github.com/dotnet/runtime) — the open-source .NET runtime on GitHub.
 - [LeetCode](https://leetcode.com/) — practice data structures and algorithms in C#.
+`,
+  },
+  {
+    id: "kotlin",
+    title: "Kotlin",
+    description: "Learn Kotlin from scratch — variables, functions, data classes, collections, and higher-order programming. The modern language for Android, JVM, and multiplatform development.",
+    language: "kotlin",
+    chapters: kotlinChapters,
+    lessons: kotlinLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why Kotlin?
+
+Kotlin is a modern, statically typed language that runs on the JVM, and is the preferred language for Android development. Created by JetBrains and adopted by Google, it combines the safety of static typing with the conciseness of functional programming.
+
+- **Concise syntax** — Kotlin eliminates boilerplate. Data classes, lambdas, and extension functions let you do in 5 lines what Java does in 50.
+- **Null safety** — the type system distinguishes nullable from non-nullable types, eliminating entire classes of NullPointerExceptions at compile time.
+- **Functional programming** — first-class functions, lambdas, and a rich collections API make it easy to write expressive, composable code.
+- **Interoperable** — Kotlin runs on the JVM and is 100% interoperable with Java. Use any Java library from Kotlin, and vice versa.
+- **Multiplatform** — Kotlin can target the JVM, JavaScript, and native platforms (iOS, macOS, Linux) from a single codebase.
+
+## The Story
+
+Kotlin was created by JetBrains, the company behind IntelliJ IDEA and other developer tools. Version 1.0 was released in 2016. In 2017, Google announced first-class support for Kotlin on Android, and in 2019 declared it the preferred language for Android development.
+
+The name comes from Kotlin Island, near Saint Petersburg, Russia — following the tradition of naming languages after islands (Java, Ceylon).
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **5 chapters**:
+
+1. **Basics** — Hello World, variables, strings, and numbers.
+2. **Control Flow** — Conditionals (\`if/else\`), \`when\` expressions, and loops.
+3. **Functions** — Function declarations, default parameters, and lambdas.
+4. **Collections** — Lists, list operations (\`map\`, \`filter\`, \`fold\`), and maps.
+5. **OOP & Data** — Data classes and higher-order functions.
+
+All code runs entirely in your browser via a JavaScript transpiler — no installation required.
+`,
+    whatsNextContent: `## What's Next
+
+You now know the core of Kotlin. Here are the natural next steps:
+
+- **Android Development** — Kotlin is the language of modern Android. Explore Jetpack Compose for building declarative UIs.
+- **Coroutines** — Kotlin's approach to asynchronous programming. Learn \`suspend\` functions, \`Flow\`, and structured concurrency.
+- **Spring Boot with Kotlin** — build REST APIs and backend services using Spring Boot's Kotlin support.
+- **Arrow** — a functional programming library for Kotlin, bringing monads, lenses, and algebraic data types.
+- **Kotlin Multiplatform** — share business logic between Android, iOS, and web from a single Kotlin codebase.
+
+## Resources
+
+- [Kotlin Official Documentation](https://kotlinlang.org/docs/) — the official language reference and tutorials.
+- [Kotlin Koans](https://play.kotlinlang.org/koans) — interactive exercises directly in the browser, organized by topic.
+- [Kotlin by Example](https://play.kotlinlang.org/byExample) — short, annotated examples for each language feature.
+- [Android Developers Kotlin Guide](https://developer.android.com/kotlin) — Kotlin for Android, with Jetpack and Compose.
+- *Kotlin in Action* by Dmitry Jemerov & Svetlana Isakova — the definitive book on Kotlin, written by JetBrains engineers.
+`,
+  },
+  {
+    id: "swift",
+    title: "Swift",
+    description: "Learn Swift from scratch — variables, optionals, closures, structs, enums, classes, and protocols. Apple's modern language for iOS, macOS, and beyond.",
+    language: "swift",
+    chapters: swiftChapters,
+    lessons: swiftLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why Swift?
+
+Swift is a modern, safe, and expressive programming language created by Apple. Since its introduction in 2014, it has become the primary language for iOS and macOS development, while also running on Linux and the web.
+
+- **Safe by design** — optionals, strong typing, and automatic memory management eliminate entire classes of bugs at compile time.
+- **Expressive** — closures, generics, and protocol-oriented programming let you write clean, composable code.
+- **Fast** — Swift compiles to native machine code and consistently outperforms Objective-C.
+- **Modern syntax** — string interpolation, trailing closures, and type inference keep code concise and readable.
+
+## A Brief History
+
+Swift was announced at Apple's WWDC in June 2014 and immediately replaced Objective-C as the primary language for Apple platforms. It became open source in December 2015. Swift 3 (2016) stabilized the language; Swift 5 (2019) achieved ABI stability, enabling binary frameworks. Today, Swift 6 brings strict concurrency checking, making safe async code the default.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **4 chapters**:
+
+1. **Basics** — Hello World, variables, string interpolation, conditionals, switch, and loops.
+2. **Collections** — Arrays, dictionaries, and optionals.
+3. **Functional** — Closures and higher-order functions (\`map\`, \`filter\`, \`reduce\`).
+4. **Types** — Structs, enums, classes, and protocols.
+
+All code runs entirely in your browser via a JavaScript transpiler — no installation required.
+`,
+    whatsNextContent: `## What's Next
+
+You now know the core of Swift. Here are the natural next steps:
+
+- **SwiftUI** — Apple's declarative UI framework for building apps across iOS, macOS, watchOS, and tvOS.
+- **Combine** — Swift's reactive framework for handling async events and data streams.
+- **Swift Concurrency** — \`async\`/\`await\` and actors for safe, structured concurrency.
+- **Swift on Server** — frameworks like Vapor and Hummingbird bring Swift to backend development.
+- **Swift Packages** — the Swift Package Manager for sharing reusable code.
+
+## Resources
+
+- [Swift.org Documentation](https://swift.org/documentation/) — the official Swift language guide and reference.
+- [The Swift Programming Language](https://docs.swift.org/swift-book/) — the free, official book by Apple.
+- [Hacking with Swift](https://www.hackingwithswift.com/) — practical Swift tutorials and projects.
+- [Swift by Sundell](https://swiftbysundell.com/) — articles and podcasts on Swift best practices.
 `,
   },
 ];

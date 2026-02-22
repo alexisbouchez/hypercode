@@ -75,6 +75,8 @@ import { runCssTests } from "./test-runners/css-test-runner";
 import { runTailwindTests } from "./test-runners/tailwind-test-runner";
 import { runCSharpTests } from "./test-runners/csharp-test-runner";
 import { runJavaTests } from "./test-runners/java-test-runner";
+import { runKotlinTests } from "./test-runners/kotlin-test-runner";
+import { runSwiftTests } from "./test-runners/swift-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 type TestRunner = () => LessonTestResult[] | Promise<LessonTestResult[]>;
@@ -157,6 +159,8 @@ const runners: Array<[string, TestRunner]> = [
   ["Tailwind CSS", runTailwindTests],
   ["C#", runCSharpTests],
   ["Java", runJavaTests],
+  ["Kotlin", runKotlinTests],
+  ["Swift", runSwiftTests],
 ];
 
 async function main() {

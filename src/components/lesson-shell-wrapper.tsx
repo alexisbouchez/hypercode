@@ -27,6 +27,8 @@ import { initCSharpRunner, isCSharpReady, runCSharp, runTests as runCSharpTests 
 import { initHtmlRunner, isHtmlReady, runHtml, runTests as runHtmlTests } from "@/lib/html-runner";
 import { initTailwindRunner, isTailwindReady, runTailwind, runTests as runTailwindTests } from "@/lib/tailwind-runner";
 import { initJavaRunner, isJavaReady, runJava, runTests as runJavaTests } from "@/lib/java-runner";
+import { initKotlinRunner, isKotlinReady, runKotlin, runTests as runKotlinTests } from "@/lib/kotlin-runner";
+import { initSwiftRunner, isSwiftReady, runSwift, runTests as runSwiftTests } from "@/lib/swift-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -127,6 +129,8 @@ const RUNNER_MAP: Record<string, RunnerModule> = {
   tailwind:                { init: initTailwindRunner, isReady: isTailwindReady, run: runTailwind, runTests: runTailwindTests },
   csharp:                  { init: initCSharpRunner,   isReady: isCSharpReady,   run: runCSharp,   runTests: runCSharpTests },
   java:                    { init: initJavaRunner,     isReady: isJavaReady,     run: runJava,     runTests: runJavaTests },
+  kotlin:                  { init: initKotlinRunner,   isReady: isKotlinReady,   run: runKotlin,   runTests: runKotlinTests },
+  swift:                   { init: initSwiftRunner,    isReady: isSwiftReady,    run: runSwift,    runTests: runSwiftTests },
 };
 
 const GO_RUNNER: RunnerModule = {
