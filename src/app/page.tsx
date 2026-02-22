@@ -184,6 +184,12 @@ const courseLogos: Record<string, React.ReactNode> = {
       <text x="4" y="22" fontSize="12" fontFamily="monospace" fill="#F89820" fontWeight="bold">Java</text>
     </svg>
   ),
+  csharp: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <rect width="32" height="32" rx="3" fill="#9B4F96"/>
+      <text x="4" y="22" fontSize="13" fontFamily="monospace" fill="white" fontWeight="bold">C#</text>
+    </svg>
+  ),
   ruby: (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
       <polygon points="16,3 27,11 27,21 16,29 5,21 5,11" fill="#CC342D"/>
@@ -748,7 +754,7 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "java", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "java", "csharp", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
   },
   {
     title: "Web & Frontend",
