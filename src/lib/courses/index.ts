@@ -84,6 +84,8 @@ import { csharpChapters, csharpLessons } from "@/lib/lessons/csharp";
 import { javaChapters, javaLessons } from "@/lib/lessons/java";
 import { kotlinChapters, kotlinLessons } from "@/lib/lessons/kotlin";
 import { swiftChapters, swiftLessons } from "@/lib/lessons/swift";
+import { elixirChapters, elixirLessons } from "@/lib/lessons/elixir";
+import { chapters as scalaChapters, lessons as scalaLessons } from "@/lib/lessons/scala";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -5286,6 +5288,122 @@ You now know the core of Swift. Here are the natural next steps:
 - [The Swift Programming Language](https://docs.swift.org/swift-book/) — the free, official book by Apple.
 - [Hacking with Swift](https://www.hackingwithswift.com/) — practical Swift tutorials and projects.
 - [Swift by Sundell](https://swiftbysundell.com/) — articles and podcasts on Swift best practices.
+`,
+  },
+  {
+    id: "elixir",
+    title: "Elixir",
+    description: "Learn Elixir from scratch — pattern matching, functions, modules, pipes, and functional collections. Runs in your browser via a JS transpiler.",
+    language: "elixir",
+    chapters: elixirChapters,
+    lessons: elixirLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why Elixir?
+
+Elixir is a dynamic, functional language built on the Erlang VM (BEAM). It was designed for building scalable, fault-tolerant, distributed systems — and it does so with a syntax that feels clean and expressive.
+
+- **Functional** — immutable data, first-class functions, and pattern matching everywhere.
+- **Concurrent** — lightweight processes (not OS threads) communicate via message passing, making concurrency straightforward.
+- **Fault-tolerant** — the "let it crash" philosophy and OTP supervisors enable self-healing systems.
+- **Extensible** — macros let you extend the language itself; Phoenix, Ecto, and Nerves are built on this power.
+
+## The Story
+
+Elixir was created by José Valim in 2011. Valim was a core contributor to Ruby on Rails who wanted the developer experience of Ruby with the performance and fault-tolerance of Erlang. The result was Elixir: a language that feels approachable but runs on a battle-tested runtime powering systems like WhatsApp (2 million connections per server) and Ericsson's telecommunications infrastructure.
+
+Elixir 1.0 was released in 2014. Today it powers Discord, PagerDuty, Bleacher Report, and many other high-traffic applications.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **5 chapters**:
+
+1. **Foundations** — Hello World, variables, atoms, strings, and numbers.
+2. **Control Flow** — Pattern matching with \`=\`, \`case\` expressions, \`if\`, and \`cond\`.
+3. **Functions** — Anonymous functions, \`fn\` syntax, capture \`&\`, modules, \`def\`, and the pipe operator \`|>\`.
+4. **Collections** — Lists, \`hd\`/\`tl\`, \`++\`, the \`Enum\` module, tuples, and maps.
+5. **Functional Patterns** — Recursion and multi-head function clauses.
+
+All code runs entirely in your browser via a JavaScript transpiler — no installation required.
+`,
+    whatsNextContent: `## What's Next
+
+You now know the core of Elixir. Here are the natural next steps:
+
+- **OTP** — GenServer, Supervisor, and Application behaviours for building concurrent, fault-tolerant systems.
+- **Phoenix** — the web framework for Elixir. Real-time channels via WebSockets make it ideal for live, interactive apps.
+- **Ecto** — the database wrapper and query DSL. Works with PostgreSQL, MySQL, and SQLite.
+- **LiveView** — Phoenix LiveView lets you build rich, real-time UIs without writing JavaScript.
+- **Nerves** — build and deploy embedded software on devices like Raspberry Pi using Elixir.
+
+## Resources
+
+- [Elixir Official Documentation](https://elixir-lang.org/docs.html) — the official language guide and API reference.
+- [Elixir School](https://elixirschool.com/) — free, community-maintained lessons covering all of Elixir.
+- [Programming Elixir](https://pragprog.com/titles/elixir16/programming-elixir-1-6/) by Dave Thomas — the classic book on Elixir by the Pragmatic Programmer.
+- [The Phoenix Framework](https://www.phoenixframework.org/) — build production-ready web apps and APIs.
+- [Exercism Elixir Track](https://exercism.org/tracks/elixir) — practice problems with mentoring.
+`,
+  },
+  {
+    id: "scala",
+    title: "Scala",
+    description: "Learn Scala from scratch — values, pattern matching, functions, recursion, collections, and OOP. Runs in your browser via a JS transpiler.",
+    language: "scala",
+    chapters: scalaChapters,
+    lessons: scalaLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why Scala?
+
+Scala is a powerful language that blends object-oriented and functional programming on the JVM. It is statically typed, expressive, and designed to scale from small scripts to large distributed systems.
+
+Scala was created by Martin Odersky at EPFL and has become the language of choice for data engineering (Apache Spark), streaming (Akka), and type-safe web backends.
+
+## What you will learn
+
+- **Values and variables** — immutable \`val\` vs mutable \`var\`
+- **String interpolation** — embed expressions in strings with \`s"..."\`
+- **If expressions** — \`if/else\` as expressions that return values
+- **Pattern matching** — Scala's powerful \`match\` expression
+- **Functions** — defining and calling \`def\` functions
+- **Recursion** — writing recursive functions
+- **Collections** — \`List\`, \`filter\`, \`map\`, \`foldLeft\`
+- **For loops** — iterating over ranges and collections
+- **Case classes** — immutable data types with methods
+- **Options** — safe handling of nullable values
+- **Traits** — interfaces with optional default implementations
+- **Objects** — singletons for utility methods and constants
+
+## Go Deeper
+
+- **Scala 3** — the latest major version brings cleaner syntax, improved type inference, and better ergonomics.
+- **Apache Spark** — the most popular big-data processing engine, written in Scala.
+- **Akka / Pekko** — actor-based concurrency and distributed systems.
+- **Cats / ZIO** — functional programming libraries for type-safe, composable effects.
+
+## Resources
+
+- [Scala Official Documentation](https://docs.scala-lang.org/) — the official language guide and API reference.
+- [Scala Exercises](https://www.scala-exercises.org/) — interactive exercises covering the standard library and key libraries.
+- [Programming in Scala](https://www.artima.com/shop/programming_in_scala) by Martin Odersky — the definitive book on Scala.
+- [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala) — advanced functional programming with Scala.
+- [Exercism Scala Track](https://exercism.org/tracks/scala) — practice problems with mentoring.
+`,
+    whatsNextContent: `## What's Next
+
+You now know the core of Scala. Here are natural next steps:
+
+- **Scala 3** — explore the new \`given\`/\`using\` syntax, union types, and improved pattern matching.
+- **Apache Spark** — the most popular big-data processing engine is written in Scala. Learn DataFrames, RDDs, and Spark SQL.
+- **Akka / Pekko** — actor-based concurrency for building distributed, fault-tolerant systems.
+- **Cats / ZIO** — functional programming libraries for type-safe, composable effects.
+- **Scala.js** — compile Scala to JavaScript for frontend development.
+
+## Resources
+
+- [Scala Official Documentation](https://docs.scala-lang.org/) — the official language guide and API reference.
+- [Scala Exercises](https://www.scala-exercises.org/) — interactive exercises covering the standard library and key libraries.
+- [Programming in Scala](https://www.artima.com/shop/programming_in_scala) by Martin Odersky — the definitive book on Scala.
+- [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala) — advanced functional programming with Scala.
 `,
   },
 ];

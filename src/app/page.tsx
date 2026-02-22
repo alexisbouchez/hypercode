@@ -211,6 +211,31 @@ const courseLogos: Record<string, React.ReactNode> = {
       <text x="3" y="22" fontSize="10" fontFamily="monospace" fill="white" fontWeight="bold">Swift</text>
     </svg>
   ),
+  elixir: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <defs>
+        <linearGradient id="elixirGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#9B59B6"/>
+          <stop offset="100%" stopColor="#6E4AFF"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="16" cy="17" rx="10" ry="13" fill="url(#elixirGrad)"/>
+      <ellipse cx="16" cy="9" rx="6" ry="8" fill="#B07FFF" opacity="0.7"/>
+    </svg>
+  ),
+  scala: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <defs>
+        <linearGradient id="scalaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#DC322F"/>
+          <stop offset="100%" stopColor="#7B1616"/>
+        </linearGradient>
+      </defs>
+      <rect x="6" y="6" width="20" height="6" rx="1" fill="url(#scalaGrad)"/>
+      <rect x="6" y="13" width="20" height="6" rx="1" fill="url(#scalaGrad)" opacity="0.75"/>
+      <rect x="6" y="20" width="20" height="6" rx="1" fill="url(#scalaGrad)" opacity="0.5"/>
+    </svg>
+  ),
   ruby: (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
       <polygon points="16,3 27,11 27,21 16,29 5,21 5,11" fill="#CC342D"/>
@@ -775,7 +800,7 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "java", "kotlin", "csharp", "swift", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "java", "kotlin", "csharp", "swift", "elixir", "scala", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
   },
   {
     title: "Web & Frontend",
