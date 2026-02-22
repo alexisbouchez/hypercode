@@ -23,6 +23,10 @@ import { initMusicRunner, isMusicReady, runMusic, runTests as runMusicTests } fr
 import { initMysqlRunner, isMysqlReady, runMysql, runTests as runMysqlTests } from "@/lib/mysql-runner";
 import { initRustRunner, isRustReady, runRust, runTests as runRustTests } from "@/lib/rust-runner";
 import { initLeanRunner, isLeanReady, runLean, runTests as runLeanTests } from "@/lib/lean-runner";
+import { initCSharpRunner, isCSharpReady, runCSharp, runTests as runCSharpTests } from "@/lib/csharp-runner";
+import { initHtmlRunner, isHtmlReady, runHtml, runTests as runHtmlTests } from "@/lib/html-runner";
+import { initTailwindRunner, isTailwindReady, runTailwind, runTests as runTailwindTests } from "@/lib/tailwind-runner";
+import { initJavaRunner, isJavaReady, runJava, runTests as runJavaTests } from "@/lib/java-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -118,6 +122,11 @@ const RUNNER_MAP: Record<string, RunnerModule> = {
   mysql:                   { init: initMysqlRunner,   isReady: isMysqlReady,   run: runMysql,   runTests: runMysqlTests },
   rust:                    { init: initRustRunner,    isReady: isRustReady,    run: runRust,    runTests: runRustTests },
   lean:                    { init: initLeanRunner,    isReady: isLeanReady,    run: runLean,    runTests: runLeanTests },
+  html:                    { init: initHtmlRunner,    isReady: isHtmlReady,    run: runHtml,    runTests: runHtmlTests },
+  css:                     { init: initHtmlRunner,    isReady: isHtmlReady,    run: runHtml,    runTests: runHtmlTests },
+  tailwind:                { init: initTailwindRunner, isReady: isTailwindReady, run: runTailwind, runTests: runTailwindTests },
+  csharp:                  { init: initCSharpRunner,   isReady: isCSharpReady,   run: runCSharp,   runTests: runCSharpTests },
+  java:                    { init: initJavaRunner,     isReady: isJavaReady,     run: runJava,     runTests: runJavaTests },
 };
 
 const GO_RUNNER: RunnerModule = {

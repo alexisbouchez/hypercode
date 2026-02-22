@@ -70,6 +70,11 @@ import { runPcbDesignTests } from "./test-runners/pcb-design-test-runner";
 import { runNeuralNetworksTests } from "./test-runners/neural-networks-test-runner";
 import { runProbabilityTests } from "./test-runners/probability-test-runner";
 import { runDiscreteMathTests } from "./test-runners/discrete-math-test-runner";
+import { runHtmlTests } from "./test-runners/html-test-runner";
+import { runCssTests } from "./test-runners/css-test-runner";
+import { runTailwindTests } from "./test-runners/tailwind-test-runner";
+import { runCSharpTests } from "./test-runners/csharp-test-runner";
+import { runJavaTests } from "./test-runners/java-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 type TestRunner = () => LessonTestResult[] | Promise<LessonTestResult[]>;
@@ -147,6 +152,11 @@ const runners: Array<[string, TestRunner]> = [
   ["Neural Networks from Scratch", runNeuralNetworksTests],
   ["Probability Theory", runProbabilityTests],
   ["Discrete Mathematics", runDiscreteMathTests],
+  ["HTML", runHtmlTests],
+  ["CSS", runCssTests],
+  ["Tailwind CSS", runTailwindTests],
+  ["C#", runCSharpTests],
+  ["Java", runJavaTests],
 ];
 
 async function main() {

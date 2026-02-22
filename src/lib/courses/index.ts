@@ -77,6 +77,11 @@ import { optionsPricingChapters, optionsPricingLessons } from "@/lib/lessons/opt
 import { riskManagementChapters, riskManagementLessons } from "@/lib/lessons/risk-management";
 import { digitalLogicChapters, digitalLogicLessons } from "@/lib/lessons/digital-logic";
 import { pcbDesignChapters, pcbDesignLessons } from "@/lib/lessons/pcb-design";
+import { htmlChapters, htmlLessons } from "@/lib/lessons/html";
+import { cssChapters, cssLessons } from "@/lib/lessons/css";
+import { tailwindChapters, tailwindLessons } from "@/lib/lessons/tailwind";
+import { csharpChapters, csharpLessons } from "@/lib/lessons/csharp";
+import { javaChapters, javaLessons } from "@/lib/lessons/java";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -4948,6 +4953,232 @@ This is the engineering behind tools like [tscircuit](https://tscircuit.com/) �
 - **Digital Logic** — The gate-level logic that runs on the chips you're routing
 - **Circuits** — Analog circuit analysis: Ohm's law, RC transients, and filter design
 - **Electromagnetism** — The Maxwell's equations underlying transmission line theory
+`,
+  },
+  {
+    id: "html",
+    title: "HTML",
+    description: "Learn HTML from scratch. Master elements, attributes, forms, tables, and semantic markup — all rendered live in your browser.",
+    language: "html",
+    chapters: htmlChapters,
+    lessons: htmlLessons,
+    runtimeLabel: "HTML preview",
+    introductionContent: `## Why HTML?
+
+HTML (HyperText Markup Language) is the foundation of every web page. Every website you have ever visited — from Google to Wikipedia to your bank — is built on HTML. It is the language that structures content on the web.
+
+Unlike programming languages, HTML does not have logic or algorithms. It describes *what* things are: headings, paragraphs, links, images, forms, tables. Browsers read HTML and render it visually.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **4 chapters**:
+
+1. **Structure** — HTML elements, headings, paragraphs, text formatting, and lists.
+2. **Content** — Links, images, tables, and containers.
+3. **Forms** — Input types, textarea, select, and form submission.
+4. **Semantic HTML** — Meaningful elements like header, nav, main, article, and footer that improve accessibility and SEO.
+
+Each lesson shows you the concept, gives examples, and asks you to write HTML that renders live in the preview pane.
+`,
+    whatsNextContent: `## What's Next
+
+You now know the structure of every web page. HTML gives you the vocabulary; the next step is style and interactivity.
+
+- **CSS** — add colors, fonts, spacing, layout, and animations to your HTML
+- **Tailwind CSS** — style HTML rapidly with utility classes
+- **JavaScript** — make pages interactive with events, DOM manipulation, and APIs
+
+## Resources
+
+- [MDN HTML Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference) — comprehensive element reference
+- [HTML Living Standard](https://html.spec.whatwg.org/) — the official specification
+- [web.dev Learn HTML](https://web.dev/learn/html) — structured curriculum from Google
+`,
+  },
+  {
+    id: "css",
+    title: "CSS",
+    description: "Learn CSS from scratch. Master selectors, the box model, flexbox, grid, animations, and responsive design — rendered live in your browser.",
+    language: "css",
+    chapters: cssChapters,
+    lessons: cssLessons,
+    runtimeLabel: "CSS preview",
+    introductionContent: `## Why CSS?
+
+CSS (Cascading Style Sheets) transforms plain HTML into beautiful, professional web pages. HTML provides structure; CSS provides presentation — colors, typography, spacing, layout, and animation.
+
+Every visual aspect of every website is controlled by CSS: the font on this page, the color of a button, the grid of product cards in a store, the animation on a loading spinner.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **4 chapters**:
+
+1. **Selectors** — How to target elements with element, class, ID, descendant, and pseudo-class selectors. Colors and typography.
+2. **Box Model** — Width, height, padding, margin, borders, display types.
+3. **Layout** — Positioning, flexbox, and CSS grid.
+4. **Styling** — Backgrounds, gradients, transitions, animations, and responsive media queries.
+
+Each lesson gives you live HTML+CSS in the preview pane so you can see your styles applied instantly.
+`,
+    whatsNextContent: `## What's Next
+
+You now know how to style web pages from scratch. The next step is to apply these skills with modern tooling.
+
+- **Tailwind CSS** — apply CSS concepts instantly with utility classes, no custom CSS needed
+- **HTML** — if you haven't taken it yet, it covers the elements you've been styling
+- **JavaScript** — make styled elements interactive
+
+## Resources
+
+- [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) — every CSS property explained
+- [CSS Tricks](https://css-tricks.com/) — guides on flexbox, grid, and modern CSS
+- [web.dev Learn CSS](https://web.dev/learn/css) — structured curriculum from Google
+- [Flexbox Froggy](https://flexboxfroggy.com/) — interactive flexbox game
+- [Grid Garden](https://cssgridgarden.com/) — interactive CSS grid game
+`,
+  },
+  {
+    id: "tailwind",
+    title: "Tailwind CSS",
+    description: "Learn Tailwind CSS from scratch. Build beautiful UIs with utility classes — no custom CSS required. Master spacing, flexbox, grid, components, and responsive design.",
+    language: "html",
+    chapters: tailwindChapters,
+    lessons: tailwindLessons,
+    runtimeLabel: "Tailwind preview",
+    introductionContent: `## Why Tailwind CSS?
+
+Tailwind CSS is a utility-first CSS framework that lets you build custom designs without ever leaving your HTML. Instead of writing CSS classes and switching between files, you compose styles directly with utility classes:
+
+\`\`\`html
+<button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg">
+  Get Started
+\`\`\`
+
+This is the same button you might otherwise write 20 lines of CSS for.
+
+Tailwind is used by thousands of companies and is one of the most popular CSS frameworks in the world. It powers the UIs of companies like GitHub, Shopify, and many others.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **4 chapters**:
+
+1. **Utilities** — Typography, colors, spacing — the building blocks of Tailwind.
+2. **Layout** — Flexbox, grid, sizing, borders, and shadows.
+3. **Components** — Build cards, buttons, navbars, and forms.
+4. **Responsive** — Mobile-first breakpoints, responsive layouts, hover and dark mode variants.
+
+The preview pane renders your Tailwind HTML live via the Tailwind CDN.
+`,
+    whatsNextContent: `## What's Next
+
+You can now build polished UIs quickly with Tailwind. The next steps:
+
+- **HTML** — deepen your understanding of the semantic elements you've been styling
+- **CSS** — understand the underlying CSS that Tailwind abstracts
+- **JavaScript** or **TypeScript** — add interactivity to your components
+- **Three.js** — build 3D scenes and visualizations
+
+## Resources
+
+- [Tailwind CSS Docs](https://tailwindcss.com/docs) — the official documentation with a searchable utility reference
+- [Tailwind UI](https://tailwindui.com/) — official component library (paid)
+- [Headless UI](https://headlessui.com/) — unstyled, accessible components for Tailwind
+- [shadcn/ui](https://ui.shadcn.com/) — beautiful Tailwind components you can copy into your project
+`,
+  },
+  {
+    id: "java",
+    title: "Java",
+    description: "Learn Java from scratch. Master variables, strings, arrays, OOP, generics, and collections — the language powering Android, Spring, and enterprise software worldwide.",
+    language: "java",
+    chapters: javaChapters,
+    lessons: javaLessons,
+    runtimeLabel: "TeaVM (WASM)",
+    introductionContent: `## Why Java?
+
+Java is one of the most widely used programming languages in the world. It powers Android apps, enterprise backends, financial systems, and large-scale distributed services. The JVM (Java Virtual Machine) makes it truly portable: write once, run anywhere.
+
+- **Statically typed** — types are checked at compile time, catching entire classes of bugs before they reach production.
+- **Object-oriented** — everything is a class. Java's OOP model (classes, interfaces, inheritance, generics) scales from small programs to massive systems.
+- **Mature ecosystem** — Spring, Maven, Gradle, JUnit, and thousands of battle-tested libraries.
+- **Performance** — the JVM's JIT compiler makes Java competitive with compiled languages for server workloads.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **5 chapters**:
+
+1. **Basics** — Hello World, variables, strings, and arrays.
+2. **Control Flow** — Conditionals and loops.
+3. **Methods** — Static methods and recursion.
+4. **Object-Oriented Programming** — Classes, inheritance, interfaces, and abstract classes.
+5. **Collections & Generics** — Generics, ArrayList, and HashMap.
+
+All code runs in-browser via [TeaVM](https://teavm.org/) — a Java-to-WebAssembly compiler — so there's nothing to install.
+`,
+    whatsNextContent: `## What's Next
+
+You have mastered the core of Java. Here are natural next steps:
+
+- **Spring Boot** — the dominant Java web framework. Build REST APIs, connect to databases, and deploy backend services.
+- **Android Development** — Java (and Kotlin) is the language of Android apps.
+- **Design Patterns** — Singleton, Factory, Observer, Strategy. Java's OOP model makes these patterns central to its culture.
+- **Concurrency** — Java's thread model, \`synchronized\`, \`ExecutorService\`, and the \`java.util.concurrent\` package.
+- **Kotlin** — a modern JVM language that runs alongside Java, with concise syntax and coroutines for async programming.
+
+## Resources
+
+- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/) — the official, comprehensive Java tutorial.
+- [Effective Java by Joshua Bloch](https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/) — the definitive book on writing good Java.
+- [Baeldung](https://www.baeldung.com/) — practical Java guides for Spring, collections, concurrency, and more.
+- [LeetCode](https://leetcode.com/) — practice data structures and algorithms in Java.
+`,
+  },
+  {
+    id: "csharp",
+    title: "C#",
+    description: "Learn C# from scratch. Master variables, control flow, collections, OOP, generics, and LINQ — one of the most versatile languages for enterprise software, games, and cloud services.",
+    language: "csharp",
+    chapters: csharpChapters,
+    lessons: csharpLessons,
+    runtimeLabel: "WasmSharp (.NET)",
+    introductionContent: `## Why C#?
+
+C# is one of the most versatile languages in modern software development. It powers Windows applications, Unity games, ASP.NET web services, and cloud-scale backends at Microsoft, Spotify, and Stack Overflow. With a clean syntax, strong type system, and the full .NET ecosystem behind it, C# is an excellent first or second language for serious programmers.
+
+- **Statically typed** — types are checked at compile time, catching entire classes of bugs before they reach production.
+- **Object-oriented** — classes, interfaces, inheritance, and generics form the backbone of C# design.
+- **LINQ** — Language Integrated Query lets you filter, transform, and aggregate collections with a declarative, SQL-like syntax built right into the language.
+- **Async/await** — first-class support for asynchronous programming, making it easy to build responsive apps and scalable services.
+- **Huge ecosystem** — NuGet has over 300,000 packages. Entity Framework, ASP.NET Core, Blazor, Unity — the ecosystem covers everything.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **5 chapters**:
+
+1. **Basics** — Hello World, variables and types, and string interpolation.
+2. **Control Flow** — Conditionals, switch expressions, and loops.
+3. **Collections** — Arrays, lists, and dictionaries.
+4. **OOP** — Methods, classes, properties, inheritance, and interfaces.
+5. **Advanced** — LINQ for querying collections.
+
+All code runs in-browser via [WasmSharp](https://github.com/ivan-prodanov/WasmSharp) — the .NET runtime compiled to WebAssembly — so there's nothing to install.
+`,
+    whatsNextContent: `## What's Next
+
+You have mastered the core of C#. Here are natural next steps:
+
+- **ASP.NET Core** — the dominant C# web framework. Build REST APIs, minimal APIs, and full MVC web apps.
+- **Entity Framework Core** — C#'s ORM for working with databases using LINQ and code-first migrations.
+- **Unity** — the most popular game engine uses C# as its scripting language. Everything you learned here applies directly.
+- **Blazor** — build interactive web UIs in C# instead of JavaScript, compiled to WebAssembly.
+- **Async/Await** — dive into \`Task\`, \`async\`/\`await\`, and \`CancellationToken\` for building concurrent, high-performance services.
+
+## Resources
+
+- [Microsoft C# Docs](https://learn.microsoft.com/en-us/dotnet/csharp/) — the official, comprehensive C# documentation.
+- [C# in Depth by Jon Skeet](https://www.manning.com/books/c-sharp-in-depth-fourth-edition) — the definitive deep-dive into C# internals.
+- [dotnet/runtime](https://github.com/dotnet/runtime) — the open-source .NET runtime on GitHub.
+- [LeetCode](https://leetcode.com/) — practice data structures and algorithms in C#.
 `,
   },
 ];

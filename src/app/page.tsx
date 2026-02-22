@@ -178,6 +178,12 @@ const courseLogos: Record<string, React.ReactNode> = {
       <text x="3" y="22" fontSize="13" fontFamily="monospace" fill="white" fontWeight="bold">C++</text>
     </svg>
   ),
+  java: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <rect width="32" height="32" rx="3" fill="#5382A1"/>
+      <text x="4" y="22" fontSize="12" fontFamily="monospace" fill="#F89820" fontWeight="bold">Java</text>
+    </svg>
+  ),
   ruby: (
     <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
       <polygon points="16,3 27,11 27,21 16,29 5,21 5,11" fill="#CC342D"/>
@@ -201,6 +207,23 @@ const courseLogos: Record<string, React.ReactNode> = {
     </svg>
   ),
   // Web & Frontend
+  html: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <rect width="32" height="32" rx="3" fill="#E44D26"/>
+      <text x="4" y="22" fontSize="11" fontFamily="monospace" fill="white" fontWeight="bold">HTML</text>
+    </svg>
+  ),
+  css: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8">
+      <rect width="32" height="32" rx="3" fill="#1572B6"/>
+      <text x="5" y="22" fontSize="11" fontFamily="monospace" fill="white" fontWeight="bold">CSS</text>
+    </svg>
+  ),
+  tailwind: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <path d="M16 6c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.9.23 1.55.9 2.27 1.64C17.68 11.9 19.1 13.4 22 13.4c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.9-.23-1.55-.9-2.27-1.64C20.32 7.5 18.9 6 16 6zm-6 8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.9.23 1.55.9 2.27 1.64C11.68 19.9 13.1 21.4 16 21.4c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.9-.23-1.55-.9-2.27-1.64C14.32 15.5 12.9 14 10 14z" fill="#38BDF8"/>
+    </svg>
+  ),
   javascript: (
     <svg viewBox="0 0 32 32" className="w-8 h-8">
       <rect width="32" height="32" rx="3" fill="#F7DF1E"/>
@@ -725,11 +748,11 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "java", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
   },
   {
     title: "Web & Frontend",
-    ids: ["javascript", "typescript", "threejs", "music"],
+    ids: ["html", "css", "tailwind", "javascript", "typescript", "threejs", "music"],
   },
   {
     title: "Data & Databases",
