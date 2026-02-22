@@ -85,6 +85,25 @@ const courseLogos: Record<string, React.ReactNode> = {
       <rect x="22" y="6" width="5" height="22" rx="1" fill="#A8B9CC"/>
     </svg>
   ),
+  probability: (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <path d="M4 28 C4 28 8 4 16 16 C24 28 28 4 28 4" stroke="#A8B9CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="16" cy="16" r="2.5" fill="#A8B9CC"/>
+    </svg>
+  ),
+  "discrete-math": (
+    <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none">
+      <circle cx="8" cy="8" r="3" fill="#A8B9CC"/>
+      <circle cx="24" cy="8" r="3" fill="#A8B9CC"/>
+      <circle cx="8" cy="24" r="3" fill="#A8B9CC"/>
+      <circle cx="24" cy="24" r="3" fill="#A8B9CC"/>
+      <line x1="8" y1="8" x2="24" y2="8" stroke="#A8B9CC" strokeWidth="1.5"/>
+      <line x1="8" y1="8" x2="8" y2="24" stroke="#A8B9CC" strokeWidth="1.5"/>
+      <line x1="24" y1="8" x2="24" y2="24" stroke="#A8B9CC" strokeWidth="1.5"/>
+      <line x1="8" y1="24" x2="24" y2="24" stroke="#A8B9CC" strokeWidth="1.5"/>
+      <line x1="8" y1="8" x2="24" y2="24" stroke="#A8B9CC" strokeWidth="1.5"/>
+    </svg>
+  ),
   python: (
     <svg viewBox="0 0 24 24" className="w-8 h-8">
       <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.031v-2.867s-.109-3.402 3.35-3.402h5.762s3.24.052 3.24-3.13V3.19S18.28 0 11.914 0zm-3.2 1.848a1.047 1.047 0 1 1 0 2.094 1.046 1.046 0 0 1 0-2.094z" fill="#387EB8"/>
@@ -733,6 +752,8 @@ const tracks: { title: string; ids: string[] }[] = [
       "linear-algebra",
       "advanced-linear-algebra",
       "statistics",
+      "probability",
+      "discrete-math",
       "diffeq",
       "number-theory",
       "cryptography",

@@ -26,6 +26,8 @@ import { linearAlgebraChapters, linearAlgebraLessons } from "@/lib/lessons/linea
 import { diffeqChapters, diffeqLessons } from "@/lib/lessons/diffeq";
 import { calculusChapters, calculusLessons } from "@/lib/lessons/calculus";
 import { statisticsChapters, statisticsLessons } from "@/lib/lessons/statistics";
+import { probabilityChapters, probabilityLessons } from "@/lib/lessons/probability";
+import { discreteMathChapters, discreteMathLessons } from "@/lib/lessons/discrete-math";
 import { calculus2Chapters, calculus2Lessons } from "@/lib/lessons/calculus2";
 import { calculus3Chapters, calculus3Lessons } from "@/lib/lessons/calculus3";
 import { circuitsChapters, circuitsLessons } from "@/lib/lessons/circuits";
@@ -52,6 +54,7 @@ import { cryptographyChapters, cryptographyLessons } from "@/lib/lessons/cryptog
 import { particlePhysicsChapters, particlePhysicsLessons } from "@/lib/lessons/particle-physics";
 import { signalProcessingChapters, signalProcessingLessons } from "@/lib/lessons/signal-processing";
 import { machineLearningChapters, machineLearningLessons } from "@/lib/lessons/machine-learning";
+import { neuralNetworksChapters, neuralNetworksLessons } from "@/lib/lessons/neural-networks";
 import { informationTheoryChapters, informationTheoryLessons } from "@/lib/lessons/information-theory";
 import { cosmologyChapters, cosmologyLessons } from "@/lib/lessons/cosmology";
 import { astrophysicsChapters, astrophysicsLessons } from "@/lib/lessons/astrophysics";
@@ -2001,6 +2004,103 @@ const statisticsWhatsNextContent = `
 - [StatQuest with Josh Starmer](https://www.youtube.com/@statquest) — YouTube channel with clear visual explanations of every concept in this course.
 `;
 
+const probabilityIntroductionContent = `
+## Why Probability Theory?
+
+Probability is the mathematics of uncertainty. It provides the rigorous foundation for statistics, machine learning, and stochastic modeling. Understanding probability deeply — beyond plugging formulas — is what separates practitioners from engineers who truly understand their models.
+
+- **Machine learning** — loss functions, Bayesian inference, generative models, and RL all speak the language of probability distributions.
+- **Quantitative finance** — option pricing, risk models, and algorithmic trading depend on stochastic processes and random variables.
+- **Science** — hypothesis testing, confidence intervals, and Bayesian updating all rest on a probabilistic foundation.
+- **Computer science** — probabilistic algorithms, hashing, randomized data structures, and information theory.
+
+## What You'll Build
+
+This course takes a hands-on approach. In each lesson you will implement the key probability concepts in Python from scratch — no scipy shortcuts until you understand what's beneath them.
+
+1. **Sample spaces & axioms** — enumerate outcomes, compute probabilities from first principles, verify Kolmogorov axioms.
+2. **Conditional probability & Bayes** — implement Bayes' theorem, solve classic problems (Monty Hall, medical tests).
+3. **Random variables** — write PMFs and PDFs, compute expectations and variances analytically.
+4. **Distributions** — implement Bernoulli, Binomial, Poisson, Exponential, Normal, Gamma, Beta from scratch.
+5. **Limit theorems & Markov chains** — verify the Law of Large Numbers, simulate Central Limit Theorem, build Markov chain simulators.
+
+## In-Browser Runtime
+
+All code runs live in your browser via **Pyodide** — CPython compiled to WebAssembly. NumPy loads automatically from your import statements.
+`;
+
+const probabilityWhatsNextContent = `
+## Continue Your Probability Journey
+
+### Deeper Probability
+
+- **Stochastic processes** — Brownian motion, Poisson processes, martingales, and stopping times.
+- **Measure-theoretic probability** — the rigorous foundation: sigma-algebras, Lebesgue integration, and the Radon-Nikodym theorem.
+- **Bayesian statistics** — PyMC or Stan for probabilistic programming and posterior inference.
+
+### Applied Directions
+
+- **Machine learning** — probabilistic graphical models, variational inference, and generative models (VAEs, diffusion).
+- **Quantitative finance** — stochastic calculus (Itô's lemma), Black-Scholes, and the Options Pricing course.
+- **Information theory** — entropy, mutual information, and the channel capacity theorem.
+
+## References
+
+- *Introduction to Probability* by Blitzstein & Hwang — the best modern probability textbook, with solved problems and intuition.
+- *Probability Theory: The Logic of Science* by E.T. Jaynes — Bayesian perspective, free online.
+- [3Blue1Brown: Bayes Theorem](https://www.youtube.com/watch?v=HZGCoVF3YvM) — visual intuition for conditional probability.
+- [Harvard Statistics 110](https://projects.iq.harvard.edu/stat110) — Blitzstein's full course with lecture videos and problem sets, free online.
+`;
+
+const discreteMathIntroductionContent = `
+## Why Discrete Mathematics?
+
+Discrete mathematics is the mathematical backbone of computer science. Every CS undergraduate takes it in year one — it provides the language and tools that every other course builds on: logic for reasoning about programs, sets for data structures, relations for databases, counting for algorithm analysis, graphs for networks.
+
+- **Algorithm analysis** — big-O notation, recurrences, counting operations, asymptotic analysis all require combinatorics and recurrence theory.
+- **Cryptography & security** — modular arithmetic, number theory, group theory, and combinatorics are the mathematical core of every encryption scheme.
+- **Formal methods & compilers** — automata, grammars, and type theory all rest on predicate logic and set theory.
+- **Database theory** — relational algebra, functional dependencies, and normal forms are applications of set theory and relations.
+- **Machine learning** — graph neural networks, probabilistic graphical models, and information theory all use discrete structures.
+
+## What You'll Build
+
+Each lesson implements the core discrete math concept in Python — not just computing answers, but understanding the underlying structures.
+
+1. **Logic & Proofs** — truth tables, quantifiers, tautologies, De Morgan's laws, proof by induction and contradiction.
+2. **Sets, Relations & Functions** — power sets, Cartesian products, equivalence classes, injections, bijections.
+3. **Counting & Combinatorics** — permutations, combinations, inclusion-exclusion, pigeonhole, Stirling numbers, Catalan numbers.
+4. **Induction & Recurrences** — mathematical induction, linear recurrences, characteristic equations, generating functions.
+5. **Graph Theory** — degree sequences, Euler circuits, graph coloring, planar graphs, Euler's formula.
+
+## In-Browser Runtime
+
+All code runs live in your browser via **Pyodide** — CPython compiled to WebAssembly.
+`;
+
+const discreteMathWhatsNextContent = `
+## Continue Your Discrete Math Journey
+
+### Deeper Theory
+
+- **Abstract Algebra** — groups, rings, fields, and Galois theory (the algebra beneath cryptography).
+- **Automata & Formal Languages** — finite automata, context-free grammars, Turing machines, and decidability.
+- **Compilers** — apply formal languages directly: build a lexer, parser, and evaluator.
+
+### Applied Directions
+
+- **Algorithms** — sorting, graph algorithms, dynamic programming — all analyzed with the combinatorics from this course.
+- **Cryptography** — RSA, elliptic curves, and zero-knowledge proofs all rest on number theory and discrete probability.
+- **Information Theory** — entropy, Huffman coding, and channel capacity require combinatorics and probability.
+
+## References
+
+- *Discrete Mathematics and Its Applications* by Kenneth Rosen — the standard undergraduate textbook, thorough and clear.
+- *Concrete Mathematics* by Knuth, Graham & Patashnik — advanced combinatorics and generating functions, written for CS students.
+- *Introduction to the Theory of Computation* by Sipser — formal languages and computability built on the foundations here.
+- [MIT 6.042J](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/) — MIT's discrete math for CS, full lecture notes and problem sets free online.
+`;
+
 const graphsIntroductionContent = `
 ## Why Graph Algorithms?
 
@@ -3012,6 +3112,46 @@ You have implemented the foundational algorithms of machine learning from scratc
 - [fast.ai](https://www.fast.ai/) — Practical deep learning top-down course, highly recommended alongside theory
 `;
 
+const neuralNetworksIntroductionContent = `
+## Why Neural Networks from Scratch?
+
+The Machine Learning course taught you perceptrons and forward passes. MicroGPT jumps straight to transformers. This course bridges the gap — implementing **backpropagation** and multi-layer networks from the ground up, giving you the foundation every modern deep learning system rests on.
+
+Understanding backprop at the equation level transforms neural networks from black boxes into transparent computations. When you can derive $\\frac{\\partial \\mathcal{L}}{\\partial w}$ by hand and implement it in Python, every deep learning paper becomes readable.
+
+## How This Course Works
+
+Each lesson introduces one concept with its mathematical derivation, then asks you to implement it in pure Python — no NumPy, no PyTorch. Tests verify your implementation against exact expected outputs.
+
+## What You Will Build
+
+1. **Foundations** — Neurons, activation functions (sigmoid, ReLU, tanh), and loss functions (MSE, binary cross-entropy)
+2. **Gradients** — Numerical gradient estimation, activation derivatives, and single-layer backpropagation
+3. **Backpropagation** — Multi-layer backprop, dense layers, and network forward passes
+4. **Training** — Gradient descent updates, the training loop, Xavier initialization, and L2 regularization
+5. **Advanced Techniques** — The Adam optimizer and a two-layer network that solves XOR
+
+By the end, you will have implemented every component needed to train a real neural network.
+`;
+
+const neuralNetworksWhatsNextContent = `
+## What's Next
+
+You have implemented backpropagation, multi-layer networks, weight initialization, regularization, and Adam from scratch. Here are the natural next steps:
+
+- **MicroGPT** — Build a transformer language model using an autograd engine. The Value class and backprop you just mastered are exactly what drives it
+- **Convolutional Networks** — 2D convolution, pooling layers, and feature maps for image classification
+- **Recurrent Networks** — LSTMs and GRUs for sequences, using the same backprop-through-time principle
+- **PyTorch** — Now that you understand what autograd does internally, using PyTorch will feel natural rather than magical
+
+## Further Reading
+
+- **Deep Learning** by Goodfellow, Bengio & Courville — The comprehensive textbook, freely available online
+- **Neural Networks and Deep Learning** by Michael Nielsen — Excellent visual explanations of backprop
+- [Andrej Karpathy's backprop video](https://www.youtube.com/watch?v=VMj-3S1tku0) — Builds micrograd live, the same approach as this course
+- **The Elements of Statistical Learning** — Chapter 11 covers neural networks in the statistical framework
+`;
+
 const opticsIntroductionContent = `
 ## Why Optics?
 
@@ -3668,6 +3808,28 @@ You have completed all 15 lessons. You now know the core of Lean 4 as a function
     whatsNextContent: statisticsWhatsNextContent,
   },
   {
+    id: "probability",
+    title: "Probability Theory in Python",
+    description: "Master probability theory in Python. Implement sample spaces, Bayes' theorem, random variables, PMFs and PDFs, Bernoulli, Binomial, Poisson, Normal, Gamma, Beta distributions, the Law of Large Numbers, and Markov chains from scratch.",
+    language: "python",
+    chapters: probabilityChapters,
+    lessons: probabilityLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: probabilityIntroductionContent,
+    whatsNextContent: probabilityWhatsNextContent,
+  },
+  {
+    id: "discrete-math",
+    title: "Discrete Mathematics in Python",
+    description: "Master discrete mathematics in Python — the mathematical backbone of CS. Implement propositional logic, set theory, relations, functions, combinatorics (Catalan numbers, Stirling numbers), induction, recurrence relations, generating functions, and graph theory from scratch.",
+    language: "python",
+    chapters: discreteMathChapters,
+    lessons: discreteMathLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: discreteMathIntroductionContent,
+    whatsNextContent: discreteMathWhatsNextContent,
+  },
+  {
     id: "calculus2",
     title: "Calculus 2 in C",
     description: "Learn Calculus 2 by implementing the algorithms in C. Compute arc lengths, surface areas, improper integrals, partial sums, geometric series, Taylor polynomials, parametric arc length, polar area, and curvature.",
@@ -3919,6 +4081,17 @@ You have completed all 15 lessons. You now know the core of Lean 4 as a function
     runtimeLabel: "Python runtime",
     introductionContent: machineLearningIntroductionContent,
     whatsNextContent: machineLearningWhatsNextContent,
+  },
+  {
+    id: "neural-networks",
+    title: "Neural Networks from Scratch",
+    description: "Bridge the gap between perceptrons and transformers. Implement backpropagation, multi-layer networks, gradient descent, Xavier initialization, L2 regularization, and the Adam optimizer from scratch in pure Python — then solve XOR with a 2-layer network.",
+    language: "python",
+    chapters: neuralNetworksChapters,
+    lessons: neuralNetworksLessons,
+    runtimeLabel: "Python runtime",
+    introductionContent: neuralNetworksIntroductionContent,
+    whatsNextContent: neuralNetworksWhatsNextContent,
   },
   {
     id: "information-theory",

@@ -67,6 +67,9 @@ import { runRiskManagementTests } from "./test-runners/risk-management-test-runn
 import { runLeanTests } from "./test-runners/lean-test-runner";
 import { runDigitalLogicTests } from "./test-runners/digital-logic-test-runner";
 import { runPcbDesignTests } from "./test-runners/pcb-design-test-runner";
+import { runNeuralNetworksTests } from "./test-runners/neural-networks-test-runner";
+import { runProbabilityTests } from "./test-runners/probability-test-runner";
+import { runDiscreteMathTests } from "./test-runners/discrete-math-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 type TestRunner = () => LessonTestResult[] | Promise<LessonTestResult[]>;
@@ -141,6 +144,9 @@ const runners: Array<[string, TestRunner]> = [
   ["Risk Management", runRiskManagementTests],
   ["Digital Logic", runDigitalLogicTests],
   ["PCB Design", runPcbDesignTests],
+  ["Neural Networks from Scratch", runNeuralNetworksTests],
+  ["Probability Theory", runProbabilityTests],
+  ["Discrete Mathematics", runDiscreteMathTests],
 ];
 
 async function main() {
