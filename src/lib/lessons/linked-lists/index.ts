@@ -11,6 +11,8 @@ import { deleteVal } from "./data/09-delete-val";
 import { nthFromEnd } from "./data/10-nth-from-end";
 import { reverse } from "./data/11-reverse";
 import { mergeSorted } from "./data/12-merge-sorted";
+import { doublyLinkedList } from "./data/13-doubly-linked-list";
+import { cycleDetection } from "./data/14-cycle-detection";
 
 export const linkedListsChapters: Chapter[] = [
 	{ id: "the-node", title: "The Node" },
@@ -32,4 +34,6 @@ export const linkedListsLessons: Lesson[] = [
 	nthFromEnd,
 	reverse,
 	mergeSorted,
+	doublyLinkedList,
+	cycleDetection,
 ];

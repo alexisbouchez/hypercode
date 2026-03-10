@@ -150,5 +150,139 @@ print_done:
       name: "prints sorted array",
       expected: "13458\n",
     },
+    {
+      name: "already sorted array stays sorted",
+      expected: "12345\n",
+      code: `.data
+arr:
+\t.byte 1, 2, 3, 4, 5
+buf:
+\t.skip 6
+
+.text
+.global _start
+_start:
+\tMOV X9, #4
+
+outer:
+\tCBZ X9, sort_done
+\tLDR X0, =arr
+\tMOV X1, X9
+\tMOV X10, #0
+
+inner:
+\tCBZ X1, inner_done
+\tLDRB W2, [X0]
+\tLDRB W3, [X0, #1]
+\tCMP W2, W3
+\tB.LE no_swap
+\tSTRB W3, [X0]
+\tSTRB W2, [X0, #1]
+
+no_swap:
+\tADD X0, X0, #1
+\tSUB X1, X1, #1
+\tB inner
+
+inner_done:
+\tSUB X9, X9, #1
+\tB outer
+
+sort_done:
+\tLDR X0, =arr
+\tLDR X4, =buf
+\tMOV X5, #0
+
+print_loop:
+\tCMP X5, #5
+\tB.GE print_done
+\tLDRB W1, [X0, X5]
+\tADD W1, W1, #48
+\tSTRB W1, [X4, X5]
+\tADD X5, X5, #1
+\tB print_loop
+
+print_done:
+\tMOV W6, #10
+\tSTRB W6, [X4, #5]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #6
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "reverse-sorted array is sorted correctly",
+      expected: "12345\n",
+      code: `.data
+arr:
+\t.byte 5, 4, 3, 2, 1
+buf:
+\t.skip 6
+
+.text
+.global _start
+_start:
+\tMOV X9, #4
+
+outer:
+\tCBZ X9, sort_done
+\tLDR X0, =arr
+\tMOV X1, X9
+\tMOV X10, #0
+
+inner:
+\tCBZ X1, inner_done
+\tLDRB W2, [X0]
+\tLDRB W3, [X0, #1]
+\tCMP W2, W3
+\tB.LE no_swap
+\tSTRB W3, [X0]
+\tSTRB W2, [X0, #1]
+
+no_swap:
+\tADD X0, X0, #1
+\tSUB X1, X1, #1
+\tB inner
+
+inner_done:
+\tSUB X9, X9, #1
+\tB outer
+
+sort_done:
+\tLDR X0, =arr
+\tLDR X4, =buf
+\tMOV X5, #0
+
+print_loop:
+\tCMP X5, #5
+\tB.GE print_done
+\tLDRB W1, [X0, X5]
+\tADD W1, W1, #48
+\tSTRB W1, [X4, X5]
+\tADD X5, X5, #1
+\tB print_loop
+
+print_done:
+\tMOV W6, #10
+\tSTRB W6, [X4, #5]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #6
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

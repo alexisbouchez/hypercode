@@ -11,6 +11,7 @@ import { fog } from "./data/09-fog";
 import { raycasting } from "./data/10-raycasting";
 import { particles } from "./data/11-particles";
 import { solarSystem } from "./data/12-solar-system";
+import { shadows } from "./data/13-shadows";
 
 export const threejsChapters: Chapter[] = [
 	{ id: "the-scene", title: "The Scene" },
@@ -24,6 +25,7 @@ export const threejsLessons = [
 	geometries,
 	materials,
 	lights,
+	shadows,
 	transformations,
 	animation,
 	groups,

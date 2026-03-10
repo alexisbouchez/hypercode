@@ -136,5 +136,129 @@ copy_done:
       name: "reverses abcde to edcba",
       expected: "edcba\n",
     },
+    {
+      name: "reverses single character",
+      expected: "x\n",
+      code: `.data
+str:
+\t.asciz "x"
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tLDR X0, =str
+\tMOV X1, #0
+
+len_loop:
+\tLDRB W2, [X0, X1]
+\tCBZ W2, len_done
+\tADD X1, X1, #1
+\tB len_loop
+
+len_done:
+\tMOV X2, #0
+\tSUB X3, X1, #1
+
+rev_loop:
+\tCMP X2, X3
+\tB.GE rev_done
+\tLDRB W4, [X0, X2]
+\tLDRB W5, [X0, X3]
+\tSTRB W5, [X0, X2]
+\tSTRB W4, [X0, X3]
+\tADD X2, X2, #1
+\tSUB X3, X3, #1
+\tB rev_loop
+
+rev_done:
+\tLDR X6, =buf
+\tMOV X7, #0
+copy_loop:
+\tLDRB W8, [X0, X7]
+\tCBZ W8, copy_done
+\tSTRB W8, [X6, X7]
+\tADD X7, X7, #1
+\tB copy_loop
+
+copy_done:
+\tMOV W9, #10
+\tSTRB W9, [X6, X7]
+\tADD X7, X7, #1
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, X7
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "reverses palindrome (stays same)",
+      expected: "aba\n",
+      code: `.data
+str:
+\t.asciz "aba"
+buf:
+\t.skip 4
+
+.text
+.global _start
+_start:
+\tLDR X0, =str
+\tMOV X1, #0
+
+len_loop:
+\tLDRB W2, [X0, X1]
+\tCBZ W2, len_done
+\tADD X1, X1, #1
+\tB len_loop
+
+len_done:
+\tMOV X2, #0
+\tSUB X3, X1, #1
+
+rev_loop:
+\tCMP X2, X3
+\tB.GE rev_done
+\tLDRB W4, [X0, X2]
+\tLDRB W5, [X0, X3]
+\tSTRB W5, [X0, X2]
+\tSTRB W4, [X0, X3]
+\tADD X2, X2, #1
+\tSUB X3, X3, #1
+\tB rev_loop
+
+rev_done:
+\tLDR X6, =buf
+\tMOV X7, #0
+copy_loop:
+\tLDRB W8, [X0, X7]
+\tCBZ W8, copy_done
+\tSTRB W8, [X6, X7]
+\tADD X7, X7, #1
+\tB copy_loop
+
+copy_done:
+\tMOV W9, #10
+\tSTRB W9, [X6, X7]
+\tADD X7, X7, #1
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, X7
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

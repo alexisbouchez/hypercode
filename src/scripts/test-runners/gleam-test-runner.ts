@@ -76,7 +76,7 @@ export function runGleamTests(): LessonTestResult[] {
             .split("\n")
             .filter((line: string) => !line.match(/^\s*(Compiling|Compiled|Running|Downloaded|Downloading|Resolving|Added)\s/))
             .join("\n");
-          passed = actual === test.expected;
+          passed = actual.trim() === test.expected.trim();
         } catch (err: unknown) {
           const e = err as { stderr?: Buffer; stdout?: Buffer };
           actual = (e.stdout?.toString() || e.stderr?.toString() || String(err)).trim();

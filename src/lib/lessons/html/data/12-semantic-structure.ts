@@ -8,6 +8,15 @@ export const semanticStructure: Lesson = {
 
 Semantic HTML uses meaningful tags that describe their purpose — not just their appearance. This helps search engines, screen readers, and developers understand the page structure.
 
+You can further improve accessibility with **ARIA attributes** (Accessible Rich Internet Applications). For example, \`aria-label\` provides a text label for screen readers, and \`role\` explicitly declares an element's purpose:
+
+\`\`\`html
+<nav aria-label="Main navigation">...</nav>
+<div role="alert">Form submitted!</div>
+\`\`\`
+
+Use ARIA only when native semantic elements are not sufficient — a \`<button>\` already has an implicit role, so adding \`role="button"\` to it is redundant.
+
 Key semantic elements:
 
 \`\`\`html

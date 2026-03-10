@@ -75,5 +75,15 @@ Print("The answer is %d\\n", ANSWER);
       name: "prints the answer",
       expected: "The answer is 42\n",
     },
+    {
+      name: "#exe computes 10 * 10",
+      code: 'I64 VAL;\n#exe {\n  VAL = 10 * 10;\n}\nPrint("%d\\n", VAL);',
+      expected: "100\n",
+    },
+    {
+      name: "#exe with loop",
+      code: 'I64 SUM;\n#exe {\n  SUM = 0;\n  for (I64 i = 1; i <= 5; i++) {\n    SUM = SUM + i;\n  }\n}\nPrint("%d\\n", SUM);',
+      expected: "15\n",
+    },
   ],
 };

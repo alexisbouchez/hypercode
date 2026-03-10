@@ -22,6 +22,8 @@ The signature: \`foldl :: (b -> a -> b) -> b -> [a] -> b\`
 - Second arg: initial accumulator
 - Third arg: the list
 
+The combining function is often written as an inline **lambda** using backslash notation (e.g., \`\\acc x -> acc + x\`). The \`\\\` resembles the Greek letter lambda. We will cover lambdas in more detail in the next lesson.
+
 ### foldr
 
 \`foldr\` processes right-to-left:

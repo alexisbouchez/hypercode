@@ -154,5 +154,16 @@ int main() {
 }`,
 			expected: "PID:      99\nName:     defunct\nState:    ZOMBIE\nPriority: 0\n",
 		},
+		{
+			name: "prints NEW state (pid 0, priority 0)",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tPCB p = {0, NEW, "idle", 0};
+\tprint_pcb(&p);
+\treturn 0;
+}`,
+			expected: "PID:      0\nName:     idle\nState:    NEW\nPriority: 0\n",
+		},
 	],
 };

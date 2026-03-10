@@ -28,6 +28,16 @@ $$\\text{EVR}_i = \\frac{\\lambda_i}{\\sum_j \\lambda_j}$$
 
 If the first component's EVR is close to 1, most variance lives along a single direction.
 
+### The Curse of Dimensionality
+
+PCA is one of the main defences against the **curse of dimensionality** — the phenomenon where high-dimensional spaces behave counter-intuitively:
+
+- **Distances converge**: In $d$ dimensions, the ratio between the nearest and farthest neighbour approaches 1 as $d \\to \\infty$. This makes distance-based methods (k-NN, k-means, DBSCAN) unreliable.
+- **Data becomes sparse**: To maintain the same density of data points, you need exponentially more samples as dimensions grow. With $n$ fixed samples, the data "spreads thin" and every point looks like an outlier.
+- **Overfitting risk increases**: More features relative to samples means more opportunity for the model to memorise noise.
+
+PCA combats this by projecting data onto the top $k$ principal components, discarding low-variance directions that are likely noise. As a rule of thumb, keep enough components to capture 90-95% of the total variance.
+
 ### Your Task
 
 Implement:

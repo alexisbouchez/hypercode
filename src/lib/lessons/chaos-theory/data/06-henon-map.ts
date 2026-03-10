@@ -79,5 +79,10 @@ def henon_orbit(x0, y0, a, b, n):
       code: `{{FUNC}}\nprint(henon_iterate(0.5, 0.5, 1.4, 0.3, 0))`,
       expected: "(0.5, 0.5)\n",
     },
+    {
+      name: "henon orbit length",
+      code: `{{FUNC}}\nprint(len(henon_orbit(0.0, 0.0, 1.4, 0.3, 5)))`,
+      expected: "5\n",
+    },
   ],
 };

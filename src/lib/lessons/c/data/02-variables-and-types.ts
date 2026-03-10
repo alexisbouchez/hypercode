@@ -43,13 +43,37 @@ long n = 999;
 printf("n = %ld\\n", n);
 \`\`\`
 
-### Constants
+### Const Correctness
 
-Use \`const\` to declare a value that cannot be changed:
+The \`const\` qualifier tells the compiler a value must not be modified. This helps prevent bugs and makes your intent clear to other programmers.
+
+**Const variables** cannot be reassigned:
 
 \`\`\`c
 const int MAX = 100;
+// MAX = 200;  // ERROR: assignment of read-only variable
 \`\`\`
+
+**Const pointers** -- the placement of \`const\` matters:
+
+\`\`\`c
+const int *p1;       // pointer to const int: can't modify *p1
+int *const p2 = &x;  // const pointer to int: can't modify p2 itself
+const int *const p3 = &x;  // both: can't modify *p3 or p3
+\`\`\`
+
+Read it right-to-left: \`const int *p\` means "p is a pointer to an int that is const."
+
+**Const function parameters** signal that a function won't modify the data:
+
+\`\`\`c
+void print_value(const int *p) {
+    printf("%d\\n", *p);  // OK: reading
+    // *p = 10;          // ERROR: can't modify through const pointer
+}
+\`\`\`
+
+This is especially important for string parameters -- use \`const char *\` when a function only reads a string.
 
 ### Your Task
 
@@ -84,6 +108,17 @@ int main() {
 		{
 			name: "prints variables",
 			expected: "x = 42\nc = Z\nn = 100\n",
+		},
+		{
+			name: "const variable used in expression",
+			code: `#include <stdio.h>
+int main() {
+\tconst int RATE = 5;
+\tint total = RATE * 10;
+\tprintf("%d\\n", total);
+\treturn 0;
+}`,
+			expected: "50\n",
 		},
 	],
 };

@@ -3,7 +3,17 @@
  * Produces redis-cli compatible output formatting.
  */
 
-type RedisType = "string" | "list" | "set" | "hash" | "zset" | "hll";
+type RedisType = "string" | "list" | "set" | "hash" | "zset" | "hll" | "stream" | "geo";
+
+interface StreamEntry {
+  id: string;
+  fields: Map<string, string>;
+}
+
+interface GeoMember {
+  longitude: number;
+  latitude: number;
+}
 
 interface StoreEntry {
   type: RedisType;
@@ -282,6 +292,17 @@ export class RedisEmulator {
       case "ZREVRANGE": return this.ZREVRANGE(args);
       case "ZRANGEBYSCORE": return this.ZRANGEBYSCORE(args);
       case "ZREM": return this.ZREM(args);
+      case "XADD": return this.XADD(args);
+      case "XLEN": return this.XLEN(args);
+      case "XRANGE": return this.XRANGE(args);
+      case "XREVRANGE": return this.XREVRANGE(args);
+      case "XREAD": return this.XREAD(args);
+      case "XTRIM": return this.XTRIM(args);
+      case "GEOADD": return this.GEOADD(args);
+      case "GEODIST": return this.GEODIST(args);
+      case "GEOPOS": return this.GEOPOS(args);
+      case "GEOMEMBERS": return this.GEOMEMBERS(args);
+      case "GEOSEARCH": return this.GEOSEARCH(args);
       case "KEYS": return this.KEYS(args);
       case "TYPE": return this.TYPE(args);
       case "RENAME": return this.RENAME(args);
@@ -868,7 +889,9 @@ export class RedisEmulator {
     if (args.length < 1) return fmtErr("ERR wrong number of arguments for 'type' command");
     const e = this.getEntry(args[0]);
     if (!e) return "none";
-    return e.type === "hll" ? "string" : e.type;
+    if (e.type === "hll") return "string";
+    if (e.type === "geo") return "zset";
+    return e.type;
   }
 
   private RENAME(args: string[]): string {
@@ -952,6 +975,286 @@ export class RedisEmulator {
     }
     this.store.set(dest, { type: "hll", value: merged });
     return "OK";
+  }
+
+  // ---- Stream commands ----
+
+  private getStream(key: string): StreamEntry[] {
+    const e = this.getEntry(key);
+    if (!e) return [];
+    if (e.type !== "stream") throw new Error("WRONGTYPE Operation against a key holding the wrong kind of value");
+    return e.value as StreamEntry[];
+  }
+
+  private getOrCreateStream(key: string): StreamEntry[] {
+    const e = this.getEntry(key);
+    if (!e) {
+      const s: StreamEntry[] = [];
+      this.store.set(key, { type: "stream", value: s });
+      return s;
+    }
+    if (e.type !== "stream") throw new Error("WRONGTYPE Operation against a key holding the wrong kind of value");
+    return e.value as StreamEntry[];
+  }
+
+  private streamAutoId = 0;
+
+  private nextStreamId(): string {
+    this.streamAutoId++;
+    return `${this.streamAutoId}-0`;
+  }
+
+  private fmtStreamEntry(entry: StreamEntry): string {
+    const fields: string[] = [];
+    let idx = 1;
+    for (const [k, v] of entry.fields) {
+      fields.push(`${idx++}) "${k}"`);
+      fields.push(`${idx++}) "${v}"`);
+    }
+    return fields.join("\n");
+  }
+
+  private XADD(args: string[]): string {
+    if (args.length < 4) return fmtErr("ERR wrong number of arguments for 'xadd' command");
+    const [key, rawId, ...rest] = args;
+    if (rest.length % 2 !== 0) return fmtErr("ERR wrong number of arguments for 'xadd' command");
+    const stream = this.getOrCreateStream(key);
+    const id = rawId === "*" ? this.nextStreamId() : rawId;
+    const fields = new Map<string, string>();
+    for (let i = 0; i < rest.length; i += 2) {
+      fields.set(rest[i], rest[i + 1]);
+    }
+    stream.push({ id, fields });
+    return fmtBulk(id);
+  }
+
+  private XLEN(args: string[]): string {
+    if (args.length < 1) return fmtErr("ERR wrong number of arguments for 'xlen' command");
+    return fmtInt(this.getStream(args[0]).length);
+  }
+
+  private XRANGE(args: string[]): string {
+    if (args.length < 3) return fmtErr("ERR wrong number of arguments for 'xrange' command");
+    const [key, startId, endId] = args;
+    const stream = this.getStream(key);
+    if (stream.length === 0) return "(empty array)";
+    const entries = stream.filter((e) => {
+      const eid = e.id;
+      return (startId === "-" || eid >= startId) && (endId === "+" || eid <= endId);
+    });
+    if (entries.length === 0) return "(empty array)";
+    const lines: string[] = [];
+    entries.forEach((entry, i) => {
+      lines.push(`${i + 1}) 1) "${entry.id}"`);
+      lines.push(`${i + 1}) 2) ${this.fmtStreamEntry(entry)}`);
+    });
+    return lines.join("\n");
+  }
+
+  private XREVRANGE(args: string[]): string {
+    if (args.length < 3) return fmtErr("ERR wrong number of arguments for 'xrevrange' command");
+    const [key, endId, startId] = args;
+    const stream = this.getStream(key);
+    if (stream.length === 0) return "(empty array)";
+    const entries = [...stream].reverse().filter((e) => {
+      const eid = e.id;
+      return (startId === "-" || eid >= startId) && (endId === "+" || eid <= endId);
+    });
+    if (entries.length === 0) return "(empty array)";
+    const lines: string[] = [];
+    entries.forEach((entry, i) => {
+      lines.push(`${i + 1}) 1) "${entry.id}"`);
+      lines.push(`${i + 1}) 2) ${this.fmtStreamEntry(entry)}`);
+    });
+    return lines.join("\n");
+  }
+
+  private XREAD(args: string[]): string {
+    // XREAD COUNT n STREAMS key1 key2 ... id1 id2 ...
+    // XREAD STREAMS key1 id1
+    let i = 0;
+    let count = Infinity;
+    while (i < args.length && args[i].toUpperCase() !== "STREAMS") {
+      if (args[i].toUpperCase() === "COUNT") { count = parseInt(args[i + 1]); i += 2; }
+      else if (args[i].toUpperCase() === "BLOCK") { i += 2; } // ignore BLOCK in emulator
+      else i++;
+    }
+    if (i >= args.length) return fmtErr("ERR syntax error");
+    i++; // skip STREAMS
+    const remaining = args.slice(i);
+    const half = remaining.length / 2;
+    if (half < 1 || remaining.length % 2 !== 0) return fmtErr("ERR syntax error");
+    const keys = remaining.slice(0, half);
+    const ids = remaining.slice(half);
+    const results: string[] = [];
+    let streamIdx = 1;
+    for (let k = 0; k < keys.length; k++) {
+      const stream = this.getStream(keys[k]);
+      const afterId = ids[k] === "0" || ids[k] === "0-0" ? "" : ids[k];
+      const entries = stream.filter((e) => e.id > afterId).slice(0, count);
+      if (entries.length === 0) continue;
+      results.push(`${streamIdx}) 1) "${keys[k]}"`);
+      const entryLines: string[] = [];
+      entries.forEach((entry, ei) => {
+        entryLines.push(`${ei + 1}) 1) "${entry.id}"`);
+        entryLines.push(`${ei + 1}) 2) ${this.fmtStreamEntry(entry)}`);
+      });
+      results.push(`${streamIdx}) 2) ${entryLines.join("\n")}`);
+      streamIdx++;
+    }
+    if (results.length === 0) return "(nil)";
+    return results.join("\n");
+  }
+
+  private XTRIM(args: string[]): string {
+    if (args.length < 3) return fmtErr("ERR wrong number of arguments for 'xtrim' command");
+    const [key, strategy, threshStr] = args;
+    const stream = this.getStream(key);
+    if (strategy.toUpperCase() === "MAXLEN") {
+      const maxlen = parseInt(threshStr.replace("~", ""));
+      if (stream.length <= maxlen) return fmtInt(0);
+      const removed = stream.length - maxlen;
+      stream.splice(0, removed);
+      return fmtInt(removed);
+    }
+    return fmtErr("ERR unsupported XTRIM strategy");
+  }
+
+  // ---- Geospatial commands ----
+
+  private getGeo(key: string): Map<string, GeoMember> {
+    const e = this.getEntry(key);
+    if (!e) return new Map();
+    if (e.type !== "geo") throw new Error("WRONGTYPE Operation against a key holding the wrong kind of value");
+    return e.value as Map<string, GeoMember>;
+  }
+
+  private getOrCreateGeo(key: string): Map<string, GeoMember> {
+    const e = this.getEntry(key);
+    if (!e) {
+      const g = new Map<string, GeoMember>();
+      this.store.set(key, { type: "geo", value: g });
+      return g;
+    }
+    if (e.type !== "geo") throw new Error("WRONGTYPE Operation against a key holding the wrong kind of value");
+    return e.value as Map<string, GeoMember>;
+  }
+
+  private haversineKm(lon1: number, lat1: number, lon2: number, lat2: number): number {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2 +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  private convertDist(km: number, unit: string): number {
+    switch (unit.toLowerCase()) {
+      case "m": return km * 1000;
+      case "mi": return km / 1.609344;
+      case "ft": return km * 3280.84;
+      default: return km; // km
+    }
+  }
+
+  private GEOADD(args: string[]): string {
+    if (args.length < 4) return fmtErr("ERR wrong number of arguments for 'geoadd' command");
+    const [key, ...rest] = args;
+    if (rest.length % 3 !== 0) return fmtErr("ERR syntax error");
+    const geo = this.getOrCreateGeo(key);
+    let added = 0;
+    for (let i = 0; i < rest.length; i += 3) {
+      const lon = parseFloat(rest[i]);
+      const lat = parseFloat(rest[i + 1]);
+      const member = rest[i + 2];
+      if (!geo.has(member)) added++;
+      geo.set(member, { longitude: lon, latitude: lat });
+    }
+    return fmtInt(added);
+  }
+
+  private GEODIST(args: string[]): string {
+    if (args.length < 3) return fmtErr("ERR wrong number of arguments for 'geodist' command");
+    const [key, m1, m2, unit] = args;
+    const geo = this.getGeo(key);
+    const a = geo.get(m1);
+    const b = geo.get(m2);
+    if (!a || !b) return "(nil)";
+    const km = this.haversineKm(a.longitude, a.latitude, b.longitude, b.latitude);
+    const dist = this.convertDist(km, unit ?? "m");
+    return fmtBulk(dist.toFixed(4));
+  }
+
+  private GEOPOS(args: string[]): string {
+    if (args.length < 2) return fmtErr("ERR wrong number of arguments for 'geopos' command");
+    const [key, ...members] = args;
+    const geo = this.getGeo(key);
+    const lines: string[] = [];
+    members.forEach((m, i) => {
+      const pos = geo.get(m);
+      if (!pos) {
+        lines.push(`${i + 1}) (nil)`);
+      } else {
+        lines.push(`${i + 1}) 1) "${pos.longitude.toFixed(4)}"`);
+        lines.push(`${i + 1}) 2) "${pos.latitude.toFixed(4)}"`);
+      }
+    });
+    return lines.join("\n");
+  }
+
+  // Simple helper to list all geo members (non-standard, for exercises)
+  private GEOMEMBERS(args: string[]): string {
+    if (args.length < 1) return fmtErr("ERR wrong number of arguments for 'geomembers' command");
+    const geo = this.getGeo(args[0]);
+    return fmtArr(Array.from(geo.keys()).sort());
+  }
+
+  private GEOSEARCH(args: string[]): string {
+    // GEOSEARCH key FROMMEMBER member|FROMLONLAT lon lat BYRADIUS radius unit [ASC|DESC] [COUNT n]
+    if (args.length < 6) return fmtErr("ERR wrong number of arguments for 'geosearch' command");
+    const key = args[0];
+    const geo = this.getGeo(key);
+    if (geo.size === 0) return "(empty array)";
+
+    let centerLon = 0, centerLat = 0;
+    let radius = 0, unit = "m";
+    let asc = true;
+    let count = Infinity;
+    let i = 1;
+    while (i < args.length) {
+      const flag = args[i].toUpperCase();
+      if (flag === "FROMMEMBER") {
+        const m = geo.get(args[i + 1]);
+        if (!m) return "(empty array)";
+        centerLon = m.longitude;
+        centerLat = m.latitude;
+        i += 2;
+      } else if (flag === "FROMLONLAT") {
+        centerLon = parseFloat(args[i + 1]);
+        centerLat = parseFloat(args[i + 2]);
+        i += 3;
+      } else if (flag === "BYRADIUS") {
+        radius = parseFloat(args[i + 1]);
+        unit = args[i + 2] ?? "m";
+        i += 3;
+      } else if (flag === "ASC") { asc = true; i++; }
+      else if (flag === "DESC") { asc = false; i++; }
+      else if (flag === "COUNT") { count = parseInt(args[i + 1]); i += 2; }
+      else i++;
+    }
+
+    const results: { member: string; dist: number }[] = [];
+    for (const [member, pos] of geo) {
+      const km = this.haversineKm(centerLon, centerLat, pos.longitude, pos.latitude);
+      const d = this.convertDist(km, unit);
+      if (d <= radius) results.push({ member, dist: d });
+    }
+    results.sort((a, b) => asc ? a.dist - b.dist : b.dist - a.dist);
+    const limited = results.slice(0, count);
+    if (limited.length === 0) return "(empty array)";
+    return fmtArr(limited.map((r) => r.member));
   }
 
   run(code: string): string {

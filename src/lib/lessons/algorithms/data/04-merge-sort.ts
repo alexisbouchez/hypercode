@@ -108,5 +108,59 @@ console.log(mergeSort([5]).join(", "));`,
 console.log(mergeSort([1, 2, 3, 4]).join(", "));`,
 			expected: "1, 2, 3, 4\n",
 		},
+		{
+			name: "property: output is always sorted and has the same length as input",
+			code: `{{FUNC}}
+// Generate several pseudo-random arrays and verify sort properties
+const inputs = [
+  [42, 17, 3, 88, 5, 23, 71, 9],
+  [1],
+  [],
+  [5, 5, 5, 5],
+  [100, 1, 50, 25, 75, 10, 90, 30, 60, 40],
+  Array.from({length: 20}, (_, i) => (i * 31 + 7) % 50),
+];
+let allPassed = true;
+for (const input of inputs) {
+  const result = mergeSort(input);
+  // Property 1: same length
+  if (result.length !== input.length) { allPassed = false; break; }
+  // Property 2: output is sorted (each element <= next)
+  for (let i = 0; i < result.length - 1; i++) {
+    if (result[i] > result[i + 1]) { allPassed = false; break; }
+  }
+  // Property 3: output is a permutation (same elements)
+  const sortedInput = [...input].sort((a, b) => a - b);
+  if (JSON.stringify(result) !== JSON.stringify(sortedInput)) { allPassed = false; break; }
+}
+console.log(allPassed ? "PASS" : "FAIL");`,
+			expected: "PASS\n",
+		},
+		{
+			name: "property: sorting any permutation produces the same result",
+			code: `{{FUNC}}
+// Commutativity: different orderings of the same elements must produce identical output
+const perms = [
+  [15, 8, 23, 4, 42, 16],
+  [42, 15, 4, 23, 8, 16],
+  [4, 8, 15, 16, 23, 42],
+  [23, 42, 16, 8, 4, 15],
+];
+const ref = mergeSort(perms[0]).join(",");
+const allMatch = perms.every(p => mergeSort(p).join(",") === ref);
+console.log(allMatch ? "PASS" : "FAIL");`,
+			expected: "PASS\n",
+		},
+		{
+			name: "handles 200 elements (efficiency check)",
+			code: `{{FUNC}}
+const input = Array.from({length: 200}, (_, i) => i + 1);
+for (let k = 0; k < 200; k++) { const j = (k * 67 + 29) % 200; [input[k], input[j]] = [input[j], input[k]]; }
+const result = mergeSort(input);
+console.log(result.length);
+console.log(result[0] + "," + result[99] + "," + result[199]);
+console.log(JSON.stringify(result) === JSON.stringify(Array.from({length: 200}, (_, i) => i + 1)));`,
+			expected: "200\n1,100,200\ntrue\n",
+		},
 	],
 };

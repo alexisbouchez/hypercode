@@ -33,6 +33,16 @@ button:focus { outline: 2px solid blue; }
 li:first-child { font-weight: bold; }
 \`\`\`
 
+### Specificity
+
+When multiple rules target the same element, the browser uses **specificity** to decide which wins. From lowest to highest priority:
+
+1. Element selectors (\`p\`, \`h1\`) — specificity **0-0-1**
+2. Class selectors (\`.card\`), pseudo-classes (\`:hover\`) — specificity **0-1-0**
+3. ID selectors (\`#title\`) — specificity **1-0-0**
+
+If two rules have equal specificity, the one that appears **last** in the stylesheet wins. Inline \`style\` attributes override all of the above, and \`!important\` overrides everything (but avoid it when possible).
+
 ### Your Task
 
 Write CSS using a class selector (\`.card\`), an ID selector (\`#title\`), a descendant selector, and a pseudo-class.`,

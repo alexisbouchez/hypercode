@@ -142,5 +142,83 @@ count_done:
       name: "prints 5",
       expected: "5\n",
     },
+    {
+      name: "popcount of 0xFF = 8",
+      expected: "8\n",
+      code: `.data
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tMOV X0, #0xFF
+\tMOV X1, #0
+
+count_loop:
+\tCBZ X0, count_done
+\tAND X2, X0, #1
+\tADD X1, X1, X2
+\tLSR X0, X0, #1
+\tB count_loop
+
+count_done:
+\tADD X1, X1, #48
+
+\tLDR X3, =buf
+\tSTRB W1, [X3]
+\tMOV X4, #10
+\tSTRB W4, [X3, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "popcount of 0x01 = 1",
+      expected: "1\n",
+      code: `.data
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tMOV X0, #0x01
+\tMOV X1, #0
+
+count_loop:
+\tCBZ X0, count_done
+\tAND X2, X0, #1
+\tADD X1, X1, X2
+\tLSR X0, X0, #1
+\tB count_loop
+
+count_done:
+\tADD X1, X1, #48
+
+\tLDR X3, =buf
+\tSTRB W1, [X3]
+\tMOV X4, #10
+\tSTRB W4, [X3, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

@@ -23,12 +23,13 @@ import { callocAndRealloc } from "./data/20-calloc-and-realloc";
 import { linkedLists } from "./data/24-linked-lists";
 import { functionPointers } from "./data/21-function-pointers";
 import { preprocessorMacros } from "./data/22-preprocessor-macros";
-import { sorting } from "./data/23-variadic-functions";
+import { sorting } from "./data/23-sorting";
 import { mathFunctions } from "./data/26-math-functions";
 import { floatingPoint } from "./data/27-floating-point";
 import { trigonometry } from "./data/28-trigonometry";
 import { logarithms } from "./data/29-logarithms";
 import { numberTheory } from "./data/30-number-theory";
+import { unions } from "./data/31-unions";
 
 export const cChapters: Chapter[] = [
 	{ id: "basics", title: "C Basics" },
@@ -63,6 +64,7 @@ export const cLessons: Lesson[] = [
 	pointersAndArrays,
 	structs,
 	structsAndPointers,
+	unions,
 	dynamicMemory,
 	callocAndRealloc,
 	linkedLists,

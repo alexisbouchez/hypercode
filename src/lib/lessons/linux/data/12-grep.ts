@@ -84,5 +84,15 @@ Search \`notes.txt\` for lines containing \`Linux\`.`,
       name: "finds lines with Linux",
       expected: "Learn Linux\n",
     },
+    {
+      name: "grep -v inverts match",
+      code: `grep -v "Linux" notes.txt`,
+      expected: "Practice daily\nHave fun\n",
+    },
+    {
+      name: "grep -i case insensitive",
+      code: `grep -i "linux" notes.txt`,
+      expected: "Learn Linux\n",
+    },
   ],
 };

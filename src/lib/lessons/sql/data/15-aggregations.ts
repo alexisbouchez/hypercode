@@ -146,5 +146,9 @@ GROUP BY category;`,
       name: "returns all 4 categories",
       expected: '{"type":"rowCount","value":4}',
     },
+    {
+      name: "result includes Electronics category",
+      expected: '{"type":"contains","value":"Electronics"}',
+    },
   ],
 };

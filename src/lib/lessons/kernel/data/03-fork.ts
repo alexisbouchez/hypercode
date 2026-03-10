@@ -178,5 +178,19 @@ int main() {
 }`,
 			expected: "READY\n",
 		},
+		{
+			name: "child copies name correctly for short name",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tPCB parent = {1, RUNNING, "x", 0};
+\tPCB child;
+\tmy_fork(&parent, &child, 100);
+\tprintf("PID:      %d\\n", child.pid);
+\tprintf("Name:     %s\\n", child.name);
+\treturn 0;
+}`,
+			expected: "PID:      100\nName:     x\n",
+		},
 	],
 };

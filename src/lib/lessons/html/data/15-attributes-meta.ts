@@ -32,6 +32,15 @@ export const attributesMeta: Lesson = {
 - \`charset="UTF-8"\` — character encoding (always include this)
 - \`viewport\` — makes the page responsive on mobile
 
+**Loading scripts:** When including JavaScript with \`<script>\`, use \`defer\` or \`async\` to avoid blocking page rendering:
+
+\`\`\`html
+<script src="app.js" defer></script>   <!-- runs after HTML is parsed -->
+<script src="analytics.js" async></script> <!-- runs as soon as downloaded -->
+\`\`\`
+
+\`defer\` preserves script order and waits for the DOM to be ready — use it for most scripts. \`async\` is best for independent scripts like analytics that don't depend on the DOM.
+
 ### Your Task
 
 Write a complete HTML document with \`<meta charset>\`, \`<meta name="viewport">\`, and a \`<div>\` using \`id\`, \`class\`, and \`data-*\` attributes.`,

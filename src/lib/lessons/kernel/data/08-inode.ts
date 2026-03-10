@@ -130,5 +130,16 @@ int main() {
 }`,
 			expected: "inode:  2\nmode:   755\nlinks:  20\nuid:    0\ngid:    0\nsize:   4096\nblocks: 8\n",
 		},
+		{
+			name: "large inode number and size",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tInode n = {999999, 644, 1, 0, 0, 65536, 128};
+\tprint_inode(&n);
+\treturn 0;
+}`,
+			expected: "inode:  999999\nmode:   644\nlinks:  1\nuid:    0\ngid:    0\nsize:   65536\nblocks: 128\n",
+		},
 	],
 };

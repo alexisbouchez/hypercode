@@ -10,7 +10,7 @@ Backpropagation requires the derivative of each activation function. These deriv
 
 ### Sigmoid Derivative
 
-The sigmoid has a beautiful self-referential derivative:
+The sigmoid has a beautiful self-referential derivative (recall that $\\sigma$ here is the sigmoid function, not the statistical standard deviation):
 
 $$\\frac{d\\sigma}{dx} = \\sigma(x)(1 - \\sigma(x))$$
 

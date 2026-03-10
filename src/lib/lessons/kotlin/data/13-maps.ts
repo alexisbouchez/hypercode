@@ -54,5 +54,15 @@ Create a map of three capitals: \`"France"\` → \`"Paris"\`, \`"Japan"\` → \`
       name: "capitals map",
       expected: "Paris\nTokyo\n3\n",
     },
+    {
+      name: "map key access and size",
+      code: 'fun main() {\n    val m = mapOf("x" to 10, "y" to 20, "z" to 30)\n    println(m["x"])\n    println(m["z"])\n    println(m.size)\n}',
+      expected: "10\n30\n3\n",
+    },
+    {
+      name: "map size and value access",
+      code: 'fun main() {\n    val scores = mapOf("Alice" to 95, "Bob" to 87)\n    println(scores.size)\n    println(scores["Alice"])\n}',
+      expected: "2\n95\n",
+    },
   ],
 };

@@ -82,5 +82,15 @@ Print("%d\\n", sum);
       name: "prints sum 1 to 10",
       expected: "55\n",
     },
+    {
+      name: "while loop sums correctly",
+      code: 'I64 sum = 0;\nI64 i = 1;\nwhile (i <= 10) {\n  sum = sum + i;\n  i++;\n}\nPrint("%d\\n", sum);',
+      expected: "55\n",
+    },
+    {
+      name: "for loop counts 0 to 4",
+      code: 'for (I64 i = 0; i < 5; i++) {\n  Print("%d\\n", i);\n}',
+      expected: "0\n1\n2\n3\n4\n",
+    },
   ],
 };

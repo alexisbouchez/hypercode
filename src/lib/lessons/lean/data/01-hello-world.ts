@@ -6,7 +6,7 @@ export const helloWorld: Lesson = {
   chapterId: "foundations",
   content: `## Your First Lean Program
 
-Lean 4 is a functional programming language and interactive theorem prover. Before we get to proofs, let's start with the basics — printing output.
+Lean 4 is both a functional programming language and an interactive **theorem prover**. What makes Lean unique among programming languages is its type system based on **dependent type theory** — types can depend on values, which lets you express precise specifications and mathematical proofs directly in code. Before we explore those advanced features, let's start with the basics — printing output.
 
 In Lean, \`IO.println\` prints a string followed by a newline. To run it, wrap it in \`#eval\`:
 

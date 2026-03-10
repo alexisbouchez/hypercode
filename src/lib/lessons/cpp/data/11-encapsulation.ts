@@ -167,5 +167,106 @@ int main() {
 			name: "counter increments with step and resets",
 			expected: "c1: 3\nc2: 10\nc1 after reset: 0\n",
 		},
+		{
+			name: "counter with step 10",
+			expected: "30\n",
+			code: `#include <iostream>
+using namespace std;
+class Counter {
+private:
+	int count;
+	int step;
+public:
+	Counter(int s = 1) {
+		this->count = 0;
+		this->step = s;
+	}
+	void increment() {
+		this->count += this->step;
+	}
+	void reset() {
+		this->count = 0;
+	}
+	int getCount() {
+		return this->count;
+	}
+};
+int main() {
+	Counter c(10);
+	c.increment();
+	c.increment();
+	c.increment();
+	cout << c.getCount() << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "reset then increment again",
+			expected: "5\n0\n5\n",
+			code: `#include <iostream>
+using namespace std;
+class Counter {
+private:
+	int count;
+	int step;
+public:
+	Counter(int s = 1) {
+		this->count = 0;
+		this->step = s;
+	}
+	void increment() {
+		this->count += this->step;
+	}
+	void reset() {
+		this->count = 0;
+	}
+	int getCount() {
+		return this->count;
+	}
+};
+int main() {
+	Counter c(5);
+	c.increment();
+	cout << c.getCount() << endl;
+	c.reset();
+	cout << c.getCount() << endl;
+	c.increment();
+	cout << c.getCount() << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "counter starts at zero",
+			expected: "0\n",
+			code: `#include <iostream>
+using namespace std;
+class Counter {
+private:
+	int count;
+	int step;
+public:
+	Counter(int s = 1) {
+		this->count = 0;
+		this->step = s;
+	}
+	void increment() {
+		this->count += this->step;
+	}
+	void reset() {
+		this->count = 0;
+	}
+	int getCount() {
+		return this->count;
+	}
+};
+int main() {
+	Counter c(100);
+	cout << c.getCount() << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

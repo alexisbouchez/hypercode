@@ -45,6 +45,8 @@ int nums[5] = {10, 20, 30, 40, 50};
 int count = sizeof(nums) / sizeof(nums[0]);  // 5
 \`\`\`
 
+> **Warning:** This trick only works on actual arrays, not on pointers. When you pass an array to a function, it decays to a pointer, so \`sizeof(arr)\` inside the function gives the pointer size (e.g., 8 bytes on 64-bit), not the array size. Always pass the length as a separate parameter.
+
 ### No Bounds Checking
 
 C does **not** check array bounds. Accessing \`nums[10]\` when the array has 5 elements is undefined behavior -- it will read whatever memory happens to be there.

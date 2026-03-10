@@ -32,6 +32,18 @@ def isZero : Nat → Bool
   | _ => false
 \`\`\`
 
+## Pattern Matching and Inductive Types
+
+Pattern matching works hand-in-hand with **inductive types**. When you pattern match on a \`Nat\`, you are actually matching on its constructors: \`Nat.zero\` (written \`0\`) and \`Nat.succ n\` (written \`n + 1\`). This is because \`Nat\` is itself an inductive type:
+
+\`\`\`lean
+inductive Nat where
+  | zero : Nat
+  | succ : Nat → Nat
+\`\`\`
+
+Every inductive type gets pattern matching for free — the compiler generates all the necessary machinery. This is also the foundation of **proof tactics** in Lean: the \`cases\` tactic performs case analysis (pattern matching) on a hypothesis, and the \`induction\` tactic generates recursive proof goals matching the constructors of an inductive type.
+
 ## Your Turn
 
 Define a function \`grade\` that takes a score (Nat) and returns a letter grade:

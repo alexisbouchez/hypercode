@@ -14,7 +14,7 @@ const doubled = numbers.map(n => n * 2);
 console.log(doubled);  // [2, 4, 6, 8, 10]
 \`\`\`
 
-The original array is unchanged. \`map\` always returns an array of the same length.
+The original array is unchanged — \`map\` creates a **new** array and never mutates the input. This immutability makes your code easier to reason about and avoids accidental side-effects. \`map\` always returns an array of the same length.
 
 ### How it Works
 

@@ -80,6 +80,20 @@ import { runSwiftTests } from "./test-runners/swift-test-runner";
 import { runElixirTests } from "./test-runners/elixir-test-runner";
 import { runScalaTests } from "./test-runners/scala-test-runner";
 import { runFSharpTests } from "./test-runners/fsharp-test-runner";
+import { runOCamlTests } from "./test-runners/ocaml-test-runner";
+import { runLuaTests } from "./test-runners/lua-test-runner";
+import { runPerlTests } from "./test-runners/perl-test-runner";
+import { runX86Tests } from "./test-runners/x86-test-runner";
+import { runAlgorithmsTests } from "./test-runners/algorithms-test-runner";
+import { runDistributedSystemsTests } from "./test-runners/distributed-systems-test-runner";
+import { runThreejsTests } from "./test-runners/threejs-test-runner";
+import { runGraphsTests } from "./test-runners/graphs-test-runner";
+import { runElectromagnetismTests } from "./test-runners/electromagnetism-test-runner";
+import { runPythonTests as runPythonLangTests } from "./test-runners/python-test-runner";
+import { runCompilerTests } from "./test-runners/compiler-test-runner";
+import { runNetworkingTests } from "./test-runners/networking-test-runner";
+import { runAbstractAlgebraTests } from "./test-runners/abstract-algebra-test-runner";
+import { runRealAnalysisTests } from "./test-runners/real-analysis-test-runner";
 import type { LessonTestResult } from "./test-runners/types";
 
 type TestRunner = () => LessonTestResult[] | Promise<LessonTestResult[]>;
@@ -167,6 +181,20 @@ const runners: Array<[string, TestRunner]> = [
   ["Elixir", runElixirTests],
   ["Scala", runScalaTests],
   ["F#", runFSharpTests],
+  ["OCaml", runOCamlTests],
+  ["Lua", runLuaTests],
+  ["Perl", runPerlTests],
+  ["Algorithms", runAlgorithmsTests],
+  ["Distributed Systems", runDistributedSystemsTests],
+  ["Three.js", runThreejsTests],
+  ["Graphs", runGraphsTests],
+  ["Electromagnetism", runElectromagnetismTests],
+  ["Python", runPythonLangTests],
+  ["x86_64", runX86Tests],
+  ["Compiler", runCompilerTests],
+  ["Networking", runNetworkingTests],
+  ["Abstract Algebra", runAbstractAlgebraTests],
+  ["Real Analysis", runRealAnalysisTests],
 ];
 
 async function main() {

@@ -52,6 +52,10 @@ cout << a.area() << endl;  // 12
 cout << b.area() << endl;  // 12
 \`\`\`
 
+### The \`this\` Pointer
+
+Inside a member function, \`this\` is a pointer to the current object. You can write \`this->width\` to explicitly access a member, but it's optional — writing \`width\` alone works the same way. The \`this->\` prefix is mainly useful when a parameter name shadows a member variable (e.g., \`this->width = width;\` in a constructor).
+
 ### Member Functions Have Access to Members
 
 Inside a member function, you can access any member variable or function of the same class:
@@ -130,6 +134,87 @@ int main() {
 		{
 			name: "computes area and perimeter",
 			expected: "Area: 12\nPerimeter: 14\n",
+		},
+		{
+			name: "rectangle with equal sides (square)",
+			expected: "Area: 25\nPerimeter: 20\n",
+			code: `#include <iostream>
+using namespace std;
+class Rectangle {
+public:
+	int width;
+	int height;
+	int area() {
+		return this->width * this->height;
+	}
+	int perimeter() {
+		return 2 * (this->width + this->height);
+	}
+};
+int main() {
+	Rectangle r;
+	r.width = 5;
+	r.height = 5;
+	cout << "Area: " << r.area() << endl;
+	cout << "Perimeter: " << r.perimeter() << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "rectangle with width 1 and height 10",
+			expected: "Area: 10\nPerimeter: 22\n",
+			code: `#include <iostream>
+using namespace std;
+class Rectangle {
+public:
+	int width;
+	int height;
+	int area() {
+		return this->width * this->height;
+	}
+	int perimeter() {
+		return 2 * (this->width + this->height);
+	}
+};
+int main() {
+	Rectangle r;
+	r.width = 1;
+	r.height = 10;
+	cout << "Area: " << r.area() << endl;
+	cout << "Perimeter: " << r.perimeter() << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "two independent rectangle objects",
+			expected: "6\n50\n",
+			code: `#include <iostream>
+using namespace std;
+class Rectangle {
+public:
+	int width;
+	int height;
+	int area() {
+		return this->width * this->height;
+	}
+	int perimeter() {
+		return 2 * (this->width + this->height);
+	}
+};
+int main() {
+	Rectangle a;
+	Rectangle b;
+	a.width = 2;
+	a.height = 3;
+	b.width = 10;
+	b.height = 5;
+	cout << a.area() << endl;
+	cout << b.area() << endl;
+	return 0;
+}
+`,
 		},
 	],
 };

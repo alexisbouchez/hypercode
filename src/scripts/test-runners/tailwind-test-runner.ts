@@ -29,7 +29,7 @@ export function runTailwindTests(): LessonTestResult[] {
         lessonId: lesson.id,
         lessonTitle: lesson.title,
         testName: test.name,
-        passed: actual === test.expected,
+        passed: actual.trim() === test.expected.trim(),
         actual,
         expected: test.expected,
       });

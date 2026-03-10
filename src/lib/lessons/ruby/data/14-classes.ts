@@ -63,6 +63,10 @@ end
 puts Point.new(3, 4)  # (3, 4)
 \`\`\`
 
+### Scope Resolution Operator (::)
+
+The \`::\` operator accesses constants and methods inside a module or class. For example, \`Math::PI\` retrieves the \`PI\` constant from the built-in \`Math\` module. You'll see this pattern frequently with namespaced code.
+
 ### Your Task
 
 Create a \`Circle\` class with:
@@ -114,6 +118,16 @@ puts c.area
 		{
 			name: "Circle(radius=5), 78.54",
 			expected: "Circle(radius=5)\n78.54\n",
+		},
+		{
+			name: "Circle with radius 1",
+			code: `class Circle\n  def initialize(radius)\n    @radius = radius\n  end\n  def area\n    (Math::PI * @radius ** 2).round(2)\n  end\n  def to_s\n    "Circle(radius=\#{@radius})"\n  end\nend\nc = Circle.new(1)\nputs c.to_s\nputs c.area`,
+			expected: "Circle(radius=1)\n3.14\n",
+		},
+		{
+			name: "Circle with radius 10",
+			code: `class Circle\n  def initialize(radius)\n    @radius = radius\n  end\n  def area\n    (Math::PI * @radius ** 2).round(2)\n  end\n  def to_s\n    "Circle(radius=\#{@radius})"\n  end\nend\nc = Circle.new(10)\nputs c.to_s\nputs c.area`,
+			expected: "Circle(radius=10)\n314.16\n",
 		},
 	],
 };

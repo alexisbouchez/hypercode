@@ -57,5 +57,23 @@ IO.puts(length(rest))
       name: "tuple and list destructuring",
       expected: "10\n20\n1\n3\n",
     },
+    {
+      name: "three-element tuple destructuring",
+      code: `{a, b, c} = {100, 200, 300}
+IO.puts(a)
+IO.puts(b)
+IO.puts(c)
+`,
+      expected: "100\n200\n300\n",
+    },
+    {
+      name: "list head/tail with two elements",
+      code: `[h | t] = [42, 99]
+IO.puts(h)
+IO.puts(length(t))
+IO.puts(hd(t))
+`,
+      expected: "42\n1\n99\n",
+    },
   ],
 };

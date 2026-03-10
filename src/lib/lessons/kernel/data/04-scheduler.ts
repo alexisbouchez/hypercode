@@ -166,5 +166,20 @@ int main() {
 }`,
 			expected: "tick 0: solo\ntick 1: solo\ntick 2: solo\n",
 		},
+		{
+			name: "only last process is READY",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tPCB procs[3] = {
+\t\t{1, WAITING, "a", 0},
+\t\t{2, WAITING, "b", 0},
+\t\t{3, READY,   "c", 0},
+\t};
+\tschedule(procs, 3, 2);
+\treturn 0;
+}`,
+			expected: "tick 0: c\ntick 1: c\n",
+		},
 	],
 };

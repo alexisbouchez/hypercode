@@ -14,6 +14,8 @@ import { aggregations } from "./data/12-aggregations";
 import { ctes } from "./data/13-ctes";
 import { windowFunctions } from "./data/14-window-functions";
 import { jsonFunctions } from "./data/15-json-functions";
+import { transactions } from "./data/16-transactions";
+import { pragmaAndCtes } from "./data/17-pragma-and-ctes";
 
 export const sqliteChapters: Chapter[] = [
   { id: "getting-started", title: "Getting Started" },
@@ -39,4 +41,6 @@ export const sqliteLessons: Lesson[] = [
   ctes,
   windowFunctions,
   jsonFunctions,
+  transactions,
+  pragmaAndCtes,
 ];

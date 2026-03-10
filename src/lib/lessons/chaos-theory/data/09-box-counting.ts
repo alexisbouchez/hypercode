@@ -111,5 +111,10 @@ def box_counting_dimension(counts, epsilons):
       code: `{{FUNC}}\ncounts = [box_count_cantor(8, 3**(-k)) for k in range(1,5)]\nepsilons = [3**(-k) for k in range(1,5)]\nd = box_counting_dimension(counts, epsilons)\nprint(round(d,2))`,
       expected: "0.63\n",
     },
+    {
+      name: "cantor set iteration 2 has 4 intervals",
+      code: `{{FUNC}}\nprint(len(cantor_set(2)))`,
+      expected: "4\n",
+    },
   ],
 };

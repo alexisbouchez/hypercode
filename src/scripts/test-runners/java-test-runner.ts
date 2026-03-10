@@ -13,7 +13,10 @@ export function runJavaTests(): LessonTestResult[] {
   try {
     for (const lesson of javaLessons) {
       for (const test of lesson.tests) {
-        const codeToRun = lesson.solution;
+        let codeToRun = lesson.solution;
+        if (test.code) {
+          codeToRun = test.code.replace("{{FUNC}}", lesson.solution);
+        }
 
         const file = join(tmp, "Main.java");
         writeFileSync(file, codeToRun);
@@ -33,7 +36,7 @@ export function runJavaTests(): LessonTestResult[] {
             stdio: "pipe",
           });
           actual = output.toString();
-          passed = actual === test.expected;
+          passed = actual.trim() === test.expected.trim();
         } catch (err: unknown) {
           const e = err as { stderr?: Buffer; stdout?: Buffer };
           actual = (

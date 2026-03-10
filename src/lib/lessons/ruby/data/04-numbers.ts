@@ -59,8 +59,18 @@ puts 17 % 5
 
 	tests: [
 		{
-			name: "1024, 3, 2.5, 2",
+			name: "exponent, integer division, float division, and modulo",
 			expected: "1024\n3\n2.5\n2\n",
+		},
+		{
+			name: "exponentiation result is correct",
+			code: `puts 2 ** 10`,
+			expected: "1024\n",
+		},
+		{
+			name: "modulo result is correct",
+			code: `puts 17 % 5`,
+			expected: "2\n",
 		},
 	],
 };

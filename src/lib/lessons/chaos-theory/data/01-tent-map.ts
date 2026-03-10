@@ -57,5 +57,10 @@ def tent_lyapunov(r):
       code: `{{FUNC}}\nprint([round(v,4) for v in tent_map(0.6, 2.0, 3)])`,
       expected: "[0.6, 0.8, 0.4, 0.8]\n",
     },
+    {
+      name: "tent_lyapunov for r=1.5",
+      code: `{{FUNC}}\nprint(round(tent_lyapunov(1.5), 4))`,
+      expected: "0.4055\n",
+    },
   ],
 };

@@ -171,5 +171,108 @@ int main() {
 			name: "dog and cat inherit and extend Animal",
 			expected: "Rex breathes\nRex barks: Woof!\nLuna breathes\nLuna meows: Meow!\n",
 		},
+		{
+			name: "dog with different name",
+			expected: "Buddy breathes\nBuddy barks: Woof!\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+class Animal {
+public:
+	string name;
+	Animal(string n) {
+		this->name = n;
+	}
+	void breathe() {
+		cout << this->name << " breathes" << endl;
+	}
+};
+class Dog : public Animal {
+public:
+	Dog(string n) : Animal(n) {}
+	void bark() {
+		cout << this->name << " barks: Woof!" << endl;
+	}
+};
+int main() {
+	Dog d("Buddy");
+	d.breathe();
+	d.bark();
+	return 0;
+}
+`,
+		},
+		{
+			name: "cat inherits breathe from Animal",
+			expected: "Whiskers breathes\nWhiskers meows: Meow!\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+class Animal {
+public:
+	string name;
+	Animal(string n) {
+		this->name = n;
+	}
+	void breathe() {
+		cout << this->name << " breathes" << endl;
+	}
+};
+class Cat : public Animal {
+public:
+	Cat(string n) : Animal(n) {}
+	void meow() {
+		cout << this->name << " meows: Meow!" << endl;
+	}
+};
+int main() {
+	Cat c("Whiskers");
+	c.breathe();
+	c.meow();
+	return 0;
+}
+`,
+		},
+		{
+			name: "multiple animals are independent",
+			expected: "Rex breathes\nLuna breathes\nMax breathes\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+class Animal {
+public:
+	string name;
+	Animal(string n) {
+		this->name = n;
+	}
+	void breathe() {
+		cout << this->name << " breathes" << endl;
+	}
+};
+class Dog : public Animal {
+public:
+	Dog(string n) : Animal(n) {}
+	void bark() {
+		cout << this->name << " barks: Woof!" << endl;
+	}
+};
+class Cat : public Animal {
+public:
+	Cat(string n) : Animal(n) {}
+	void meow() {
+		cout << this->name << " meows: Meow!" << endl;
+	}
+};
+int main() {
+	Dog d1("Rex");
+	Cat c1("Luna");
+	Dog d2("Max");
+	d1.breathe();
+	c1.breathe();
+	d2.breathe();
+	return 0;
+}
+`,
+		},
 	],
 };

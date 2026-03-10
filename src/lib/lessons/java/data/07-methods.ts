@@ -84,11 +84,11 @@ Print \`multiply(6, 7)\`, \`average(1.0, 2.0, 3.0)\`, and \`repeat("ha", 3)\`.`,
     }
 
     static String repeat(String s, int n) {
-        String result = "";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            result += s;
+            sb.append(s);
         }
-        return result;
+        return sb.toString();
     }
 
     public static void main(String[] args) {
@@ -101,8 +101,59 @@ Print \`multiply(6, 7)\`, \`average(1.0, 2.0, 3.0)\`, and \`repeat("ha", 3)\`.`,
 
 	tests: [
 		{
-			name: "42, 2.0, hahaha",
+			name: "multiply, average, and repeat produce correct results",
 			expected: "42\n2.0\nhahaha\n",
+		},
+		{
+			name: "multiply with zero",
+			expected: "0\n",
+			code: `public class Main {
+    static int multiply(int a, int b) {
+        return a * b;
+    }
+    public static void main(String[] args) {
+        System.out.println(multiply(5, 0));
+    }
+}
+`,
+		},
+		{
+			name: "average of equal values and repeat with n=1",
+			expected: "7.0\nhi\n",
+			code: `public class Main {
+    static double average(double a, double b, double c) {
+        return (a + b + c) / 3.0;
+    }
+    static String repeat(String s, int n) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args) {
+        System.out.println(average(7.0, 7.0, 7.0));
+        System.out.println(repeat("hi", 1));
+    }
+}
+`,
+		},
+		{
+			name: "repeat with n=0 returns empty string",
+			expected: "\n",
+			code: `public class Main {
+    static String repeat(String s, int n) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args) {
+        System.out.println(repeat("test", 0));
+    }
+}
+`,
 		},
 	],
 };

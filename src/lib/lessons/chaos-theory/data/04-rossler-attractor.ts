@@ -54,5 +54,10 @@ def rossler_euler(x0, y0, z0, a, b, c, dt, steps):
       code: `{{FUNC}}\nx,y,z = rossler_euler(1.0,0.0,0.0,0.2,0.2,5.7,0.1,1)\nprint(round(x,4),round(y,4),round(z,4))`,
       expected: "1.0 0.1 0.02\n",
     },
+    {
+      name: "rossler derivative at (1,1,1)",
+      code: `{{FUNC}}\ndx,dy,dz = rossler_deriv(1.0,1.0,1.0,0.2,0.2,5.7)\nprint(round(dx,1),round(dy,1),round(dz,1))`,
+      expected: "-2.0 1.2 -4.5\n",
+    },
   ],
 };

@@ -15,6 +15,8 @@ import { classes } from "./data/13-classes";
 import { inheritance } from "./data/14-inheritance";
 import { arraysAndPointers } from "./data/15-arrays-and-pointers";
 import { compileTimeExpressions } from "./data/16-compile-time-expressions";
+import { structs } from "./data/17-structs";
+import { recursion } from "./data/18-recursion";
 
 export const holycChapters: Chapter[] = [
   { id: "the-temple", title: "The Temple" },
@@ -42,4 +44,6 @@ export const holycLessons: Lesson[] = [
   inheritance,
   arraysAndPointers,
   compileTimeExpressions,
+  structs,
+  recursion,
 ];

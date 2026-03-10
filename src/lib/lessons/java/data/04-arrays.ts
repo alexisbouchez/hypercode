@@ -78,5 +78,44 @@ public class Main {
 			name: "length, first, sorted, min",
 			expected: "6\n5\n[1, 2, 3, 5, 8, 9]\n1\n",
 		},
+		{
+			name: "array access and last element",
+			expected: "3\n10\n30\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30};
+        System.out.println(arr.length);
+        System.out.println(arr[0]);
+        System.out.println(arr[arr.length - 1]);
+    }
+}
+`,
+		},
+		{
+			name: "2D array access",
+			expected: "1\n4\n6\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        int[][] grid = {{1, 2}, {3, 4}, {5, 6}};
+        System.out.println(grid[0][0]);
+        System.out.println(grid[1][1]);
+        System.out.println(grid[2][1]);
+    }
+}
+`,
+		},
+		{
+			name: "default values in new array",
+			expected: "0\n0\n0\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        int[] zeros = new int[3];
+        System.out.println(zeros[0]);
+        System.out.println(zeros[1]);
+        System.out.println(zeros[2]);
+    }
+}
+`,
+		},
 	],
 };

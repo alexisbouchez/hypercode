@@ -81,5 +81,15 @@ fi
       name: "detects file existence",
       expected: "File exists\n",
     },
+    {
+      name: "detects missing file",
+      code: `if [ -f missing.txt ]; then\n  echo "File exists"\nelse\n  echo "Not found"\nfi`,
+      expected: "Not found\n",
+    },
+    {
+      name: "detects directory with -d",
+      code: `if [ -d docs ]; then\n  echo "Is a directory"\nelse\n  echo "Not a directory"\nfi`,
+      expected: "Is a directory\n",
+    },
   ],
 };

@@ -34,7 +34,7 @@ def depth(tree):
 
 ### Memoization
 
-Avoid recomputing by caching results:
+Avoid recomputing by caching results. The \`@lru_cache\` **decorator** wraps \`fib\` so previously computed values are returned from a cache instead of being recalculated — turning exponential time into linear:
 
 \`\`\`python
 from functools import lru_cache

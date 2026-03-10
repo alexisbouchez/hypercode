@@ -92,7 +92,7 @@ For example, \`countdown(3)\` should print:
 Go!
 \`\`\`
 
-Hint: defer each number inside the loop. Since deferred calls execute in LIFO order, deferring 1, 2, 3 will print 3, 2, 1. Print \`"Go!"\` at the end of the function body (not deferred) --- but think about why that does not work and what you need to do instead.`,
+Hint: defer each number inside the loop. Since deferred calls execute in LIFO order, deferring 1, 2, 3 will print 3, 2, 1. Think about where \`"Go!"\` needs to appear relative to the numbers, and remember that all deferred calls execute in LIFO order --- so if you defer \`"Go!"\` *before* the loop, it will be at the bottom of the stack and print last.`,
 
   starterCode: `package main
 

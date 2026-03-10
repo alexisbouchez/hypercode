@@ -49,5 +49,15 @@ Given \`val city = "Berlin"\`, print the city name, its length, and its uppercas
       name: "prints city info",
       expected: "Berlin\nLength: 6\nBERLIN\n",
     },
+    {
+      name: "string template with expression",
+      code: 'fun main() {\n    val name = "Kotlin"\n    println("${name} has ${name.length} chars")\n}',
+      expected: "Kotlin has 6 chars\n",
+    },
+    {
+      name: "lowercase conversion",
+      code: 'fun main() {\n    val word = "HELLO"\n    println(word.lowercase())\n}',
+      expected: "hello\n",
+    },
   ],
 };

@@ -8,7 +8,7 @@ export const portfolioVariance2Asset: Lesson = {
 
 While the expected return of a portfolio is simply a weighted average, **portfolio variance** also depends on how the assets co-move — captured by their **correlation**.
 
-For two assets with weights w₁, w₂ and standard deviations σ₁, σ₂:
+For two assets with weights w₁, w₂ and standard deviations σ₁, σ₂ (in finance/statistics, σ denotes standard deviation or volatility — not the sigmoid activation function used in ML):
 
 $$\\sigma_p^2 = w_1^2 \\sigma_1^2 + w_2^2 \\sigma_2^2 + 2 w_1 w_2 \\rho_{12} \\sigma_1 \\sigma_2$$
 

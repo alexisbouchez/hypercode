@@ -169,7 +169,7 @@ export async function runCalculus2Tests(): Promise<LessonTestResult[]> {
 
 				const hasError = result.error !== "";
 				const actual = hasError ? result.error : result.stdout;
-				const passed = !hasError && result.stdout === test.expected;
+				const passed = !hasError && result.stdout.trim() === test.expected.trim();
 
 				results.push({
 					course: "calculus2",

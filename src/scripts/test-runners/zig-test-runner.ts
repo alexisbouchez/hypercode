@@ -35,7 +35,7 @@ export function runZigTests(): LessonTestResult[] {
             shell: "/bin/sh",
           });
           actual = output.toString();
-          passed = actual === test.expected;
+          passed = actual.trim() === test.expected.trim();
         } catch (err: unknown) {
           const e = err as { stderr?: Buffer; stdout?: Buffer };
           actual = (e.stdout?.toString() || e.stderr?.toString() || String(err)).trim();

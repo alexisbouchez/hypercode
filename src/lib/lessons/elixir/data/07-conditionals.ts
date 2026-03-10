@@ -79,5 +79,39 @@ IO.puts(grade)
       name: "if/else and cond",
       expected: "big\nB\n",
     },
+    {
+      name: "if/else takes else branch",
+      code: `x = 5
+label = if x > 10 do
+  "big"
+else
+  "small"
+end
+IO.puts(label)
+`,
+      expected: "small\n",
+    },
+    {
+      name: "cond with boundary scores",
+      code: `score = 90
+grade = cond do
+  score >= 90 -> "A"
+  score >= 80 -> "B"
+  score >= 70 -> "C"
+  true -> "F"
+end
+IO.puts(grade)
+
+score2 = 50
+grade2 = cond do
+  score2 >= 90 -> "A"
+  score2 >= 80 -> "B"
+  score2 >= 70 -> "C"
+  true -> "F"
+end
+IO.puts(grade2)
+`,
+      expected: "A\nF\n",
+    },
   ],
 };

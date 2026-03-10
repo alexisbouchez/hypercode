@@ -174,5 +174,21 @@ int main() {
 }`,
 			expected: "0\n",
 		},
+		{
+			name: "wrap-around: fill, drain, refill",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tRingBuf rb = {};
+\tfor (int i = 0; i < RB_SIZE; i++) rb_write(&rb, 'A');
+\tchar c;
+\tfor (int i = 0; i < RB_SIZE; i++) rb_read(&rb, &c);
+\tfor (int i = 0; i < 3; i++) rb_write(&rb, 'B' + i);
+\trb_drain(&rb);
+\tputchar('\\n');
+\treturn 0;
+}`,
+			expected: "BCD\n",
+		},
 	],
 };

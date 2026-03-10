@@ -82,5 +82,10 @@ Print("%d\\n", Power(2, 8));
       code: "{{FUNC}}\nPrint(\"%d\\n\", Power(2, 8));",
       expected: "256\n",
     },
+    {
+      name: "Power(3) returns 9 (default exp=2)",
+      code: "{{FUNC}}\nPrint(\"%d\\n\", Power(3));",
+      expected: "9\n",
+    },
   ],
 };

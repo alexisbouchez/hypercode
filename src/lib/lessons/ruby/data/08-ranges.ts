@@ -58,8 +58,18 @@ puts (1..100).sum
 
 	tests: [
 		{
-			name: "5, 4, true, 5050",
+			name: "range size, exclusive range, include?, and sum",
 			expected: "5\n4\ntrue\n5050\n",
+		},
+		{
+			name: "inclusive range has correct length",
+			code: `puts (1..5).to_a.length`,
+			expected: "5\n",
+		},
+		{
+			name: "exclusive range excludes endpoint",
+			code: `puts (1...5).to_a.length`,
+			expected: "4\n",
 		},
 	],
 };

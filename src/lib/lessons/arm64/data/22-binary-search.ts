@@ -165,5 +165,149 @@ not_found:
       name: "finds 23 at index 5",
       expected: "5\n",
     },
+    {
+      name: "finds first element at index 0",
+      expected: "0\n",
+      code: `.data
+arr:
+\t.byte 2, 5, 8, 12, 16, 23, 38, 42, 55, 67
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tLDR X5, =arr
+\tMOV X6, #2
+\tMOV X0, #0
+\tMOV X1, #9
+
+search_loop:
+\tCMP X0, X1
+\tB.GT not_found
+
+\tADD X3, X0, X1
+\tLSR X3, X3, #1
+
+\tLDRB W4, [X5, X3]
+\tCMP W4, W6
+\tB.EQ found
+\tB.LT go_higher
+
+\tSUB X1, X3, #1
+\tB search_loop
+
+go_higher:
+\tADD X0, X3, #1
+\tB search_loop
+
+found:
+\tADD X3, X3, #48
+
+\tLDR X9, =buf
+\tSTRB W3, [X9]
+\tMOV W10, #10
+\tSTRB W10, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+
+not_found:
+\tLDR X9, =buf
+\tMOV W10, #45
+\tSTRB W10, [X9]
+\tMOV W10, #10
+\tSTRB W10, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "not found prints -",
+      expected: "-\n",
+      code: `.data
+arr:
+\t.byte 2, 5, 8, 12, 16, 23, 38, 42, 55, 67
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tLDR X5, =arr
+\tMOV X6, #99
+\tMOV X0, #0
+\tMOV X1, #9
+
+search_loop:
+\tCMP X0, X1
+\tB.GT not_found
+
+\tADD X3, X0, X1
+\tLSR X3, X3, #1
+
+\tLDRB W4, [X5, X3]
+\tCMP W4, W6
+\tB.EQ found
+\tB.LT go_higher
+
+\tSUB X1, X3, #1
+\tB search_loop
+
+go_higher:
+\tADD X0, X3, #1
+\tB search_loop
+
+found:
+\tADD X3, X3, #48
+
+\tLDR X9, =buf
+\tSTRB W3, [X9]
+\tMOV W10, #10
+\tSTRB W10, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+
+not_found:
+\tLDR X9, =buf
+\tMOV W10, #45
+\tSTRB W10, [X9]
+\tMOV W10, #10
+\tSTRB W10, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

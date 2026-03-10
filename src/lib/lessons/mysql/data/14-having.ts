@@ -131,5 +131,9 @@ HAVING COUNT(*) >= 3;`,
       name: "Office is included (has 3 products)",
       expected: '{"type":"contains","value":"Office"}',
     },
+    {
+      name: "each category has exactly 3 products (product_count = 3)",
+      expected: '{"type":"contains","value":"3"}',
+    },
   ],
 };

@@ -112,8 +112,8 @@ pub fn clamp(value: i32, lower: i32, upper: i32) i32 {
 }
 
 pub fn main() void {
-\tstd.debug.print("max(3, 7) = {d}\\n", .{max(3, 7)});
-\tstd.debug.print("clamp(15, 0, 10) = {d}\\n", .{clamp(15, 0, 10)});
+\tstd.debug.print("max(3, 7) = {}\\n", .{max(3, 7)});
+\tstd.debug.print("clamp(15, 0, 10) = {}\\n", .{clamp(15, 0, 10)});
 }
 `,
 
@@ -137,8 +137,8 @@ pub fn clamp(value: i32, lower: i32, upper: i32) i32 {
 }
 
 pub fn main() void {
-\tstd.debug.print("max(3, 7) = {d}\\n", .{max(3, 7)});
-\tstd.debug.print("clamp(15, 0, 10) = {d}\\n", .{clamp(15, 0, 10)});
+\tstd.debug.print("max(3, 7) = {}\\n", .{max(3, 7)});
+\tstd.debug.print("clamp(15, 0, 10) = {}\\n", .{clamp(15, 0, 10)});
 }
 `,
 
@@ -150,7 +150,7 @@ pub fn main() void {
 {{FUNC}}
 
 pub fn main() void {
-\tstd.debug.print("{d}\\n", .{max(3, 7)});
+\tstd.debug.print("{}\\n", .{max(3, 7)});
 }`,
       expected: "7\n",
     },
@@ -161,7 +161,7 @@ pub fn main() void {
 {{FUNC}}
 
 pub fn main() void {
-\tstd.debug.print("{d}\\n", .{max(-2, -5)});
+\tstd.debug.print("{}\\n", .{max(-2, -5)});
 }`,
       expected: "-2\n",
     },
@@ -172,7 +172,7 @@ pub fn main() void {
 {{FUNC}}
 
 pub fn main() void {
-\tstd.debug.print("{d}\\n", .{clamp(15, 0, 10)});
+\tstd.debug.print("{}\\n", .{clamp(15, 0, 10)});
 }`,
       expected: "10\n",
     },
@@ -183,7 +183,7 @@ pub fn main() void {
 {{FUNC}}
 
 pub fn main() void {
-\tstd.debug.print("{d}\\n", .{clamp(-5, 0, 10)});
+\tstd.debug.print("{}\\n", .{clamp(-5, 0, 10)});
 }`,
       expected: "0\n",
     },
@@ -194,7 +194,7 @@ pub fn main() void {
 {{FUNC}}
 
 pub fn main() void {
-\tstd.debug.print("{d}\\n", .{clamp(5, 0, 10)});
+\tstd.debug.print("{}\\n", .{clamp(5, 0, 10)});
 }`,
       expected: "5\n",
     },

@@ -100,5 +100,15 @@ int main() {
 }`,
 			expected: "foo\nbar\n",
 		},
+		{
+			name: "my_cat with empty string prints nothing",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tmy_cat("");
+\treturn 0;
+}`,
+			expected: "",
+		},
 	],
 };

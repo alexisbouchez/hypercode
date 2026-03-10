@@ -26,6 +26,23 @@ For N assets, the inverse volatility weights are:
 
 $$w_i = \\frac{1/\\sigma_i}{\\sum_j 1/\\sigma_j}$$
 
+### Risk Parity vs. Minimum Variance
+
+Risk parity and minimum variance are both portfolio construction approaches, but they differ fundamentally:
+
+- **Minimum variance** minimizes total portfolio variance, which can lead to highly concentrated portfolios (all weight in the lowest-vol asset)
+- **Risk parity** ensures each asset contributes equally to risk, leading to more diversified portfolios
+
+Risk parity ignores expected returns entirely and focuses on balanced risk contribution. Bridgewater's "All Weather" fund popularized this approach.
+
+### Verifying Equal Risk Contribution
+
+For inverse-volatility weights, each asset's marginal risk contribution is w_i * σ_i. If risk parity is correct, all these products should be equal:
+
+\`\`\`
+w_i * sigma_i == w_j * sigma_j  for all i, j
+\`\`\`
+
 ### Your Task
 
 Implement:
@@ -65,6 +82,15 @@ def risk_parity_n(sigmas):
       name: "N-asset inverse volatility (2 assets)",
       code: `{{FUNC}}\nprint(risk_parity_n([0.1, 0.2]))`,
       expected: "[0.6667, 0.3333]\n",
+    },
+    {
+      name: "Risk parity: equal risk contributions (w_i * sigma_i approx equal)",
+      code: `{{FUNC}}
+sigmas = [0.1, 0.2, 0.4]
+weights = risk_parity_n(sigmas)
+contribs = [w * s for w, s in zip(weights, sigmas)]
+print(round(max(contribs) - min(contribs) < 0.001))`,
+      expected: "1\n",
     },
   ],
 };

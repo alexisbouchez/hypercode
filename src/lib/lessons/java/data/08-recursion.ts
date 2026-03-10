@@ -93,5 +93,37 @@ Print \`factorial(10)\` then \`fibonacci(10)\`.`,
 			name: "factorial(10)=3628800, fibonacci(10)=55",
 			expected: "3628800\n55\n",
 		},
+		{
+			name: "base cases: factorial(0)=1, factorial(1)=1",
+			expected: "1\n1\n",
+			code: `public class Main {
+    static long factorial(int n) {
+        if (n <= 1) return 1;
+        return n * factorial(n - 1);
+    }
+    public static void main(String[] args) {
+        System.out.println(factorial(0));
+        System.out.println(factorial(1));
+    }
+}
+`,
+		},
+		{
+			name: "fibonacci base cases and small values",
+			expected: "0\n1\n1\n5\n",
+			code: `public class Main {
+    static int fibonacci(int n) {
+        if (n <= 1) return n;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+    public static void main(String[] args) {
+        System.out.println(fibonacci(0));
+        System.out.println(fibonacci(1));
+        System.out.println(fibonacci(2));
+        System.out.println(fibonacci(5));
+    }
+}
+`,
+		},
 	],
 };

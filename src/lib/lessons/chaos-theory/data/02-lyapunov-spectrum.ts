@@ -59,5 +59,10 @@ def is_chaotic(lam):
       code: `{{FUNC}}\nlam = logistic_lyapunov(4.0, 0.1, 10000)\nprint(round(lam, 2))`,
       expected: "0.69\n",
     },
+    {
+      name: "r=3.2 is not chaotic",
+      code: `{{FUNC}}\nlam = logistic_lyapunov(3.2, 0.1, 2000)\nprint(is_chaotic(lam))`,
+      expected: "False\n",
+    },
   ],
 };

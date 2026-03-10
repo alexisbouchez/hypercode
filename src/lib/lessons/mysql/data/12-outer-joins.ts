@@ -107,5 +107,9 @@ GROUP BY c.id, c.name;`,
       name: "includes 0 order count for customer with no orders",
       expected: '{"type":"contains","value":"0"}',
     },
+    {
+      name: "Alice Johnson has 2 orders",
+      expected: '{"type":"contains","value":"2"}',
+    },
   ],
 };

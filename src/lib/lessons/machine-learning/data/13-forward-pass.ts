@@ -14,7 +14,7 @@ Each row $W_i$ contains the weights for one neuron:
 
 $$z_i = W_i \\cdot \\mathbf{x} + b_i = \\sum_j W_{ij} x_j + b_i$$
 
-Then an **activation function** $\\sigma$ is applied element-wise:
+Then an **activation function** $\\sigma$ (sigmoid or another non-linearity — not to be confused with the $\\sigma$ used for standard deviation in statistics) is applied element-wise:
 
 $$\\mathbf{a} = \\sigma(\\mathbf{z})$$
 

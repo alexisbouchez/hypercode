@@ -117,5 +117,46 @@ int main() {
 			name: "prints combined string, length, and substring",
 			expected: "Hello, World!\nLength: 13\nStarts with: Hello\n",
 		},
+		{
+			name: "empty string has length 0",
+			expected: "0\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	string s = "";
+	cout << s.length() << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "substr extracts middle of string",
+			expected: ", \n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	string s = "Hello, World!";
+	cout << s.substr(5, 2) << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "append with += operator",
+			expected: "foobar\n6\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	string s = "foo";
+	s += "bar";
+	cout << s << endl;
+	cout << s.length() << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

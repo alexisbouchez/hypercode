@@ -108,5 +108,16 @@ int main() {
 }`,
 			expected: "0\n4\n",
 		},
+		{
+			name: "long chain traversal",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint fat[6] = {1, 2, 3, 4, 5, -1};
+\tfat_chain(fat, 0);
+\treturn 0;
+}`,
+			expected: "0\n1\n2\n3\n4\n5\n",
+		},
 	],
 };

@@ -786,7 +786,7 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
   {
     title: "Systems & Low-Level",
     subtitle: "Understand how computers work at the metal — from ARM64 assembly to a C compiler, Linux shell, and kernel primitives.",
-    ids: ["arm64", "c", "linux", "kernel", "coreutils"],
+    ids: ["arm64", "x86", "c", "linux", "kernel", "coreutils"],
   },
   {
     title: "Mathematics in C",
@@ -812,7 +812,7 @@ const orderedCurriculums: { title: string; subtitle: string; ids: string[] }[] =
 const tracks: { title: string; ids: string[] }[] = [
   {
     title: "Languages",
-    ids: ["go", "zig", "rust", "cpp", "java", "kotlin", "csharp", "swift", "elixir", "scala", "fsharp", "python", "gleam", "ruby", "haskell", "lean", "holyc"],
+    ids: ["go", "zig", "rust", "cpp", "java", "kotlin", "csharp", "swift", "elixir", "scala", "fsharp", "python", "gleam", "ruby", "haskell", "lean", "holyc", "lua", "perl", "ocaml"],
   },
   {
     title: "Web & Frontend",
@@ -831,6 +831,8 @@ const tracks: { title: string; ids: string[] }[] = [
       "linked-lists",
       "distributed-systems",
       "raytracer",
+      "networking",
+      "compiler",
     ],
   },
   {
@@ -847,6 +849,8 @@ const tracks: { title: string; ids: string[] }[] = [
       "signal-processing",
       "information-theory",
       "functional-diff-geo",
+      "abstract-algebra",
+      "real-analysis",
     ],
   },
   {

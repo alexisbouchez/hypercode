@@ -68,5 +68,15 @@ ls
       name: "creates projects directory",
       expected: "docs\nhello.txt\nnotes.txt\nprojects\n",
     },
+    {
+      name: "mkdir -p creates nested directories",
+      code: `mkdir -p a/b/c\nls a`,
+      expected: "b\n",
+    },
+    {
+      name: "new directory appears in listing",
+      code: `mkdir projects\nls projects`,
+      expected: "",
+    },
   ],
 };

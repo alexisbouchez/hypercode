@@ -26,6 +26,10 @@ def fibonacci (n : Nat) : Nat :=
 
 Lean verifies that recursive functions terminate (for \`Nat\`, each recursive call must use a smaller number).
 
+## Termination and Proofs
+
+This termination checking is actually connected to Lean's role as a **theorem prover**. In Lean's type theory, every function must be total (defined for all inputs and guaranteed to terminate). For recursive functions on \`Nat\`, Lean automatically checks that the argument decreases on each call — this is called **structural recursion**. If Lean cannot verify termination automatically, you can provide a \`decreasing_by\` proof using **tactics** (Lean's proof language). Tactics like \`simp\`, \`omega\`, and \`exact\` let you guide the prover step by step. This is a taste of how programming and proving intertwine in Lean.
+
 ## Your Turn
 
 Define a recursive function \`sumTo\` that computes the sum \`1 + 2 + ... + n\`.

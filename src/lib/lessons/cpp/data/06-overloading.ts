@@ -118,5 +118,65 @@ int main() {
 			name: "calls correct overload for each type",
 			expected: "int: 42\ndouble: 3.14\nstring: hello\n",
 		},
+		{
+			name: "overloaded print with negative int",
+			expected: "int: -10\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+void print(int x) {
+	cout << "int: " << x << endl;
+}
+void print(double x) {
+	cout << "double: " << x << endl;
+}
+void print(string x) {
+	cout << "string: " << x << endl;
+}
+int main() {
+	print(-10);
+	return 0;
+}
+`,
+		},
+		{
+			name: "overload by parameter count",
+			expected: "3\n6\n",
+			code: `#include <iostream>
+using namespace std;
+int add(int a, int b) {
+	return a + b;
+}
+int add(int a, int b, int c) {
+	return a + b + c;
+}
+int main() {
+	cout << add(1, 2) << endl;
+	cout << add(1, 2, 3) << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "overloaded print with int zero",
+			expected: "int: 0\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+void print(int x) {
+	cout << "int: " << x << endl;
+}
+void print(double x) {
+	cout << "double: " << x << endl;
+}
+void print(string x) {
+	cout << "string: " << x << endl;
+}
+int main() {
+	print(0);
+	return 0;
+}
+`,
+		},
 	],
 };

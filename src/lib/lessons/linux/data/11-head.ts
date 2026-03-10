@@ -74,5 +74,15 @@ Print the first 2 lines of \`notes.txt\` using \`head -n 2\`.`,
       name: "prints first 2 lines",
       expected: "Learn Linux\nPractice daily\n",
     },
+    {
+      name: "head -n 1 prints first line only",
+      code: `head -n 1 notes.txt`,
+      expected: "Learn Linux\n",
+    },
+    {
+      name: "tail -n 1 prints last line",
+      code: `tail -n 1 notes.txt`,
+      expected: "Have fun\n",
+    },
   ],
 };

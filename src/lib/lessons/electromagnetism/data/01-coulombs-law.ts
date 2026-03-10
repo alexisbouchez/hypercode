@@ -24,7 +24,7 @@ Coulomb's law has the same $r^2$ dependence as Newton's gravity — both are lon
 | r (m) | F (N) |
 |-------|-------|
 | 1 | **0.008990** |
-| 2 | **0.002248** |
+| 2 | **0.002247** |
 | 3 | **0.000999** |
 
 ### Your Task
@@ -41,7 +41,7 @@ def coulomb_force(q1, q2, r):
 
 print(f"{coulomb_force(1e-6, 1e-6, 1):.6f}")    # 0.008990
 print(f"{coulomb_force(2e-6, 1e-6, 1):.6f}")    # 0.017980
-print(f"{coulomb_force(1e-6, 1e-6, 2):.6f}")    # 0.002248
+print(f"{coulomb_force(1e-6, 1e-6, 2):.6f}")    # 0.002247
 print(f"{coulomb_force(1e-6, 1e-6, 3):.6f}")    # 0.000999
 `,
 
@@ -54,7 +54,7 @@ def coulomb_force(q1, q2, r):
 
 print(f"{coulomb_force(1e-6, 1e-6, 1):.6f}")    # 0.008990
 print(f"{coulomb_force(2e-6, 1e-6, 1):.6f}")    # 0.017980
-print(f"{coulomb_force(1e-6, 1e-6, 2):.6f}")    # 0.002248
+print(f"{coulomb_force(1e-6, 1e-6, 2):.6f}")    # 0.002247
 print(f"{coulomb_force(1e-6, 1e-6, 3):.6f}")    # 0.000999
 `,
 
@@ -72,10 +72,10 @@ print(f"{coulomb_force(2e-6, 1e-6, 1):.6f}")`,
 			expected: "0.017980\n",
 		},
 		{
-			name: "q₁=q₂=1 μC, r=2 m → 0.002248 N (¼ force)",
+			name: "q₁=q₂=1 μC, r=2 m → 0.002247 N (¼ force)",
 			code: `{{FUNC}}
 print(f"{coulomb_force(1e-6, 1e-6, 2):.6f}")`,
-			expected: "0.002248\n",
+			expected: "0.002247\n",
 		},
 		{
 			name: "q₁=q₂=1 μC, r=3 m → 0.000999 N",

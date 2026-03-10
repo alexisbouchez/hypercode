@@ -94,5 +94,15 @@ if (temp > 30) {
       name: "prints Hot for 35",
       expected: "Hot\n",
     },
+    {
+      name: "prints Warm for 25",
+      code: 'I64 temp = 25;\nif (temp > 30) {\n  Print("Hot\\n");\n} else if (temp > 20) {\n  Print("Warm\\n");\n} else {\n  Print("Cool\\n");\n}',
+      expected: "Warm\n",
+    },
+    {
+      name: "prints Cool for 15",
+      code: 'I64 temp = 15;\nif (temp > 30) {\n  Print("Hot\\n");\n} else if (temp > 20) {\n  Print("Warm\\n");\n} else {\n  Print("Cool\\n");\n}',
+      expected: "Cool\n",
+    },
   ],
 };

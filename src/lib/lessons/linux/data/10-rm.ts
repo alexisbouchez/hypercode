@@ -65,5 +65,15 @@ ls
       name: "removes notes.txt",
       expected: "docs\nhello.txt\n",
     },
+    {
+      name: "rm -r removes directory",
+      code: `rm -r docs\nls`,
+      expected: "hello.txt\nnotes.txt\n",
+    },
+    {
+      name: "rm -f ignores missing files",
+      code: `rm -f nonexistent.txt\necho "ok"`,
+      expected: "ok\n",
+    },
   ],
 };

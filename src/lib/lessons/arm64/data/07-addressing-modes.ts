@@ -60,7 +60,7 @@ You can use a register as the offset, which is useful for indexing arrays with a
 LDRB W0, [X1, X2]   // Load byte from X1 + X2
 \`\`\`
 
-### Walking Through an Array
+### Walking Through an Array with a Loop
 
 Post-index is especially natural for sequential access. Compare these two approaches:
 
@@ -73,11 +73,30 @@ ADD X1, X1, #1      // Advance pointer
 LDRB W0, [X1], #1   // Load byte AND advance pointer
 \`\`\`
 
+The real power of post-index shows when combined with a loop. Instead of repeating \`LDRB\`/\`ADD\` for each element, you can process any number of elements with a fixed set of instructions:
+
+\`\`\`asm
+MOV X2, #4          // counter = array length
+MOV X5, #0          // sum = 0
+loop:
+    LDRB W1, [X0], #1   // Load byte AND advance pointer
+    ADD X5, X5, X1       // Accumulate into sum
+    SUBS X2, X2, #1      // counter-- (sets flags)
+    B.NE loop            // Repeat if counter != 0
+\`\`\`
+
+We are sneaking a peek at two instructions from later lessons:
+
+- **\`SUBS\`** works like \`SUB\` but also sets condition flags (the \`S\` suffix means "set flags"). When the result is zero, it sets the Zero flag.
+- **\`B.NE\`** ("Branch if Not Equal") jumps to the label if the Zero flag is **not** set -- i.e., the counter has not reached zero.
+
+Together they form a counted loop: decrement, check for zero, repeat. This pattern scales to arrays of any size -- just change the counter.
+
 > **Tip**: Use post-index for forward iteration and pre-index for stack operations. Offset addressing is best when you know the exact position at compile time.
 
 ### Your Task
 
-An array of four bytes is defined in the data section: \`3, 7, 2, 8\`. Using post-index addressing, load each byte, add them all together, convert the sum (20) to ASCII, and print it followed by a newline.`,
+An array of four bytes is defined in the data section: \`3, 7, 2, 8\`. Using post-index addressing **in a loop**, load each byte, add them all together, convert the sum (20) to ASCII, and print it followed by a newline.`,
 
   starterCode: `.data
 arr:
@@ -89,8 +108,9 @@ buf:
 .global _start
 _start:
 \t// Load address of arr into X0
-\t// Use post-index LDRB to load each byte
-\t// Sum them into X5
+\t// Set counter X2 = 4 (array length)
+\t// Set sum X5 = 0
+\t// Loop: LDRB with post-index, ADD to sum, SUBS counter, B.NE loop
 \t// Convert sum to ASCII and print
 \t// Exit
 `,
@@ -105,16 +125,14 @@ buf:
 .global _start
 _start:
 \tLDR X0, =arr
+\tMOV X2, #4
 \tMOV X5, #0
 
+loop:
 \tLDRB W1, [X0], #1
 \tADD X5, X5, X1
-\tLDRB W1, [X0], #1
-\tADD X5, X5, X1
-\tLDRB W1, [X0], #1
-\tADD X5, X5, X1
-\tLDRB W1, [X0], #1
-\tADD X5, X5, X1
+\tSUBS X2, X2, #1
+\tB.NE loop
 
 \tMOV X1, #10
 \tUDIV X2, X5, X1

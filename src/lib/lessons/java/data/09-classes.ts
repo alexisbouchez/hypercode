@@ -133,5 +133,63 @@ Then run the sequence shown in the expected output.`,
 			expected:
 				"Alice: $1000.0\nAlice: $1500.0\ntrue\nAlice: $1300.0\n",
 		},
+		{
+			name: "withdraw insufficient funds returns false",
+			expected: "false\nBob: $100.0\n",
+			code: `public class Main {
+    static class BankAccount {
+        private String owner;
+        private double balance;
+        BankAccount(String owner, double initialBalance) {
+            this.owner = owner;
+            this.balance = initialBalance;
+        }
+        void deposit(double amount) { balance += amount; }
+        boolean withdraw(double amount) {
+            if (amount > balance) return false;
+            balance -= amount;
+            return true;
+        }
+        @Override
+        public String toString() { return owner + ": $" + balance; }
+    }
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount("Bob", 100.0);
+        System.out.println(acc.withdraw(500.0));
+        System.out.println(acc);
+    }
+}
+`,
+		},
+		{
+			name: "multiple deposits and withdrawals",
+			expected: "Alice: $0.0\ntrue\nAlice: $0.0\nfalse\n",
+			code: `public class Main {
+    static class BankAccount {
+        private String owner;
+        private double balance;
+        BankAccount(String owner, double initialBalance) {
+            this.owner = owner;
+            this.balance = initialBalance;
+        }
+        void deposit(double amount) { balance += amount; }
+        boolean withdraw(double amount) {
+            if (amount > balance) return false;
+            balance -= amount;
+            return true;
+        }
+        @Override
+        public String toString() { return owner + ": $" + balance; }
+    }
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount("Alice", 0.0);
+        System.out.println(acc);
+        System.out.println(acc.withdraw(0.0));
+        System.out.println(acc);
+        System.out.println(acc.withdraw(1.0));
+    }
+}
+`,
+		},
 	],
 };

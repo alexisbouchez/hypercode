@@ -157,5 +157,15 @@ ALTER TABLE products`,
       code: `{{USER_SQL}}\n---VALIDATE---\nSELECT column_name FROM information_schema.columns WHERE table_name = 'products' AND column_name = 'description';`,
       expected: '{"type":"rowCount","value":1}',
     },
+    {
+      name: "description column has TEXT data type",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT data_type FROM information_schema.columns WHERE table_name = 'products' AND column_name = 'description';`,
+      expected: '{"type":"exact","value":"text"}',
+    },
+    {
+      name: "products table now has 5 columns",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT column_name FROM information_schema.columns WHERE table_name = 'products';`,
+      expected: '{"type":"rowCount","value":5}',
+    },
   ],
 };

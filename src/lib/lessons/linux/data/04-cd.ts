@@ -55,5 +55,15 @@ pwd
       name: "navigates to docs directory",
       expected: "/home/user/docs\n",
     },
+    {
+      name: "cd with absolute path",
+      code: `cd /tmp\npwd`,
+      expected: "/tmp\n",
+    },
+    {
+      name: "cd .. goes up one level",
+      code: `cd docs\ncd ..\npwd`,
+      expected: "/home/user\n",
+    },
   ],
 };

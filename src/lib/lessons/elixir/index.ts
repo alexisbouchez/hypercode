@@ -14,6 +14,7 @@ import { enum_ } from "./data/12-enum";
 import { tuplesMaps } from "./data/13-tuples-maps";
 import { recursion } from "./data/14-recursion";
 import { multihead } from "./data/15-multihead";
+import { comprehensions } from "./data/16-comprehensions";
 
 export const elixirChapters: Chapter[] = [
   { id: "foundations", title: "Foundations" },
@@ -39,4 +40,5 @@ export const elixirLessons: Lesson[] = [
   tuplesMaps,
   recursion,
   multihead,
+  comprehensions,
 ];

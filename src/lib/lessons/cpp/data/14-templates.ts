@@ -137,5 +137,71 @@ int main() {
 			name: "maximum and minimum work correctly",
 			expected: "20\n-3\n3\n-4\n",
 		},
+		{
+			name: "maximum and minimum with equal values",
+			expected: "7\n7\n",
+			code: `#include <iostream>
+using namespace std;
+template <typename T>
+T maximum(T a, T b) {
+	if (a > b) return a;
+	return b;
+}
+template <typename T>
+T minimum(T a, T b) {
+	if (a < b) return a;
+	return b;
+}
+int main() {
+	cout << maximum(7, 7) << endl;
+	cout << minimum(7, 7) << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "templates with zero and negative",
+			expected: "0\n-5\n",
+			code: `#include <iostream>
+using namespace std;
+template <typename T>
+T maximum(T a, T b) {
+	if (a > b) return a;
+	return b;
+}
+template <typename T>
+T minimum(T a, T b) {
+	if (a < b) return a;
+	return b;
+}
+int main() {
+	cout << maximum(0, -5) << endl;
+	cout << minimum(0, -5) << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "templates with double type",
+			expected: "3.14\n1.5\n",
+			code: `#include <iostream>
+using namespace std;
+template <typename T>
+T maximum(T a, T b) {
+	if (a > b) return a;
+	return b;
+}
+template <typename T>
+T minimum(T a, T b) {
+	if (a < b) return a;
+	return b;
+}
+int main() {
+	cout << maximum(1.5, 3.14) << endl;
+	cout << minimum(1.5, 3.14) << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

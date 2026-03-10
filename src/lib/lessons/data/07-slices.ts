@@ -58,11 +58,53 @@ c := s[2:]   // [2, 3, 4]  (to the end)
 
 A sub-slice shares the same underlying array. Modifying one affects the other. If you need an independent copy, use \`copy\` or \`append\` to a new slice.
 
+### The copy Builtin
+
+\`copy\` copies elements from a source slice into a destination slice and returns the number of elements copied. The destination must already have enough length --- \`copy\` does not grow the slice:
+
+\`\`\`go
+src := []int{1, 2, 3, 4, 5}
+dst := make([]int, 3)
+n := copy(dst, src)
+fmt.Println(dst) // [1 2 3]
+fmt.Println(n)   // 3 (copied min(len(dst), len(src)) elements)
+\`\`\`
+
+To make a full independent copy of a slice:
+
+\`\`\`go
+original := []int{10, 20, 30}
+clone := make([]int, len(original))
+copy(clone, original)
+// Modifying clone does not affect original
+\`\`\`
+
+### Nil Slices vs Empty Slices
+
+This is a subtle but important distinction:
+
+\`\`\`go
+var nilSlice []int          // nil slice: no underlying array
+emptySlice := []int{}       // empty slice: has an underlying array, but length 0
+madeSlice := make([]int, 0) // also empty, not nil
+
+fmt.Println(nilSlice == nil)    // true
+fmt.Println(emptySlice == nil)  // false
+fmt.Println(len(nilSlice))      // 0
+fmt.Println(len(emptySlice))    // 0
+\`\`\`
+
+Both have length 0 and both work fine with \`append\`, \`range\`, and \`len\`. The difference matters when you serialize to JSON (\`nil\` becomes \`null\`, empty becomes \`[]\`) or check for "no data provided" vs "explicitly empty."
+
+In practice: use \`var s []int\` (nil) when you might not need a slice at all, and \`s := []int{}\` when you need an explicitly empty collection.
+
 ### Your Task
 
 Write a function \`sum\` that takes a \`[]int\` and returns the sum of all elements.
 
-Write a function \`filterEvens\` that takes a \`[]int\` and returns a new \`[]int\` containing only the even numbers, in order.`,
+Write a function \`filterEvens\` that takes a \`[]int\` and returns a new \`[]int\` containing only the even numbers, in order.
+
+Write a function \`cloneSlice\` that takes a \`[]int\` and returns an independent copy using the \`copy\` builtin. Modifying the returned slice must not affect the original.`,
 
   starterCode: `package main
 
@@ -78,10 +120,19 @@ func filterEvens(numbers []int) []int {
 \treturn nil
 }
 
+func cloneSlice(s []int) []int {
+\t// Return an independent copy of s using the copy builtin
+\treturn nil
+}
+
 func main() {
 \tnums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 \tfmt.Println(sum(nums))
 \tfmt.Println(filterEvens(nums))
+
+\toriginal := []int{10, 20, 30}
+\tcloned := cloneSlice(original)
+\tfmt.Println(cloned)
 }
 `,
 
@@ -107,10 +158,20 @@ func filterEvens(numbers []int) []int {
 \treturn result
 }
 
+func cloneSlice(s []int) []int {
+\tclone := make([]int, len(s))
+\tcopy(clone, s)
+\treturn clone
+}
+
 func main() {
 \tnums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 \tfmt.Println(sum(nums))
 \tfmt.Println(filterEvens(nums))
+
+\toriginal := []int{10, 20, 30}
+\tcloned := cloneSlice(original)
+\tfmt.Println(cloned)
 }
 `,
 
@@ -166,6 +227,36 @@ func main() {
 \tfmt.Println(filterEvens([]int{1, 3, 5}))
 }`,
       expected: "[]\n",
+    },
+    {
+      name: "cloneSlice returns correct values",
+      code: `package main
+
+import "fmt"
+
+{{FUNC}}
+
+func main() {
+\tfmt.Println(cloneSlice([]int{10, 20, 30}))
+}`,
+      expected: "[10 20 30]\n",
+    },
+    {
+      name: "cloneSlice is independent from original",
+      code: `package main
+
+import "fmt"
+
+{{FUNC}}
+
+func main() {
+\toriginal := []int{1, 2, 3}
+\tcloned := cloneSlice(original)
+\tcloned[0] = 999
+\tfmt.Println(original)
+\tfmt.Println(cloned)
+}`,
+      expected: "[1 2 3]\n[999 2 3]\n",
     },
   ],
 };

@@ -86,5 +86,15 @@ done
       name: "prints Number 1, 2, 3",
       expected: "Number 1\nNumber 2\nNumber 3\n",
     },
+    {
+      name: "for loop over words",
+      code: `for x in a b c; do\n  echo "$x"\ndone`,
+      expected: "a\nb\nc\n",
+    },
+    {
+      name: "for loop with five items",
+      code: `for n in 1 2 3 4 5; do\n  echo "$n"\ndone`,
+      expected: "1\n2\n3\n4\n5\n",
+    },
   ],
 };

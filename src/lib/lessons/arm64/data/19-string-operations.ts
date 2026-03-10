@@ -146,5 +146,97 @@ to_upper_done:
       name: "prints HELLO",
       expected: "HELLO\n",
     },
+    {
+      name: "converts mixed case to uppercase",
+      expected: "ABC123\n",
+      code: `.data
+msg:
+\t.asciz "aBc123"
+buf:
+\t.skip 7
+
+.text
+.global _start
+_start:
+\tLDR X0, =msg
+\tLDR X3, =buf
+\tMOV X4, #0
+
+to_upper_loop:
+\tLDRB W1, [X0], #1
+\tCBZ W1, to_upper_done
+\tCMP W1, #97
+\tB.LT store_char
+\tCMP W1, #122
+\tB.GT store_char
+\tSUB W1, W1, #32
+
+store_char:
+\tSTRB W1, [X3, X4]
+\tADD X4, X4, #1
+\tB to_upper_loop
+
+to_upper_done:
+\tMOV W5, #10
+\tSTRB W5, [X3, X4]
+\tADD X4, X4, #1
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, X4
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "already uppercase stays unchanged",
+      expected: "WORLD\n",
+      code: `.data
+msg:
+\t.asciz "WORLD"
+buf:
+\t.skip 6
+
+.text
+.global _start
+_start:
+\tLDR X0, =msg
+\tLDR X3, =buf
+\tMOV X4, #0
+
+to_upper_loop:
+\tLDRB W1, [X0], #1
+\tCBZ W1, to_upper_done
+\tCMP W1, #97
+\tB.LT store_char
+\tCMP W1, #122
+\tB.GT store_char
+\tSUB W1, W1, #32
+
+store_char:
+\tSTRB W1, [X3, X4]
+\tADD X4, X4, #1
+\tB to_upper_loop
+
+to_upper_done:
+\tMOV W5, #10
+\tSTRB W5, [X3, X4]
+\tADD X4, X4, #1
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, X4
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

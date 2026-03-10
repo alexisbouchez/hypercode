@@ -110,7 +110,7 @@ pub fn main() void {
   solution: `const std = @import("std");
 
 pub fn describe(name: []const u8, year: u16, typed: bool) void {
-\tstd.debug.print("name: {s}, year: {d}, typed: {}\\n", .{ name, year, typed });
+\tstd.debug.print("name: {s}, year: {}, typed: {}\\n", .{ name, year, typed });
 }
 
 pub fn main() void {

@@ -70,5 +70,15 @@ Print("%.2f\\n", area);
       name: "prints circle area",
       expected: "153.94\n",
     },
+    {
+      name: "area with radius 1.0",
+      code: 'F64 pi = 3.14159;\nF64 r = 1.0;\nF64 area = pi * r * r;\nPrint("%.2f\\n", area);',
+      expected: "3.14\n",
+    },
+    {
+      name: "area with radius 10.0",
+      code: 'F64 pi = 3.14159;\nF64 r = 10.0;\nF64 area = pi * r * r;\nPrint("%.2f\\n", area);',
+      expected: "314.16\n",
+    },
   ],
 };

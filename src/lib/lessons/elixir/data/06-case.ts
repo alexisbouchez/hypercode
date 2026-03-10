@@ -78,5 +78,37 @@ IO.puts(label)
       name: "case matching integers and atoms",
       expected: "two\nweekend\n",
     },
+    {
+      name: "case with wildcard fallthrough",
+      code: `n = 99
+result = case n do
+  1 -> "one"
+  2 -> "two"
+  _ -> "other"
+end
+IO.puts(result)
+`,
+      expected: "other\n",
+    },
+    {
+      name: "case matching first clause",
+      code: `day = :sunday
+label = case day do
+  :saturday -> "weekend"
+  :sunday -> "weekend"
+  _ -> "weekday"
+end
+IO.puts(label)
+
+day2 = :monday
+label2 = case day2 do
+  :saturday -> "weekend"
+  :sunday -> "weekend"
+  _ -> "weekday"
+end
+IO.puts(label2)
+`,
+      expected: "weekend\nweekday\n",
+    },
   ],
 };

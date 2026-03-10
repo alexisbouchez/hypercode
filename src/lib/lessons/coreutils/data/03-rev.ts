@@ -119,5 +119,15 @@ int main() {
 }`,
 			expected: "tac\ngod\n",
 		},
+		{
+			name: "reverses single character lines",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tmy_rev("a\\nb\\nc\\n");
+\treturn 0;
+}`,
+			expected: "a\nb\nc\n",
+		},
 	],
 };

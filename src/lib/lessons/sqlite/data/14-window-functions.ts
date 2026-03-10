@@ -122,5 +122,13 @@ FROM products;`,
       name: "returns all 8 products",
       expected: '{"type":"rowCount","value":8}',
     },
+    {
+      name: "includes Laptop (most expensive in Electronics, rank 1)",
+      expected: '{"type":"contains","value":"Laptop"}',
+    },
+    {
+      name: "rank values include 1 (top rank in each category)",
+      expected: '{"type":"contains","value":"1"}',
+    },
   ],
 };

@@ -14,10 +14,31 @@ The **sigmoid** (logistic) function squashes any real number into the interval $
 
 $$\\sigma(z) = \\frac{1}{1 + e^{-z}}$$
 
+> **Notation note:** In ML, $\\sigma$ conventionally denotes the sigmoid activation function. In statistics and finance, the same symbol $\\sigma$ represents standard deviation or volatility — an entirely different quantity.
+
 Key properties:
 - $\\sigma(0) = 0.5$
 - $\\sigma(z) \\to 1$ as $z \\to +\\infty$
 - $\\sigma(z) \\to 0$ as $z \\to -\\infty$
+
+### Numerical Stability
+
+The naive formula \`1 / (1 + exp(-z))\` overflows when \`z\` is a large negative number (e.g., -1000), because \`exp(1000)\` exceeds floating-point range.
+
+The fix: when $z \\ge 0$, use the formula directly. When $z < 0$, rewrite as:
+
+$$\\sigma(z) = \\frac{e^z}{1 + e^z}$$
+
+This way the exponent is always non-positive, so \`exp()\` never overflows:
+
+\`\`\`python
+def sigmoid(z):
+    if z >= 0:
+        return 1 / (1 + math.exp(-z))
+    else:
+        ez = math.exp(z)
+        return ez / (1 + ez)
+\`\`\`
 
 ### Logistic Prediction
 
@@ -42,6 +63,7 @@ Implement:
 
 def sigmoid(z):
     # 1 / (1 + exp(-z))
+    # Handle z < 0 separately to avoid overflow: use exp(z)/(1+exp(z))
     return 0.0
 
 def logistic_predict(x, w, b):
@@ -61,7 +83,11 @@ print(round(binary_cross_entropy([0.5, 0.5], [1, 0]), 4))  # 0.6931
 	solution: `import math
 
 def sigmoid(z):
-    return 1 / (1 + math.exp(-z))
+    if z >= 0:
+        return 1 / (1 + math.exp(-z))
+    else:
+        ez = math.exp(z)
+        return ez / (1 + ez)
 
 def logistic_predict(x, w, b):
     return sigmoid(w * x + b)
@@ -108,6 +134,20 @@ print(round(logistic_predict(0, 1.0, 0.0), 4))`,
 			code: `{{FUNC}}
 print(round(sigmoid(1), 4))`,
 			expected: "0.7311\n",
+		},
+		{
+			name: "numerical stability: sigmoid does not overflow for extreme inputs",
+			code: `{{FUNC}}
+import math
+# sigmoid(-1000) should be ~0, not OverflowError
+# sigmoid(1000) should be ~1
+s_neg = sigmoid(-1000)
+s_pos = sigmoid(1000)
+print(math.isfinite(s_neg) and s_neg >= 0)
+print(math.isfinite(s_pos) and s_pos <= 1)
+print(round(s_neg, 4))
+print(round(s_pos, 4))`,
+			expected: "True\nTrue\n0.0\n1.0\n",
 		},
 	],
 };

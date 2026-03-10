@@ -26,6 +26,16 @@ You can also define names without type annotations:
 def answer := 42
 \`\`\`
 
+## Types as First-Class Citizens
+
+An important concept in Lean: **types are values too**. You can assign a type to a name just like any other value:
+
+\`\`\`lean
+def MyType := Nat
+\`\`\`
+
+This is the beginning of what makes Lean a **dependently typed** language. In most languages, types and values live in separate worlds. In Lean, there is no hard boundary — types can be computed, passed to functions, and returned from functions. This seemingly simple idea is what enables Lean to serve as both a programming language and a theorem prover. We will see more of this power in later lessons.
+
 ## Your Turn
 
 Define three constants:

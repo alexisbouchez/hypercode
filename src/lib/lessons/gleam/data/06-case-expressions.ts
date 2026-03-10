@@ -88,13 +88,15 @@ case number {
 
 ### Your Task
 
+Using the recursion concepts from the previous lesson, write a FizzBuzz program.
+
 Write a function called \`fizzbuzz\` that takes an \`Int\` and returns:
 - \`"FizzBuzz"\` if divisible by both 3 and 5
 - \`"Fizz"\` if divisible by 3
 - \`"Buzz"\` if divisible by 5
 - The number as a string otherwise
 
-Print the result for numbers 1 through 15, each on a separate line.`,
+Use a recursive \`loop\` helper to print the result for numbers 1 through 15, each on a separate line.`,
 
   starterCode: `import gleam/io
 import gleam/int

@@ -18,6 +18,16 @@ HTML (HyperText Markup Language) is the standard language for creating web pages
 
 \`h1\` stands for "heading level 1" — the most important heading on the page.
 
+> **Note:** Every HTML page should start with \`<!DOCTYPE html>\` followed by an \`<html>\` element. This tells the browser to use HTML5 standards mode. A minimal boilerplate looks like:
+> \`\`\`html
+> <!DOCTYPE html>
+> <html lang="en">
+>   <head><title>Page Title</title></head>
+>   <body><!-- content here --></body>
+> </html>
+> \`\`\`
+> We will skip the boilerplate in early lessons for simplicity, but you will use the full structure in later lessons.
+
 ### Your Task
 
 Write an \`<h1>\` element containing the text \`Hello, World!\`.`,

@@ -64,5 +64,15 @@ puts !true
 			name: "true, true, true, true, false, true, false",
 			expected: "true\ntrue\ntrue\ntrue\nfalse\ntrue\nfalse\n",
 		},
+		{
+			name: "AND operator returns false",
+			code: `puts true && false`,
+			expected: "false\n",
+		},
+		{
+			name: "OR operator returns true",
+			code: `puts true || false`,
+			expected: "true\n",
+		},
 	],
 };

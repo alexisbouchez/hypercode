@@ -90,5 +90,34 @@ for (int i = 0; i < 10; i++) {
 			name: "sum=15, countdown, fruits",
 			expected: "15\n3 2 1 \napple\nbanana\ncherry\n",
 		},
+		{
+			name: "for loop sum 1 to 10",
+			expected: "55\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        int sum = 0;
+        for (int i = 1; i <= 10; i++) {
+            sum += i;
+        }
+        System.out.println(sum);
+    }
+}
+`,
+		},
+		{
+			name: "break and continue",
+			expected: "0 1 2 4 5 \n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            if (i == 3) continue;
+            if (i == 6) break;
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+}
+`,
+		},
 	],
 };

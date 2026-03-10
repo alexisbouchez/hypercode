@@ -122,5 +122,16 @@ int main() {
 }`,
 			expected: "0x1fff\n",
 		},
+		{
+			name: "VPN 0 unmapped triggers page fault",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tunsigned long pt[3] = {0, 2, 4};
+\ttranslate(pt, 3, 0x0010);
+\treturn 0;
+}`,
+			expected: "page fault\n",
+		},
 	],
 };

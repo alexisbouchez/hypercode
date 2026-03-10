@@ -94,5 +94,13 @@ ORDER BY product_count DESC;`,
       name: "returns 4 category groups",
       expected: '{"type":"rowCount","value":4}',
     },
+    {
+      name: "Office category is first (3 products, highest count)",
+      expected: '{"type":"exact","value":"Office"}',
+    },
+    {
+      name: "includes Electronics category",
+      expected: '{"type":"contains","value":"Electronics"}',
+    },
   ],
 };

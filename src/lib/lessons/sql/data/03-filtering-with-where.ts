@@ -130,5 +130,13 @@ WHERE category = 'Electronics'
       name: "returns exactly 2 products (Electronics between 50 and 1000)",
       expected: '{"type":"rowCount","value":2}',
     },
+    {
+      name: "result contains Laptop",
+      expected: '{"type":"contains","value":"Laptop"}',
+    },
+    {
+      name: "result contains Headphones",
+      expected: '{"type":"contains","value":"Headphones"}',
+    },
   ],
 };

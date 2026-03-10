@@ -140,6 +140,63 @@ const List = {
   flatten: function(l) { return l.flat(Infinity); },
   uniq: function(l) { return [...new Set(l)]; },
 };
+
+const Stream = {
+  map: function(list, f) {
+    return { __stream: true, __enumerate: function() { return __enumToList(list).map(f); } };
+  },
+  filter: function(list, f) {
+    return { __stream: true, __enumerate: function() { return __enumToList(list).filter(f); } };
+  },
+  take: function(list, n) {
+    return { __stream: true, __enumerate: function() { return __enumToList(list).slice(0, n); } };
+  },
+  cycle: function(list) {
+    return { __stream: true, __enumerate: function() { return list; }, __infinite: true };
+  },
+  iterate: function(start, f) {
+    return { __stream: true, __enumerate: function() { var arr = [start]; for (var i = 1; i < 1000; i++) arr.push(f(arr[arr.length-1])); return arr; }, __infinite: true };
+  },
+  chunk_every: function(list, n) {
+    return { __stream: true, __enumerate: function() {
+      var src = list.__stream ? list.__enumerate() : list;
+      var result = [];
+      for (var i = 0; i < src.length; i += n) result.push(src.slice(i, i + n));
+      return result;
+    }};
+  },
+  with_index: function(list) {
+    return { __stream: true, __enumerate: function() {
+      var src = list.__stream ? list.__enumerate() : list;
+      return src.map(function(v, i) { return __tuple([v, i]); });
+    }};
+  },
+  run: function(stream) {
+    if (stream.__stream) stream.__enumerate();
+    return 'ok';
+  },
+};
+
+function __enumToList(v) {
+  if (v && v.__stream) return v.__enumerate();
+  return v;
+}
+
+// Patch Enum to handle streams
+var _origEnumMap = Enum.map;
+Enum.map = function(list, f) { return _origEnumMap(__enumToList(list), f); };
+var _origEnumFilter = Enum.filter;
+Enum.filter = function(list, f) { return _origEnumFilter(__enumToList(list), f); };
+var _origEnumReduce = Enum.reduce;
+Enum.reduce = function(list, acc, f) { return _origEnumReduce(__enumToList(list), acc, f); };
+var _origEnumJoin = Enum.join;
+Enum.join = function(list, sep) { return _origEnumJoin(__enumToList(list), sep); };
+var _origEnumTake = Enum.take;
+Enum.take = function(list, n) { return _origEnumTake(__enumToList(list), n); };
+var _origEnumEach = Enum.each;
+Enum.each = function(list, f) { return _origEnumEach(__enumToList(list), f); };
+var _origEnumToList = Enum.to_list || function(l) { return l; };
+Enum.to_list = function(list) { return __enumToList(list); };
 `;
 
 // ---------------------------------------------------------------------------
@@ -896,6 +953,8 @@ function transpileExprNoPipe(s: string): string {
     if (lm && (i === 0 || /\W/.test(s[i - 1]))) { result += "List." + lm[1] + "("; i += lm[0].length; continue; }
     const im = s.slice(i).match(/^Integer\.(\w+)\(/);
     if (im && (i === 0 || /\W/.test(s[i - 1]))) { result += "Integer." + im[1] + "("; i += im[0].length; continue; }
+    const stm = s.slice(i).match(/^Stream\.(\w+)\(/);
+    if (stm && (i === 0 || /\W/.test(s[i - 1]))) { result += "Stream." + stm[1] + "("; i += stm[0].length; continue; }
     if (s[i] === "." && s[i + 1] === "(") { result += "("; i += 2; continue; }
     if (s[i] === "<" && s[i + 1] === ">") { result += " + "; i += 2; continue; }
     if (s.slice(i, i + 4) === "not ") { result += "!"; i += 4; continue; }
@@ -982,6 +1041,58 @@ function buildCondIife(arms: Array<{ cond: string; body: string }>): string {
   }
   lines.push(`  throw new Error("no cond match"); })()`);
   return lines.join("\n");
+}
+
+// ---------------------------------------------------------------------------
+// for comprehension: for x <- list, y <- list2, filter, do: expr
+// ---------------------------------------------------------------------------
+
+function buildForComprehension(generatorStr: string, bodyExpr: string): string {
+  // Split generators/filters by comma at top level
+  const parts = splitByCommaEx(generatorStr);
+  const generators: Array<{ variable: string; source: string }> = [];
+  const filters: string[] = [];
+
+  for (const part of parts) {
+    const trimmed = part.trim();
+    const genMatch = trimmed.match(/^(\w+)\s*<-\s*(.+)$/);
+    if (genMatch) {
+      generators.push({ variable: genMatch[1], source: genMatch[2] });
+    } else {
+      filters.push(trimmed);
+    }
+  }
+
+  // Build nested flatMap/map chain
+  let code = "";
+  const depth = generators.length;
+
+  for (let g = 0; g < depth; g++) {
+    const gen = generators[g];
+    const isLast = g === depth - 1;
+    const method = isLast ? "map" : "flatMap";
+    const returnPrefix = g > 0 ? "return " : "";
+    code += `${returnPrefix}__enumToList(${transpileExpr(gen.source)}).${method}(function(${gen.variable}) { `;
+  }
+
+  // Add filter condition
+  if (filters.length > 0) {
+    const filterCond = filters.map((f) => transpileExpr(f)).join(" && ");
+    code += `if (!(${filterCond})) return ${depth > 1 ? "[]" : "undefined"}; `;
+  }
+
+  code += `return ${transpileExpr(bodyExpr)};`;
+
+  for (let g = 0; g < depth; g++) {
+    code += " })";
+  }
+
+  // If we had filters with a single generator, we need to filter out undefined
+  if (filters.length > 0 && depth === 1) {
+    code += ".filter(function(x) { return x !== undefined; })";
+  }
+
+  return code;
 }
 
 // ---------------------------------------------------------------------------
@@ -1490,6 +1601,48 @@ export function transpileElixir(code: string): string {
       const elseCode = elseLines.length > 0 ? transpileBody(elseLines) : "return null;";
       output.push(`const ${varName} = (() => { if (${transpileExpr(cond)}) {\n${thenCode}\n} else {\n${elseCode}\n} })();`);
       i = afterEnd;
+      continue;
+    }
+
+    // for comprehension (inline): for x <- list, do: expr
+    const forInlineMatch = s.match(/^for\s+(.+),\s*do:\s*(.+)$/);
+    if (forInlineMatch) {
+      const forResult = buildForComprehension(forInlineMatch[1], forInlineMatch[2]);
+      output.push(forResult + ";");
+      i++;
+      continue;
+    }
+
+    // for comprehension (block): for x <- list do ... end
+    const forBlockMatch = s.match(/^for\s+(.+)\s+do$/);
+    if (forBlockMatch) {
+      const { bodyLines, next } = collectBlockBody(lines, i);
+      const bodyCode = bodyLines.map((l) => l.trim()).filter(Boolean).join("\n");
+      const forResult = buildForComprehension(forBlockMatch[1], bodyCode);
+      output.push(forResult + ";");
+      i = next;
+      continue;
+    }
+
+    // var = for comprehension (inline): result = for x <- list, do: expr
+    const forAssignInlineMatch = s.match(/^([a-z_]\w*)\s*=\s*for\s+(.+),\s*do:\s*(.+)$/);
+    if (forAssignInlineMatch) {
+      const [, varName, generators, bodyExpr] = forAssignInlineMatch;
+      const forResult = buildForComprehension(generators, bodyExpr);
+      output.push(`const ${varName} = ${forResult};`);
+      i++;
+      continue;
+    }
+
+    // var = for comprehension (block): result = for x <- list do ... end
+    const forAssignBlockMatch = s.match(/^([a-z_]\w*)\s*=\s*for\s+(.+)\s+do$/);
+    if (forAssignBlockMatch) {
+      const [, varName, generators] = forAssignBlockMatch;
+      const { bodyLines, next } = collectBlockBody(lines, i);
+      const bodyCode = bodyLines.map((l) => l.trim()).filter(Boolean).join("\n");
+      const forResult = buildForComprehension(generators, bodyCode);
+      output.push(`const ${varName} = ${forResult};`);
+      i = next;
       continue;
     }
 

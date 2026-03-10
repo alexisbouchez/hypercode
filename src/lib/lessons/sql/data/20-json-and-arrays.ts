@@ -189,5 +189,14 @@ FROM products p;`,
       name: "returns all 8 products as JSON",
       expected: '{"type":"rowCount","value":8}',
     },
+    {
+      name: "result includes row_to_json column",
+      expected: '{"type":"contains","columns":["row_to_json"]}',
+    },
+    {
+      name: "JSON output contains Laptop product",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT (row_to_json(p))::text AS json_text FROM products p WHERE name = 'Laptop';`,
+      expected: '{"type":"contains","value":"Laptop"}',
+    },
   ],
 };

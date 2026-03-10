@@ -77,5 +77,15 @@ if (logged_in) {
       name: "prints welcome message",
       expected: "Welcome, terry\n",
     },
+    {
+      name: "prints access denied when logged out",
+      code: 'Bool logged_in = FALSE;\nauto username = "terry";\nif (logged_in) {\n  Print("Welcome, %s\\n", username);\n} else {\n  Print("Access denied\\n");\n}',
+      expected: "Access denied\n",
+    },
+    {
+      name: "Bool TRUE equals 1",
+      code: 'Bool flag = TRUE;\nPrint("%d\\n", flag);',
+      expected: "1\n",
+    },
   ],
 };

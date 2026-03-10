@@ -50,7 +50,7 @@ The \`try\` keyword unwraps an error union. If the value is an error, it immedia
 fn doWork() !void {
     const result = try divide(10.0, 0.0);
     // If divide returns an error, doWork returns that same error
-    std.debug.print("result: {d}\\n", .{result});
+    std.debug.print("result: {}\\n", .{result});
 }
 \`\`\`
 
@@ -83,7 +83,7 @@ The \`main\` function can return \`!void\` to propagate errors. If an error reac
 \`\`\`zig
 pub fn main() !void {
     const result = try divide(10.0, 3.0);
-    std.debug.print("{d}\\n", .{result});
+    std.debug.print("{}\\n", .{result});
 }
 \`\`\`
 

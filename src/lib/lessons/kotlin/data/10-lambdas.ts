@@ -58,5 +58,15 @@ Create a lambda \`square\` that squares a number, and a lambda \`isEven\` that r
       name: "square and isEven",
       expected: "16\n49\ntrue\nfalse\n",
     },
+    {
+      name: "lambda with two parameters",
+      code: "fun main() {\n    val add = { x: Int, y: Int -> x + y }\n    println(add(10, 20))\n}",
+      expected: "30\n",
+    },
+    {
+      name: "lambda used with map and implicit it",
+      code: 'fun main() {\n    val nums = listOf(1, 2, 3)\n    val doubled = nums.map { it * 2 }\n    println(doubled)\n}',
+      expected: "[2, 4, 6]\n",
+    },
   ],
 };

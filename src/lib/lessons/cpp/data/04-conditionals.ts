@@ -117,5 +117,77 @@ int main() {
 			name: "prints score and grade B",
 			expected: "Score: 85\nGrade: B\n",
 		},
+		{
+			name: "grade A for score 95",
+			expected: "Score: 95\nGrade: A\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	int score = 95;
+	string grade;
+	if (score >= 90) {
+		grade = "A";
+	} else if (score >= 80) {
+		grade = "B";
+	} else if (score >= 70) {
+		grade = "C";
+	} else {
+		grade = "F";
+	}
+	cout << "Score: " << score << endl;
+	cout << "Grade: " << grade << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "grade F for score 50",
+			expected: "Score: 50\nGrade: F\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	int score = 50;
+	string grade;
+	if (score >= 90) {
+		grade = "A";
+	} else if (score >= 80) {
+		grade = "B";
+	} else if (score >= 70) {
+		grade = "C";
+	} else {
+		grade = "F";
+	}
+	cout << "Score: " << score << endl;
+	cout << "Grade: " << grade << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "grade C for boundary score 70",
+			expected: "Score: 70\nGrade: C\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	int score = 70;
+	string grade;
+	if (score >= 90) {
+		grade = "A";
+	} else if (score >= 80) {
+		grade = "B";
+	} else if (score >= 70) {
+		grade = "C";
+	} else {
+		grade = "F";
+	}
+	cout << "Score: " << score << endl;
+	cout << "Grade: " << grade << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

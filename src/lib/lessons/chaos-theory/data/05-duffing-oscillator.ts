@@ -57,5 +57,10 @@ def duffing_euler(x0, y0, delta, alpha, beta, gamma, omega, dt, steps):
       code: `{{FUNC}}\nx,y = duffing_euler(0.0,0.0,0.3,-1.0,1.0,0.5,1.2,0.1,1)\nprint(round(x,4), round(y,4))`,
       expected: "0.0 0.05\n",
     },
+    {
+      name: "duffing derivative with nonzero velocity",
+      code: `{{FUNC}}\ndx,dy = duffing_deriv(1.0,1.0,0.0,0.3,-1.0,1.0,0.5,1.2)\nprint(round(dx,4), round(dy,4))`,
+      expected: "1.0 0.2\n",
+    },
   ],
 };

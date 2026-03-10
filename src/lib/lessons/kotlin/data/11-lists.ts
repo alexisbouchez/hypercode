@@ -50,8 +50,18 @@ Create a list of the first 5 odd numbers \`[1, 3, 5, 7, 9]\`. Print the list's s
 `,
   tests: [
     {
-      name: "list operations",
+      name: "size, indexing, and contains on a list",
       expected: "5\n1\n9\ntrue\n",
+    },
+    {
+      name: "contains returns false for missing element",
+      code: "fun main() {\n    val nums = listOf(1, 3, 5)\n    println(nums.contains(2))\n    println(nums.contains(3))\n}",
+      expected: "false\ntrue\n",
+    },
+    {
+      name: "empty list size is 0",
+      code: "fun main() {\n    val empty = listOf()\n    println(empty.size)\n    val nums = listOf(10, 20, 30)\n    println(nums[1])\n}",
+      expected: "0\n20\n",
     },
   ],
 };

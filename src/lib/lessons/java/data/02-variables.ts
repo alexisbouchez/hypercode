@@ -34,6 +34,8 @@ var score = 100;        // inferred as int
 var message = "Hi";    // inferred as String
 \`\`\`
 
+\`var\` is most useful when the type is obvious from the right-hand side or when the full type name is long and repetitive (e.g., \`var users = new ArrayList<String>()\` instead of \`ArrayList<String> users = new ArrayList<>()\`). Avoid \`var\` when the type isn't clear from context — explicit types make code easier to read. Note that \`var\` can only be used for local variables, not for fields, method parameters, or return types.
+
 ### Constants
 
 Use \`final\` to declare a constant:
@@ -76,8 +78,35 @@ Declare the following variables and print the output exactly as shown:
 
 	tests: [
 		{
-			name: "correct output",
+			name: "prints name, age, height, and student status",
 			expected: "Alice is 25 years old\nHeight: 1.75\nStudent: true\n",
+		},
+		{
+			name: "integer and double types",
+			expected: "30\n2.5\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        int x = 30;
+        double y = 2.5;
+        System.out.println(x);
+        System.out.println(y);
+    }
+}
+`,
+		},
+		{
+			name: "boolean and string concatenation",
+			expected: "active: true\nBob is 17 years old\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        boolean active = true;
+        System.out.println("active: " + active);
+        String name = "Bob";
+        int age = 17;
+        System.out.println(name + " is " + age + " years old");
+    }
+}
+`,
 		},
 	],
 };

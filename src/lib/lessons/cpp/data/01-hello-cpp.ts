@@ -35,7 +35,7 @@ int main() {
 - \`using namespace std;\` — lets you write \`cout\` instead of \`std::cout\`
 - \`cout\` — the standard output stream (like \`stdout\` in C)
 - \`<<\` — the insertion operator (feeds data into the stream)
-- \`endl\` — inserts a newline and flushes the stream
+- \`endl\` — inserts a newline **and flushes the stream**. You can also use \`"\\n"\` for just a newline without flushing, which is faster in performance-sensitive code. For most learning exercises, either works fine
 
 ### Chaining Output
 
@@ -72,6 +72,30 @@ int main() {
 		{
 			name: "prints Hello, C++!",
 			expected: "Hello, C++!\n",
+		},
+		{
+			name: "cout with chained insertion operators",
+			expected: "Hello, C++!\n",
+			code: `#include <iostream>
+using namespace std;
+int main() {
+	string lang = "C++";
+	cout << "Hello, " << lang << "!" << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "multiple lines of output",
+			expected: "Hello, C++!\nWelcome to C++!\n",
+			code: `#include <iostream>
+using namespace std;
+int main() {
+	cout << "Hello, C++!" << endl;
+	cout << "Welcome to C++!" << endl;
+	return 0;
+}
+`,
 		},
 	],
 };

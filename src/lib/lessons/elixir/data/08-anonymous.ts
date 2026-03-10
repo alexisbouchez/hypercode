@@ -55,5 +55,21 @@ IO.puts(square.(6))
       name: "fn and & capture",
       expected: "10\n7\n36\n",
     },
+    {
+      name: "anonymous function with zero",
+      code: `double = fn x -> x * 2 end
+IO.puts(double.(0))
+IO.puts(double.(-3))
+`,
+      expected: "0\n-6\n",
+    },
+    {
+      name: "capture syntax with subtraction",
+      code: `subtract = &(&1 - &2)
+IO.puts(subtract.(10, 3))
+IO.puts(subtract.(5, 5))
+`,
+      expected: "7\n0\n",
+    },
   ],
 };

@@ -14,6 +14,8 @@ import { attention } from "./data/12-attention";
 import { multiHead } from "./data/13-multi-head";
 import { trainingLoop } from "./data/14-training-loop";
 import { adam } from "./data/15-adam";
+import { bpeTokenization } from "./data/16-bpe-tokenization";
+import { positionalEncoding } from "./data/17-positional-encoding";
 
 export const microgptChapters: Chapter[] = [
 	{ id: "autograd", title: "Autograd Engine" },
@@ -30,12 +32,14 @@ export const microgptLessons: Lesson[] = [
 	topology,
 	backward,
 	tokenizer,
+	bpeTokenization,
 	trainingPairs,
 	linear,
 	softmax,
 	rmsnorm,
 	crossEntropy,
 	attention,
+	positionalEncoding,
 	multiHead,
 	trainingLoop,
 	adam,

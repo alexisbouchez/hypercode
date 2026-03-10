@@ -187,5 +187,29 @@ bf.add("test-key");
 console.log(bf.mightContain("test-key"));`,
 			expected: "true\n",
 		},
+		{
+			name: "no false negatives for multiple added items",
+			code: `{{FUNC}}
+const bf = new BloomFilter(1000);
+const items = ["cat", "dog", "fish", "bird", "snake"];
+for (const item of items) bf.add(item);
+let allFound = true;
+for (const item of items) {
+	if (!bf.mightContain(item)) allFound = false;
+}
+console.log(allFound);`,
+			expected: "true\n",
+		},
+		{
+			name: "large filter has no false positives for these items",
+			code: `{{FUNC}}
+const bf = new BloomFilter(10000);
+bf.add("inserted-a");
+bf.add("inserted-b");
+console.log(bf.mightContain("not-inserted-x"));
+console.log(bf.mightContain("not-inserted-y"));
+console.log(bf.mightContain("not-inserted-z"));`,
+			expected: "false\nfalse\nfalse\n",
+		},
 	],
 };

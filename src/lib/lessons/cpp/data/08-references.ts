@@ -128,5 +128,51 @@ int main() {
 			name: "const references used for parameter passing",
 			expected: "Hello and World\nHello, World\nHello - World\n",
 		},
+		{
+			name: "combine with different separators",
+			expected: "A+B\nX Y\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+string combine(const string& a, const string& b, const string& sep) {
+	return a + sep + b;
+}
+int main() {
+	cout << combine("A", "B", "+") << endl;
+	cout << combine("X", "Y", " ") << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "printPair with single-char strings",
+			expected: "a and b\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+void printPair(const string& first, const string& second) {
+	cout << first << " and " << second << endl;
+}
+int main() {
+	printPair("a", "b");
+	return 0;
+}
+`,
+		},
+		{
+			name: "combine with empty separator",
+			expected: "HelloWorld\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+string combine(const string& a, const string& b, const string& sep) {
+	return a + sep + b;
+}
+int main() {
+	cout << combine("Hello", "World", "") << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

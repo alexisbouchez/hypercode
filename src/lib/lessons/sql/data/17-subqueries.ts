@@ -149,5 +149,9 @@ WHERE price > (SELECT AVG(price) FROM products);`,
       name: "returns exactly one product above average (Laptop)",
       expected: '{"type":"rowCount","value":1}',
     },
+    {
+      name: "result contains Laptop",
+      expected: '{"type":"contains","value":"Laptop"}',
+    },
   ],
 };

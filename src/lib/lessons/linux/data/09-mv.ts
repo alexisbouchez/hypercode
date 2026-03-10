@@ -60,5 +60,15 @@ ls
       name: "renames hello.txt to greet.txt",
       expected: "docs\ngreet.txt\nnotes.txt\n",
     },
+    {
+      name: "renamed file has same content",
+      code: `mv hello.txt greet.txt\ncat greet.txt`,
+      expected: "Hello, Linux!\n",
+    },
+    {
+      name: "mv into directory",
+      code: `mv hello.txt docs/\nls docs`,
+      expected: "hello.txt\nreadme.txt\n",
+    },
   ],
 };

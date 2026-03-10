@@ -204,5 +204,9 @@ JOIN products p ON o.product_id = p.id;`,
       name: "returns all 3 orders",
       expected: '{"type":"rowCount","value":3}',
     },
+    {
+      name: "result includes product_name column",
+      expected: '{"type":"contains","columns":["product_name"]}',
+    },
   ],
 };

@@ -14,6 +14,11 @@ import { abstractClasses } from "./data/12-abstract";
 import { generics } from "./data/13-generics";
 import { arrayList } from "./data/14-arraylist";
 import { hashMap } from "./data/15-hashmap";
+import { exceptionHandling } from "./data/16-exception-handling";
+import { enums } from "./data/17-enums";
+import { staticAndFinal } from "./data/18-static-and-final";
+import { lambdaExpressions } from "./data/19-lambda-expressions";
+import { accessModifiers } from "./data/20-access-modifiers";
 
 export const javaChapters: Chapter[] = [
 	{ id: "basics", title: "Basics" },
@@ -21,6 +26,8 @@ export const javaChapters: Chapter[] = [
 	{ id: "methods", title: "Methods" },
 	{ id: "oop", title: "Object-Oriented Programming" },
 	{ id: "advanced", title: "Collections & Generics" },
+	{ id: "error-handling", title: "Error Handling" },
+	{ id: "functional", title: "Functional Programming" },
 ];
 
 export const javaLessons: Lesson[] = [
@@ -39,4 +46,9 @@ export const javaLessons: Lesson[] = [
 	generics,
 	arrayList,
 	hashMap,
+	exceptionHandling,
+	enums,
+	staticAndFinal,
+	lambdaExpressions,
+	accessModifiers,
 ];

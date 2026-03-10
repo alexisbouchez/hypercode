@@ -16,7 +16,7 @@ The **Black-Scholes model** (1973) gives a closed-form price for European option
 | K | Strike price |
 | T | Time to expiry (years) |
 | r | Risk-free rate (continuously compounded) |
-| σ | Volatility (annualized standard deviation of log-returns) |
+| σ | Volatility (annualized standard deviation of log-returns). *Note: in finance, σ denotes volatility/standard deviation — not the sigmoid function used in ML.* |
 
 ### Formula
 
@@ -96,6 +96,29 @@ def bs_put(S, K, T, r, sigma):
       name: "OTM put (S=90, K=100, T=0.5, r=0.03, sigma=0.3)",
       code: `{{FUNC}}\nprint(round(bs_put(90, 100, 0.5, 0.03, 0.3), 4))`,
       expected: "12.9257\n",
+    },
+    {
+      name: "numerical stability: extreme params produce finite non-negative prices",
+      code: `{{FUNC}}
+import math
+# Very short time to expiry
+c1 = bs_call(100, 100, 0.001, 0.05, 0.2)
+p1 = bs_put(100, 100, 0.001, 0.05, 0.2)
+# Very high volatility
+c2 = bs_call(100, 100, 1, 0.05, 5.0)
+p2 = bs_put(100, 100, 1, 0.05, 5.0)
+# Very low volatility
+c3 = bs_call(100, 100, 1, 0.05, 0.001)
+p3 = bs_put(100, 100, 1, 0.05, 0.001)
+# Deep ITM / OTM
+c4 = bs_call(200, 50, 1, 0.05, 0.3)
+p4 = bs_put(50, 200, 1, 0.05, 0.3)
+results = [c1, p1, c2, p2, c3, p3, c4, p4]
+all_finite = all(math.isfinite(v) for v in results)
+all_nonneg = all(v >= -1e-10 for v in results)
+print(all_finite)
+print(all_nonneg)`,
+      expected: "True\nTrue\n",
     },
   ],
 };

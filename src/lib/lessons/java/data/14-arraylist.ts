@@ -96,5 +96,42 @@ public class Main {
 			name: "size, get, contains, sort, remove",
 			expected: "4\nbanana\ntrue\n[apple, banana, cherry, date]\n3\napple\n",
 		},
+		{
+			name: "empty list behavior",
+			expected: "0\ntrue\nfalse\n[]\n",
+			code: `import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        System.out.println(list.size());
+        System.out.println(list.isEmpty());
+        System.out.println(list.contains("anything"));
+        System.out.println(list);
+    }
+}
+`,
+		},
+		{
+			name: "add, remove by index, and contains after removal",
+			expected: "3\ntrue\n2\nfalse\n[apple, cherry]\n",
+			code: `import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("apple");
+        list.add("banana");
+        list.add("cherry");
+        System.out.println(list.size());
+        System.out.println(list.contains("banana"));
+        list.remove(1);
+        System.out.println(list.size());
+        System.out.println(list.contains("banana"));
+        System.out.println(list);
+    }
+}
+`,
+		},
 	],
 };

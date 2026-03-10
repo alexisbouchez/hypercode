@@ -88,5 +88,15 @@ apply_twice { puts "Hello!" }
 			name: "Hello! twice",
 			expected: "Hello!\nHello!\n",
 		},
+		{
+			name: "apply_twice yields with different block",
+			code: `{{FUNC}}\napply_twice { puts "Ruby" }`,
+			expected: "Ruby\nRuby\n",
+		},
+		{
+			name: "apply_twice runs block exactly two times",
+			code: `{{FUNC}}\ncount = 0\napply_twice { count += 1 }\nputs count`,
+			expected: "2\n",
+		},
 	],
 };

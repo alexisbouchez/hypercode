@@ -114,5 +114,34 @@ dw1, db1, dw2, db2 = two_layer_backward(2.0, 1.0, 0.0, 1.0, 0.0, 0.0)
 print(round(dw1, 4), round(db1, 4), round(dw2, 4), round(db2, 4))`,
 			expected: "0.3699 0.185 0.3699 0.185\n",
 		},
+		{
+			name: "numerical gradient check matches analytical gradients",
+			code: `{{FUNC}}
+# Numerical gradient check: verify all 4 analytical gradients via finite differences
+x_val = 1.5
+w1_val, b1_val = 0.8, -0.3
+w2_val, b2_val = -0.6, 0.4
+y_val = 0.7
+h = 1e-5
+
+def loss_fn(x, w1, b1, w2, b2, y):
+    z1 = w1 * x + b1
+    a1 = relu(z1)
+    z2 = w2 * a1 + b2
+    a2 = sigmoid(z2)
+    return (a2 - y) ** 2
+
+dw1_a, db1_a, dw2_a, db2_a = two_layer_backward(x_val, w1_val, b1_val, w2_val, b2_val, y_val)
+
+# Numerical gradients for each parameter
+dw1_n = (loss_fn(x_val, w1_val+h, b1_val, w2_val, b2_val, y_val) - loss_fn(x_val, w1_val-h, b1_val, w2_val, b2_val, y_val)) / (2*h)
+db1_n = (loss_fn(x_val, w1_val, b1_val+h, w2_val, b2_val, y_val) - loss_fn(x_val, w1_val, b1_val-h, w2_val, b2_val, y_val)) / (2*h)
+dw2_n = (loss_fn(x_val, w1_val, b1_val, w2_val+h, b2_val, y_val) - loss_fn(x_val, w1_val, b1_val, w2_val-h, b2_val, y_val)) / (2*h)
+db2_n = (loss_fn(x_val, w1_val, b1_val, w2_val, b2_val+h, y_val) - loss_fn(x_val, w1_val, b1_val, w2_val, b2_val-h, y_val)) / (2*h)
+
+ok = all(abs(a - n) < 1e-4 for a, n in [(dw1_a, dw1_n), (db1_a, db1_n), (dw2_a, dw2_n), (db2_a, db2_n)])
+print(ok)`,
+			expected: "True\n",
+		},
 	],
 };

@@ -102,5 +102,36 @@ int main() {
 			name: "uses default and explicit arguments",
 			expected: "Hello, Alice!\nHi, Bob!\n10\n15\n",
 		},
+		{
+			name: "greet with custom greeting",
+			expected: "Hey, Carol!\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+void greet(string name, string greeting = "Hello") {
+	cout << greeting << ", " << name << "!" << endl;
+}
+int main() {
+	greet("Carol", "Hey");
+	return 0;
+}
+`,
+		},
+		{
+			name: "multiply with default b=2",
+			expected: "0\n20\n-6\n",
+			code: `#include <iostream>
+using namespace std;
+int multiply(int a, int b = 2) {
+	return a * b;
+}
+int main() {
+	cout << multiply(0) << endl;
+	cout << multiply(10) << endl;
+	cout << multiply(-3) << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

@@ -21,6 +21,8 @@ import { windowFunctions } from "./data/19-window-functions";
 import { jsonAndArrays } from "./data/20-json-and-arrays";
 import { indexesAndOptimization } from "./data/21-indexes-and-optimization";
 import { databaseDesign } from "./data/22-database-design";
+import { transactions } from "./data/23-transactions";
+import { views } from "./data/24-views";
 
 export const sqlChapters: Chapter[] = [
   { id: "sql-basics", title: "SQL Basics" },
@@ -56,4 +58,6 @@ export const sqlLessons: Lesson[] = [
   jsonAndArrays,
   indexesAndOptimization,
   databaseDesign,
+  transactions,
+  views,
 ];

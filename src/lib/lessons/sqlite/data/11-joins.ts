@@ -98,5 +98,13 @@ INNER JOIN products p ON o.product_id = p.id;`,
       name: "returns 3 order rows",
       expected: '{"type":"rowCount","value":3}',
     },
+    {
+      name: "includes Alice's Laptop order",
+      expected: '{"type":"contains","value":"Laptop"}',
+    },
+    {
+      name: "includes Bob's Coffee Maker order (total 49.99)",
+      expected: '{"type":"contains","value":"49.99"}',
+    },
   ],
 };

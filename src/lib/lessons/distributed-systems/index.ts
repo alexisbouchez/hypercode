@@ -11,6 +11,8 @@ import { circuitBreaker } from "./data/09-circuit-breaker";
 import { lruCache } from "./data/10-lru-cache";
 import { gossipProtocol } from "./data/11-gossip-protocol";
 import { twoPhaseCommit } from "./data/12-two-phase-commit";
+import { capTheorem } from "./data/13-cap-theorem";
+import { timeSynchronization } from "./data/14-time-sync";
 
 export const distributedSystemsChapters: Chapter[] = [
 	{ id: "clocks", title: "Clocks & Ordering" },
@@ -34,4 +36,6 @@ export const distributedSystemsLessons: Lesson[] = [
 	rateLimiter,
 	circuitBreaker,
 	lruCache,
+	capTheorem,
+	timeSynchronization,
 ];

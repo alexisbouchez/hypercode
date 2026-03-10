@@ -64,5 +64,15 @@ Read the contents of \`hello.txt\` using \`cat\`.`,
       name: "reads hello.txt",
       expected: "Hello, Linux!\n",
     },
+    {
+      name: "cat reads notes.txt",
+      code: `cat notes.txt`,
+      expected: "Learn Linux\nPractice daily\nHave fun\n",
+    },
+    {
+      name: "cat reads multiple files",
+      code: `cat hello.txt notes.txt`,
+      expected: "Hello, Linux!\nLearn Linux\nPractice daily\nHave fun\n",
+    },
   ],
 };

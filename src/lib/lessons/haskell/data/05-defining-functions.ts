@@ -36,6 +36,10 @@ addThree = add 3
 addThree 10    -- 13
 \`\`\`
 
+### How Tests Work
+
+Some tests extract your function definitions and run them with different inputs. When you see a test fail, it means your function was called with a new argument — make sure your logic is general, not hard-coded!
+
 ### Your Task
 
 Define a function \`double\` that multiplies its argument by 2, then print \`double 21\`.`,

@@ -142,5 +142,22 @@ int main() {
 }`,
 			expected: "0\n",
 		},
+		{
+			name: "free middle slot and alloc reuses it before later slots",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint bm = 0;
+\tslab_alloc(&bm, 8);
+\tslab_alloc(&bm, 8);
+\tslab_alloc(&bm, 8);
+\tslab_free(&bm, 1);
+\tslab_free(&bm, 2);
+\tprintf("%d\\n", slab_alloc(&bm, 8));
+\tprintf("%d\\n", slab_alloc(&bm, 8));
+\treturn 0;
+}`,
+			expected: "1\n2\n",
+		},
 	],
 };

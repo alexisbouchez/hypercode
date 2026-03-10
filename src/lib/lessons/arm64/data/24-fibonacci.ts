@@ -128,5 +128,91 @@ fib_done:
       name: "prints fib(10) = 55",
       expected: "55\n",
     },
+    {
+      name: "fib(0) = 0",
+      expected: "0\n",
+      code: `.data
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tMOV X0, #0
+\tMOV X1, #1
+\tMOV X2, #0
+\tMOV X3, #0
+
+fib_loop:
+\tCMP X3, X2
+\tB.GE fib_done
+\tADD X4, X0, X1
+\tMOV X0, X1
+\tMOV X1, X4
+\tADD X3, X3, #1
+\tB fib_loop
+
+fib_done:
+\tADD X0, X0, #48
+
+\tLDR X9, =buf
+\tSTRB W0, [X9]
+\tMOV W10, #10
+\tSTRB W10, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "fib(1) = 1",
+      expected: "1\n",
+      code: `.data
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tMOV X0, #0
+\tMOV X1, #1
+\tMOV X2, #1
+\tMOV X3, #0
+
+fib_loop:
+\tCMP X3, X2
+\tB.GE fib_done
+\tADD X4, X0, X1
+\tMOV X0, X1
+\tMOV X1, X4
+\tADD X3, X3, #1
+\tB fib_loop
+
+fib_done:
+\tADD X0, X0, #48
+
+\tLDR X9, =buf
+\tSTRB W0, [X9]
+\tMOV W10, #10
+\tSTRB W10, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

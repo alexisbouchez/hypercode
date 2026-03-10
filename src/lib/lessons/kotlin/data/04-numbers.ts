@@ -58,5 +58,15 @@ Compute and print: the sum, difference, product, and remainder when dividing 15 
       name: "arithmetic on 15 and 4",
       expected: "19\n11\n60\n3\n",
     },
+    {
+      name: "minOf and maxOf",
+      code: "fun main() {\n    println(minOf(3, 7))\n    println(maxOf(3, 7))\n}",
+      expected: "3\n7\n",
+    },
+    {
+      name: "arithmetic with different operands",
+      code: "fun main() {\n    val a = 10\n    val b = 3\n    println(a + b)\n    println(a * b)\n    println(a % b)\n}",
+      expected: "13\n30\n1\n",
+    },
   ],
 };

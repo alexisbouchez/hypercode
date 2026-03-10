@@ -74,5 +74,10 @@ def is_synchronized(x0, y0, r, k, n_transient, n_measure, tol):
       code: `{{FUNC}}\nerr_weak = synchronization_error(0.1, 0.7, 4.0, 0.1, 100, 50)\nerr_strong = synchronization_error(0.1, 0.7, 4.0, 0.8, 100, 50)\nprint(err_strong < err_weak)`,
       expected: `True\n`,
     },
+    {
+      name: "same initial conditions zero error",
+      code: `{{FUNC}}\nerr = synchronization_error(0.3, 0.3, 4.0, 0.0, 100, 50)\nprint(round(err, 6))`,
+      expected: `0.0\n`,
+    },
   ],
 };

@@ -87,6 +87,14 @@ import { swiftChapters, swiftLessons } from "@/lib/lessons/swift";
 import { elixirChapters, elixirLessons } from "@/lib/lessons/elixir";
 import { chapters as scalaChapters, lessons as scalaLessons } from "@/lib/lessons/scala";
 import { fsharpChapters, fsharpLessons } from "@/lib/lessons/fsharp";
+import { luaChapters, luaLessons } from "@/lib/lessons/lua";
+import { perlChapters, perlLessons } from "@/lib/lessons/perl";
+import { ocamlChapters, ocamlLessons } from "@/lib/lessons/ocaml";
+import { x86Chapters, x86Lessons } from "@/lib/lessons/x86";
+import { networkingChapters, networkingLessons } from "@/lib/lessons/networking";
+import { compilerChapters, compilerLessons } from "@/lib/lessons/compiler";
+import { abstractAlgebraChapters, abstractAlgebraLessons } from "@/lib/lessons/abstract-algebra";
+import { realAnalysisChapters, realAnalysisLessons } from "@/lib/lessons/real-analysis";
 const goIntroductionContent = `
 ## Why Go?
 
@@ -534,6 +542,63 @@ That is a real accomplishment. ARM64 assembly is not easy, and you have built a 
 - [Azeria Labs ARM Assembly Basics](https://azeria-labs.com/writing-arm-assembly-language/) -- excellent tutorials on ARM assembly.
 - [ARM Assembly Internals and Reverse Engineering](https://www.wiley.com/en-us/ARM+Assembly+Internals+and+Reverse+Engineering-p-9781119745303) by Maria Markstedter -- comprehensive book.
 - [Computer Organization and Design: ARM Edition](https://www.elsevier.com/books/computer-organization-and-design-arm-edition/patterson/978-0-12-801733-3) by Patterson and Hennessy.
+`;
+
+const x86IntroductionContent = `
+## Why x86_64 Assembly?
+
+x86_64 (AMD64) is the dominant architecture for desktops, laptops, and servers. It powers virtually every PC, every cloud instance on AWS/GCP/Azure, and most supercomputers. Understanding x86_64 assembly gives you direct insight into how the software you use every day actually runs on the hardware.
+
+- **The architecture that runs the world** -- From gaming PCs to data centers, x86_64 is everywhere.
+- **Essential for systems programming** -- Operating systems, compilers, and debuggers all operate at the assembly level.
+- **Performance optimization** -- Understanding assembly lets you write faster code and interpret compiler output.
+- **Security research** -- Reverse engineering, exploit development, and malware analysis all require assembly knowledge.
+
+### What You Will Learn
+
+This course covers x86_64 assembly in Intel syntax:
+
+1. **Registers and data movement** -- MOV, LEA, PUSH, POP
+2. **Arithmetic** -- ADD, SUB, MUL, DIV, bitwise operations
+3. **Control flow** -- CMP, conditional jumps, loops
+4. **Functions** -- CALL, RET, the System V calling convention
+5. **String operations** -- Byte-level memory access and manipulation
+
+### How This Course Works
+
+Each lesson explains a concept, shows examples, and gives you a coding exercise. Your code runs directly in the browser using a custom x86_64 interpreter -- no native toolchain required.
+
+Let's get started.
+`;
+
+const x86WhatsNextContent = `
+## Congratulations
+
+You have completed all 15 lessons. You now understand x86_64 registers, memory addressing, arithmetic, control flow, functions, and string manipulation in assembly.
+
+That is a real accomplishment. x86_64 assembly is one of the most complex instruction sets in use today, and you have built a solid foundation.
+
+## What to Explore Next
+
+- **More syscalls** -- Linux has hundreds of syscalls: open, read, mmap, socket, ioctl, and more.
+- **SSE/AVX** -- x86_64 SIMD instructions for parallel data processing.
+- **x87 FPU** -- Legacy floating-point instructions still used in some contexts.
+- **Inline assembly** -- Embed assembly in C/C++ code using GCC's asm syntax.
+- **Performance optimization** -- Instruction scheduling, cache effects, branch prediction, and micro-op fusion.
+
+## Build Something
+
+- **A simple shell** -- Read commands, fork processes, execute programs using only syscalls.
+- **A bootloader** -- Write bare-metal x86_64 code that runs before the OS.
+- **An ELF parser** -- Read and understand the binary format that Linux executables use.
+- **Optimize a hot loop** -- Take a C function, look at the compiler output (\`gcc -S\`), and hand-optimize it.
+
+## References
+
+- [Intel 64 and IA-32 Architectures Software Developer's Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html) -- the definitive reference.
+- [x86 and amd64 Instruction Reference](https://www.felixcloutier.com/x86/) -- searchable instruction reference.
+- [Agner Fog's Optimization Manuals](https://www.agner.org/optimize/) -- the gold standard for x86 performance optimization.
+- *Computer Systems: A Programmer's Perspective* by Bryant and O'Hallaron -- excellent textbook covering x86_64 assembly in depth.
 `;
 
 const cIntroductionContent = `
@@ -3505,6 +3570,17 @@ export const courses: Course[] = [
     whatsNextContent: arm64WhatsNextContent,
   },
   {
+    id: "x86",
+    title: "x86_64 Assembly",
+    description: "Learn x86_64 assembly language from scratch. Understand how desktop and server processors execute code with registers, memory, branches, and syscalls.",
+    language: "x86",
+    chapters: x86Chapters,
+    lessons: x86Lessons,
+    runtimeLabel: "x86_64 runtime",
+    introductionContent: x86IntroductionContent,
+    whatsNextContent: x86WhatsNextContent,
+  },
+  {
     id: "c",
     title: "C",
     description: "Learn the C programming language from scratch. See the ARM64 assembly your code compiles to, compiled and executed entirely in your browser.",
@@ -5462,6 +5538,321 @@ You have completed the F# course. You can now write idiomatic F# — defining fu
 - [F# Official Documentation](https://learn.microsoft.com/en-us/dotnet/fsharp/) — the official F# language reference.
 - [F# for Fun and Profit](https://fsharpforfunandprofit.com/) — comprehensive guide to functional programming in F#.
 - [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/) by Scott Wlaschin — the definitive book on F# domain modeling.
+`,
+  },
+  {
+    id: "lua",
+    title: "Lua",
+    description: "Learn Lua from scratch — variables, control flow, functions, closures, tables, metatables, and modules. Runs in your browser via a JS transpiler.",
+    language: "lua",
+    chapters: luaChapters,
+    lessons: luaLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why Lua?
+
+Lua is a lightweight, embeddable scripting language designed for extending applications. It powers game scripting (Roblox, World of Warcraft, LOVE2D), embedded systems, and configuration for tools like Neovim, Redis, and Nginx.
+
+- **Simple and elegant** — Lua has a tiny core with just 8 basic types and one data structure (the table).
+- **Fast** — LuaJIT is one of the fastest dynamic language runtimes ever built.
+- **Embeddable** — Lua was designed from day one to be embedded in C/C++ applications.
+- **Tables are everything** — arrays, dictionaries, objects, modules, and namespaces are all tables.
+
+## What You Will Learn
+
+- **Variables and types** — dynamic typing with \`local\` declarations
+- **Strings** — concatenation with \`..\`, the \`string\` library
+- **Control flow** — \`if/elseif/else\`, \`while\`, \`repeat/until\`, numeric and generic \`for\`
+- **Functions** — first-class functions, closures, variadic arguments
+- **Tables** — arrays (1-indexed), dictionaries, metatables for OOP
+- **Modules** — organizing code with table-based modules
+- **Coroutines** — cooperative multitasking via iterator patterns
+
+## Resources
+
+- [Lua Official Documentation](https://www.lua.org/manual/5.4/) — the official language reference manual.
+- [Programming in Lua](https://www.lua.org/pil/) by Roberto Ierusalimschy — the definitive book on Lua.
+- [Lua Users Wiki](http://lua-users.org/wiki/) — community-maintained tutorials and code samples.
+- [LOVE2D](https://love2d.org/) — a popular 2D game framework that uses Lua.
+- [Exercism Lua Track](https://exercism.org/tracks/lua) — practice problems with mentoring.
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the Lua course. You can now write Lua programs using variables, control flow, functions, closures, tables, and modules.
+
+## Go Deeper
+
+- **Metatables and metamethods** — customize table behavior with \`__add\`, \`__tostring\`, \`__call\`, and more.
+- **Coroutines** — Lua's built-in cooperative multitasking for generators, state machines, and async patterns.
+- **LuaJIT** — a just-in-time compiler for Lua that provides C-level performance for hot paths.
+- **C API** — embed Lua in C/C++ applications or write C extensions callable from Lua.
+- **Game development** — use LOVE2D, Defold, or Roblox Studio to build games with Lua.
+- **Neovim** — configure and extend Neovim with Lua plugins.
+
+## Resources
+
+- [Lua Official Documentation](https://www.lua.org/manual/5.4/) — the official language reference manual.
+- [Programming in Lua](https://www.lua.org/pil/) by Roberto Ierusalimschy — the definitive book on Lua.
+- [LuaJIT](https://luajit.org/) — the high-performance Lua implementation.
+- [Awesome Lua](https://github.com/LewisJEllis/awesome-lua) — a curated list of Lua libraries and resources.
+`,
+  },
+  {
+    id: "perl",
+    title: "Perl",
+    description: "Learn Perl from scratch — scalars, arrays, hashes, control flow, subroutines, string operations, and regular expressions. Runs in your browser via a JS transpiler.",
+    language: "perl",
+    chapters: perlChapters,
+    lessons: perlLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why Perl?
+
+Perl is a highly capable, feature-rich programming language with over 35 years of development. It was designed for text processing and remains unmatched for quick data manipulation, system administration, and glue code.
+
+- **Text processing** — Perl's regular expressions and string operations are legendary. It was built to process text, and it shows.
+- **CPAN** — the Comprehensive Perl Archive Network has over 200,000 modules covering everything from web frameworks to bioinformatics.
+- **Practical extraction** — Perl excels at reading files, extracting data, and generating reports. One-liners can replace entire shell scripts.
+- **Cross-platform** — Perl runs on virtually every operating system and comes pre-installed on most Unix-like systems.
+- **Mature ecosystem** — used in production at Amazon, BBC, Booking.com, and countless infrastructure tools worldwide.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **5 chapters**:
+
+1. **Perl Basics** — hello world, scalar variables, arithmetic, and string operations.
+2. **Control Flow** — if/unless, while/until, for/foreach loops.
+3. **Data Structures** — arrays, hashes, and data operations like join and split.
+4. **Functions & I/O** — subroutines, string functions, grep, and map.
+5. **Advanced Perl** — data processing and a capstone project combining everything.
+
+Each lesson runs in your browser via a Perl-to-JavaScript transpiler — no installation required.
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the Perl course. You can now write idiomatic Perl — declaring variables, manipulating strings, working with arrays and hashes, writing subroutines, and processing data.
+
+## Go Deeper
+
+- **Regular expressions** — Perl's regex engine supports lookahead, lookbehind, named captures, and more.
+- **References and complex data structures** — build arrays of hashes, hashes of arrays, and nested data structures using references.
+- **Object-oriented Perl** — use bless, packages, and Moose/Moo for OOP.
+- **CPAN modules** — explore DBI for databases, LWP for web requests, JSON for data interchange, and thousands more.
+- **One-liners** — use perl -e and perl -ne for powerful command-line text processing.
+
+## Resources
+
+- [Perl Official Documentation](https://perldoc.perl.org/) — the official language reference.
+- [Modern Perl](http://modernperlbooks.com/) by chromatic — a free book on writing clean, modern Perl.
+- [Learning Perl](https://www.oreilly.com/library/view/learning-perl-8th/9781492094944/) by Randal Schwartz — the classic introductory book.
+- [Exercism Perl Track](https://exercism.org/tracks/perl5) — practice problems with mentoring.
+`,
+  },
+  {
+    id: "ocaml",
+    title: "OCaml",
+    description: "Learn OCaml from scratch — let bindings, pattern matching, recursion, lists, options, and modules. Runs in your browser via a JS transpiler.",
+    language: "ocaml",
+    chapters: ocamlChapters,
+    lessons: ocamlLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why OCaml?
+
+OCaml is a statically typed functional programming language with a powerful type system, automatic memory management, and native code compilation. It is the language behind tools like the Coq proof assistant, MirageOS, and the original implementation of Rust's compiler.
+
+- **Strong type inference** — OCaml infers types so you rarely need annotations, yet the compiler catches errors at compile time.
+- **Pattern matching** — exhaustive pattern matching makes it easy to handle every case in your data.
+- **Algebraic data types** — variants and records let you model complex domains precisely.
+- **Functional core, imperative when needed** — OCaml is functional-first but supports mutable state and imperative loops.
+- **Fast native compilation** — OCaml compiles to efficient native code, with performance competitive with C.
+
+## What You Will Learn
+
+- Printing output with \`print_endline\`, \`print_int\`, and \`print_newline\`
+- Immutable bindings with \`let\`
+- Basic types: \`int\`, \`float\`, \`string\`, \`bool\`
+- Arithmetic and type conversions
+- Defining and calling functions
+- Recursion with \`let rec\`
+- Higher-order functions and \`fun\` lambdas
+- Lists with \`[...]\`, \`::\`, and the \`List\` module
+- Tuples and \`fst\`/\`snd\`
+- Pattern matching with \`match ... with\`
+- The \`option\` type (\`Some\`/\`None\`)
+- Modules and the pipe operator \`|>\`
+
+## Resources
+
+- [OCaml Official Site](https://ocaml.org/) — the official language site with tutorials and documentation.
+- [Real World OCaml](https://dev.realworldocaml.org/) — a comprehensive, freely available book.
+- [OCaml Manual](https://v2.ocaml.org/api/) — the standard library API reference.
+- [Exercism OCaml Track](https://exercism.org/tracks/ocaml) — practice problems with mentoring.
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the OCaml course. You can now write idiomatic OCaml — defining functions, using pattern matching, transforming lists, and modeling data with tuples and options.
+
+## Go Deeper
+
+- **Algebraic data types** — define variants with data payloads and use exhaustive pattern matching.
+- **The module system** — signatures, functors, and first-class modules for abstraction at scale.
+- **Imperative features** — mutable references, arrays, for/while loops, and exceptions.
+- **The opam ecosystem** — \`dune\` build system, \`lwt\` for async I/O, \`dream\` for web servers, \`cmdliner\` for CLI tools.
+- **OCaml 5 effects** — algebraic effects and multicore parallelism.
+
+## Resources
+
+- [OCaml Official Site](https://ocaml.org/) — the official language site with tutorials and documentation.
+- [Real World OCaml](https://dev.realworldocaml.org/) — a comprehensive, freely available book.
+- [Cornell CS 3110](https://cs3110.github.io/textbook/) — an excellent OCaml-based programming textbook.
+- [Exercism OCaml Track](https://exercism.org/tracks/ocaml) — practice problems with mentoring.
+`,
+  },
+  {
+    id: "networking",
+    title: "Networking",
+    description: "Learn computer networking from scratch — sockets, protocols, TCP/IP, HTTP, and DNS. Build working network programs in JavaScript.",
+    language: "javascript",
+    chapters: networkingChapters,
+    lessons: networkingLessons,
+    runtimeLabel: "Node.js",
+    introductionContent: `## Why Networking?
+
+Computer networking is the foundation of the modern internet. Understanding how data travels between machines — from raw sockets to HTTP requests — is essential for every software engineer.
+
+- **Protocols** — learn how TCP, UDP, IP, HTTP, and DNS work under the hood.
+- **Sockets** — build client-server programs that communicate over the network.
+- **Hands-on** — every lesson runs real networking code in your browser.
+
+## What You Will Learn
+
+- How the internet protocol stack works (physical → application layer)
+- TCP connections, handshakes, and reliable delivery
+- UDP datagrams and when to use them
+- HTTP request/response lifecycle
+- DNS resolution and domain name lookups
+- Building simple network services
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the Networking course. You now understand how data moves across networks — from raw packets to application-layer protocols.
+
+## Go Deeper
+
+- **Network programming** — build production servers with Node.js or Go.
+- **Security** — explore TLS, HTTPS, and certificate management.
+- **Distributed systems** — study consensus algorithms, replication, and fault tolerance.
+- **Wireshark** — capture and analyze real network traffic.
+`,
+  },
+  {
+    id: "compiler",
+    title: "Build an Interpreter",
+    description: "Build a working interpreter from scratch — lexing, parsing, AST construction, and tree-walking evaluation. All in JavaScript.",
+    language: "javascript",
+    chapters: compilerChapters,
+    lessons: compilerLessons,
+    runtimeLabel: "Node.js",
+    introductionContent: `## Why Build an Interpreter?
+
+Understanding how programming languages work is one of the most rewarding topics in computer science. By building an interpreter from scratch, you will demystify the magic behind every language you use.
+
+- **Lexing** — break source code into tokens.
+- **Parsing** — transform tokens into an abstract syntax tree (AST).
+- **Evaluation** — walk the AST to execute programs.
+- **From scratch** — no libraries, no shortcuts, just you and JavaScript.
+
+## What You Will Learn
+
+- Tokenization and lexical analysis
+- Recursive descent parsing
+- Abstract syntax tree design
+- Tree-walking interpretation
+- Variables, expressions, and control flow
+- Functions and closures
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the Interpreter course. You now understand the core pipeline of every programming language: source code to tokens to AST to execution.
+
+## Go Deeper
+
+- **Bytecode compilation** — compile to a virtual machine instead of tree-walking.
+- **Type checking** — add a static type system to your language.
+- **Optimization** — constant folding, dead code elimination, and more.
+- **Crafting Interpreters** by Robert Nystrom — the definitive book on building interpreters.
+`,
+  },
+  {
+    id: "abstract-algebra",
+    title: "Abstract Algebra in Python",
+    description: "Learn abstract algebra from scratch — groups, rings, fields, homomorphisms, and symmetry. Implement algebraic structures in Python.",
+    language: "python",
+    chapters: abstractAlgebraChapters,
+    lessons: abstractAlgebraLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: `## Why Abstract Algebra?
+
+Abstract algebra studies the deep structure behind arithmetic, symmetry, and computation. It underpins modern cryptography, error-correcting codes, and theoretical computer science.
+
+- **Groups** — the simplest algebraic structure, capturing the essence of symmetry.
+- **Rings and fields** — generalize arithmetic from integers to polynomials and beyond.
+- **Homomorphisms** — structure-preserving maps that reveal hidden connections.
+- **Hands-on** — implement every concept in Python with immediate feedback.
+
+## What You Will Learn
+
+- Groups, subgroups, and group axioms
+- Cyclic groups and permutation groups
+- Rings, integral domains, and fields
+- Homomorphisms and isomorphisms
+- Quotient groups and the first isomorphism theorem
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the Abstract Algebra course. You can now reason about algebraic structures — groups, rings, and fields — and implement them in Python.
+
+## Go Deeper
+
+- **Galois theory** — the deep connection between field extensions and group theory.
+- **Cryptography** — RSA, elliptic curves, and lattice-based schemes all rely on abstract algebra.
+- **Category theory** — abstract algebra at a higher level of abstraction.
+- **Coding theory** — error-correcting codes built on finite fields.
+`,
+  },
+  {
+    id: "real-analysis",
+    title: "Real Analysis in Python",
+    description: "Learn real analysis from scratch — sequences, limits, continuity, differentiation, and integration. Implement and visualize every concept in Python.",
+    language: "python",
+    chapters: realAnalysisChapters,
+    lessons: realAnalysisLessons,
+    runtimeLabel: "Pyodide",
+    introductionContent: `## Why Real Analysis?
+
+Real analysis is the rigorous foundation of calculus. It replaces intuition with precise definitions and proofs, giving you a deep understanding of limits, continuity, and convergence.
+
+- **Epsilon-delta** — master the precise language of limits and continuity.
+- **Sequences and series** — understand convergence, divergence, and the tools to tell them apart.
+- **Differentiation and integration** — the Riemann integral and the fundamental theorem, done right.
+- **Hands-on** — implement numerical approximations and verify theoretical results in Python.
+
+## What You Will Learn
+
+- Sequences, limits, and the completeness of the real numbers
+- Series convergence tests
+- Continuity and the intermediate value theorem
+- Differentiation and the mean value theorem
+- Riemann integration and the fundamental theorem of calculus
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the Real Analysis course. You now have a rigorous understanding of the foundations of calculus — limits, continuity, differentiation, and integration.
+
+## Go Deeper
+
+- **Measure theory** — generalize integration with Lebesgue measure and the dominated convergence theorem.
+- **Functional analysis** — Banach spaces, Hilbert spaces, and operator theory.
+- **Complex analysis** — extend real analysis to the complex plane with stunning results.
+- **Topology** — generalize continuity and convergence to abstract spaces.
 `,
   },
 ];

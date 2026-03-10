@@ -6,7 +6,7 @@ export const impliedVolatility: Lesson = {
   chapterId: "black-scholes",
   content: `## Implied Volatility
 
-The **implied volatility** (IV) is the volatility value σ that, when plugged into Black-Scholes, produces the observed market price of the option.
+The **implied volatility** (IV) is the volatility value σ that, when plugged into Black-Scholes, produces the observed market price of the option. (Recall that σ here denotes volatility, as is standard in finance — not the sigmoid function from ML.)
 
 Unlike the other Black-Scholes inputs (S, K, T, r), volatility is not directly observable. Traders quote options prices in terms of their implied volatility.
 
@@ -28,6 +28,16 @@ The bisection method works on a function f(σ) = BS(σ) - market_price:
 5. Repeat until |f(mid)| < 1e-6 or 100 iterations
 
 This works because BS price is **monotonically increasing** in σ.
+
+### The Volatility Smile and Skew
+
+In theory (under Black-Scholes assumptions), all options on the same underlying with the same expiry should have the **same** implied volatility regardless of strike. In practice, they do not.
+
+**Volatility smile**: OTM puts and OTM calls both have higher IV than ATM options, forming a U-shaped curve when plotting IV vs. strike. This is common in FX markets.
+
+**Volatility skew**: OTM puts have significantly higher IV than OTM calls, creating a downward-sloping curve. This is the dominant pattern in equity index options and reflects the market pricing crash risk (investors pay more for downside protection).
+
+The smile/skew exists because real return distributions have **fat tails** and **negative skewness** — violations of the lognormal assumption in Black-Scholes. Models like **stochastic volatility** (Heston) and **local volatility** (Dupire) were developed specifically to capture these patterns.
 
 ### Example
 
@@ -103,6 +113,31 @@ def implied_vol(market_price, S, K, T, r, option_type='call'):
       name: "IV roundtrip: BS price -> IV -> BS price",
       code: `{{FUNC}}\noriginal_sigma = 0.3\nprice = bs_call(100, 100, 1, 0.05, original_sigma)\nrecovered = implied_vol(price, 100, 100, 1, 0.05)\nprint(round(abs(recovered - original_sigma) < 1e-4))`,
       expected: "1\n",
+    },
+    {
+      name: "Volatility smile: OTM put has higher IV than ATM",
+      code: `{{FUNC}}
+# Simulate a smile: price OTM put with higher vol, then recover IV
+otm_put_price = bs_put(100, 90, 1, 0.05, 0.30)
+atm_put_price = bs_put(100, 100, 1, 0.05, 0.20)
+iv_otm = implied_vol(otm_put_price, 100, 90, 1, 0.05, 'put')
+iv_atm = implied_vol(atm_put_price, 100, 100, 1, 0.05, 'put')
+print(round(iv_otm, 2) > round(iv_atm, 2))`,
+      expected: "True\n",
+    },
+    {
+      name: "Volatility skew: IV increases as strike decreases (put side)",
+      code: `{{FUNC}}
+# Simulate skew: lower strikes priced with progressively higher vol
+strikes = [90, 95, 100]
+vols = [0.30, 0.25, 0.20]
+ivs = []
+for K, v in zip(strikes, vols):
+    price = bs_put(100, K, 1, 0.05, v)
+    iv = implied_vol(price, 100, K, 1, 0.05, 'put')
+    ivs.append(round(iv, 4))
+print(ivs[0] > ivs[1] > ivs[2])`,
+      expected: "True\n",
     },
   ],
 };

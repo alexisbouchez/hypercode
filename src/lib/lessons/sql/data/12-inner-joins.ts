@@ -106,5 +106,9 @@ INNER JOIN customers c ON o.customer_id = c.id;`,
       name: "returns all 3 orders",
       expected: '{"type":"rowCount","value":3}',
     },
+    {
+      name: "result includes Alice (has 2 orders)",
+      expected: '{"type":"contains","value":"Alice"}',
+    },
   ],
 };

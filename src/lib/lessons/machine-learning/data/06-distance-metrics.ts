@@ -32,6 +32,10 @@ $$\\text{cos\\_sim}(\\mathbf{a}, \\mathbf{b}) = \\frac{\\mathbf{a} \\cdot \\math
 
 Cosine similarity is widely used in text and document similarity because it is scale-invariant.
 
+### A Warning: The Curse of Dimensionality
+
+All distance metrics suffer in very high dimensions. As the number of features $d$ grows, the difference between the nearest and farthest points shrinks, making distances less meaningful. This is why dimensionality reduction (e.g., PCA, covered later in this course) is often applied before distance-based algorithms like k-NN or k-means.
+
 ### Your Task
 
 Implement:

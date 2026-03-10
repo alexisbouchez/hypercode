@@ -6,7 +6,14 @@ export const selfAndCrossJoins: Lesson = {
   chapterId: "joins",
   content: `## Joining a Table with Itself
 
-Not all joins are between different tables. Sometimes the relationship you need to express exists within a single table. A **self join** is a regular join where both sides reference the same table.
+In the previous lessons you learned how to combine **different** tables using \`INNER JOIN\` (Lesson 12) and \`LEFT\`/\`RIGHT\`/\`FULL OUTER JOIN\` (Lesson 13). The key idea was always the same: match rows from table A with rows from table B based on a join condition.
+
+Self joins and cross joins reuse those exact mechanics --- the only twist is **which** tables you combine:
+
+- A **self join** joins a table to *itself* (same syntax as an inner or outer join, just both sides point to the same table).
+- A **CROSS JOIN** pairs every row with every row, with no \`ON\` condition at all.
+
+If you are comfortable writing an \`INNER JOIN ... ON\` clause, you already have the core skill. The examples below simply apply it in a new context.
 
 ### Self Joins
 
@@ -122,6 +129,10 @@ INNER JOIN products b ON a.category = b.category AND a.id < b.id;`,
     {
       name: "returns product_a, product_b, and category columns",
       expected: '{"type":"contains","columns":["category"]}',
+    },
+    {
+      name: "result includes Office category pairs",
+      expected: '{"type":"contains","value":"Office"}',
     },
   ],
 };

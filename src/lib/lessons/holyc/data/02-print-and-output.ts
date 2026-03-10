@@ -67,5 +67,15 @@ Print("Year: %d\\n", 1999);
       name: "prints three lines",
       expected: "Name: HolyC\nVersion: 1\nYear: 1999\n",
     },
+    {
+      name: "first line is Name: HolyC",
+      code: 'Print("Name: %s\\n", "HolyC");',
+      expected: "Name: HolyC\n",
+    },
+    {
+      name: "prints Version and Year with format specifiers",
+      code: 'Print("Version: %d\\nYear: %d\\n", 1, 1999);',
+      expected: "Version: 1\nYear: 1999\n",
+    },
   ],
 };

@@ -111,5 +111,15 @@ int main() {
 }`,
 			expected: "78.5398\n",
 		},
+		{
+			name: "sqrt(2.0) with %.6f",
+			code: `#include <stdio.h>
+#include <math.h>
+int main() {
+\tprintf("%.6f\\n", sqrt(2.0));
+\treturn 0;
+}`,
+			expected: "1.414214\n",
+		},
 	],
 };

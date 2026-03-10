@@ -30,21 +30,15 @@ CMP X0, #10
 CSINC X1, X2, X3, EQ  // if X0 == 10 then X1 = X2 else X1 = X3 + 1
 \`\`\`
 
-A common pattern is using CSINC to create a boolean flag:
+A common pattern is using CSINC with XZR to create a boolean flag. Remember: \`CSINC Xd, XZR, XZR, cond\` returns 0 when the condition is true and 1 when it is false (because the "increment" path runs on the false branch). So to set X2 to 1 when X0 equals X1, you use the **opposite** condition (\`NE\`):
 
 \`\`\`asm
 CMP X0, X1
-CSINC X2, XZR, XZR, NE  // X2 = (X0 == X1) ? 0 : 0 + 1 = 1 if not equal
+CSINC X2, XZR, XZR, NE  // condition NE is false when equal, so X2 = 0 + 1 = 1
+                          // condition NE is true when not equal, so X2 = 0
 \`\`\`
 
-Wait -- that sets X2 to 1 when NOT equal, and 0 when equal. To set X2 to 1 when equal, invert the condition:
-
-\`\`\`asm
-CMP X0, X1
-CSINC X2, XZR, XZR, NE  // X2 = 1 if equal (condition is inverted!)
-\`\`\`
-
-This is actually what the \`CSET\` pseudo-instruction does: \`CSET X2, EQ\` is shorthand for \`CSINC X2, XZR, XZR, NE\`.
+In other words, \`CSINC Xd, XZR, XZR, NE\` means "set Xd to 1 if equal, 0 otherwise." This is exactly what the \`CSET\` pseudo-instruction does: \`CSET X2, EQ\` is shorthand for \`CSINC X2, XZR, XZR, NE\`. The inverted condition is intentional -- \`CSET\` always encodes the opposite condition because the +1 happens on the false path of \`CSINC\`.
 
 ### CSNEG -- Conditional Select and Negate
 

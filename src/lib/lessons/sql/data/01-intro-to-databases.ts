@@ -70,5 +70,13 @@ Run the query below to see all the products in the database. This is the sandbox
       name: "returns all products",
       expected: '{"type":"rowCount","value":8}',
     },
+    {
+      name: "result includes id, name, price, and category columns",
+      expected: '{"type":"contains","columns":["id","name","price","category"]}',
+    },
+    {
+      name: "result contains Laptop",
+      expected: '{"type":"contains","value":"Laptop"}',
+    },
   ],
 };

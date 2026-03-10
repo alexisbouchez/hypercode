@@ -51,6 +51,23 @@ free(arr);
 - \`realloc(NULL, size)\` behaves like \`malloc(size)\`
 - Always assign the result of \`realloc\` -- the pointer may change
 
+### Common Pitfall: Losing the Original Pointer
+
+Never assign \`realloc\` directly to the same pointer without checking for failure:
+
+\`\`\`c
+// DANGEROUS: if realloc fails, arr is lost (memory leak)
+arr = (int *)realloc(arr, new_size);
+
+// SAFER: use a temporary pointer
+int *tmp = (int *)realloc(arr, new_size);
+if (tmp != NULL) {
+    arr = tmp;
+}
+\`\`\`
+
+If \`realloc\` returns \`NULL\`, the original block is still valid. Overwriting the pointer with \`NULL\` means you can never free the original block.
+
 ### Your Task
 
 Write a function \`int *zeros(int n)\` that uses \`calloc\` to allocate an array of \`n\` integers (all zero). Write a function \`int *grow(int *arr, int old_n, int new_n, int fill)\` that uses \`realloc\` to grow the array and fills new slots with \`fill\`. Print all elements after growing.`,
@@ -158,6 +175,19 @@ int main() {
 \treturn 0;
 }`,
 			expected: "10\n20\n99\n99\n",
+		},
+		{
+			name: "zeros(1) single element",
+			code: `#include <stdio.h>
+#include <stdlib.h>
+{{FUNC}}
+int main() {
+\tint *arr = zeros(1);
+\tprintf("%d\\n", arr[0]);
+\tfree(arr);
+\treturn 0;
+}`,
+			expected: "0\n",
 		},
 	],
 };

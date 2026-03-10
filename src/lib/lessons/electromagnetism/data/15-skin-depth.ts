@@ -73,36 +73,36 @@ print(f"{skin_depth(rho_cu, 1e9, MU0):.2e}")     # 2.09e-06
 
 	tests: [
 		{
-			name: "copper at 50 Hz → δ ≈ 9.33e-03 m",
+			name: "copper at 50 Hz → δ ≈ 9.23e-03 m",
 			code: `{{FUNC}}
 import math
 MU0 = 4 * math.pi * 1e-7
 print(f"{skin_depth(1.68e-8, 50, MU0):.2e}")`,
-			expected: "9.33e-03\n",
+			expected: "9.23e-03\n",
 		},
 		{
-			name: "copper at 1000 Hz → δ ≈ 2.09e-03 m",
+			name: "copper at 1000 Hz → δ ≈ 2.06e-03 m",
 			code: `{{FUNC}}
 import math
 MU0 = 4 * math.pi * 1e-7
 print(f"{skin_depth(1.68e-8, 1000, MU0):.2e}")`,
-			expected: "2.09e-03\n",
+			expected: "2.06e-03\n",
 		},
 		{
-			name: "copper at 1 MHz → δ ≈ 6.61e-05 m",
+			name: "copper at 1 MHz → δ ≈ 6.52e-05 m",
 			code: `{{FUNC}}
 import math
 MU0 = 4 * math.pi * 1e-7
 print(f"{skin_depth(1.68e-8, 1e6, MU0):.2e}")`,
-			expected: "6.60e-05\n",
+			expected: "6.52e-05\n",
 		},
 		{
-			name: "copper at 1 GHz → δ ≈ 2.09e-06 m",
+			name: "copper at 1 GHz → δ ≈ 2.06e-06 m",
 			code: `{{FUNC}}
 import math
 MU0 = 4 * math.pi * 1e-7
 print(f"{skin_depth(1.68e-8, 1e9, MU0):.2e}")`,
-			expected: "2.09e-06\n",
+			expected: "2.06e-06\n",
 		},
 	],
 };

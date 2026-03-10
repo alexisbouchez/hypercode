@@ -28,6 +28,12 @@ def myLength : List Nat → Nat
   | _ :: xs => 1 + myLength xs
 \`\`\`
 
+## Structural Recursion and the Induction Principle
+
+When you write a recursive function on a list by matching \`[]\` and \`x :: xs\`, you are performing **structural recursion** — each recursive call operates on a strictly smaller piece of the input. This pattern mirrors the **induction principle** for lists: to prove a property holds for all lists, prove it for the empty list (base case) and prove that if it holds for \`xs\` then it holds for \`x :: xs\` (inductive step).
+
+In Lean's theorem-proving mode, the \`induction\` tactic automates exactly this pattern. For example, to prove that \`myLength (xs ++ ys) = myLength xs + myLength ys\`, you would use \`induction xs\` and Lean generates two goals matching the two constructors of \`List\`. Proof **tactics** like \`simp\`, \`rfl\`, and \`induction\` are the tools that make Lean a practical theorem prover.
+
 ## Your Turn
 
 Define \`myProduct\` that multiplies all elements in a list.

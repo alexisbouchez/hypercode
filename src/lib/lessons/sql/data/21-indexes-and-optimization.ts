@@ -163,5 +163,15 @@ CREATE INDEX`,
       expected: '{"type":"rowCount","value":1}',
       code: `{{USER_SQL}}\n---VALIDATE---\nSELECT indexname FROM pg_indexes WHERE tablename = 'products' AND indexdef LIKE '%category%';`,
     },
+    {
+      name: "index is a btree index (default type)",
+      expected: '{"type":"contains","value":"btree"}',
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT indexdef FROM pg_indexes WHERE tablename = 'products' AND indexdef LIKE '%category%';`,
+    },
+    {
+      name: "index is not a unique index",
+      expected: '{"type":"rowCount","value":0}',
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT indexname FROM pg_indexes WHERE tablename = 'products' AND indexdef LIKE '%category%' AND indexdef LIKE '%UNIQUE%';`,
+    },
   ],
 };

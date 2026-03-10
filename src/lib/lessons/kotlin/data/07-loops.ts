@@ -68,5 +68,15 @@ Use a \`for\` loop over the range \`1..5\` to compute and print the sum of squar
       name: "sum of squares 1..5 = 55",
       expected: "55\n",
     },
+    {
+      name: "for loop over range 1..3",
+      code: "fun main() {\n    for (i in 1..3) {\n        println(i)\n    }\n}",
+      expected: "1\n2\n3\n",
+    },
+    {
+      name: "while loop countdown",
+      code: "fun main() {\n    var n = 3\n    while (n > 0) {\n        println(n)\n        n -= 1\n    }\n}",
+      expected: "3\n2\n1\n",
+    },
   ],
 };

@@ -97,13 +97,14 @@ Write a function \`acronym(s string) string\` that takes a phrase and returns it
 
 For example, \`"Portable Network Graphics"\` becomes \`"PNG"\`.
 
-Use \`strings.Fields\` to split into words, and \`strings.ToUpper\` to uppercase.`,
+Use \`strings.Fields\` to split into words, \`utf8.DecodeRuneInString\` to grab the first rune of each word, and \`strings.ToUpper\` to uppercase it.`,
 
   starterCode: `package main
 
 import (
 \t"fmt"
 \t"strings"
+\t"unicode/utf8"
 )
 
 func acronym(s string) string {
@@ -122,16 +123,15 @@ func main() {
 import (
 \t"fmt"
 \t"strings"
+\t"unicode/utf8"
 )
 
 func acronym(s string) string {
 \twords := strings.Fields(s)
 \tresult := ""
 \tfor _, w := range words {
-\t\tfor _, r := range w {
-\t\t\tresult += strings.ToUpper(string(r))
-\t\t\tbreak
-\t\t}
+\t\tr, _ := utf8.DecodeRuneInString(w)
+\t\tresult += strings.ToUpper(string(r))
 \t}
 \treturn result
 }
@@ -150,6 +150,7 @@ func main() {
 import (
 \t"fmt"
 \t"strings"
+\t"unicode/utf8"
 )
 
 {{FUNC}}
@@ -166,6 +167,7 @@ func main() {
 import (
 \t"fmt"
 \t"strings"
+\t"unicode/utf8"
 )
 
 {{FUNC}}
@@ -182,6 +184,7 @@ func main() {
 import (
 \t"fmt"
 \t"strings"
+\t"unicode/utf8"
 )
 
 {{FUNC}}
@@ -198,6 +201,7 @@ func main() {
 import (
 \t"fmt"
 \t"strings"
+\t"unicode/utf8"
 )
 
 {{FUNC}}

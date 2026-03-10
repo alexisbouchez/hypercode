@@ -67,5 +67,10 @@ def return_map_pairs(xs):
       code: `{{FUNC}}\nprint(return_map_pairs([1.0, 2.0, 3.0]))`,
       expected: "[(1.0, 2.0), (2.0, 3.0)]\n",
     },
+    {
+      name: "r=3.3 period-2 orbit",
+      code: `{{FUNC}}\norbit = logistic_orbit(3.3, 0.1, 1000, 20)\nprint(orbit_period(orbit))`,
+      expected: "2\n",
+    },
   ],
 };

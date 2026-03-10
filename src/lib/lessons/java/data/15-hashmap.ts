@@ -86,5 +86,42 @@ public class Main {
 			name: "size, get, containsKey, default, update",
 			expected: "3\n95\ntrue\n0\n98\n",
 		},
+		{
+			name: "key overwrite replaces value",
+			expected: "1\n10\n1\n20\n",
+			code: `import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("x", 10);
+        System.out.println(map.size());
+        System.out.println(map.get("x"));
+        map.put("x", 20);
+        System.out.println(map.size());
+        System.out.println(map.get("x"));
+    }
+}
+`,
+		},
+		{
+			name: "get missing key returns null, remove decreases size",
+			expected: "null\n2\n1\nfalse\n",
+			code: `import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        System.out.println(map.get("c"));
+        System.out.println(map.size());
+        map.remove("a");
+        System.out.println(map.size());
+        System.out.println(map.containsKey("a"));
+    }
+}
+`,
+		},
 	],
 };

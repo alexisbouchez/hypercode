@@ -97,5 +97,16 @@ console.log(binarySearch([1, 3, 5, 7, 9], 9));`,
 console.log(binarySearch([], 5));`,
 			expected: "-1\n",
 		},
+		{
+			name: "handles 10000 elements (O(log n) efficiency check)",
+			code: `{{FUNC}}
+const big = Array.from({length: 10000}, (_, i) => i * 3);
+console.log(binarySearch(big, 0));
+console.log(binarySearch(big, 14997));
+console.log(binarySearch(big, 29997));
+console.log(binarySearch(big, 15000));
+console.log(binarySearch(big, 1));`,
+			expected: "0\n4999\n9999\n5000\n-1\n",
+		},
 	],
 };

@@ -6,6 +6,8 @@ export const typeNarrowing: Lesson = {
 	chapterId: "type-system",
 	content: `## Type Narrowing
 
+> **Building on Union Types:** In the previous lesson you wrote \`typeof\` checks to distinguish \`string | number\` in \`describe()\`. That was already narrowing in action! Here we will name the concept and explore more narrowing techniques.
+
 When you have a union type, TypeScript does not know which specific type you have. **Narrowing** uses runtime checks to determine the actual type, letting TypeScript then give you the correct methods:
 
 \`\`\`ts

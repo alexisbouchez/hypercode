@@ -148,5 +148,95 @@ _start:
       name: "prints 120",
       expected: "120\n",
     },
+    {
+      name: "factorial(0) = 1 (base case)",
+      expected: "1\n",
+      code: `.data
+buf:
+\t.skip 4
+
+.text
+.global _start
+
+factorial:
+\tCMP X0, #1
+\tB.LE base_case
+\tSTP X30, X0, [SP, #-16]!
+\tSUB X0, X0, #1
+\tBL factorial
+\tLDP X30, X1, [SP], #16
+\tMUL X0, X0, X1
+\tRET
+
+base_case:
+\tMOV X0, #1
+\tRET
+
+_start:
+\tMOV X0, #0
+\tBL factorial
+
+\tADD X0, X0, #48
+\tLDR X4, =buf
+\tSTRB W0, [X4]
+\tMOV X5, #10
+\tSTRB W5, [X4, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "factorial(1) = 1 (base case)",
+      expected: "1\n",
+      code: `.data
+buf:
+\t.skip 4
+
+.text
+.global _start
+
+factorial:
+\tCMP X0, #1
+\tB.LE base_case
+\tSTP X30, X0, [SP, #-16]!
+\tSUB X0, X0, #1
+\tBL factorial
+\tLDP X30, X1, [SP], #16
+\tMUL X0, X0, X1
+\tRET
+
+base_case:
+\tMOV X0, #1
+\tRET
+
+_start:
+\tMOV X0, #1
+\tBL factorial
+
+\tADD X0, X0, #48
+\tLDR X4, =buf
+\tSTRB W0, [X4]
+\tMOV X5, #10
+\tSTRB W5, [X4, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

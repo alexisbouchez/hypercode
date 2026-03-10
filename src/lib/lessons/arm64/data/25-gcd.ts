@@ -108,5 +108,87 @@ gcd_done:
       name: "GCD(48, 18) = 6",
       expected: "6\n",
     },
+    {
+      name: "GCD(35, 14) = 7",
+      expected: "7\n",
+      code: `.data
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tMOV X0, #35
+\tMOV X1, #14
+
+gcd_loop:
+\tCBZ X1, gcd_done
+\tUDIV X2, X0, X1
+\tMUL X3, X2, X1
+\tSUB X2, X0, X3
+\tMOV X0, X1
+\tMOV X1, X2
+\tB gcd_loop
+
+gcd_done:
+\tADD X0, X0, #48
+
+\tLDR X9, =buf
+\tSTRB W0, [X9]
+\tMOV W1, #10
+\tSTRB W1, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "GCD(9, 9) = 9 (equal inputs)",
+      expected: "9\n",
+      code: `.data
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tMOV X0, #9
+\tMOV X1, #9
+
+gcd_loop:
+\tCBZ X1, gcd_done
+\tUDIV X2, X0, X1
+\tMUL X3, X2, X1
+\tSUB X2, X0, X3
+\tMOV X0, X1
+\tMOV X1, X2
+\tB gcd_loop
+
+gcd_done:
+\tADD X0, X0, #48
+
+\tLDR X9, =buf
+\tSTRB W0, [X9]
+\tMOV W1, #10
+\tSTRB W1, [X9, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

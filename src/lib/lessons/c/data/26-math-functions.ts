@@ -112,5 +112,25 @@ int main() {
 }`,
 			expected: "3.14\n",
 		},
+		{
+			name: "floor(4.9) = 4.00",
+			code: `#include <stdio.h>
+#include <math.h>
+int main() {
+\tprintf("%.2f\\n", floor(4.9));
+\treturn 0;
+}`,
+			expected: "4.00\n",
+		},
+		{
+			name: "ceil(4.1) = 5.00",
+			code: `#include <stdio.h>
+#include <math.h>
+int main() {
+\tprintf("%.2f\\n", ceil(4.1));
+\treturn 0;
+}`,
+			expected: "5.00\n",
+		},
 	],
 };

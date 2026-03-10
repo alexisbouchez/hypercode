@@ -68,5 +68,10 @@ def mandelbrot_grid(cr_min, cr_max, ci_min, ci_max, nx, ny, max_iter):
       code: `{{FUNC}}\nprint(in_mandelbrot(-1.0, 0.0, 100))`,
       expected: `True\n`,
     },
+    {
+      name: "c=1 escapes",
+      code: `{{FUNC}}\nprint(in_mandelbrot(1.0, 0.0, 100))`,
+      expected: `False\n`,
+    },
   ],
 };

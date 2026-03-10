@@ -78,5 +78,15 @@ echo "Hello, $NAME!"
       name: "uses variable in echo",
       expected: "Hello, Linux!\n",
     },
+    {
+      name: "variable assignment and expansion",
+      code: `LANG="Shell"\necho "Learning $LANG"`,
+      expected: "Learning Shell\n",
+    },
+    {
+      name: "braces for variable expansion",
+      code: "VER=\"2\"\necho \"v${VER}.0\"",
+      expected: "v2.0\n",
+    },
   ],
 };

@@ -134,5 +134,15 @@ CREATE TABLE books (
       code: `{{USER_SQL}}\n---VALIDATE---\nSELECT column_name FROM information_schema.columns WHERE table_name = 'books' ORDER BY ordinal_position;`,
       expected: '{"type":"rowCount","value":5}',
     },
+    {
+      name: "books table has a title column",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT column_name FROM information_schema.columns WHERE table_name = 'books' AND column_name = 'title';`,
+      expected: '{"type":"rowCount","value":1}',
+    },
+    {
+      name: "books table has an author column",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT column_name FROM information_schema.columns WHERE table_name = 'books' AND column_name = 'author';`,
+      expected: '{"type":"rowCount","value":1}',
+    },
   ],
 };

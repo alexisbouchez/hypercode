@@ -120,5 +120,38 @@ int main() {
 			name: "prints numbers and languages",
 			expected: "1 2 3 4 5\nC\nC++\nGo\n",
 		},
+		{
+			name: "while loop counts down",
+			expected: "5 4 3 2 1\n",
+			code: `#include <iostream>
+using namespace std;
+int main() {
+	int n = 5;
+	while (n >= 1) {
+		cout << n;
+		if (n > 1) cout << " ";
+		n--;
+	}
+	cout << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "break exits loop early",
+			expected: "0 1 2\n",
+			code: `#include <iostream>
+using namespace std;
+int main() {
+	for (int i = 0; i < 10; i++) {
+		if (i == 3) break;
+		if (i > 0) cout << " ";
+		cout << i;
+	}
+	cout << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

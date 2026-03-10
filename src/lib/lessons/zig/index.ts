@@ -11,14 +11,17 @@ import { pointers } from "./data/09-pointers";
 import { allocators } from "./data/10-allocators";
 import { comptime } from "./data/11-comptime";
 import { optionalsAndUnions } from "./data/12-optionals-and-unions";
+import { comptimeGenerics } from "./data/13-comptime-generics";
+import { recursiveDataStructures } from "./data/14-recursive-data-structures";
+import { safetyBuildModes } from "./data/15-safety-build-modes";
 
 export const zigChapters: Chapter[] = [
   { id: "foundations", title: "Foundations" },
   { id: "control-flow", title: "Control Flow" },
   { id: "functions-chapter", title: "Functions" },
   { id: "data-structures", title: "Data Structures" },
-  { id: "memory", title: "Memory" },
   { id: "advanced", title: "Advanced" },
+  { id: "memory", title: "Memory" },
 ];
 
 export const zigLessons: Lesson[] = [
@@ -30,8 +33,11 @@ export const zigLessons: Lesson[] = [
   errorHandling,
   arraysAndSlices,
   structs,
+  recursiveDataStructures,
   pointers,
-  allocators,
   comptime,
+  comptimeGenerics,
   optionalsAndUnions,
+  safetyBuildModes,
+  allocators,
 ];

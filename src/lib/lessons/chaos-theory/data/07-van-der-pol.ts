@@ -95,5 +95,10 @@ def vdp_amplitude(x0, y0, mu, dt, steps, n_keep):
       code: `{{FUNC}}\nx,y = vdp_euler(1.0,0.0,1.0,0.01,0)\nprint(x,y)`,
       expected: "1.0 0.0\n",
     },
+    {
+      name: "one euler step from (0,1)",
+      code: `{{FUNC}}\nx,y = vdp_euler(0.0,1.0,1.0,0.1,1)\nprint(round(x,4), round(y,4))`,
+      expected: "0.1 1.1\n",
+    },
   ],
 };

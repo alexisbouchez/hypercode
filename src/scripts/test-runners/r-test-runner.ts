@@ -49,7 +49,9 @@ export function runRTests(): LessonTestResult[] {
             stdio: "pipe",
           });
           actual = output.toString();
-          passed = actual === test.expected;
+          passed =
+            actual.replace(/\s+/g, " ").trim() ===
+            test.expected.replace(/\s+/g, " ").trim();
         } catch (err: unknown) {
           const e = err as { stderr?: Buffer; stdout?: Buffer };
           actual = (e.stderr?.toString() || e.stdout?.toString() || String(err)).trim();

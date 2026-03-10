@@ -10,10 +10,14 @@ import { references } from "./data/08-references";
 import { classes } from "./data/09-classes";
 import { constructors } from "./data/10-constructors";
 import { encapsulation } from "./data/11-encapsulation";
+import { destructors } from "./data/18-destructors";
+import { copyMove } from "./data/19-copy-move";
 import { inheritance } from "./data/12-inheritance";
 import { virtualFunctions } from "./data/13-virtual-functions";
 import { templates } from "./data/14-templates";
 import { vectors } from "./data/15-vectors";
+import { smartPointers } from "./data/16-smart-pointers";
+import { stlAlgorithms } from "./data/17-stl-algorithms";
 
 export const cppChapters: Chapter[] = [
 	{ id: "basics", title: "C++ Basics" },
@@ -22,6 +26,7 @@ export const cppChapters: Chapter[] = [
 	{ id: "classes", title: "Classes" },
 	{ id: "inheritance", title: "Inheritance" },
 	{ id: "templates", title: "Templates & STL" },
+	{ id: "modern-cpp", title: "Modern C++" },
 ];
 
 export const cppLessons: Lesson[] = [
@@ -36,8 +41,12 @@ export const cppLessons: Lesson[] = [
 	classes,
 	constructors,
 	encapsulation,
+	destructors,
+	copyMove,
 	inheritance,
 	virtualFunctions,
 	templates,
 	vectors,
+	smartPointers,
+	stlAlgorithms,
 ];

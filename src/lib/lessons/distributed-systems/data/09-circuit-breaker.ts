@@ -210,5 +210,32 @@ cb.call(() => { throw new Error(); }); // 2 failures
 console.log(cb.state);                 // still CLOSED`,
 			expected: "CLOSED\n",
 		},
+		{
+			name: "half-open goes back to open on failure",
+			code: `{{FUNC}}
+const cb = new CircuitBreaker(2, 3);
+cb.call(() => { throw new Error(); });
+cb.call(() => { throw new Error(); });
+// now OPEN, wait 3 calls
+cb.call(() => "x"); // REJECTED
+cb.call(() => "x"); // REJECTED
+// next call triggers HALF-OPEN, but fails → back to OPEN
+console.log(cb.call(() => { throw new Error(); }));
+console.log(cb.state);`,
+			expected: "FAILED\nOPEN\n",
+		},
+		{
+			name: "half-open goes to closed on success",
+			code: `{{FUNC}}
+const cb = new CircuitBreaker(2, 3);
+cb.call(() => { throw new Error(); });
+cb.call(() => { throw new Error(); });
+cb.call(() => "x"); // REJECTED
+cb.call(() => "x"); // REJECTED
+// next call triggers HALF-OPEN, succeeds → CLOSED
+console.log(cb.call(() => "recovered"));
+console.log(cb.state);`,
+			expected: "recovered\nCLOSED\n",
+		},
 	],
 };

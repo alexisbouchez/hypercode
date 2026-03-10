@@ -26,6 +26,18 @@ You can also prepend an element using \`::\` (the cons operator):
 #eval 0 :: [1, 2, 3]    -- [0, 1, 2, 3]
 \`\`\`
 
+## Lists Are an Inductive Type
+
+Under the hood, \`List\` in Lean is defined as an **inductive type**:
+
+\`\`\`lean
+inductive List (α : Type) where
+  | nil  : List α
+  | cons : α → List α → List α
+\`\`\`
+
+This says a list is either empty (\`nil\`, written \`[]\`) or an element followed by another list (\`cons\`, written \`x :: xs\`). Inductive types are how Lean defines all data structures — natural numbers, booleans, option types, trees, and more. The \`inductive\` keyword tells Lean to generate pattern matching and recursion principles automatically. Notice that \`List\` takes a type parameter \`α\` — this is a **dependent type** in action: \`List\` is a function from types to types.
+
 ## Your Turn
 
 Evaluate:
@@ -43,7 +55,7 @@ Evaluate:
 `,
   tests: [
     {
-      name: "list operations",
+      name: "length, append, and reverse on lists",
       expected: "4\n[1, 2, 3, 4, 5, 6]\n[5, 4, 3, 2, 1]\n",
     },
   ],

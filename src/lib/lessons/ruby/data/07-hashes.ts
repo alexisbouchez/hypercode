@@ -69,5 +69,15 @@ puts person[:country]
 			name: "Alice, 30, 4, France",
 			expected: "Alice\n30\n4\nFrance\n",
 		},
+		{
+			name: "hash access by symbol key",
+			code: `person = { name: "Alice", age: 30 }\nputs person[:name]`,
+			expected: "Alice\n",
+		},
+		{
+			name: "adding a key increases length",
+			code: `person = { name: "Alice", age: 30 }\nperson[:city] = "Paris"\nputs person.keys.length`,
+			expected: "3\n",
+		},
 	],
 };

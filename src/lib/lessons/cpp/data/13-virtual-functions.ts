@@ -54,10 +54,11 @@ Now the method is selected at **runtime** based on the actual object type. This 
 
 ### override Keyword
 
-\`override\` tells the compiler you intend to override a virtual function. It catches mistakes:
+The \`override\` keyword is placed after the parameter list in a derived class method. It tells the compiler you intend to override a virtual function from the base class. While not strictly required, it is strongly recommended because the compiler will produce an error if the method does not actually match a virtual function in the base — catching typos and signature mismatches at compile time:
 
 \`\`\`cpp
 class Circle : public Shape {
+    string type() override { return "circle"; }  // OK: matches virtual in Shape
     string tipe() override { ... }  // error: no virtual tipe() in Shape
 };
 \`\`\`
@@ -176,6 +177,109 @@ int main() {
 		{
 			name: "virtual dispatch calls correct overrides",
 			expected: "rectangle: area = 12\nsquare: area = 25\n",
+		},
+		{
+			name: "square with side 1",
+			expected: "square: area = 1\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+class Shape {
+public:
+	virtual string type() {
+		return "shape";
+	}
+	virtual int area() {
+		return 0;
+	}
+};
+class Square : public Shape {
+public:
+	int side;
+	Square(int s) {
+		this->side = s;
+	}
+	string type() override {
+		return "square";
+	}
+	int area() override {
+		return this->side * this->side;
+	}
+};
+void printInfo(Shape& s) {
+	cout << s.type() << ": area = " << s.area() << endl;
+}
+int main() {
+	Square sq(1);
+	printInfo(sq);
+	return 0;
+}
+`,
+		},
+		{
+			name: "rectangle with large dimensions",
+			expected: "rectangle: area = 1000\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+class Shape {
+public:
+	virtual string type() {
+		return "shape";
+	}
+	virtual int area() {
+		return 0;
+	}
+};
+class Rectangle : public Shape {
+public:
+	int w;
+	int h;
+	Rectangle(int rw, int rh) {
+		this->w = rw;
+		this->h = rh;
+	}
+	string type() override {
+		return "rectangle";
+	}
+	int area() override {
+		return this->w * this->h;
+	}
+};
+void printInfo(Shape& s) {
+	cout << s.type() << ": area = " << s.area() << endl;
+}
+int main() {
+	Rectangle r(100, 10);
+	printInfo(r);
+	return 0;
+}
+`,
+		},
+		{
+			name: "base shape type and area defaults",
+			expected: "shape: area = 0\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+class Shape {
+public:
+	virtual string type() {
+		return "shape";
+	}
+	virtual int area() {
+		return 0;
+	}
+};
+void printInfo(Shape& s) {
+	cout << s.type() << ": area = " << s.area() << endl;
+}
+int main() {
+	Shape s;
+	printInfo(s);
+	return 0;
+}
+`,
 		},
 	],
 };

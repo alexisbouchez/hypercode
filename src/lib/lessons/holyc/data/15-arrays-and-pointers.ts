@@ -91,5 +91,15 @@ for (I64 i = 0; i < 5; i++) {
       name: "prints squares 0 to 4",
       expected: "0\n1\n4\n9\n16\n",
     },
+    {
+      name: "pointer dereference works",
+      code: 'I64 x = 42;\nI64 *ptr = &x;\nPrint("%d\\n", *ptr);',
+      expected: "42\n",
+    },
+    {
+      name: "array indexing works",
+      code: 'I64 arr[3] = {10, 20, 30};\nPrint("%d %d %d\\n", arr[0], arr[1], arr[2]);',
+      expected: "10 20 30\n",
+    },
   ],
 };

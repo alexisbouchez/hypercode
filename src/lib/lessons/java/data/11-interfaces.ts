@@ -141,5 +141,54 @@ Create \`Box(2.0, 3.0, 4.0)\`, call \`print()\`, \`measure()\`, and \`summary()\
 			name: "Box print, volume, summary",
 			expected: "Box(2.0x3.0x4.0)\n24.0\nMeasurement: 24.0\n",
 		},
+		{
+			name: "unit cube (1x1x1)",
+			expected: "Box(1.0x1.0x1.0)\n1.0\nMeasurement: 1.0\n",
+			code: `public class Main {
+    interface Printable { void print(); }
+    interface Measurable {
+        double measure();
+        default String summary() { return "Measurement: " + measure(); }
+    }
+    static class Box implements Printable, Measurable {
+        double width, height, depth;
+        Box(double w, double h, double d) { width = w; height = h; depth = d; }
+        @Override
+        public void print() {
+            System.out.println("Box(" + width + "x" + height + "x" + depth + ")");
+        }
+        @Override
+        public double measure() { return width * height * depth; }
+    }
+    public static void main(String[] args) {
+        Box b = new Box(1.0, 1.0, 1.0);
+        b.print();
+        System.out.println(b.measure());
+        System.out.println(b.summary());
+    }
+}
+`,
+		},
+		{
+			name: "default summary method uses measure",
+			expected: "Measurement: 60.0\n",
+			code: `public class Main {
+    interface Measurable {
+        double measure();
+        default String summary() { return "Measurement: " + measure(); }
+    }
+    static class Box implements Measurable {
+        double width, height, depth;
+        Box(double w, double h, double d) { width = w; height = h; depth = d; }
+        @Override
+        public double measure() { return width * height * depth; }
+    }
+    public static void main(String[] args) {
+        Box b = new Box(3.0, 4.0, 5.0);
+        System.out.println(b.summary());
+    }
+}
+`,
+		},
 	],
 };

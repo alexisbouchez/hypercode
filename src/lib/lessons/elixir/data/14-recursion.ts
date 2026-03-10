@@ -67,5 +67,23 @@ IO.puts(MyList.sum([1, 2, 3, 4, 5]))
       name: "factorial and recursive sum",
       expected: "120\n15\n",
     },
+    {
+      name: "factorial of 0 and 1 (base cases)",
+      code: `{{FUNC}}
+IO.puts(Math.factorial(0))
+IO.puts(Math.factorial(1))
+IO.puts(Math.factorial(3))
+`,
+      expected: "1\n1\n6\n",
+    },
+    {
+      name: "sum of empty and single-element list",
+      code: `{{FUNC}}
+IO.puts(MyList.sum([]))
+IO.puts(MyList.sum([100]))
+IO.puts(MyList.sum([10, 20, 30]))
+`,
+      expected: "0\n100\n60\n",
+    },
   ],
 };

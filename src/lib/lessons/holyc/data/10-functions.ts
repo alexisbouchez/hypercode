@@ -86,5 +86,10 @@ Print("%d\\n", Square(9));
       code: "{{FUNC}}\nPrint(\"%d\\n\", Square(5));",
       expected: "25\n",
     },
+    {
+      name: "Square(0) returns 0",
+      code: "{{FUNC}}\nPrint(\"%d\\n\", Square(0));",
+      expected: "0\n",
+    },
   ],
 };

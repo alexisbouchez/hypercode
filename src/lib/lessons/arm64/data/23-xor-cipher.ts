@@ -122,5 +122,106 @@ decrypt_done:
       name: "decrypts to ARM64",
       expected: "ARM64\n",
     },
+    {
+      name: "decrypts HI with key 0x2A",
+      expected: "HI\n",
+      code: `.data
+encrypted:
+\t.byte 0x62, 0x63, 0
+output:
+\t.skip 3
+
+.text
+.global _start
+_start:
+\tLDR X0, =encrypted
+\tLDR X3, =output
+\tMOV W2, #0x2A
+\tMOV X4, #0
+
+decrypt_loop:
+\tLDRB W1, [X0], #1
+\tCBZ W1, decrypt_done
+\tEOR W1, W1, W2
+\tSTRB W1, [X3, X4]
+\tADD X4, X4, #1
+\tB decrypt_loop
+
+decrypt_done:
+\tMOV W5, #10
+\tSTRB W5, [X3, X4]
+\tADD X4, X4, #1
+
+\tMOV X0, #1
+\tLDR X1, =output
+\tMOV X2, X4
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "XOR is self-inverse (encrypt then decrypt)",
+      expected: "OK\n",
+      code: `.data
+plain:
+\t.byte 79, 75, 0
+temp:
+\t.skip 3
+output:
+\t.skip 3
+
+.text
+.global _start
+_start:
+\tLDR X0, =plain
+\tLDR X3, =temp
+\tMOV W2, #0x2A
+\tMOV X4, #0
+
+encrypt_loop:
+\tLDRB W1, [X0], #1
+\tCBZ W1, encrypt_done
+\tEOR W1, W1, W2
+\tSTRB W1, [X3, X4]
+\tADD X4, X4, #1
+\tB encrypt_loop
+
+encrypt_done:
+\tMOV W5, #0
+\tSTRB W5, [X3, X4]
+
+\tLDR X0, =temp
+\tLDR X3, =output
+\tMOV W2, #0x2A
+\tMOV X4, #0
+
+decrypt_loop:
+\tLDRB W1, [X0], #1
+\tCBZ W1, decrypt_done
+\tEOR W1, W1, W2
+\tSTRB W1, [X3, X4]
+\tADD X4, X4, #1
+\tB decrypt_loop
+
+decrypt_done:
+\tMOV W5, #10
+\tSTRB W5, [X3, X4]
+\tADD X4, X4, #1
+
+\tMOV X0, #1
+\tLDR X1, =output
+\tMOV X2, X4
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

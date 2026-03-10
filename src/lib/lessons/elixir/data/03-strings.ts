@@ -48,5 +48,20 @@ IO.puts(String.reverse(lang))
       name: "string interpolation and operations",
       expected: "Hello, Elixir!\n6\nELIXIR\nrixilE\n",
     },
+    {
+      name: "interpolation with arithmetic",
+      code: `age = 25
+IO.puts("I am \#{age + 5} years old")
+`,
+      expected: "I am 30 years old\n",
+    },
+    {
+      name: "String.downcase and String.contains?",
+      code: `IO.puts(String.downcase("HELLO"))
+IO.puts(String.length(""))
+IO.puts(String.reverse("abcba"))
+`,
+      expected: "hello\n0\nabcba\n",
+    },
   ],
 };

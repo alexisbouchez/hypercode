@@ -108,9 +108,17 @@ fn parseCommand(input: []const u8) ?Command {
 
 ### Your Task
 
-Write a function \`safeDivide(a: i32, b: i32) ?i32\` that returns \`a / b\` as an optional. If \`b\` is zero, return \`null\`.
+**Part 1 — Optionals:** Write a function \`safeDivide(a: i32, b: i32) ?i32\` that returns \`a / b\` as an optional. If \`b\` is zero, return \`null\`.
 
-Also write a function \`describeNumber(n: i32) []const u8\` that returns \`"positive"\`, \`"negative"\`, or \`"zero"\` depending on the value of \`n\`.`,
+For division, use Zig's \`@divTrunc(a, b)\` builtin, which performs integer division and truncates toward zero. Zig does not allow the \`/\` operator on signed integers because the truncation behavior is implicit; \`@divTrunc\` makes it explicit.
+
+**Part 2 — Tagged Unions:** Define a tagged union \`NumberKind\` with three variants:
+
+- \`.positive: i32\` — stores the positive value
+- \`.negative: i32\` — stores the negative value
+- \`.zero: void\` — no payload
+
+Then write a function \`classifyNumber(n: i32) NumberKind\` that returns the appropriate variant. Finally, write a function \`describeKind(kind: NumberKind) []const u8\` that switches on the union and returns \`"positive"\`, \`"negative"\`, or \`"zero"\`.`,
 
   starterCode: `const std = @import("std");
 
@@ -121,9 +129,20 @@ fn safeDivide(a: i32, b: i32) ?i32 {
 \treturn null;
 }
 
-fn describeNumber(n: i32) []const u8 {
-\t// Your code here: return "positive", "negative", or "zero"
+const NumberKind = union(enum) {
+\t// Your code here: define positive, negative, zero variants
+\tplaceholder: void,
+};
+
+fn classifyNumber(n: i32) NumberKind {
+\t// Your code here: return the appropriate variant
 \t_ = n;
+\treturn .{ .placeholder = {} };
+}
+
+fn describeKind(kind: NumberKind) []const u8 {
+\t// Your code here: switch on kind and return a string
+\t_ = kind;
 \treturn "unknown";
 }
 
@@ -135,7 +154,8 @@ pub fn main() !void {
 \t\tstd.debug.print("division by zero\\n", .{});
 \t}
 
-\tstd.debug.print("{s}\\n", .{describeNumber(42)});
+\tconst kind = classifyNumber(42);
+\tstd.debug.print("{s}\\n", .{describeKind(kind)});
 }
 `,
 
@@ -146,10 +166,24 @@ fn safeDivide(a: i32, b: i32) ?i32 {
 \treturn @divTrunc(a, b);
 }
 
-fn describeNumber(n: i32) []const u8 {
-\tif (n > 0) return "positive";
-\tif (n < 0) return "negative";
-\treturn "zero";
+const NumberKind = union(enum) {
+\tpositive: i32,
+\tnegative: i32,
+\tzero: void,
+};
+
+fn classifyNumber(n: i32) NumberKind {
+\tif (n > 0) return .{ .positive = n };
+\tif (n < 0) return .{ .negative = n };
+\treturn .zero;
+}
+
+fn describeKind(kind: NumberKind) []const u8 {
+\treturn switch (kind) {
+\t\t.positive => "positive",
+\t\t.negative => "negative",
+\t\t.zero => "zero",
+\t};
 }
 
 pub fn main() !void {
@@ -160,7 +194,8 @@ pub fn main() !void {
 \t\tstd.debug.print("division by zero\\n", .{});
 \t}
 
-\tstd.debug.print("{s}\\n", .{describeNumber(42)});
+\tconst kind = classifyNumber(42);
+\tstd.debug.print("{s}\\n", .{describeKind(kind)});
 }
 `,
 
@@ -196,40 +231,60 @@ pub fn main() !void {
       expected: "null\n",
     },
     {
-      name: "describeNumber(42) is positive",
+      name: "classifyNumber(42) described as positive",
       code: `const std = @import("std");
 
 {{FUNC}}
 
 pub fn main() !void {
-\tstd.debug.print("{s}\\n", .{describeNumber(42)});
+\tconst kind = classifyNumber(42);
+\tstd.debug.print("{s}\\n", .{describeKind(kind)});
 }
 `,
       expected: "positive\n",
     },
     {
-      name: "describeNumber(-5) is negative",
+      name: "classifyNumber(-5) described as negative",
       code: `const std = @import("std");
 
 {{FUNC}}
 
 pub fn main() !void {
-\tstd.debug.print("{s}\\n", .{describeNumber(-5)});
+\tconst kind = classifyNumber(-5);
+\tstd.debug.print("{s}\\n", .{describeKind(kind)});
 }
 `,
       expected: "negative\n",
     },
     {
-      name: "describeNumber(0) is zero",
+      name: "classifyNumber(0) described as zero",
       code: `const std = @import("std");
 
 {{FUNC}}
 
 pub fn main() !void {
-\tstd.debug.print("{s}\\n", .{describeNumber(0)});
+\tconst kind = classifyNumber(0);
+\tstd.debug.print("{s}\\n", .{describeKind(kind)});
 }
 `,
       expected: "zero\n",
+    },
+    {
+      name: "classifyNumber(7) carries value 7",
+      code: `const std = @import("std");
+
+{{FUNC}}
+
+pub fn main() !void {
+\tconst kind = classifyNumber(7);
+\tswitch (kind) {
+\t\t.positive => |val| std.debug.print("{}\\n", .{val}),
+\t\t.negative => |val| std.debug.print("{}\\n", .{val}),
+\t\t.zero => std.debug.print("0\\n", .{}),
+\t}
+}
+`,
+      expected: "7\n",
     },
   ],
 };

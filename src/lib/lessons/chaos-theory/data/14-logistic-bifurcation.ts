@@ -69,5 +69,10 @@ def count_attractor_points(r, x0, n_transient, n_keep, tol):
       code: `{{FUNC}}\nlo,hi = attractor_range(4.0, 0.1, 100, 1000)\nprint(lo < 0.1, hi > 0.9)`,
       expected: `True True\n`,
     },
+    {
+      name: "r=2.5 single attractor point",
+      code: `{{FUNC}}\nprint(count_attractor_points(2.5, 0.5, 1000, 50, 1e-5))`,
+      expected: `1\n`,
+    },
   ],
 };

@@ -51,7 +51,8 @@ export function extractJsFunctions(code: string): string {
     if (!inFunction && depth === 0) {
       if (
         line.match(/^\s*function\s+\w+/) ||
-        line.match(/^\s*(?:const|let|var)\s+\w+\s*=\s*(?:async\s*)?\(/)
+        line.match(/^\s*(?:const|let|var)\s+\w+\s*=\s*(?:async\s*)?\(/) ||
+        line.match(/^\s*class\s+\w+/)
       ) {
         inFunction = true;
         result.push(line);

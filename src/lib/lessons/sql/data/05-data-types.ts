@@ -127,5 +127,13 @@ WHERE table_name = 'products';`,
       name: "returns column information for products (4 columns)",
       expected: '{"type":"rowCount","value":4}',
     },
+    {
+      name: "result includes column_name and data_type columns",
+      expected: '{"type":"contains","columns":["column_name","data_type"]}',
+    },
+    {
+      name: "result contains the integer data type (for the id column)",
+      expected: '{"type":"contains","value":"integer"}',
+    },
   ],
 };

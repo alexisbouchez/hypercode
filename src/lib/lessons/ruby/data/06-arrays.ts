@@ -39,6 +39,8 @@ puts numbers.sort.inspect     # [1, 2, 3]
 puts numbers.include?(2)      # true
 \`\`\`
 
+By convention, Ruby methods ending in \`?\` return a boolean. You'll see this pattern throughout the standard library — \`include?\`, \`empty?\`, \`nil?\`, \`even?\`, and many more.
+
 ### Your Task
 
 Starting with \`numbers = [1, 2, 3, 4, 5]\`:
@@ -66,8 +68,18 @@ puts numbers.join(", ")
 
 	tests: [
 		{
-			name: "1, 5, 6, 1 2 3 4 5 6",
+			name: "prints 1, 5, 6, and joined array",
 			expected: "1\n5\n6\n1, 2, 3, 4, 5, 6\n",
+		},
+		{
+			name: "array first element is 1",
+			code: `numbers = [1, 2, 3, 4, 5]\nputs numbers[0]`,
+			expected: "1\n",
+		},
+		{
+			name: "push adds element to end",
+			code: `numbers = [1, 2, 3, 4, 5]\nnumbers.push(6)\nputs numbers.last`,
+			expected: "6\n",
 		},
 	],
 };

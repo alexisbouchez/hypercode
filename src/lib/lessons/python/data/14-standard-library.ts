@@ -53,6 +53,8 @@ def fib(n):
     return fib(n-1) + fib(n-2)
 \`\`\`
 
+The \`@lru_cache\` line is a **decorator** — the \`@\` syntax wraps \`fib\` so that its return values are cached. After the first call to \`fib(10)\`, subsequent calls with the same argument return instantly from the cache instead of recomputing.
+
 ### Your Task
 
 Implement \`most_common_words(text, n)\` that:

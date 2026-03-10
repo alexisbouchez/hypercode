@@ -117,5 +117,9 @@ LEFT JOIN orders o ON c.id = o.customer_id;`,
       name: "returns 4 rows (all customers including Charlie with NULL)",
       expected: '{"type":"rowCount","value":4}',
     },
+    {
+      name: "result includes Charlie (customer with no orders)",
+      expected: '{"type":"contains","value":"Charlie"}',
+    },
   ],
 };

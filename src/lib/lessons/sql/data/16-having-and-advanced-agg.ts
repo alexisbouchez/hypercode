@@ -129,14 +129,15 @@ GROUP BY ROLLUP(category);
 
 ### Your Task
 
-Find categories that have more than 2 products.`,
+Find categories that have more than 2 products. For each qualifying category, show the category name, the total product count, and the number of premium products (price > 20) using \`COUNT(*) FILTER (WHERE ...)\`. Alias the columns \`category\`, \`product_count\`, and \`premium_count\`.`,
 
   starterCode: `-- Find categories with more than 2 products
+-- Include a premium_count using FILTER
 SELECT category, COUNT(*) AS product_count
 FROM products
 `,
 
-  solution: `SELECT category, COUNT(*) AS product_count
+  solution: `SELECT category, COUNT(*) AS product_count, COUNT(*) FILTER (WHERE price > 20) AS premium_count
 FROM products
 GROUP BY category
 HAVING COUNT(*) > 2;`,
@@ -149,6 +150,14 @@ HAVING COUNT(*) > 2;`,
     {
       name: "result includes Office",
       expected: '{"type":"contains","value":"Office"}',
+    },
+    {
+      name: "result includes category, product_count, and premium_count columns",
+      expected: '{"type":"contains","columns":["category","product_count","premium_count"]}',
+    },
+    {
+      name: "premium_count is correct (Office has 1 premium product: Desk Lamp at 34.99)",
+      expected: '{"type":"contains","value":"1"}',
     },
   ],
 };

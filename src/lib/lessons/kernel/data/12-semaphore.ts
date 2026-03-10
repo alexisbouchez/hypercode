@@ -136,5 +136,22 @@ int main() {
 }`,
 			expected: "0\n",
 		},
+		{
+			name: "multiple ups before down accumulates value",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tSemaphore s = {0};
+\tsem_up(&s);
+\tsem_up(&s);
+\tsem_up(&s);
+\tprintf("%d\\n", sem_down(&s));
+\tprintf("%d\\n", sem_down(&s));
+\tprintf("%d\\n", sem_down(&s));
+\tprintf("%d\\n", sem_down(&s));
+\treturn 0;
+}`,
+			expected: "1\n1\n1\n0\n",
+		},
 	],
 };

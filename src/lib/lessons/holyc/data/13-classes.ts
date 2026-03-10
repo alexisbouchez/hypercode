@@ -108,5 +108,15 @@ Print("%.2f\\n", Circumference(&circ));
       name: "prints circumference of radius 5",
       expected: "31.42\n",
     },
+    {
+      name: "circumference of radius 1",
+      code: '{{FUNC}}\nCircle c;\nc.radius = 1.0;\nPrint("%.2f\\n", Circumference(&c));',
+      expected: "6.28\n",
+    },
+    {
+      name: "circumference of radius 10",
+      code: '{{FUNC}}\nCircle c;\nc.radius = 10.0;\nPrint("%.2f\\n", Circumference(&c));',
+      expected: "62.83\n",
+    },
   ],
 };

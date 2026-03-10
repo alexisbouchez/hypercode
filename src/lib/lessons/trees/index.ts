@@ -11,6 +11,8 @@ import { bstInsert } from "./data/09-bst-insert";
 import { bstSearch } from "./data/10-bst-search";
 import { bstMinMax } from "./data/11-bst-min-max";
 import { isBst } from "./data/12-is-bst";
+import { bstDeletion } from "./data/13-bst-deletion";
+import { avlTree } from "./data/14-avl-tree";
 
 export const treesChapters: Chapter[] = [
 	{ id: "binary-trees", title: "Binary Trees" },
@@ -32,4 +34,6 @@ export const treesLessons: Lesson[] = [
 	bstSearch,
 	bstMinMax,
 	isBst,
+	bstDeletion,
+	avlTree,
 ];

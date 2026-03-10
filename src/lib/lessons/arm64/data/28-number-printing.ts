@@ -117,5 +117,95 @@ digit_loop:
       name: "prints 2048",
       expected: "2048\n",
     },
+    {
+      name: "prints single digit 7",
+      expected: "7\n",
+      code: `.data
+buf:
+\t.skip 12
+
+.text
+.global _start
+_start:
+\tMOV X0, #7
+
+\tLDR X5, =buf
+\tADD X5, X5, #10
+\tMOV X6, X5
+
+\tMOV W7, #10
+\tSTRB W7, [X5]
+\tSUB X5, X5, #1
+
+digit_loop:
+\tMOV X1, #10
+\tUDIV X2, X0, X1
+\tMUL X3, X2, X1
+\tSUB X3, X0, X3
+\tADD X3, X3, #48
+\tSTRB W3, [X5]
+\tSUB X5, X5, #1
+\tMOV X0, X2
+\tCBNZ X0, digit_loop
+
+\tADD X5, X5, #1
+\tADD X6, X6, #1
+\tSUB X2, X6, X5
+
+\tMOV X0, #1
+\tMOV X1, X5
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "prints 100",
+      expected: "100\n",
+      code: `.data
+buf:
+\t.skip 12
+
+.text
+.global _start
+_start:
+\tMOV X0, #100
+
+\tLDR X5, =buf
+\tADD X5, X5, #10
+\tMOV X6, X5
+
+\tMOV W7, #10
+\tSTRB W7, [X5]
+\tSUB X5, X5, #1
+
+digit_loop:
+\tMOV X1, #10
+\tUDIV X2, X0, X1
+\tMUL X3, X2, X1
+\tSUB X3, X0, X3
+\tADD X3, X3, #48
+\tSTRB W3, [X5]
+\tSUB X5, X5, #1
+\tMOV X0, X2
+\tCBNZ X0, digit_loop
+
+\tADD X5, X5, #1
+\tADD X6, X6, #1
+\tSUB X2, X6, X5
+
+\tMOV X0, #1
+\tMOV X1, X5
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

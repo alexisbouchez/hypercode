@@ -58,5 +58,13 @@ puts name.reverse
 			name: "interpolation, upcase, downcase, length, reverse",
 			expected: "Hello, World!\nWORLD\nworld\n5\ndlroW\n",
 		},
+		{
+			name: "includes uppercase version",
+			expected: "Hello, World!\nWORLD\nworld\n5\ndlroW\n",
+		},
+		{
+			name: "includes reversed string",
+			expected: "Hello, World!\nWORLD\nworld\n5\ndlroW\n",
+		},
 	],
 };

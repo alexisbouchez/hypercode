@@ -92,5 +92,9 @@ SELECT`,
       name: "returns all 8 products",
       expected: '{"type":"rowCount","value":8}',
     },
+    {
+      name: "result contains Laptop",
+      expected: '{"type":"contains","value":"Laptop"}',
+    },
   ],
 };

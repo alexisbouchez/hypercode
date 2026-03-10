@@ -16,28 +16,57 @@ let square = |x: i32| x * x;     // explicit type
 let always_one = || 1;            // no parameters
 \`\`\`
 
-### Capturing the Environment
+### Capture Semantics
 
-\`\`\`rust
-let threshold = 5;
-let greater_than_threshold = |n: &i32| n > &threshold; // captures threshold
-\`\`\`
+Rust closures capture variables from their environment in three ways, and the compiler picks the least restrictive mode that works:
 
-Closures can capture by reference, by mutable reference, or by value (\`move\`):
+**1. Borrow immutably (\`Fn\`)** — the closure only reads the captured value:
 
 \`\`\`rust
 let name = String::from("Alice");
-let greet = move || println!("Hello, {}!", name); // name is moved into closure
+let greet = || println!("Hello, {}", name); // borrows &name
 greet();
+greet(); // can call multiple times
+println!("{}", name); // name still usable
 \`\`\`
 
-### Closure Traits
+**2. Borrow mutably (\`FnMut\`)** — the closure modifies the captured value:
 
-| Trait | What it means |
-|-------|---------------|
-| \`Fn\` | borrows immutably — can be called multiple times |
-| \`FnMut\` | borrows mutably — can be called multiple times |
-| \`FnOnce\` | consumes captures — can only be called once |
+\`\`\`rust
+let mut count = 0;
+let mut inc = || { count += 1; count };
+inc(); // count is now 1
+inc(); // count is now 2
+\`\`\`
+
+**3. Move / consume (\`FnOnce\`)** — the closure takes ownership:
+
+\`\`\`rust
+let name = String::from("Alice");
+let consume = || { drop(name); }; // moves name into closure
+consume(); // name is dropped
+// consume(); ← ERROR: cannot call FnOnce twice
+\`\`\`
+
+### The \`move\` Keyword
+
+\`move\` forces the closure to take ownership of all captured variables, even if it only reads them. This is essential when the closure outlives the scope it was created in:
+
+\`\`\`rust
+fn make_greeter(name: String) -> impl Fn() -> String {
+    move || format!("Hello, {}!", name) // must move: name would be dropped otherwise
+}
+\`\`\`
+
+### Closure Trait Hierarchy
+
+Every closure implements \`FnOnce\`. If it doesn't consume captures, it also implements \`FnMut\`. If it doesn't mutate captures, it also implements \`Fn\`:
+
+\`\`\`
+Fn ⊂ FnMut ⊂ FnOnce
+\`\`\`
+
+A function accepting \`impl FnOnce\` can take any closure. A function requiring \`impl Fn\` only accepts closures that borrow immutably.
 
 ### Higher-Order Functions
 
@@ -65,7 +94,9 @@ add5(3); // 8
 1. \`apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32\` — applies f to x.
 2. \`apply_n_times<F: Fn(i32) -> i32>(f: F, x: i32, n: u32) -> i32\` — applies f to x n times.
 3. \`make_adder(n: i32) -> impl Fn(i32) -> i32\` — returns a closure that adds n.
-4. \`make_multiplier(n: i32) -> impl Fn(i32) -> i32\` — returns a closure that multiplies by n.`,
+4. \`make_multiplier(n: i32) -> impl Fn(i32) -> i32\` — returns a closure that multiplies by n.
+5. \`make_counter() -> impl FnMut() -> i32\` — returns a closure that returns an incrementing count (1, 2, 3, ...) each time it is called. This exercises \`FnMut\` capture semantics.
+6. \`consume_and_length(s: String) -> impl FnOnce() -> usize\` — returns a closure that moves \`s\` into itself and returns its length. This exercises \`FnOnce\` / \`move\` capture semantics.`,
 
   starterCode: `fn apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32 {
     todo!()
@@ -83,6 +114,14 @@ fn make_multiplier(n: i32) -> impl Fn(i32) -> i32 {
     todo!()
 }
 
+fn make_counter() -> impl FnMut() -> i32 {
+    todo!()
+}
+
+fn consume_and_length(s: String) -> impl FnOnce() -> usize {
+    todo!()
+}
+
 fn main() {
     println!("{}", apply(|x| x * x, 5));
     println!("{}", apply_n_times(|x| x + 3, 10, 3));
@@ -90,6 +129,10 @@ fn main() {
     println!("{}", add7(10));
     let triple = make_multiplier(3);
     println!("{}", triple(6));
+    let mut counter = make_counter();
+    println!("{} {}", counter(), counter());
+    let get_len = consume_and_length(String::from("Rust"));
+    println!("{}", get_len());
 }
 `,
 
@@ -113,6 +156,15 @@ fn make_multiplier(n: i32) -> impl Fn(i32) -> i32 {
     move |x| x * n
 }
 
+fn make_counter() -> impl FnMut() -> i32 {
+    let mut count = 0;
+    move || { count += 1; count }
+}
+
+fn consume_and_length(s: String) -> impl FnOnce() -> usize {
+    move || s.len()
+}
+
 fn main() {
     println!("{}", apply(|x| x * x, 5));
     println!("{}", apply_n_times(|x| x + 3, 10, 3));
@@ -120,6 +172,10 @@ fn main() {
     println!("{}", add7(10));
     let triple = make_multiplier(3);
     println!("{}", triple(6));
+    let mut counter = make_counter();
+    println!("{} {}", counter(), counter());
+    let get_len = consume_and_length(String::from("Rust"));
+    println!("{}", get_len());
 }
 `,
 
@@ -164,6 +220,43 @@ fn main() {
       code: `{{FUNC}}
 fn main() {
     println!("{}", apply_n_times(|x| x * 2, 1, 4));
+}`,
+    },
+    {
+      name: "make_counter returns 1 then 2 then 3 (FnMut capture)",
+      expected: "1 2 3\n",
+      code: `{{FUNC}}
+fn main() {
+    let mut c = make_counter();
+    println!("{} {} {}", c(), c(), c());
+}`,
+    },
+    {
+      name: "two independent counters track separately",
+      expected: "1 1 2\n",
+      code: `{{FUNC}}
+fn main() {
+    let mut c1 = make_counter();
+    let mut c2 = make_counter();
+    println!("{} {} {}", c1(), c2(), c1());
+}`,
+    },
+    {
+      name: "consume_and_length returns length of moved string (FnOnce)",
+      expected: "4\n",
+      code: `{{FUNC}}
+fn main() {
+    let f = consume_and_length(String::from("Rust"));
+    println!("{}", f());
+}`,
+    },
+    {
+      name: "consume_and_length with empty string returns 0",
+      expected: "0\n",
+      code: `{{FUNC}}
+fn main() {
+    let f = consume_and_length(String::new());
+    println!("{}", f());
 }`,
     },
   ],

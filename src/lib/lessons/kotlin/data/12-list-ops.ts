@@ -59,5 +59,15 @@ Given the list \`[1, 2, 3, 4, 5, 6]\`, print the list of squares, then the list 
       name: "squares, odds, and sum",
       expected: "[1, 4, 9, 16, 25, 36]\n[1, 3, 5]\n21\n",
     },
+    {
+      name: "filter even numbers",
+      code: "fun main() {\n    val nums = listOf(1, 2, 3, 4, 5, 6)\n    val evens = nums.filter { it % 2 == 0 }\n    println(evens)\n}",
+      expected: "[2, 4, 6]\n",
+    },
+    {
+      name: "any and all checks",
+      code: "fun main() {\n    val nums = listOf(1, 2, 3, 4, 5)\n    println(nums.any { it > 4 })\n    println(nums.all { it > 0 })\n    println(nums.all { it > 3 })\n}",
+      expected: "true\ntrue\nfalse\n",
+    },
   ],
 };

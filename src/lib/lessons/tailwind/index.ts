@@ -14,12 +14,14 @@ import { formsTailwind } from "./data/12-forms";
 import { responsiveBasics } from "./data/13-responsive";
 import { responsiveLayouts } from "./data/14-responsive-layouts";
 import { hoverDark } from "./data/15-hover-dark";
+import { configuration } from "./data/16-configuration";
 
 export const tailwindChapters: Chapter[] = [
   { id: "utilities", title: "Utilities" },
   { id: "layout", title: "Layout" },
   { id: "components", title: "Components" },
   { id: "responsive", title: "Responsive" },
+  { id: "configuration", title: "Configuration" },
 ];
 
 export const tailwindLessons: Lesson[] = [
@@ -38,4 +40,5 @@ export const tailwindLessons: Lesson[] = [
   responsiveBasics,
   responsiveLayouts,
   hoverDark,
+  configuration,
 ];

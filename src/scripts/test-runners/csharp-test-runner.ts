@@ -16,8 +16,23 @@ const CSPROJ = `<Project Sdk="Microsoft.NET.Sdk">
 </Project>
 `;
 
+function hasDotnet(): boolean {
+  try {
+    execSync("dotnet --version", { stdio: "pipe" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function runCSharpTests(): LessonTestResult[] {
   const results: LessonTestResult[] = [];
+
+  if (!hasDotnet()) {
+    console.log("  (skipped: dotnet not found)");
+    return results;
+  }
+
   const tmp = join(tmpdir(), `hypercode-csharp-${Date.now()}`);
   mkdirSync(tmp, { recursive: true });
 
@@ -46,7 +61,7 @@ export function runCSharpTests(): LessonTestResult[] {
             stdio: "pipe",
           });
           actual = output.toString();
-          passed = actual === test.expected;
+          passed = actual.trim() === test.expected.trim();
         } catch (err: unknown) {
           const e = err as { stderr?: Buffer; stdout?: Buffer };
           actual = (e.stderr?.toString() || e.stdout?.toString() || String(err)).trim();

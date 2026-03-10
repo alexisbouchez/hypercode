@@ -165,5 +165,15 @@ CREATE TABLE reviews (
       code: `{{USER_SQL}}\n---VALIDATE---\nSELECT column_name FROM information_schema.columns WHERE table_name = 'reviews' ORDER BY ordinal_position;`,
       expected: '{"type":"rowCount","value":4}',
     },
+    {
+      name: "reviews table has a rating column",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT column_name FROM information_schema.columns WHERE table_name = 'reviews' AND column_name = 'rating';`,
+      expected: '{"type":"rowCount","value":1}',
+    },
+    {
+      name: "reviews table has a foreign key on product_id",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT constraint_name FROM information_schema.table_constraints WHERE table_name = 'reviews' AND constraint_type = 'FOREIGN KEY';`,
+      expected: '{"type":"rowCount","value":1}',
+    },
   ],
 };

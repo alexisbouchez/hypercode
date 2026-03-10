@@ -150,5 +150,18 @@ int main() {
 }`,
 			expected: "ok\n",
 		},
+		{
+			name: "raise unregistered signal in range does nothing",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\thandler_t table[NSIG] = {};
+\tmy_raise(table, SIGINT);
+\tmy_raise(table, SIGTERM);
+\tprintf("safe\\n");
+\treturn 0;
+}`,
+			expected: "safe\n",
+		},
 	],
 };

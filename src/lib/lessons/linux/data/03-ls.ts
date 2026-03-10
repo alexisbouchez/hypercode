@@ -63,5 +63,15 @@ Run \`ls\` to list the contents of the current directory.`,
       name: "lists directory contents",
       expected: "docs\nhello.txt\nnotes.txt\n",
     },
+    {
+      name: "ls shows docs subdirectory",
+      code: `ls docs`,
+      expected: "readme.txt\n",
+    },
+    {
+      name: "ls with path argument",
+      code: `ls /etc`,
+      expected: "hosts\n",
+    },
   ],
 };

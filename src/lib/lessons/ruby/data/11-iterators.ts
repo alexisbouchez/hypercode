@@ -74,5 +74,15 @@ puts total
 			name: "doubles, evens, sum",
 			expected: "2, 4, 6, 8, 10, 12, 14, 16, 18, 20\n2, 4, 6, 8, 10\n55\n",
 		},
+		{
+			name: "map doubles each number",
+			code: `numbers = [1, 2, 3, 4, 5]\nputs numbers.map { |n| n * 2 }.join(", ")`,
+			expected: "2, 4, 6, 8, 10\n",
+		},
+		{
+			name: "reduce sums correctly",
+			code: `numbers = [1, 2, 3, 4, 5]\nputs numbers.reduce(0) { |sum, n| sum + n }`,
+			expected: "15\n",
+		},
 	],
 };

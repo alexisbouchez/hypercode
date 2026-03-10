@@ -78,5 +78,35 @@ Given \`s = "Hello, Java!"\`, print:
 			name: "length, uppercase, substring, replace, contains",
 			expected: "12\nHELLO, JAVA!\nHello\nHello, World!\ntrue\n",
 		},
+		{
+			name: "string comparison with equals",
+			expected: "true\nfalse\ntrue\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        String a = "hello";
+        String b = "hello";
+        String c = "HELLO";
+        System.out.println(a.equals(b));
+        System.out.println(a.equals(c));
+        System.out.println(a.equalsIgnoreCase(c));
+    }
+}
+`,
+		},
+		{
+			name: "trim, startsWith, endsWith, indexOf",
+			expected: "hello\ntrue\ntrue\n7\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        String s = "  hello  ";
+        System.out.println(s.trim());
+        String t = "Hello, Java!";
+        System.out.println(t.startsWith("Hello"));
+        System.out.println(t.endsWith("!"));
+        System.out.println(t.indexOf("Java"));
+    }
+}
+`,
+		},
 	],
 };

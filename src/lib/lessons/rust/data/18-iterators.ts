@@ -56,12 +56,39 @@ iter.find(|x| x > 0)          // first matching element
 iter.fold(init, |acc, x| ...) // reduce with accumulator
 \`\`\`
 
+### \`scan()\` vs \`fold()\`
+
+Both carry state through an iteration, but they serve different purposes:
+
+**\`fold()\`** consumes the entire iterator and returns a single final value:
+
+\`\`\`rust
+let total = vec![1, 2, 3].iter().fold(0, |acc, &x| acc + x);
+// total = 6
+\`\`\`
+
+**\`scan()\`** is like \`fold()\` but it is lazy and yields each intermediate state, producing a new iterator:
+
+\`\`\`rust
+let running: Vec<i32> = vec![1, 2, 3].iter()
+    .scan(0, |acc, &x| { *acc += x; Some(*acc) })
+    .collect();
+// running = [1, 3, 6]
+\`\`\`
+
+Key differences:
+- \`fold()\` returns one value. \`scan()\` returns an iterator of intermediate values.
+- \`fold()\` is eager (consumes the iterator). \`scan()\` is lazy (produces an adapter).
+- \`scan()\` can stop early by returning \`None\`.
+
 ### Your Task
 
 1. \`sum_of_squares(n: u32) -> u32\` — sum of squares from 1 to n.
 2. \`filter_evens(v: &[i32]) -> Vec<i32>\` — keep only even numbers.
-3. \`running_sum(v: &[i32]) -> Vec<i32>\` — running cumulative sum.
-4. \`flat_zip(a: &[i32], b: &[i32]) -> Vec<i32>\` — interleave two slices: [a0,b0,a1,b1,...].`,
+3. \`running_sum(v: &[i32]) -> Vec<i32>\` — running cumulative sum (use \`scan()\`).
+4. \`flat_zip(a: &[i32], b: &[i32]) -> Vec<i32>\` — interleave two slices: [a0,b0,a1,b1,...].
+5. \`product_with_fold(v: &[i32]) -> i32\` — compute the product of all elements using \`fold()\`.
+6. \`running_max(v: &[i32]) -> Vec<i32>\` — running maximum using \`scan()\`: for each position, the max of all elements up to and including that position.`,
 
   starterCode: `fn sum_of_squares(n: u32) -> u32 {
     todo!()
@@ -79,11 +106,21 @@ fn flat_zip(a: &[i32], b: &[i32]) -> Vec<i32> {
     todo!()
 }
 
+fn product_with_fold(v: &[i32]) -> i32 {
+    todo!()
+}
+
+fn running_max(v: &[i32]) -> Vec<i32> {
+    todo!()
+}
+
 fn main() {
     println!("{}", sum_of_squares(5));
     println!("{:?}", filter_evens(&[1, 2, 3, 4, 5, 6]));
     println!("{:?}", running_sum(&[1, 2, 3, 4]));
     println!("{:?}", flat_zip(&[1, 3], &[2, 4]));
+    println!("{}", product_with_fold(&[2, 3, 4]));
+    println!("{:?}", running_max(&[3, 1, 4, 1, 5]));
 }
 `,
 
@@ -103,11 +140,21 @@ fn flat_zip(a: &[i32], b: &[i32]) -> Vec<i32> {
     a.iter().zip(b.iter()).flat_map(|(&x, &y)| [x, y]).collect()
 }
 
+fn product_with_fold(v: &[i32]) -> i32 {
+    v.iter().fold(1, |acc, &x| acc * x)
+}
+
+fn running_max(v: &[i32]) -> Vec<i32> {
+    v.iter().scan(i32::MIN, |max, &x| { *max = (*max).max(x); Some(*max) }).collect()
+}
+
 fn main() {
     println!("{}", sum_of_squares(5));
     println!("{:?}", filter_evens(&[1, 2, 3, 4, 5, 6]));
     println!("{:?}", running_sum(&[1, 2, 3, 4]));
     println!("{:?}", flat_zip(&[1, 3], &[2, 4]));
+    println!("{}", product_with_fold(&[2, 3, 4]));
+    println!("{:?}", running_max(&[3, 1, 4, 1, 5]));
 }
 `,
 
@@ -150,6 +197,38 @@ fn main() {
       code: `{{FUNC}}
 fn main() {
     println!("{:?}", flat_zip(&[1, 3], &[2, 4]));
+}`,
+    },
+    {
+      name: "product_with_fold([2,3,4]) returns 24",
+      expected: "24\n",
+      code: `{{FUNC}}
+fn main() {
+    println!("{}", product_with_fold(&[2, 3, 4]));
+}`,
+    },
+    {
+      name: "product_with_fold on empty slice returns 1 (identity)",
+      expected: "1\n",
+      code: `{{FUNC}}
+fn main() {
+    println!("{}", product_with_fold(&[]));
+}`,
+    },
+    {
+      name: "running_max([3,1,4,1,5]) returns [3,3,4,4,5]",
+      expected: "[3, 3, 4, 4, 5]\n",
+      code: `{{FUNC}}
+fn main() {
+    println!("{:?}", running_max(&[3, 1, 4, 1, 5]));
+}`,
+    },
+    {
+      name: "running_max on descending [5,3,1] returns [5,5,5]",
+      expected: "[5, 5, 5]\n",
+      code: `{{FUNC}}
+fn main() {
+    println!("{:?}", running_max(&[5, 3, 1]));
 }`,
     },
   ],

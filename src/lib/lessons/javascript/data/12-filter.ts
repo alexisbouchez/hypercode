@@ -14,6 +14,8 @@ const evens = numbers.filter(n => n % 2 === 0);
 console.log(evens);  // [2, 4, 6]
 \`\`\`
 
+Like \`map\`, \`filter\` returns a **new** array — the original is never modified. This immutability means you can safely filter without worrying about changing the source data.
+
 The function you pass must return \`true\` (keep) or \`false\` (discard). The result may be shorter than the original.
 
 ### Chaining

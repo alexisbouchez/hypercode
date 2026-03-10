@@ -103,5 +103,15 @@ Speak(&duck);
       name: "prints animal sounds",
       expected: "Cow says Moo\nDuck says Quack\n",
     },
+    {
+      name: "Speak works with a Cat",
+      code: '{{FUNC}}\nAnimal cat;\ncat.name = "Cat";\ncat.sound = "Meow";\nSpeak(&cat);',
+      expected: "Cat says Meow\n",
+    },
+    {
+      name: "Speak works with a Dog",
+      code: '{{FUNC}}\nAnimal dog;\ndog.name = "Dog";\ndog.sound = "Woof";\nSpeak(&dog);',
+      expected: "Dog says Woof\n",
+    },
   ],
 };

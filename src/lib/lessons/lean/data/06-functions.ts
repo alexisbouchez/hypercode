@@ -24,6 +24,10 @@ Call the function by writing its name followed by the argument (no parentheses n
 #eval double 21   -- 42
 \`\`\`
 
+## Dependent Types Preview
+
+In Lean, function types can be **dependent** — the return type can refer to the input value. For example, a function could return a different type based on which argument it receives. The general function type \`(x : A) → B x\` says "given an \`x\` of type \`A\`, return something of type \`B x\`" where \`B\` may depend on \`x\`. When \`B\` does not depend on \`x\`, this simplifies to the ordinary function type \`A → B\`. This is what distinguishes Lean from languages like Haskell or OCaml.
+
 ## Your Turn
 
 Define a function \`triple\` that multiplies its argument by 3.

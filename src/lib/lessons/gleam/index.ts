@@ -4,6 +4,7 @@ import { variablesAndTypes } from "./data/02-variables-and-types";
 import { functions } from "./data/03-functions";
 import { strings } from "./data/04-strings";
 import { numbers } from "./data/05-numbers";
+import { recursion } from "./data/06-recursion";
 import { caseExpressions } from "./data/06-case-expressions";
 import { patternMatching } from "./data/07-pattern-matching";
 import { lists } from "./data/08-lists";
@@ -32,6 +33,7 @@ export const gleamLessons: Lesson[] = [
   functions,
   strings,
   numbers,
+  recursion,
   caseExpressions,
   patternMatching,
   lists,

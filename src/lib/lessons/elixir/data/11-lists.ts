@@ -54,8 +54,25 @@ IO.puts(Enum.sum(extended))
 `,
   tests: [
     {
-      name: "list operations",
+      name: "length, head, tail, and concatenation with sum",
       expected: "5\n1\n4\n28\n",
+    },
+    {
+      name: "single-element list head and tail",
+      code: `one = [42]
+IO.puts(hd(one))
+IO.puts(length(tl(one)))
+`,
+      expected: "42\n0\n",
+    },
+    {
+      name: "concatenating empty list",
+      code: `a = [1, 2, 3]
+b = a ++ []
+IO.puts(length(b))
+IO.puts(Enum.sum(b))
+`,
+      expected: "3\n6\n",
     },
   ],
 };

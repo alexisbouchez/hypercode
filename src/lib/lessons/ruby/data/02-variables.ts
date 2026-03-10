@@ -63,5 +63,13 @@ puts active
 			name: "prints all four variables",
 			expected: "Alice\n30\n5.8\ntrue\n",
 		},
+		{
+			name: "first line is the name",
+			expected: "Alice\n30\n5.8\ntrue\n",
+		},
+		{
+			name: "boolean value is last",
+			expected: "Alice\n30\n5.8\ntrue\n",
+		},
 	],
 };

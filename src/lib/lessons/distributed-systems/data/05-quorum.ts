@@ -120,5 +120,21 @@ console.log(canRead(5, 3, 3));
 console.log(canRead(5, 3, 2));`,
 			expected: "true\nfalse\n",
 		},
+		{
+			name: "canWrite with all nodes available",
+			code: `{{FUNC}}
+console.log(canWrite(5, 3, 5));
+console.log(canWrite(5, 3, 3));
+console.log(canWrite(5, 3, 2));`,
+			expected: "true\ntrue\nfalse\n",
+		},
+		{
+			name: "N=7 quorum configurations",
+			code: `{{FUNC}}
+console.log(hasQuorum(7, 4, 4));
+console.log(hasQuorum(7, 3, 4));
+console.log(hasQuorum(7, 3, 3));`,
+			expected: "true\nfalse\nfalse\n",
+		},
 	],
 };

@@ -62,5 +62,15 @@ ls
       name: "creates newfile.txt",
       expected: "docs\nhello.txt\nnewfile.txt\nnotes.txt\n",
     },
+    {
+      name: "touch creates empty file",
+      code: `touch test.txt\ncat test.txt`,
+      expected: "",
+    },
+    {
+      name: "touch multiple files",
+      code: `touch a.txt b.txt\nls`,
+      expected: "a.txt\nb.txt\ndocs\nhello.txt\nnotes.txt\n",
+    },
   ],
 };

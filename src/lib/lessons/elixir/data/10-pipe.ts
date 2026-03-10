@@ -45,5 +45,21 @@ Use the pipe operator to:
       name: "pipe through reverse and upcase",
       expected: "DLROW OLLEH\n",
     },
+    {
+      name: "pipe with String.length",
+      code: `result = "elixir" |> String.upcase()
+IO.puts(result)
+`,
+      expected: "ELIXIR\n",
+    },
+    {
+      name: "pipe through trim and downcase",
+      code: `"  HELLO  "
+|> String.trim()
+|> String.downcase()
+|> IO.puts()
+`,
+      expected: "hello\n",
+    },
   ],
 };

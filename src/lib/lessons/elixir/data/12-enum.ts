@@ -67,5 +67,23 @@ IO.puts(total)
       name: "Enum.map, filter, reduce, join",
       expected: "2, 4, 6, 8, 10\n2, 4\n15\n",
     },
+    {
+      name: "Enum.sort and Enum.reverse",
+      code: `sorted = Enum.sort([5, 3, 1, 4, 2])
+IO.puts(Enum.join(sorted, ", "))
+rev = Enum.reverse([1, 2, 3])
+IO.puts(Enum.join(rev, ", "))
+`,
+      expected: "1, 2, 3, 4, 5\n3, 2, 1\n",
+    },
+    {
+      name: "Enum.min, Enum.max, Enum.count",
+      code: `nums = [10, 20, 30, 40, 50]
+IO.puts(Enum.min(nums))
+IO.puts(Enum.max(nums))
+IO.puts(Enum.count(nums))
+`,
+      expected: "10\n50\n5\n",
+    },
   ],
 };

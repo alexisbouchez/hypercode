@@ -6,7 +6,7 @@ export const layerBackward: Lesson = {
 	chapterId: "gradients",
 	content: `## Gradients Through One Layer
 
-Consider a single neuron with sigmoid activation and MSE loss:
+Consider a single neuron with sigmoid activation ($\\sigma$ = sigmoid function, not standard deviation) and MSE loss:
 
 $$z = \\mathbf{w} \\cdot \\mathbf{x} + b \\qquad a = \\sigma(z) \\qquad \\mathcal{L} = (a - y)^2$$
 
@@ -94,6 +94,44 @@ dw1, db1 = layer_backward([1.0, 2.0], [0.5, -0.5], 0.0, 0.0)
 print([round(v, 4) for v in dw1])
 print(round(db1, 4))`,
 			expected: "[0.1774, 0.3549]\n0.1774\n",
+		},
+		{
+			name: "numerical gradient check matches analytical gradients",
+			code: `{{FUNC}}
+# Numerical gradient check: verify analytical gradients via finite differences
+inputs = [1.5, -0.7]
+weights = [0.3, -0.8]
+bias = 0.2
+target = 0.9
+h = 1e-5
+
+def loss_fn(inp, w, b, t):
+    z = sum(wi * xi for wi, xi in zip(w, inp)) + b
+    a = sigmoid(z)
+    return (a - t) ** 2
+
+dw_anal, db_anal = layer_backward(inputs, weights, bias, target)
+
+# Numerical gradient for each weight
+ok = True
+for i in range(len(weights)):
+    w_plus = list(weights)
+    w_minus = list(weights)
+    w_plus[i] += h
+    w_minus[i] -= h
+    dw_num = (loss_fn(inputs, w_plus, bias, target) - loss_fn(inputs, w_minus, bias, target)) / (2 * h)
+    if abs(dw_anal[i] - dw_num) > 1e-4:
+        ok = False
+
+# Numerical gradient for bias
+loss_plus = loss_fn(inputs, weights, bias + h, target)
+loss_minus = loss_fn(inputs, weights, bias - h, target)
+db_num = (loss_plus - loss_minus) / (2 * h)
+if abs(db_anal - db_num) > 1e-4:
+    ok = False
+
+print(ok)`,
+			expected: "True\n",
 		},
 	],
 };

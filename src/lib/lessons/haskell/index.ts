@@ -13,7 +13,8 @@ import { listComprehensions } from "./data/11-list-comprehensions";
 import { folds } from "./data/12-folds";
 import { lambdas } from "./data/13-lambdas";
 import { whereLet } from "./data/14-where-let";
-import { maybe_ } from "./data/15-maybe";
+import { moduleSystem } from "./data/15-module-system";
+import { maybe_ } from "./data/16-maybe";
 
 export const haskellChapters: Chapter[] = [
   { id: "basics", title: "Basics" },
@@ -37,5 +38,6 @@ export const haskellLessons: Lesson[] = [
   folds,
   lambdas,
   whereLet,
+  moduleSystem,
   maybe_,
 ];

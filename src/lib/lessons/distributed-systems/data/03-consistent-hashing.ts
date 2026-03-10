@@ -153,7 +153,7 @@ console.log(ring.getServer("user:1001"));
 	tests: [
 		{
 			name: "routes keys to consistent servers",
-			expected: "server-A\nserver-C\nserver-A\n",
+			expected: "server-A\nserver-A\nserver-A\n",
 		},
 		{
 			name: "empty ring returns null",

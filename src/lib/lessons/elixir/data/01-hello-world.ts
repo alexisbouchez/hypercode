@@ -29,5 +29,18 @@ Print \`Hello, Elixir!\` to the output.
       name: 'prints "Hello, Elixir!"',
       expected: "Hello, Elixir!\n",
     },
+    {
+      name: "prints multiple lines",
+      code: `IO.puts("Hello, Elixir!")
+IO.puts("Welcome to functional programming!")
+`,
+      expected: "Hello, Elixir!\nWelcome to functional programming!\n",
+    },
+    {
+      name: "prints an empty string",
+      code: `IO.puts("")
+`,
+      expected: "\n",
+    },
   ],
 };

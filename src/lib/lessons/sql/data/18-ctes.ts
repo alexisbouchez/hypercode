@@ -4,7 +4,9 @@ export const ctes: Lesson = {
   id: "ctes",
   title: "Common Table Expressions",
   chapterId: "subqueries-ctes",
-  content: `## The WITH Clause
+  content: `> **Prerequisites:** This lesson builds directly on the subquery concepts from Lesson 17. You should be comfortable writing subqueries in \`WHERE\` and \`FROM\` clauses before continuing. The second half of this lesson covers **recursive CTEs**, which are an advanced technique --- if recursion feels unfamiliar, focus on the basic \`WITH\` syntax first and revisit the recursive section later.
+
+## The WITH Clause
 
 A Common Table Expression (CTE) is a named temporary result set defined using the \`WITH\` keyword. It exists only for the duration of the query that follows it. Think of it as giving a name to a subquery so you can reference it like a table.
 
@@ -165,6 +167,10 @@ WHERE price > avg_price.value;`,
     {
       name: "returns exactly one product above average (Laptop)",
       expected: '{"type":"rowCount","value":1}',
+    },
+    {
+      name: "result contains Laptop",
+      expected: '{"type":"contains","value":"Laptop"}',
     },
   ],
 };

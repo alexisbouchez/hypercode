@@ -49,5 +49,15 @@ Create a \`val\` named \`language\` with the value \`"Kotlin"\`, then create a \
       name: "prints language and version",
       expected: "Kotlin\n2\n",
     },
+    {
+      name: "val holds an immutable value",
+      code: 'fun main() {\n    val greeting = "Hello"\n    println(greeting)\n}',
+      expected: "Hello\n",
+    },
+    {
+      name: "var can be reassigned multiple times",
+      code: 'fun main() {\n    var count = 10\n    count = 20\n    count = 30\n    println(count)\n}',
+      expected: "30\n",
+    },
   ],
 };

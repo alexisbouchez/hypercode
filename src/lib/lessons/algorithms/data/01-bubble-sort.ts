@@ -90,5 +90,45 @@ console.log(bubbleSort([42]).join(", "));`,
 console.log(bubbleSort([1, 2, 3, 4, 5]).join(", "));`,
 			expected: "1, 2, 3, 4, 5\n",
 		},
+		{
+			name: "property: sorting any permutation of the same array produces the same result",
+			code: `{{FUNC}}
+// Test commutativity: all permutations of the same elements must sort identically
+const arrays = [
+  [7, 3, 9, 1, 5],
+  [3, 9, 1, 5, 7],
+  [1, 5, 7, 3, 9],
+  [9, 5, 3, 7, 1],
+  [5, 1, 7, 9, 3],
+];
+const reference = bubbleSort(arrays[0]).join(",");
+const allMatch = arrays.every(a => bubbleSort(a).join(",") === reference);
+console.log(allMatch ? "PASS" : "FAIL");
+// Also test with duplicates
+const dupes = [
+  [4, 2, 4, 1, 2],
+  [2, 4, 1, 2, 4],
+  [1, 2, 2, 4, 4],
+];
+const refDupes = bubbleSort(dupes[0]).join(",");
+const allDupesMatch = dupes.every(a => bubbleSort(a).join(",") === refDupes);
+console.log(allDupesMatch ? "PASS" : "FAIL");`,
+			expected: "PASS\nPASS\n",
+		},
+		{
+			name: "handles 100 elements (efficiency check)",
+			code: `{{FUNC}}
+// Shuffled array of 1..100 (deterministic shuffle)
+const arr = [];
+for (let i = 100; i >= 1; i--) arr.push(i % 7 === 0 ? 101 - i : i);
+// Flatten to a known shuffled order using a simple rearrangement
+const input = Array.from({length: 100}, (_, i) => i + 1);
+for (let k = 0; k < 100; k++) { const j = (k * 37 + 13) % 100; [input[k], input[j]] = [input[j], input[k]]; }
+const result = bubbleSort(input);
+console.log(result.length);
+console.log(result[0] + "," + result[49] + "," + result[99]);
+console.log(JSON.stringify(result) === JSON.stringify(Array.from({length: 100}, (_, i) => i + 1)));`,
+			expected: "100\n1,50,100\ntrue\n",
+		},
 	],
 };

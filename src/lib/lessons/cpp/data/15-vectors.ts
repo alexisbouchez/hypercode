@@ -142,5 +142,57 @@ int main() {
 			name: "prints vector size, elements, and sum",
 			expected: "Size: 5\nFirst: 10\nLast: 50\nSum: 150\n",
 		},
+		{
+			name: "empty vector has size 0",
+			expected: "0\n",
+			code: `#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+	vector<int> v;
+	cout << v.size() << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "push_back grows the vector",
+			expected: "1\n2\n3\n",
+			code: `#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+	vector<int> v;
+	v.push_back(100);
+	cout << v.size() << endl;
+	v.push_back(200);
+	cout << v.size() << endl;
+	v.push_back(300);
+	cout << v.size() << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "vector with single element",
+			expected: "Size: 1\nFirst: 42\nLast: 42\nSum: 42\n",
+			code: `#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+	vector<int> v;
+	v.push_back(42);
+	cout << "Size: " << v.size() << endl;
+	cout << "First: " << v[0] << endl;
+	cout << "Last: " << v.back() << endl;
+	int sum = 0;
+	for (int n : v) {
+		sum += n;
+	}
+	cout << "Sum: " << sum << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

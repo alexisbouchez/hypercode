@@ -36,5 +36,15 @@ Print the message \`Hello, Kotlin!\` to the output.
       name: 'prints "Hello, Kotlin!"',
       expected: "Hello, Kotlin!\n",
     },
+    {
+      name: "uses println for output",
+      code: 'fun main() {\n    println("Greetings from Kotlin!")\n}',
+      expected: "Greetings from Kotlin!\n",
+    },
+    {
+      name: "print without newline then println",
+      code: 'fun main() {\n    print("Hello, ")\n    println("World!")\n}',
+      expected: "Hello, World!\n",
+    },
   ],
 };

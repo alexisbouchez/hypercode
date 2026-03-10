@@ -61,5 +61,23 @@ IO.puts(status)
       name: "prints name, age, active, status",
       expected: "Alice\n30\ntrue\nok\n",
     },
+    {
+      name: "numeric and string variables",
+      code: `count = 42
+label = "items"
+IO.puts(count)
+IO.puts(label)
+`,
+      expected: "42\nitems\n",
+    },
+    {
+      name: "boolean false and atom",
+      code: `flag = false
+IO.puts(flag)
+color = :blue
+IO.puts(color)
+`,
+      expected: "false\nblue\n",
+    },
   ],
 };

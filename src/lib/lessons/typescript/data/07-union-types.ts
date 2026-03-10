@@ -6,6 +6,8 @@ export const unionTypes: Lesson = {
 	chapterId: "type-system",
 	content: `## Union Types
 
+> **Building on Optional Properties:** In the previous lesson, you saw that an optional property like \`age?: number\` actually has the type \`number | undefined\` — that \`|\` is a union! You have already been using union types without realizing it. Now let's explore them fully.
+
 A **union type** means a value can be one of several types, written with \`|\`:
 
 \`\`\`ts

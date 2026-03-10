@@ -75,5 +75,15 @@ Use a pipe to pass the contents of \`notes.txt\` through \`grep\` to find lines 
       name: "finds lines with daily",
       expected: "Practice daily\n",
     },
+    {
+      name: "pipe grep to head",
+      code: `cat notes.txt | grep "L" | head -n 1`,
+      expected: "Learn Linux\n",
+    },
+    {
+      name: "pipe to wc -l counts matches",
+      code: `cat notes.txt | grep "a" | wc -l`,
+      expected: "3\n",
+    },
   ],
 };

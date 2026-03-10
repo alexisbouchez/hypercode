@@ -71,5 +71,10 @@ def feigenbaum_ratio(r1, r2, r3):
       code: `{{FUNC}}\nratio = feigenbaum_ratio(3.0, 3.449, 3.5441)\nprint(round(ratio, 1))`,
       expected: `4.7\n`,
     },
+    {
+      name: "r=3.5 period-4",
+      code: `{{FUNC}}\nprint(find_period(3.5, 0.5, 500, 100, 1e-6))`,
+      expected: `4\n`,
+    },
   ],
 };

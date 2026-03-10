@@ -123,5 +123,15 @@ WHERE name = 'Notebook';`,
       code: `{{USER_SQL}}\n---VALIDATE---\nSELECT price FROM products WHERE name = 'Notebook';`,
       expected: '{"type":"exact","value":"5.99"}',
     },
+    {
+      name: "only Notebook is updated (other products unchanged)",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT COUNT(*) AS cnt FROM products WHERE price = 5.99;`,
+      expected: '{"type":"exact","value":"1"}',
+    },
+    {
+      name: "total product count remains 8",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT COUNT(*) AS cnt FROM products;`,
+      expected: '{"type":"exact","value":"8"}',
+    },
   ],
 };

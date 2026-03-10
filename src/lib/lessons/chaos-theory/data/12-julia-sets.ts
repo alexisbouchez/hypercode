@@ -69,5 +69,10 @@ def julia_fill_ratio(cr, ci, zr_min, zr_max, zi_min, zi_max, n, max_iter):
       code: `{{FUNC}}\nprint(julia_connected(-1.0, 0.0, 100))`,
       expected: `True\n`,
     },
+    {
+      name: "c=10 julia is disconnected",
+      code: `{{FUNC}}\nprint(julia_connected(10.0, 0.0, 100))`,
+      expected: `False\n`,
+    },
   ],
 };

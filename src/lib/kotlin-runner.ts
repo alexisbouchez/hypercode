@@ -51,6 +51,32 @@ if (!('contains' in Array.prototype)) {
   Object.defineProperty(Array.prototype, 'contains', { value(x) { return this.includes(x); }, configurable: true });
 }
 
+function __ktLet(receiver, fn) {
+  if (receiver == null) return null;
+  return fn(receiver);
+}
+
+function __ktAlso(receiver, fn) {
+  if (receiver == null) return null;
+  fn(receiver);
+  return receiver;
+}
+
+function __ktApply(receiver, fn) {
+  if (receiver == null) return null;
+  fn(receiver);
+  return receiver;
+}
+
+function __ktRun(receiver, fn) {
+  if (receiver == null) return null;
+  return fn(receiver);
+}
+
+function __ktWith(receiver, fn) {
+  return fn(receiver);
+}
+
 function __mapOf(obj) {
   return new Proxy(obj, {
     get(target, prop) {
@@ -269,6 +295,23 @@ function transformExpr(s: string): string {
       continue;
     }
 
+    // with(receiver) { block }
+    if (s.slice(i, i + 5) === "with(" && (i === 0 || /\W/.test(s[i - 1]))) {
+      const parenStart = i + 4;
+      const parenEnd = findMatchingClose(s, parenStart, "(", ")");
+      const receiver = s.slice(parenStart + 1, parenEnd).trim();
+      let k = parenEnd + 1;
+      while (k < s.length && s[k] === " ") k++;
+      if (k < s.length && s[k] === "{") {
+        const braceEnd = findMatchingClose(s, k, "{", "}");
+        const lambdaInner = s.slice(k + 1, braceEnd).trim();
+        const lambda = transformLambdaInner(lambdaInner);
+        result += `__ktWith(${transformExpr(receiver)}, ${lambda})`;
+        i = braceEnd + 1;
+        continue;
+      }
+    }
+
     // println( and print(
     if (s.slice(i, i + 8) === "println(" && (i === 0 || /\W/.test(s[i - 1]))) {
       result += "__println(";
@@ -406,6 +449,35 @@ function transformExpr(s: string): string {
         const lambda = transformLambdaInner(lambdaInner);
 
         switch (methodName) {
+          case "let": {
+            // x.let { lambda } → __ktLet(x, lambda)
+            // x?.let { lambda } → __ktLet(x, lambda)  (handles null internally)
+            // Strip trailing ?. from result if present
+            let receiver = result;
+            if (receiver.endsWith("?")) {
+              receiver = receiver.slice(0, -1);
+            }
+            result = `__ktLet(${receiver}, ${lambda})`;
+            break;
+          }
+          case "also": {
+            let receiver = result;
+            if (receiver.endsWith("?")) receiver = receiver.slice(0, -1);
+            result = `__ktAlso(${receiver}, ${lambda})`;
+            break;
+          }
+          case "apply": {
+            let receiver = result;
+            if (receiver.endsWith("?")) receiver = receiver.slice(0, -1);
+            result = `__ktApply(${receiver}, ${lambda})`;
+            break;
+          }
+          case "run": {
+            let receiver = result;
+            if (receiver.endsWith("?")) receiver = receiver.slice(0, -1);
+            result = `__ktRun(${receiver}, ${lambda})`;
+            break;
+          }
           case "map": result += `.map(${lambda})`; break;
           case "filter": result += `.filter(${lambda})`; break;
           case "forEach": result += `.forEach(${lambda})`; break;
@@ -438,6 +510,20 @@ function transformExpr(s: string): string {
       const inner = s.slice(i + 1, braceEnd).trim();
       result += transformLambdaInner(inner);
       i = braceEnd + 1;
+      continue;
+    }
+
+    // Elvis operator ?: → ??
+    if (s[i] === "?" && s[i + 1] === ":") {
+      result += "??";
+      i += 2;
+      continue;
+    }
+
+    // Non-null assertion !! → strip (just pass the value through)
+    if (s[i] === "!" && s[i + 1] === "!") {
+      // Skip the !! entirely; the value is already on the left
+      i += 2;
       continue;
     }
 
@@ -724,8 +810,65 @@ function collectDataClass(lines: string[], start: number): { code: string; next:
   return { code, next: start + 1 };
 }
 
+function collectExtensionFunction(lines: string[], start: number, receiverType: string, name: string): { code: string; next: number } {
+  const line = lines[start].trim();
+  const parenStart = line.indexOf("(");
+  const parenEnd = findMatchingClose(line, parenStart, "(", ")");
+  const params = line.slice(parenStart + 1, parenEnd);
+  const jsParams = stripParamTypes(params);
+  let afterParen = line.slice(parenEnd + 1).trim();
+
+  // Strip return type annotation
+  if (afterParen.startsWith(":")) {
+    let depth = 0;
+    let j = 1;
+    while (j < afterParen.length) {
+      const ch = afterParen[j];
+      if ("<([{".includes(ch)) depth++;
+      else if (">)]}".includes(ch)) depth--;
+      else if (depth === 0 && (ch === "=" || ch === "{")) break;
+      j++;
+    }
+    afterParen = afterParen.slice(j).trim();
+  }
+
+  // Map receiver type to JS type for prototype extension
+  const typeMap: Record<string, string> = {
+    String: "String", Int: "Number", Double: "Number", Float: "Number",
+    Boolean: "Boolean", List: "Array", MutableList: "Array",
+  };
+  const jsType = typeMap[receiverType] || receiverType;
+
+  // Single-expression: = expr
+  if (afterParen.startsWith("=")) {
+    const body = afterParen.slice(1).trim();
+    // Replace `this` references in the body with `this` (works for prototype methods)
+    const jsBody = transformExpr(body);
+    const allParams = jsParams ? `${jsParams}` : "";
+    return {
+      code: `${jsType}.prototype.${name} = function(${allParams}) { return ${jsBody}; };`,
+      next: start + 1,
+    };
+  }
+
+  // Block function
+  const { bodyLines, next } = collectFunctionBody(lines, start);
+  const jsBody = transformFunctionBody(bodyLines);
+  const allParams = jsParams ? `${jsParams}` : "";
+  return {
+    code: `${jsType}.prototype.${name} = function(${allParams}) {\n${jsBody}\n};`,
+    next,
+  };
+}
+
 function collectFunction(lines: string[], start: number): { code: string; next: number } {
   const line = lines[start].trim();
+
+  // Extension function: fun ReceiverType.name(params)
+  const extMatch = line.match(/^fun\s+(\w+)\.(\w+)\s*\(/);
+  if (extMatch) {
+    return collectExtensionFunction(lines, start, extMatch[1], extMatch[2]);
+  }
 
   // Find function name
   const funNameMatch = line.match(/^fun\s+(\w+)\s*\(/);
@@ -809,7 +952,7 @@ export function transpileKotlin(code: string): string {
       continue;
     }
 
-    if (/^fun\s+\w+/.test(trimmed)) {
+    if (/^fun\s+\w+/.test(trimmed) || /^fun\s+\w+\.\w+/.test(trimmed)) {
       const { code: fn, next } = collectFunction(lines, i);
       output.push(fn);
       i = next;

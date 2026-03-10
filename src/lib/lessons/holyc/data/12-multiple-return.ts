@@ -98,5 +98,15 @@ Print("x=%d y=%d\\n", x, y);
       name: "swaps correctly",
       expected: "x=9 y=3\n",
     },
+    {
+      name: "Swap with equal values",
+      code: '{{FUNC}}\nI64 x = 5;\nI64 y = 5;\nSwap(&x, &y);\nPrint("x=%d y=%d\\n", x, y);',
+      expected: "x=5 y=5\n",
+    },
+    {
+      name: "Swap with negative values",
+      code: '{{FUNC}}\nI64 x = -1;\nI64 y = 42;\nSwap(&x, &y);\nPrint("x=%d y=%d\\n", x, y);',
+      expected: "x=42 y=-1\n",
+    },
   ],
 };

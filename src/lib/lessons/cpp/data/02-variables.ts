@@ -111,5 +111,48 @@ int main() {
 			name: "prints all variables with labels",
 			expected: "Count: 42\nPi: 3.14\nActive: 1\nLanguage: C++\n",
 		},
+		{
+			name: "auto type deduction with int and double",
+			expected: "10\n3.14\n",
+			code: `#include <iostream>
+using namespace std;
+int main() {
+	auto x = 10;
+	auto y = 3.14;
+	cout << x << endl;
+	cout << y << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "bool prints as 0 and 1",
+			expected: "1\n0\n",
+			code: `#include <iostream>
+using namespace std;
+int main() {
+	bool t = true;
+	bool f = false;
+	cout << t << endl;
+	cout << f << endl;
+	return 0;
+}
+`,
+		},
+		{
+			name: "string concatenation with +",
+			expected: "Hello, World!\n",
+			code: `#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	string a = "Hello";
+	string b = "World";
+	string c = a + ", " + b + "!";
+	cout << c << endl;
+	return 0;
+}
+`,
+		},
 	],
 };

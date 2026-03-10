@@ -45,5 +45,13 @@ Print exactly \`Hello, World!\` using \`puts\`.`,
 			name: "prints Hello, World!",
 			expected: "Hello, World!\n",
 		},
+		{
+			name: "output starts with Hello",
+			expected: "Hello, World!\n",
+		},
+		{
+			name: "output contains exclamation mark",
+			expected: "Hello, World!\n",
+		},
 	],
 };

@@ -56,10 +56,13 @@ export function extractPythonFunctions(code: string): string {
   for (const line of lines) {
     const isImport = /^(import |from )/.test(line);
     const isTopLevelDef = /^(def |class |@)/.test(line);
+    const constantMatch = /^[A-Z_][A-Z_0-9]*\s*=(.*)/.exec(line);
+    const isTopLevelConstant = constantMatch !== null &&
+      !(/(?<!\w\.)(?!math\.)\b[a-z_]\w*\s*\(/.test(constantMatch[1]));
     const isEmpty = line.trim() === "";
     const isIndented = line.startsWith(" ") || line.startsWith("\t");
 
-    if (isImport) {
+    if (isImport || isTopLevelConstant) {
       result.push(line);
       inBlock = false;
     } else if (isTopLevelDef) {

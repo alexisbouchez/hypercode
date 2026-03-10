@@ -15,7 +15,7 @@ The \`while\` loop executes as long as its condition is true:
 \`\`\`zig
 var i: u32 = 0;
 while (i < 5) {
-    std.debug.print("{d}\\n", .{i});
+    std.debug.print("{}\\n", .{i});
     i += 1;
 }
 \`\`\`
@@ -27,7 +27,7 @@ Zig's \`while\` has an optional *continue expression* that runs at the end of ea
 \`\`\`zig
 var i: u32 = 0;
 while (i < 5) : (i += 1) {
-    std.debug.print("{d}\\n", .{i});
+    std.debug.print("{}\\n", .{i});
 }
 \`\`\`
 
@@ -50,7 +50,7 @@ You can also get the index:
 
 \`\`\`zig
 for (names, 0..) |name, i| {
-    std.debug.print("{d}: {s}\\n", .{ i, name });
+    std.debug.print("{}: {s}\\n", .{ i, name });
 }
 \`\`\`
 
@@ -63,7 +63,7 @@ var i: u32 = 0;
 while (i < 10) : (i += 1) {
     if (i == 5) break;
     if (i % 2 == 0) continue;
-    std.debug.print("{d}\\n", .{i}); // prints 1, 3
+    std.debug.print("{}\\n", .{i}); // prints 1, 3
 }
 \`\`\`
 
@@ -85,7 +85,7 @@ You can iterate over a range by creating a range from a slice or using \`0..n\` 
 
 \`\`\`zig
 for (0..5) |i| {
-    std.debug.print("{d}\\n", .{i}); // prints 0 through 4
+    std.debug.print("{}\\n", .{i}); // prints 0 through 4
 }
 \`\`\`
 
@@ -120,7 +120,7 @@ pub fn fizzBuzz(n: u32) void {
 \t\t} else if (i % 5 == 0) {
 \t\t\tstd.debug.print("Buzz\\n", .{});
 \t\t} else {
-\t\t\tstd.debug.print("{d}\\n", .{i});
+\t\t\tstd.debug.print("{}\\n", .{i});
 \t\t}
 \t}
 }

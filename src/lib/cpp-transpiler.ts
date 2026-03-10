@@ -418,6 +418,24 @@ function transformClassBody(
 			continue;
 		}
 
+		// Destructor: ~ClassName() {
+		const dtorRe = new RegExp(`^~${className}\\s*\\(\\s*\\)\\s*\\{`);
+		const dtorM = t.match(dtorRe);
+		if (dtorM) {
+			const relOpen = rest.indexOf("{");
+			const relClose = findMatchingBrace(rest, relOpen);
+			const bodyStr = rest.slice(relOpen + 1, relClose);
+			const transformedBody = transformBody(bodyStr, knownClasses);
+
+			output.push(`\t__destroy() {`);
+			output.push(transformedBody);
+			output.push("\t}");
+
+			const used = rest.slice(0, relClose + 1).split("\n").length;
+			i += used;
+			continue;
+		}
+
 		// Method: [virtual] [Type] name(params) [override] [const] {
 		const methRe =
 			/^(?:virtual\s+)?(?:(?:int|double|float|bool|void|string|char|auto|[A-Z]\w*)\s+)?(\w+)\s*\(([^)]*)\)\s*(?:override\s*)?(?:const\s*)?\{/;

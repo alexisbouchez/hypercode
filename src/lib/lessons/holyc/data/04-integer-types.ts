@@ -67,5 +67,15 @@ Print("%d\\n", a * b);
       name: "prints 60",
       expected: "60\n",
     },
+    {
+      name: "I64 addition works",
+      code: 'I64 a = 12;\nI64 b = 5;\nPrint("%d\\n", a + b);',
+      expected: "17\n",
+    },
+    {
+      name: "I64 modulus works",
+      code: 'I64 a = 12;\nI64 b = 5;\nPrint("%d\\n", a % b);',
+      expected: "2\n",
+    },
   ],
 };

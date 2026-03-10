@@ -67,5 +67,21 @@ IO.puts(Math.cube(3))
       name: "defmodule with square and cube",
       expected: "16\n27\n",
     },
+    {
+      name: "square of zero and one",
+      code: `{{FUNC}}
+IO.puts(Math.square(0))
+IO.puts(Math.square(1))
+`,
+      expected: "0\n1\n",
+    },
+    {
+      name: "cube of negative number",
+      code: `{{FUNC}}
+IO.puts(Math.cube(2))
+IO.puts(Math.cube(10))
+`,
+      expected: "8\n1000\n",
+    },
   ],
 };

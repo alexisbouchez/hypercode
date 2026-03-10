@@ -115,5 +115,16 @@ int main() {
 }`,
 			expected: "-1\n",
 		},
+		{
+			name: "write zero bytes returns 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tint r = sys_write(STDOUT, "anything", 0);
+\tprintf("%d\\n", r);
+\treturn 0;
+}`,
+			expected: "0\n",
+		},
 	],
 };

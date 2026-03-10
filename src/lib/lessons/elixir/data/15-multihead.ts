@@ -57,5 +57,22 @@ IO.puts(Handler.handle(:something_else))
       name: "multi-head function pattern matching",
       expected: "Success: 42\nError: not found\nUnknown\n",
     },
+    {
+      name: "handle ok with string value",
+      code: `{{FUNC}}
+IO.puts(Handler.handle({:ok, "hello"}))
+IO.puts(Handler.handle({:ok, 0}))
+`,
+      expected: "Success: hello\nSuccess: 0\n",
+    },
+    {
+      name: "handle error with different reasons",
+      code: `{{FUNC}}
+IO.puts(Handler.handle({:error, "timeout"}))
+IO.puts(Handler.handle({:error, 404}))
+IO.puts(Handler.handle(:unknown))
+`,
+      expected: "Error: timeout\nError: 404\nUnknown\n",
+    },
   ],
 };

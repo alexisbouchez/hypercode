@@ -53,7 +53,7 @@ Implement \`two_sum(nums, target)\` that:
 - Returns \`True\` if any two distinct elements in \`nums\` sum to \`target\`
 - Returns \`False\` otherwise
 
-Hint: use a set to track which numbers you've seen.`,
+Hint: use a **set** to track which numbers you've seen. A set is an unordered collection of unique elements — created with \`set()\` — that supports O(1) lookups via \`in\`, and \`.add()\` to insert elements. (Sets also support operations like \`|\` for union and \`&\` for intersection.)`,
 
 	starterCode: `def two_sum(nums, target):
     # Return True if any two distinct elements sum to target

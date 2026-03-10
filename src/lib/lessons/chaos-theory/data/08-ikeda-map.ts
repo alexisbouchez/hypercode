@@ -72,5 +72,10 @@ def ikeda_iterate(x0, y0, u, n):
       code: `{{FUNC}}\nx,y = ikeda_step(1.0,0.0,0.9)\nprint(round(x,4),round(y,4))`,
       expected: "0.2288 -0.464\n",
     },
+    {
+      name: "ikeda one iteration from origin",
+      code: `{{FUNC}}\nx,y = ikeda_iterate(0.0,0.0,0.9,1)\nprint(round(x,4),round(y,4))`,
+      expected: "1.0 0.0\n",
+    },
   ],
 };

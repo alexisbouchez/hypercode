@@ -16,6 +16,7 @@ import { genericFunctions } from "./data/14-generic-functions";
 import { genericTypes } from "./data/15-generic-types";
 import { concurrency } from "./data/16-goroutines-channels";
 import { select_ } from "./data/17-select";
+import { variadicFunctions } from "./data/18-variadic-functions";
 
 export const chapters: Chapter[] = [
   { id: "foundations", title: "Foundations" },
@@ -46,6 +47,7 @@ export const lessons: Lesson[] = [
   genericTypes,
   concurrency,
   select_,
+  variadicFunctions,
 ];
 
 export function getLessonById(id: string): Lesson | undefined {

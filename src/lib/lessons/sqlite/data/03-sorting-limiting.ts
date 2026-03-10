@@ -88,5 +88,13 @@ SELECT name, price FROM products`,
       name: "returns exactly 3 rows",
       expected: '{"type":"rowCount","value":3}',
     },
+    {
+      name: "first row is Laptop (most expensive at 999.99)",
+      expected: '{"type":"exact","value":"Laptop"}',
+    },
+    {
+      name: "includes Headphones (2nd most expensive)",
+      expected: '{"type":"contains","value":"Headphones"}',
+    },
   ],
 };

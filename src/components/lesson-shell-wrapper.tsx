@@ -32,6 +32,10 @@ import { initSwiftRunner, isSwiftReady, runSwift, runTests as runSwiftTests } fr
 import { initElixirRunner, isElixirReady, runElixir, runTests as runElixirTests } from "@/lib/elixir-runner";
 import { initScalaRunner, isScalaReady, runScala, runTests as runScalaTests } from "@/lib/scala-runner";
 import { initFSharpRunner, isFSharpReady, runFSharp, runTests as runFSharpTests } from "@/lib/fsharp-runner";
+import { initLuaRunner, isLuaReady, runLua, runTests as runLuaTests } from "@/lib/lua-runner";
+import { initPerlRunner, isPerlReady, runPerl, runTests as runPerlTests } from "@/lib/perl-runner";
+import { initOCamlRunner, isOCamlReady, runOCaml, runTests as runOCamlTests } from "@/lib/ocaml-runner";
+import { initX86Runner, isX86Ready, runX86, runTests as runX86Tests } from "@/lib/x86-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -117,6 +121,10 @@ const RUNNER_MAP: Record<string, RunnerModule> = {
   "machine-learning":      python,
   "neural-networks":       python,
   "information-theory":    python,
+  "abstract-algebra":      python,
+  "real-analysis":         python,
+  networking:              js,
+  compiler:                js,
   haskell:                 { init: initHaskellRunner, isReady: isHaskellReady, run: runHaskell, runTests: runHaskellTests },
   sqlite:                  { init: initSqliteRunner,  isReady: isSqliteReady,  run: runSqlite,  runTests: runSqliteTests },
   redis:                   { init: initRedisRunner,   isReady: isRedisReady,   run: runRedis,   runTests: runRedisTests },
@@ -137,6 +145,10 @@ const RUNNER_MAP: Record<string, RunnerModule> = {
   elixir:                  { init: initElixirRunner,   isReady: isElixirReady,   run: runElixir,   runTests: runElixirTests },
   scala:                   { init: initScalaRunner,    isReady: isScalaReady,    run: runScala,    runTests: runScalaTests },
   fsharp:                  { init: initFSharpRunner,   isReady: isFSharpReady,   run: runFSharp,   runTests: runFSharpTests },
+  lua:                     { init: initLuaRunner,      isReady: isLuaReady,      run: runLua,      runTests: runLuaTests },
+  perl:                    { init: initPerlRunner,     isReady: isPerlReady,     run: runPerl,     runTests: runPerlTests },
+  ocaml:                   { init: initOCamlRunner,    isReady: isOCamlReady,    run: runOCaml,    runTests: runOCamlTests },
+  x86:                     { init: initX86Runner,      isReady: isX86Ready,      run: runX86,      runTests: runX86Tests },
 };
 
 const GO_RUNNER: RunnerModule = {

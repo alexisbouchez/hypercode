@@ -62,7 +62,7 @@ Write a program that prints exactly \`Hello, World!\` followed by a newline to t
   starterCode: `const std = @import("std");
 
 pub fn main() void {
-\t// Write your first Zig program here
+\t// Your code here
 }
 `,
 

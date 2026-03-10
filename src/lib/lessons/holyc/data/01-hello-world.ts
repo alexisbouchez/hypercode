@@ -49,5 +49,15 @@ Write a program that prints exactly \`Hello, World!\` followed by a newline.`,
       name: "prints Hello, World!",
       expected: "Hello, World!\n",
     },
+    {
+      name: "outputs exactly one line",
+      code: 'Print("Hello, World!\\n");',
+      expected: "Hello, World!\n",
+    },
+    {
+      name: "no extra output",
+      code: 'Print("Hello, World!\\n");',
+      expected: "Hello, World!\n",
+    },
   ],
 };

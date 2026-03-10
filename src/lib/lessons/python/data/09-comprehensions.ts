@@ -28,6 +28,8 @@ lengths = {w: len(w) for w in words}
 
 ### Set Comprehension
 
+A **set** is an unordered collection of unique elements. Using \`{}\` with a comprehension builds a set instead of a list — duplicates are automatically removed. Sets also support operations like \`|\` (union), \`&\` (intersection), and \`-\` (difference).
+
 \`\`\`python
 unique_lens = {len(w) for w in words}
 # {5, 6}

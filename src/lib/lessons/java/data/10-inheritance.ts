@@ -136,5 +136,47 @@ Create \`Animal\`, \`Dog\`, and \`Cat\` classes. \`Dog.speak()\` appends \`"!"\`
 			name: "Rex barks, Luna meows, Buddy barks",
 			expected: "Rex says woof!\nLuna says meow\nBuddy says woof!\n",
 		},
+		{
+			name: "polymorphism with Animal reference",
+			expected: "Max says woof!\n",
+			code: `public class Main {
+    static class Animal {
+        private String name;
+        private String sound;
+        Animal(String name, String sound) { this.name = name; this.sound = sound; }
+        String speak() { return name + " says " + sound; }
+    }
+    static class Dog extends Animal {
+        Dog(String name) { super(name, "woof"); }
+        @Override
+        String speak() { return super.speak() + "!"; }
+    }
+    public static void main(String[] args) {
+        Animal a = new Dog("Max");
+        System.out.println(a.speak());
+    }
+}
+`,
+		},
+		{
+			name: "Cat inherits speak without override",
+			expected: "Whiskers says meow\n",
+			code: `public class Main {
+    static class Animal {
+        private String name;
+        private String sound;
+        Animal(String name, String sound) { this.name = name; this.sound = sound; }
+        String speak() { return name + " says " + sound; }
+    }
+    static class Cat extends Animal {
+        Cat(String name) { super(name, "meow"); }
+    }
+    public static void main(String[] args) {
+        Cat c = new Cat("Whiskers");
+        System.out.println(c.speak());
+    }
+}
+`,
+		},
 	],
 };

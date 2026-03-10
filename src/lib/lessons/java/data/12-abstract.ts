@@ -176,5 +176,54 @@ Print Alice (FullTime, $25/hr) and Bob (PartTime, $20/hr, 20 hrs).`,
 			name: "Alice $1000, Bob $400",
 			expected: "Alice earns $1000.0\nBob earns $400.0\n",
 		},
+		{
+			name: "PartTime with zero hours",
+			expected: "Eve earns $0.0\n",
+			code: `public class Main {
+    static abstract class Employee {
+        protected String name;
+        protected double hourlyRate;
+        Employee(String name, double hourlyRate) { this.name = name; this.hourlyRate = hourlyRate; }
+        abstract double hoursWorked();
+        double pay() { return hourlyRate * hoursWorked(); }
+        @Override
+        public String toString() { return name + " earns $" + pay(); }
+    }
+    static class PartTime extends Employee {
+        private double hours;
+        PartTime(String name, double hourlyRate, double hours) { super(name, hourlyRate); this.hours = hours; }
+        @Override
+        double hoursWorked() { return hours; }
+    }
+    public static void main(String[] args) {
+        System.out.println(new PartTime("Eve", 15.0, 0.0));
+    }
+}
+`,
+		},
+		{
+			name: "FullTime always returns 40 hours",
+			expected: "40.0\n2000.0\n",
+			code: `public class Main {
+    static abstract class Employee {
+        protected String name;
+        protected double hourlyRate;
+        Employee(String name, double hourlyRate) { this.name = name; this.hourlyRate = hourlyRate; }
+        abstract double hoursWorked();
+        double pay() { return hourlyRate * hoursWorked(); }
+    }
+    static class FullTime extends Employee {
+        FullTime(String name, double hourlyRate) { super(name, hourlyRate); }
+        @Override
+        double hoursWorked() { return 40; }
+    }
+    public static void main(String[] args) {
+        FullTime ft = new FullTime("Carol", 50.0);
+        System.out.println(ft.hoursWorked());
+        System.out.println(ft.pay());
+    }
+}
+`,
+		},
 	],
 };

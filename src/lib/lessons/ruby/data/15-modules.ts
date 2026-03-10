@@ -80,7 +80,7 @@ Create a module \`Describable\` with a method \`describe\` that returns \`"#{sel
 
 Create a class \`Animal\` that includes \`Describable\`, has \`attr_reader :name\`, and an \`initialize(name)\` method.
 
-Create \`Animal.new("Whiskers")\` and print \`cat.describe\`.`,
+Create a variable \`cat\` set to \`Animal.new("Whiskers")\` and print \`cat.describe\`.`,
 
 	starterCode: `module Describable
   def describe
@@ -124,6 +124,16 @@ puts cat.describe
 		{
 			name: "Animal: Whiskers",
 			expected: "Animal: Whiskers\n",
+		},
+		{
+			name: "describe works with different name",
+			code: `module Describable\n  def describe\n    "\#{self.class}: \#{name}"\n  end\nend\nclass Animal\n  include Describable\n  attr_reader :name\n  def initialize(name)\n    @name = name\n  end\nend\ndog = Animal.new("Buddy")\nputs dog.describe`,
+			expected: "Animal: Buddy\n",
+		},
+		{
+			name: "module mixin provides describe method",
+			code: `module Describable\n  def describe\n    "\#{self.class}: \#{name}"\n  end\nend\nclass Animal\n  include Describable\n  attr_reader :name\n  def initialize(name)\n    @name = name\n  end\nend\ncat = Animal.new("Luna")\nputs cat.describe`,
+			expected: "Animal: Luna\n",
 		},
 	],
 };

@@ -101,5 +101,15 @@ int main() {
 }`,
 			expected: "VPN:    0x15\nOffset: 0x3cd\n",
 		},
+		{
+			name: "address zero has VPN 0 and offset 0",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tparse_vaddr(0x0, 12);
+\treturn 0;
+}`,
+			expected: "VPN:    0x0\nOffset: 0x0\n",
+		},
 	],
 };

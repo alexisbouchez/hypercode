@@ -69,5 +69,15 @@ Print("TempleOS\\n");
       name: "prints TempleOS",
       expected: "TempleOS\n",
     },
+    {
+      name: "comments do not produce output",
+      code: '// This is a comment\n/* block comment */\nPrint("TempleOS\\n");',
+      expected: "TempleOS\n",
+    },
+    {
+      name: "only TempleOS is printed",
+      code: '/* multi\nline\ncomment */\n// single line\nPrint("TempleOS\\n");',
+      expected: "TempleOS\n",
+    },
   ],
 };

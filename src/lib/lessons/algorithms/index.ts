@@ -14,6 +14,11 @@ import { dfs } from "./data/12-dfs";
 import { dijkstra } from "./data/13-dijkstra";
 import { fibonacciMemoization } from "./data/14-fibonacci-memoization";
 import { lcs } from "./data/15-lcs";
+import { hashTable } from "./data/16-hash-table";
+import { minHeap } from "./data/17-heap";
+import { trie } from "./data/18-trie";
+import { unionFind } from "./data/19-union-find";
+import { topologicalSort } from "./data/20-topological-sort";
 
 export const algorithmsChapters: Chapter[] = [
 	{ id: "sorting", title: "Sorting" },
@@ -39,4 +44,9 @@ export const algorithmsLessons: Lesson[] = [
 	dijkstra,
 	fibonacciMemoization,
 	lcs,
+	hashTable,
+	minHeap,
+	trie,
+	unionFind,
+	topologicalSort,
 ];

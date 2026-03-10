@@ -1,0 +1,211 @@
+================================================================================
+                        HYPERCODE COURSE IMPROVEMENT TODO
+                              88 courses, ~415+ lessons
+================================================================================
+
+
+================================================================================
+  SECTION 1: CRITICAL / INFRASTRUCTURE ISSUES  (ALL DONE)
+================================================================================
+
+[x] MISSING TEST RUNNERS - Created algorithms + distributed-systems + three.js runners
+[x] C COURSE INDEX BUG - Renamed file, fixed import
+[x] ELIXIR LESSON 13 TRUNCATED - Fixed text and numbering
+[x] RAY TRACER COURSE MISSING - Already exists
+
+
+================================================================================
+  SECTION 2: TEST COVERAGE GAPS  (ALL DONE)
+================================================================================
+
+[x] Java - 62 tests    [x] C++ - 67 tests     [x] Elixir - 48 tests
+[x] HolyC - 54 tests   [x] SQL - 75 tests     [x] C - 130 tests
+[x] ARM64 - 54 tests   [x] Ruby - 45 tests    [x] Chaos Theory - 60 tests
+[x] Kotlin - 51 tests  [x] Linux - 51 tests   [x] Coreutils - 92 tests
+[x] Kernel - 89 tests  [x] DS - 54 tests      [x] Rust - 110 tests
+[x] Algorithms - 79 tests  [x] Three.js - 54 tests
+[x] All other courses already had good coverage
+
+
+================================================================================
+  SECTION 3: MISSING CONCEPTS BY COURSE
+================================================================================
+
+---------- Programming Languages ----------
+
+[x] Go - Added variadic functions lesson + copy()/nil-vs-empty slice content
+    + init() explanation + embedded interfaces (67/67 pass)
+
+[x] Zig - Added tagged unions exercise, @divTrunc, comptime generics lesson,
+    recursive data structures (linked list), safety & build modes (65/65 pass)
+
+[x] Rust - Added capture semantics + scan() vs fold() (110/110 pass)
+
+[x] C++ - Added smart pointers, STL algorithms, destructors, copy/move semantics (70/70)
+
+[x] C - Added unions, const correctness, heap vs stack, valgrind notes (130/130)
+
+[x] Java - Added exception handling, enums, static/final, lambda expressions,
+    access modifiers (65/65 pass)
+
+[x] Python - Added decorator, set operation explanations
+
+[x] JavaScript - Added immutability notes to map/filter
+
+[x] TypeScript - Added optional/rest params + as const content (49/49 pass)
+
+[x] Ruby - Added :: scope resolution and ? suffix convention
+
+[x] Haskell - Added module system lesson + factorial explanation
+
+[x] Gleam - Added recursion lesson before FizzBuzz
+
+[x] Kotlin - Added null-safety + scope functions/extension functions (51/51)
+
+[x] HolyC - Added structs + recursion lessons (54 tests)
+
+[x] Lean - Added dependent types, inductive types, proof tactics content
+
+[x] Elixir - Added comprehensions & streams lesson (48/48 pass)
+
+---------- Databases ----------
+
+[x] SQL/PostgreSQL - Added Transactions + Views lessons (75/75 pass)
+[x] SQLite - Added Transactions & Savepoints + PRAGMA & CTEs lessons (40/40 pass)
+[ ] MySQL - Uses SQLite as emulator; MySQL-specific features can't be tested
+[x] Redis - Added Streams + Geospatial lessons (42/42 pass)
+
+---------- CS / Systems ----------
+
+[x] Algorithms - Added hash table, min heap, trie, union-find, topological
+    sort lessons (79/79 pass)
+[x] Distributed Systems - Added CAP theorem + time synchronization lessons (57/57)
+[x] Trees - Added BST deletion + AVL tree lessons (56/56 pass)
+[x] Linked Lists - Added doubly linked list + Floyd's cycle detection (54/54)
+[x] Kernel - Added all 5 state transitions + dup/dup2 (89/89 pass)
+
+---------- Finance ----------
+
+[x] Algorithmic Trading - Added drawdown limits + volatility targeting (64/64)
+[x] Options Pricing - Added volatility smile/skew content (62/62)
+[x] Portfolio Theory - Added N-asset optimization + risk parity (63/63)
+
+---------- ML / AI ----------
+
+[x] Machine Learning - Added cross-validation, evaluation metrics (72/72)
+[x] Neural Networks - Added GELU/SiLU, He init, batch processing (56/56)
+[x] MicroGPT - Added log-sum-exp, BPE tokenization, positional encoding (21/21)
+
+---------- Web ----------
+
+[x] HTML - Added DOCTYPE, ARIA, script defer/async explanations
+[x] CSS - Added specificity, CSS variables, inheritance explanations
+[x] Tailwind - Added configuration/customization lesson (63/63 pass)
+[x] Three.js - Added shadows lesson + test runner (54/54 pass)
+
+---------- Science ----------
+
+[x] Fluid Mechanics - 16 lessons confirmed intentional
+
+
+================================================================================
+  SECTION 4: CONTENT QUALITY ISSUES  (ALL DONE)
+================================================================================
+
+[x] All confusing/misleading explanations fixed (10 items)
+[x] All difficulty progression issues fixed (7 items)
+[x] Star Trek Theme Consistency - Added transporter/viewscreen references to lessons 23-24
+
+
+================================================================================
+  SECTION 5: PEDAGOGICAL IMPROVEMENTS  (ALL DONE)
+================================================================================
+
+[x] All task/exercise design issues fixed (5 items)
+[x] All "why" explanations added (6 items)
+[x] Test count standardized, naming improved, notation disambiguated
+[x] String handling consistency - Standardized .trim() on all 80 test runners
+
+
+================================================================================
+  SECTION 6: NEW COURSES / LESSONS TO CONSIDER
+================================================================================
+
+---------- High Value Additions (ALL DONE) ----------
+
+[x] Java Exception Handling + Enums + Static/Final + Lambdas (62/62)
+[x] SQL Transactions + Views (75/75)
+[x] SQLite Transactions (40/40)
+[x] Haskell Module System
+[x] Gleam Recursion
+[x] C++ Smart Pointers + STL Algorithms + Destructors (67/67)
+[x] Kotlin Null Safety + Scope Functions (51/51)
+[x] HolyC Structs + Recursion (54 tests)
+[x] Algorithms Hash Table + Min Heap + Trie + Union-Find + Topo Sort (79/79)
+[x] Trees BST Deletion (52/52)
+[x] Linked Lists Doubly Linked List + Cycle Detection (54/54)
+[x] Go Variadic Functions (64/64)
+[x] C Unions (130/130)
+[x] Elixir Comprehensions & Streams (48/48)
+[x] Zig Comptime Generics + Recursive Data Structures + Safety Modes (65/65)
+[x] Redis Streams + Geospatial (42/42)
+[x] Distributed Systems CAP Theorem (54/54)
+[x] MicroGPT BPE + Positional Encoding (21/21)
+[x] Tailwind Configuration (63/63)
+[x] Three.js Shadows (54/54)
+
+---------- Course Gaps (requires entirely new courses - very large scope) ----------
+
+[x] No Lua course - Created (15 lessons, 29 tests, Lua→JS transpiler)
+[x] No Perl course - Created (15 lessons, 50 tests, Perl→JS transpiler)
+[x] No OCaml course - Created (15 lessons, 37 tests, OCaml→JS transpiler)
+[x] No Assembly x86_64 course - Created (15 lessons, 15 tests, x86 assembler+interpreter)
+[x] No networking course - Created (15 lessons, 58 tests, JS runner)
+[x] No compiler/interpreter course - Created (15 lessons, 45 tests, JS runner)
+[x] No real analysis course - Created (15 lessons, 52 tests, Python runner)
+[x] No abstract algebra course - Created (15 lessons, 51 tests, Python runner)
+[x] No graph theory dedicated course - Already exists (15 lessons, "Graphs in Python")
+
+
+================================================================================
+  SECTION 7: TEST INFRASTRUCTURE IMPROVEMENTS  (ALL DONE except MySQL limitation)
+================================================================================
+
+[x] SQL/SQLite/MySQL - Improved from row counts to actual data checks
+[x] Three.js - Created test runner (was missing entirely)
+
+[x] HTML/CSS/Tailwind tests only check tag/property presence via regex - by design, acceptable
+[x] Music tests - confirmed NOT brittle, .toFixed() precision is appropriate
+[x] R tests - fixed whitespace normalization in test runner
+[x] Property-based testing - added sorting invariant tests (commutativity, length preservation)
+[x] Numerical stability tests: BS edge cases (63/63), softmax large logits (22/22), sigmoid overflow fix (73/73)
+[x] Gradient validation tests - added central-difference gradient checking for neural networks
+[x] Performance/efficiency tests for algorithms - added scaling tests (100-10000 elements)
+[ ] MySQL uses SQLite as emulator; MySQL-specific features untestable - platform limitation
+
+
+================================================================================
+  SECTION 8: MINOR POLISH  (ALL DONE)
+================================================================================
+
+[x] All 7 items completed
+
+
+================================================================================
+  REMAINING ITEMS
+================================================================================
+
+PLATFORM LIMITATION (not fixable):
+   - MySQL uses SQLite emulator (can't test MySQL-specific features)
+
+ALL other items across all 8 sections have been completed, including:
+   - All 8 new courses (Lua, Perl, OCaml, x86_64, networking, compiler,
+     real analysis, abstract algebra) created with full test coverage
+   - Fixed extractPythonFunctions to properly handle uppercase variable
+     assignments that contain function calls (was breaking AdvLA + Crypto tests)
+   - Added dotnet skip check to C# test runner (matches other CLI-dependent runners)
+   - Full test suite: 5313/5313 passing (6 courses skipped: no CLI installed)
+
+================================================================================
+  END OF TODO
+================================================================================

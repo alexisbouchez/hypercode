@@ -88,5 +88,15 @@ VALUES ('Wireless Mouse', 29.99, 'Electronics');`,
       code: `{{USER_SQL}}\n---VALIDATE---\nSELECT * FROM products WHERE name = 'Wireless Mouse';`,
       expected: '{"type":"rowCount","value":1}',
     },
+    {
+      name: "Wireless Mouse has correct price of 29.99",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT price FROM products WHERE name = 'Wireless Mouse';`,
+      expected: '{"type":"exact","value":"29.99"}',
+    },
+    {
+      name: "Wireless Mouse is in Electronics category",
+      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT category FROM products WHERE name = 'Wireless Mouse';`,
+      expected: '{"type":"exact","value":"Electronics"}',
+    },
   ],
 };

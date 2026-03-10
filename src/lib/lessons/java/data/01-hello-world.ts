@@ -51,5 +51,26 @@ Print exactly \`Hello, World!\` using \`System.out.println\`.`,
 			name: "prints Hello, World!",
 			expected: "Hello, World!\n",
 		},
+		{
+			name: "uses println (output ends with newline)",
+			expected: "Hello, World!\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+`,
+		},
+		{
+			name: "print vs println distinction",
+			expected: "Hello, Java!\n",
+			code: `public class Main {
+    public static void main(String[] args) {
+        System.out.print("Hello, ");
+        System.out.println("Java!");
+    }
+}
+`,
+		},
 	],
 };

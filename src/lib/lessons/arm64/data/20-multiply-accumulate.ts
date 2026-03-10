@@ -154,5 +154,92 @@ _start:
       name: "prints 43",
       expected: "43\n",
     },
+    {
+      name: "dot product [1,2,3] . [4,5,6] = 32",
+      expected: "32\n",
+      code: `.data
+buf:
+\t.skip 3
+
+.text
+.global _start
+_start:
+\tMOV X10, #0
+
+\tMOV X0, #1
+\tMOV X1, #4
+\tMADD X10, X0, X1, X10
+
+\tMOV X0, #2
+\tMOV X1, #5
+\tMADD X10, X0, X1, X10
+
+\tMOV X0, #3
+\tMOV X1, #6
+\tMADD X10, X0, X1, X10
+
+\tMOV X3, #10
+\tUDIV X4, X10, X3
+\tMUL X5, X4, X3
+\tSUB X5, X10, X5
+
+\tADD X4, X4, #48
+\tADD X5, X5, #48
+
+\tLDR X6, =buf
+\tSTRB W4, [X6]
+\tSTRB W5, [X6, #1]
+\tMOV X7, #10
+\tSTRB W7, [X6, #2]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #3
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "dot product with zeros = 0",
+      expected: "0\n",
+      code: `.data
+buf:
+\t.skip 2
+
+.text
+.global _start
+_start:
+\tMOV X10, #0
+
+\tMOV X0, #0
+\tMOV X1, #5
+\tMADD X10, X0, X1, X10
+
+\tMOV X0, #0
+\tMOV X1, #3
+\tMADD X10, X0, X1, X10
+
+\tADD X10, X10, #48
+
+\tLDR X6, =buf
+\tSTRB W10, [X6]
+\tMOV X7, #10
+\tSTRB W7, [X6, #1]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #2
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

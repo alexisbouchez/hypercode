@@ -26,6 +26,14 @@ A CSS rule has:
 - **Selector** — what to style (\`h1\`, \`p\`, \`.class\`, \`#id\`)
 - **Declaration block** — \`{ property: value; }\`
 
+**Inheritance:** Some CSS properties (like \`color\`, \`font-family\`, \`line-height\`) are **inherited** by child elements automatically. Others (like \`border\`, \`padding\`, \`margin\`) are not. This means if you set \`color: navy\` on \`body\`, all text inside inherits that color unless overridden.
+
+**CSS Variables (Custom Properties):** You can define reusable values with \`--\` prefix:
+\`\`\`css
+:root { --primary: #2563eb; --gap: 1rem; }
+h1   { color: var(--primary); margin-bottom: var(--gap); }
+\`\`\`
+
 Common properties:
 - \`color\` — text color
 - \`font-size\` — text size

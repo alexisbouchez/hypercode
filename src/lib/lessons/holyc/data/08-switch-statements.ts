@@ -82,5 +82,15 @@ switch (month) {
       name: "prints Summer for month 7",
       expected: "Summer\n",
     },
+    {
+      name: "prints Spring for month 4",
+      code: 'I64 month = 4;\nswitch (month) {\n  case 3...5:  Print("Spring\\n"); break;\n  case 6...8:  Print("Summer\\n"); break;\n  case 9...11: Print("Autumn\\n"); break;\n  default:     Print("Winter\\n"); break;\n}',
+      expected: "Spring\n",
+    },
+    {
+      name: "prints Winter for month 1",
+      code: 'I64 month = 1;\nswitch (month) {\n  case 3...5:  Print("Spring\\n"); break;\n  case 6...8:  Print("Summer\\n"); break;\n  case 9...11: Print("Autumn\\n"); break;\n  default:     Print("Winter\\n"); break;\n}',
+      expected: "Winter\n",
+    },
   ],
 };

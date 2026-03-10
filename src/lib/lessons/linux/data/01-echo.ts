@@ -53,5 +53,15 @@ Print \`Hello, Linux!\` using the \`echo\` command.`,
       name: "prints Hello, Linux!",
       expected: "Hello, Linux!\n",
     },
+    {
+      name: "uses echo command",
+      code: `echo "Hello, Linux!"`,
+      expected: "Hello, Linux!\n",
+    },
+    {
+      name: "echo with different text",
+      code: `echo "Goodbye, Linux!"`,
+      expected: "Goodbye, Linux!\n",
+    },
   ],
 };

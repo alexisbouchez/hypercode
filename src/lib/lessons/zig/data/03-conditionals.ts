@@ -39,7 +39,7 @@ Zig has a special \`if\` syntax for unwrapping optional values:
 \`\`\`zig
 const maybe_value: ?i32 = 42;
 if (maybe_value) |value| {
-    std.debug.print("got: {d}\\n", .{value});
+    std.debug.print("got: {}\\n", .{value});
 } else {
     std.debug.print("no value\\n", .{});
 }

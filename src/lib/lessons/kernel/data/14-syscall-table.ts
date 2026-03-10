@@ -144,5 +144,21 @@ int main() {
 }`,
 			expected: "hello from syscall\n",
 		},
+		{
+			name: "overwriting a syscall entry replaces handler",
+			code: `#include <stdio.h>
+{{FUNC}}
+void old_fn(void) { printf("old\\n"); }
+void new_fn(void) { printf("new\\n"); }
+int main() {
+\tsyscall_fn table[NR_SYSCALLS] = {};
+\tregister_syscall(table, 0, old_fn);
+\tdo_syscall(table, 0);
+\tregister_syscall(table, 0, new_fn);
+\tdo_syscall(table, 0);
+\treturn 0;
+}`,
+			expected: "old\nnew\n",
+		},
 	],
 };

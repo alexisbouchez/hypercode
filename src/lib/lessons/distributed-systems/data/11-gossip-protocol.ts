@@ -151,5 +151,30 @@ gossipRound(nodes, 0, 1);
 console.log(nodes[1].state.y.value);`,
 			expected: "v3\n",
 		},
+		{
+			name: "gossipRound merges disjoint keys from both nodes",
+			code: `{{FUNC}}
+const nodes = [
+	{ id: 0, state: { a: { value: "alpha", version: 1 } } },
+	{ id: 1, state: { b: { value: "beta", version: 1 } } },
+];
+gossipRound(nodes, 0, 1);
+console.log(nodes[0].state.b.value);
+console.log(nodes[1].state.a.value);`,
+			expected: "beta\nalpha\n",
+		},
+		{
+			name: "spreadInfo propagates to all 6 nodes",
+			code: `{{FUNC}}
+const nodes = [];
+for (let i = 0; i < 6; i++) nodes.push({ id: i, state: {} });
+spreadInfo(nodes, "config", "v2", 2);
+let allHave = true;
+for (const n of nodes) {
+	if (!n.state.config || n.state.config.value !== "v2") allHave = false;
+}
+console.log(allHave);`,
+			expected: "true\n",
+		},
 	],
 };

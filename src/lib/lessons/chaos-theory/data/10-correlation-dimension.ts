@@ -107,5 +107,10 @@ def correlation_dimension(points, r_values):
       code: `{{FUNC}}\npoints = [0.0, 1.0]\nprint(correlation_sum(points, 0.5), correlation_sum(points, 2.0))`,
       expected: "0.0 1.0\n",
     },
+    {
+      name: "correlation sum all pairs close",
+      code: `{{FUNC}}\npoints = [0.1, 0.2, 0.3]\nprint(round(correlation_sum(points, 0.5), 4))`,
+      expected: "1.0\n",
+    },
   ],
 };

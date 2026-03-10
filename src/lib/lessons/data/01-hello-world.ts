@@ -52,6 +52,32 @@ Notice the capital \`P\` in \`Println\`. In Go, any name that starts with an upp
 
 No \`public\` or \`private\` keywords. The casing **is** the access control. This is a deliberate design choice that makes visibility immediately obvious when reading code.
 
+### The init() Function
+
+Go has a special function called \`init()\` that runs automatically before \`main()\`. You never call it yourself --- the runtime calls it for you.
+
+\`\`\`go
+var greeting string
+
+func init() {
+    greeting = "Hello from init!"
+}
+
+func main() {
+    fmt.Println(greeting) // "Hello from init!"
+}
+\`\`\`
+
+Key rules about \`init()\`:
+- \`init()\` takes no arguments and returns nothing
+- A single file can have **multiple** \`init()\` functions --- they run in the order they appear
+- Package-level variables are initialized first, then \`init()\` runs, then \`main()\`
+- Every package can have \`init()\` functions, not just \`main\`
+
+The execution order is: **package-level variables** -> **init()** -> **main()**.
+
+\`init()\` is commonly used for setup that cannot be expressed as a simple variable initialization: validating configuration, registering database drivers, or populating lookup tables.
+
 ### Your Task
 
 Write a program that prints exactly \`Hello, World!\` to standard output.`,

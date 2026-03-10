@@ -33,10 +33,9 @@ IO.puts(person.age)    # 30
 ## Your Turn
 
 1. Create \`point = {3, 4}\` and print it → \`(3, 4)\`
-2. Destructure \`{x, y} = point\` and print \`x\` → \`Alice... wait
-3. Create \`person = %{name: "Alice", age: 30}\`
-4. Print \`person.name\` → \`Alice\`
-5. Print \`person.age\` → \`30\`
+2. Create \`person = %{name: "Alice", age: 30}\`
+3. Print \`person.name\` → \`Alice\`
+4. Print \`person.age\` → \`30\`
 `,
   starterCode: `point = {3, 4}
 IO.puts(point)
@@ -54,8 +53,25 @@ IO.puts(person.age)
 `,
   tests: [
     {
-      name: "tuples and maps",
+      name: "prints tuple and accesses map fields",
       expected: "(3, 4)\nAlice\n30\n",
+    },
+    {
+      name: "map with updated value",
+      code: `person = %{name: "Alice", age: 30}
+updated = Map.put(person, :age, 31)
+IO.puts(updated.name)
+IO.puts(updated.age)
+`,
+      expected: "Alice\n31\n",
+    },
+    {
+      name: "tuple destructuring into variables",
+      code: `{status, value} = {:ok, 42}
+IO.puts(status)
+IO.puts(value)
+`,
+      expected: "ok\n42\n",
     },
   ],
 };

@@ -20,7 +20,7 @@ export function runRaytracerTests(): LessonTestResult[] {
 			const result = runCpp(codeToRun);
 			const hasError = result.error !== "";
 			const actual = hasError ? result.error : result.stdout;
-			const passed = !hasError && result.stdout === test.expected;
+			const passed = !hasError && result.stdout.trim() === test.expected.trim();
 
 			results.push({
 				course: "raytracer",

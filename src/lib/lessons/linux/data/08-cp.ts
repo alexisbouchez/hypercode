@@ -63,5 +63,15 @@ ls
       name: "copies hello.txt",
       expected: "docs\nhello-copy.txt\nhello.txt\nnotes.txt\n",
     },
+    {
+      name: "copied file has same content",
+      code: `cp hello.txt hello-copy.txt\ncat hello-copy.txt`,
+      expected: "Hello, Linux!\n",
+    },
+    {
+      name: "original file still exists",
+      code: `cp hello.txt hello-copy.txt\ncat hello.txt`,
+      expected: "Hello, Linux!\n",
+    },
   ],
 };

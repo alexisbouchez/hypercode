@@ -103,21 +103,46 @@ The \`ELSE price\` clause ensures that rows not listed in the \`CASE\` keep thei
 
 ### Your Task
 
-Insert three new products in a single statement: \`'USB Cable'\` for \`9.99\`, \`'Monitor Stand'\` for \`49.99\`, and \`'Desk Mat'\` for \`24.99\`, all in the \`'Office'\` category.`,
+The \`products\` table already has a unique constraint on \`name\`. Write a single statement that inserts three products — \`'USB Cable'\` (\`9.99\`, \`'Accessories'\`), \`'Headphones'\` (\`89.99\`, \`'Electronics'\`), and \`'Desk Mat'\` (\`24.99\`, \`'Office'\`) — using \`ON CONFLICT (name) DO UPDATE\` to set the price and category to the new values if the product already exists.
 
-  starterCode: `-- Insert three products in one statement
-INSERT INTO products (name, price, category) VALUES`,
+Note: \`'Headphones'\` already exists in the table with a different price, so your upsert should update it.`,
+
+  starterCode: `-- Upsert three products: insert or update on name conflict
+INSERT INTO products (name, price, category) VALUES
+  ('USB Cable', 9.99, 'Accessories'),
+  ('Headphones', 89.99, 'Electronics'),
+  ('Desk Mat', 24.99, 'Office')
+ON CONFLICT (name) DO UPDATE
+SET `,
 
   solution: `INSERT INTO products (name, price, category) VALUES
-  ('USB Cable', 9.99, 'Office'),
-  ('Monitor Stand', 49.99, 'Office'),
-  ('Desk Mat', 24.99, 'Office');`,
+  ('USB Cable', 9.99, 'Accessories'),
+  ('Headphones', 89.99, 'Electronics'),
+  ('Desk Mat', 24.99, 'Office')
+ON CONFLICT (name) DO UPDATE
+SET price = EXCLUDED.price,
+    category = EXCLUDED.category;`,
 
   tests: [
     {
-      name: "inserts three new products",
-      code: `{{USER_SQL}}\n---VALIDATE---\nSELECT * FROM products WHERE name IN ('USB Cable', 'Monitor Stand', 'Desk Mat');`,
-      expected: '{"type":"rowCount","value":3}',
+      name: "USB Cable is inserted with correct price",
+      code: `ALTER TABLE products ADD CONSTRAINT products_name_unique UNIQUE (name);\n{{USER_SQL}}\n---VALIDATE---\nSELECT price FROM products WHERE name = 'USB Cable';`,
+      expected: '{"type":"exact","value":"9.99"}',
+    },
+    {
+      name: "Headphones price is updated to 89.99",
+      code: `ALTER TABLE products ADD CONSTRAINT products_name_unique UNIQUE (name);\n{{USER_SQL}}\n---VALIDATE---\nSELECT price FROM products WHERE name = 'Headphones';`,
+      expected: '{"type":"exact","value":"89.99"}',
+    },
+    {
+      name: "Desk Mat is inserted in the Office category",
+      code: `ALTER TABLE products ADD CONSTRAINT products_name_unique UNIQUE (name);\n{{USER_SQL}}\n---VALIDATE---\nSELECT category FROM products WHERE name = 'Desk Mat';`,
+      expected: '{"type":"exact","value":"Office"}',
+    },
+    {
+      name: "no duplicate Headphones row (upsert updated, not inserted)",
+      code: `ALTER TABLE products ADD CONSTRAINT products_name_unique UNIQUE (name);\n{{USER_SQL}}\n---VALIDATE---\nSELECT COUNT(*) AS cnt FROM products WHERE name = 'Headphones';`,
+      expected: '{"type":"exact","value":"1"}',
     },
   ],
 };

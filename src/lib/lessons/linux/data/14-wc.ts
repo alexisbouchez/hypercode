@@ -80,5 +80,15 @@ Count the number of lines in \`notes.txt\` using \`wc -l\`.`,
       name: "counts lines in notes.txt",
       expected: "3 notes.txt\n",
     },
+    {
+      name: "wc -w counts words",
+      code: `wc -w notes.txt`,
+      expected: "6 notes.txt\n",
+    },
+    {
+      name: "wc -l with pipe",
+      code: `cat notes.txt | wc -l`,
+      expected: "3\n",
+    },
   ],
 };

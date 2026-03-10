@@ -89,5 +89,15 @@ int main() {
 }`,
 			expected: "\n",
 		},
+		{
+			name: "my_echo prints string with spaces",
+			code: `#include <stdio.h>
+{{FUNC}}
+int main() {
+\tmy_echo("hello world 123");
+\treturn 0;
+}`,
+			expected: "hello world 123\n",
+		},
 	],
 };

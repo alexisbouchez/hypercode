@@ -115,5 +115,101 @@ done:
       name: "equal strings print EQ",
       expected: "EQ\n",
     },
+    {
+      name: "unequal strings print NE",
+      expected: "NE\n",
+      code: `.data
+str1:
+\t.asciz "hello"
+str2:
+\t.asciz "world"
+eq_msg:
+\t.ascii "EQ\\n"
+ne_msg:
+\t.ascii "NE\\n"
+
+.text
+.global _start
+_start:
+\tLDR X0, =str1
+\tLDR X1, =str2
+
+cmp_loop:
+\tLDRB W2, [X0], #1
+\tLDRB W3, [X1], #1
+\tCMP W2, W3
+\tB.NE not_equal
+\tCBZ W2, equal
+\tB cmp_loop
+
+equal:
+\tMOV X0, #1
+\tLDR X1, =eq_msg
+\tMOV X2, #3
+\tMOV X8, #64
+\tSVC #0
+\tB done
+
+not_equal:
+\tMOV X0, #1
+\tLDR X1, =ne_msg
+\tMOV X2, #3
+\tMOV X8, #64
+\tSVC #0
+
+done:
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "different length strings print NE",
+      expected: "NE\n",
+      code: `.data
+str1:
+\t.asciz "hi"
+str2:
+\t.asciz "hip"
+eq_msg:
+\t.ascii "EQ\\n"
+ne_msg:
+\t.ascii "NE\\n"
+
+.text
+.global _start
+_start:
+\tLDR X0, =str1
+\tLDR X1, =str2
+
+cmp_loop:
+\tLDRB W2, [X0], #1
+\tLDRB W3, [X1], #1
+\tCMP W2, W3
+\tB.NE not_equal
+\tCBZ W2, equal
+\tB cmp_loop
+
+equal:
+\tMOV X0, #1
+\tLDR X1, =eq_msg
+\tMOV X2, #3
+\tMOV X8, #64
+\tSVC #0
+\tB done
+
+not_equal:
+\tMOV X0, #1
+\tLDR X1, =ne_msg
+\tMOV X2, #3
+\tMOV X8, #64
+\tSVC #0
+
+done:
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

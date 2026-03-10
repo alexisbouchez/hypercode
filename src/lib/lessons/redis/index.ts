@@ -14,6 +14,8 @@ import { caching } from "./data/12-caching";
 import { leaderboards } from "./data/13-leaderboards";
 import { hyperloglog } from "./data/14-hyperloglog";
 import { dataModeling } from "./data/15-data-modeling";
+import { streams } from "./data/16-streams";
+import { geospatial } from "./data/17-geospatial";
 
 export const redisChapters: Chapter[] = [
   { id: "strings", title: "Strings" },
@@ -39,4 +41,6 @@ export const redisLessons: Lesson[] = [
   leaderboards,
   hyperloglog,
   dataModeling,
+  streams,
+  geospatial,
 ];

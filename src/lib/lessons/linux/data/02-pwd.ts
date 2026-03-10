@@ -53,5 +53,15 @@ Run \`pwd\` to print the current working directory.`,
       name: "prints current directory",
       expected: "/home/user\n",
     },
+    {
+      name: "pwd after cd docs",
+      code: `cd docs\npwd`,
+      expected: "/home/user/docs\n",
+    },
+    {
+      name: "pwd shows absolute path",
+      code: `cd /tmp\npwd`,
+      expected: "/tmp\n",
+    },
   ],
 };

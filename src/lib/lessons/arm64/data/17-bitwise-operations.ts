@@ -143,5 +143,97 @@ _start:
       name: "prints CA",
       expected: "CA\n",
     },
+    {
+      name: "extracts nibbles from 0x3F",
+      expected: "3F\n",
+      code: `.data
+buf:
+\t.skip 3
+
+.text
+.global _start
+
+to_hex:
+\tCMP X0, #10
+\tB.GE hex_letter
+\tADD X0, X0, #48
+\tRET
+hex_letter:
+\tADD X0, X0, #55
+\tRET
+
+_start:
+\tMOV X19, #0x3F
+
+\tLSR X0, X19, #4
+\tBL to_hex
+\tLDR X4, =buf
+\tSTRB W0, [X4]
+
+\tAND X0, X19, #0x0F
+\tBL to_hex
+\tLDR X4, =buf
+\tSTRB W0, [X4, #1]
+
+\tMOV X5, #10
+\tSTRB W5, [X4, #2]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #3
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
+    {
+      name: "extracts nibbles from 0xA0",
+      expected: "A0\n",
+      code: `.data
+buf:
+\t.skip 3
+
+.text
+.global _start
+
+to_hex:
+\tCMP X0, #10
+\tB.GE hex_letter
+\tADD X0, X0, #48
+\tRET
+hex_letter:
+\tADD X0, X0, #55
+\tRET
+
+_start:
+\tMOV X19, #0xA0
+
+\tLSR X0, X19, #4
+\tBL to_hex
+\tLDR X4, =buf
+\tSTRB W0, [X4]
+
+\tAND X0, X19, #0x0F
+\tBL to_hex
+\tLDR X4, =buf
+\tSTRB W0, [X4, #1]
+
+\tMOV X5, #10
+\tSTRB W5, [X4, #2]
+
+\tMOV X0, #1
+\tLDR X1, =buf
+\tMOV X2, #3
+\tMOV X8, #64
+\tSVC #0
+
+\tMOV X0, #0
+\tMOV X8, #93
+\tSVC #0
+`,
+    },
   ],
 };

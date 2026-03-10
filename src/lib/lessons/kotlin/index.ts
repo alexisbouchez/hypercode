@@ -14,6 +14,8 @@ import { listOps } from "./data/12-list-ops";
 import { maps } from "./data/13-maps";
 import { dataClasses } from "./data/14-data-classes";
 import { higherOrder } from "./data/15-higher-order";
+import { nullSafety } from "./data/16-null-safety";
+import { scopeFunctions } from "./data/17-scope-functions";
 
 export const kotlinChapters: Chapter[] = [
   { id: "basics", title: "Basics" },
@@ -39,4 +41,6 @@ export const kotlinLessons: Lesson[] = [
   maps,
   dataClasses,
   higherOrder,
+  nullSafety,
+  scopeFunctions,
 ];

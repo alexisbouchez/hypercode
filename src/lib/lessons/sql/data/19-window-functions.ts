@@ -151,28 +151,40 @@ This ranks products by price within each category independently. The most expens
 
 ### Your Task
 
-Rank all products by price (highest first) using \`DENSE_RANK\`. Return the columns \`name\`, \`price\`, and \`price_rank\`.`,
+For each product, show its \`name\`, \`category\`, \`price\`, a running total of prices within its category ordered by price (ascending) aliased as \`running_category_total\`, and a \`DENSE_RANK\` by price (highest first) across all products aliased as \`price_rank\`. Order the final results by \`category\` and then \`price\`.`,
 
-  starterCode: `-- Rank all products by price (highest first)
+  starterCode: `-- Show each product with a running total within its category and an overall price rank
 SELECT
   name,
+  category,
   price,
 `,
 
   solution: `SELECT
   name,
+  category,
   price,
+  SUM(price) OVER(PARTITION BY category ORDER BY price) AS running_category_total,
   DENSE_RANK() OVER(ORDER BY price DESC) AS price_rank
-FROM products;`,
+FROM products
+ORDER BY category, price;`,
 
   tests: [
     {
-      name: "returns name, price, and price_rank columns",
-      expected: '{"type":"contains","columns":["name","price","price_rank"]}',
+      name: "returns name, category, price, running_category_total, and price_rank columns",
+      expected: '{"type":"contains","columns":["name","category","price","running_category_total","price_rank"]}',
     },
     {
       name: "returns all 8 products",
       expected: '{"type":"rowCount","value":8}',
+    },
+    {
+      name: "Laptop has rank 1 (highest price)",
+      expected: '{"type":"contains","value":"1"}',
+    },
+    {
+      name: "running total for Electronics category includes 1079.98 (79.99 + 999.99)",
+      expected: '{"type":"contains","value":"1079.98"}',
     },
   ],
 };

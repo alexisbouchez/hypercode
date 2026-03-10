@@ -57,6 +57,8 @@ issubclass(Dog, Animal)  # True
 
 ### Abstract Methods (abc)
 
+The \`@abstractmethod\` syntax is a **decorator** — a function that wraps another function or method to modify its behavior. The \`@\` symbol is shorthand: writing \`@abstractmethod\` above a method is equivalent to \`area = abstractmethod(area)\`. Here, it marks \`area()\` as required — any subclass must override it or Python raises \`TypeError\`.
+
 \`\`\`python
 from abc import ABC, abstractmethod
 
