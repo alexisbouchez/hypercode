@@ -72,6 +72,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <script src="https://cdn.palmframe.com/embed.js" async />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
@@ -86,6 +87,8 @@ export default function RootLayout({
             <CourseThemeWrapper>{children}</CourseThemeWrapper>
           </TooltipProvider>
         </ThemeProvider>
+        {/* @ts-expect-error - PalmFrame web component */}
+        <palmframe-widget project="8APfN_CkVClx" />
       </body>
     </html>
   );
