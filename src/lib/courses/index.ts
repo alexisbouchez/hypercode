@@ -89,6 +89,7 @@ import { chapters as scalaChapters, lessons as scalaLessons } from "@/lib/lesson
 import { fsharpChapters, fsharpLessons } from "@/lib/lessons/fsharp";
 import { luaChapters, luaLessons } from "@/lib/lessons/lua";
 import { perlChapters, perlLessons } from "@/lib/lessons/perl";
+import { phpChapters, phpLessons } from "@/lib/lessons/php";
 import { ocamlChapters, ocamlLessons } from "@/lib/lessons/ocaml";
 import { x86Chapters, x86Lessons } from "@/lib/lessons/x86";
 import { networkingChapters, networkingLessons } from "@/lib/lessons/networking";
@@ -5853,6 +5854,49 @@ You have completed the Real Analysis course. You now have a rigorous understandi
 - **Functional analysis** — Banach spaces, Hilbert spaces, and operator theory.
 - **Complex analysis** — extend real analysis to the complex plane with stunning results.
 - **Topology** — generalize continuity and convergence to abstract spaces.
+`,
+  },
+  {
+    id: "php",
+    title: "PHP",
+    description: "Learn PHP from scratch. Master variables, strings, arrays, functions, and object-oriented programming — the language that powers most of the web's backend.",
+    language: "php",
+    chapters: phpChapters,
+    lessons: phpLessons,
+    runtimeLabel: "JS Transpiler",
+    introductionContent: `## Why PHP?
+
+PHP is one of the most widely-used server-side programming languages, powering over 75% of websites including WordPress, Wikipedia, and Facebook's early infrastructure.
+
+- **Web-native** — PHP was designed for web development. It integrates seamlessly with HTML and handles HTTP requests, sessions, and databases out of the box.
+- **Massive ecosystem** — Composer and Packagist provide access to hundreds of thousands of packages. Frameworks like Laravel, Symfony, and Slim cover everything from APIs to full-stack apps.
+- **Easy to learn** — PHP has a gentle learning curve with familiar C-style syntax and comprehensive documentation.
+- **Battle-tested** — powers WordPress (43% of all websites), Drupal, Magento, and countless custom applications worldwide.
+- **Modern PHP** — PHP 8+ brings union types, named arguments, match expressions, fibers, and JIT compilation.
+
+## What You Will Learn
+
+This course has **15 lessons** organized into **5 chapters**:
+
+1. **PHP Basics** — hello world, variables, arithmetic, and string operations.
+2. **Control Flow** — if/elseif/else, while loops, for and foreach loops.
+3. **Data Structures** — indexed arrays, associative arrays, and array functions.
+4. **Functions** — function declarations, string functions, scope, and closures.
+5. **Object-Oriented PHP** — classes, constructors, methods, and a capstone project.
+
+Each lesson runs in your browser via a PHP-to-JavaScript transpiler — no installation required.
+`,
+    whatsNextContent: `## What's Next
+
+You have completed the PHP course! You now understand PHP fundamentals: variables, control flow, arrays, functions, and OOP.
+
+## Keep Building
+
+- [Laravel](https://laravel.com/) — the most popular PHP framework for building modern web applications.
+- [Symfony](https://symfony.com/) — a set of reusable PHP components and a full-stack framework.
+- [PHP: The Right Way](https://phptherightway.com/) — a quick reference for PHP best practices and modern standards.
+- [Composer](https://getcomposer.org/) — PHP's dependency manager, essential for any real-world project.
+- [PHP Manual](https://www.php.net/manual/) — the official documentation, one of the best in any language.
 `,
   },
 ];

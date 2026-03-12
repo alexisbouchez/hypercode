@@ -84,6 +84,7 @@ import { runOCamlTests } from "./test-runners/ocaml-test-runner";
 import { runLuaTests } from "./test-runners/lua-test-runner";
 import { runPerlTests } from "./test-runners/perl-test-runner";
 import { runX86Tests } from "./test-runners/x86-test-runner";
+import { runPhpTests } from "./test-runners/php-test-runner";
 import { runAlgorithmsTests } from "./test-runners/algorithms-test-runner";
 import { runDistributedSystemsTests } from "./test-runners/distributed-systems-test-runner";
 import { runThreejsTests } from "./test-runners/threejs-test-runner";
@@ -195,6 +196,7 @@ const runners: Array<[string, TestRunner]> = [
   ["Networking", runNetworkingTests],
   ["Abstract Algebra", runAbstractAlgebraTests],
   ["Real Analysis", runRealAnalysisTests],
+  ["PHP", runPhpTests],
 ];
 
 async function main() {

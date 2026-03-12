@@ -36,6 +36,7 @@ import { initLuaRunner, isLuaReady, runLua, runTests as runLuaTests } from "@/li
 import { initPerlRunner, isPerlReady, runPerl, runTests as runPerlTests } from "@/lib/perl-runner";
 import { initOCamlRunner, isOCamlReady, runOCaml, runTests as runOCamlTests } from "@/lib/ocaml-runner";
 import { initX86Runner, isX86Ready, runX86, runTests as runX86Tests } from "@/lib/x86-runner";
+import { initPhpRunner, isPhpReady, runPhp, runTests as runPhpTests } from "@/lib/php-runner";
 import { LessonShell } from "./lesson-shell";
 
 interface LessonShellWrapperProps {
@@ -149,6 +150,7 @@ const RUNNER_MAP: Record<string, RunnerModule> = {
   perl:                    { init: initPerlRunner,     isReady: isPerlReady,     run: runPerl,     runTests: runPerlTests },
   ocaml:                   { init: initOCamlRunner,    isReady: isOCamlReady,    run: runOCaml,    runTests: runOCamlTests },
   x86:                     { init: initX86Runner,      isReady: isX86Ready,      run: runX86,      runTests: runX86Tests },
+  php:                     { init: initPhpRunner,      isReady: isPhpReady,      run: runPhp,      runTests: runPhpTests },
 };
 
 const GO_RUNNER: RunnerModule = {
